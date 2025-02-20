@@ -19,4 +19,4 @@ def test_add__raise():
     """Ensure it raises for x < 0."""
 
     with pytest.raises(match="x must be positive"):
-        example(-1, 0)
+        example.add(-1, 0)
