@@ -1,0 +1,500 @@
+{
+  "data": [
+    {
+      "authorized_project_id": "103d7868-147e-4f07-af0d-71d8568f575c",
+      "authorized_public": false,
+      "license": {
+        "id": 2,
+        "creation_date": "2025-02-20T13:42:46.529983Z",
+        "update_date": "2025-02-20T13:42:46.529983Z",
+        "name": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "description": "Creative Commons Corporation (\"Creative Commons\") is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an \"as-is\" basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information. Creative Commons disclaims all liability for damages resulting from their use to the fullest extent possible.",
+        "label": "CC BY-NC 4.0 Deed"
+      },
+      "id": 6470,
+      "creation_date": "2025-02-20T13:44:50.208591Z",
+      "update_date": "2025-02-20T13:44:50.208591Z",
+      "name": "jy171019_A_idB",
+      "description": "This morphology reconstruction of a mouse thalamus cell was provided by the Laboratory for Neural Microcircuitry https://www.epfl.ch/labs/markram-lab/ through a collaboration with BBP. This morphology was used in part or in whole to construct some of the cells used in the circuit of (Iavarone, et al., 2023) https://doi.org/10.1016/j.celrep.2023.112200 .",
+      "brain_location": null,
+      "species": {
+        "id": 1,
+        "creation_date": "2025-02-20T13:42:56.228818Z",
+        "update_date": "2025-02-20T13:42:56.228818Z",
+        "name": "Mus musculus",
+        "taxonomy_id": "NCBITaxon:10090"
+      },
+      "strain": null,
+      "brain_region": {
+        "id": 733,
+        "creation_date": "2025-02-20T13:36:50.896784Z",
+        "update_date": "2025-02-20T13:36:50.896784Z",
+        "name": "Ventral posteromedial nucleus of the thalamus",
+        "acronym": "VPM",
+        "children": []
+      }
+    },
+    {
+      "authorized_project_id": "103d7868-147e-4f07-af0d-71d8568f575c",
+      "authorized_public": false,
+      "license": {
+        "id": 2,
+        "creation_date": "2025-02-20T13:42:46.529983Z",
+        "update_date": "2025-02-20T13:42:46.529983Z",
+        "name": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "description": "Creative Commons Corporation (\"Creative Commons\") is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an \"as-is\" basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information. Creative Commons disclaims all liability for damages resulting from their use to the fullest extent possible.",
+        "label": "CC BY-NC 4.0 Deed"
+      },
+      "id": 6469,
+      "creation_date": "2025-02-20T13:44:50.184147Z",
+      "update_date": "2025-02-20T13:44:50.184147Z",
+      "name": "jy180411_B_idF",
+      "description": "This morphology reconstruction of a mouse thalamus cell was provided by the Laboratory for Neural Microcircuitry https://www.epfl.ch/labs/markram-lab/ through a collaboration with BBP. This morphology was used in part or in whole to construct some of the cells used in the circuit of (Iavarone, et al., 2023) https://doi.org/10.1016/j.celrep.2023.112200 .",
+      "brain_location": null,
+      "species": {
+        "id": 1,
+        "creation_date": "2025-02-20T13:42:56.228818Z",
+        "update_date": "2025-02-20T13:42:56.228818Z",
+        "name": "Mus musculus",
+        "taxonomy_id": "NCBITaxon:10090"
+      },
+      "strain": null,
+      "brain_region": {
+        "id": 733,
+        "creation_date": "2025-02-20T13:36:50.896784Z",
+        "update_date": "2025-02-20T13:36:50.896784Z",
+        "name": "Ventral posteromedial nucleus of the thalamus",
+        "acronym": "VPM",
+        "children": []
+      }
+    },
+    {
+      "authorized_project_id": "103d7868-147e-4f07-af0d-71d8568f575c",
+      "authorized_public": false,
+      "license": {
+        "id": 2,
+        "creation_date": "2025-02-20T13:42:46.529983Z",
+        "update_date": "2025-02-20T13:42:46.529983Z",
+        "name": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "description": "Creative Commons Corporation (\"Creative Commons\") is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an \"as-is\" basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information. Creative Commons disclaims all liability for damages resulting from their use to the fullest extent possible.",
+        "label": "CC BY-NC 4.0 Deed"
+      },
+      "id": 6468,
+      "creation_date": "2025-02-20T13:44:50.158401Z",
+      "update_date": "2025-02-20T13:44:50.158401Z",
+      "name": "AA0318 in CCFv2.5",
+      "description": "This is a morphology reconstruction of a mouse thalamus cell that was obtained from the Janelia Mouselight project http://ml-neuronbrowser.janelia.org/ and was used in part or in whole to construct some of the cells used in the circuit of (Iavarone, et al., 2023) https://doi.org/10.1016/j.celrep.2023.112200 . This morphology is positioned in the Mouselight custom \"CCFv2.5\" reference space, instead of the Allen Institute CCFv3 reference space.",
+      "brain_location": null,
+      "species": {
+        "id": 1,
+        "creation_date": "2025-02-20T13:42:56.228818Z",
+        "update_date": "2025-02-20T13:42:56.228818Z",
+        "name": "Mus musculus",
+        "taxonomy_id": "NCBITaxon:10090"
+      },
+      "strain": null,
+      "brain_region": {
+        "id": 733,
+        "creation_date": "2025-02-20T13:36:50.896784Z",
+        "update_date": "2025-02-20T13:36:50.896784Z",
+        "name": "Ventral posteromedial nucleus of the thalamus",
+        "acronym": "VPM",
+        "children": []
+      }
+    },
+    {
+      "authorized_project_id": "103d7868-147e-4f07-af0d-71d8568f575c",
+      "authorized_public": false,
+      "license": {
+        "id": 2,
+        "creation_date": "2025-02-20T13:42:46.529983Z",
+        "update_date": "2025-02-20T13:42:46.529983Z",
+        "name": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "description": "Creative Commons Corporation (\"Creative Commons\") is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an \"as-is\" basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information. Creative Commons disclaims all liability for damages resulting from their use to the fullest extent possible.",
+        "label": "CC BY-NC 4.0 Deed"
+      },
+      "id": 6467,
+      "creation_date": "2025-02-20T13:44:50.128307Z",
+      "update_date": "2025-02-20T13:44:50.128307Z",
+      "name": "AA0518 in CCFv2.5",
+      "description": "This is a morphology reconstruction of a mouse thalamus cell that was obtained from the Janelia Mouselight project http://ml-neuronbrowser.janelia.org/ and was used in part or in whole to construct some of the cells used in the circuit of (Iavarone, et al., 2023) https://doi.org/10.1016/j.celrep.2023.112200 . This morphology is positioned in the Mouselight custom \"CCFv2.5\" reference space, instead of the Allen Institute CCFv3 reference space.",
+      "brain_location": null,
+      "species": {
+        "id": 1,
+        "creation_date": "2025-02-20T13:42:56.228818Z",
+        "update_date": "2025-02-20T13:42:56.228818Z",
+        "name": "Mus musculus",
+        "taxonomy_id": "NCBITaxon:10090"
+      },
+      "strain": null,
+      "brain_region": {
+        "id": 255,
+        "creation_date": "2025-02-20T13:36:50.950556Z",
+        "update_date": "2025-02-20T13:36:50.950556Z",
+        "name": "Anteroventral nucleus of thalamus",
+        "acronym": "AV",
+        "children": []
+      }
+    },
+    {
+      "authorized_project_id": "103d7868-147e-4f07-af0d-71d8568f575c",
+      "authorized_public": false,
+      "license": {
+        "id": 3,
+        "creation_date": "2025-02-20T13:42:46.532333Z",
+        "update_date": "2025-02-20T13:42:46.532333Z",
+        "name": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "description": "Creative Commons Corporation (\"Creative Commons\") is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an \"as-is\" basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information. Creative Commons disclaims all liability for damages resulting from their use to the fullest extent possible.",
+        "label": "CC BY-NC-SA 4.0 Deed"
+      },
+      "id": 6466,
+      "creation_date": "2025-02-20T13:44:50.111791Z",
+      "update_date": "2025-02-20T13:44:50.111791Z",
+      "name": "04446-04462-X10187-Y13578_final",
+      "description": "This morphology reconstruction of a mouse thalamus cell was provided by Wenzhou Medical University through a collaboration with BBP. This morphology was used in part or in whole to construct some of the cells used in the circuit of (Iavarone, et al., 2023) https://doi.org/10.1016/j.celrep.2023.112200 .",
+      "brain_location": null,
+      "species": {
+        "id": 1,
+        "creation_date": "2025-02-20T13:42:56.228818Z",
+        "update_date": "2025-02-20T13:42:56.228818Z",
+        "name": "Mus musculus",
+        "taxonomy_id": "NCBITaxon:10090"
+      },
+      "strain": null,
+      "brain_region": {
+        "id": 262,
+        "creation_date": "2025-02-20T13:36:51.010167Z",
+        "update_date": "2025-02-20T13:36:51.010167Z",
+        "name": "Reticular nucleus of the thalamus",
+        "acronym": "RT",
+        "children": []
+      }
+    },
+    {
+      "authorized_project_id": "103d7868-147e-4f07-af0d-71d8568f575c",
+      "authorized_public": false,
+      "license": {
+        "id": 3,
+        "creation_date": "2025-02-20T13:42:46.532333Z",
+        "update_date": "2025-02-20T13:42:46.532333Z",
+        "name": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "description": "Creative Commons Corporation (\"Creative Commons\") is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an \"as-is\" basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information. Creative Commons disclaims all liability for damages resulting from their use to the fullest extent possible.",
+        "label": "CC BY-NC-SA 4.0 Deed"
+      },
+      "id": 6465,
+      "creation_date": "2025-02-20T13:44:50.094080Z",
+      "update_date": "2025-02-20T13:44:50.094080Z",
+      "name": "04527-04540-X11773-Y24082_final",
+      "description": "This morphology reconstruction of a mouse thalamus cell was provided by Wenzhou Medical University through a collaboration with BBP. This morphology was used in part or in whole to construct some of the cells used in the circuit of (Iavarone, et al., 2023) https://doi.org/10.1016/j.celrep.2023.112200 .",
+      "brain_location": null,
+      "species": {
+        "id": 1,
+        "creation_date": "2025-02-20T13:42:56.228818Z",
+        "update_date": "2025-02-20T13:42:56.228818Z",
+        "name": "Mus musculus",
+        "taxonomy_id": "NCBITaxon:10090"
+      },
+      "strain": null,
+      "brain_region": {
+        "id": 262,
+        "creation_date": "2025-02-20T13:36:51.010167Z",
+        "update_date": "2025-02-20T13:36:51.010167Z",
+        "name": "Reticular nucleus of the thalamus",
+        "acronym": "RT",
+        "children": []
+      }
+    },
+    {
+      "authorized_project_id": "103d7868-147e-4f07-af0d-71d8568f575c",
+      "authorized_public": false,
+      "license": {
+        "id": 2,
+        "creation_date": "2025-02-20T13:42:46.529983Z",
+        "update_date": "2025-02-20T13:42:46.529983Z",
+        "name": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "description": "Creative Commons Corporation (\"Creative Commons\") is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an \"as-is\" basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information. Creative Commons disclaims all liability for damages resulting from their use to the fullest extent possible.",
+        "label": "CC BY-NC 4.0 Deed"
+      },
+      "id": 6464,
+      "creation_date": "2025-02-20T13:44:50.075499Z",
+      "update_date": "2025-02-20T13:44:50.075499Z",
+      "name": "jy180524_A_idB",
+      "description": "This morphology reconstruction of a mouse thalamus cell was provided by the Laboratory for Neural Microcircuitry https://www.epfl.ch/labs/markram-lab/ through a collaboration with BBP. This morphology was used in part or in whole to construct some of the cells used in the circuit of (Iavarone, et al., 2023) https://doi.org/10.1016/j.celrep.2023.112200 .",
+      "brain_location": null,
+      "species": {
+        "id": 1,
+        "creation_date": "2025-02-20T13:42:56.228818Z",
+        "update_date": "2025-02-20T13:42:56.228818Z",
+        "name": "Mus musculus",
+        "taxonomy_id": "NCBITaxon:10090"
+      },
+      "strain": null,
+      "brain_region": {
+        "id": 733,
+        "creation_date": "2025-02-20T13:36:50.896784Z",
+        "update_date": "2025-02-20T13:36:50.896784Z",
+        "name": "Ventral posteromedial nucleus of the thalamus",
+        "acronym": "VPM",
+        "children": []
+      }
+    },
+    {
+      "authorized_project_id": "103d7868-147e-4f07-af0d-71d8568f575c",
+      "authorized_public": false,
+      "license": {
+        "id": 3,
+        "creation_date": "2025-02-20T13:42:46.532333Z",
+        "update_date": "2025-02-20T13:42:46.532333Z",
+        "name": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "description": "Creative Commons Corporation (\"Creative Commons\") is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an \"as-is\" basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information. Creative Commons disclaims all liability for damages resulting from their use to the fullest extent possible.",
+        "label": "CC BY-NC-SA 4.0 Deed"
+      },
+      "id": 6463,
+      "creation_date": "2025-02-20T13:44:50.063172Z",
+      "update_date": "2025-02-20T13:44:50.063172Z",
+      "name": "04891-04900-X11322-Y13161_final",
+      "description": "This morphology reconstruction of a mouse thalamus cell was provided by Wenzhou Medical University through a collaboration with BBP. This morphology was used in part or in whole to construct some of the cells used in the circuit of (Iavarone, et al., 2023) https://doi.org/10.1016/j.celrep.2023.112200 .",
+      "brain_location": null,
+      "species": {
+        "id": 1,
+        "creation_date": "2025-02-20T13:42:56.228818Z",
+        "update_date": "2025-02-20T13:42:56.228818Z",
+        "name": "Mus musculus",
+        "taxonomy_id": "NCBITaxon:10090"
+      },
+      "strain": null,
+      "brain_region": {
+        "id": 262,
+        "creation_date": "2025-02-20T13:36:51.010167Z",
+        "update_date": "2025-02-20T13:36:51.010167Z",
+        "name": "Reticular nucleus of the thalamus",
+        "acronym": "RT",
+        "children": []
+      }
+    },
+    {
+      "authorized_project_id": "103d7868-147e-4f07-af0d-71d8568f575c",
+      "authorized_public": false,
+      "license": {
+        "id": 2,
+        "creation_date": "2025-02-20T13:42:46.529983Z",
+        "update_date": "2025-02-20T13:42:46.529983Z",
+        "name": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "description": "Creative Commons Corporation (\"Creative Commons\") is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an \"as-is\" basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information. Creative Commons disclaims all liability for damages resulting from their use to the fullest extent possible.",
+        "label": "CC BY-NC 4.0 Deed"
+      },
+      "id": 6462,
+      "creation_date": "2025-02-20T13:44:50.047335Z",
+      "update_date": "2025-02-20T13:44:50.047335Z",
+      "name": "jy180118_C_idA",
+      "description": "This morphology reconstruction of a mouse thalamus cell was provided by the Laboratory for Neural Microcircuitry https://www.epfl.ch/labs/markram-lab/ through a collaboration with BBP. This morphology was used in part or in whole to construct some of the cells used in the circuit of (Iavarone, et al., 2023) https://doi.org/10.1016/j.celrep.2023.112200 .",
+      "brain_location": null,
+      "species": {
+        "id": 1,
+        "creation_date": "2025-02-20T13:42:56.228818Z",
+        "update_date": "2025-02-20T13:42:56.228818Z",
+        "name": "Mus musculus",
+        "taxonomy_id": "NCBITaxon:10090"
+      },
+      "strain": null,
+      "brain_region": {
+        "id": 262,
+        "creation_date": "2025-02-20T13:36:51.010167Z",
+        "update_date": "2025-02-20T13:36:51.010167Z",
+        "name": "Reticular nucleus of the thalamus",
+        "acronym": "RT",
+        "children": []
+      }
+    },
+    {
+      "authorized_project_id": "103d7868-147e-4f07-af0d-71d8568f575c",
+      "authorized_public": false,
+      "license": {
+        "id": 2,
+        "creation_date": "2025-02-20T13:42:46.529983Z",
+        "update_date": "2025-02-20T13:42:46.529983Z",
+        "name": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "description": "Creative Commons Corporation (\"Creative Commons\") is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an \"as-is\" basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information. Creative Commons disclaims all liability for damages resulting from their use to the fullest extent possible.",
+        "label": "CC BY-NC 4.0 Deed"
+      },
+      "id": 6461,
+      "creation_date": "2025-02-20T13:44:50.030598Z",
+      "update_date": "2025-02-20T13:44:50.030598Z",
+      "name": "AA0593 in CCFv2.5",
+      "description": "This is a morphology reconstruction of a mouse thalamus cell that was obtained from the Janelia Mouselight project http://ml-neuronbrowser.janelia.org/ and was used in part or in whole to construct some of the cells used in the circuit of (Iavarone, et al., 2023) https://doi.org/10.1016/j.celrep.2023.112200 . This morphology is positioned in the Mouselight custom \"CCFv2.5\" reference space, instead of the Allen Institute CCFv3 reference space.",
+      "brain_location": null,
+      "species": {
+        "id": 1,
+        "creation_date": "2025-02-20T13:42:56.228818Z",
+        "update_date": "2025-02-20T13:42:56.228818Z",
+        "name": "Mus musculus",
+        "taxonomy_id": "NCBITaxon:10090"
+      },
+      "strain": null,
+      "brain_region": {
+        "id": 907,
+        "creation_date": "2025-02-20T13:36:51.001331Z",
+        "update_date": "2025-02-20T13:36:51.001331Z",
+        "name": "Paracentral nucleus",
+        "acronym": "PCN",
+        "children": []
+      }
+    }
+  ],
+  "pagination": {
+    "page": 0,
+    "page_size": 10,
+    "total_items": 4566
+  },
+  "facets": {
+    "species": [
+      {
+        "id": 1,
+        "label": "Mus musculus",
+        "count": 3508
+      },
+      {
+        "id": 2,
+        "label": "Rattus norvegicus",
+        "count": 1058
+      }
+    ],
+    "strain": [
+      {
+        "id": 20,
+        "label": "C57BL/6J",
+        "count": 450
+      },
+      {
+        "id": 19,
+        "label": "C57BL/6N",
+        "count": 720
+      },
+      {
+        "id": 17,
+        "label": "Calb2-CreERT2",
+        "count": 1
+      },
+      {
+        "id": 8,
+        "label": "Chrna2-Cre_OE25;Sst-IRES-FlpO",
+        "count": 19
+      },
+      {
+        "id": 1,
+        "label": "Cux2-CreERT2",
+        "count": 194
+      },
+      {
+        "id": 18,
+        "label": "Esr2-IRES2-Cre",
+        "count": 4
+      },
+      {
+        "id": 15,
+        "label": "Fezf2-CreER",
+        "count": 35
+      },
+      {
+        "id": 5,
+        "label": "Gnb4-IRES2-CreERT2",
+        "count": 16
+      },
+      {
+        "id": 13,
+        "label": "Grp-Cre_KH288",
+        "count": 1
+      },
+      {
+        "id": 23,
+        "label": "HSD2-Cre",
+        "count": 4
+      },
+      {
+        "id": 12,
+        "label": "Nxph4-T2A-CreERT2",
+        "count": 1
+      },
+      {
+        "id": 7,
+        "label": "Oxtr-T2A-Cre;Pvalb-T2A-FlpO",
+        "count": 29
+      },
+      {
+        "id": 10,
+        "label": "PhP.eB Syn-CreERT2 1:1000x",
+        "count": 5
+      },
+      {
+        "id": 6,
+        "label": "Plxnd1-CreER",
+        "count": 23
+      },
+      {
+        "id": 4,
+        "label": "Pvalb-T2A-CreERT2",
+        "count": 203
+      },
+      {
+        "id": 25,
+        "label": "Rorb-Cre-1",
+        "count": 11
+      },
+      {
+        "id": 21,
+        "label": "Sim1-Cre",
+        "count": 244
+      },
+      {
+        "id": 3,
+        "label": "Sst-Cre",
+        "count": 5
+      },
+      {
+        "id": 24,
+        "label": "Sst-IRES-Cre",
+        "count": 22
+      },
+      {
+        "id": 11,
+        "label": "Tacr1-T2A-Cre;Sst-IRES-FlpO",
+        "count": 3
+      },
+      {
+        "id": 14,
+        "label": "Th-Cre_FI172",
+        "count": 1
+      },
+      {
+        "id": 16,
+        "label": "Tlx3-Cre_PL56",
+        "count": 11
+      },
+      {
+        "id": 9,
+        "label": "Tnnt1-IRES2-CreERT2",
+        "count": 169
+      },
+      {
+        "id": 22,
+        "label": "Vgat-Cre",
+        "count": 19
+      },
+      {
+        "id": 27,
+        "label": "Vglut1-Cre",
+        "count": 3
+      },
+      {
+        "id": 26,
+        "label": "Vglut2-Cre",
+        "count": 13
+      },
+      {
+        "id": 2,
+        "label": "Vipr2-IRES2-Cre-neo",
+        "count": 81
+      }
+    ]
+  }
+}
