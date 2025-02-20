@@ -1,0 +1,127 @@
+[build-system]
+requires = ["setuptools>=42", "setuptools-scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "entitysdk"
+dependencies = [
+]
+authors = [
+    {name = "Open Brain Institute", email = "john.doe@openbraininstitute.org"}
+]
+maintainers = [
+    {name = "Open Brain Institute", email = "john.doe@openbraininstitute.org"}
+]
+description = "TODO: write something meaningful here"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "my-license"}
+classifiers = [
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+dynamic = ["version"]
+
+[project.urls]
+documentation = "https://entitysdk.readthedocs.io/en/stable"
+repository = "https://github.com/openbraininstitute/entitysdk"
+changelog = "https://github.com/openbraininstitute/entitysdk/CHANGELOG.rst"
+
+[tool.setuptools_scm]
+local_scheme = "no-local-version"
+
+[tool.pytest.ini_options]
+addopts = [
+    "-vv",
+    "-ra",
+    "--import-mode=importlib",
+    "--cov=entitysdk",
+    "--durations=10",
+    "--durations-min=1.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    "A", # flake8-builtins
+    "B", # bugbear
+    "D", # pydocstyle
+    "E", # pycodestyle
+    "F", # pyflakes
+    "I", # isort
+    "S", # bandit
+    "UP", # pyupgrade
+]
+ignore = [
+    "S107", "S602", "S603", "S608"
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*.py" = [
+    "ANN",     # Missing type annotation
+    "D",       # pydocstyle
+    "ERA001",  # Found commented-out code
+    "INP001",  # Missing `__init__.py`
+    "PLC2701", # Private name import from external module
+    "PLR2004", # magic value (constant) used in comparison (i.e. expected == 3)
+    "S101",    # Use of `assert` detected
+    "SIM117",  # Use a single `with` statement with multiple contexts
+    "SLF001",  # private member access
+]
+
+[tool.ruff.lint.pylint]
+# Maximum number of arguments for function / method
+max-args = 12
+# Maximum number of locals for function / method body
+max-locals = 15
+# Maximum number of return / yield for function / method body
+max-returns = 6
+# Maximum number of branch for function / method body
+max-branches = 12
+# Maximum number of statements in function / method body
+max-statements = 50
+# Maximum number of public methods for a class (see R0904).
+max-public-methods = 60
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+# Enable auto-formatting of code examples in docstrings. Markdown,
+# reStructuredText code/literal blocks and doctests are all supported.
+docstring-code-format = true
+# Set the line length limit used when formatting code snippets in
+# docstrings.
+docstring-code-line-length = 100
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+[tool.coverage.paths]
+source = [
+    "src",
+    "*/site-packages",
+]
+
+[tool.coverage.run]
+branch = true
+parallel = false
+
+[tool.coverage.report]
+show_missing = true
+precision = 0
+fail_under = 80
+
+[tool.mypy]
+show_error_codes = true
+ignore_missing_imports = true
+allow_redefinition = true
