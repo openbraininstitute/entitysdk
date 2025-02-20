@@ -63,6 +63,19 @@ ignore = [
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
+[tool.ruff.lint.per-file-ignores]
+"tests/*.py" = [
+    "ANN",     # Missing type annotation
+    "D",       # pydocstyle
+    "ERA001",  # Found commented-out code
+    "INP001",  # Missing `__init__.py`
+    "PLC2701", # Private name import from external module
+    "PLR2004", # magic value (constant) used in comparison (i.e. expected == 3)
+    "S101",    # Use of `assert` detected
+    "SIM117",  # Use a single `with` statement with multiple contexts
+    "SLF001",  # private member access
+]
+
 [tool.ruff.lint.pylint]
 # Maximum number of arguments for function / method
 max-args = 12
