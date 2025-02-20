@@ -31,19 +31,6 @@ changelog = "https://github.com/openbraininstitute/entitysdk/CHANGELOG.rst"
 [tool.setuptools_scm]
 local_scheme = "no-local-version"
 
-[tool.black]
-line-length = 100
-target-version = [
-    'py311',
-    'py312',
-    'py313',
-]
-include = 'src/entitysdk\/.*\.py$|tests\/.*\.py$|docs\/source\/conf\.py$'
-
-[tool.isort]
-profile = "black"
-line_length = 100
-
 [tool.pytest.ini_options]
 addopts = [
     "-vv",
