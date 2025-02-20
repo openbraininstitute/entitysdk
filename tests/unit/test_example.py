@@ -18,5 +18,5 @@ def test_add_0_0():
 def test_add__raise():
     """Ensure it raises for x < 0."""
 
-    with pytest.raises(match="x must be positive"):
+    with pytest.raises(ValueError, match="x must be positive"):
         example.add(-1, 0)
