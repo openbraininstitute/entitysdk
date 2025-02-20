@@ -1,5 +1,7 @@
 """Sample test file."""
 
+import pytest
+
 from entitysdk import example
 
 
@@ -11,3 +13,10 @@ def test_add_3_4():
 def test_add_0_0():
     """Adding zero to zero."""
     assert example.add(0, 0) == 0
+
+
+def test_add__raise():
+    """Ensure it raises for x < 0."""
+
+    with pytest.raises(match="x must be positive"):
+        example(-1, 0)
