@@ -1,4 +1,5 @@
 """Sample test file."""
+
 from entitysdk import example
 
 
