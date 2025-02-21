@@ -1,6 +1,6 @@
 """Entity SDK client."""
 
-from dataclasses import dataclass
+import httpx
 
 from entitysdk.common import ProjectContext
 from entitysdk.core import Entity
@@ -8,12 +8,14 @@ from entitysdk.serdes import deserialize_entity, serialize_entity
 from entitysdk.util import make_db_api_request
 
 
-@dataclass
 class Client:
     """Client for entitysdk."""
 
-    api_url: str
-    project_context: ProjectContext | None = None
+    def __init__(self, api_url: str, project_context: ProjectContext | None = None) -> None:
+        """Initialize client."""
+        self.api_url = api_url
+        self.project_context = project_context
+        self._http_client = httpx.Client()
 
     def _url(self, route: str, resource_id: str | None = None):
         """Get url for route and resource id."""
@@ -49,6 +51,7 @@ class Client:
             entity_type=entity_type,
             project_context=project_context,
             token=token,
+            http_client=self._http_client,
         )
 
     def register(
@@ -67,11 +70,16 @@ class Client:
             entity=entity,
             project_context=project_context,
             token=token,
+            http_client=self._http_client,
         )
 
 
 def get_entity(
-    url: str, entity_type: type[Entity], project_context: ProjectContext, token: str
+    url: str,
+    entity_type: type[Entity],
+    project_context: ProjectContext,
+    token: str,
+    http_client: httpx.Client | None = None,
 ) -> Entity:
     """Instantiate entity with model ``entity_type`` from resource id."""
     response = make_db_api_request(
@@ -80,13 +88,19 @@ def get_entity(
         json=None,
         project_context=project_context,
         token=token,
+        http_client=http_client,
     )
 
     return deserialize_entity(response.json(), entity_type)
 
 
 def register_entity(
-    url: str, *, entity: Entity, project_context: ProjectContext, token: str
+    url: str,
+    *,
+    entity: Entity,
+    project_context: ProjectContext,
+    token: str,
+    http_client: httpx.Client | None = None,
 ) -> Entity:
     """Register entity."""
     json_data = serialize_entity(entity)
@@ -97,6 +111,7 @@ def register_entity(
         json=json_data,
         project_context=project_context,
         token=token,
+        http_client=http_client,
     )
 
     return deserialize_entity(response.json(), type(entity))

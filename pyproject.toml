@@ -5,8 +5,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "entitysdk"
 dependencies = [
+    "httpx",
     "pydantic",
-    "requests"
 ]
 authors = [
     {name = "Open Brain Institute", email = "john.doe@openbraininstitute.org"}
