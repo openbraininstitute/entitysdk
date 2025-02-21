@@ -20,7 +20,7 @@ class Client:
         route = f"{self.api_url}/{route}"
         return f"{route}/{resource_id}" if resource_id else route
 
-    def _project_context(self, override_context: ProjectContext):
+    def _project_context(self, override_context: ProjectContext | None) -> ProjectContext:
         context = override_context or self.project_context
 
         if not context:
@@ -32,12 +32,17 @@ class Client:
         self,
         resource_id: str,
         *,
-        entity_type: Entity,
+        entity_type: type[Entity],
         project_context: ProjectContext | None = None,
         token: str,
     ) -> Entity:
         """Get entity from resource id."""
-        url = self._url(route=entity_type.route, resource_id=resource_id)
+        route = entity_type.route
+        if route is None:
+            raise TypeError(
+                f"Entity type {entity_type} does not have a corresponding route in entitycore."
+            )
+        url = self._url(route=str(route), resource_id=resource_id)
         project_context = self._project_context(override_context=project_context)
         return get_entity(
             url=url,
@@ -50,7 +55,12 @@ class Client:
         self, entity: Entity, *, project_context: ProjectContext | None = None, token: str
     ) -> Entity:
         """Register entity."""
-        url = self._url(route=entity.route, resource_id=None)
+        route = entity.route
+        if route is None:
+            raise TypeError(
+                f"Entity type {type(entity)} does not have a corresponding route in entitycore."
+            )
+        url = self._url(route=str(entity.route), resource_id=None)
         project_context = self._project_context(override_context=project_context)
         return register_entity(
             url=url,
