@@ -1,9 +1,9 @@
-"""Entity SDK client."""
+"""Identifiable SDK client."""
 
 import httpx
 
 from entitysdk.common import ProjectContext
-from entitysdk.core import Entity
+from entitysdk.core import Identifiable
 from entitysdk.serdes import deserialize_entity, serialize_entity
 from entitysdk.util import make_db_api_request
 
@@ -19,13 +19,13 @@ class Client:
 
     def _url(self, route: str, resource_id: str | None = None):
         """Get url for route and resource id."""
-        route = f"{self.api_url}/{route}"
-        return f"{route}/{resource_id}" if resource_id else route
+        route = f"{self.api_url}/{route}/"
+        return f"{route}{resource_id}" if resource_id else route
 
     def _project_context(self, override_context: ProjectContext | None) -> ProjectContext:
         context = override_context or self.project_context
 
-        if not context:
+        if context is None:
             raise ValueError("A project context must be specified.")
 
         return context
@@ -34,17 +34,22 @@ class Client:
         self,
         resource_id: str,
         *,
-        entity_type: type[Entity],
+        entity_type: type[Identifiable],
         project_context: ProjectContext | None = None,
         token: str,
-    ) -> Entity:
-        """Get entity from resource id."""
-        route = entity_type.route
-        if route is None:
-            raise TypeError(
-                f"Entity type {entity_type} does not have a corresponding route in entitycore."
-            )
-        url = self._url(route=str(route), resource_id=resource_id)
+    ) -> Identifiable:
+        """Get entity from resource id.
+
+        Args:
+            resource_id: Resource id of the entity.
+            entity_type: Type of the entity.
+            project_context: Optional project context.
+            token: Authorization access token.
+
+        Returns:
+            entity_type instantatied by deserializing the response.
+        """
+        url = self._url(route=str(entity_type.__route__), resource_id=resource_id)
         project_context = self._project_context(override_context=project_context)
         return get_entity(
             url=url,
@@ -54,16 +59,46 @@ class Client:
             http_client=self._http_client,
         )
 
+    def search(
+        self,
+        *,
+        entity_type: type[Identifiable],
+        query: dict,
+        project_context: ProjectContext | None = None,
+        token: str,
+    ) -> list[Identifiable]:
+        """Search for entities.
+
+        Args:
+            entity_type: Type of the entity.
+            query: Query parameters.
+            project_context: Optional project context.
+            token: Authorization access token.
+        """
+        url = self._url(route=str(entity_type.__route__), resource_id=None)
+        return search(
+            url=url,
+            entity_type=entity_type,
+            query=query,
+            project_context=self._project_context(override_context=project_context),
+            token=token,
+            http_client=self._http_client,
+        )
+
     def register(
-        self, entity: Entity, *, project_context: ProjectContext | None = None, token: str
-    ) -> Entity:
-        """Register entity."""
-        route = entity.route
-        if route is None:
-            raise TypeError(
-                f"Entity type {type(entity)} does not have a corresponding route in entitycore."
-            )
-        url = self._url(route=str(entity.route), resource_id=None)
+        self, entity: Identifiable, *, project_context: ProjectContext | None = None, token: str
+    ) -> Identifiable:
+        """Register entity.
+
+        Args:
+            entity: Identifiable to register.
+            project_context: Optional project context.
+            token: Authorization access token.
+
+        Returns:
+            Registered entity with id.
+        """
+        url = self._url(route=str(entity.__route__), resource_id=None)
         project_context = self._project_context(override_context=project_context)
         return register_entity(
             url=url,
@@ -74,13 +109,47 @@ class Client:
         )
 
 
-def get_entity(
+def search(
     url: str,
-    entity_type: type[Entity],
+    *,
+    entity_type: type[Identifiable],
+    query: dict,
     project_context: ProjectContext,
     token: str,
     http_client: httpx.Client | None = None,
-) -> Entity:
+) -> list[Identifiable]:
+    """Search for entities.
+
+    Args:
+        url: URL of the resource.
+        entity_type: Type of the entity.
+        query: Query parameters
+        project_context: Project context.
+        token: Authorization access token.
+        http_client: HTTP client.
+
+    Returns:
+        List of entities.
+    """
+    response = make_db_api_request(
+        url=url,
+        method="GET",
+        parameters=query,
+        project_context=project_context,
+        token=token,
+        http_client=http_client,
+    )
+    json_data_list = response.json()["data"]
+    return [deserialize_entity(json_data, entity_type) for json_data in json_data_list]
+
+
+def get_entity(
+    url: str,
+    entity_type: type[Identifiable],
+    project_context: ProjectContext,
+    token: str,
+    http_client: httpx.Client | None = None,
+) -> Identifiable:
     """Instantiate entity with model ``entity_type`` from resource id."""
     response = make_db_api_request(
         url=url,
@@ -97,11 +166,11 @@ def get_entity(
 def register_entity(
     url: str,
     *,
-    entity: Entity,
+    entity: Identifiable,
     project_context: ProjectContext,
     token: str,
     http_client: httpx.Client | None = None,
-) -> Entity:
+) -> Identifiable:
     """Register entity."""
     json_data = serialize_entity(entity)
 
