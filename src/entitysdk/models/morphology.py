@@ -1,3 +1,5 @@
+"""Morphology models."""
+
 from typing import ClassVar
 
 from entitysdk.core import Entity

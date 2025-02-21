@@ -74,6 +74,7 @@ convention = "google"
     "PLC2701", # Private name import from external module
     "PLR2004", # magic value (constant) used in comparison (i.e. expected == 3)
     "S101",    # Use of `assert` detected
+    "S106",    # Magic value
     "SIM117",  # Use a single `with` statement with multiple contexts
     "SLF001",  # private member access
 ]

@@ -50,7 +50,6 @@ class Client:
         self, entity: Entity, *, project_context: ProjectContext | None = None, token: str
     ) -> Entity:
         """Register entity."""
-        assert entity.id is None
         url = self._url(route=entity.route, resource_id=None)
         project_context = self._project_context(override_context=project_context)
         return register_entity(

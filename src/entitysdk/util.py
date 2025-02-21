@@ -17,7 +17,7 @@ def make_db_api_request(
             "virtual-lab-id": project_context.virtual_lab_id,
             "Authorization": f"Bearer {token}",
         },
-        json=json_data,
+        json=json,
     )
 
 
