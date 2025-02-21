@@ -15,7 +15,7 @@ def mock_project_context():
     )
 
 
-@patch("entitysdk.client.make_request")
+@patch("entitysdk.client.make_db_api_request")
 def test_client__morph_read(mock_make_request, mock_project_context):
     mock_make_request.return_value = Mock(
         json=lambda: {
@@ -56,7 +56,7 @@ def test_client__morph_read(mock_make_request, mock_project_context):
 
     entity = test_module.get_entity(
         url=None,
-        model_cls=ReconstructionMorphology,
+        entity_type=ReconstructionMorphology,
         project_context=mock_project_context,
         token="mock-token",
     )

@@ -2,6 +2,24 @@
 
 import requests
 
+from entitysdk.common import ProjectContext
+
+
+def make_db_api_request(
+    url: str, *, method: str, json: dict | None = None, project_context: ProjectContext, token: str
+):
+    """Make a request to entitycore api."""
+    return make_request(
+        method="POST",
+        url=url,
+        headers={
+            "project-id": project_context.project_id,
+            "virtual-lab-id": project_context.virtual_lab_id,
+            "Authorization": f"Bearer {token}",
+        },
+        json=json_data,
+    )
+
 
 def make_request(url: str, *, method, **kwargs) -> requests.Response:
     """Make a request to the given URL with the given method and data."""

@@ -1,9 +1,11 @@
+"""Entity SDK client."""
+
 from dataclasses import dataclass
 
 from entitysdk.common import ProjectContext
 from entitysdk.core import Entity
 from entitysdk.serdes import deserialize_entity, serialize_entity
-from entitysdk.util import make_request
+from entitysdk.util import make_db_api_request
 
 
 @dataclass
@@ -30,23 +32,23 @@ class Client:
         self,
         resource_id: str,
         *,
-        model_cls: Entity,
+        entity_type: Entity,
         project_context: ProjectContext | None = None,
         token: str,
-    ):
+    ) -> Entity:
         """Get entity from resource id."""
-        url = self._url(route=model_cls.route, resource_id=resource_id)
+        url = self._url(route=entity_type.route, resource_id=resource_id)
         project_context = self._project_context(override_context=project_context)
         return get_entity(
             url=url,
-            model_cls=model_cls,
+            entity_type=entity_type,
             project_context=project_context,
             token=token,
         )
 
     def register(
         self, entity: Entity, *, project_context: ProjectContext | None = None, token: str
-    ):
+    ) -> Entity:
         """Register entity."""
         assert entity.id is None
         url = self._url(route=entity.route, resource_id=None)
@@ -59,34 +61,33 @@ class Client:
         )
 
 
-def get_entity(url: str, model_cls: Entity, project_context: ProjectContext, token: str):
-    """Instantiate entity with model ``model_cls`` from resource id."""
-    response = make_request(
-        method="GET",
+def get_entity(
+    url: str, entity_type: type[Entity], project_context: ProjectContext, token: str
+) -> Entity:
+    """Instantiate entity with model ``entity_type`` from resource id."""
+    response = make_db_api_request(
         url=url,
-        headers={
-            "project-id": project_context.project_id,
-            "virtual-lab-id": project_context.virtual_lab_id,
-            "Authorization": f"Bearer {token}",
-        },
+        method="GET",
+        json=None,
+        project_context=project_context,
+        token=token,
     )
 
-    return deserialize_entity(response.json(), model_cls)
+    return deserialize_entity(response.json(), entity_type)
 
 
-def register_entity(url: str, *, entity: Entity, project_context: ProjectContext, token: str):
+def register_entity(
+    url: str, *, entity: Entity, project_context: ProjectContext, token: str
+) -> Entity:
     """Register entity."""
     json_data = serialize_entity(entity)
 
-    response = make_request(
-        method="POST",
+    response = make_db_api_request(
         url=url,
-        headers={
-            "project-id": project_context.project_id,
-            "virtual-lab-id": project_context.virtual_lab_id,
-            "Authorization": f"Bearer {token}",
-        },
+        method="POST",
         json=json_data,
+        project_context=project_context,
+        token=token,
     )
 
-    return deserialize_entity(response.json(), entity.__class__)
+    return deserialize_entity(response.json(), type(entity))
