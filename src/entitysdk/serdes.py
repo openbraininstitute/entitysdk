@@ -1,5 +1,7 @@
 """Serialization and deserialization of entities."""
 
+from pydantic import TypeAdapter
+
 from entitysdk.base import BaseModel
 
 
@@ -13,6 +15,13 @@ def serialize_entity(entity: BaseModel) -> dict:
     data = entity.model_dump(mode="json", exclude_none=True)
     processed = _convert_identifiables_to_ids(data)
     return processed
+
+
+def serialize_dict(data: dict) -> dict:
+    """Serialize a model dictionary into json."""
+    processed = _convert_identifiables_to_ids(data)
+    json_data = TypeAdapter(dict).dump_python(processed, mode="json")
+    return json_data
 
 
 def _convert_identifiables_to_ids(data: dict) -> dict:

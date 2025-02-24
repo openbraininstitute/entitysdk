@@ -86,3 +86,29 @@ def test_register_reconstruction_morphology(mock_request, mock_project_context):
 
     assert registered.id == 1
     assert registered.name == morph.name
+
+
+@patch("entitysdk.client.make_db_api_request")
+def test_update_reconstruction_morphology(mock_request, mock_project_context):
+    morph = ReconstructionMorphology(
+        id=1,
+        name="foo",
+        species=Species(taxonomy_id="NCBITaxon"),
+        strain=Strain(name="my-strain", pref_label="my-strain"),
+        brain_region=BrainRegion(acronym="CB", children=[1, 2]),
+    )
+
+    mock_request.return_value = Mock(json=lambda: morph.model_dump() | {"id": 1})
+
+    updated = test_module.update_entity(
+        url=None,
+        entity_type=ReconstructionMorphology,
+        attrs_or_entity={
+            "name": "foo",
+        },
+        project_context=mock_project_context,
+        token="mock-token",
+    )
+
+    assert updated.id == 1
+    assert updated.name == "foo"

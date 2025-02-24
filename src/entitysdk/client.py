@@ -4,7 +4,7 @@ import httpx
 
 from entitysdk.common import ProjectContext
 from entitysdk.core import Identifiable
-from entitysdk.serdes import deserialize_entity, serialize_entity
+from entitysdk.serdes import deserialize_entity, serialize_dict, serialize_entity
 from entitysdk.util import make_db_api_request
 
 
@@ -108,6 +108,35 @@ class Client:
             http_client=self._http_client,
         )
 
+    def update(
+        self,
+        entity_id: str,
+        entity_type: type[Identifiable],
+        attrs_or_entity: dict | Identifiable,
+        *,
+        project_context: ProjectContext | None = None,
+        token: str,
+    ) -> Identifiable:
+        """Update an entity.
+
+        Args:
+            entity_id: Id of the entity to update.
+            entity_type: Type of the entity.
+            attrs_or_entity: Attributes or entity to update.
+            project_context: Optional project context.
+            token: Authorization access token.
+        """
+        url = self._url(route=str(entity_type.__route__), resource_id=entity_id)
+        project_context = self._project_context(override_context=project_context)
+        return update_entity(
+            url=url,
+            entity_type=entity_type,
+            attrs_or_entity=attrs_or_entity,
+            project_context=project_context,
+            token=token,
+            http_client=self._http_client,
+        )
+
 
 def search(
     url: str,
@@ -184,3 +213,32 @@ def register_entity(
     )
 
     return deserialize_entity(response.json(), type(entity))
+
+
+def update_entity(
+    url: str,
+    *,
+    entity_type: type[Identifiable],
+    attrs_or_entity: dict | Identifiable,
+    project_context: ProjectContext,
+    token: str,
+    http_client: httpx.Client | None = None,
+):
+    """Update entity."""
+    if isinstance(attrs_or_entity, dict):
+        json_data = serialize_dict(attrs_or_entity)
+    else:
+        json_data = serialize_entity(attrs_or_entity)
+
+    response = make_db_api_request(
+        url=url,
+        method="PATCH",
+        json=json_data,
+        project_context=project_context,
+        token=token,
+        http_client=http_client,
+    )
+
+    json_data = response.json()
+
+    return deserialize_entity(json_data, entity_type)
