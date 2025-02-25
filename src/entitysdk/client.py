@@ -17,10 +17,10 @@ class Client:
         self.project_context = project_context
         self._http_client = httpx.Client()
 
-    def _url(self, route: str, resource_id: str | None = None):
+    def _url(self, route: str, entity_id: str | None = None):
         """Get url for route and resource id."""
         route = f"{self.api_url}/{route}/"
-        return f"{route}{resource_id}" if resource_id else route
+        return f"{route}{entity_id}" if entity_id else route
 
     def _project_context(self, override_context: ProjectContext | None) -> ProjectContext:
         context = override_context or self.project_context
@@ -32,7 +32,7 @@ class Client:
 
     def get(
         self,
-        resource_id: str,
+        entity_id: str,
         *,
         entity_type: type[Identifiable],
         project_context: ProjectContext | None = None,
@@ -41,7 +41,7 @@ class Client:
         """Get entity from resource id.
 
         Args:
-            resource_id: Resource id of the entity.
+            entity_id: Resource id of the entity.
             entity_type: Type of the entity.
             project_context: Optional project context.
             token: Authorization access token.
@@ -49,7 +49,7 @@ class Client:
         Returns:
             entity_type instantatied by deserializing the response.
         """
-        url = self._url(route=str(entity_type.__route__), resource_id=resource_id)
+        url = self._url(route=str(entity_type.__route__), entity_id=entity_id)
         project_context = self._project_context(override_context=project_context)
         return get_entity(
             url=url,
@@ -75,7 +75,7 @@ class Client:
             project_context: Optional project context.
             token: Authorization access token.
         """
-        url = self._url(route=str(entity_type.__route__), resource_id=None)
+        url = self._url(route=str(entity_type.__route__), entity_id=None)
         return search_entities(
             url=url,
             entity_type=entity_type,
@@ -98,7 +98,7 @@ class Client:
         Returns:
             Registered entity with id.
         """
-        url = self._url(route=str(entity.__route__), resource_id=None)
+        url = self._url(route=str(entity.__route__), entity_id=None)
         project_context = self._project_context(override_context=project_context)
         return register_entity(
             url=url,
@@ -126,7 +126,7 @@ class Client:
             project_context: Optional project context.
             token: Authorization access token.
         """
-        url = self._url(route=str(entity_type.__route__), resource_id=entity_id)
+        url = self._url(route=str(entity_type.__route__), entity_id=entity_id)
         project_context = self._project_context(override_context=project_context)
         return update_entity(
             url=url,
