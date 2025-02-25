@@ -1,9 +1,7 @@
-from unittest.mock import Mock, patch
+from unittest.mock import Mock
 
 import pytest
 
-from entitysdk import client as test_module
-from entitysdk.common import ProjectContext
 from entitysdk.models.morphology import (
     BrainLocation,
     BrainRegion,
@@ -11,14 +9,6 @@ from entitysdk.models.morphology import (
     Species,
     Strain,
 )
-
-
-@pytest.fixture
-def mock_project_context():
-    return ProjectContext(
-        project_id="103d7868-147e-4f07-af0d-71d8568f575c",
-        virtual_lab_id="103d7868-147e-4f07-af0d-71d8568f575c",
-    )
 
 
 @pytest.fixture
@@ -53,6 +43,17 @@ def brain_region():
         name="Frontal pole, layer 1",
         acronym="FRP1",
         children=[],
+    )
+
+
+@pytest.fixture
+def morphology(species, strain, brain_region):
+    return ReconstructionMorphology(
+        name="my-morph",
+        description="my-description",
+        species=species,
+        strain=strain,
+        brain_region=brain_region,
     )
 
 
@@ -94,68 +95,42 @@ def json_morphology_expanded():
     }
 
 
-@patch("entitysdk.client.make_db_api_request")
-def test_read_reconstruction_morphology(
-    mock_request, json_morphology_expanded, mock_project_context
-):
-    mock_request.return_value = Mock(json=lambda: json_morphology_expanded)
+def test_read_reconstruction_morphology(client, json_morphology_expanded):
+    client._http_client.request.return_value = Mock(json=lambda: json_morphology_expanded)
 
-    entity = test_module.get_entity(
-        url=None,
+    entity = client.get(
+        entity_id=1,
         entity_type=ReconstructionMorphology,
-        project_context=mock_project_context,
         token="mock-token",
     )
 
     assert entity.id == 6466
 
 
-@patch("entitysdk.client.make_db_api_request")
-def test_register_reconstruction_morphology(
-    mock_request, mock_project_context, species, strain, brain_region, brain_location
-):
-    morph = ReconstructionMorphology(
-        name="my-morph",
-        description="my-description",
-        species=species,
-        strain=strain,
-        brain_region=brain_region,
-        brain_location=brain_location,
+def test_register_reconstruction_morphology(client, morphology):
+    client._http_client.request.return_value = Mock(
+        json=lambda: morphology.model_dump() | {"id": 1}
     )
 
-    mock_request.return_value = Mock(json=lambda: morph.model_dump() | {"id": 1})
-
-    registered = test_module.register_entity(
-        url=None, entity=morph, project_context=mock_project_context, token="mock-token"
-    )
+    registered = client.register(entity=morphology, token="mock-token")
 
     assert registered.id == 1
-    assert registered.name == morph.name
+    assert registered.name == morphology.name
 
 
-@patch("entitysdk.client.make_db_api_request")
-def test_update_reconstruction_morphology(
-    mock_request, mock_project_context, species, strain, brain_location, brain_region
-):
-    morph = ReconstructionMorphology(
-        id=1,
-        name="foo",
-        description="my-description",
-        species=species,
-        strain=strain,
-        brain_region=brain_region,
-        brain_location=brain_location,
+def test_update_reconstruction_morphology(client, morphology):
+    morphology = morphology.evolve(id=1)
+
+    client._http_client.request.return_value = Mock(
+        json=lambda: morphology.model_dump() | {"id": 1, "name": "foo"}
     )
 
-    mock_request.return_value = Mock(json=lambda: morph.model_dump() | {"id": 1})
-
-    updated = test_module.update_entity(
-        url=None,
+    updated = client.update(
+        entity_id=1,
         entity_type=ReconstructionMorphology,
         attrs_or_entity={
             "name": "foo",
         },
-        project_context=mock_project_context,
         token="mock-token",
     )
 
