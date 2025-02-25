@@ -63,7 +63,7 @@ class Strain(Entity):
     name: str
     taxonomy_id: str
 
-    species: Species
+    species_id: int
 
 
 class ReconstructionMorphology(Entity):

@@ -32,7 +32,7 @@ def strain(species):
         id=1,
         name="Cux2-CreERT2",
         taxonomy_id="http://bbp.epfl.ch/neurosciencegraph/ontologies/speciestaxonomy/RBS4I6tyfUBSDt1i0jXLpgN",
-        species=species,
+        species_id=1,
     )
 
 
