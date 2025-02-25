@@ -76,7 +76,7 @@ class Client:
             token: Authorization access token.
         """
         url = self._url(route=str(entity_type.__route__), resource_id=None)
-        return search(
+        return search_entities(
             url=url,
             entity_type=entity_type,
             query=query,
@@ -138,7 +138,7 @@ class Client:
         )
 
 
-def search(
+def search_entities(
     url: str,
     *,
     entity_type: type[Identifiable],
