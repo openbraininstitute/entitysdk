@@ -1,5 +1,6 @@
 """Base model."""
 
+from datetime import datetime
 from typing import ClassVar, Self
 
 from pydantic import BaseModel as PydanticBaseModel
@@ -12,7 +13,14 @@ class BaseModel(PydanticBaseModel):
     model_config = ConfigDict(
         frozen=True,
         from_attributes=True,
+        extra="forbid",
     )
+
+    update_date: datetime | None = None
+    creation_date: datetime | None = None
+
+    authorized_public: bool | None = None
+    authorized_project_id: str | None = None
 
     __route__: ClassVar[str | None] = None
 

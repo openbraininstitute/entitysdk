@@ -4,7 +4,13 @@ import pytest
 
 from entitysdk import client as test_module
 from entitysdk.common import ProjectContext
-from entitysdk.models.morphology import BrainRegion, ReconstructionMorphology, Species, Strain
+from entitysdk.models.morphology import (
+    BrainLocation,
+    BrainRegion,
+    ReconstructionMorphology,
+    Species,
+    Strain,
+)
 
 
 @pytest.fixture
@@ -12,6 +18,41 @@ def mock_project_context():
     return ProjectContext(
         project_id="103d7868-147e-4f07-af0d-71d8568f575c",
         virtual_lab_id="103d7868-147e-4f07-af0d-71d8568f575c",
+    )
+
+
+@pytest.fixture
+def species():
+    return Species(id=1, name="Mus musculus", taxonomy_id="NCBITaxon:10090")
+
+
+@pytest.fixture
+def strain(species):
+    return Strain(
+        id=1,
+        name="Cux2-CreERT2",
+        taxonomy_id="http://bbp.epfl.ch/neurosciencegraph/ontologies/speciestaxonomy/RBS4I6tyfUBSDt1i0jXLpgN",
+        species=species,
+    )
+
+
+@pytest.fixture
+def brain_location():
+    return BrainLocation(
+        id=1,
+        x=4101.52490234375,
+        y=1173.8499755859375,
+        z=4744.60009765625,
+    )
+
+
+@pytest.fixture
+def brain_region():
+    return BrainRegion(
+        id=68,
+        name="Frontal pole, layer 1",
+        acronym="FRP1",
+        children=[],
     )
 
 
@@ -70,12 +111,16 @@ def test_read_reconstruction_morphology(
 
 
 @patch("entitysdk.client.make_db_api_request")
-def test_register_reconstruction_morphology(mock_request, mock_project_context):
+def test_register_reconstruction_morphology(
+    mock_request, mock_project_context, species, strain, brain_region, brain_location
+):
     morph = ReconstructionMorphology(
         name="my-morph",
-        species=Species(taxonomy_id="NCBITaxon"),
-        strain=Strain(name="my-strain", pref_label="my-strain"),
-        brain_region=BrainRegion(acronym="CB", children=[1, 2]),
+        description="my-description",
+        species=species,
+        strain=strain,
+        brain_region=brain_region,
+        brain_location=brain_location,
     )
 
     mock_request.return_value = Mock(json=lambda: morph.model_dump() | {"id": 1})
@@ -89,13 +134,17 @@ def test_register_reconstruction_morphology(mock_request, mock_project_context):
 
 
 @patch("entitysdk.client.make_db_api_request")
-def test_update_reconstruction_morphology(mock_request, mock_project_context):
+def test_update_reconstruction_morphology(
+    mock_request, mock_project_context, species, strain, brain_location, brain_region
+):
     morph = ReconstructionMorphology(
         id=1,
         name="foo",
-        species=Species(taxonomy_id="NCBITaxon"),
-        strain=Strain(name="my-strain", pref_label="my-strain"),
-        brain_region=BrainRegion(acronym="CB", children=[1, 2]),
+        description="my-description",
+        species=species,
+        strain=strain,
+        brain_region=brain_region,
+        brain_location=brain_location,
     )
 
     mock_request.return_value = Mock(json=lambda: morph.model_dump() | {"id": 1})
