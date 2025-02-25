@@ -1,5 +1,7 @@
 """Utility functions."""
 
+from json import dumps
+
 import httpx
 
 from entitysdk.common import ProjectContext
@@ -30,5 +32,16 @@ def make_db_api_request(
         json=json,
         params=parameters,
     )
+
+    try:
+        response.raise_for_status()
+    except httpx.HTTPError as e:
+        message = (
+            f"{method} {url}\n"
+            f"json : {dumps(json, indent=2)}\n"
+            f"params : {parameters}\n"
+            f"response : {response.text}"
+        )
+        raise httpx.HTTPError(message=message) from e
 
     return response
