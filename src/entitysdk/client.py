@@ -1,11 +1,15 @@
 """Identifiable SDK client."""
 
+import io
+import os
+from pathlib import Path
+
 import httpx
 
+from entitysdk import route, serdes
 from entitysdk.common import ProjectContext
+from entitysdk.models.asset import Asset, LocalAssetMetadata
 from entitysdk.models.core import Identifiable
-from entitysdk.route import get_api_endpoint
-from entitysdk.serdes import deserialize_entity, serialize_dict, serialize_entity
 from entitysdk.util import make_db_api_request
 
 
@@ -25,7 +29,7 @@ class Client:
             project_context: Project context.
             http_client: Optional HTTP client to use.
         """
-        self.api_url = api_url
+        self.api_url = api_url.rstrip("/")
         self.project_context = project_context
         self._http_client = http_client or httpx.Client()
 
@@ -56,12 +60,12 @@ class Client:
         Returns:
             entity_type instantiated by deserializing the response.
         """
-        url = get_api_endpoint(api_url=self.api_url, entity_type=entity_type, entity_id=entity_id)
-        project_context = self._project_context(override_context=project_context)
         return get_entity(
-            url=url,
+            url=route.get_entities_endpoint(
+                api_url=self.api_url, entity_type=entity_type, entity_id=entity_id
+            ),
             entity_type=entity_type,
-            project_context=project_context,
+            project_context=self._project_context(override_context=project_context),
             token=token,
             http_client=self._http_client,
         )
@@ -82,9 +86,8 @@ class Client:
             project_context: Optional project context.
             token: Authorization access token.
         """
-        url = get_api_endpoint(api_url=self.api_url, entity_type=entity_type, entity_id=None)
         return search_entities(
-            url=url,
+            url=route.get_entities_endpoint(api_url=self.api_url, entity_type=entity_type),
             entity_type=entity_type,
             query=query,
             project_context=self._project_context(override_context=project_context),
@@ -105,12 +108,10 @@ class Client:
         Returns:
             Registered entity with id.
         """
-        url = get_api_endpoint(api_url=self.api_url, entity_type=type(entity), entity_id=None)
-        project_context = self._project_context(override_context=project_context)
         return register_entity(
-            url=url,
+            url=route.get_entities_endpoint(api_url=self.api_url, entity_type=type(entity)),
             entity=entity,
-            project_context=project_context,
+            project_context=self._project_context(override_context=project_context),
             token=token,
             http_client=self._http_client,
         )
@@ -133,13 +134,144 @@ class Client:
             project_context: Optional project context.
             token: Authorization access token.
         """
-        url = get_api_endpoint(api_url=self.api_url, entity_type=entity_type, entity_id=entity_id)
-        project_context = self._project_context(override_context=project_context)
         return update_entity(
-            url=url,
+            url=route.get_entities_endpoint(
+                api_url=self.api_url, entity_type=entity_type, entity_id=entity_id
+            ),
             entity_type=entity_type,
             attrs_or_entity=attrs_or_entity,
-            project_context=project_context,
+            project_context=self._project_context(override_context=project_context),
+            token=token,
+            http_client=self._http_client,
+        )
+
+    def upload_file(
+        self,
+        *,
+        entity_id: str,
+        entity_type: type[Identifiable],
+        file_path: os.PathLike,
+        file_content_type: str,
+        file_name: str | None = None,
+        file_metadata: dict | None = None,
+        project_context: ProjectContext | None = None,
+        token: str,
+    ) -> Asset:
+        """Upload asset to an existing entity's endpoint from a file path."""
+        path = Path(file_path)
+        asset_metadata = LocalAssetMetadata(
+            file_name=file_name or path.name,
+            content_type=file_content_type,
+            metadata=file_metadata,
+        )
+        return upload_asset_file(
+            url=route.get_assets_endpoint(
+                api_url=self.api_url,
+                entity_type=entity_type,
+                entity_id=entity_id,
+                asset_id=None,
+            ),
+            asset_path=path,
+            asset_metadata=asset_metadata,
+            project_context=self._project_context(override_context=project_context),
+            token=token,
+            http_client=self._http_client,
+        )
+
+    def upload_content(
+        self,
+        *,
+        entity_id: str,
+        entity_type: type[Identifiable],
+        file_content: io.BufferedIOBase,
+        file_name: str,
+        file_content_type: str,
+        file_metadata: dict | None = None,
+        project_context: ProjectContext | None = None,
+        token: str,
+    ) -> Asset:
+        """Upload asset to an existing entity's endpoint from a file-like object."""
+        asset_metadata = LocalAssetMetadata(
+            file_name=file_name,
+            content_type=file_content_type,
+            metadata=file_metadata or {},
+        )
+        return upload_asset_content(
+            url=route.get_assets_endpoint(
+                api_url=self.api_url,
+                entity_type=entity_type,
+                entity_id=entity_id,
+                asset_id=None,
+            ),
+            asset_content=file_content,
+            asset_metadata=asset_metadata,
+            project_context=self._project_context(override_context=project_context),
+            token=token,
+            http_client=self._http_client,
+        )
+
+    def download_content(
+        self,
+        *,
+        entity_id: str,
+        entity_type: type[Identifiable],
+        asset_id: str,
+        project_context: ProjectContext | None = None,
+        token: str,
+    ) -> bytes:
+        """Download asset content.
+
+        Args:
+            entity_id: Id of the entity.
+            entity_type: Type of the entity.
+            asset_id: Id of the asset.
+            project_context: Optional project context.
+            token: Authorization access token.
+
+        Returns:
+            Asset content in bytes.
+        """
+        return download_asset_content(
+            url=route.get_assets_endpoint(
+                api_url=self.api_url,
+                entity_type=entity_type,
+                entity_id=entity_id,
+                asset_id=asset_id,
+            ),
+            project_context=self._project_context(override_context=project_context),
+            token=token,
+            http_client=self._http_client,
+        )
+
+    def download_file(
+        self,
+        *,
+        entity_id: str,
+        entity_type: type[Identifiable],
+        asset_id: str,
+        output_path: os.PathLike,
+        project_context: ProjectContext | None = None,
+        token: str,
+    ) -> None:
+        """Download asset file to a file path.
+
+        Args:
+            entity_id: Id of the entity.
+            entity_type: Type of the entity.
+            asset_id: Id of the asset.
+            output_path: Path to save the file to.
+            project_context: Optional project context.
+            token: Authorization access token.
+        """
+        return download_asset_file(
+            url=route.get_assets_endpoint(
+                api_url=self.api_url,
+                entity_type=entity_type,
+                entity_id=entity_id,
+                asset_id=asset_id,
+            ),
+            output_path=Path(output_path),
+            project_context=self._project_context(override_context=project_context),
             token=token,
             http_client=self._http_client,
         )
@@ -176,7 +308,7 @@ def search_entities(
         http_client=http_client,
     )
     json_data_list = response.json()["data"]
-    return [deserialize_entity(json_data, entity_type) for json_data in json_data_list]
+    return [serdes.deserialize_entity(json_data, entity_type) for json_data in json_data_list]
 
 
 def get_entity(
@@ -196,7 +328,7 @@ def get_entity(
         http_client=http_client,
     )
 
-    return deserialize_entity(response.json(), entity_type)
+    return serdes.deserialize_entity(response.json(), entity_type)
 
 
 def register_entity(
@@ -208,7 +340,7 @@ def register_entity(
     http_client: httpx.Client | None = None,
 ) -> Identifiable:
     """Register entity."""
-    json_data = serialize_entity(entity)
+    json_data = serdes.serialize_entity(entity)
 
     response = make_db_api_request(
         url=url,
@@ -218,8 +350,7 @@ def register_entity(
         token=token,
         http_client=http_client,
     )
-
-    return deserialize_entity(response.json(), type(entity))
+    return serdes.deserialize_entity(response.json(), type(entity))
 
 
 def update_entity(
@@ -233,9 +364,9 @@ def update_entity(
 ):
     """Update entity."""
     if isinstance(attrs_or_entity, dict):
-        json_data = serialize_dict(attrs_or_entity)
+        json_data = serdes.serialize_dict(attrs_or_entity)
     else:
-        json_data = serialize_entity(attrs_or_entity)
+        json_data = serdes.serialize_entity(attrs_or_entity)
 
     response = make_db_api_request(
         url=url,
@@ -248,4 +379,107 @@ def update_entity(
 
     json_data = response.json()
 
-    return deserialize_entity(json_data, entity_type)
+    return serdes.deserialize_entity(json_data, entity_type)
+
+
+def upload_asset_file(
+    url: str,
+    *,
+    asset_path: Path,
+    asset_metadata: LocalAssetMetadata,
+    project_context: ProjectContext,
+    token: str,
+    http_client: httpx.Client | None = None,
+):
+    """Upload asset to an existing entity's endpoint from a file path."""
+    with open(asset_path, "rb") as file_content:
+        return upload_asset_content(
+            url=url,
+            asset_content=file_content,
+            asset_metadata=asset_metadata,
+            project_context=project_context,
+            token=token,
+            http_client=http_client,
+        )
+
+
+def upload_asset_content(
+    url: str,
+    *,
+    asset_content: io.BufferedIOBase,
+    asset_metadata: LocalAssetMetadata,
+    project_context: ProjectContext,
+    token: str,
+    http_client: httpx.Client | None = None,
+) -> Asset:
+    """Upload asset to an existing entity's endpoint from a file-like object."""
+    files = {
+        "file": (
+            asset_metadata.file_name,
+            asset_content,
+            asset_metadata.content_type,
+        )
+    }
+    response = make_db_api_request(
+        url=url,
+        method="POST",
+        files=files,
+        project_context=project_context,
+        token=token,
+        http_client=http_client,
+    )
+    return serdes.deserialize_entity(response.json(), Asset)
+
+
+def download_asset_content(
+    url: str,
+    *,
+    project_context: ProjectContext,
+    token: str,
+    http_client: httpx.Client | None = None,
+) -> bytes:
+    """Download asset content.
+
+    Args:
+        url: URL of the asset.
+        project_context: Project context.
+        token: Authorization access token.
+        http_client: HTTP client.
+
+    Returns:
+        Asset content in bytes.
+    """
+    response = make_db_api_request(
+        url=url,
+        method="GET",
+        project_context=project_context,
+        token=token,
+        http_client=http_client,
+    )
+    return response.content
+
+
+def download_asset_file(
+    url: str,
+    *,
+    output_path: Path,
+    project_context: ProjectContext,
+    token: str,
+    http_client: httpx.Client | None = None,
+) -> None:
+    """Download asset file to a file path.
+
+    Args:
+        url: URL of the asset.
+        output_path: Path to save the file to.
+        project_context: Project context.
+        token: Authorization access token.
+        http_client: HTTP client.
+    """
+    bytes_content = download_asset_content(
+        url=url,
+        project_context=project_context,
+        token=token,
+        http_client=http_client,
+    )
+    output_path.write_bytes(bytes_content)

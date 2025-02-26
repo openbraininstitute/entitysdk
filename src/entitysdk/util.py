@@ -14,6 +14,7 @@ def make_db_api_request(
     method: str,
     json: dict | None = None,
     parameters: dict | None = None,
+    files: dict | None = None,
     project_context: ProjectContext,
     token: str,
     http_client: httpx.Client | None = None,
@@ -32,6 +33,7 @@ def make_db_api_request(
                 "Authorization": f"Bearer {token}",
             },
             json=json,
+            files=files,
             params=parameters,
             follow_redirects=True,
         )

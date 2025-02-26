@@ -15,13 +15,21 @@ def test_get_route_name__raises():
         test_module.get_route_name(int)
 
 
-def test_get_api_endpoint():
-    res = test_module.get_api_endpoint(api_url="http://localhost:8000", entity_type=Entity)
-    assert res == "http://localhost:8000/entity"
+def test_get_entities_endpoint(api_url):
+    res = test_module.get_entities_endpoint(api_url=api_url, entity_type=Entity)
+    assert res == f"{api_url}/entity"
 
 
-def test_get_api_endpoint__with_entity_id():
-    res = test_module.get_api_endpoint(
-        api_url="http://localhost:8000", entity_type=Entity, entity_id="1"
+def test_get_entities_endpoint__with_entity_id(api_url):
+    res = test_module.get_entities_endpoint(api_url=api_url, entity_type=Entity, entity_id="1")
+    assert res == f"{api_url}/entity/1"
+
+
+def test_get_assets_endpoint(api_url):
+    res = test_module.get_assets_endpoint(api_url=api_url, entity_type=Entity, entity_id="1")
+    assert res == f"{api_url}/entity/1/assets"
+
+    res = test_module.get_assets_endpoint(
+        api_url=api_url, entity_type=Entity, entity_id="1", asset_id="2"
     )
-    assert res == "http://localhost:8000/entity/1"
+    assert res == f"{api_url}/entity/1/assets/2"
