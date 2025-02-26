@@ -1,14 +1,10 @@
 """Morphology models."""
 
-from typing import ClassVar
-
 from entitysdk.core import Entity
 
 
 class License(Entity):
     """License model."""
-
-    __route__: ClassVar[str] = "license"
 
     name: str
     description: str
@@ -20,8 +16,6 @@ class License(Entity):
 class BrainRegion(Entity):
     """BrainRegion model."""
 
-    __route__: ClassVar[str] = "brain_region"
-
     name: str
     acronym: str
     children: list[int]
@@ -29,8 +23,6 @@ class BrainRegion(Entity):
 
 class BrainLocation(Entity):
     """BrainLocation model."""
-
-    __route__: ClassVar[str] = "brain_location"
 
     x: float
     y: float
@@ -40,8 +32,6 @@ class BrainLocation(Entity):
 class Taxonomy(Entity):
     """Taxonomy model."""
 
-    __route__: ClassVar[str] = "taxonomy"
-
     name: str
     pref_label: str
 
@@ -49,16 +39,12 @@ class Taxonomy(Entity):
 class Species(Entity):
     """Species model."""
 
-    __route__: ClassVar[str] = "species"
-
     name: str
     taxonomy_id: str
 
 
 class Strain(Entity):
     """Strain model."""
-
-    __route__: ClassVar[str] = "strain"
 
     name: str
     taxonomy_id: str
@@ -68,8 +54,6 @@ class Strain(Entity):
 
 class ReconstructionMorphology(Entity):
     """Morphology model."""
-
-    __route__: ClassVar[str] = "reconstruction_morphology"
 
     name: str
     description: str

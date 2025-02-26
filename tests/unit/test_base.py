@@ -22,17 +22,6 @@ def model():
     )
 
 
-def test_route(model: MyCustomModel):
-    assert model.route == "my-custom-model"
-
-
-def test_route_raises_error_if_not_set():
-    model = test_module.BaseModel()
-
-    with pytest.raises(TypeError, match="does not have a corresponding route in entitycore"):
-        _ = model.route
-
-
 def test_evolve(model: MyCustomModel):
     evolved = model.evolve(name="baz")
     assert evolved.name == "baz"

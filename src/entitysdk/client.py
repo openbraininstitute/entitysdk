@@ -4,6 +4,7 @@ import httpx
 
 from entitysdk.common import ProjectContext
 from entitysdk.core import Identifiable
+from entitysdk.route import get_api_endpoint
 from entitysdk.serdes import deserialize_entity, serialize_dict, serialize_entity
 from entitysdk.util import make_db_api_request
 
@@ -27,11 +28,6 @@ class Client:
         self.api_url = api_url
         self.project_context = project_context
         self._http_client = http_client or httpx.Client()
-
-    def _url(self, route: str, entity_id: str | None = None):
-        """Get url for route and resource id."""
-        route = f"{self.api_url}/{route}/"
-        return f"{route}{entity_id}" if entity_id else route
 
     def _project_context(self, override_context: ProjectContext | None) -> ProjectContext:
         context = override_context or self.project_context
@@ -60,7 +56,7 @@ class Client:
         Returns:
             entity_type instantiated by deserializing the response.
         """
-        url = self._url(route=str(entity_type.__route__), entity_id=entity_id)
+        url = get_api_endpoint(api_url=self.api_url, entity_type=entity_type, entity_id=entity_id)
         project_context = self._project_context(override_context=project_context)
         return get_entity(
             url=url,
@@ -86,7 +82,7 @@ class Client:
             project_context: Optional project context.
             token: Authorization access token.
         """
-        url = self._url(route=str(entity_type.__route__), entity_id=None)
+        url = get_api_endpoint(api_url=self.api_url, entity_type=entity_type, entity_id=None)
         return search_entities(
             url=url,
             entity_type=entity_type,
@@ -109,7 +105,7 @@ class Client:
         Returns:
             Registered entity with id.
         """
-        url = self._url(route=str(entity.__route__), entity_id=None)
+        url = get_api_endpoint(api_url=self.api_url, entity_type=type(entity), entity_id=None)
         project_context = self._project_context(override_context=project_context)
         return register_entity(
             url=url,
@@ -137,7 +133,7 @@ class Client:
             project_context: Optional project context.
             token: Authorization access token.
         """
-        url = self._url(route=str(entity_type.__route__), entity_id=entity_id)
+        url = get_api_endpoint(api_url=self.api_url, entity_type=entity_type, entity_id=entity_id)
         project_context = self._project_context(override_context=project_context)
         return update_entity(
             url=url,

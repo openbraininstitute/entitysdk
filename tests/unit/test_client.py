@@ -3,7 +3,7 @@ from unittest.mock import Mock
 import pytest
 
 from entitysdk.client import Client
-from entitysdk.core import Identifiable
+from entitysdk.core import Entity
 
 
 def test_client_project_context__raises():
@@ -17,7 +17,7 @@ def test_client_search(client):
     client._http_client.request.return_value = Mock(json=lambda: {"data": []})
 
     res = client.search(
-        entity_type=Identifiable,
+        entity_type=Entity,
         query={"name": "foo"},
         token="mock-token",
     )
@@ -30,8 +30,8 @@ def test_client_update(client):
 
     res = client.update(
         entity_id=1,
-        entity_type=Identifiable,
-        attrs_or_entity=Identifiable(id="1"),
+        entity_type=Entity,
+        attrs_or_entity=Entity(id="1"),
         token="mock-token",
     )
 
