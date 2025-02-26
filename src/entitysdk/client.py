@@ -26,7 +26,7 @@ class Client:
         """
         self.api_url = api_url
         self.project_context = project_context
-        self._http_client = http_client
+        self._http_client = http_client or httpx.Client()
 
     def _url(self, route: str, entity_id: str | None = None):
         """Get url for route and resource id."""
