@@ -1,7 +1,5 @@
 """Core models."""
 
-from typing import ClassVar
-
 from entitysdk.base import BaseModel
 
 
@@ -18,10 +16,6 @@ class Identifiable(BaseModel):
 class Entity(Identifiable):
     """Entity is a model with an id."""
 
-    __route__: ClassVar[str] = "entity"
-
 
 class Activity(Identifiable):
     """Activity model."""
-
-    __route__: ClassVar[str] = "activity"
