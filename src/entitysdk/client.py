@@ -11,11 +11,22 @@ from entitysdk.util import make_db_api_request
 class Client:
     """Client for entitysdk."""
 
-    def __init__(self, api_url: str, project_context: ProjectContext | None = None) -> None:
-        """Initialize client."""
+    def __init__(
+        self,
+        api_url: str,
+        project_context: ProjectContext | None = None,
+        http_client: httpx.Client | None = None,
+    ) -> None:
+        """Initialize client.
+
+        Args:
+            api_url: The API URL to entitycore service.
+            project_context: Project context.
+            http_client: Optional HTTP client to use.
+        """
         self.api_url = api_url
         self.project_context = project_context
-        self._http_client = httpx.Client()
+        self._http_client = http_client
 
     def _url(self, route: str, entity_id: str | None = None):
         """Get url for route and resource id."""

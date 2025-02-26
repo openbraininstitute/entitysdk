@@ -1,4 +1,4 @@
-from unittest.mock import patch
+from unittest.mock import Mock
 
 import pytest
 
@@ -16,8 +16,6 @@ def project_context():
 
 @pytest.fixture
 def client(project_context):
-    with patch("entitysdk.client.httpx"):
-        yield Client(
-            api_url="http://localhost:8000",
-            project_context=project_context,
-        )
+    return Client(
+        api_url="http://localhost:8000", project_context=project_context, http_client=Mock()
+    )
