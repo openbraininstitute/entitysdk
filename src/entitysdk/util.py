@@ -5,6 +5,7 @@ from json import dumps
 import httpx
 
 from entitysdk.common import ProjectContext
+from entitysdk.exception import EntitySDKError
 
 
 def make_db_api_request(
@@ -21,17 +22,20 @@ def make_db_api_request(
     if http_client is None:
         http_client = httpx.Client()
 
-    response = http_client.request(
-        method=method,
-        url=url,
-        headers={
-            "project-id": project_context.project_id,
-            "virtual-lab-id": project_context.virtual_lab_id,
-            "Authorization": f"Bearer {token}",
-        },
-        json=json,
-        params=parameters,
-    )
+    try:
+        response = http_client.request(
+            method=method,
+            url=url,
+            headers={
+                "project-id": project_context.project_id,
+                "virtual-lab-id": project_context.virtual_lab_id,
+                "Authorization": f"Bearer {token}",
+            },
+            json=json,
+            params=parameters,
+        )
+    except httpx.RequestError as e:
+        raise EntitySDKError(f"Request error: {e}") from e
 
     try:
         response.raise_for_status()
@@ -42,6 +46,6 @@ def make_db_api_request(
             f"params : {parameters}\n"
             f"response : {response.text}"
         )
-        raise httpx.HTTPError(message=message) from e
+        raise EntitySDKError(message) from e
 
     return response
