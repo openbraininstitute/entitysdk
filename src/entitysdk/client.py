@@ -47,7 +47,7 @@ class Client:
             token: Authorization access token.
 
         Returns:
-            entity_type instantatied by deserializing the response.
+            entity_type instantiated by deserializing the response.
         """
         url = self._url(route=str(entity_type.__route__), entity_id=entity_id)
         project_context = self._project_context(override_context=project_context)
