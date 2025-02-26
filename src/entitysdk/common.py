@@ -1,11 +1,12 @@
 """Common stuff."""
 
 from dataclasses import dataclass
+from uuid import UUID
 
 
 @dataclass
 class ProjectContext:
     """Project context."""
 
-    project_id: str
-    virtual_lab_id: str
+    project_id: UUID
+    virtual_lab_id: UUID
