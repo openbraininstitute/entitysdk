@@ -35,4 +35,4 @@ class BaseModel(PydanticBaseModel):
 
     def evolve(self, **model_attributes) -> Self:
         """Evolve a copy of the model with new attributes."""
-        return self.model_validate({**self.model_dump(), **model_attributes})
+        return self.model_copy(update=model_attributes, deep=True)
