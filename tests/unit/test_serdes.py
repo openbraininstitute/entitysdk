@@ -28,7 +28,7 @@ class E3(Identifiable):
         ),
         (
             E2(id=1, a="foo", b=1),
-            {"id": 1, "a": "foo", "b": 1},
+            {"a": "foo", "b": 1},
         ),
         (
             E3(
@@ -37,7 +37,6 @@ class E3(Identifiable):
                 b=E2(id=2, a="foo", b=1),
             ),
             {
-                "id": 1,
                 "a": {"a": "foo", "b": 1},
                 "b_id": 2,
             },

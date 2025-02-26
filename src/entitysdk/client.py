@@ -219,7 +219,24 @@ def register_entity(
         http_client=http_client,
     )
 
-    return deserialize_entity(response.json(), type(entity))
+    registered = deserialize_entity(response.json(), type(entity))
+
+    if hasattr(entity, "assets") and (assets_to_upload := entity.assets):
+        assets = []
+        for asset_to_upload in assets_to_upload:
+            if isinstance(asset_to_upload, Asset):
+                raise TypeError("Asset already registered.")
+            asset = upload_asset(
+                url=f"{url}{registered.id}/assets",
+                project_context=project_context,
+                token=token,
+                asset_to_upload=asset_to_upload,
+                http_client=http_client,
+            )
+            assets.append(asset)
+        registered = registered.evolve(assets=assets)
+
+    return registered
 
 
 def update_entity(
@@ -249,3 +266,30 @@ def update_entity(
     json_data = response.json()
 
     return deserialize_entity(json_data, entity_type)
+
+
+def upload_asset(
+    url: str,
+    *,
+    asset_to_upload: LocalAsset,
+    project_context: ProjectContext,
+    token: str,
+    http_client: httpx.Client | None = None,
+) -> Asset:
+    """Upload asset to an existing entity's route."""
+    files = {
+        "file": (
+            asset_to_upload.filename,
+            asset_to_upload.content,
+            asset_to_upload.content_type,
+        )
+    }
+    response = make_db_api_request(
+        url=url,
+        method="POST",
+        files=files,
+        project_context=project_context,
+        token=token,
+        http_client=http_client,
+    )
+    return deserialize_entity(response.json(), Asset)
