@@ -1,6 +1,7 @@
 """Morphology models."""
 
 from entitysdk.models.core import Entity
+from entitysdk.mixin import HasAssets
 
 
 class License(Entity):
@@ -52,7 +53,7 @@ class Strain(Entity):
     species_id: int
 
 
-class ReconstructionMorphology(Entity):
+class ReconstructionMorphology(HasAssets, Entity):
     """Morphology model."""
 
     name: str
