@@ -1,6 +1,7 @@
 """Morphology models."""
 
-from entitysdk.models.core import Entity
+from entitysdk.models.contribution import Contribution
+from entitysdk.models.core import Entity, Struct
 
 
 class License(Entity):
@@ -21,7 +22,7 @@ class BrainRegion(Entity):
     children: list[int]
 
 
-class BrainLocation(Entity):
+class BrainLocation(Struct):
     """BrainLocation model."""
 
     x: float
@@ -62,7 +63,8 @@ class ReconstructionMorphology(Entity):
     species: Species
     strain: Strain | None = None
     brain_region: BrainRegion
-    brain_location: BrainLocation | None = None
+    location: BrainLocation | None = None
+    contributions: list[Contribution] | None = None
 
     license: License | None = None
 

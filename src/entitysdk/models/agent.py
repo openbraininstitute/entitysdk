@@ -1,18 +1,27 @@
 """Agent models."""
 
-from entitysdk.models.core import Struct
+from typing import Literal
+
+from entitysdk.models.core import Identifiable
 
 
-class Person(Struct):
+class Agent(Identifiable):
+    """Agent model."""
+
+    type: str
+    pref_label: str
+
+
+class Person(Agent):
     """Person model."""
 
-    givenName: str
+    type: Literal["person"]
     familyName: str
-    pref_label: str
+    givenName: str
 
 
-class Organization(Struct):
+class Organization(Agent):
     """Organization model."""
 
-    pref_label: str
-    alternative_name: str | None = None
+    type: Literal["organization"]
+    alternative_name: str
