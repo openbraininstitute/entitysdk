@@ -2,7 +2,7 @@
 
 from pydantic import TypeAdapter
 
-from entitysdk.base import BaseModel
+from entitysdk.models.base import BaseModel
 
 
 def deserialize_entity(json_data: dict, entity_type: type[BaseModel]):

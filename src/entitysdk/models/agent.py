@@ -1,6 +1,6 @@
 """Agent models."""
 
-from entitysdk.core import Struct
+from entitysdk.models.core import Struct
 
 
 class Person(Struct):

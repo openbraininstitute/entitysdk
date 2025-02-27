@@ -1,6 +1,6 @@
 """Core models."""
 
-from entitysdk.base import BaseModel
+from entitysdk.models.base import BaseModel
 
 
 class Struct(BaseModel):
