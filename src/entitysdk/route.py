@@ -8,13 +8,13 @@ from entitysdk.models.core import Identifiable
 # Mapping of entity type to api route name.
 _ROUTES = {
     "Activity": "activity",
-    "BrainLocation": "brain_location",
-    "BrainRegion": "brain_region",
+    "BrainLocation": "brain-location",
+    "BrainRegion": "brain-region",
     "Entity": "entity",
     "License": "license",
     "Organization": "organization",
     "Person": "person",
-    "ReconstructionMorphology": "reconstruction_morphology",
+    "ReconstructionMorphology": "reconstruction-morphology",
     "Species": "species",
     "Strain": "strain",
     "Taxonomy": "taxonomy",

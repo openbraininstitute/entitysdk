@@ -33,6 +33,7 @@ def make_db_api_request(
             },
             json=json,
             params=parameters,
+            follow_redirects=True,
         )
     except httpx.RequestError as e:
         raise EntitySDKError(f"Request error: {e}") from e
