@@ -2,8 +2,8 @@
 
 from urllib.parse import urljoin
 
-from entitysdk.core import Identifiable
 from entitysdk.exception import RouteNotFoundError
+from entitysdk.models.core import Identifiable
 
 # Mapping of entity type to api route name.
 _ROUTES = {

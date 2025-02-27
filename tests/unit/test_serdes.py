@@ -1,7 +1,7 @@
 import pytest
 
 from entitysdk import serdes as test_module
-from entitysdk.core import Identifiable, Struct
+from entitysdk.models.core import Identifiable, Struct
 
 
 class E1(Struct):

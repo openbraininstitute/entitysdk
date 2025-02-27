@@ -1,6 +1,6 @@
 """Morphology models."""
 
-from entitysdk.core import Entity
+from entitysdk.models.core import Entity
 
 
 class License(Entity):

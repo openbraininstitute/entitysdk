@@ -1,8 +1,8 @@
 import pytest
 
 from entitysdk import route as test_module
-from entitysdk.core import Entity
 from entitysdk.exception import RouteNotFoundError
+from entitysdk.models.core import Entity
 
 
 def test_get_route_name():

@@ -2,7 +2,7 @@ from typing import ClassVar
 
 import pytest
 
-from entitysdk import base as test_module
+from entitysdk.models import base as test_module
 
 
 class MyCustomModel(test_module.BaseModel):

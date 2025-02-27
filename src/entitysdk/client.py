@@ -3,7 +3,7 @@
 import httpx
 
 from entitysdk.common import ProjectContext
-from entitysdk.core import Identifiable
+from entitysdk.models.core import Identifiable
 from entitysdk.route import get_api_endpoint
 from entitysdk.serdes import deserialize_entity, serialize_dict, serialize_entity
 from entitysdk.util import make_db_api_request
