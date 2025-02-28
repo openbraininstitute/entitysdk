@@ -11,12 +11,15 @@ from entitysdk.models.core import Identifiable, Struct
 class Role(Identifiable):
     """Role model."""
 
-    name: str
-    role_id: str
+    name: str = Field(..., description="The name of the role.")
+    role_id: str = Field(
+        ...,
+        description="The role id.",
+    )
 
 
 class Contribution(Struct):
     """Contribution model."""
 
     agent: Annotated[Person | Organization, Field(discriminator="type")]
-    role: Role
+    role: Role = Field(..., description="The role of the contribution.")
