@@ -29,8 +29,7 @@ def _convert_identifiables_to_ids(data: dict) -> dict:
 
     for key, value in data.items():
         if isinstance(value, dict):
-            # TODO: Remove brain_location hack when it becomes embdedded
-            if "id" in value and key != "brain_location":
+            if "id" in value:
                 new_key = f"{key}_id"
                 result[new_key] = value["id"]
             else:

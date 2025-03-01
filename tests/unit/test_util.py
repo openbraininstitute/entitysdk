@@ -35,6 +35,7 @@ def test_make_db_api_request(mock_client: Mock):
         headers={"project-id": "123", "virtual-lab-id": "456", "Authorization": "Bearer 123"},
         json={"name": "John Doe"},
         params={"foo": "bar"},
+        follow_redirects=True,
     )
 
 

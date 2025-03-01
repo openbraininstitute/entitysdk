@@ -75,7 +75,7 @@ def json_morphology_expanded():
         "update_date": "2025-02-20T13:44:50.111791Z",
         "name": "04446-04462-X10187-Y13578_final",
         "description": "Bar",
-        "brain_location": None,
+        "location": None,
         "species": {
             "id": 1,
             "creation_date": "2025-02-20T13:42:56.228818Z",
