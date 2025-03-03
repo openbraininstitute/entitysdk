@@ -474,6 +474,32 @@ def upload_asset_content(
     return serdes.deserialize_entity(response.json(), Asset)
 
 
+def download_asset_file(
+    url: str,
+    *,
+    output_path: Path,
+    project_context: ProjectContext,
+    token: str,
+    http_client: httpx.Client | None = None,
+) -> None:
+    """Download asset file to a file path.
+
+    Args:
+        url: URL of the asset.
+        output_path: Path to save the file to.
+        project_context: Project context.
+        token: Authorization access token.
+        http_client: HTTP client.
+    """
+    bytes_content = download_asset_content(
+        url=url,
+        project_context=project_context,
+        token=token,
+        http_client=http_client,
+    )
+    output_path.write_bytes(bytes_content)
+
+
 def download_asset_content(
     url: str,
     *,
@@ -500,29 +526,3 @@ def download_asset_content(
         http_client=http_client,
     )
     return response.content
-
-
-def download_asset_file(
-    url: str,
-    *,
-    output_path: Path,
-    project_context: ProjectContext,
-    token: str,
-    http_client: httpx.Client | None = None,
-) -> None:
-    """Download asset file to a file path.
-
-    Args:
-        url: URL of the asset.
-        output_path: Path to save the file to.
-        project_context: Project context.
-        token: Authorization access token.
-        http_client: HTTP client.
-    """
-    bytes_content = download_asset_content(
-        url=url,
-        project_context=project_context,
-        token=token,
-        http_client=http_client,
-    )
-    output_path.write_bytes(bytes_content)
