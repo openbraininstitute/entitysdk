@@ -46,6 +46,7 @@ class Client:
         entity_id: str,
         *,
         entity_type: type[Identifiable],
+        with_assets: bool = True,
         project_context: ProjectContext | None = None,
         token: str,
     ) -> Identifiable:
@@ -54,13 +55,14 @@ class Client:
         Args:
             entity_id: Resource id of the entity.
             entity_type: Type of the entity.
+            with_assets: Whether to include assets in the response.
             project_context: Optional project context.
             token: Authorization access token.
 
         Returns:
             entity_type instantiated by deserializing the response.
         """
-        return get_entity(
+        entity = get_entity(
             url=route.get_entities_endpoint(
                 api_url=self.api_url, entity_type=entity_type, entity_id=entity_id
             ),
@@ -69,6 +71,20 @@ class Client:
             token=token,
             http_client=self._http_client,
         )
+        if with_assets:
+            assets = get_entity_assets(
+                url=route.get_assets_endpoint(
+                    api_url=self.api_url,
+                    entity_type=entity_type,
+                    entity_id=entity_id,
+                ),
+                project_context=self._project_context(override_context=project_context),
+                token=token,
+                http_client=self._http_client,
+            )
+            entity = entity.evolve(assets=assets)
+
+        return entity
 
     def search(
         self,
@@ -329,6 +345,33 @@ def get_entity(
     )
 
     return serdes.deserialize_entity(response.json(), entity_type)
+
+
+def get_entity_assets(
+    url: str,
+    project_context: ProjectContext,
+    token: str,
+    http_client: httpx.Client | None = None,
+) -> list[Asset]:
+    """Get entity assets.
+
+    Args:
+        url: URL of the resource.
+        project_context: Project context.
+        token: Authorization access token.
+        http_client: HTTP client.
+
+    Returns:
+        List of assets.
+    """
+    response = make_db_api_request(
+        url=url,
+        method="GET",
+        project_context=project_context,
+        token=token,
+        http_client=http_client,
+    )
+    return [serdes.deserialize_entity(asset, Asset) for asset in response.json()["data"]]
 
 
 def register_entity(

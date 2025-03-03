@@ -158,3 +158,23 @@ def test_client_download_file(tmp_path, client, mock_asset_response, api_url, pr
         token="mock-token",
     )
     assert output_path.read_bytes() == b"foo"
+
+
+def test_client_get(client, mock_asset_response, api_url, project_context):
+    def mock_request(*args, **kwargs):
+        if "assets" in kwargs["url"]:
+            return Mock(
+                json=lambda: {"data": [mock_asset_response, mock_asset_response]},
+            )
+        return Mock(json=lambda: {"id": 1})
+
+    client._http_client.request = mock_request
+
+    res = client.get(
+        entity_id=1,
+        entity_type=Entity,
+        token="mock-token",
+        with_assets=True,
+    )
+    assert res.id == 1
+    assert len(res.assets) == 2
