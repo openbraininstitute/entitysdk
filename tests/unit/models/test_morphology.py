@@ -102,6 +102,7 @@ def test_read_reconstruction_morphology(client, json_morphology_expanded):
         entity_id=1,
         entity_type=ReconstructionMorphology,
         token="mock-token",
+        with_assets=False,
     )
 
     assert entity.id == 6466

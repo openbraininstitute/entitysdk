@@ -4,6 +4,13 @@ from pydantic import TypeAdapter
 
 from entitysdk.models.base import BaseModel
 
+SERIALIZATION_EXCLUDE_KEYS = {
+    "assets",
+    "creation_date",
+    "id",
+    "update_date",
+}
+
 
 def deserialize_entity(json_data: dict, entity_type: type[BaseModel]):
     """Deserialize json into entity."""
@@ -12,7 +19,11 @@ def deserialize_entity(json_data: dict, entity_type: type[BaseModel]):
 
 def serialize_entity(entity: BaseModel) -> dict:
     """Serialize entity into json."""
-    data = entity.model_dump(mode="json", exclude_none=True)
+    data = entity.model_dump(
+        mode="json",
+        exclude=SERIALIZATION_EXCLUDE_KEYS,
+        exclude_none=True,
+    )
     processed = _convert_identifiables_to_ids(data)
     return processed
 

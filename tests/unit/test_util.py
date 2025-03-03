@@ -36,6 +36,7 @@ def test_make_db_api_request(mock_client: Mock):
         json={"name": "John Doe"},
         params={"foo": "bar"},
         follow_redirects=True,
+        files=None,
     )
 
 
