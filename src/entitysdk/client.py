@@ -101,7 +101,7 @@ class Client:
         Args:
             entity_type: Type of the entity.
             query: Query parameters.
-            limit: Limit the number of entities to return. Default is 0, no limit.
+            limit: Limit the number of entities to yield. Default is 0, no limit.
             project_context: Optional project context.
             token: Authorization access token.
         """
