@@ -6,7 +6,7 @@ from json import dumps
 import httpx
 
 from entitysdk.common import ProjectContext
-from entitysdk.config import constants
+from entitysdk.config import settings
 from entitysdk.exception import EntitySDKError
 
 
@@ -65,7 +65,7 @@ def stream_paginated_request(
     project_context: ProjectContext,
     token: str,
     http_client: httpx.Client | None = None,
-    page_size: int = constants.page_size,
+    page_size: int = settings.page_size,
     limit: int,
 ) -> Iterator[dict]:
     """Paginate a request to entitycore api.

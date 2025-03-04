@@ -6,10 +6,16 @@ from pydantic import Field
 from pydantic_settings import BaseSettings
 
 
-class Constants(BaseSettings):
+class Settings(BaseSettings):
     """Constants for this library."""
 
-    page_size: Annotated[int, Field(description="Default pagination page size.")] = 20
+    page_size: Annotated[
+        int,
+        Field(
+            env="ENTITYSDK_PAGE_SIZE",
+            description="Default pagination page size.",
+        ),
+    ] = 20
 
 
-constants = Constants()
+settings = Settings()
