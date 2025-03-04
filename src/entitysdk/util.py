@@ -74,7 +74,6 @@ def stream_paginated_request(
         method: The method to use.
         json: The json to send.
         parameters: The parameters to send.
-        files: The files to send.
         project_context: The project context.
         token: The token to use.
         http_client: The http client to use.
