@@ -23,7 +23,7 @@ def test_client_search(client):
         token="mock-token",
     )
 
-    assert res == []
+    assert list(res) == []
 
 
 def test_client_update(client):
