@@ -2,6 +2,7 @@
 
 import io
 import os
+from collections.abc import Iterator
 from pathlib import Path
 
 import httpx
@@ -10,7 +11,7 @@ from entitysdk import route, serdes
 from entitysdk.common import ProjectContext
 from entitysdk.models.asset import Asset, LocalAssetMetadata
 from entitysdk.models.core import Identifiable
-from entitysdk.util import make_db_api_request
+from entitysdk.util import make_db_api_request, stream_paginated_request
 
 
 class Client:
@@ -91,14 +92,16 @@ class Client:
         *,
         entity_type: type[Identifiable],
         query: dict,
+        limit: int = 0,
         project_context: ProjectContext | None = None,
         token: str,
-    ) -> list[Identifiable]:
+    ) -> Iterator[Identifiable]:
         """Search for entities.
 
         Args:
             entity_type: Type of the entity.
             query: Query parameters.
+            limit: Limit the number of entities to yield. Default is 0, no limit.
             project_context: Optional project context.
             token: Authorization access token.
         """
@@ -106,6 +109,7 @@ class Client:
             url=route.get_entities_endpoint(api_url=self.api_url, entity_type=entity_type),
             entity_type=entity_type,
             query=query,
+            limit=limit,
             project_context=self._project_context(override_context=project_context),
             token=token,
             http_client=self._http_client,
@@ -298,16 +302,18 @@ def search_entities(
     *,
     entity_type: type[Identifiable],
     query: dict,
+    limit: int,
     project_context: ProjectContext,
     token: str,
     http_client: httpx.Client | None = None,
-) -> list[Identifiable]:
+) -> Iterator[Identifiable]:
     """Search for entities.
 
     Args:
         url: URL of the resource.
         entity_type: Type of the entity.
         query: Query parameters
+        limit: Limit the number of entities to return.
         project_context: Project context.
         token: Authorization access token.
         http_client: HTTP client.
@@ -315,16 +321,17 @@ def search_entities(
     Returns:
         List of entities.
     """
-    response = make_db_api_request(
+    iterator: Iterator[dict] = stream_paginated_request(
         url=url,
         method="GET",
         parameters=query,
+        limit=limit,
         project_context=project_context,
         token=token,
         http_client=http_client,
     )
-    json_data_list = response.json()["data"]
-    return [serdes.deserialize_entity(json_data, entity_type) for json_data in json_data_list]
+    for json_data in iterator:
+        yield serdes.deserialize_entity(json_data, entity_type)
 
 
 def get_entity(

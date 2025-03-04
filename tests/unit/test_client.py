@@ -15,15 +15,19 @@ def test_client_project_context__raises():
 
 
 def test_client_search(client):
-    client._http_client.request.return_value = Mock(json=lambda: {"data": []})
+    client._http_client.request.return_value = Mock(json=lambda: {"data": [{"id": 1}, {"id": 2}]})
 
-    res = client.search(
-        entity_type=Entity,
-        query={"name": "foo"},
-        token="mock-token",
+    res = list(
+        client.search(
+            entity_type=Entity,
+            query={"name": "foo"},
+            token="mock-token",
+            limit=2,
+        )
     )
-
-    assert res == []
+    assert len(res) == 2
+    assert res[0].id == 1
+    assert res[1].id == 2
 
 
 def test_client_update(client):
