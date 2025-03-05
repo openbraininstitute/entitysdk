@@ -83,7 +83,7 @@ def stream_paginated_request(
     Returns:
         An iterator of dicts.
     """
-    page = 0
+    page = 1
     number_of_items = 0
     base_parameters = (parameters or {}) | {"page_size": page_size}
     while True:
