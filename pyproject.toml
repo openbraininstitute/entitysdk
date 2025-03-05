@@ -8,6 +8,7 @@ dependencies = [
     "httpx",
     "pydantic",
     "pydantic-settings",
+    "curlify2"
 ]
 authors = [
     {name = "Open Brain Institute", email = "john.doe@openbraininstitute.org"}
