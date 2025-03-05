@@ -1,9 +1,10 @@
 import io
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 
 import pytest
 
 from entitysdk.client import Client
+from entitysdk.mixin import HasAssets
 from entitysdk.models.entity import Entity
 
 
@@ -48,7 +49,7 @@ def mock_asset_response():
     return {
         "id": 1,
         "path": "path/to/asset",
-        "fullpath": "full/path/to/asset",
+        "full_path": "full/path/to/asset",
         "bucket_name": "bucket_name",
         "is_directory": False,
         "content_type": "text/plain",
@@ -60,6 +61,7 @@ def mock_asset_response():
 
 def test_client_upload_file(tmp_path, client, mock_asset_response, api_url, project_context):
     client._http_client.request.return_value = Mock(json=lambda: mock_asset_response)
+    client._http_client.request.headers = {}
 
     path = tmp_path / "foo.h5"
     path.write_bytes(b"foo")
@@ -164,7 +166,13 @@ def test_client_download_file(tmp_path, client, mock_asset_response, api_url, pr
     assert output_path.read_bytes() == b"foo"
 
 
-def test_client_get(client, mock_asset_response, api_url, project_context):
+@patch("entitysdk.route.get_route_name")
+def test_client_get(mock_route, client, mock_asset_response, api_url, project_context):
+    class EntityWithAssets(HasAssets, Entity):
+        """Entity plus assets."""
+
+    mock_route.return_value = "entity"
+
     def mock_request(*args, **kwargs):
         if "assets" in kwargs["url"]:
             return Mock(
@@ -176,7 +184,7 @@ def test_client_get(client, mock_asset_response, api_url, project_context):
 
     res = client.get(
         entity_id=1,
-        entity_type=Entity,
+        entity_type=EntityWithAssets,
         token="mock-token",
         with_assets=True,
     )
