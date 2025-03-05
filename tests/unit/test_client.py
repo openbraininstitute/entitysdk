@@ -4,7 +4,7 @@ from unittest.mock import Mock
 import pytest
 
 from entitysdk.client import Client
-from entitysdk.models.core import Entity
+from entitysdk.models.entity import Entity
 
 
 def test_client_project_context__raises():
