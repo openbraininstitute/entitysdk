@@ -72,7 +72,7 @@ class Client:
             token=token,
             http_client=self._http_client,
         )
-        if with_assets:
+        if with_assets and "assets" in entity_type.model_fields:
             assets = get_entity_assets(
                 url=route.get_assets_endpoint(
                     api_url=self.api_url,
