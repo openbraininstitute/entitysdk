@@ -6,7 +6,8 @@ from pydantic import Field
 
 from entitysdk.mixin import HasAssets
 from entitysdk.models.contribution import Contribution
-from entitysdk.models.core import Entity, Struct
+from entitysdk.models.core import Struct
+from entitysdk.models.entity import Entity
 
 
 class License(Entity):
