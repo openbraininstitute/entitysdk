@@ -8,6 +8,7 @@ _ROUTES = {
     "Activity": "activity",
     "BrainLocation": "brain-location",
     "BrainRegion": "brain-region",
+    "Contribution": "contribution",
     "Entity": "entity",
     "License": "license",
     "Organization": "organization",
