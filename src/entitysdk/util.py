@@ -4,6 +4,7 @@ from collections.abc import Iterator
 from json import dumps
 
 import httpx
+from curlify2 import Curlify
 
 from entitysdk.common import ProjectContext
 from entitysdk.config import settings
@@ -47,9 +48,10 @@ def make_db_api_request(
     except httpx.HTTPError as e:
         message = (
             f"{method} {url}\n"
-            f"json : {dumps(json, indent=2)}\n"
-            f"params : {parameters}\n"
-            f"response : {response.text}"
+            f"json       : {dumps(json, indent=2)}\n"
+            f"params     : {parameters}\n"
+            f"curl repro : {Curlify(response.request).to_curl()}\n"
+            f"response   : {response.text}"
         )
         raise EntitySDKError(message) from e
     return response
