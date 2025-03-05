@@ -11,6 +11,7 @@ _ROUTES = {
     "Contribution": "contribution",
     "Entity": "entity",
     "License": "license",
+    "MTypeClass": "mtype",
     "Organization": "organization",
     "Person": "person",
     "ReconstructionMorphology": "reconstruction-morphology",
