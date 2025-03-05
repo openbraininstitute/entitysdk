@@ -13,6 +13,7 @@ _ROUTES = {
     "Organization": "organization",
     "Person": "person",
     "ReconstructionMorphology": "reconstruction-morphology",
+    "Role": "role",
     "Species": "species",
     "Strain": "strain",
     "Taxonomy": "taxonomy",
