@@ -333,7 +333,10 @@ class Client:
         project_context: ProjectContext | None = None,
         token: str,
     ) -> Asset:
-        """Update an entity's asset file."""
+        """Update an entity's asset file.
+
+        Note: This operation is not atomic. Deletion can succeed and upload can fail.
+        """
         self.delete_asset(
             entity_id=entity_id,
             entity_type=entity_type,
