@@ -12,7 +12,6 @@ entitysdk is a Python library for interacting with the entitycore service, provi
 ```bash
 pip install entitysdk
 ```
-
 ## Quick Start
 
 ```python
@@ -49,6 +48,23 @@ client.upload_file(
 )
 ```
 
+### Authentication
+- Valid Keycloak access token
+- Project context with:
+  - Valid project ID (UUID)
+  - Valid virtual lab ID (UUID)
+
+Example configuration:
+```python
+from uuid import UUID
+from entitysdk.common import ProjectContext
+
+project_context = ProjectContext(
+    project_id=UUID("12345678-1234-1234-1234-123456789012"),
+    virtual_lab_id=UUID("87654321-4321-4321-4321-210987654321")
+)
+```
+
 ## Development
 
 ### Requirements
@@ -60,22 +76,26 @@ client.upload_file(
 # Clone the repository
 git clone https://github.com/your-org/entitysdk.git
 
-# Install development dependencies
-pip install -e ".[dev]"
-
-# Run tests
-pytest
-
-# Run type checks
-mypy src/entitysdk
-```
-
-```bash
+# Run linting, tests, and check-packaging
 tox
 ```
 
-## Development
+## Contributing
 
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
+## License
 
 Copyright (c) 2025 Open Brain Institute
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
