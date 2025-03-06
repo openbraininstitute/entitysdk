@@ -610,5 +610,4 @@ def delete_asset(
         token=token,
         http_client=http_client,
     )
-    print(response.json())
     return serdes.deserialize_entity(response.json(), Asset)
