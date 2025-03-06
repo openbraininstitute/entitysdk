@@ -251,13 +251,14 @@ class Client:
         Returns:
             Asset content in bytes.
         """
+        assets_route = route.get_assets_endpoint(
+            api_url=self.api_url,
+            entity_type=entity_type,
+            entity_id=entity_id,
+            asset_id=asset_id,
+        )
         return download_asset_content(
-            url=route.get_assets_endpoint(
-                api_url=self.api_url,
-                entity_type=entity_type,
-                entity_id=entity_id,
-                asset_id=asset_id,
-            ),
+            f"{assets_route}/download",
             project_context=self._project_context(override_context=project_context),
             token=token,
             http_client=self._http_client,
@@ -283,13 +284,14 @@ class Client:
             project_context: Optional project context.
             token: Authorization access token.
         """
+        assets_route = route.get_assets_endpoint(
+            api_url=self.api_url,
+            entity_type=entity_type,
+            entity_id=entity_id,
+            asset_id=asset_id,
+        )
         return download_asset_file(
-            url=route.get_assets_endpoint(
-                api_url=self.api_url,
-                entity_type=entity_type,
-                entity_id=entity_id,
-                asset_id=asset_id,
-            ),
+            f"{assets_route}/download",
             output_path=Path(output_path),
             project_context=self._project_context(override_context=project_context),
             token=token,

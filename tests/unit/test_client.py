@@ -138,7 +138,7 @@ def test_client_download_content(client, mock_asset_response, api_url, project_c
 
     client._http_client.request.assert_called_once_with(
         method="GET",
-        url=f"{api_url}/entity/1/assets/2",
+        url=f"{api_url}/entity/1/assets/2/download",
         headers={
             "project-id": project_context.project_id,
             "virtual-lab-id": project_context.virtual_lab_id,
