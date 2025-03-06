@@ -48,6 +48,12 @@ class Asset(Identifiable):
             description="The size of the asset in bytes.",
         ),
     ]
+    sha256_digest: Annotated[
+        str | None,
+        Field(
+            description="The sha256 digest of the file content.",
+        ),
+    ] = None
     status: Annotated[
         str | None,
         Field(

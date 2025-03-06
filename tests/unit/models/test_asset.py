@@ -23,6 +23,7 @@ def test_asset():
         "content_type": "text/plain",
         "size": 100,
         "status": None,
+        "sha256_digest": None,
         "meta": {},
     }
 
