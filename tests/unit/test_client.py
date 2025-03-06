@@ -56,6 +56,7 @@ def mock_asset_response():
         "size": 100,
         "status": "completed",
         "meta": {},
+        "sha256_digest": "sha256_digest",
     }
 
 

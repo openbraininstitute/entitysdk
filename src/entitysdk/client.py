@@ -380,6 +380,7 @@ def get_entity_assets(
         token=token,
         http_client=http_client,
     )
+    print(response.json())
     return [serdes.deserialize_entity(asset, Asset) for asset in response.json()["data"]]
 
 
