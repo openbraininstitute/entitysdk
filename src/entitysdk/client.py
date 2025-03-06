@@ -437,11 +437,7 @@ def get_entity_assets(
         token=token,
         http_client=http_client,
     )
-    return [
-        serdes.deserialize_entity(asset, Asset)
-        for asset in response.json()["data"]
-        if asset["status"] != "deleted"
-    ]
+    return [serdes.deserialize_entity(asset, Asset) for asset in response.json()["data"]]
 
 
 def register_entity(
