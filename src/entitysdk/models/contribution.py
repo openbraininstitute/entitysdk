@@ -5,7 +5,8 @@ from typing import Annotated
 from pydantic import Field
 
 from entitysdk.models.agent import Organization, Person
-from entitysdk.models.core import Identifiable, Struct
+from entitysdk.models.core import Identifiable
+from entitysdk.models.entity import Entity
 
 
 class Role(Identifiable):
@@ -25,7 +26,7 @@ class Role(Identifiable):
     ]
 
 
-class Contribution(Struct):
+class Contribution(Identifiable):
     """Contribution model."""
 
     agent: Annotated[
@@ -41,3 +42,7 @@ class Contribution(Struct):
             description="The role of the contribution.",
         ),
     ]
+    entity: Annotated[
+        Entity | None,
+        Field(description="The entity that resulted in this contribution."),
+    ] = None

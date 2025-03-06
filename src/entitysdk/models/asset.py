@@ -16,7 +16,7 @@ class Asset(Identifiable):
             description="The path of the asset.",
         ),
     ]
-    fullpath: Annotated[
+    full_path: Annotated[
         str,
         Field(
             description="The full path of the asset.",

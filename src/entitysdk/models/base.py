@@ -12,7 +12,7 @@ class BaseModel(PydanticBaseModel):
     model_config = ConfigDict(
         frozen=True,
         from_attributes=True,
-        extra="forbid",
+        extra="ignore",
     )
 
     def evolve(self, **model_attributes) -> Self:

@@ -5,7 +5,7 @@ def test_asset():
     res = test_module.Asset(
         id=1,
         path="path/to/asset",
-        fullpath="full/path/to/asset",
+        full_path="full/path/to/asset",
         bucket_name="bucket_name",
         is_directory=False,
         content_type="text/plain",
@@ -17,7 +17,7 @@ def test_asset():
         "creation_date": None,
         "id": 1,
         "path": "path/to/asset",
-        "fullpath": "full/path/to/asset",
+        "full_path": "full/path/to/asset",
         "bucket_name": "bucket_name",
         "is_directory": False,
         "content_type": "text/plain",

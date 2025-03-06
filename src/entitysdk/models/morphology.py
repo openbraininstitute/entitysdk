@@ -6,7 +6,9 @@ from pydantic import Field
 
 from entitysdk.mixin import HasAssets
 from entitysdk.models.contribution import Contribution
-from entitysdk.models.core import Entity, Struct
+from entitysdk.models.core import Struct
+from entitysdk.models.entity import Entity
+from entitysdk.models.mtype import MTypeClass
 
 
 class License(Entity):
@@ -219,5 +221,11 @@ class ReconstructionMorphology(HasAssets, Entity):
         str | None,
         Field(
             description="The legacy id of the morphology.",
+        ),
+    ] = None
+    mtype: Annotated[
+        list[MTypeClass] | None,
+        Field(
+            description="The mtype classes of the morphology.",
         ),
     ] = None

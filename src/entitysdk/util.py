@@ -47,9 +47,9 @@ def make_db_api_request(
     except httpx.HTTPError as e:
         message = (
             f"{method} {url}\n"
-            f"json : {dumps(json, indent=2)}\n"
-            f"params : {parameters}\n"
-            f"response : {response.text}"
+            f"json       : {dumps(json, indent=2)}\n"
+            f"params     : {parameters}\n"
+            f"response   : {response.text}"
         )
         raise EntitySDKError(message) from e
     return response
@@ -83,7 +83,7 @@ def stream_paginated_request(
     Returns:
         An iterator of dicts.
     """
-    page = 0
+    page = 1
     number_of_items = 0
     base_parameters = (parameters or {}) | {"page_size": page_size}
     while True:
