@@ -291,11 +291,65 @@ class Client:
             asset_id=asset_id,
         )
         return download_asset_file(
-            f"{assets_route}/download",
+            url=f"{assets_route}/download",
             output_path=Path(output_path),
             project_context=self._project_context(override_context=project_context),
             token=token,
             http_client=self._http_client,
+        )
+
+    def delete_asset(
+        self,
+        *,
+        entity_id: str,
+        entity_type: type[Identifiable],
+        asset_id: str,
+        project_context: ProjectContext | None = None,
+        token: str,
+    ) -> Asset:
+        """Delete an entity's asset."""
+        return delete_asset(
+            url=route.get_assets_endpoint(
+                api_url=self.api_url,
+                entity_type=entity_type,
+                entity_id=entity_id,
+                asset_id=asset_id,
+            ),
+            project_context=self._project_context(override_context=project_context),
+            token=token,
+            http_client=self._http_client,
+        )
+
+    def update_asset_file(
+        self,
+        *,
+        entity_id: str,
+        entity_type: type[Identifiable],
+        asset_id: str,
+        file_path: os.PathLike,
+        file_content_type: str,
+        file_name: str | None = None,
+        file_metadata: dict | None = None,
+        project_context: ProjectContext | None = None,
+        token: str,
+    ) -> Asset:
+        """Update an entity's asset file."""
+        self.delete_asset(
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=asset_id,
+            project_context=project_context,
+            token=token,
+        )
+        return self.upload_file(
+            entity_id=entity_id,
+            entity_type=entity_type,
+            file_path=file_path,
+            file_content_type=file_content_type,
+            file_name=file_name,
+            file_metadata=file_metadata,
+            project_context=project_context,
+            token=token,
         )
 
 
@@ -380,7 +434,11 @@ def get_entity_assets(
         token=token,
         http_client=http_client,
     )
-    return [serdes.deserialize_entity(asset, Asset) for asset in response.json()["data"]]
+    return [
+        serdes.deserialize_entity(asset, Asset)
+        for asset in response.json()["data"]
+        if asset["status"] != "deleted"
+    ]
 
 
 def register_entity(
@@ -535,3 +593,22 @@ def download_asset_content(
         http_client=http_client,
     )
     return response.content
+
+
+def delete_asset(
+    url: str,
+    *,
+    project_context: ProjectContext,
+    token: str,
+    http_client: httpx.Client | None = None,
+) -> Asset:
+    """Delete asset."""
+    response = make_db_api_request(
+        url=url,
+        method="DELETE",
+        project_context=project_context,
+        token=token,
+        http_client=http_client,
+    )
+    print(response.json())
+    return serdes.deserialize_entity(response.json(), Asset)
