@@ -65,7 +65,7 @@ def stream_paginated_request(
     token: str,
     http_client: httpx.Client | None = None,
     page_size: int = settings.page_size,
-    limit: int,
+    limit: int | None = None,
 ) -> Iterator[dict]:
     """Paginate a request to entitycore api.
 
@@ -83,6 +83,11 @@ def stream_paginated_request(
     Returns:
         An iterator of dicts.
     """
+    if has_limit := (limit is not None):
+        limit = int(limit)
+        if limit <= 0:
+            raise EntitySDKError("Limit must be either None or strictly positive.")
+
     page = 1
     number_of_items = 0
     base_parameters = (parameters or {}) | {"page_size": page_size}
@@ -105,7 +110,7 @@ def stream_paginated_request(
             yield data
             number_of_items += 1
 
-            if limit > 0 and number_of_items == limit:
+            if has_limit and number_of_items == limit:
                 return
 
         page += 1

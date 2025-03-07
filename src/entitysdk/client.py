@@ -92,7 +92,7 @@ class Client:
         *,
         entity_type: type[Identifiable],
         query: dict | None = None,
-        limit: int = 0,
+        limit: int | None = None,
         project_context: ProjectContext | None = None,
         token: str,
     ) -> Iterator[Identifiable]:
@@ -361,7 +361,7 @@ def search_entities(
     *,
     entity_type: type[Identifiable],
     query: dict | None = None,
-    limit: int,
+    limit: int | None,
     project_context: ProjectContext,
     token: str,
     http_client: httpx.Client | None = None,
