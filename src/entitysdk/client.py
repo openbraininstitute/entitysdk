@@ -391,8 +391,7 @@ def search_entities(
         http_client=http_client,
     )
     return IteratorResult(
-        serdes.deserialize_entity(json_data, entity_type)
-        for json_data in iterator
+        serdes.deserialize_entity(json_data, entity_type) for json_data in iterator
     )
 
 
