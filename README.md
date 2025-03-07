@@ -4,7 +4,7 @@ entitysdk is a Python library for interacting with the [entitycore service][enti
 
 ## Requirements
 
-- Python3.11 or higher
+- Python 3.11 or higher
 - Network access to entitycore service endpoints
 
 ## Installation
