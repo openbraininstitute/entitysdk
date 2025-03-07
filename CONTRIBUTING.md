@@ -1,4 +1,4 @@
-i# Contribution Guide
+# Contribution Guide
 
 We would love for you to contribute to the project and help make it better than it is today.
 As a contributor, here are the guidelines we would like you to follow:
