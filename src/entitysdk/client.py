@@ -11,8 +11,8 @@ from entitysdk import route, serdes
 from entitysdk.common import ProjectContext
 from entitysdk.models.asset import Asset, LocalAssetMetadata
 from entitysdk.models.core import Identifiable
-from entitysdk.util import make_db_api_request, stream_paginated_request
 from entitysdk.result import IteratorResult
+from entitysdk.util import make_db_api_request, stream_paginated_request
 
 
 class Client:
