@@ -1,6 +1,6 @@
 # entitysdk
 
-entitysdk is a Python library for interacting with the entitycore service, providing a type-safe and intuitive interface for managing scientific entities, and their associated assets.
+entitysdk is a Python library for interacting with the [entitycore service][entitycore], providing a type-safe and intuitive interface for managing scientific entities, and their associated assets.
 
 ## Requirements
 
@@ -99,3 +99,6 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+
+[entitycore]: https://github.com/openbraininstitute/entitycore
