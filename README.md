@@ -1,3 +1,9 @@
+[![Build status][build_status_badge]][build_status_target]
+[![License][license_badge]][license_target]
+[![Code coverage][coverage_badge]][coverage_target]
+[![CodeQL][codeql_badge]][codeql_target]
+[![PyPI][pypi_badge]][pypi_target]
+
 # entitysdk
 
 entitysdk is a Python library for interacting with the [entitycore service][entitycore], providing a type-safe and intuitive interface for managing scientific entities, and their associated assets.
@@ -102,3 +108,15 @@ limitations under the License.
 
 
 [entitycore]: https://github.com/openbraininstitute/entitycore
+
+[build_status_badge]: https://github.com/openbraininstitute/entitysdk/actions/workflows/tox.yml/badge.svg
+[build_status_target]: https://github.com/openbraininstitute/entitysdk/actions
+[license_badge]: https://img.shields.io/pypi/l/entitysdk
+[license_target]: https://github.com/openbraininstitute/entitysdk/blob/main/LICENSE.txt
+[coverage_badge]: https://codecov.io/github/openbraininstitute/entitysdk/coverage.svg?branch=main
+[coverage_target]: https://codecov.io/github/openbraininstitute/entitysdk?branch=main
+[codeql_badge]: https://github.com/openbraininstitute/entitysdk/actions/workflows/github-code-scanning/codeql/badge.svg
+[codeql_target]: https://github.com/openbraininstitute/entitysdk/actions/workflows/github-code-scanning/codeql
+[pypi_badge]: https://github.com/openbraininstitute/entitysdk/actions/workflows/sdist.yml/badge.svg
+[pypi_target]: https://pypi.org/project/entitysdk/
+

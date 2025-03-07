@@ -10,15 +10,15 @@ dependencies = [
     "pydantic-settings",
 ]
 authors = [
-    {name = "Open Brain Institute", email = "john.doe@openbraininstitute.org"}
+    {name = "Open Brain Institute", email = "info@openbraininstitute.org"}
 ]
 maintainers = [
-    {name = "Open Brain Institute", email = "john.doe@openbraininstitute.org"}
+    {name = "Open Brain Institute", email = "info@openbraininstitute.org"}
 ]
-description = "TODO: write something meaningful here"
+description = "Python library for interacting with the entitycore service"
 readme = "README.md"
 requires-python = ">=3.11"
-license = {text = "my-license"}
+license = {text = "Apache-2.0"}
 classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -29,7 +29,7 @@ dynamic = ["version"]
 [project.urls]
 documentation = "https://entitysdk.readthedocs.io/en/stable"
 repository = "https://github.com/openbraininstitute/entitysdk"
-changelog = "https://github.com/openbraininstitute/entitysdk/CHANGELOG.rst"
+changelog = "https://github.com/openbraininstitute/entitysdk/CHANGELOG.md"
 
 [tool.setuptools_scm]
 local_scheme = "no-local-version"
