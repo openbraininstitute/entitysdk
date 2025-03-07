@@ -124,10 +124,8 @@ def test_stream_paginated_request(mock_client: Mock, project_context: ProjectCon
 
     mock_client.request = mock_request
 
-    request_count = 0
-
-    with pytest.raises(EntitySDKError, match="Limit must be None or strictly positive."):
-        test_module.stream_paginated_request(
+    with pytest.raises(EntitySDKError, match="Limit must be either None or strictly positive."):
+        res = test_module.stream_paginated_request(
             url="foo",
             method="POST",
             limit=0,
@@ -135,11 +133,12 @@ def test_stream_paginated_request(mock_client: Mock, project_context: ProjectCon
             token="123",
             http_client=mock_client,
         )
+        list(res)
 
     request_count = 0
 
-    with pytest.raises(EntitySDKError, match="Limit must be None or strictly positive."):
-        test_module.stream_paginated_request(
+    with pytest.raises(EntitySDKError, match="Limit must be either None or strictly positive."):
+        res = test_module.stream_paginated_request(
             url="foo",
             method="POST",
             limit=-1,
@@ -147,6 +146,9 @@ def test_stream_paginated_request(mock_client: Mock, project_context: ProjectCon
             token="123",
             http_client=mock_client,
         )
+        list(res)
+
+    request_count = 0
 
     res = test_module.stream_paginated_request(
         url="foo",

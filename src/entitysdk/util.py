@@ -62,10 +62,10 @@ def stream_paginated_request(
     json: dict | None = None,
     parameters: dict | None = None,
     project_context: ProjectContext,
-    token: str,
     http_client: httpx.Client | None = None,
     page_size: int = settings.page_size,
     limit: int | None = None,
+    token: str,
 ) -> Iterator[dict]:
     """Paginate a request to entitycore api.
 
