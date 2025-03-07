@@ -1,5 +1,5 @@
 from entitysdk.mixin import HasAssets
-from entitysdk.core import Activity
+from entitysdk.models.core import Activity
 
 
 class WorkflowExecution(HasAssets, Activity):
