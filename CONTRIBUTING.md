@@ -52,7 +52,6 @@ When you wish to contribute to the code base, please consider the following guid
      git checkout -b my-fix-branch main
      ```
 * Create your patch, **including appropriate Python test cases**.
-  Please check the coding [conventions](#coding-conventions) for more information.
 * Run the full test suite, and ensure that all tests pass.
 * Commit your changes using a descriptive commit message.
 
