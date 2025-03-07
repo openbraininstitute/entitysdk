@@ -7,8 +7,6 @@ As a contributor, here are the guidelines we would like you to follow:
  - [Issues and Bugs](#found-a-bug)
  - [Feature Requests](#missing-a-feature)
  - [Submissions](#submission-guidelines)
- - [Development Guidelines](#development)
- - [Release Procedure](#release)
 
 # Got a Question?
 
