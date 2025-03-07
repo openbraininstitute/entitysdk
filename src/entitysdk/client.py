@@ -12,6 +12,7 @@ from entitysdk.common import ProjectContext
 from entitysdk.models.asset import Asset, LocalAssetMetadata
 from entitysdk.models.core import Identifiable
 from entitysdk.util import make_db_api_request, stream_paginated_request
+from entitysdk.result import IteratorResult
 
 
 class Client:
@@ -95,7 +96,7 @@ class Client:
         limit: int = 0,
         project_context: ProjectContext | None = None,
         token: str,
-    ) -> Iterator[Identifiable]:
+    ) -> IteratorResult[Identifiable]:
         """Search for entities.
 
         Args:
@@ -365,7 +366,7 @@ def search_entities(
     project_context: ProjectContext,
     token: str,
     http_client: httpx.Client | None = None,
-) -> Iterator[Identifiable]:
+) -> IteratorResult[Identifiable]:
     """Search for entities.
 
     Args:
@@ -389,8 +390,10 @@ def search_entities(
         token=token,
         http_client=http_client,
     )
-    for json_data in iterator:
-        yield serdes.deserialize_entity(json_data, entity_type)
+    return IteratorResult(
+        serdes.deserialize_entity(json_data, entity_type)
+        for json_data in iterator
+    )
 
 
 def get_entity(
