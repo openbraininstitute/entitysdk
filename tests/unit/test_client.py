@@ -191,3 +191,55 @@ def test_client_get(mock_route, client, mock_asset_response, api_url, project_co
     )
     assert res.id == 1
     assert len(res.assets) == 2
+
+
+@pytest.fixture
+def mock_asset_delete_response():
+    return {
+        "path": "buffer.h5",
+        "full_path": "private/103d7868/103d7868/assets/reconstruction_morphology/8703/buffer.h5",
+        "bucket_name": "obi-private",
+        "is_directory": False,
+        "content_type": "application/swc",
+        "size": 18,
+        "sha256_digest": "47ddc1b6e05dcbfbd2db9dcec4a49d83c6f9f10ad595649bacdcb629671fd954",
+        "meta": {},
+        "id": 16393,
+        "status": "deleted",
+    }
+
+
+@patch("entitysdk.route.get_route_name")
+def test_client_delete_asset(mock_route, client, mock_asset_delete_response, project_context):
+    mock_route.return_value = "reconstruction_morphology"
+    client._http_client.request.return_value = Mock(json=lambda: mock_asset_delete_response)
+
+    res = client.delete_asset(
+        entity_id=1,
+        entity_type=None,
+        asset_id=2,
+        token="foo",
+    )
+
+    assert res.status == "deleted"
+
+
+@patch("entitysdk.route.get_route_name")
+def test_client_update_asset(mock_route, tmp_path, client, mock_asset_response):
+    mock_route.return_value = "reconstruction_morphology"
+    client._http_client.request.return_value = Mock(json=lambda: mock_asset_response)
+
+    path = tmp_path / "file.txt"
+    path.touch()
+
+    res = client.update_asset_file(
+        entity_id=1,
+        entity_type=None,
+        file_path=path,
+        file_name="foo.txt",
+        file_content_type="application/swc",
+        asset_id=2,
+        token="foo",
+    )
+
+    assert res.status == "completed"
