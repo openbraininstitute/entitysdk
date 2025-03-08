@@ -78,7 +78,7 @@ def stream_paginated_request(
         token: The token to use.
         http_client: The http client to use.
         page_size: The page size to use.
-        limit: Limit the number of entities to return. Zero means no limit.
+        limit: Limit the number of entities to return. Default is None.
 
     Returns:
         An iterator of dicts.

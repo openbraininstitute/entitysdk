@@ -101,7 +101,7 @@ class Client:
         Args:
             entity_type: Type of the entity.
             query: Query parameters.
-            limit: Limit the number of entities to yield. Default is 0, no limit.
+            limit: Optional limit of the number of entities to yield. Default is None.
             project_context: Optional project context.
             token: Authorization access token.
         """
@@ -372,7 +372,7 @@ def search_entities(
         url: URL of the resource.
         entity_type: Type of the entity.
         query: Query parameters
-        limit: Limit the number of entities to return.
+        limit: Limit of the number of entities to yield or None.
         project_context: Project context.
         token: Authorization access token.
         http_client: HTTP client.
