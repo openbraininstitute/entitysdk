@@ -99,7 +99,9 @@ def stream_paginated_request(
             token=token,
             http_client=http_client,
         )
-        json_data = response.json()["data"]
+        json_response = response.json()
+        json_data = json_response["data"]
+        total_items = json_response["total_items"]
 
         for data in json_data:
             yield data
@@ -108,7 +110,7 @@ def stream_paginated_request(
             if limit and number_of_items == limit:
                 return
 
-        if len(json_data) < page_size:
+        if len(json_data) < page_size or number_of_items >= total_items:
             return
 
         page += 1
