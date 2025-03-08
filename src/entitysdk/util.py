@@ -83,10 +83,8 @@ def stream_paginated_request(
     Returns:
         An iterator of dicts.
     """
-    if has_limit := (limit is not None):
-        limit = int(limit)
-        if limit <= 0:
-            raise EntitySDKError("Limit must be either None or strictly positive.")
+    if limit is not None and limit <= 0:
+        raise EntitySDKError("Limit must be either None or strictly positive.")
 
     page = 1
     number_of_items = 0
@@ -110,7 +108,7 @@ def stream_paginated_request(
             yield data
             number_of_items += 1
 
-            if has_limit and number_of_items == limit:
+            if limit and number_of_items == limit:
                 return
 
         page += 1
