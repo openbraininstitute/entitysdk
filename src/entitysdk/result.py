@@ -23,22 +23,21 @@ class IteratorResult(Iterator[ResultType]):
         """Return the next element of the iterable."""
         return next(self._iterable)
 
-    def first(self) -> ResultType:
-        """Return the first element of the iterable."""
-        if first_item := next(self, None):
-            return first_item
-        raise IteratorResultError("Iterable is empty.")
+    def first(self) -> ResultType | None:
+        """Return the first element of the iterable or None if empty."""
+        return next(self, None)
 
     def one(self) -> ResultType:
         """Return exactly one item from the iterable or raise an error if not exactly one item."""
-        first_item = self.first()
-        if next(self, None) is not None:
-            raise IteratorResultError("There are more than one items.")
-        return first_item
+        if (first_item := self.first()) is None:
+            raise IteratorResultError("Iterable is empty.")
+        if next(self, None) is None:
+            return first_item
+        raise IteratorResultError("There are more than one items.")
 
     def one_or_none(self) -> ResultType | None:
         """Return exactly one item from the iterable or None if empty."""
-        first_item = next(self, None)
+        first_item = self.first()
         if next(self, None) is None:
             return first_item
         raise IteratorResultError("There are more than one items.")

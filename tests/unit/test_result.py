@@ -9,9 +9,7 @@ def test_iterator_result():
     assert [v for v in test_module.IteratorResult(data)] == []
     assert list(test_module.IteratorResult(data)) == []
     assert list(iter(test_module.IteratorResult(data))) == []
-
-    with pytest.raises(IteratorResultError, match="Iterable is empty."):
-        assert test_module.IteratorResult(data).first()
+    assert test_module.IteratorResult(data).first() is None
 
     with pytest.raises(IteratorResultError, match="Iterable is empty."):
         assert test_module.IteratorResult(data).one() == 1
