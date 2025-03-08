@@ -101,14 +101,14 @@ def stream_paginated_request(
         )
         json_data = response.json()["data"]
 
-        if not json_data:
-            return
-
         for data in json_data:
             yield data
             number_of_items += 1
 
             if limit and number_of_items == limit:
                 return
+
+        if len(json_data) < page_size:
+            return
 
         page += 1
