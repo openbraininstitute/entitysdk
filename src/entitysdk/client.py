@@ -93,7 +93,7 @@ class Client:
         *,
         entity_type: type[Identifiable],
         query: dict | None = None,
-        limit: int = 0,
+        limit: int | None = None,
         project_context: ProjectContext | None = None,
         token: str,
     ) -> IteratorResult[Identifiable]:
@@ -102,7 +102,7 @@ class Client:
         Args:
             entity_type: Type of the entity.
             query: Query parameters.
-            limit: Limit the number of entities to yield. Default is 0, no limit.
+            limit: Optional limit of the number of entities to yield. Default is None.
             project_context: Optional project context.
             token: Authorization access token.
         """
@@ -362,7 +362,7 @@ def search_entities(
     *,
     entity_type: type[Identifiable],
     query: dict | None = None,
-    limit: int,
+    limit: int | None,
     project_context: ProjectContext,
     token: str,
     http_client: httpx.Client | None = None,
@@ -373,7 +373,7 @@ def search_entities(
         url: URL of the resource.
         entity_type: Type of the entity.
         query: Query parameters
-        limit: Limit the number of entities to return.
+        limit: Limit of the number of entities to yield or None.
         project_context: Project context.
         token: Authorization access token.
         http_client: HTTP client.
