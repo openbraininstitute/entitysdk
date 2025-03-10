@@ -10,12 +10,12 @@ class Settings(BaseSettings):
     """Constants for this library."""
 
     page_size: Annotated[
-        int,
+        int | None,
         Field(
             env="ENTITYSDK_PAGE_SIZE",
-            description="Default pagination page size.",
+            description="Default pagination page size, or None to use server default.",
         ),
-    ] = 20
+    ] = None
 
 
 settings = Settings()
