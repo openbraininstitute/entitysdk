@@ -9,9 +9,11 @@ import httpx
 
 from entitysdk import route, serdes
 from entitysdk.common import ProjectContext
+from entitysdk.errors import EntitySDKError
 from entitysdk.models.asset import Asset, LocalAssetMetadata
 from entitysdk.models.core import Identifiable
 from entitysdk.result import IteratorResult
+from entitysdk.token_manager import TokenManager
 from entitysdk.util import make_db_api_request, stream_paginated_request
 
 
@@ -23,6 +25,7 @@ class Client:
         api_url: str,
         project_context: ProjectContext | None = None,
         http_client: httpx.Client | None = None,
+        token_manager: TokenManager | None = None,
     ) -> None:
         """Initialize client.
 
@@ -30,10 +33,27 @@ class Client:
             api_url: The API URL to entitycore service.
             project_context: Project context.
             http_client: Optional HTTP client to use.
+            token_manager: Optional token manager to use.
         """
         self.api_url = api_url.rstrip("/")
         self.project_context = project_context
         self._http_client = http_client or httpx.Client()
+        self._token_manager = token_manager
+
+    def _get_token(self, override_token: str | None = None) -> str:
+        """Get a token either from an override or from the token manager.
+
+        Args:
+            override_token: Optional override token.
+
+        Returns:
+            Token.
+        """
+        if override_token:
+            return override_token
+        if self._token_manager is None:
+            raise EntitySDKError("Either override_token or token_manager must be provided.")
+        return self._token_manager.get_token()
 
     def _project_context(self, override_context: ProjectContext | None) -> ProjectContext:
         context = override_context or self.project_context
@@ -50,7 +70,7 @@ class Client:
         entity_type: type[Identifiable],
         with_assets: bool = True,
         project_context: ProjectContext | None = None,
-        token: str,
+        token: str | None = None,
     ) -> Identifiable:
         """Get entity from resource id.
 
@@ -64,6 +84,7 @@ class Client:
         Returns:
             entity_type instantiated by deserializing the response.
         """
+        token = self._get_token(override_token=token)
         entity = get_entity(
             url=route.get_entities_endpoint(
                 api_url=self.api_url, entity_type=entity_type, entity_id=entity_id
@@ -95,7 +116,7 @@ class Client:
         query: dict | None = None,
         limit: int | None = None,
         project_context: ProjectContext | None = None,
-        token: str,
+        token: str | None = None,
     ) -> IteratorResult[Identifiable]:
         """Search for entities.
 
@@ -112,12 +133,16 @@ class Client:
             query=query,
             limit=limit,
             project_context=self._project_context(override_context=project_context),
-            token=token,
+            token=self._get_token(override_token=token),
             http_client=self._http_client,
         )
 
     def register_entity(
-        self, entity: Identifiable, *, project_context: ProjectContext | None = None, token: str
+        self,
+        entity: Identifiable,
+        *,
+        project_context: ProjectContext | None = None,
+        token: str | None = None,
     ) -> Identifiable:
         """Register entity.
 
@@ -133,7 +158,7 @@ class Client:
             url=route.get_entities_endpoint(api_url=self.api_url, entity_type=type(entity)),
             entity=entity,
             project_context=self._project_context(override_context=project_context),
-            token=token,
+            token=self._get_token(override_token=token),
             http_client=self._http_client,
         )
 
@@ -144,7 +169,7 @@ class Client:
         attrs_or_entity: dict | Identifiable,
         *,
         project_context: ProjectContext | None = None,
-        token: str,
+        token: str | None = None,
     ) -> Identifiable:
         """Update an entity.
 
@@ -162,7 +187,7 @@ class Client:
             entity_type=entity_type,
             attrs_or_entity=attrs_or_entity,
             project_context=self._project_context(override_context=project_context),
-            token=token,
+            token=self._get_token(override_token=token),
             http_client=self._http_client,
         )
 
@@ -176,7 +201,7 @@ class Client:
         file_name: str | None = None,
         file_metadata: dict | None = None,
         project_context: ProjectContext | None = None,
-        token: str,
+        token: str | None = None,
     ) -> Asset:
         """Upload asset to an existing entity's endpoint from a file path."""
         path = Path(file_path)
@@ -195,7 +220,7 @@ class Client:
             asset_path=path,
             asset_metadata=asset_metadata,
             project_context=self._project_context(override_context=project_context),
-            token=token,
+            token=self._get_token(override_token=token),
             http_client=self._http_client,
         )
 
@@ -227,7 +252,7 @@ class Client:
             asset_content=file_content,
             asset_metadata=asset_metadata,
             project_context=self._project_context(override_context=project_context),
-            token=token,
+            token=self._get_token(override_token=token),
             http_client=self._http_client,
         )
 
@@ -238,7 +263,7 @@ class Client:
         entity_type: type[Identifiable],
         asset_id: str,
         project_context: ProjectContext | None = None,
-        token: str,
+        token: str | None = None,
     ) -> bytes:
         """Download asset content.
 
@@ -261,7 +286,7 @@ class Client:
         return download_asset_content(
             f"{assets_route}/download",
             project_context=self._project_context(override_context=project_context),
-            token=token,
+            token=self._get_token(override_token=token),
             http_client=self._http_client,
         )
 
@@ -273,7 +298,7 @@ class Client:
         asset_id: str,
         output_path: os.PathLike,
         project_context: ProjectContext | None = None,
-        token: str,
+        token: str | None = None,
     ) -> None:
         """Download asset file to a file path.
 
@@ -295,7 +320,7 @@ class Client:
             url=f"{assets_route}/download",
             output_path=Path(output_path),
             project_context=self._project_context(override_context=project_context),
-            token=token,
+            token=self._get_token(override_token=token),
             http_client=self._http_client,
         )
 
@@ -306,7 +331,7 @@ class Client:
         entity_type: type[Identifiable],
         asset_id: str,
         project_context: ProjectContext | None = None,
-        token: str,
+        token: str | None = None,
     ) -> Asset:
         """Delete an entity's asset."""
         return delete_asset(
@@ -317,7 +342,7 @@ class Client:
                 asset_id=asset_id,
             ),
             project_context=self._project_context(override_context=project_context),
-            token=token,
+            token=self._get_token(override_token=token),
             http_client=self._http_client,
         )
 
@@ -332,7 +357,7 @@ class Client:
         file_name: str | None = None,
         file_metadata: dict | None = None,
         project_context: ProjectContext | None = None,
-        token: str,
+        token: str | None = None,
     ) -> Asset:
         """Update an entity's asset file.
 
@@ -353,7 +378,7 @@ class Client:
             file_name=file_name,
             file_metadata=file_metadata,
             project_context=project_context,
-            token=token,
+            token=self._get_token(override_token=token),
         )
 
 
