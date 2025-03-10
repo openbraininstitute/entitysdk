@@ -8,6 +8,7 @@ import httpx
 from entitysdk.common import ProjectContext
 from entitysdk.config import settings
 from entitysdk.exception import EntitySDKError
+from entitysdk.models.response import ListResponse
 
 
 def make_db_api_request(
@@ -63,7 +64,7 @@ def stream_paginated_request(
     parameters: dict | None = None,
     project_context: ProjectContext,
     http_client: httpx.Client | None = None,
-    page_size: int = settings.page_size,
+    page_size: int | None = None,
     limit: int | None = None,
     token: str,
 ) -> Iterator[dict]:
@@ -75,10 +76,10 @@ def stream_paginated_request(
         json: The json to send.
         parameters: The parameters to send.
         project_context: The project context.
-        token: The token to use.
         http_client: The http client to use.
-        page_size: The page size to use.
+        page_size: The page size to use, or None to use server default.
         limit: Limit the number of entities to return. Default is None.
+        token: The token to use.
 
     Returns:
         An iterator of dicts.
@@ -88,29 +89,32 @@ def stream_paginated_request(
 
     page = 1
     number_of_items = 0
-    base_parameters = (parameters or {}) | {"page_size": page_size}
+    parameters = parameters or {}
+    if page_size := page_size or settings.page_size:
+        parameters = parameters | {"page_size": page_size}
     while True:
         response = make_db_api_request(
             url=url,
             method=method,
             json=json,
-            parameters=base_parameters | {"page": page},
+            parameters=parameters | {"page": page},
             project_context=project_context,
             token=token,
             http_client=http_client,
         )
-        json_response = response.json()
-        json_data = json_response["data"]
-        total_items = json_response["total_items"]
+        payload = ListResponse.model_validate(response.json())
 
-        for data in json_data:
+        for data in payload.data:
             yield data
             number_of_items += 1
 
-            if limit and number_of_items == limit:
+            if limit and number_of_items >= limit:
                 return
 
-        if len(json_data) < page_size or number_of_items >= total_items:
+        if (
+            len(payload.data) < payload.pagination.page_size
+            or number_of_items >= payload.pagination.total_items
+        ):
             return
 
         page += 1
