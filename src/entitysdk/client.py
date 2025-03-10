@@ -43,7 +43,7 @@ class Client:
 
         return context
 
-    def get(
+    def get_entity(
         self,
         entity_id: str,
         *,
@@ -88,7 +88,7 @@ class Client:
 
         return entity
 
-    def search(
+    def search_entity(
         self,
         *,
         entity_type: type[Identifiable],
@@ -116,7 +116,7 @@ class Client:
             http_client=self._http_client,
         )
 
-    def register(
+    def register_entity(
         self, entity: Identifiable, *, project_context: ProjectContext | None = None, token: str
     ) -> Identifiable:
         """Register entity.
@@ -137,7 +137,7 @@ class Client:
             http_client=self._http_client,
         )
 
-    def update(
+    def update_entity(
         self,
         entity_id: str,
         entity_type: type[Identifiable],
