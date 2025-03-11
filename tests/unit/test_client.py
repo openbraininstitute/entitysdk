@@ -4,8 +4,32 @@ from unittest.mock import patch
 import pytest
 
 from entitysdk.client import Client
+from entitysdk.exception import EntitySDKError
 from entitysdk.mixin import HasAssets
 from entitysdk.models.entity import Entity
+
+
+def test_client_get_token():
+    class Foo:
+        def get_token(self):
+            return "foo"
+
+    client = Client(api_url="foo", project_context=None, token_manager=Foo())
+
+    res = client._get_token()
+    assert res == "foo"
+
+    res = client._get_token(override_token="override")
+    assert res == "override"
+
+
+def test_client__get_token__raises():
+    client = Client(api_url="foo", project_context=None)
+
+    with pytest.raises(
+        EntitySDKError, match="Either override_token or token_manager must be provided."
+    ):
+        client._get_token()
 
 
 def test_client_project_context__raises():
