@@ -24,7 +24,7 @@ def test_client_search(client, httpx_mock, auth_token):
         },
     )
     res = list(
-        client.search(
+        client.search_entity(
             entity_type=Entity,
             query={"name": "foo"},
             token=auth_token,
@@ -39,7 +39,7 @@ def test_client_search(client, httpx_mock, auth_token):
 def test_client_update(client, httpx_mock, auth_token):
     httpx_mock.add_response(method="PATCH", json={"id": 1})
 
-    res = client.update(
+    res = client.update_entity(
         entity_id=1,
         entity_type=Entity,
         attrs_or_entity=Entity(id=1),
@@ -208,7 +208,7 @@ def test_client_get(
         },
     )
 
-    res = client.get(
+    res = client.get_entity(
         entity_id=1,
         entity_type=EntityWithAssets,
         token=auth_token,
