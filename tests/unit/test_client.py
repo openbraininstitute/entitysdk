@@ -19,7 +19,7 @@ def test_client_search(client):
     client._http_client.request.return_value = Mock(json=lambda: {"data": [{"id": 1}, {"id": 2}]})
 
     res = list(
-        client.search(
+        client.search_entity(
             entity_type=Entity,
             query={"name": "foo"},
             token="mock-token",
@@ -34,7 +34,7 @@ def test_client_search(client):
 def test_client_update(client):
     client._http_client.request.return_value = Mock(json=lambda: {"id": 1})
 
-    res = client.update(
+    res = client.update_entity(
         entity_id=1,
         entity_type=Entity,
         attrs_or_entity=Entity(id="1"),
@@ -183,7 +183,7 @@ def test_client_get(mock_route, client, mock_asset_response, api_url, project_co
 
     client._http_client.request = mock_request
 
-    res = client.get(
+    res = client.get_entity(
         entity_id=1,
         entity_type=EntityWithAssets,
         token="mock-token",

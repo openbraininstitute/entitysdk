@@ -98,7 +98,7 @@ def json_morphology_expanded():
 def test_read_reconstruction_morphology(client, json_morphology_expanded):
     client._http_client.request.return_value = Mock(json=lambda: json_morphology_expanded)
 
-    entity = client.get(
+    entity = client.get_entity(
         entity_id=1,
         entity_type=ReconstructionMorphology,
         token="mock-token",
@@ -113,7 +113,7 @@ def test_register_reconstruction_morphology(client, morphology):
         json=lambda: morphology.model_dump() | {"id": 1}
     )
 
-    registered = client.register(entity=morphology, token="mock-token")
+    registered = client.register_entity(entity=morphology, token="mock-token")
 
     assert registered.id == 1
     assert registered.name == morphology.name
@@ -126,7 +126,7 @@ def test_update_reconstruction_morphology(client, morphology):
         json=lambda: morphology.model_dump() | {"id": 1, "name": "foo"}
     )
 
-    updated = client.update(
+    updated = client.update_entity(
         entity_id=1,
         entity_type=ReconstructionMorphology,
         attrs_or_entity={
