@@ -223,7 +223,7 @@ class ReconstructionMorphology(HasAssets, Entity):
             description="The legacy id of the morphology.",
         ),
     ] = None
-    mtype: Annotated[
+    mtypes: Annotated[
         list[MTypeClass] | None,
         Field(
             description="The mtype classes of the morphology.",
