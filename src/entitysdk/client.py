@@ -9,7 +9,7 @@ import httpx
 
 from entitysdk import route, serdes
 from entitysdk.common import ProjectContext
-from entitysdk.errors import EntitySDKError
+from entitysdk.exception import EntitySDKError
 from entitysdk.models.asset import Asset, LocalAssetMetadata
 from entitysdk.models.core import Identifiable
 from entitysdk.result import IteratorResult
