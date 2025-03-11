@@ -25,4 +25,6 @@ class TokenFromEnv:
         try:
             return os.environ[self._env_var_name]
         except KeyError:
-            raise EntitySDKError(f"Environment variable {self._env_var_name} not found.") from None
+            raise EntitySDKError(
+                f"Environment variable '{self._env_var_name}' not found."
+            ) from None
