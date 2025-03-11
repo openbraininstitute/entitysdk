@@ -1,5 +1,5 @@
 import io
-from unittest.mock import Mock, patch
+from unittest.mock import patch
 
 import pytest
 
@@ -15,14 +15,19 @@ def test_client_project_context__raises():
         client._project_context(override_context=None)
 
 
-def test_client_search(client):
-    client._http_client.request.return_value = Mock(json=lambda: {"data": [{"id": 1}, {"id": 2}]})
-
+def test_client_search(client, httpx_mock, auth_token):
+    httpx_mock.add_response(
+        method="GET",
+        json={
+            "data": [{"id": 1}, {"id": 2}],
+            "pagination": {"page": 1, "page_size": 10, "total_items": 2},
+        },
+    )
     res = list(
         client.search_entity(
             entity_type=Entity,
             query={"name": "foo"},
-            token="mock-token",
+            token=auth_token,
             limit=2,
         )
     )
@@ -31,14 +36,14 @@ def test_client_search(client):
     assert res[1].id == 2
 
 
-def test_client_update(client):
-    client._http_client.request.return_value = Mock(json=lambda: {"id": 1})
+def test_client_update(client, httpx_mock, auth_token):
+    httpx_mock.add_response(method="PATCH", json={"id": 1})
 
     res = client.update_entity(
         entity_id=1,
         entity_type=Entity,
-        attrs_or_entity=Entity(id="1"),
-        token="mock-token",
+        attrs_or_entity=Entity(id=1),
+        token=auth_token,
     )
 
     assert res.id == 1
@@ -54,15 +59,28 @@ def mock_asset_response():
         "is_directory": False,
         "content_type": "text/plain",
         "size": 100,
-        "status": "completed",
+        "status": "created",
         "meta": {},
         "sha256_digest": "sha256_digest",
     }
 
 
-def test_client_upload_file(tmp_path, client, mock_asset_response, api_url, project_context):
-    client._http_client.request.return_value = Mock(json=lambda: mock_asset_response)
-    client._http_client.request.headers = {}
+def test_client_upload_file(
+    tmp_path,
+    client,
+    httpx_mock,
+    mock_asset_response,
+    api_url,
+    project_context,
+    auth_token,
+    request_headers,
+):
+    httpx_mock.add_response(
+        method="POST",
+        url=f"{api_url}/entity/1/assets",
+        match_headers=request_headers,
+        json=mock_asset_response,
+    )
 
     path = tmp_path / "foo.h5"
     path.write_bytes(b"foo")
@@ -74,25 +92,29 @@ def test_client_upload_file(tmp_path, client, mock_asset_response, api_url, proj
         file_path=path,
         file_content_type="text/plain",
         file_metadata={"key": "value"},
-        token="mock-token",
+        token=auth_token,
     )
-
-    call_args = client._http_client.request.call_args
-
-    assert call_args.kwargs["method"] == "POST"
-    assert call_args.kwargs["url"] == f"{api_url}/entity/1/assets"
-    assert call_args.kwargs["headers"]["project-id"] == project_context.project_id
-    assert call_args.kwargs["headers"]["virtual-lab-id"] == project_context.virtual_lab_id
-    assert call_args.kwargs["headers"]["Authorization"] == "Bearer mock-token"
 
     assert res.id == 1
 
 
-def test_client_upload_content(client, mock_asset_response, api_url, project_context):
-    client._http_client.request.return_value = Mock(json=lambda: mock_asset_response)
-
+def test_client_upload_content(
+    client, httpx_mock, mock_asset_response, api_url, project_context, auth_token, request_headers
+):
     buffer = io.BytesIO(b"foo")
-
+    httpx_mock.add_response(
+        method="POST",
+        url=f"{api_url}/entity/1/assets",
+        match_headers=request_headers,
+        match_files={
+            "file": (
+                "foo.txt",
+                buffer,
+                "text/plain",
+            )
+        },
+        json=mock_asset_response,
+    )
     res = client.upload_content(
         entity_id=1,
         entity_type=Entity,
@@ -100,60 +122,47 @@ def test_client_upload_content(client, mock_asset_response, api_url, project_con
         file_content=buffer,
         file_content_type="text/plain",
         file_metadata={"key": "value"},
-        token="mock-token",
-    )
-
-    client._http_client.request.assert_called_once_with(
-        method="POST",
-        url=f"{api_url}/entity/1/assets",
-        headers={
-            "project-id": project_context.project_id,
-            "virtual-lab-id": project_context.virtual_lab_id,
-            "Authorization": "Bearer mock-token",
-        },
-        json=None,
-        files={
-            "file": (
-                "foo.txt",
-                buffer,
-                "text/plain",
-            )
-        },
-        params=None,
-        follow_redirects=True,
+        token=auth_token,
     )
 
     assert res.id == 1
 
 
-def test_client_download_content(client, mock_asset_response, api_url, project_context):
-    client._http_client.request.return_value = Mock(content=b"foo")
+def test_client_download_content(
+    client, httpx_mock, mock_asset_response, api_url, project_context, auth_token, request_headers
+):
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/1/assets/2/download",
+        match_headers=request_headers,
+        content=b"foo",
+    )
 
     res = client.download_content(
         entity_id=1,
         entity_type=Entity,
         asset_id=2,
-        token="mock-token",
+        token=auth_token,
     )
     assert res == b"foo"
 
-    client._http_client.request.assert_called_once_with(
+
+def test_client_download_file(
+    tmp_path,
+    client,
+    httpx_mock,
+    mock_asset_response,
+    api_url,
+    project_context,
+    auth_token,
+    request_headers,
+):
+    httpx_mock.add_response(
         method="GET",
         url=f"{api_url}/entity/1/assets/2/download",
-        headers={
-            "project-id": project_context.project_id,
-            "virtual-lab-id": project_context.virtual_lab_id,
-            "Authorization": "Bearer mock-token",
-        },
-        json=None,
-        params=None,
-        files=None,
-        follow_redirects=True,
+        match_headers=request_headers,
+        content=b"foo",
     )
-
-
-def test_client_download_file(tmp_path, client, mock_asset_response, api_url, project_context):
-    client._http_client.request.return_value = Mock(content=b"foo")
 
     output_path = tmp_path / "foo.h5"
 
@@ -162,31 +171,47 @@ def test_client_download_file(tmp_path, client, mock_asset_response, api_url, pr
         entity_type=Entity,
         asset_id=2,
         output_path=output_path,
-        token="mock-token",
+        token=auth_token,
     )
     assert output_path.read_bytes() == b"foo"
 
 
 @patch("entitysdk.route.get_route_name")
-def test_client_get(mock_route, client, mock_asset_response, api_url, project_context):
+def test_client_get(
+    mock_route,
+    client,
+    httpx_mock,
+    mock_asset_response,
+    api_url,
+    project_context,
+    auth_token,
+    request_headers,
+):
     class EntityWithAssets(HasAssets, Entity):
         """Entity plus assets."""
 
     mock_route.return_value = "entity"
 
-    def mock_request(*args, **kwargs):
-        if "assets" in kwargs["url"]:
-            return Mock(
-                json=lambda: {"data": [mock_asset_response, mock_asset_response]},
-            )
-        return Mock(json=lambda: {"id": 1})
-
-    client._http_client.request = mock_request
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/1",
+        match_headers=request_headers,
+        json={"id": 1},
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/1/assets",
+        match_headers=request_headers,
+        json={
+            "data": [mock_asset_response, mock_asset_response],
+            "pagination": {"page": 1, "page_size": 10, "total_items": 2},
+        },
+    )
 
     res = client.get_entity(
         entity_id=1,
         entity_type=EntityWithAssets,
-        token="mock-token",
+        token=auth_token,
         with_assets=True,
     )
     assert res.id == 1
@@ -210,24 +235,61 @@ def mock_asset_delete_response():
 
 
 @patch("entitysdk.route.get_route_name")
-def test_client_delete_asset(mock_route, client, mock_asset_delete_response, project_context):
-    mock_route.return_value = "reconstruction_morphology"
-    client._http_client.request.return_value = Mock(json=lambda: mock_asset_delete_response)
+def test_client_delete_asset(
+    mock_route,
+    client,
+    httpx_mock,
+    mock_asset_delete_response,
+    api_url,
+    project_context,
+    auth_token,
+    request_headers,
+):
+    mock_route.return_value = "reconstruction-morphology"
+
+    httpx_mock.add_response(
+        method="DELETE",
+        url=f"{api_url}/reconstruction-morphology/1/assets/2",
+        match_headers=request_headers,
+        json=mock_asset_delete_response,
+    )
 
     res = client.delete_asset(
         entity_id=1,
         entity_type=None,
         asset_id=2,
-        token="foo",
+        token=auth_token,
     )
 
     assert res.status == "deleted"
 
 
 @patch("entitysdk.route.get_route_name")
-def test_client_update_asset(mock_route, tmp_path, client, mock_asset_response):
-    mock_route.return_value = "reconstruction_morphology"
-    client._http_client.request.return_value = Mock(json=lambda: mock_asset_response)
+def test_client_update_asset(
+    mock_route,
+    tmp_path,
+    client,
+    httpx_mock,
+    mock_asset_response,
+    api_url,
+    project_context,
+    auth_token,
+    request_headers,
+):
+    mock_route.return_value = "reconstruction-morphology"
+
+    httpx_mock.add_response(
+        method="DELETE",
+        url=f"{api_url}/reconstruction-morphology/1/assets/2",
+        match_headers=request_headers,
+        json=mock_asset_response,
+    )
+    httpx_mock.add_response(
+        method="POST",
+        url=f"{api_url}/reconstruction-morphology/1/assets",
+        match_headers=request_headers,
+        json=mock_asset_response,
+    )
 
     path = tmp_path / "file.txt"
     path.touch()
@@ -239,7 +301,7 @@ def test_client_update_asset(mock_route, tmp_path, client, mock_asset_response):
         file_name="foo.txt",
         file_content_type="application/swc",
         asset_id=2,
-        token="foo",
+        token=auth_token,
     )
 
-    assert res.status == "completed"
+    assert res.status == "created"
