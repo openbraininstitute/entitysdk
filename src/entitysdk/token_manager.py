@@ -11,7 +11,6 @@ class TokenManager(Protocol):
 
     def get_token(self) -> str:
         """Get the token."""
-        ...
 
 
 class TokenFromEnv:
@@ -25,5 +24,5 @@ class TokenFromEnv:
         """Get the token from the environment variable."""
         try:
             return os.environ[self._env_var_name]
-        except KeyError as e:
-            raise EntitySDKError(f"Environment variable {self._env_var_name} not found.") from e
+        except KeyError:
+            raise EntitySDKError(f"Environment variable {self._env_var_name} not found.") from None
