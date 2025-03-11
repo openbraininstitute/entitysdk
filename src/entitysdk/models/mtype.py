@@ -24,5 +24,5 @@ class MTypeClass(Entity):
     ]
     alt_label: Annotated[
         str | None,
-        Field(description="The alternative lable of th mtype class."),
+        Field(description="The alternative label of th mtype class."),
     ]

@@ -195,10 +195,12 @@ class ReconstructionMorphology(HasAssets, Entity):
             description="The preferred label of the morphology.",
         ),
     ] = None
-    species: Species = Field(
-        ...,
-        description="The species of the morphology.",
-    )
+    species: Annotated[
+        Species,
+        Field(
+            description="The species of the morphology.",
+        ),
+    ]
     strain: Annotated[
         Strain | None,
         Field(
