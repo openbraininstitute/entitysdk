@@ -211,8 +211,8 @@ class ReconstructionMorphology(HasAssets, Entity):
             description="The license attached to the morphology.",
         ),
     ] = None
-    contributions: Annotated[
-        list[Contribution] | None,
+    contribution: Annotated[
+        Contribution | None,
         Field(
             description="List of contributions.",
         ),
@@ -223,7 +223,7 @@ class ReconstructionMorphology(HasAssets, Entity):
             description="The legacy id of the morphology.",
         ),
     ] = None
-    mtype: Annotated[
+    mtypes: Annotated[
         list[MTypeClass] | None,
         Field(
             description="The mtype classes of the morphology.",
