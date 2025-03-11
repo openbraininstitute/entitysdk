@@ -211,8 +211,8 @@ class ReconstructionMorphology(HasAssets, Entity):
             description="The license attached to the morphology.",
         ),
     ] = None
-    contribution: Annotated[
-        Contribution | None,
+    contributions: Annotated[
+        list[Contribution] | None,
         Field(
             description="List of contributions.",
         ),
