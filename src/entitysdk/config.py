@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     page_size: Annotated[
         int | None,
         Field(
-            env="ENTITYSDK_PAGE_SIZE",
+            alias="ENTITYSDK_PAGE_SIZE",
             description="Default pagination page size, or None to use server default.",
         ),
     ] = None

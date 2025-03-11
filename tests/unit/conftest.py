@@ -1,4 +1,4 @@
-from unittest.mock import Mock
+from uuid import UUID
 
 import pytest
 
@@ -14,11 +14,25 @@ def api_url():
 @pytest.fixture(scope="session")
 def project_context():
     return ProjectContext(
-        project_id="103d7868-147e-4f07-af0d-71d8568f575c",
-        virtual_lab_id="103d7868-147e-4f07-af0d-71d8568f575c",
+        project_id=UUID("103d7868-147e-4f07-af0d-71d8568f575c"),
+        virtual_lab_id=UUID("103d7868-147e-4f07-af0d-71d8568f575c"),
     )
+
+
+@pytest.fixture(scope="session")
+def auth_token():
+    return "mock-token"
+
+
+@pytest.fixture(scope="session")
+def request_headers(project_context, auth_token):
+    return {
+        "project-id": str(project_context.project_id),
+        "virtual-lab-id": str(project_context.virtual_lab_id),
+        "Authorization": f"Bearer {auth_token}",
+    }
 
 
 @pytest.fixture
 def client(project_context, api_url):
-    return Client(api_url=api_url, project_context=project_context, http_client=Mock())
+    return Client(api_url=api_url, project_context=project_context)

@@ -1,198 +1,408 @@
-from unittest.mock import Mock, patch
-
 import httpx
 import pytest
 
 from entitysdk import util as test_module
-from entitysdk.common import ProjectContext
 from entitysdk.exception import EntitySDKError
 
 
-@pytest.fixture
-def mock_client():
-    return Mock()
-
-
-def test_make_db_api_request(mock_client: Mock):
-    url = "http://localhost:8000/api/v1/entity/person"
-
-    test_module.make_db_api_request(
-        url=url,
+def test_make_db_api_request(httpx_mock, api_url, project_context, auth_token, request_headers):
+    url = f"{api_url}/api/v1/entity/person"
+    httpx_mock.add_response(
         method="POST",
-        json={"name": "John Doe"},
-        parameters={"foo": "bar"},
-        token="123",
-        project_context=ProjectContext(
-            project_id="123",
-            virtual_lab_id="456",
-        ),
-        http_client=mock_client,
+        url=f"{url}?foo=bar",
+        match_headers=request_headers,
+        match_json={"name": "John Doe"},
     )
 
-    mock_client.request.assert_called_once_with(
-        method="POST",
-        url=url,
-        headers={"project-id": "123", "virtual-lab-id": "456", "Authorization": "Bearer 123"},
-        json={"name": "John Doe"},
-        params={"foo": "bar"},
-        follow_redirects=True,
-        files=None,
-    )
-
-
-def test_make_db_api_request_with_none_http_client__raises_request(mock_client: Mock):
-    url = "http://localhost:8000/api/v1/entity/person"
-
-    mock_client.request.side_effect = httpx.RequestError(message="Test")
-
-    with pytest.raises(EntitySDKError, match="Request error: Test"):
-        test_module.make_db_api_request(
+    with httpx.Client() as http_client:
+        res = test_module.make_db_api_request(
             url=url,
             method="POST",
             json={"name": "John Doe"},
             parameters={"foo": "bar"},
-            project_context=ProjectContext(
-                project_id="123",
-                virtual_lab_id="456",
-            ),
-            token="123",
-            http_client=mock_client,
+            token=auth_token,
+            project_context=project_context,
+            http_client=http_client,
         )
+        assert res.status_code == 200
 
 
-def test_make_db_api_request_with_none_http_client__raises(mock_client: Mock):
-    url = "http://localhost:8000/api/v1/entity/person"
+def test_make_db_api_request_with_none_http_client__raises_request(
+    httpx_mock, api_url, project_context, auth_token
+):
+    url = f"{api_url}/api/v1/entity/person"
+    httpx_mock.add_exception(httpx.RequestError(message="Test"))
 
-    mock_response = Mock()
-    mock_response.raise_for_status.side_effect = httpx.HTTPStatusError(
-        message="404 Not Found", request=Mock(), response=Mock(status_code=404)
+    with httpx.Client() as http_client:
+        with pytest.raises(EntitySDKError, match="Request error: Test"):
+            test_module.make_db_api_request(
+                url=url,
+                method="POST",
+                json={"name": "John Doe"},
+                parameters={"foo": "bar"},
+                project_context=project_context,
+                token=auth_token,
+                http_client=http_client,
+            )
+
+
+def test_make_db_api_request_with_none_http_client__raises(
+    httpx_mock, api_url, project_context, auth_token
+):
+    url = f"{api_url}/api/v1/entity/person"
+    httpx_mock.add_response(status_code=404)
+
+    with httpx.Client() as http_client:
+        with pytest.raises(EntitySDKError, match=f"HTTP error 404 for POST {url}"):
+            test_module.make_db_api_request(
+                url=url,
+                method="POST",
+                json={"name": "John Doe"},
+                parameters={"foo": "bar"},
+                project_context=project_context,
+                token=auth_token,
+                http_client=http_client,
+            )
+
+
+def test_make_db_api_request_with_none_http_client__client_none(
+    httpx_mock, api_url, project_context, auth_token, request_headers
+):
+    url = f"{api_url}/api/v1/entity/person"
+    httpx_mock.add_response(
+        method="POST",
+        url=f"{url}?foo=bar",
+        match_headers=request_headers,
+        match_json={"name": "John Doe"},
     )
-    mock_client.request.return_value = mock_response
-
-    with pytest.raises(EntitySDKError, match="person"):
-        test_module.make_db_api_request(
-            url=url,
-            method="POST",
-            json={"name": "John Doe"},
-            parameters={"foo": "bar"},
-            project_context=ProjectContext(
-                project_id="123",
-                virtual_lab_id="456",
-            ),
-            token="123",
-            http_client=mock_client,
-        )
-
-
-@patch("entitysdk.util.httpx")
-def test_make_db_api_request_with_none_http_client__client_none(mock_httpx: Mock):
-    # Create a mock response with status_code 200
-    mock_response = Mock(status_code=200)
-    # Set up the mock chain to return our mock response
-    mock_client = Mock()
-    mock_client.request.return_value = mock_response
-    mock_httpx.Client.return_value = mock_client
 
     res = test_module.make_db_api_request(
-        url="foo",
+        url=url,
         method="POST",
         json={"name": "John Doe"},
         parameters={"foo": "bar"},
-        project_context=ProjectContext(
-            project_id="123",
-            virtual_lab_id="456",
-        ),
-        token="123",
+        project_context=project_context,
+        token=auth_token,
         http_client=None,
     )
 
     assert res.status_code == 200
 
 
-def test_stream_paginated_request(mock_client: Mock, project_context: ProjectContext):
-    request_count = 0
+@pytest.mark.parametrize("limit", [0, -1])
+def test_stream_paginated_request_validate_limit(api_url, project_context, auth_token, limit):
+    url = f"{api_url}/api/v1/entity/person"
+    it = test_module.stream_paginated_request(
+        url=url,
+        method="GET",
+        limit=limit,
+        project_context=project_context,
+        token=auth_token,
+    )
+    with pytest.raises(EntitySDKError, match="limit must be either None or strictly positive."):
+        next(it)
 
-    def mock_request(*args, **kwargs):
-        nonlocal request_count
 
-        # Simulate the end of the pagination
-        if request_count == 2:
-            return Mock(json=lambda: {"data": []})
+@pytest.mark.parametrize("page_size", [0, -1])
+def test_stream_paginated_request_validate_page_size(
+    api_url, project_context, auth_token, page_size
+):
+    url = f"{api_url}/api/v1/entity/person"
+    it = test_module.stream_paginated_request(
+        url=url,
+        method="GET",
+        page_size=page_size,
+        project_context=project_context,
+        token=auth_token,
+    )
+    with pytest.raises(EntitySDKError, match="page_size must be either None or strictly positive."):
+        next(it)
 
-        request_count += 1
-        return Mock(json=lambda: {"data": [{"id": 1}, {"id": 2}]})
 
-    mock_client.request = mock_request
+def test_stream_paginated_request_one_item(
+    httpx_mock, api_url, project_context, auth_token, request_headers
+):
+    url = f"{api_url}/api/v1/entity/person"
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{url}?page_size=2&page=1",
+        match_headers=request_headers,
+        json={
+            "data": [{"id": 1}, {"id": 2}],
+            "pagination": {"page": 1, "page_size": 2, "total_items": 4},
+        },
+    )
 
-    with pytest.raises(EntitySDKError, match="Limit must be either None or strictly positive."):
-        res = test_module.stream_paginated_request(
-            url="foo",
-            method="POST",
-            limit=0,
-            project_context=project_context,
-            token="123",
-            http_client=mock_client,
-        )
-        list(res)
-
-    request_count = 0
-
-    with pytest.raises(EntitySDKError, match="Limit must be either None or strictly positive."):
-        res = test_module.stream_paginated_request(
-            url="foo",
-            method="POST",
-            limit=-1,
-            project_context=project_context,
-            token="123",
-            http_client=mock_client,
-        )
-        list(res)
-
-    request_count = 0
-
-    res = test_module.stream_paginated_request(
-        url="foo",
-        method="POST",
+    it = test_module.stream_paginated_request(
+        url=url,
+        method="GET",
         limit=1,
         project_context=project_context,
-        token="123",
-        http_client=mock_client,
-    )
-    assert len(list(res)) == 1
-
-    request_count = 0
-
-    res = test_module.stream_paginated_request(
-        url="foo",
-        method="POST",
-        limit=None,
-        project_context=project_context,
-        token="123",
-        http_client=mock_client,
-    )
-    assert len(list(res)) == 4
-
-    request_count = 0
-
-    res = test_module.stream_paginated_request(
-        url="foo",
-        method="POST",
-        limit=3,
-        project_context=project_context,
-        token="123",
-        http_client=mock_client,
-    )
-    assert len(list(res)) == 3
-
-    request_count = 0
-
-    res = test_module.stream_paginated_request(
-        url="foo",
-        method="POST",
-        limit=5,
-        project_context=project_context,
-        token="123",
-        http_client=mock_client,
+        token=auth_token,
         page_size=2,
     )
-    assert len(list(res)) == 4
+    assert [item["id"] for item in it] == [1]
+
+
+def test_stream_paginated_request_two_pages(
+    httpx_mock, api_url, project_context, auth_token, request_headers
+):
+    url = f"{api_url}/api/v1/entity/person"
+    for page, json_response in enumerate(
+        [
+            {
+                "data": [{"id": 1}, {"id": 2}],
+                "pagination": {"page": 1, "page_size": 2, "total_items": 4},
+            },
+            {
+                "data": [{"id": 3}, {"id": 4}],
+                "pagination": {"page": 2, "page_size": 2, "total_items": 4},
+            },
+        ],
+        start=1,
+    ):
+        httpx_mock.add_response(
+            method="GET",
+            url=f"{url}?page_size=2&page={page}",
+            match_headers=request_headers,
+            json=json_response,
+        )
+
+    it = test_module.stream_paginated_request(
+        url=url,
+        method="GET",
+        limit=None,
+        project_context=project_context,
+        token=auth_token,
+        page_size=2,
+    )
+    assert [item["id"] for item in it] == [1, 2, 3, 4]
+
+
+def test_stream_paginated_request_two_pages_and_lower_limit(
+    httpx_mock, api_url, project_context, auth_token, request_headers
+):
+    url = f"{api_url}/api/v1/entity/person"
+    for page, json_response in enumerate(
+        [
+            {
+                "data": [{"id": 1}, {"id": 2}],
+                "pagination": {"page": 1, "page_size": 2, "total_items": 4},
+            },
+            {
+                "data": [{"id": 3}, {"id": 4}],
+                "pagination": {"page": 2, "page_size": 2, "total_items": 4},
+            },
+        ],
+        start=1,
+    ):
+        httpx_mock.add_response(
+            method="GET",
+            url=f"{url}?page_size=2&page={page}",
+            match_headers=request_headers,
+            json=json_response,
+        )
+
+    it = test_module.stream_paginated_request(
+        url=url,
+        method="GET",
+        limit=3,
+        project_context=project_context,
+        token=auth_token,
+        page_size=2,
+    )
+    assert [item["id"] for item in it] == [1, 2, 3]
+
+
+def test_stream_paginated_request_two_pages_and_higher_limit(
+    httpx_mock, api_url, project_context, auth_token, request_headers
+):
+    url = f"{api_url}/api/v1/entity/person"
+    for page, json_response in enumerate(
+        [
+            {
+                "data": [{"id": 1}, {"id": 2}],
+                "pagination": {"page": 1, "page_size": 2, "total_items": 4},
+            },
+            {
+                "data": [{"id": 3}, {"id": 4}],
+                "pagination": {"page": 2, "page_size": 2, "total_items": 4},
+            },
+        ],
+        start=1,
+    ):
+        httpx_mock.add_response(
+            method="GET",
+            url=f"{url}?page_size=2&page={page}",
+            match_headers=request_headers,
+            json=json_response,
+        )
+
+    it = test_module.stream_paginated_request(
+        url=url,
+        method="GET",
+        limit=5,
+        project_context=project_context,
+        token=auth_token,
+        page_size=2,
+    )
+    assert [item["id"] for item in it] == [1, 2, 3, 4]
+
+
+def test_stream_paginated_request_one_page_and_some(
+    httpx_mock, api_url, project_context, auth_token, request_headers
+):
+    url = f"{api_url}/api/v1/entity/person"
+    for page, json_response in enumerate(
+        [
+            {
+                "data": [{"id": 1}, {"id": 2}],
+                "pagination": {"page": 1, "page_size": 2, "total_items": 3},
+            },
+            {
+                "data": [{"id": 3}],
+                "pagination": {"page": 2, "page_size": 2, "total_items": 3},
+            },
+        ],
+        start=1,
+    ):
+        httpx_mock.add_response(
+            method="GET",
+            url=f"{url}?page_size=2&page={page}",
+            match_headers=request_headers,
+            json=json_response,
+        )
+
+    it = test_module.stream_paginated_request(
+        url=url,
+        method="GET",
+        limit=5,
+        project_context=project_context,
+        token=auth_token,
+        page_size=2,
+    )
+    assert [item["id"] for item in it] == [1, 2, 3]
+
+
+def test_stream_paginated_request_one_page_exactly(
+    httpx_mock, api_url, project_context, auth_token, request_headers
+):
+    url = f"{api_url}/api/v1/entity/person"
+    for page, json_response in enumerate(
+        [
+            {
+                "data": [{"id": 1}, {"id": 2}],
+                "pagination": {"page": 1, "page_size": 2, "total_items": 2},
+            },
+        ],
+        start=1,
+    ):
+        httpx_mock.add_response(
+            method="GET",
+            url=f"{url}?page={page}",
+            match_headers=request_headers,
+            json=json_response,
+        )
+
+    it = test_module.stream_paginated_request(
+        url=url,
+        method="GET",
+        project_context=project_context,
+        token=auth_token,
+    )
+    assert [item["id"] for item in it] == [1, 2]
+
+
+def test_stream_paginated_request_no_items(
+    httpx_mock, api_url, project_context, auth_token, request_headers
+):
+    url = f"{api_url}/api/v1/entity/person"
+    for page, json_response in enumerate(
+        [
+            {
+                "data": [],
+                "pagination": {"page": 1, "page_size": 2, "total_items": 0},
+            },
+        ],
+        1,
+    ):
+        httpx_mock.add_response(
+            method="GET",
+            url=f"{url}?page={page}",
+            match_headers=request_headers,
+            json=json_response,
+        )
+
+    it = test_module.stream_paginated_request(
+        url=url,
+        method="GET",
+        project_context=project_context,
+        token=auth_token,
+    )
+    assert [item["id"] for item in it] == []
+
+
+def test_stream_paginated_request_with_unexpected_page(
+    httpx_mock, api_url, project_context, auth_token, request_headers
+):
+    url = f"{api_url}/api/v1/entity/person"
+    for page, json_response in enumerate(
+        [
+            {
+                "data": [{"id": 1}, {"id": 2}],
+                "pagination": {"page": 2, "page_size": 2, "total_items": 4},
+            },
+        ],
+        1,
+    ):
+        httpx_mock.add_response(
+            method="GET",
+            url=f"{url}?page={page}",
+            match_headers=request_headers,
+            json=json_response,
+        )
+
+    it = test_module.stream_paginated_request(
+        url=url,
+        method="GET",
+        project_context=project_context,
+        token=auth_token,
+    )
+    with pytest.raises(
+        EntitySDKError, match="Unexpected response: payload.pagination.page=2 but it should be 1"
+    ):
+        next(it)
+
+
+def test_stream_paginated_request_with_unexpected_page_size(
+    httpx_mock, api_url, project_context, auth_token, request_headers
+):
+    url = f"{api_url}/api/v1/entity/person"
+    for page, json_response in enumerate(
+        [
+            {
+                "data": [{"id": 1}, {"id": 2}],
+                "pagination": {"page": 1, "page_size": 2, "total_items": 2},
+            },
+        ],
+        1,
+    ):
+        httpx_mock.add_response(
+            method="GET",
+            url=f"{url}?page={page}&page_size=123",
+            match_headers=request_headers,
+            json=json_response,
+        )
+
+    it = test_module.stream_paginated_request(
+        url=url,
+        method="GET",
+        project_context=project_context,
+        token=auth_token,
+        page_size=123,
+    )
+    with pytest.raises(
+        EntitySDKError,
+        match="Unexpected response: payload.pagination.page_size=2 but it should be 123",
+    ):
+        next(it)

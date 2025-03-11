@@ -1,5 +1,3 @@
-from unittest.mock import Mock
-
 import pytest
 
 from entitysdk.models.morphology import (
@@ -95,36 +93,31 @@ def json_morphology_expanded():
     }
 
 
-def test_read_reconstruction_morphology(client, json_morphology_expanded):
-    client._http_client.request.return_value = Mock(json=lambda: json_morphology_expanded)
+def test_read_reconstruction_morphology(client, httpx_mock, auth_token, json_morphology_expanded):
+    httpx_mock.add_response(method="GET", json=json_morphology_expanded)
 
     entity = client.get(
         entity_id=1,
         entity_type=ReconstructionMorphology,
-        token="mock-token",
+        token=auth_token,
         with_assets=False,
     )
 
     assert entity.id == 6466
 
 
-def test_register_reconstruction_morphology(client, morphology):
-    client._http_client.request.return_value = Mock(
-        json=lambda: morphology.model_dump() | {"id": 1}
-    )
+def test_register_reconstruction_morphology(client, httpx_mock, auth_token, morphology):
+    httpx_mock.add_response(method="POST", json=morphology.model_dump() | {"id": 1})
 
-    registered = client.register(entity=morphology, token="mock-token")
+    registered = client.register(entity=morphology, token=auth_token)
 
     assert registered.id == 1
     assert registered.name == morphology.name
 
 
-def test_update_reconstruction_morphology(client, morphology):
+def test_update_reconstruction_morphology(client, httpx_mock, auth_token, morphology):
     morphology = morphology.evolve(id=1)
-
-    client._http_client.request.return_value = Mock(
-        json=lambda: morphology.model_dump() | {"id": 1, "name": "foo"}
-    )
+    httpx_mock.add_response(method="PATCH", json=morphology.model_dump() | {"id": 1, "name": "foo"})
 
     updated = client.update(
         entity_id=1,
@@ -132,7 +125,7 @@ def test_update_reconstruction_morphology(client, morphology):
         attrs_or_entity={
             "name": "foo",
         },
-        token="mock-token",
+        token=auth_token,
     )
 
     assert updated.id == 1

@@ -1,5 +1,6 @@
 """Utility functions."""
 
+import sys
 from collections.abc import Iterator
 from json import dumps
 
@@ -45,9 +46,9 @@ def make_db_api_request(
 
     try:
         response.raise_for_status()
-    except httpx.HTTPError as e:
+    except httpx.HTTPStatusError as e:
         message = (
-            f"{method} {url}\n"
+            f"HTTP error {response.status_code} for {method} {url}\n"
             f"json       : {dumps(json, indent=2)}\n"
             f"params     : {parameters}\n"
             f"response   : {response.text}"
@@ -85,10 +86,13 @@ def stream_paginated_request(
         An iterator of dicts.
     """
     if limit is not None and limit <= 0:
-        raise EntitySDKError("Limit must be either None or strictly positive.")
+        raise EntitySDKError("limit must be either None or strictly positive.")
+    if page_size is not None and page_size <= 0:
+        raise EntitySDKError("page_size must be either None or strictly positive.")
 
     page = 1
     number_of_items = 0
+    limit = limit or sys.maxsize
     parameters = parameters or {}
     if page_size := page_size or settings.page_size:
         parameters = parameters | {"page_size": page_size}
@@ -102,19 +106,21 @@ def stream_paginated_request(
             token=token,
             http_client=http_client,
         )
-        payload = ListResponse.model_validate(response.json())
-
+        payload = ListResponse.model_validate_json(response.text)
+        if payload.pagination.page != page:
+            raise EntitySDKError(
+                f"Unexpected response: {payload.pagination.page=} but it should be {page}"
+            )
+        if page_size and payload.pagination.page_size != page_size:
+            raise EntitySDKError(
+                f"Unexpected response: {payload.pagination.page_size=} but it should be {page_size}"
+            )
+        if not payload.data:
+            return
+        limit = min(payload.pagination.total_items, limit)
         for data in payload.data:
             yield data
             number_of_items += 1
-
-            if limit and number_of_items >= limit:
+            if number_of_items >= limit:
                 return
-
-        if (
-            len(payload.data) < payload.pagination.page_size
-            or number_of_items >= payload.pagination.total_items
-        ):
-            return
-
         page += 1
