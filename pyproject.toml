@@ -39,7 +39,6 @@ addopts = [
     "-vv",
     "-ra",
     "--import-mode=importlib",
-    "--cov=entitysdk",
     "--durations=10",
     "--durations-min=1.0",
 ]
