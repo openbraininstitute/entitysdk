@@ -1,3 +1,4 @@
+import os
 import pytest
 
 from entitysdk.client import Client
@@ -6,7 +7,7 @@ from entitysdk.common import ProjectContext
 
 @pytest.fixture(scope="session")
 def api_url():
-    return "http://localhost:8000"
+    return os.environ["DB_API_URL"]
 
 
 @pytest.fixture(scope="session")
