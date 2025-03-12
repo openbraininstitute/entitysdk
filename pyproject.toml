@@ -42,7 +42,6 @@ addopts = [
     "--durations=10",
     "--durations-min=1.0",
 ]
-testpaths = ["tests/unit"]
 
 [tool.ruff]
 line-length = 100
