@@ -8,7 +8,7 @@ from entitysdk.common import ProjectContext
 
 @pytest.fixture(scope="session")
 def api_url():
-    return "http://localhost:8000"
+    return "http://mock-host:8000"
 
 
 @pytest.fixture(scope="session")
