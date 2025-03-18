@@ -1,9 +1,11 @@
 from entitysdk.models import asset as test_module
 
+from ..util import MOCK_UUID
+
 
 def test_asset():
     res = test_module.Asset(
-        id=1,
+        id=MOCK_UUID,
         path="path/to/asset",
         full_path="full/path/to/asset",
         bucket_name="bucket_name",
@@ -15,7 +17,7 @@ def test_asset():
     assert res.model_dump() == {
         "update_date": None,
         "creation_date": None,
-        "id": 1,
+        "id": MOCK_UUID,
         "path": "path/to/asset",
         "full_path": "full/path/to/asset",
         "bucket_name": "bucket_name",

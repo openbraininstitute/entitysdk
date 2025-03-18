@@ -8,6 +8,8 @@ from entitysdk.exception import EntitySDKError
 from entitysdk.mixin import HasAssets
 from entitysdk.models.entity import Entity
 
+from .util import MOCK_UUID
+
 
 def test_client_get_token():
     class Foo:
@@ -43,7 +45,7 @@ def test_client_search(client, httpx_mock, auth_token):
     httpx_mock.add_response(
         method="GET",
         json={
-            "data": [{"id": 1}, {"id": 2}],
+            "data": [{"id": str(MOCK_UUID)}, {"id": str(MOCK_UUID)}],
             "pagination": {"page": 1, "page_size": 10, "total_items": 2},
         },
     )
@@ -56,27 +58,27 @@ def test_client_search(client, httpx_mock, auth_token):
         )
     )
     assert len(res) == 2
-    assert res[0].id == 1
-    assert res[1].id == 2
+    assert res[0].id == MOCK_UUID
+    assert res[1].id == MOCK_UUID
 
 
 def test_client_update(client, httpx_mock, auth_token):
-    httpx_mock.add_response(method="PATCH", json={"id": 1})
+    httpx_mock.add_response(method="PATCH", json={"id": str(MOCK_UUID)})
 
     res = client.update_entity(
-        entity_id=1,
+        entity_id=MOCK_UUID,
         entity_type=Entity,
-        attrs_or_entity=Entity(id=1),
+        attrs_or_entity=Entity(id=MOCK_UUID),
         token=auth_token,
     )
 
-    assert res.id == 1
+    assert res.id == MOCK_UUID
 
 
 @pytest.fixture
 def mock_asset_response():
     return {
-        "id": 1,
+        "id": str(MOCK_UUID),
         "path": "path/to/asset",
         "full_path": "full/path/to/asset",
         "bucket_name": "bucket_name",
@@ -101,7 +103,7 @@ def test_client_upload_file(
 ):
     httpx_mock.add_response(
         method="POST",
-        url=f"{api_url}/entity/1/assets",
+        url=f"{api_url}/entity/{MOCK_UUID}/assets",
         match_headers=request_headers,
         json=mock_asset_response,
     )
@@ -110,7 +112,7 @@ def test_client_upload_file(
     path.write_bytes(b"foo")
 
     res = client.upload_file(
-        entity_id=1,
+        entity_id=MOCK_UUID,
         entity_type=Entity,
         file_name="foo",
         file_path=path,
@@ -119,7 +121,7 @@ def test_client_upload_file(
         token=auth_token,
     )
 
-    assert res.id == 1
+    assert res.id == MOCK_UUID
 
 
 def test_client_upload_content(
@@ -128,7 +130,7 @@ def test_client_upload_content(
     buffer = io.BytesIO(b"foo")
     httpx_mock.add_response(
         method="POST",
-        url=f"{api_url}/entity/1/assets",
+        url=f"{api_url}/entity/{MOCK_UUID}/assets",
         match_headers=request_headers,
         match_files={
             "file": (
@@ -140,7 +142,7 @@ def test_client_upload_content(
         json=mock_asset_response,
     )
     res = client.upload_content(
-        entity_id=1,
+        entity_id=MOCK_UUID,
         entity_type=Entity,
         file_name="foo.txt",
         file_content=buffer,
@@ -149,7 +151,7 @@ def test_client_upload_content(
         token=auth_token,
     )
 
-    assert res.id == 1
+    assert res.id == MOCK_UUID
 
 
 def test_client_download_content(
@@ -157,15 +159,15 @@ def test_client_download_content(
 ):
     httpx_mock.add_response(
         method="GET",
-        url=f"{api_url}/entity/1/assets/2/download",
+        url=f"{api_url}/entity/{MOCK_UUID}/assets/{MOCK_UUID}/download",
         match_headers=request_headers,
         content=b"foo",
     )
 
     res = client.download_content(
-        entity_id=1,
+        entity_id=MOCK_UUID,
         entity_type=Entity,
-        asset_id=2,
+        asset_id=MOCK_UUID,
         token=auth_token,
     )
     assert res == b"foo"
@@ -183,7 +185,7 @@ def test_client_download_file(
 ):
     httpx_mock.add_response(
         method="GET",
-        url=f"{api_url}/entity/1/assets/2/download",
+        url=f"{api_url}/entity/{MOCK_UUID}/assets/{MOCK_UUID}/download",
         match_headers=request_headers,
         content=b"foo",
     )
@@ -191,9 +193,9 @@ def test_client_download_file(
     output_path = tmp_path / "foo.h5"
 
     client.download_file(
-        entity_id=1,
+        entity_id=MOCK_UUID,
         entity_type=Entity,
-        asset_id=2,
+        asset_id=MOCK_UUID,
         output_path=output_path,
         token=auth_token,
     )
@@ -218,13 +220,13 @@ def test_client_get(
 
     httpx_mock.add_response(
         method="GET",
-        url=f"{api_url}/entity/1",
+        url=f"{api_url}/entity/{MOCK_UUID}",
         match_headers=request_headers,
-        json={"id": 1},
+        json={"id": str(MOCK_UUID)},
     )
     httpx_mock.add_response(
         method="GET",
-        url=f"{api_url}/entity/1/assets",
+        url=f"{api_url}/entity/{MOCK_UUID}/assets",
         match_headers=request_headers,
         json={
             "data": [mock_asset_response, mock_asset_response],
@@ -233,12 +235,12 @@ def test_client_get(
     )
 
     res = client.get_entity(
-        entity_id=1,
+        entity_id=str(MOCK_UUID),
         entity_type=EntityWithAssets,
         token=auth_token,
         with_assets=True,
     )
-    assert res.id == 1
+    assert res.id == MOCK_UUID
     assert len(res.assets) == 2
 
 
@@ -253,7 +255,7 @@ def mock_asset_delete_response():
         "size": 18,
         "sha256_digest": "47ddc1b6e05dcbfbd2db9dcec4a49d83c6f9f10ad595649bacdcb629671fd954",
         "meta": {},
-        "id": 16393,
+        "id": str(MOCK_UUID),
         "status": "deleted",
     }
 
@@ -273,15 +275,15 @@ def test_client_delete_asset(
 
     httpx_mock.add_response(
         method="DELETE",
-        url=f"{api_url}/reconstruction-morphology/1/assets/2",
+        url=f"{api_url}/reconstruction-morphology/{MOCK_UUID}/assets/{MOCK_UUID}",
         match_headers=request_headers,
         json=mock_asset_delete_response,
     )
 
     res = client.delete_asset(
-        entity_id=1,
+        entity_id=MOCK_UUID,
         entity_type=None,
-        asset_id=2,
+        asset_id=MOCK_UUID,
         token=auth_token,
     )
 
@@ -304,13 +306,13 @@ def test_client_update_asset(
 
     httpx_mock.add_response(
         method="DELETE",
-        url=f"{api_url}/reconstruction-morphology/1/assets/2",
+        url=f"{api_url}/reconstruction-morphology/{MOCK_UUID}/assets/{MOCK_UUID}",
         match_headers=request_headers,
         json=mock_asset_response,
     )
     httpx_mock.add_response(
         method="POST",
-        url=f"{api_url}/reconstruction-morphology/1/assets",
+        url=f"{api_url}/reconstruction-morphology/{MOCK_UUID}/assets",
         match_headers=request_headers,
         json=mock_asset_response,
     )
@@ -319,12 +321,12 @@ def test_client_update_asset(
     path.touch()
 
     res = client.update_asset_file(
-        entity_id=1,
+        entity_id=MOCK_UUID,
         entity_type=None,
         file_path=path,
         file_name="foo.txt",
         file_content_type="application/swc",
-        asset_id=2,
+        asset_id=MOCK_UUID,
         token=auth_token,
     )
 

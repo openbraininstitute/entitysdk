@@ -3,6 +3,8 @@ import pytest
 from entitysdk import serdes as test_module
 from entitysdk.models.core import Identifiable, Struct
 
+from .util import MOCK_UUID
+
 
 class E1(Struct):
     a: str
@@ -27,18 +29,18 @@ class E3(Identifiable):
             {"a": "foo", "b": 1},
         ),
         (
-            E2(id=1, a="foo", b=1),
+            E2(id=MOCK_UUID, a="foo", b=1),
             {"a": "foo", "b": 1},
         ),
         (
             E3(
-                id=1,
+                id=MOCK_UUID,
                 a=E1(a="foo", b=1),
-                b=E2(id=2, a="foo", b=1),
+                b=E2(id=MOCK_UUID, a="foo", b=1),
             ),
             {
                 "a": {"a": "foo", "b": 1},
-                "b_id": 2,
+                "b_id": str(MOCK_UUID),
             },
         ),
     ],
