@@ -53,7 +53,7 @@ class BrainRegion(Entity):
             examples=[1, 2],
             description="The region's id.",
         ),
-    ]
+    ]  # type: ignore
 
     name: Annotated[
         str,
