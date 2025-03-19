@@ -14,6 +14,7 @@ from entitysdk.models.asset import Asset, LocalAssetMetadata
 from entitysdk.models.core import Identifiable
 from entitysdk.result import IteratorResult
 from entitysdk.token_manager import TokenManager
+from entitysdk.typedef import ID
 from entitysdk.util import make_db_api_request, stream_paginated_request
 
 
@@ -65,7 +66,7 @@ class Client:
 
     def get_entity(
         self,
-        entity_id: str,
+        entity_id: ID,
         *,
         entity_type: type[Identifiable],
         with_assets: bool = True,
@@ -164,7 +165,7 @@ class Client:
 
     def update_entity(
         self,
-        entity_id: str,
+        entity_id: ID,
         entity_type: type[Identifiable],
         attrs_or_entity: dict | Identifiable,
         *,
@@ -194,7 +195,7 @@ class Client:
     def upload_file(
         self,
         *,
-        entity_id: str,
+        entity_id: ID,
         entity_type: type[Identifiable],
         file_path: os.PathLike,
         file_content_type: str,
@@ -227,7 +228,7 @@ class Client:
     def upload_content(
         self,
         *,
-        entity_id: str,
+        entity_id: ID,
         entity_type: type[Identifiable],
         file_content: io.BufferedIOBase,
         file_name: str,
@@ -259,7 +260,7 @@ class Client:
     def download_content(
         self,
         *,
-        entity_id: str,
+        entity_id: ID,
         entity_type: type[Identifiable],
         asset_id: str,
         project_context: ProjectContext | None = None,
@@ -293,7 +294,7 @@ class Client:
     def download_file(
         self,
         *,
-        entity_id: str,
+        entity_id: ID,
         entity_type: type[Identifiable],
         asset_id: str,
         output_path: os.PathLike,
@@ -327,9 +328,9 @@ class Client:
     def delete_asset(
         self,
         *,
-        entity_id: str,
+        entity_id: ID,
         entity_type: type[Identifiable],
-        asset_id: str,
+        asset_id: ID,
         project_context: ProjectContext | None = None,
         token: str | None = None,
     ) -> Asset:
@@ -349,9 +350,9 @@ class Client:
     def update_asset_file(
         self,
         *,
-        entity_id: str,
+        entity_id: ID,
         entity_type: type[Identifiable],
-        asset_id: str,
+        asset_id: ID,
         file_path: os.PathLike,
         file_content_type: str,
         file_name: str | None = None,

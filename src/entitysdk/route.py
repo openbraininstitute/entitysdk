@@ -2,6 +2,7 @@
 
 from entitysdk.exception import RouteNotFoundError
 from entitysdk.models.core import Identifiable
+from entitysdk.typedef import ID
 
 # Mapping of entity type to api route name.
 _ROUTES = {
@@ -39,7 +40,7 @@ def get_entities_endpoint(
     *,
     api_url: str,
     entity_type: type[Identifiable],
-    entity_id: str | int | None = None,
+    entity_id: str | ID | None = None,
 ) -> str:
     """Get the API endpoint for an entity type."""
     route_name = get_route_name(entity_type)
@@ -51,8 +52,8 @@ def get_assets_endpoint(
     *,
     api_url: str,
     entity_type: type[Identifiable],
-    entity_id: str | int,
-    asset_id: str | int | None = None,
+    entity_id: str | ID,
+    asset_id: str | ID | None = None,
 ) -> str:
     """Return the endpoint for the assets of an entity.
 

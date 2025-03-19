@@ -9,6 +9,7 @@ from entitysdk.models.contribution import Contribution
 from entitysdk.models.core import Struct
 from entitysdk.models.entity import Entity
 from entitysdk.models.mtype import MTypeClass
+from entitysdk.typedef import ID
 
 
 class License(Entity):
@@ -45,6 +46,14 @@ class License(Entity):
 
 class BrainRegion(Entity):
     """BrainRegion model."""
+
+    id: Annotated[
+        int,
+        Field(
+            examples=[1, 2],
+            description="The region's id.",
+        ),
+    ]  # type: ignore
 
     name: Annotated[
         str,
@@ -151,9 +160,8 @@ class Strain(Entity):
         ),
     ]
     species_id: Annotated[
-        int,
+        ID,
         Field(
-            examples=[1],
             description="The species id of the strain.",
         ),
     ]

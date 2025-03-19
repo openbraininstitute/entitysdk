@@ -6,6 +6,7 @@ from typing import Annotated
 from pydantic import Field
 
 from entitysdk.models.base import BaseModel
+from entitysdk.typedef import ID
 
 
 class Struct(BaseModel):
@@ -16,9 +17,8 @@ class Identifiable(BaseModel):
     """Identifiable is a model with an id."""
 
     id: Annotated[
-        int | None,
+        ID | None,
         Field(
-            examples=[1, 2, 3],
             description="The primary key identifier of the resource.",
         ),
     ] = None
