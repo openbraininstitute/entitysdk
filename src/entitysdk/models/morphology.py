@@ -162,7 +162,6 @@ class Strain(Entity):
     species_id: Annotated[
         ID,
         Field(
-            examples=[1],
             description="The species id of the strain.",
         ),
     ]
