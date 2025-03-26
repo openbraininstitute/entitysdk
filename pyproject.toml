@@ -59,7 +59,6 @@ select = [
     "UP", # pyupgrade
 ]
 ignore = [
-    "S107", "S602", "S603", "S608"
 ]
 
 [tool.ruff.lint.pydocstyle]
