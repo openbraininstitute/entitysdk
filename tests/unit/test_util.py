@@ -27,6 +27,30 @@ def test_make_db_api_request(httpx_mock, api_url, project_context, auth_token, r
         assert res.status_code == 200
 
 
+def test_make_db_api_request__no_context(
+    httpx_mock, api_url, auth_token, request_headers_no_context
+):
+    url = f"{api_url}/api/v1/entity/person"
+    httpx_mock.add_response(
+        method="POST",
+        url=f"{url}?foo=bar",
+        match_headers=request_headers_no_context,
+        match_json={"name": "John Doe"},
+    )
+
+    with httpx.Client() as http_client:
+        res = test_module.make_db_api_request(
+            url=url,
+            method="POST",
+            json={"name": "John Doe"},
+            parameters={"foo": "bar"},
+            token=auth_token,
+            project_context=None,
+            http_client=http_client,
+        )
+        assert res.status_code == 200
+
+
 def test_make_db_api_request_with_none_http_client__raises_request(
     httpx_mock, api_url, project_context, auth_token
 ):
