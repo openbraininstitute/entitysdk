@@ -36,8 +36,8 @@ def test_client__get_token__raises():
 def test_client_project_context__raises():
     client = Client(api_url="foo", project_context=None)
 
-    with pytest.raises(ValueError, match="A project context must be specified."):
-        client._project_context(override_context=None)
+    with pytest.raises(EntitySDKError, match="A project context is mandatory for this operation."):
+        client._required_user_context(override_context=None)
 
 
 def test_client_search(client, httpx_mock, auth_token):

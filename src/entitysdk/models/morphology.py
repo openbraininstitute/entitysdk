@@ -36,12 +36,6 @@ class License(Entity):
             description="The label of the license.",
         ),
     ]
-    legacy_id: Annotated[
-        str | None,
-        Field(
-            description="The legacy id of the license.",
-        ),
-    ] = None
 
 
 class BrainRegion(Entity):
@@ -225,12 +219,6 @@ class ReconstructionMorphology(HasAssets, Entity):
         list[Contribution] | None,
         Field(
             description="List of contributions.",
-        ),
-    ] = None
-    legacy_id: Annotated[
-        str | None,
-        Field(
-            description="The legacy id of the morphology.",
         ),
     ] = None
     mtypes: Annotated[
