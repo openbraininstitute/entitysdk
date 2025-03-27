@@ -2,12 +2,11 @@
 
 import io
 import os
-from collections.abc import Iterator
 from pathlib import Path
 
 import httpx
 
-from entitysdk import route, serdes
+from entitysdk import core, route
 from entitysdk.common import ProjectContext
 from entitysdk.exception import EntitySDKError
 from entitysdk.models.asset import Asset, LocalAssetMetadata
@@ -15,7 +14,6 @@ from entitysdk.models.core import Identifiable
 from entitysdk.result import IteratorResult
 from entitysdk.token_manager import TokenManager
 from entitysdk.typedef import ID
-from entitysdk.util import make_db_api_request, stream_paginated_request
 
 
 class Client:
@@ -56,12 +54,15 @@ class Client:
             raise EntitySDKError("Either override_token or token_manager must be provided.")
         return self._token_manager.get_token()
 
-    def _project_context(self, override_context: ProjectContext | None) -> ProjectContext:
-        context = override_context or self.project_context
+    def _optional_user_context(
+        self, override_context: ProjectContext | None
+    ) -> ProjectContext | None:
+        return override_context or self.project_context
 
+    def _required_user_context(self, override_context: ProjectContext | None) -> ProjectContext:
+        context = self._optional_user_context(override_context)
         if context is None:
-            raise ValueError("A project context must be specified.")
-
+            raise EntitySDKError("A project context is mandatory for this operation.")
         return context
 
     def get_entity(
@@ -85,25 +86,30 @@ class Client:
         Returns:
             entity_type instantiated by deserializing the response.
         """
-        token = self._get_token(override_token=token)
-        entity = get_entity(
-            url=route.get_entities_endpoint(
-                api_url=self.api_url, entity_type=entity_type, entity_id=entity_id
-            ),
+        url = route.get_entities_endpoint(
+            api_url=self.api_url,
             entity_type=entity_type,
-            project_context=self._project_context(override_context=project_context),
+            entity_id=entity_id,
+        )
+        token = self._get_token(override_token=token)
+        context = self._optional_user_context(override_context=project_context)
+        entity = core.get_entity(
+            url=url,
             token=token,
+            entity_type=entity_type,
+            project_context=context,
             http_client=self._http_client,
         )
         if with_assets and "assets" in entity_type.model_fields:
-            assets = get_entity_assets(
-                url=route.get_assets_endpoint(
-                    api_url=self.api_url,
-                    entity_type=entity_type,
-                    entity_id=entity_id,
-                ),
-                project_context=self._project_context(override_context=project_context),
+            url = route.get_assets_endpoint(
+                api_url=self.api_url,
+                entity_type=entity_type,
+                entity_id=entity_id,
+            )
+            assets = core.get_entity_assets(
+                url=url,
                 token=token,
+                project_context=context,
                 http_client=self._http_client,
             )
             entity = entity.evolve(assets=assets)
@@ -128,13 +134,16 @@ class Client:
             project_context: Optional project context.
             token: Authorization access token.
         """
-        return search_entities(
-            url=route.get_entities_endpoint(api_url=self.api_url, entity_type=entity_type),
-            entity_type=entity_type,
+        url = route.get_entities_endpoint(api_url=self.api_url, entity_type=entity_type)
+        token = self._get_token(override_token=token)
+        context = self._optional_user_context(override_context=project_context)
+        return core.search_entities(
+            url=url,
             query=query,
             limit=limit,
-            project_context=self._project_context(override_context=project_context),
-            token=self._get_token(override_token=token),
+            token=token,
+            project_context=context,
+            entity_type=entity_type,
             http_client=self._http_client,
         )
 
@@ -155,11 +164,14 @@ class Client:
         Returns:
             Registered entity with id.
         """
-        return register_entity(
-            url=route.get_entities_endpoint(api_url=self.api_url, entity_type=type(entity)),
+        url = route.get_entities_endpoint(api_url=self.api_url, entity_type=type(entity))
+        context = self._required_user_context(override_context=project_context)
+        token = self._get_token(override_token=token)
+        return core.register_entity(
+            url=url,
+            token=token,
             entity=entity,
-            project_context=self._project_context(override_context=project_context),
-            token=self._get_token(override_token=token),
+            project_context=context,
             http_client=self._http_client,
         )
 
@@ -181,14 +193,19 @@ class Client:
             project_context: Optional project context.
             token: Authorization access token.
         """
-        return update_entity(
-            url=route.get_entities_endpoint(
-                api_url=self.api_url, entity_type=entity_type, entity_id=entity_id
-            ),
+        url = route.get_entities_endpoint(
+            api_url=self.api_url,
+            entity_type=entity_type,
+            entity_id=entity_id,
+        )
+        token = self._get_token(override_token=token)
+        context = self._required_user_context(override_context=project_context)
+        return core.update_entity(
+            url=url,
+            token=token,
+            project_context=context,
             entity_type=entity_type,
             attrs_or_entity=attrs_or_entity,
-            project_context=self._project_context(override_context=project_context),
-            token=self._get_token(override_token=token),
             http_client=self._http_client,
         )
 
@@ -206,22 +223,25 @@ class Client:
     ) -> Asset:
         """Upload asset to an existing entity's endpoint from a file path."""
         path = Path(file_path)
+        url = route.get_assets_endpoint(
+            api_url=self.api_url,
+            entity_type=entity_type,
+            entity_id=entity_id,
+            asset_id=None,
+        )
+        token = self._get_token(override_token=token)
+        context = self._required_user_context(override_context=project_context)
         asset_metadata = LocalAssetMetadata(
             file_name=file_name or path.name,
             content_type=file_content_type,
             metadata=file_metadata,
         )
-        return upload_asset_file(
-            url=route.get_assets_endpoint(
-                api_url=self.api_url,
-                entity_type=entity_type,
-                entity_id=entity_id,
-                asset_id=None,
-            ),
+        return core.upload_asset_file(
+            url=url,
+            token=token,
             asset_path=path,
+            project_context=context,
             asset_metadata=asset_metadata,
-            project_context=self._project_context(override_context=project_context),
-            token=self._get_token(override_token=token),
             http_client=self._http_client,
         )
 
@@ -238,22 +258,25 @@ class Client:
         token: str,
     ) -> Asset:
         """Upload asset to an existing entity's endpoint from a file-like object."""
+        url = route.get_assets_endpoint(
+            api_url=self.api_url,
+            entity_type=entity_type,
+            entity_id=entity_id,
+            asset_id=None,
+        )
         asset_metadata = LocalAssetMetadata(
             file_name=file_name,
             content_type=file_content_type,
             metadata=file_metadata or {},
         )
-        return upload_asset_content(
-            url=route.get_assets_endpoint(
-                api_url=self.api_url,
-                entity_type=entity_type,
-                entity_id=entity_id,
-                asset_id=None,
-            ),
+        token = self._get_token(override_token=token)
+        context = self._required_user_context(override_context=project_context)
+        return core.upload_asset_content(
+            url=url,
+            token=token,
+            project_context=context,
             asset_content=file_content,
             asset_metadata=asset_metadata,
-            project_context=self._project_context(override_context=project_context),
-            token=self._get_token(override_token=token),
             http_client=self._http_client,
         )
 
@@ -278,16 +301,21 @@ class Client:
         Returns:
             Asset content in bytes.
         """
-        assets_route = route.get_assets_endpoint(
-            api_url=self.api_url,
-            entity_type=entity_type,
-            entity_id=entity_id,
-            asset_id=asset_id,
+        url = (
+            route.get_assets_endpoint(
+                api_url=self.api_url,
+                entity_type=entity_type,
+                entity_id=entity_id,
+                asset_id=asset_id,
+            )
+            + "/download"
         )
-        return download_asset_content(
-            f"{assets_route}/download",
-            project_context=self._project_context(override_context=project_context),
-            token=self._get_token(override_token=token),
+        token = self._get_token(override_token=token)
+        context = self._optional_user_context(override_context=project_context)
+        return core.download_asset_content(
+            url=url,
+            token=token,
+            project_context=context,
             http_client=self._http_client,
         )
 
@@ -311,17 +339,22 @@ class Client:
             project_context: Optional project context.
             token: Authorization access token.
         """
-        assets_route = route.get_assets_endpoint(
-            api_url=self.api_url,
-            entity_type=entity_type,
-            entity_id=entity_id,
-            asset_id=asset_id,
+        url = (
+            route.get_assets_endpoint(
+                api_url=self.api_url,
+                entity_type=entity_type,
+                entity_id=entity_id,
+                asset_id=asset_id,
+            )
+            + "/download"
         )
-        return download_asset_file(
-            url=f"{assets_route}/download",
+        token = self._get_token(override_token=token)
+        context = self._optional_user_context(override_context=project_context)
+        return core.download_asset_file(
+            url=url,
+            token=token,
+            project_context=context,
             output_path=Path(output_path),
-            project_context=self._project_context(override_context=project_context),
-            token=self._get_token(override_token=token),
             http_client=self._http_client,
         )
 
@@ -335,15 +368,18 @@ class Client:
         token: str | None = None,
     ) -> Asset:
         """Delete an entity's asset."""
-        return delete_asset(
-            url=route.get_assets_endpoint(
-                api_url=self.api_url,
-                entity_type=entity_type,
-                entity_id=entity_id,
-                asset_id=asset_id,
-            ),
-            project_context=self._project_context(override_context=project_context),
-            token=self._get_token(override_token=token),
+        url = route.get_assets_endpoint(
+            api_url=self.api_url,
+            entity_type=entity_type,
+            entity_id=entity_id,
+            asset_id=asset_id,
+        )
+        token = self._get_token(override_token=token)
+        context = self._required_user_context(override_context=project_context)
+        return core.delete_asset(
+            url=url,
+            token=token,
+            project_context=context,
             http_client=self._http_client,
         )
 
@@ -379,262 +415,5 @@ class Client:
             file_name=file_name,
             file_metadata=file_metadata,
             project_context=project_context,
-            token=self._get_token(override_token=token),
-        )
-
-
-def search_entities(
-    url: str,
-    *,
-    entity_type: type[Identifiable],
-    query: dict | None = None,
-    limit: int | None,
-    project_context: ProjectContext,
-    token: str,
-    http_client: httpx.Client | None = None,
-) -> IteratorResult[Identifiable]:
-    """Search for entities.
-
-    Args:
-        url: URL of the resource.
-        entity_type: Type of the entity.
-        query: Query parameters
-        limit: Limit of the number of entities to yield or None.
-        project_context: Project context.
-        token: Authorization access token.
-        http_client: HTTP client.
-
-    Returns:
-        List of entities.
-    """
-    iterator: Iterator[dict] = stream_paginated_request(
-        url=url,
-        method="GET",
-        parameters=query,
-        limit=limit,
-        project_context=project_context,
-        token=token,
-        http_client=http_client,
-    )
-    return IteratorResult(
-        serdes.deserialize_entity(json_data, entity_type) for json_data in iterator
-    )
-
-
-def get_entity(
-    url: str,
-    entity_type: type[Identifiable],
-    project_context: ProjectContext,
-    token: str,
-    http_client: httpx.Client | None = None,
-) -> Identifiable:
-    """Instantiate entity with model ``entity_type`` from resource id."""
-    response = make_db_api_request(
-        url=url,
-        method="GET",
-        json=None,
-        project_context=project_context,
-        token=token,
-        http_client=http_client,
-    )
-
-    return serdes.deserialize_entity(response.json(), entity_type)
-
-
-def get_entity_assets(
-    url: str,
-    project_context: ProjectContext,
-    token: str,
-    http_client: httpx.Client | None = None,
-) -> list[Asset]:
-    """Get entity assets.
-
-    Args:
-        url: URL of the resource.
-        project_context: Project context.
-        token: Authorization access token.
-        http_client: HTTP client.
-
-    Returns:
-        List of assets.
-    """
-    response = make_db_api_request(
-        url=url,
-        method="GET",
-        project_context=project_context,
-        token=token,
-        http_client=http_client,
-    )
-    return [serdes.deserialize_entity(asset, Asset) for asset in response.json()["data"]]
-
-
-def register_entity(
-    url: str,
-    *,
-    entity: Identifiable,
-    project_context: ProjectContext,
-    token: str,
-    http_client: httpx.Client | None = None,
-) -> Identifiable:
-    """Register entity."""
-    json_data = serdes.serialize_entity(entity)
-
-    response = make_db_api_request(
-        url=url,
-        method="POST",
-        json=json_data,
-        project_context=project_context,
-        token=token,
-        http_client=http_client,
-    )
-    return serdes.deserialize_entity(response.json(), type(entity))
-
-
-def update_entity(
-    url: str,
-    *,
-    entity_type: type[Identifiable],
-    attrs_or_entity: dict | Identifiable,
-    project_context: ProjectContext,
-    token: str,
-    http_client: httpx.Client | None = None,
-) -> Identifiable:
-    """Update entity."""
-    if isinstance(attrs_or_entity, dict):
-        json_data = serdes.serialize_dict(attrs_or_entity)
-    else:
-        json_data = serdes.serialize_entity(attrs_or_entity)
-
-    response = make_db_api_request(
-        url=url,
-        method="PATCH",
-        json=json_data,
-        project_context=project_context,
-        token=token,
-        http_client=http_client,
-    )
-
-    json_data = response.json()
-
-    return serdes.deserialize_entity(json_data, entity_type)
-
-
-def upload_asset_file(
-    url: str,
-    *,
-    asset_path: Path,
-    asset_metadata: LocalAssetMetadata,
-    project_context: ProjectContext,
-    token: str,
-    http_client: httpx.Client | None = None,
-) -> Asset:
-    """Upload asset to an existing entity's endpoint from a file path."""
-    with open(asset_path, "rb") as file_content:
-        return upload_asset_content(
-            url=url,
-            asset_content=file_content,
-            asset_metadata=asset_metadata,
-            project_context=project_context,
             token=token,
-            http_client=http_client,
         )
-
-
-def upload_asset_content(
-    url: str,
-    *,
-    asset_content: io.BufferedIOBase,
-    asset_metadata: LocalAssetMetadata,
-    project_context: ProjectContext,
-    token: str,
-    http_client: httpx.Client | None = None,
-) -> Asset:
-    """Upload asset to an existing entity's endpoint from a file-like object."""
-    files = {
-        "file": (
-            asset_metadata.file_name,
-            asset_content,
-            asset_metadata.content_type,
-        )
-    }
-    response = make_db_api_request(
-        url=url,
-        method="POST",
-        files=files,
-        project_context=project_context,
-        token=token,
-        http_client=http_client,
-    )
-    return serdes.deserialize_entity(response.json(), Asset)
-
-
-def download_asset_file(
-    url: str,
-    *,
-    output_path: Path,
-    project_context: ProjectContext,
-    token: str,
-    http_client: httpx.Client | None = None,
-) -> None:
-    """Download asset file to a file path.
-
-    Args:
-        url: URL of the asset.
-        output_path: Path to save the file to.
-        project_context: Project context.
-        token: Authorization access token.
-        http_client: HTTP client.
-    """
-    bytes_content = download_asset_content(
-        url=url,
-        project_context=project_context,
-        token=token,
-        http_client=http_client,
-    )
-    output_path.write_bytes(bytes_content)
-
-
-def download_asset_content(
-    url: str,
-    *,
-    project_context: ProjectContext,
-    token: str,
-    http_client: httpx.Client | None = None,
-) -> bytes:
-    """Download asset content.
-
-    Args:
-        url: URL of the asset.
-        project_context: Project context.
-        token: Authorization access token.
-        http_client: HTTP client.
-
-    Returns:
-        Asset content in bytes.
-    """
-    response = make_db_api_request(
-        url=url,
-        method="GET",
-        project_context=project_context,
-        token=token,
-        http_client=http_client,
-    )
-    return response.content
-
-
-def delete_asset(
-    url: str,
-    *,
-    project_context: ProjectContext,
-    token: str,
-    http_client: httpx.Client | None = None,
-) -> Asset:
-    """Delete asset."""
-    response = make_db_api_request(
-        url=url,
-        method="DELETE",
-        project_context=project_context,
-        token=token,
-        http_client=http_client,
-    )
-    return serdes.deserialize_entity(response.json(), Asset)

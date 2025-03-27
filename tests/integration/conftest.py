@@ -12,6 +12,11 @@ def api_url():
 
 
 @pytest.fixture(scope="session")
+def token():
+    return os.getenv("ACCESS_TOKEN", "mock-token")
+
+
+@pytest.fixture(scope="session")
 def project_context():
     return ProjectContext(
         virtual_lab_id="a98b7abc-fc46-4700-9e3d-37137812c730",
@@ -20,11 +25,9 @@ def project_context():
 
 
 @pytest.fixture(scope="session")
-def client(project_context, api_url):
+def client(project_context, api_url, token):
     class MockTokenManager:
         def get_token(self):
-            return "mock-token"
+            return token
 
-    return Client(
-        api_url=api_url, project_context=project_context, token_manager=MockTokenManager()
-    )
+    return Client(api_url=api_url, token_manager=MockTokenManager())

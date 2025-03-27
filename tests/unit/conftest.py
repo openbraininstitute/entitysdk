@@ -33,6 +33,13 @@ def request_headers(project_context, auth_token):
     }
 
 
+@pytest.fixture(scope="session")
+def request_headers_no_context(auth_token):
+    return {
+        "Authorization": f"Bearer {auth_token}",
+    }
+
+
 @pytest.fixture
 def client(project_context, api_url):
     return Client(api_url=api_url, project_context=project_context)

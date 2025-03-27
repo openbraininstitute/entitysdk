@@ -36,8 +36,8 @@ def test_client__get_token__raises():
 def test_client_project_context__raises():
     client = Client(api_url="foo", project_context=None)
 
-    with pytest.raises(ValueError, match="A project context must be specified."):
-        client._project_context(override_context=None)
+    with pytest.raises(EntitySDKError, match="A project context is mandatory for this operation."):
+        client._required_user_context(override_context=None)
 
 
 def test_client_search(client, httpx_mock, auth_token):
@@ -65,7 +65,7 @@ def test_client_search(client, httpx_mock, auth_token):
 
 
 @patch("entitysdk.route.get_route_name")
-def test_clientnupdate(mocked_route, client, httpx_mock, auth_token):
+def test_client_nupdate(mocked_route, client, httpx_mock, auth_token):
     class Foo(Entity):
         name: str
 
@@ -79,6 +79,18 @@ def test_clientnupdate(mocked_route, client, httpx_mock, auth_token):
         entity_id=id1,
         entity_type=Foo,
         attrs_or_entity={"name": new_name},
+        token=auth_token,
+    )
+
+    assert res.id == id1
+    assert res.name == new_name
+
+    httpx_mock.add_response(method="PATCH", json={"id": str(id1), "name": new_name})
+
+    res = client.update_entity(
+        entity_id=id1,
+        entity_type=Foo,
+        attrs_or_entity=Foo(name=new_name),
         token=auth_token,
     )
 

@@ -19,7 +19,7 @@ def make_db_api_request(
     json: dict | None = None,
     parameters: dict | None = None,
     files: dict | None = None,
-    project_context: ProjectContext,
+    project_context: ProjectContext | None = None,
     token: str,
     http_client: httpx.Client | None = None,
 ) -> httpx.Response:
@@ -27,15 +27,17 @@ def make_db_api_request(
     if http_client is None:
         http_client = httpx.Client()
 
+    headers = {"Authorization": f"Bearer {token}"}
+
+    if project_context:
+        headers["project-id"] = str(project_context.project_id)
+        headers["virtual-lab-id"] = str(project_context.project_id)
+
     try:
         response = http_client.request(
             method=method,
             url=url,
-            headers={
-                "project-id": str(project_context.project_id),
-                "virtual-lab-id": str(project_context.virtual_lab_id),
-                "Authorization": f"Bearer {token}",
-            },
+            headers=headers,
             json=json,
             files=files,
             params=parameters,
@@ -63,7 +65,7 @@ def stream_paginated_request(
     method: str,
     json: dict | None = None,
     parameters: dict | None = None,
-    project_context: ProjectContext,
+    project_context: ProjectContext | None = None,
     http_client: httpx.Client | None = None,
     page_size: int | None = None,
     limit: int | None = None,
