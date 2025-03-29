@@ -4,7 +4,7 @@ from typing import Annotated
 
 from pydantic import Field
 
-from entitysdk.models.agent import Organization, Person
+from entitysdk.models.agent import Agent
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 
@@ -30,7 +30,7 @@ class Contribution(Identifiable):
     """Contribution model."""
 
     agent: Annotated[
-        Person | Organization,
+        Agent,
         Field(
             discriminator="type",
             description="The agent of the contribution.",

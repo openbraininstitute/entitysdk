@@ -7,7 +7,7 @@ from pydantic import Field
 from entitysdk.models.core import Identifiable
 
 
-class Agent(Identifiable):
+class AgentBase(Identifiable):
     """Agent model."""
 
     type: Annotated[
@@ -24,7 +24,7 @@ class Agent(Identifiable):
     ]
 
 
-class Person(Agent):
+class Person(AgentBase):
     """Person model."""
 
     type: Annotated[
@@ -49,7 +49,7 @@ class Person(Agent):
     ]
 
 
-class Organization(Agent):
+class Organization(AgentBase):
     """Organization model."""
 
     type: Annotated[
@@ -66,3 +66,6 @@ class Organization(Agent):
             description="The alternative name of the organization.",
         ),
     ] = None
+
+
+Agent = Annotated[Person | Organization, Field(discriminator="type")]
