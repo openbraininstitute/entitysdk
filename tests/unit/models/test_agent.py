@@ -30,7 +30,7 @@ def test_organization_entity():
 
 def test_agent_discriminated_union():
     class A(Identifiable):
-        agent: test_module.Agent | None = None
+        agent: test_module.AgentUnion | None = None
 
     res = A.model_validate(
         {
