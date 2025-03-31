@@ -7,7 +7,7 @@ from entitysdk.models.morphology import (
     ReconstructionMorphology,
 )
 
-from ..util import MOCK_UUID, PROJECT_ID
+from ..util import MOCK_UUID
 
 DATA_DIR = Path(__file__).parent / "data"
 
