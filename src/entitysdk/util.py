@@ -31,7 +31,7 @@ def make_db_api_request(
 
     if project_context:
         headers["project-id"] = str(project_context.project_id)
-        headers["virtual-lab-id"] = str(project_context.project_id)
+        headers["virtual-lab-id"] = str(project_context.virtual_lab_id)
 
     try:
         response = http_client.request(

@@ -4,6 +4,7 @@ import pytest
 
 from entitysdk.client import Client
 from entitysdk.common import ProjectContext
+from tests.unit.util import PROJECT_ID, VIRTUAL_LAB_ID
 
 
 @pytest.fixture(scope="session")
@@ -14,8 +15,8 @@ def api_url():
 @pytest.fixture(scope="session")
 def project_context():
     return ProjectContext(
-        project_id=uuid.UUID("103d7868-147e-4f07-af0d-71d8568f575c"),
-        virtual_lab_id=uuid.UUID("103d7868-147e-4f07-af0d-71d8568f575c"),
+        project_id=PROJECT_ID,
+        virtual_lab_id=VIRTUAL_LAB_ID,
     )
 
 

@@ -8,7 +8,7 @@ from entitysdk.models.morphology import (
     Strain,
 )
 
-from ..util import MOCK_UUID
+from ..util import MOCK_UUID, PROJECT_ID
 
 
 @pytest.fixture
@@ -59,7 +59,7 @@ def morphology(species, strain, brain_region):
 @pytest.fixture
 def json_morphology_expanded():
     return {
-        "authorized_project_id": "103d7868-147e-4f07-af0d-71d8568f575c",
+        "authorized_project_id": str(PROJECT_ID),
         "authorized_public": False,
         "license": {
             "id": str(MOCK_UUID),
