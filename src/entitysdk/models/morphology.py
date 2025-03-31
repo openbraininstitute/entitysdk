@@ -227,3 +227,4 @@ class ReconstructionMorphology(HasAssets, Entity):
             description="The mtype classes of the morphology.",
         ),
     ] = None
+    legacy_id: list[str] | None = None
