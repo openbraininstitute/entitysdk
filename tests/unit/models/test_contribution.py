@@ -36,3 +36,21 @@ def test_contribution(role):
 
     assert res.agent == organization
     assert res.role == role
+
+    res = test_module.Contribution.model_validate(
+        {
+            "agent": person.model_dump(mode="json"),
+            "role": role.model_dump(mode="json"),
+        }
+    )
+    assert res.agent == person
+    assert res.role == role
+
+    res = test_module.Contribution.model_validate(
+        {
+            "agent": organization.model_dump(mode="json"),
+            "role": role.model_dump(mode="json"),
+        }
+    )
+    assert res.agent == organization
+    assert res.role == role

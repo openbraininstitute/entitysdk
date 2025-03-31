@@ -5,7 +5,7 @@ from uuid import UUID
 
 from pydantic import Field
 
-from entitysdk.models.agent import Agent
+from entitysdk.models.agent import AgentUnion
 from entitysdk.models.core import Identifiable
 
 
@@ -13,11 +13,11 @@ class Entity(Identifiable):
     """Entity is a model with id and authorization."""
 
     createdBy: Annotated[
-        Agent | None,
+        AgentUnion | None,
         Field(description="The agent that created this entity."),
     ] = None
     updatedBy: Annotated[
-        Agent | None,
+        AgentUnion | None,
         Field(
             description="The agent that updated this entity.",
         ),

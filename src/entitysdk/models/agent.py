@@ -66,3 +66,6 @@ class Organization(Agent):
             description="The alternative name of the organization.",
         ),
     ] = None
+
+
+AgentUnion = Annotated[Person | Organization, Field(discriminator="type")]
