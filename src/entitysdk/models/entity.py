@@ -14,7 +14,7 @@ class Entity(Identifiable):
 
     createdBy: Annotated[
         AgentUnion | None,
-        Field(description="The agent that created this entity.", discriminator="type"),
+        Field(description="The agent that created this entity."),
     ] = None
     updatedBy: Annotated[
         AgentUnion | None,
