@@ -190,13 +190,6 @@ class ReconstructionMorphology(HasAssets, Entity):
             description="The description of the morphology.",
         ),
     ]
-    pref_label: Annotated[
-        str | None,
-        Field(
-            examples=["layer 5 Pyramidal Cell"],
-            description="The preferred label of the morphology.",
-        ),
-    ] = None
     species: Annotated[
         Species,
         Field(
