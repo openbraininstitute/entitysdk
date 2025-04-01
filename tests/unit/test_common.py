@@ -28,7 +28,7 @@ PROJ_ID = "f373e771-3a2f-4f45-ab59-0955efd7b1f4"
             ),
         ),
         (
-            f"https://openbraininstitute.org/app/virtual-lab/lab/{VLAB_ID}/project/{PROJ_ID}/home",
+            f"https://www.openbraininstitute.org/app/virtual-lab/lab/{VLAB_ID}/project/{PROJ_ID}/home",
             test_module.ProjectContext(
                 virtual_lab_id=VLAB_ID,
                 project_id=PROJ_ID,
@@ -36,7 +36,7 @@ PROJ_ID = "f373e771-3a2f-4f45-ab59-0955efd7b1f4"
             ),
         ),
         (
-            f"https://openbraininstitute.org/app/virtual-lab/lab/{VLAB_ID}/project/{PROJ_ID}",
+            f"https://www.openbraininstitute.org/app/virtual-lab/lab/{VLAB_ID}/project/{PROJ_ID}",
             test_module.ProjectContext(
                 virtual_lab_id=VLAB_ID,
                 project_id=PROJ_ID,

@@ -9,10 +9,13 @@ from pydantic import BaseModel
 from entitysdk.exception import EntitySDKError
 from entitysdk.typedef import DeploymentEnvironment
 
+UUID_RE = "[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}"
+
+
 VLAB_URL_PATTERN = re.compile(
-    r"^https:\/\/(?:(?P<staging>staging)\.)?openbraininstitute\.org"
-    r"\/app\/virtual-lab\/lab\/(?P<vlab>[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12})"
-    r"\/project\/(?P<proj>[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12})(?:\/.*)?$"
+    r"^https:\/\/(?P<env>staging|www)?\.openbraininstitute\.org"
+    rf"\/app\/virtual-lab\/lab\/(?P<vlab>{UUID_RE})"
+    rf"\/project\/(?P<proj>{UUID_RE})(?:\/.*)?$"
 )
 
 
@@ -31,11 +34,11 @@ class ProjectContext(BaseModel):
         if not result:
             raise EntitySDKError(f"Badly formed vlab url: {url}")
 
-        env = (
-            DeploymentEnvironment.staging
-            if result.group("staging")
-            else DeploymentEnvironment.production
-        )
+        env = {
+            "www": DeploymentEnvironment.production,
+            "staging": DeploymentEnvironment.staging,
+        }[result.group("env")]
+
         vlab_id = UUID(result.group("vlab"))
         proj_id = UUID(result.group("proj"))
 
