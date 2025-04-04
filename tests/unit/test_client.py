@@ -1,4 +1,5 @@
 import io
+import re
 import uuid
 from unittest.mock import patch
 
@@ -9,6 +10,7 @@ from entitysdk.config import settings
 from entitysdk.exception import EntitySDKError
 from entitysdk.mixin import HasAssets
 from entitysdk.models.entity import Entity
+from entitysdk.typedef import DeploymentEnvironment
 
 
 def test_client_api_url():
@@ -28,6 +30,11 @@ def test_client_api_url():
 
     with pytest.raises(EntitySDKError, match="Neither api_url nor environment have been defined."):
         Client()
+
+    str_envs = [str(env) for env in DeploymentEnvironment]
+    expected = f"'foo' is not a valid DeploymentEnvironment. Choose one of: {str_envs}"
+    with pytest.raises(EntitySDKError, match=re.escape(expected)):
+        Client(environment="foo")
 
 
 def test_client_get_token():

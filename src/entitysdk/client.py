@@ -26,7 +26,7 @@ class Client:
         project_context: ProjectContext | None = None,
         http_client: httpx.Client | None = None,
         token_manager: TokenManager | None = None,
-        environment: DeploymentEnvironment | None = None,
+        environment: DeploymentEnvironment | str | None = None,
     ) -> None:
         """Initialize client.
 
@@ -37,7 +37,18 @@ class Client:
             token_manager: Optional token manager to use.
             environment: Deployment environent.
         """
-        self.api_url = self._handle_api_url(api_url, environment)
+        try:
+            environment = DeploymentEnvironment(environment) if environment else None
+        except ValueError:
+            raise EntitySDKError(
+                f"'{environment}' is not a valid DeploymentEnvironment. "
+                f"Choose one of: {[str(env) for env in DeploymentEnvironment]}"
+            ) from None
+
+        self.api_url = self._handle_api_url(
+            api_url=api_url,
+            environment=DeploymentEnvironment(environment) if environment else None,
+        )
         self.project_context = project_context
         self._http_client = http_client or httpx.Client()
         self._token_manager = token_manager
