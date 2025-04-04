@@ -56,13 +56,17 @@ class Client:
     @staticmethod
     def _handle_api_url(api_url: str | None, environment: DeploymentEnvironment | None) -> str:
         """Return or create api url."""
-        if api_url:
-            if environment:
+        match (api_url, environment):
+            case (str(), None):
+                return api_url
+            case (None, DeploymentEnvironment()):
+                return build_api_url(environment=environment)
+            case (None, None):
+                raise EntitySDKError("Neither api_url nor environment have been defined.")
+            case (str(), DeploymentEnvironment()):
                 raise EntitySDKError("Either the api_url or environment must be defined, not both.")
-            return api_url
-        if environment:
-            return build_api_url(environment=environment)
-        raise EntitySDKError("Neither api_url nor environment have been defined.")
+            case _:
+                raise EntitySDKError("Either api_url or environment is of the wrong type.")
 
     def _get_token(self, override_token: str | None = None) -> str:
         """Get a token either from an override or from the token manager.
