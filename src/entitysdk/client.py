@@ -13,7 +13,8 @@ from entitysdk.models.asset import Asset, LocalAssetMetadata
 from entitysdk.models.core import Identifiable
 from entitysdk.result import IteratorResult
 from entitysdk.token_manager import TokenManager
-from entitysdk.typedef import ID
+from entitysdk.typedef import ID, DeploymentEnvironment
+from entitysdk.util import build_api_url
 
 
 class Client:
@@ -21,10 +22,11 @@ class Client:
 
     def __init__(
         self,
-        api_url: str,
+        api_url: str | None = None,
         project_context: ProjectContext | None = None,
         http_client: httpx.Client | None = None,
         token_manager: TokenManager | None = None,
+        environment: DeploymentEnvironment | None = None,
     ) -> None:
         """Initialize client.
 
@@ -33,11 +35,23 @@ class Client:
             project_context: Project context.
             http_client: Optional HTTP client to use.
             token_manager: Optional token manager to use.
+            environment: Deployment environent.
         """
-        self.api_url = api_url.rstrip("/")
+        self.api_url = self._handle_api_url(api_url, environment)
         self.project_context = project_context
         self._http_client = http_client or httpx.Client()
         self._token_manager = token_manager
+
+    @staticmethod
+    def _handle_api_url(api_url: str | None, environment: DeploymentEnvironment | None) -> str:
+        """Return or create api url."""
+        if api_url:
+            if environment:
+                raise EntitySDKError("Either the api_url or environment must be defined, not both.")
+            return api_url
+        if environment:
+            return build_api_url(environment=environment)
+        raise EntitySDKError("Neither api_url nor environment have been defined.")
 
     def _get_token(self, override_token: str | None = None) -> str:
         """Get a token either from an override or from the token manager.

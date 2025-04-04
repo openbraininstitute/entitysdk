@@ -5,9 +5,29 @@ from unittest.mock import patch
 import pytest
 
 from entitysdk.client import Client
+from entitysdk.config import settings
 from entitysdk.exception import EntitySDKError
 from entitysdk.mixin import HasAssets
 from entitysdk.models.entity import Entity
+
+
+def test_client_api_url():
+    client = Client(api_url="foo")
+    assert client.api_url == "foo"
+
+    client = Client(api_url=None, environment="staging")
+    assert client.api_url == settings.staging_api_url
+
+    client = Client(api_url=None, environment="production")
+    assert client.api_url == settings.production_api_url
+
+    with pytest.raises(
+        EntitySDKError, match="Either the api_url or environment must be defined, not both."
+    ):
+        Client(api_url="foo", environment="staging")
+
+    with pytest.raises(EntitySDKError, match="Neither api_url nor environment have been defined."):
+        Client()
 
 
 def test_client_get_token():
