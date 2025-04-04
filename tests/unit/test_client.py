@@ -31,6 +31,9 @@ def test_client_api_url():
     with pytest.raises(EntitySDKError, match="Neither api_url nor environment have been defined."):
         Client()
 
+    with pytest.raises(EntitySDKError, match="Either api_url or environment is of the wrong type."):
+        Client(api_url=int)
+
     str_envs = [str(env) for env in DeploymentEnvironment]
     expected = f"'foo' is not a valid DeploymentEnvironment. Choose one of: {str_envs}"
     with pytest.raises(EntitySDKError, match=re.escape(expected)):
