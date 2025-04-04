@@ -17,5 +17,21 @@ class Settings(BaseSettings):
         ),
     ] = None
 
+    staging_api_url: Annotated[
+        str,
+        Field(
+            alias="ENTITYSDK_STAGING_API_URL",
+            description="Default staging entitycore API url.",
+        ),
+    ] = "https://staging.openbraininstitute.org/api/entitycore"
+
+    production_api_url: Annotated[
+        str,
+        Field(
+            alias="ENTITYSDK_PRODUCTION_API_URL",
+            description="Default production entitycore API url.",
+        ),
+    ] = "https://www.openbraininstitute.org/api/entitycore"
+
 
 settings = Settings()

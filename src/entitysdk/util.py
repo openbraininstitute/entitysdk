@@ -10,6 +10,7 @@ from entitysdk.common import ProjectContext
 from entitysdk.config import settings
 from entitysdk.exception import EntitySDKError
 from entitysdk.models.response import ListResponse
+from entitysdk.typedef import DeploymentEnvironment
 
 
 def make_db_api_request(
@@ -126,3 +127,11 @@ def stream_paginated_request(
             if number_of_items >= limit:
                 return
         page += 1
+
+
+def build_api_url(environment: DeploymentEnvironment) -> str:
+    """Return API url for the respective deployment environment."""
+    return {
+        DeploymentEnvironment.staging: settings.staging_api_url,
+        DeploymentEnvironment.production: settings.production_api_url,
+    }[environment]
