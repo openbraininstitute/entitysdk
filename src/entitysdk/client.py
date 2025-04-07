@@ -47,7 +47,7 @@ class Client:
 
         self.api_url = self._handle_api_url(
             api_url=api_url,
-            environment=DeploymentEnvironment(environment) if environment else None,
+            environment=environment,
         )
         self.project_context = project_context
         self._http_client = http_client or httpx.Client()
