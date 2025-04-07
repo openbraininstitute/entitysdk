@@ -13,7 +13,8 @@ from entitysdk.models.asset import Asset, LocalAssetMetadata
 from entitysdk.models.core import Identifiable
 from entitysdk.result import IteratorResult
 from entitysdk.token_manager import TokenManager
-from entitysdk.typedef import ID
+from entitysdk.typedef import ID, DeploymentEnvironment
+from entitysdk.util import build_api_url
 
 
 class Client:
@@ -21,10 +22,11 @@ class Client:
 
     def __init__(
         self,
-        api_url: str,
+        api_url: str | None = None,
         project_context: ProjectContext | None = None,
         http_client: httpx.Client | None = None,
         token_manager: TokenManager | None = None,
+        environment: DeploymentEnvironment | str | None = None,
     ) -> None:
         """Initialize client.
 
@@ -33,11 +35,38 @@ class Client:
             project_context: Project context.
             http_client: Optional HTTP client to use.
             token_manager: Optional token manager to use.
+            environment: Deployment environent.
         """
-        self.api_url = api_url.rstrip("/")
+        try:
+            environment = DeploymentEnvironment(environment) if environment else None
+        except ValueError:
+            raise EntitySDKError(
+                f"'{environment}' is not a valid DeploymentEnvironment. "
+                f"Choose one of: {[str(env) for env in DeploymentEnvironment]}"
+            ) from None
+
+        self.api_url = self._handle_api_url(
+            api_url=api_url,
+            environment=environment,
+        )
         self.project_context = project_context
         self._http_client = http_client or httpx.Client()
         self._token_manager = token_manager
+
+    @staticmethod
+    def _handle_api_url(api_url: str | None, environment: DeploymentEnvironment | None) -> str:
+        """Return or create api url."""
+        match (api_url, environment):
+            case (str(), None):
+                return api_url
+            case (None, DeploymentEnvironment()):
+                return build_api_url(environment=environment)
+            case (None, None):
+                raise EntitySDKError("Neither api_url nor environment have been defined.")
+            case (str(), DeploymentEnvironment()):
+                raise EntitySDKError("Either the api_url or environment must be defined, not both.")
+            case _:
+                raise EntitySDKError("Either api_url or environment is of the wrong type.")
 
     def _get_token(self, override_token: str | None = None) -> str:
         """Get a token either from an override or from the token manager.
