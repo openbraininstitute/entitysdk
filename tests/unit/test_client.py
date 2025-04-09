@@ -133,7 +133,6 @@ def _mock_asset_response(asset_id):
         "id": str(asset_id),
         "path": "path/to/asset",
         "full_path": "full/path/to/asset",
-        "bucket_name": "bucket_name",
         "is_directory": False,
         "content_type": "text/plain",
         "size": 100,
@@ -315,7 +314,6 @@ def _mock_asset_delete_response(asset_id):
     return {
         "path": "buffer.h5",
         "full_path": "private/103d7868/103d7868/assets/reconstruction_morphology/8703/buffer.h5",
-        "bucket_name": "obi-private",
         "is_directory": False,
         "content_type": "application/swc",
         "size": 18,

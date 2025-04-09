@@ -22,12 +22,6 @@ class Asset(Identifiable):
             description="The full path of the asset.",
         ),
     ]
-    bucket_name: Annotated[
-        str,
-        Field(
-            description="The name of the s3 bucket.",
-        ),
-    ]
     is_directory: Annotated[
         bool,
         Field(
