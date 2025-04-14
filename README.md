@@ -18,6 +18,21 @@ entitysdk is a Python library for interacting with the [entitycore service][enti
 ```bash
 pip install entitysdk
 ```
+
+## Obtaining a valid access token
+
+An access token can be retrieved easily using the obi-auth helper library.
+
+```bash
+pip install obi-auth
+```
+
+```python
+from obi_auth import get_token
+
+access_token = get_token(environment="staging")
+```
+
 ## Quick Start
 
 ```python
@@ -28,11 +43,11 @@ from entitysdk.models.morphology import ReconstructionMorphology
 
 # Initialize client
 client = Client(
-    api_url="http://api.example.com",
     project_context=ProjectContext(
         project_id=UUID("your-project-id"),
         virtual_lab_id=UUID("your-lab-id")
     )
+    environment="staging"
 )
 
 # Search for morphologies
