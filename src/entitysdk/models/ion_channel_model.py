@@ -38,11 +38,11 @@ class NmodlParameters(BaseModel):
         ),
     ] = None
     range: Annotated[
-        list[str] | None,
+        list[str],
         Field(
             description="Variables listed in the RANGE statement.", examples=[["gCa_HVAbar", "ica"]]
         ),
-    ] = None
+    ]
     read: Annotated[
         list[str] | None,
         Field(
@@ -148,11 +148,10 @@ class IonChannelModel(HasAssets, Entity):
             description="Whether the mechanism has stochastic behavior.",
         ),
     ] = False
-
     ions: Annotated[
         list[Ion] | None,
         Field(description="List of ions involved (used in USEION statements)."),
-    ]
+    ] = None
     nmodl_parameters: Annotated[
         NmodlParameters,
         Field(description="Parameters parsed from the NMODL mechanism definition."),
@@ -162,5 +161,5 @@ class IonChannelModel(HasAssets, Entity):
         Field(
             description="The Allen Notation acronym.",
         ),
-    ]
+    ] = None
     legacy_id: list[str] | None = None
