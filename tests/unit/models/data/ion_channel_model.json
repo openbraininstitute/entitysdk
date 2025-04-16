@@ -1,0 +1,126 @@
+{
+  "id": "b8f38c7f-2675-4c6a-a394-f3a60a9a3e6f",
+  "update_date": "2024-10-29T13:36:30.827776Z",
+  "creation_date": "2024-09-10T14:25:03.707956Z",
+  "createdBy": null,
+  "updatedBy": null,
+  "authorized_public": true,
+  "authorized_project_id": "c73ac3a5-3b7d-41bc-92e7-9f9309a49300",
+  "name": "Ca_HVA",
+  "acronym": "CHVA",
+  "brain_region": {
+    "id": 407,
+    "update_date": "2025-03-29T16:48:20.636283Z",
+    "creation_date": "2025-03-29T16:48:20.636283Z",
+    "createdBy": null,
+    "updatedBy": null,
+    "authorized_public": null,
+    "authorized_project_id": null,
+    "name": "Field CA1, pyramidal layer",
+    "acronym": "CA1sp",
+    "children": []
+  },
+  "description": "High-voltage activated calcium channel",
+  "species": {
+    "id": "0895fa61-fa6d-4674-9014-7300f9edf8da",
+    "update_date": "2025-03-29T16:48:36.175090Z",
+    "creation_date": "2025-03-29T16:48:36.175090Z",
+    "createdBy": null,
+    "updatedBy": null,
+    "authorized_public": null,
+    "authorized_project_id": null,
+    "name": "Rattus norvegicus",
+    "taxonomy_id": "NCBITaxon:10116"
+  },
+  "strain": null,
+  "license": null,
+  "contributions": [
+    {
+      "id": "7f43ce20-e63d-48c1-bc73-dabb38ee181b",
+      "update_date": "2025-03-29T16:49:12.449364Z",
+      "creation_date": "2025-03-29T16:49:12.449364Z",
+      "agent": {
+        "id": "f27cfa11-d1bc-4a14-b651-174bb53674ff",
+        "update_date": "2021-04-14T09:51:14.062000Z",
+        "creation_date": "2021-04-14T09:51:14.062000Z",
+        "type": "organization",
+        "pref_label": "École Polytechnique Fédérale de Lausanne",
+        "alternative_name": ""
+      },
+      "role": {
+        "id": "8b06e557-277b-4b0c-a439-bfb02d41927c",
+        "update_date": "2025-03-29T16:48:36.192831Z",
+        "creation_date": "2025-03-29T16:48:36.192831Z",
+        "name": "unspecified",
+        "role_id": "unspecified"
+      },
+      "entity": null
+    }
+  ],
+  "is_ljp_corrected": false,
+  "is_temperature_dependent": true,
+  "temperature_celsius": 36,
+  "stochastic": true,
+  "ions": [
+    {
+      "authorized_project_id": null,
+      "authorized_public": null,
+      "createdBy": null,
+      "id": "06d8b2b3-2f38-4d9d-99d0-fbd7b556b3dc",
+      "ontology_id": "https://neuroshapes.org/Ca",
+      "name": "Ca",
+      "update_date": "2025-03-29T16:48:20.636283",
+      "creation_date": "2025-03-29T16:48:20.636283",
+      "updatedBy": null
+    }
+  ],
+  "nmodl_parameters": {
+    "global_": ["gna", "gk"],
+    "range": ["gCa_HVAbar", "ica"],
+    "read": ["eca"],
+    "suffix": "Ca_HVA",
+    "useion": ["ca"],
+    "write": ["ica"],
+    "nonspecific": ["ihcn"],
+    "valence": 2
+  },
+  "assets": [
+    {
+      "id": "a90bab5c-8529-4829-99fc-e90a270e8b30",
+      "update_date": null,
+      "creation_date": null,
+      "path": "Ca_HVA.mod",
+      "full_path": "public/a98b7abc-fc46-4700-9e3d-37137812c730/0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6/assets/ion_channel_model/9720aa4a-0cd1-4f10-b6ad-04deb8f997b6/Ca_HVA.mod",
+      "is_directory": false,
+      "content_type": "application/swc",
+      "size": 561221,
+      "sha256_digest": "8b850eface3e7b881db62c361dc5da62be008ca81501c406a59646bf7075c95b",
+      "status": "created",
+      "meta": {
+        "legacy": {
+          "@id": "https://bbp.epfl.ch/data/public/morphologies/42315b31-081f-4d40-8b94-b72dbd16c99e",
+          "name": "Ca_HVA.mod",
+          "@type": "DataDownload",
+          "digest": {
+            "value": "8b850eface3e7b881db62c361dc5da62be008ca81501c406a59646bf7075c95b",
+            "algorithm": "SHA-256"
+          },
+          "atLocation": {
+            "@type": "Location",
+            "store": {
+              "@id": "nxv:diskStorageDefault",
+              "_rev": 1,
+              "@type": "DiskStorage"
+            }
+          },
+          "contentUrl": "https://bbp.epfl.ch/nexus/v1/files/public/morphologies/https:%2F%2Fbbp.epfl.ch%2Fdata%2Fpublic%2Fmorphologies%2F42315b31-081f-4d40-8b94-b72dbd16c99e",
+          "contentSize": {
+            "value": 561221,
+            "unitCode": "bytes"
+          },
+          "encodingFormat": "application/mod"
+        }
+      }
+    }
+  ]
+}
