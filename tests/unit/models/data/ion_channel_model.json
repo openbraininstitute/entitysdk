@@ -60,29 +60,51 @@
   "is_ljp_corrected": false,
   "is_temperature_dependent": true,
   "temperature_celsius": 36,
-  "stochastic": true,
-  "ions": [
-    {
-      "authorized_project_id": null,
-      "authorized_public": null,
-      "createdBy": null,
-      "id": "06d8b2b3-2f38-4d9d-99d0-fbd7b556b3dc",
-      "ontology_id": "https://neuroshapes.org/Ca",
-      "name": "Ca",
-      "update_date": "2025-03-29T16:48:20.636283",
-      "creation_date": "2025-03-29T16:48:20.636283",
-      "updatedBy": null
-    }
-  ],
-  "nmodl_parameters": {
-    "global_": ["gna", "gk"],
-    "range": ["gCa_HVAbar", "ica"],
-    "read": ["eca"],
+  "is_stochastic": true,
+  "neuron_block": {
+    "global_": [
+      {
+        "gna": "S/cm2"
+      },
+      {
+        "gk": "S/cm2"
+      }
+    ],
+    "range": [
+      {
+        "gCa_HVAbar": "S/cm2"
+      },
+      {
+        "ica": "mA/cm2"
+      }
+    ],
     "suffix": "Ca_HVA",
-    "useion": ["ca"],
-    "write": ["ica"],
-    "nonspecific": ["ihcn"],
-    "valence": 2
+    "use_ion": [
+      {
+        "ion": {
+          "authorized_project_id": null,
+          "authorized_public": null,
+          "createdBy": null,
+          "creation_date": null,
+          "id": "06d8b2b3-2f38-4d9d-99d0-fbd7b556b3dc",
+          "ontology_id": "https://neuroshapes.org/Ca",
+          "name": "Ca",
+          "update_date": null,
+          "updatedBy": null
+        },
+        "read": [
+          "eca"
+        ],
+        "write": [
+          "ica"
+        ],
+        "valence": 2,
+        "main_ion": true
+      }
+    ],
+    "nonspecific": [
+      "ihcn"
+    ]
   },
   "assets": [
     {

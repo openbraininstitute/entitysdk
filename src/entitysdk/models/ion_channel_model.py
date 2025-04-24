@@ -15,7 +15,7 @@ class Ion(Entity):
     """Represents an ion involved in the ion channel mechanism."""
 
     ontology_id: Annotated[
-        str,
+        str | None,
         Field(
             description="Ontology-based identifier for the ion.",
             examples=["https://neuroshapes.org/Ca"],
@@ -27,27 +27,61 @@ class Ion(Entity):
     ]
 
 
-class NmodlParameters(BaseModel):
-    """Parameters derived from the NMODL (.mod) file."""
+class UseIon(BaseModel):
+    """Specifies how an ion is used in the mod file (USEION behavior)."""
 
-    global_: Annotated[
-        list[str] | None,
+    ion: Annotated[
+        Ion,
         Field(
-            description="Variables listed in the GLOBAL statement.",
-            examples=[["gna", "gk"]],
-        ),
-    ] = None
-    range: Annotated[
-        list[str],
-        Field(
-            description="Variables listed in the RANGE statement.", examples=[["gCa_HVAbar", "ica"]]
+            description="The ion involved. This includes its identity (e.g., 'Na', 'Ca') and "
+            "optional ontology reference.",
         ),
     ]
     read: Annotated[
         list[str] | None,
         Field(
-            description="Variables listed in the READ statement.",
+            description="Variables listed in the READ statement for this ion.",
             examples=[["eca"]],
+        ),
+    ] = None
+    write: Annotated[
+        list[str] | None,
+        Field(
+            description="Variables listed in the WRITE statement for this ion.",
+            examples=[["ica"]],
+        ),
+    ] = None
+    valence: Annotated[
+        int | None,
+        Field(
+            description="VALENCE of the ion, if specified.",
+            examples=[2],
+        ),
+    ] = None
+    main_ion: Annotated[
+        bool,
+        Field(
+            description="Whether this ion is the main ion for the mechanism.",
+            examples=[True],
+        ),
+    ]
+
+
+class NeuronBlock(BaseModel):
+    """Variables declared in the NEURON block of the mod file."""
+
+    global_: Annotated[
+        list[dict[str, str]] | None,
+        Field(
+            description="Variables listed in the GLOBAL statement, with associated units.",
+            examples=[[{"celsius": "degree C"}]],
+        ),
+    ] = None
+    range: Annotated[
+        list[dict[str, str | None]] | None,
+        Field(
+            description="Variables listed in the RANGE statement, with associated units.",
+            examples=[[{"gCa_HVAbar": "S/cm2"}, {"ica": "mA/cm2"}]],
         ),
     ] = None
     suffix: Annotated[
@@ -57,18 +91,10 @@ class NmodlParameters(BaseModel):
             examples=["Ca_HVA2"],
         ),
     ] = None
-    useion: Annotated[
-        list[str] | None,
+    use_ion: Annotated[
+        list[UseIon] | None,
         Field(
-            description="List of ions in USEION statements.",
-            examples=[["ca"]],
-        ),
-    ] = None
-    write: Annotated[
-        list[str] | None,
-        Field(
-            description="Variables in WRITE or NONSPECIFIC_CURRENT statements.",
-            examples=[["ica"]],
+            description="Ion-specific READ/WRITE/VALENCE declarations from USEION.",
         ),
     ] = None
     nonspecific: Annotated[
@@ -76,13 +102,6 @@ class NmodlParameters(BaseModel):
         Field(
             description="Variables listed in NONSPECIFIC_CURRENT statements.",
             examples=[["ihcn"]],
-        ),
-    ] = None
-    valence: Annotated[
-        int | None,
-        Field(
-            description="VALENCE of the ion, if specified.",
-            examples=[2],
         ),
     ] = None
 
@@ -130,7 +149,7 @@ class IonChannelModel(HasAssets, Entity):
         Field(
             description="Whether the mechanism is corrected for liquid junction potential.",
         ),
-    ]
+    ] = False
     is_temperature_dependent: Annotated[
         bool,
         Field(
@@ -142,20 +161,16 @@ class IonChannelModel(HasAssets, Entity):
         int,
         Field(description="The temperature at which the mechanism has been built to work on."),
     ]
-    stochastic: Annotated[
+    is_stochastic: Annotated[
         bool | None,
         Field(
             description="Whether the mechanism has stochastic behavior.",
         ),
     ] = False
-    ions: Annotated[
-        list[Ion] | None,
-        Field(description="List of ions involved (used in USEION statements)."),
+    neuron_block: Annotated[
+        NeuronBlock | None,
+        Field(description="Variables declared in the NEURON block of the mod file."),
     ] = None
-    nmodl_parameters: Annotated[
-        NmodlParameters,
-        Field(description="Parameters parsed from the NMODL mechanism definition."),
-    ]
     acronym: Annotated[
         str | None,
         Field(
