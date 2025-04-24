@@ -59,12 +59,12 @@ class UseIon(BaseModel):
         ),
     ] = None
     main_ion: Annotated[
-        bool,
+        bool | None,
         Field(
             description="Whether this ion is the main ion for the mechanism.",
             examples=[True],
         ),
-    ]
+    ] = None
 
 
 class NeuronBlock(BaseModel):
