@@ -31,10 +31,9 @@ class UseIon(BaseModel):
     """Specifies how an ion is used in the mod file (USEION behavior)."""
 
     ion: Annotated[
-        Ion,
+        str,
         Field(
-            description="The ion involved. This includes its identity (e.g., 'Na', 'Ca') and "
-            "optional ontology reference.",
+            description="The name of the ion involved."
         ),
     ]
     read: Annotated[
@@ -82,13 +81,6 @@ class NeuronBlock(BaseModel):
         Field(
             description="Variables listed in the RANGE statement, with associated units.",
             examples=[[{"gCa_HVAbar": "S/cm2"}, {"ica": "mA/cm2"}]],
-        ),
-    ] = None
-    suffix: Annotated[
-        str | None,
-        Field(
-            description="SUFFIX name from the mod file.",
-            examples=["Ca_HVA2"],
         ),
     ] = None
     use_ion: Annotated[
@@ -168,13 +160,19 @@ class IonChannelModel(HasAssets, Entity):
         ),
     ] = False
     neuron_block: Annotated[
-        NeuronBlock | None,
+        NeuronBlock,
         Field(description="Variables declared in the NEURON block of the mod file."),
-    ] = None
+    ]
     acronym: Annotated[
         str | None,
         Field(
             description="The Allen Notation acronym.",
+        ),
+    ] = None
+    ions: Annotated[
+        list[Ion] | None,
+        Field(
+            description="List of ions involved in the mechanism.",
         ),
     ] = None
     legacy_id: list[str] | None = None
