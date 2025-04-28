@@ -11,57 +11,49 @@ from entitysdk.models.entity import Entity
 from entitysdk.models.morphology import BrainRegion, License, Species, Strain
 
 
-class Ion(Entity):
-    """Represents an ion involved in the ion channel mechanism."""
+class UseIon(BaseModel):
+    """Specifies how an ion is used in the mod file (USEION behavior)."""
 
+    ion_name: Annotated[
+        str,
+        Field(
+            description="The name of the ion involved.",
+            examples="Ca",
+        ),
+    ]
     ontology_id: Annotated[
         str | None,
         Field(
             description="Ontology-based identifier for the ion.",
-            examples=["https://neuroshapes.org/Ca"],
-        ),
-    ]
-    name: Annotated[
-        str,
-        Field(description="Name of the ion (e.g. 'Ca', 'Na').", examples=["Ca"]),
-    ]
-
-
-class UseIon(BaseModel):
-    """Specifies how an ion is used in the mod file (USEION behavior)."""
-
-    ion: Annotated[
-        str,
-        Field(
-            description="The name of the ion involved."
+            examples="https://neuroshapes.org/Ca",
         ),
     ]
     read: Annotated[
         list[str] | None,
         Field(
             description="Variables listed in the READ statement for this ion.",
-            examples=[["eca"]],
+            examples=["eca", "ica"],
         ),
-    ] = None
+    ]
     write: Annotated[
         list[str] | None,
         Field(
             description="Variables listed in the WRITE statement for this ion.",
-            examples=[["ica"]],
+            examples=["ica"],
         ),
-    ] = None
+    ]
     valence: Annotated[
         int | None,
         Field(
             description="VALENCE of the ion, if specified.",
-            examples=[2],
+            examples=2,
         ),
-    ] = None
+    ]
     main_ion: Annotated[
         bool | None,
         Field(
             description="Whether this ion is the main ion for the mechanism.",
-            examples=[True],
+            examples=True,
         ),
     ] = None
 
@@ -73,14 +65,14 @@ class NeuronBlock(BaseModel):
         list[dict[str, str]] | None,
         Field(
             description="Variables listed in the GLOBAL statement, with associated units.",
-            examples=[[{"celsius": "degree C"}]],
+            examples=[{"celsius": "degree C"}],
         ),
     ] = None
     range: Annotated[
         list[dict[str, str | None]] | None,
         Field(
             description="Variables listed in the RANGE statement, with associated units.",
-            examples=[[{"gCa_HVAbar": "S/cm2"}, {"ica": "mA/cm2"}]],
+            examples=[{"gCa_HVAbar": "S/cm2"}, {"ica": "mA/cm2"}],
         ),
     ] = None
     use_ion: Annotated[
@@ -93,7 +85,7 @@ class NeuronBlock(BaseModel):
         list[str] | None,
         Field(
             description="Variables listed in NONSPECIFIC_CURRENT statements.",
-            examples=[["ihcn"]],
+            examples=["ihcn"],
         ),
     ] = None
 
@@ -106,14 +98,14 @@ class IonChannelModel(HasAssets, Entity):
         Field(
             description="The name of the ion channel model "
             "(e.g., the SUFFIX or POINT_PROCESS name).",
-            examples=["Ca_HVA", "NaT"],
+            examples="Ca_HVA",
         ),
     ]
     description: Annotated[
         str,
         Field(
             description="A description of the ion channel mechanism.",
-            examples=["High-voltage activated calcium channel"],
+            examples="High-voltage activated calcium channel",
         ),
     ]
     species: Annotated[
@@ -167,12 +159,6 @@ class IonChannelModel(HasAssets, Entity):
         str | None,
         Field(
             description="The Allen Notation acronym.",
-        ),
-    ] = None
-    ions: Annotated[
-        list[Ion] | None,
-        Field(
-            description="List of ions involved in the mechanism.",
         ),
     ] = None
     legacy_id: list[str] | None = None

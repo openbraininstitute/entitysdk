@@ -63,54 +63,28 @@
   "is_stochastic": true,
   "neuron_block": {
     "global_": [
-      {
-        "gna": "S/cm2"
-      },
-      {
-        "gk": "S/cm2"
-      }
+      {"gna": "S/cm2"},
+      {"gk": "S/cm2"}
     ],
     "range": [
-      {
-        "gCa_HVAbar": "S/cm2"
-      },
-      {
-        "ica": "mA/cm2"
-      }
+      {"gCa_HVAbar": "S/cm2"},
+      {"ica": "mA/cm2"}
     ],
-    "suffix": "Ca_HVA",
     "use_ion": [
       {
-        "ion": {
-          "authorized_project_id": null,
-          "authorized_public": null,
-          "createdBy": null,
-          "creation_date": null,
-          "id": "06d8b2b3-2f38-4d9d-99d0-fbd7b556b3dc",
-          "ontology_id": "https://neuroshapes.org/Ca",
-          "name": "Ca",
-          "update_date": null,
-          "updatedBy": null
-        },
-        "read": [
-          "eca"
-        ],
-        "write": [
-          "ica"
-        ],
+        "ion_name": "Ca",
+        "ontology_id": "https://neuroshapes.org/Ca",
+        "read": ["eca"],
+        "write": ["ica"],
         "valence": 2,
         "main_ion": true
       }
     ],
-    "nonspecific": [
-      "ihcn"
-    ]
+    "nonspecific": ["ihcn"]
   },
   "assets": [
     {
       "id": "a90bab5c-8529-4829-99fc-e90a270e8b30",
-      "update_date": null,
-      "creation_date": null,
       "path": "Ca_HVA.mod",
       "full_path": "public/a98b7abc-fc46-4700-9e3d-37137812c730/0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6/assets/ion_channel_model/9720aa4a-0cd1-4f10-b6ad-04deb8f997b6/Ca_HVA.mod",
       "is_directory": false,
@@ -118,6 +92,8 @@
       "size": 561221,
       "sha256_digest": "8b850eface3e7b881db62c361dc5da62be008ca81501c406a59646bf7075c95b",
       "status": "created",
+      "creation_date": null,
+      "update_date": null,
       "meta": {
         "legacy": {
           "@id": "https://bbp.epfl.ch/data/public/morphologies/42315b31-081f-4d40-8b94-b72dbd16c99e",
@@ -129,17 +105,10 @@
           },
           "atLocation": {
             "@type": "Location",
-            "store": {
-              "@id": "nxv:diskStorageDefault",
-              "_rev": 1,
-              "@type": "DiskStorage"
-            }
+            "store": {"@id": "nxv:diskStorageDefault", "_rev": 1, "@type": "DiskStorage"}
           },
           "contentUrl": "https://bbp.epfl.ch/nexus/v1/files/public/morphologies/https:%2F%2Fbbp.epfl.ch%2Fdata%2Fpublic%2Fmorphologies%2F42315b31-081f-4d40-8b94-b72dbd16c99e",
-          "contentSize": {
-            "value": 561221,
-            "unitCode": "bytes"
-          },
+          "contentSize": {"value": 561221, "unitCode": "bytes"},
           "encodingFormat": "application/mod"
         }
       }
