@@ -21,13 +21,6 @@ class UseIon(BaseModel):
             examples="Ca",
         ),
     ]
-    ontology_id: Annotated[
-        str | None,
-        Field(
-            description="Ontology-based identifier for the ion.",
-            examples="https://neuroshapes.org/Ca",
-        ),
-    ]
     read: Annotated[
         list[str] | None,
         Field(

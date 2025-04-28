@@ -73,7 +73,6 @@
     "use_ion": [
       {
         "ion_name": "Ca",
-        "ontology_id": "https://neuroshapes.org/Ca",
         "read": ["eca"],
         "write": ["ica"],
         "valence": 2,
