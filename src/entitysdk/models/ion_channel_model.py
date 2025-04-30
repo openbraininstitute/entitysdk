@@ -94,6 +94,13 @@ class IonChannelModel(HasAssets, Entity):
             examples="Ca_HVA",
         ),
     ]
+    nmodl_suffix: Annotated[
+        str,
+        Field(
+            description="The SUFFIX of the ion channel model as defined in the NMODL file ",
+            examples="Ca_HVA",
+        ),
+    ]
     description: Annotated[
         str,
         Field(
@@ -148,10 +155,4 @@ class IonChannelModel(HasAssets, Entity):
         NeuronBlock,
         Field(description="Variables declared in the NEURON block of the mod file."),
     ]
-    acronym: Annotated[
-        str | None,
-        Field(
-            description="The Allen Notation acronym.",
-        ),
-    ] = None
     legacy_id: list[str] | None = None

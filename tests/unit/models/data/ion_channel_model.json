@@ -7,7 +7,7 @@
   "authorized_public": true,
   "authorized_project_id": "c73ac3a5-3b7d-41bc-92e7-9f9309a49300",
   "name": "Ca_HVA",
-  "acronym": "CHVA",
+  "nmodl_suffix": "Ca_HVA",
   "brain_region": {
     "id": 407,
     "update_date": "2025-03-29T16:48:20.636283Z",
