@@ -64,12 +64,12 @@ class BrainRegion(Entity):
         ),
     ]
     children: Annotated[
-        list[int],
+        list[int] | None,
         Field(
             examples=[1, 2],
             description="The children of the brain region hierarchy.",
         ),
-    ]
+    ] = None
 
 
 class BrainLocation(Struct):
