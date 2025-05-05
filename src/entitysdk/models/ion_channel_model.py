@@ -55,7 +55,7 @@ class NeuronBlock(BaseModel):
     """Variables declared in the NEURON block of the mod file."""
 
     global_: Annotated[
-        list[dict[str, str]] | None,
+        list[dict[str, str | None]] | None,
         Field(
             description="Variables listed in the GLOBAL statement, with associated units.",
             examples=[{"celsius": "degree C"}],
@@ -68,17 +68,17 @@ class NeuronBlock(BaseModel):
             examples=[{"gCa_HVAbar": "S/cm2"}, {"ica": "mA/cm2"}],
         ),
     ] = None
-    use_ion: Annotated[
+    useion: Annotated[
         list[UseIon] | None,
         Field(
             description="Ion-specific READ/WRITE/VALENCE declarations from USEION.",
         ),
     ] = None
     nonspecific: Annotated[
-        list[str] | None,
+        list[dict[str, str | None]] | None,
         Field(
             description="Variables listed in NONSPECIFIC_CURRENT statements.",
-            examples=["ihcn"],
+            examples=[{"ihcn": "mA/cm2"}],
         ),
     ] = None
 

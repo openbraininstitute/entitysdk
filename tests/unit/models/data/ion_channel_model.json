@@ -70,7 +70,7 @@
       {"gCa_HVAbar": "S/cm2"},
       {"ica": "mA/cm2"}
     ],
-    "use_ion": [
+    "useion": [
       {
         "ion_name": "Ca",
         "read": ["eca"],
@@ -79,7 +79,7 @@
         "main_ion": true
       }
     ],
-    "nonspecific": ["ihcn"]
+    "nonspecific": [{"ihcn": "mA/cm2"}]
   },
   "assets": [
     {
