@@ -14,7 +14,7 @@ class BrainRegion(Identifiable):
     name: Annotated[
         str,
         Field(
-            examples=["Prefrontal Cortex"],
+            examples=["Thalamus"],
             description="The name of the brain region.",
         ),
     ]
@@ -24,7 +24,7 @@ class BrainRegion(Identifiable):
     acronym: Annotated[
         str,
         Field(
-            examples=["PFC"],
+            examples=["TH"],
             description="The acronym of the brain region.",
         ),
     ]
