@@ -5,6 +5,7 @@ from typing import Annotated
 from pydantic import Field
 
 from entitysdk.mixin import HasAssets
+from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.contribution import Contribution
 from entitysdk.models.core import Struct
 from entitysdk.models.entity import Entity
@@ -34,40 +35,6 @@ class License(Entity):
         Field(
             examples=["Apache 2.0"],
             description="The label of the license.",
-        ),
-    ]
-
-
-class BrainRegion(Entity):
-    """BrainRegion model."""
-
-    id: Annotated[
-        int,
-        Field(
-            examples=[1, 2],
-            description="The region's id.",
-        ),
-    ]  # type: ignore
-
-    name: Annotated[
-        str,
-        Field(
-            examples=["Prefrontal Cortex"],
-            description="The name of the brain region.",
-        ),
-    ]
-    acronym: Annotated[
-        str,
-        Field(
-            examples=["PFC"],
-            description="The acronym of the brain region.",
-        ),
-    ]
-    children: Annotated[
-        list[int],
-        Field(
-            examples=[1, 2],
-            description="The children of the brain region hierarchy.",
         ),
     ]
 
