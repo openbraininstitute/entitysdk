@@ -1,0 +1,114 @@
+{
+  "id": "b8f38c7f-2675-4c6a-a394-f3a60a9a3e6f",
+  "update_date": "2024-10-29T13:36:30.827776Z",
+  "creation_date": "2024-09-10T14:25:03.707956Z",
+  "createdBy": null,
+  "updatedBy": null,
+  "authorized_public": true,
+  "authorized_project_id": "c73ac3a5-3b7d-41bc-92e7-9f9309a49300",
+  "name": "Ca_HVA",
+  "nmodl_suffix": "Ca_HVA",
+  "brain_region": {
+    "id": "38553ac8-7d71-4591-bfee-2fc72e2dffdf",
+    "update_date": "2025-05-09T13:32:18.034672Z",
+    "creation_date": "2025-05-09T13:32:18.034672Z",
+    "name": "Accessory abducens nucleus",
+    "annotation_value": 568,
+    "acronym": "ACVI",
+    "parent_structure_id": "596305b3-71b2-41e4-afd3-b9f2e90f79f8",
+    "hierarchy_id": "e3e70682-c209-4cac-a29f-6fbed82c07cd"
+  },
+  "description": "High-voltage activated calcium channel",
+  "species": {
+    "id": "0895fa61-fa6d-4674-9014-7300f9edf8da",
+    "update_date": "2025-03-29T16:48:36.175090Z",
+    "creation_date": "2025-03-29T16:48:36.175090Z",
+    "createdBy": null,
+    "updatedBy": null,
+    "authorized_public": null,
+    "authorized_project_id": null,
+    "name": "Rattus norvegicus",
+    "taxonomy_id": "NCBITaxon:10116"
+  },
+  "strain": null,
+  "license": null,
+  "contributions": [
+    {
+      "id": "7f43ce20-e63d-48c1-bc73-dabb38ee181b",
+      "update_date": "2025-03-29T16:49:12.449364Z",
+      "creation_date": "2025-03-29T16:49:12.449364Z",
+      "agent": {
+        "id": "f27cfa11-d1bc-4a14-b651-174bb53674ff",
+        "update_date": "2021-04-14T09:51:14.062000Z",
+        "creation_date": "2021-04-14T09:51:14.062000Z",
+        "type": "organization",
+        "pref_label": "École Polytechnique Fédérale de Lausanne",
+        "alternative_name": ""
+      },
+      "role": {
+        "id": "8b06e557-277b-4b0c-a439-bfb02d41927c",
+        "update_date": "2025-03-29T16:48:36.192831Z",
+        "creation_date": "2025-03-29T16:48:36.192831Z",
+        "name": "unspecified",
+        "role_id": "unspecified"
+      },
+      "entity": null
+    }
+  ],
+  "is_ljp_corrected": false,
+  "is_temperature_dependent": true,
+  "temperature_celsius": 36,
+  "is_stochastic": true,
+  "neuron_block": {
+    "global_": [
+      {"gna": "S/cm2"},
+      {"gk": "S/cm2"}
+    ],
+    "range": [
+      {"gCa_HVAbar": "S/cm2"},
+      {"ica": "mA/cm2"}
+    ],
+    "useion": [
+      {
+        "ion_name": "Ca",
+        "read": ["eca"],
+        "write": ["ica"],
+        "valence": 2,
+        "main_ion": true
+      }
+    ],
+    "nonspecific": [{"ihcn": "mA/cm2"}]
+  },
+  "assets": [
+    {
+      "id": "a90bab5c-8529-4829-99fc-e90a270e8b30",
+      "path": "Ca_HVA.mod",
+      "full_path": "public/a98b7abc-fc46-4700-9e3d-37137812c730/0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6/assets/ion_channel_model/9720aa4a-0cd1-4f10-b6ad-04deb8f997b6/Ca_HVA.mod",
+      "is_directory": false,
+      "content_type": "application/swc",
+      "size": 561221,
+      "sha256_digest": "8b850eface3e7b881db62c361dc5da62be008ca81501c406a59646bf7075c95b",
+      "status": "created",
+      "creation_date": null,
+      "update_date": null,
+      "meta": {
+        "legacy": {
+          "@id": "https://bbp.epfl.ch/data/public/morphologies/42315b31-081f-4d40-8b94-b72dbd16c99e",
+          "name": "Ca_HVA.mod",
+          "@type": "DataDownload",
+          "digest": {
+            "value": "8b850eface3e7b881db62c361dc5da62be008ca81501c406a59646bf7075c95b",
+            "algorithm": "SHA-256"
+          },
+          "atLocation": {
+            "@type": "Location",
+            "store": {"@id": "nxv:diskStorageDefault", "_rev": 1, "@type": "DiskStorage"}
+          },
+          "contentUrl": "https://bbp.epfl.ch/nexus/v1/files/public/morphologies/https:%2F%2Fbbp.epfl.ch%2Fdata%2Fpublic%2Fmorphologies%2F42315b31-081f-4d40-8b94-b72dbd16c99e",
+          "contentSize": {"value": 561221, "unitCode": "bytes"},
+          "encodingFormat": "application/mod"
+        }
+      }
+    }
+  ]
+}

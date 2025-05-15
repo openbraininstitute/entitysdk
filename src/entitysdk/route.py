@@ -20,6 +20,8 @@ _ROUTES = {
     "Species": "species",
     "Strain": "strain",
     "Taxonomy": "taxonomy",
+    "IonChannelModel": "ion-channel-model",
+    "Ion": "ion",
 }
 
 
