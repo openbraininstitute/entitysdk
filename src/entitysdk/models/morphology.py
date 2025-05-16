@@ -35,7 +35,7 @@ class ReconstructionMorphology(HasAssets, Entity):
         Field(
             description="The region of the brain where the morphology is located.",
         ),
-    ]
+    ] = None
     description: Annotated[
         str,
         Field(
@@ -48,7 +48,7 @@ class ReconstructionMorphology(HasAssets, Entity):
         Field(
             description="The species of the morphology.",
         ),
-    ]
+    ] = None
     strain: Annotated[
         Strain | None,
         Field(

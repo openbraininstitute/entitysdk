@@ -22,6 +22,7 @@ _ROUTES = {
     "Taxonomy": "taxonomy",
     "IonChannelModel": "ion-channel-model",
     "Ion": "ion",
+    "EModel": "emodel",
 }
 
 

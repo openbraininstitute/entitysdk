@@ -1,0 +1,98 @@
+"""Ion channel model."""
+
+from typing import Annotated
+
+from pydantic import Field
+
+from entitysdk.mixin import HasAssets
+from entitysdk.models.contribution import Contribution
+from entitysdk.models.entity import Entity
+from entitysdk.models.etype import ETypeClass
+from entitysdk.models.morphology import BrainRegion, License, Species, Strain, ReconstructionMorphology
+from entitysdk.models.mtype import MTypeClass
+from entitysdk.models.ion_channel_model import IonChannelModel
+
+
+class EModel(HasAssets, Entity):
+    """Electrical cell model."""
+
+    name: Annotated[
+        str,
+        Field(
+            description="The name of the emodel.",
+            examples="EMS__1372346__cADpyr__13",
+        ),
+    ]
+    description: Annotated[
+        str,
+        Field(
+            description="A description of the emodel.",
+            examples="Canonical placeholder morphology e-model with soma and axon initial segment.",
+        ),
+    ]
+    species: Annotated[
+        Species,
+        Field(description="The species for which the emodel applies."),
+    ]
+    strain: Annotated[
+        Strain | None,
+        Field(description="The specific strain of the species, if applicable."),
+    ] = None
+    brain_region: Annotated[
+        BrainRegion,
+        Field(description="The brain region where the emodel is used or applies."),
+    ]
+    license: Annotated[
+        License | None,
+        Field(description="License under which the emodel is distributed."),
+    ] = None
+    contributions: Annotated[
+        list[Contribution] | None,
+        Field(description="List of contributions related to this emodel."),
+    ] = None
+    iteration: Annotated[
+        str,
+        Field(
+            description="The iteration of the emodel used during optimisation.",
+            examples="1372346",
+        ),
+    ]
+    score: Annotated[
+        float,
+        Field(
+            description="The score of the emodel gotten during validation.",
+            examples=54.0,
+        ),
+    ]
+    seed: Annotated[
+        int,
+        Field(
+            description="The RNG seed used during optimisation.",
+            examples=13,
+        ),
+    ]
+    exemplar_morphology: Annotated[
+        ReconstructionMorphology,
+        Field(
+            description="The morphology used during optimisation.",
+        ),
+    ] = None
+    etypes: Annotated[
+        list[ETypeClass] | None,
+        Field(
+            description="The etype classes of the morphology.",
+        ),
+    ] = None
+    mtypes: Annotated[
+        list[MTypeClass] | None,
+        Field(
+            description="The mtype classes of the morphology.",
+        ),
+    ] = None
+    ion_channel_models: Annotated[
+        list[IonChannelModel] | None,
+        Field(
+            description="List of ion channel models.",
+        ),
+    ] = None
+    legacy_id: list[str] | None = None
