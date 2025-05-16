@@ -1,4 +1,4 @@
-"""Ion channel model."""
+"""Electrical cell model."""
 
 from typing import Annotated
 
@@ -8,9 +8,15 @@ from entitysdk.mixin import HasAssets
 from entitysdk.models.contribution import Contribution
 from entitysdk.models.entity import Entity
 from entitysdk.models.etype import ETypeClass
-from entitysdk.models.morphology import BrainRegion, License, Species, Strain, ReconstructionMorphology
-from entitysdk.models.mtype import MTypeClass
 from entitysdk.models.ion_channel_model import IonChannelModel
+from entitysdk.models.morphology import (
+    BrainRegion,
+    License,
+    ReconstructionMorphology,
+    Species,
+    Strain,
+)
+from entitysdk.models.mtype import MTypeClass
 
 
 class EModel(HasAssets, Entity):
@@ -72,7 +78,7 @@ class EModel(HasAssets, Entity):
         ),
     ]
     exemplar_morphology: Annotated[
-        ReconstructionMorphology,
+        ReconstructionMorphology | None,
         Field(
             description="The morphology used during optimisation.",
         ),
