@@ -10,12 +10,14 @@ from entitysdk.models.license import License
 from entitysdk.models.morphology import ReconstructionMorphology
 from entitysdk.models.mtype import MTypeClass
 from entitysdk.models.taxonomy import Species, Strain, Taxonomy
+from entitysdk.models.emodel import EModel
 
 __all__ = [
     "Asset",
     "BrainLocation",
     "BrainRegion",
     "Contribution",
+    "EModel",
     "IonChannelModel",
     "License",
     "MTypeClass",

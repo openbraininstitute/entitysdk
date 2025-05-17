@@ -11,6 +11,10 @@ from entitysdk.models import (
     Role,
     Species,
     Strain,
+    Role,
+    Organization,
+    Person,
+    EModel,
 )
 
 
@@ -27,6 +31,7 @@ from entitysdk.models import (
         Species,
         Strain,
         Organization,
+        EModel,
     ],
 )
 def test_is_searchable(entity_type, client):
