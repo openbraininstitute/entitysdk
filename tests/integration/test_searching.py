@@ -2,6 +2,7 @@ import pytest
 
 from entitysdk.models import (
     Contribution,
+    EModel,
     IonChannelModel,
     License,
     MTypeClass,
@@ -11,10 +12,6 @@ from entitysdk.models import (
     Role,
     Species,
     Strain,
-    Role,
-    Organization,
-    Person,
-    EModel,
 )
 
 

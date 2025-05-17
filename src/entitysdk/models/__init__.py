@@ -5,12 +5,12 @@ from entitysdk.models.asset import Asset
 from entitysdk.models.brain_location import BrainLocation
 from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.contribution import Contribution, Role
+from entitysdk.models.emodel import EModel
 from entitysdk.models.ion_channel_model import IonChannelModel, NeuronBlock, UseIon
 from entitysdk.models.license import License
 from entitysdk.models.morphology import ReconstructionMorphology
 from entitysdk.models.mtype import MTypeClass
 from entitysdk.models.taxonomy import Species, Strain, Taxonomy
-from entitysdk.models.emodel import EModel
 
 __all__ = [
     "Asset",
