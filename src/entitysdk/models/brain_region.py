@@ -29,7 +29,7 @@ class BrainRegion(Identifiable):
         ),
     ]
     parent_structure_id: Annotated[
-        ID, Field(examples=[], description="The parent region structure UUID.")
+        ID | None, Field(examples=[], description="The parent region structure UUID.")
     ]
     hierarchy_id: Annotated[
         ID, Field(examples=[], description="The brain hierarchy that includes this brain region.")
