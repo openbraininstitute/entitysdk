@@ -5,10 +5,11 @@ from typing import Annotated
 from pydantic import Field
 
 from entitysdk.models.entity import Entity
+from entitysdk.models.core import Identifiable
 from entitysdk.typedef import ID
 
 
-class Species(Entity):
+class Species(Identifiable):
     """Species model."""
 
     name: Annotated[
@@ -27,7 +28,7 @@ class Species(Entity):
     ]
 
 
-class Strain(Entity):
+class Strain(Identifiable):
     """Strain model."""
 
     name: Annotated[
