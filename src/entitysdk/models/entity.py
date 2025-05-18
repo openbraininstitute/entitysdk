@@ -1,17 +1,33 @@
 """Entity model."""
 
-from typing import Annotated
 from uuid import UUID
+
+from typing import Annotated
 
 from pydantic import Field
 
 from entitysdk.models.agent import AgentUnion
 from entitysdk.models.core import Identifiable
+from entitysdk.mixin import HasAssets
+from entitysdk.typedef import ID
 
 
-class Entity(Identifiable):
+class Entity(Identifiable, HasAssets):
     """Entity is a model with id and authorization."""
-
+    name: Annotated[
+        str,
+        Field(
+            examples=["Entity 1"],
+            description="The name of the entity.",
+        ),
+    ]
+    description: Annotated[
+        str,
+        Field(
+            examples=["This is entity 1"],
+            description="The description of the entity.",
+        ),
+    ]
     createdBy: Annotated[
         AgentUnion | None,
         Field(description="The agent that created this entity."),
@@ -30,9 +46,20 @@ class Entity(Identifiable):
         ),
     ] = None
     authorized_project_id: Annotated[
-        UUID | None,
+        ID | None,
         Field(
             examples=[UUID("12345678-1234-1234-1234-123456789012")],
             description="The project ID the resource is authorized to be public.",
         ),
     ] = None
+    contributions: Annotated[
+        "list[Contribution] | None",
+        Field(
+            description="The constributions for this entity."
+        )
+    ] = None
+
+
+# Update forward reference for Contribution
+from entitysdk.models.contribution import Contribution
+Entity.model_rebuild(force=True)
