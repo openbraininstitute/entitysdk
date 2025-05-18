@@ -62,6 +62,10 @@ class Entity(Identifiable, HasAssets):
     contributions: Annotated[
         "list[Contribution] | None", Field(description="The constributions for this entity.")
     ] = None
+    legacy_id: Annotated[
+        list[str] | None,
+        Field(description="Legacy NEXUS ids."),
+    ] = None
 
 
 # Update forward reference for Contribution
