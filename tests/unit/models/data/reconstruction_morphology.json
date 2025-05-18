@@ -99,10 +99,6 @@
     "id": "0895fa61-fa6d-4674-9014-7300f9edf8da",
     "update_date": "2025-03-29T16:48:36.175090Z",
     "creation_date": "2025-03-29T16:48:36.175090Z",
-    "createdBy": null,
-    "updatedBy": null,
-    "authorized_public": null,
-    "authorized_project_id": null,
     "name": "Mus musculus",
     "taxonomy_id": "NCBITaxon:10090"
   },
@@ -158,10 +154,6 @@
       "id": "b2221a58-008a-45a6-8464-7159c324c985",
       "update_date": "2021-09-06T15:47:05.039000Z",
       "creation_date": "2021-09-06T15:47:04.890000Z",
-      "createdBy": null,
-      "updatedBy": null,
-      "authorized_public": null,
-      "authorized_project_id": null,
       "pref_label": "SR_PC",
       "definition": "",
       "alt_label": ""

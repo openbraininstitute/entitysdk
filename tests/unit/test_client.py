@@ -8,7 +8,7 @@ import pytest
 from entitysdk.client import Client
 from entitysdk.config import settings
 from entitysdk.exception import EntitySDKError
-from entitysdk.mixin import HasAssets
+from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.typedef import DeploymentEnvironment
 
@@ -77,7 +77,10 @@ def test_client_search(client, httpx_mock, auth_token):
     httpx_mock.add_response(
         method="GET",
         json={
-            "data": [{"id": str(id1)}, {"id": str(id2)}],
+            "data": [
+                {"id": str(id1), "name": "foo", "description": "bar"},
+                {"id": str(id2), "name": "foo", "description": "bar"},
+            ],
             "pagination": {"page": 1, "page_size": 10, "total_items": 2},
         },
     )
@@ -96,14 +99,16 @@ def test_client_search(client, httpx_mock, auth_token):
 
 @patch("entitysdk.route.get_route_name")
 def test_client_nupdate(mocked_route, client, httpx_mock, auth_token):
-    class Foo(Entity):
+    class Foo(Identifiable):
         name: str
 
     id1 = uuid.uuid4()
 
     new_name = "bar"
 
-    httpx_mock.add_response(method="PATCH", json={"id": str(id1), "name": new_name})
+    httpx_mock.add_response(
+        method="PATCH", json={"id": str(id1), "name": new_name, "description": "bar"}
+    )
 
     res = client.update_entity(
         entity_id=id1,
@@ -277,7 +282,7 @@ def test_client_get(
     asset_id1 = uuid.uuid4()
     asset_id2 = uuid.uuid4()
 
-    class EntityWithAssets(HasAssets, Entity):
+    class EntityWithAssets(Entity):
         """Entity plus assets."""
 
     mock_route.return_value = "entity"
@@ -286,7 +291,7 @@ def test_client_get(
         method="GET",
         url=f"{api_url}/entity/{entity_id}",
         match_headers=request_headers,
-        json={"id": str(entity_id)},
+        json={"id": str(entity_id), "name": "foo", "description": "bar"},
     )
     httpx_mock.add_response(
         method="GET",
