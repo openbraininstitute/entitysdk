@@ -15,26 +15,26 @@ class Entity(Identifiable, HasAssets):
     """Entity is a model with id and authorization."""
 
     name: Annotated[
-        str,
+        str | None,
         Field(
             examples=["Entity 1"],
             description="The name of the entity.",
         ),
-    ]
+    ] = None
     description: Annotated[
-        str,
+        str | None,
         Field(
             examples=["This is entity 1"],
             description="The description of the entity.",
         ),
-    ]
+    ] = None
     type: Annotated[
-        str,
+        str | None,
         Field(
             examples=["license"],
             description="The type of this Entity.",
         ),
-    ]
+    ] = None
     createdBy: Annotated[
         AgentUnion | None,
         Field(description="The agent that created this entity."),
