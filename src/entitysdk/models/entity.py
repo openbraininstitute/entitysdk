@@ -28,6 +28,13 @@ class Entity(Identifiable, HasAssets):
             description="The description of the entity.",
         ),
     ]
+    type: Annotated[
+        str,
+        Field(
+            examples=["license"],
+            description="The type of this Entity.",
+        ),
+    ]
     createdBy: Annotated[
         AgentUnion | None,
         Field(description="The agent that created this entity."),

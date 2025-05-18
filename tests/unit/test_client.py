@@ -78,8 +78,8 @@ def test_client_search(client, httpx_mock, auth_token):
         method="GET",
         json={
             "data": [
-                {"id": str(id1), "name": "foo", "description": "bar"},
-                {"id": str(id2), "name": "foo", "description": "bar"},
+                {"id": str(id1), "name": "foo", "description": "bar", "type": "zee"},
+                {"id": str(id2), "name": "foo", "description": "bar", "type": "zee"},
             ],
             "pagination": {"page": 1, "page_size": 10, "total_items": 2},
         },
@@ -291,7 +291,7 @@ def test_client_get(
         method="GET",
         url=f"{api_url}/entity/{entity_id}",
         match_headers=request_headers,
-        json={"id": str(entity_id), "name": "foo", "description": "bar"},
+        json={"id": str(entity_id), "name": "foo", "description": "bar", "type": "entity"},
     )
     httpx_mock.add_response(
         method="GET",
