@@ -34,3 +34,4 @@ class BrainRegion(Identifiable):
     hierarchy_id: Annotated[
         ID, Field(examples=[], description="The brain hierarchy that includes this brain region.")
     ]
+    color_hex_triplet: Annotated[str, Field(description="Region's color hex triplet.")]

@@ -93,7 +93,8 @@
     "annotation_value": 568,
     "acronym": "ACVI",
     "parent_structure_id": "596305b3-71b2-41e4-afd3-b9f2e90f79f8",
-    "hierarchy_id": "e3e70682-c209-4cac-a29f-6fbed82c07cd"
+    "hierarchy_id": "e3e70682-c209-4cac-a29f-6fbed82c07cd",
+    "color_hex_triplet": "1000"
   },
   "description": "Neuronal morphology of excitatory neuron cell 'mpg150211_A_idA' in Field CA1, pyramidal layer of cell type SR_PC. A neuron that releases excitatory neurotransmitters. This neuron doesn't have axon, has a basal dendrite and apical dendrite.",
   "species": {
