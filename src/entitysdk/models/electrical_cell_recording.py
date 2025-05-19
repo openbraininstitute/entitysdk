@@ -8,14 +8,19 @@ from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.entity import Entity
 from entitysdk.models.license import License
 from entitysdk.models.subject import Subject
+from entitysdk.types import (
+    ElectricalRecordingStimulusShape,
+    ElectricalRecordingStimulusType,
+    ElectricalRecordingType,
+)
 
 
 class ElectricalRecordingStimulus(Entity):
     """Electrical cell recording stimulus model."""
 
     dt: float | None = None
-    injection_type: str
-    shape: str
+    injection_type: ElectricalRecordingStimulusType
+    shape: ElectricalRecordingStimulusShape
     start_time: float | None = None
     end_time: float | None = None
 
@@ -41,7 +46,7 @@ class ElectricalCellRecording(Entity):
         ),
     ]
     recording_type: Annotated[
-        str,
+        ElectricalRecordingType,
         Field(
             title="Recording Type",
             description="Recording type.",

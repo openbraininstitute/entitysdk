@@ -2,7 +2,7 @@
 
 from entitysdk.exception import RouteNotFoundError
 from entitysdk.models.core import Identifiable
-from entitysdk.typedef import ID
+from entitysdk.types import ID
 
 # Mapping of entity type to api route name.
 _ROUTES = {

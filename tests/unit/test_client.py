@@ -10,7 +10,7 @@ from entitysdk.config import settings
 from entitysdk.exception import EntitySDKError
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
-from entitysdk.typedef import DeploymentEnvironment
+from entitysdk.types import DeploymentEnvironment
 
 
 def test_client_api_url():

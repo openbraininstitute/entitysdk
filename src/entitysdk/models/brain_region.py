@@ -5,7 +5,7 @@ from typing import Annotated
 from pydantic import Field
 
 from entitysdk.models.core import Identifiable
-from entitysdk.typedef import ID
+from entitysdk.types import ID
 
 
 class BrainRegion(Identifiable):

@@ -16,7 +16,7 @@ from entitysdk.models.morphology import (
     Strain,
 )
 from entitysdk.models.mtype import MTypeClass
-from entitysdk.typedef import ValidationStatus
+from entitysdk.types import ValidationStatus
 
 
 class MEModel(Entity):

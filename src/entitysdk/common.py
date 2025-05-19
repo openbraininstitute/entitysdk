@@ -7,7 +7,7 @@ from uuid import UUID
 from pydantic import BaseModel
 
 from entitysdk.exception import EntitySDKError
-from entitysdk.typedef import DeploymentEnvironment
+from entitysdk.types import DeploymentEnvironment
 
 UUID_RE = "[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}"
 

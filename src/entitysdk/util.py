@@ -10,7 +10,7 @@ from entitysdk.common import ProjectContext
 from entitysdk.config import settings
 from entitysdk.exception import EntitySDKError
 from entitysdk.models.response import ListResponse
-from entitysdk.typedef import DeploymentEnvironment
+from entitysdk.types import DeploymentEnvironment
 
 
 def make_db_api_request(
