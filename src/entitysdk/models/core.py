@@ -6,7 +6,7 @@ from typing import Annotated
 from pydantic import Field
 
 from entitysdk.models.base import BaseModel
-from entitysdk.typedef import ID
+from entitysdk.types import ID
 
 
 class Struct(BaseModel):

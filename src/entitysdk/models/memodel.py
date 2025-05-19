@@ -16,7 +16,7 @@ from entitysdk.models.morphology import (
     Strain,
 )
 from entitysdk.models.mtype import MTypeClass
-from entitysdk.typedef import ValidationStatus
+from entitysdk.types import ValidationStatus
 
 
 class MEModel(Entity):
@@ -56,19 +56,19 @@ class MEModel(Entity):
         ),
     ]
     holding_current: Annotated[
-        float,
+        float | None,
         Field(
             description="The holding current of the memodel.",
             examples=0.0,
         ),
-    ] = 0.0
+    ] = None
     threshold_current: Annotated[
-        float,
+        float | None,
         Field(
             description="The threshold current of the memodel.",
             examples=0.1,
         ),
-    ] = 0.1
+    ] = None
     morphology: Annotated[
         ReconstructionMorphology,
         Field(

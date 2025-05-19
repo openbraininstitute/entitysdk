@@ -13,7 +13,7 @@ from entitysdk.models.asset import Asset, LocalAssetMetadata
 from entitysdk.models.core import Identifiable
 from entitysdk.result import IteratorResult
 from entitysdk.token_manager import TokenManager
-from entitysdk.typedef import ID, DeploymentEnvironment
+from entitysdk.types import ID, DeploymentEnvironment
 from entitysdk.util import build_api_url
 
 

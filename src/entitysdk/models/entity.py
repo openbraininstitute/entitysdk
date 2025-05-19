@@ -8,7 +8,7 @@ from pydantic import Field
 from entitysdk.mixin import HasAssets
 from entitysdk.models.agent import AgentUnion
 from entitysdk.models.core import Identifiable
-from entitysdk.typedef import ID
+from entitysdk.types import ID
 
 
 class Entity(Identifiable, HasAssets):

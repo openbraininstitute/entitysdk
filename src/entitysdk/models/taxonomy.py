@@ -6,7 +6,7 @@ from pydantic import Field
 
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
-from entitysdk.typedef import ID
+from entitysdk.types import ID
 
 
 class Species(Identifiable):

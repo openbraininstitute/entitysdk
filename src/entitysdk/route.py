@@ -2,7 +2,7 @@
 
 from entitysdk.exception import RouteNotFoundError
 from entitysdk.models.core import Identifiable
-from entitysdk.typedef import ID
+from entitysdk.types import ID
 
 # Mapping of entity type to api route name.
 _ROUTES = {
@@ -10,6 +10,7 @@ _ROUTES = {
     "BrainLocation": "brain-location",
     "BrainRegion": "brain-region",
     "Contribution": "contribution",
+    "ElectricalCellRecording": "electrical-cell-recording",
     "Entity": "entity",
     "License": "license",
     "MTypeClass": "mtype",

@@ -2,7 +2,7 @@ import pytest
 
 from entitysdk import common as test_module
 from entitysdk.exception import EntitySDKError
-from entitysdk.typedef import DeploymentEnvironment
+from entitysdk.types import DeploymentEnvironment
 
 VLAB_ID = "ff888f05-f314-4702-8a92-b86f754270bb"
 PROJ_ID = "f373e771-3a2f-4f45-ab59-0955efd7b1f4"

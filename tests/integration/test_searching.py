@@ -2,6 +2,7 @@ import pytest
 
 from entitysdk.models import (
     Contribution,
+    ElectricalCellRecording,
     EModel,
     IonChannelModel,
     License,
@@ -31,6 +32,7 @@ from entitysdk.models import (
         Organization,
         EModel,
         MEModel,
+        ElectricalCellRecording,
     ],
 )
 def test_is_searchable(entity_type, client):
