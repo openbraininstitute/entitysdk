@@ -2,9 +2,9 @@
 
 from typing import Annotated
 
+from app.db.types import ValidationStatus
 from pydantic import Field
 
-from app.db.types import ValidationStatus
 from entitysdk.models.contribution import Contribution
 from entitysdk.models.emodel import EModel
 from entitysdk.models.entity import Entity

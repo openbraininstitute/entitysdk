@@ -4,10 +4,10 @@ from typing import Annotated
 
 from pydantic import Field
 
-from entitysdk.models.entity import Entity
+from entitysdk.models.core import Identifiable
 
 
-class ETypeClass(Entity):
+class ETypeClass(Identifiable):
     """EType model class."""
 
     pref_label: Annotated[

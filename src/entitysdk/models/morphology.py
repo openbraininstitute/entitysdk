@@ -26,7 +26,7 @@ class ReconstructionMorphology(Entity):
         Field(
             description="The region of the brain where the morphology is located.",
         ),
-    ]
+    ] = None
     species: Annotated[
         Species | None,
         Field(
