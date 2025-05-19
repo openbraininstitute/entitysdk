@@ -2,7 +2,6 @@
 
 from typing import Annotated
 
-from app.db.types import ValidationStatus
 from pydantic import Field
 
 from entitysdk.models.contribution import Contribution
@@ -17,6 +16,7 @@ from entitysdk.models.morphology import (
     Strain,
 )
 from entitysdk.models.mtype import MTypeClass
+from entitysdk.typedef import ValidationStatus
 
 
 class MEModel(Entity):
