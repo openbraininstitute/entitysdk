@@ -22,17 +22,17 @@ class ReconstructionMorphology(Entity):
         ),
     ] = None
     brain_region: Annotated[
-        BrainRegion,
+        BrainRegion | None,
         Field(
             description="The region of the brain where the morphology is located.",
         ),
-    ]
+    ] = None
     species: Annotated[
-        Species,
+        Species | None,
         Field(
             description="The species of the morphology.",
         ),
-    ]
+    ] = None
     strain: Annotated[
         Strain | None,
         Field(
