@@ -23,6 +23,7 @@ _ROUTES = {
     "IonChannelModel": "ion-channel-model",
     "Ion": "ion",
     "EModel": "emodel",
+    "MEModel": "memodel",
 }
 
 

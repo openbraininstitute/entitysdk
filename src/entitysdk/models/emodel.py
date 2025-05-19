@@ -86,13 +86,13 @@ class EModel(HasAssets, Entity):
     etypes: Annotated[
         list[ETypeClass] | None,
         Field(
-            description="The etype classes of the morphology.",
+            description="The etype classes of the emodel.",
         ),
     ] = None
     mtypes: Annotated[
         list[MTypeClass] | None,
         Field(
-            description="The mtype classes of the morphology.",
+            description="The mtype classes of the emodel.",
         ),
     ] = None
     ion_channel_models: Annotated[
