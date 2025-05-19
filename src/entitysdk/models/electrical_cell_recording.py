@@ -9,6 +9,7 @@ from entitysdk.models.entity import Entity
 from entitysdk.models.license import License
 from entitysdk.models.subject import Subject
 from entitysdk.types import (
+    ElectricalRecordingOrigin,
     ElectricalRecordingStimulusShape,
     ElectricalRecordingStimulusType,
     ElectricalRecordingType,
@@ -53,7 +54,7 @@ class ElectricalCellRecording(Entity):
         ),
     ]
     recording_origin: Annotated[
-        str,
+        ElectricalRecordingOrigin,
         Field(
             title="Recording Origin",
             description="Recording origin.",
