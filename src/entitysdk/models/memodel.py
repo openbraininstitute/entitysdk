@@ -56,19 +56,19 @@ class MEModel(Entity):
         ),
     ]
     holding_current: Annotated[
-        float,
+        float | None,
         Field(
             description="The holding current of the memodel.",
             examples=0.0,
         ),
-    ] = 0.0
+    ] = None
     threshold_current: Annotated[
-        float,
+        float | None,
         Field(
             description="The threshold current of the memodel.",
             examples=0.1,
         ),
-    ] = 0.1
+    ] = None
     morphology: Annotated[
         ReconstructionMorphology,
         Field(
