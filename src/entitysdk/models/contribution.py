@@ -6,7 +6,6 @@ from pydantic import Field
 
 from entitysdk.models.agent import AgentUnion
 from entitysdk.models.core import Identifiable
-from entitysdk.models.entity import Entity
 
 
 class Role(Identifiable):
@@ -42,6 +41,12 @@ class Contribution(Identifiable):
         ),
     ]
     entity: Annotated[
-        Entity | None,
+        "Entity | None",
         Field(description="The entity that resulted in this contribution."),
     ] = None
+
+
+# Update forward reference for Entity
+from entitysdk.models.entity import Entity  # noqa: E402
+
+Contribution.model_rebuild(force=True)

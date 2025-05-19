@@ -4,7 +4,6 @@ from typing import Annotated
 
 from pydantic import Field
 
-from entitysdk.mixin import HasAssets
 from entitysdk.models.base import BaseModel
 from entitysdk.models.contribution import Contribution
 from entitysdk.models.entity import Entity
@@ -83,7 +82,7 @@ class NeuronBlock(BaseModel):
     ] = None
 
 
-class IonChannelModel(HasAssets, Entity):
+class IonChannelModel(Entity):
     """Ion channel mechanism model."""
 
     name: Annotated[
