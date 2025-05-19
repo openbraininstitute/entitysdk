@@ -5,7 +5,6 @@ from typing import Annotated
 from pydantic import Field
 
 from app.db.types import ValidationStatus
-from entitysdk.mixin import HasAssets
 from entitysdk.models.contribution import Contribution
 from entitysdk.models.emodel import EModel
 from entitysdk.models.entity import Entity
@@ -20,23 +19,9 @@ from entitysdk.models.morphology import (
 from entitysdk.models.mtype import MTypeClass
 
 
-class MEModel(HasAssets, Entity):
+class MEModel(Entity):
     """Simulatable neuron model."""
 
-    name: Annotated[
-        str,
-        Field(
-            description="The name of the memodel.",
-            examples="MEM__C060114A5__cADpyr_L5_TPC:A",
-        ),
-    ]
-    description: Annotated[
-        str,
-        Field(
-            description="A description of the memodel.",
-            examples="This MEModel is part of OBI curated dataset of morpho-electric models.",
-        ),
-    ]
     species: Annotated[
         Species,
         Field(description="The species for which the memodel applies."),

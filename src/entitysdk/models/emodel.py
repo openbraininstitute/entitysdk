@@ -4,7 +4,6 @@ from typing import Annotated
 
 from pydantic import Field
 
-from entitysdk.mixin import HasAssets
 from entitysdk.models.contribution import Contribution
 from entitysdk.models.entity import Entity
 from entitysdk.models.etype import ETypeClass
@@ -19,23 +18,9 @@ from entitysdk.models.morphology import (
 from entitysdk.models.mtype import MTypeClass
 
 
-class EModel(HasAssets, Entity):
+class EModel(Entity):
     """Electrical cell model."""
 
-    name: Annotated[
-        str,
-        Field(
-            description="The name of the emodel.",
-            examples="EMS__1372346__cADpyr__13",
-        ),
-    ]
-    description: Annotated[
-        str,
-        Field(
-            description="A description of the emodel.",
-            examples="Canonical placeholder morphology e-model with soma and axon initial segment.",
-        ),
-    ]
     species: Annotated[
         Species,
         Field(description="The species for which the emodel applies."),
