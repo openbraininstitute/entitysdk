@@ -5,127 +5,13 @@ from typing import Annotated
 from pydantic import Field
 
 from entitysdk.mixin import HasAssets
+from entitysdk.models.brain_location import BrainLocation
 from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.contribution import Contribution
-from entitysdk.models.core import Struct
 from entitysdk.models.entity import Entity
+from entitysdk.models.license import License
 from entitysdk.models.mtype import MTypeClass
-from entitysdk.typedef import ID
-
-
-class License(Entity):
-    """License model."""
-
-    name: Annotated[
-        str,
-        Field(
-            examples=["Apache 2.0"],
-            description="The name of the license.",
-        ),
-    ]
-    description: Annotated[
-        str,
-        Field(
-            examples=["The 2.0 version of the Apache License"],
-            description="The description of the license.",
-        ),
-    ]
-    label: Annotated[
-        str,
-        Field(
-            examples=["Apache 2.0"],
-            description="The label of the license.",
-        ),
-    ]
-
-
-class BrainLocation(Struct):
-    """BrainLocation model."""
-
-    x: Annotated[
-        float,
-        Field(
-            examples=[1.0, 2.0, 3.0],
-            description="The x coordinate of the brain location.",
-        ),
-    ]
-    y: Annotated[
-        float,
-        Field(
-            examples=[1.0, 2.0, 3.0],
-            description="The y coordinate of the brain location.",
-        ),
-    ]
-    z: Annotated[
-        float,
-        Field(
-            examples=[1.0, 2.0, 3.0],
-            description="The z coordinate of the brain location.",
-        ),
-    ]
-
-
-class Taxonomy(Entity):
-    """Taxonomy model."""
-
-    name: Annotated[
-        str,
-        Field(
-            examples=["Homo sapiens"],
-            description="The name of the taxonomy.",
-        ),
-    ]
-    pref_label: Annotated[
-        str,
-        Field(
-            examples=["Homo sapiens"],
-            description="The preferred label of the taxonomy.",
-        ),
-    ]
-
-
-class Species(Entity):
-    """Species model."""
-
-    name: Annotated[
-        str,
-        Field(
-            examples=["Mus musculus"],
-            description="The name of the species.",
-        ),
-    ]
-    taxonomy_id: Annotated[
-        str,
-        Field(
-            examples=["1"],
-            description="The taxonomy id of the species.",
-        ),
-    ]
-
-
-class Strain(Entity):
-    """Strain model."""
-
-    name: Annotated[
-        str,
-        Field(
-            examples=["C57BL/6J"],
-            description="The name of the strain.",
-        ),
-    ]
-    taxonomy_id: Annotated[
-        str,
-        Field(
-            examples=["1"],
-            description="The taxonomy id of the strain.",
-        ),
-    ]
-    species_id: Annotated[
-        ID,
-        Field(
-            description="The species id of the strain.",
-        ),
-    ]
+from entitysdk.models.taxonomy import Species, Strain
 
 
 class ReconstructionMorphology(HasAssets, Entity):
@@ -145,11 +31,11 @@ class ReconstructionMorphology(HasAssets, Entity):
         ),
     ] = None
     brain_region: Annotated[
-        BrainRegion,
+        BrainRegion | None,
         Field(
             description="The region of the brain where the morphology is located.",
         ),
-    ]
+    ] = None
     description: Annotated[
         str,
         Field(
@@ -158,11 +44,11 @@ class ReconstructionMorphology(HasAssets, Entity):
         ),
     ]
     species: Annotated[
-        Species,
+        Species | None,
         Field(
             description="The species of the morphology.",
         ),
-    ]
+    ] = None
     strain: Annotated[
         Strain | None,
         Field(

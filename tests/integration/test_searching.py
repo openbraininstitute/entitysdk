@@ -1,19 +1,25 @@
 import pytest
 
-from entitysdk.models.agent import Organization, Person
-from entitysdk.models.contribution import Role
-from entitysdk.models.morphology import (
+from entitysdk.models import (
+    Contribution,
+    EModel,
+    IonChannelModel,
     License,
+    MTypeClass,
+    Organization,
+    Person,
     ReconstructionMorphology,
+    Role,
     Species,
     Strain,
 )
-from entitysdk.models.mtype import MTypeClass
 
 
 @pytest.mark.parametrize(
     "entity_type",
     [
+        Contribution,
+        IonChannelModel,
         License,
         MTypeClass,
         Person,
@@ -22,6 +28,7 @@ from entitysdk.models.mtype import MTypeClass
         Species,
         Strain,
         Organization,
+        EModel,
     ],
 )
 def test_is_searchable(entity_type, client):
