@@ -1,5 +1,6 @@
 {
   "id": "b8f38c7f-2675-4c6a-a394-f3a60a9a3e6f",
+  "type": "ion_channel_model",
   "update_date": "2024-10-29T13:36:30.827776Z",
   "creation_date": "2024-09-10T14:25:03.707956Z",
   "createdBy": null,
@@ -16,17 +17,14 @@
     "annotation_value": 568,
     "acronym": "ACVI",
     "parent_structure_id": "596305b3-71b2-41e4-afd3-b9f2e90f79f8",
-    "hierarchy_id": "e3e70682-c209-4cac-a29f-6fbed82c07cd"
+    "hierarchy_id": "e3e70682-c209-4cac-a29f-6fbed82c07cd",
+    "color_hex_triplet": "1000"
   },
   "description": "High-voltage activated calcium channel",
   "species": {
     "id": "0895fa61-fa6d-4674-9014-7300f9edf8da",
     "update_date": "2025-03-29T16:48:36.175090Z",
     "creation_date": "2025-03-29T16:48:36.175090Z",
-    "createdBy": null,
-    "updatedBy": null,
-    "authorized_public": null,
-    "authorized_project_id": null,
     "name": "Rattus norvegicus",
     "taxonomy_id": "NCBITaxon:10116"
   },
