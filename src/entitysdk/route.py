@@ -10,6 +10,7 @@ _ROUTES = {
     "BrainLocation": "brain-location",
     "BrainRegion": "brain-region",
     "Contribution": "contribution",
+    "ElectricalCellRecording": "electrical-cell-recording",
     "Entity": "entity",
     "License": "license",
     "MTypeClass": "mtype",

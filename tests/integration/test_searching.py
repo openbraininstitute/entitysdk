@@ -13,6 +13,7 @@ from entitysdk.models import (
     Role,
     Species,
     Strain,
+    ElectricalCellRecording,
 )
 
 
@@ -31,6 +32,7 @@ from entitysdk.models import (
         Organization,
         EModel,
         MEModel,
+        ElectricalCellRecording,
     ],
 )
 def test_is_searchable(entity_type, client):
