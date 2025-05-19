@@ -2,6 +2,7 @@ import pytest
 
 from entitysdk.models import (
     Contribution,
+    ElectricalCellRecording,
     EModel,
     IonChannelModel,
     License,
@@ -13,7 +14,6 @@ from entitysdk.models import (
     Role,
     Species,
     Strain,
-    ElectricalCellRecording,
 )
 
 
