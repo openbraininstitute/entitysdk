@@ -10,7 +10,7 @@ class BaseModel(PydanticBaseModel):
     """Base model."""
 
     model_config = ConfigDict(
-        frozen=True,
+        frozen=False,
         from_attributes=True,
         extra="ignore",
     )
