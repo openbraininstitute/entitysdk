@@ -14,6 +14,7 @@ from entitysdk.models import (
     Role,
     Species,
     Strain,
+    ValidationResult,
 )
 
 
@@ -33,6 +34,7 @@ from entitysdk.models import (
         EModel,
         MEModel,
         ElectricalCellRecording,
+        ValidationResult,
     ],
 )
 def test_is_searchable(entity_type, client):
