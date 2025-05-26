@@ -33,20 +33,20 @@ class Person(Agent):
             description="The type of this agent. Should be 'agent'",
         ),
     ] = "person"
-    givenName: Annotated[
-        str,
+    given_name: Annotated[
+        str | None,
         Field(
             examples=["John", "Jane"],
             description="The given name of the person.",
         ),
-    ]
-    familyName: Annotated[
-        str,
+    ] = None
+    family_name: Annotated[
+        str | None,
         Field(
             examples=["Doe", "Smith"],
             description="The family name of the person.",
         ),
-    ]
+    ] = None
 
 
 class Organization(Agent):

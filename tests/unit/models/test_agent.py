@@ -6,13 +6,13 @@ from ..util import MOCK_UUID
 
 def test_person_entity():
     agent = test_module.Person(
-        givenName="foo",
-        familyName="bar",
+        given_name="foo",
+        family_name="bar",
         pref_label="test",
         type="person",
     )
-    assert agent.givenName == "foo"
-    assert agent.familyName == "bar"
+    assert agent.given_name == "foo"
+    assert agent.family_name == "bar"
     assert agent.pref_label == "test"
     assert agent.type == "person"
 
@@ -57,8 +57,8 @@ def test_agent_discriminated_union():
             "agent": {
                 "type": "person",
                 "pref_label": "foo",
-                "givenName": "John",
-                "familyName": "Smith",
+                "given_name": "John",
+                "family_name": "Smith",
             },
         }
     )
