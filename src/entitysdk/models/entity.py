@@ -35,11 +35,11 @@ class Entity(Identifiable, HasAssets):
             description="The type of this Entity.",
         ),
     ] = None
-    createdBy: Annotated[
+    created_by: Annotated[
         AgentUnion | None,
         Field(description="The agent that created this entity."),
     ] = None
-    updatedBy: Annotated[
+    updated_by: Annotated[
         AgentUnion | None,
         Field(
             description="The agent that updated this entity.",
