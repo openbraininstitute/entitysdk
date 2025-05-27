@@ -15,7 +15,7 @@ def test_role(role):
 
 
 def test_contribution(role):
-    person = agent.Person(type="person", givenName="foo", familyName="bar", pref_label="test")
+    person = agent.Person(type="person", given_name="foo", family_name="bar", pref_label="test")
 
     res = test_module.Contribution(
         agent=person,

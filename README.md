@@ -30,7 +30,7 @@ pip install obi-auth
 ```python
 from obi_auth import get_token
 
-access_token = get_token(environment="staging")
+token = get_token(environment="staging")
 ```
 
 ## Quick Start
@@ -46,12 +46,12 @@ client = Client(
     project_context=ProjectContext(
         project_id=UUID("your-project-id"),
         virtual_lab_id=UUID("your-lab-id")
-    )
+    ),
     environment="staging"
 )
 
 # Search for morphologies
-iterator = client.search(
+iterator = client.search_entity(
     entity_type=ReconstructionMorphology,
     query={"mtype__pref_label": "L5_TPC:A"},
     token=token,
