@@ -30,7 +30,7 @@ pip install obi-auth
 ```python
 from obi_auth import get_token
 
-access_token = get_token(environment="staging")
+token = get_token(environment="staging")
 ```
 
 ## Quick Start
