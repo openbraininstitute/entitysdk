@@ -380,7 +380,7 @@ class Client:
         )
         token = self._get_token(override_token=token)
         context = self._optional_user_context(override_context=project_context)
-        asset: Asset = core.get_entity(
+        asset = core.get_entity(
             asset_endpoint,
             entity_type=Asset,
             token=token,
