@@ -13,13 +13,13 @@ class Asset(Identifiable):
     path: Annotated[
         str,
         Field(
-            description="The path of the asset.",
+            description="The relative path of the asset.",
         ),
     ]
     full_path: Annotated[
         str,
         Field(
-            description="The full path of the asset.",
+            description="The full s3 path of the asset.",
         ),
     ]
     is_directory: Annotated[

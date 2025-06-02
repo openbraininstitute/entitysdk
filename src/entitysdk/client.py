@@ -14,7 +14,11 @@ from entitysdk.models.core import Identifiable
 from entitysdk.result import IteratorResult
 from entitysdk.token_manager import TokenManager
 from entitysdk.types import ID, DeploymentEnvironment
-from entitysdk.util import build_api_url
+from entitysdk.util import (
+    build_api_url,
+    create_intermediate_directories,
+    validate_filename_extension_consistency,
+)
 
 
 class Client:
@@ -314,7 +318,7 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Identifiable],
-        asset_id: str,
+        asset_id: ID,
         project_context: ProjectContext | None = None,
         token: str | None = None,
     ) -> bytes:
@@ -353,7 +357,7 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Identifiable],
-        asset_id: str,
+        asset_id: ID,
         output_path: os.PathLike,
         project_context: ProjectContext | None = None,
         token: str | None = None,
@@ -368,22 +372,33 @@ class Client:
             project_context: Optional project context.
             token: Authorization access token.
         """
-        url = (
-            route.get_assets_endpoint(
-                api_url=self.api_url,
-                entity_type=entity_type,
-                entity_id=entity_id,
-                asset_id=asset_id,
-            )
-            + "/download"
+        asset_endpoint = route.get_assets_endpoint(
+            api_url=self.api_url,
+            entity_type=entity_type,
+            entity_id=entity_id,
+            asset_id=asset_id,
         )
         token = self._get_token(override_token=token)
         context = self._optional_user_context(override_context=project_context)
-        return core.download_asset_file(
-            url=url,
+        asset: Asset = core.get_entity(
+            asset_endpoint,
+            entity_type=Asset,
             token=token,
             project_context=context,
-            output_path=Path(output_path),
+            http_client=self._http_client,
+        )
+        path: Path = Path(output_path)
+        path = (
+            path / asset.path
+            if path.is_dir()
+            else validate_filename_extension_consistency(path, Path(asset.path).suffix)
+        )
+        create_intermediate_directories(path)
+        return core.download_asset_file(
+            url=f"{asset_endpoint}/download",
+            token=token,
+            project_context=context,
+            output_path=path,
             http_client=self._http_client,
         )
 

@@ -52,14 +52,14 @@ def search_entities(
     )
 
 
-def get_entity(
+def get_entity[I: Identifiable](
     url: str,
     *,
-    entity_type: type[Identifiable],
+    entity_type: type[I],
     project_context: ProjectContext | None = None,
     token: str,
     http_client: httpx.Client | None = None,
-) -> Identifiable:
+) -> I:
     """Instantiate entity with model ``entity_type`` from resource id."""
     response = make_db_api_request(
         url=url,

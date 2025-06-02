@@ -3,6 +3,7 @@
 import sys
 from collections.abc import Iterator
 from json import dumps
+from pathlib import Path
 
 import httpx
 
@@ -135,3 +136,15 @@ def build_api_url(environment: DeploymentEnvironment) -> str:
         DeploymentEnvironment.staging: settings.staging_api_url,
         DeploymentEnvironment.production: settings.production_api_url,
     }[environment]
+
+
+def validate_filename_extension_consistency(path: Path, expected_extension: str) -> Path:
+    """Validate file path extension against expected extension."""
+    if path.suffix == expected_extension:
+        return path
+    raise EntitySDKError(f"File path {path} does not have expected extension {expected_extension}.")
+
+
+def create_intermediate_directories(path: Path) -> None:
+    """Create intermediate directories in a path."""
+    path.parent.mkdir(parents=True, exist_ok=True)
