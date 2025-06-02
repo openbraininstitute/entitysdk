@@ -284,7 +284,7 @@ def test_client_download_file__output_file__inconsistent_ext(
     auth_token,
     request_headers,
 ):
-    """User must provice a path extension that is consitent with the asset path."""
+    """User must provide a path extension that is consitent with the asset path."""
 
     entity_id = uuid.uuid4()
     asset_id = uuid.uuid4()
