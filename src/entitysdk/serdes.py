@@ -22,7 +22,7 @@ def serialize_entity(entity: BaseModel) -> dict:
     data = entity.model_dump(
         mode="json",
         exclude=SERIALIZATION_EXCLUDE_KEYS,
-        exclude_none=True,
+        exclude_none=False,
     )
     processed = _convert_identifiables_to_ids(data)
     return processed
