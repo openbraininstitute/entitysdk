@@ -140,7 +140,7 @@ def build_api_url(environment: DeploymentEnvironment) -> str:
 
 def validate_filename_extension_consistency(path: Path, expected_extension: str) -> Path:
     """Validate file path extension against expected extension."""
-    if path.suffix == expected_extension:
+    if path.suffix.lower() == expected_extension.lower():
         return path
     raise EntitySDKError(f"File path {path} does not have expected extension {expected_extension}.")
 
