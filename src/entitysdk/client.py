@@ -368,7 +368,7 @@ class Client:
             entity_id: Id of the entity.
             entity_type: Type of the entity.
             asset_id: Id of the asset.
-            output_path: Path to save the file to.
+            output_path: Either be a file path to write the file to or an output directory.
             project_context: Optional project context.
             token: Authorization access token.
         """
