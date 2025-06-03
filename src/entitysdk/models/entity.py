@@ -46,12 +46,12 @@ class Entity(Identifiable, HasAssets):
         ),
     ] = None
     authorized_public: Annotated[
-        bool | None,
+        bool,
         Field(
             examples=[True, False],
             description="Whether the resource is authorized to be public.",
         ),
-    ] = None
+    ] = False
     authorized_project_id: Annotated[
         ID | None,
         Field(

@@ -97,7 +97,8 @@
       "name": "GenericStep",
       "description": "",
       "injection_type": "current_clamp",
-      "shape": "step"
+      "shape": "step",
+      "authorized_public": false
     },
     {
       "type": "electrical_recording_stimulus",
@@ -107,7 +108,8 @@
       "name": "GenericStep",
       "description": "",
       "injection_type": "current_clamp",
-      "shape": "step"
+      "shape": "step",
+      "authorized_public": false
     },
     {
       "type": "electrical_recording_stimulus",
@@ -117,7 +119,8 @@
       "name": "GenericStep",
       "description": "",
       "injection_type": "current_clamp",
-      "shape": "step"
+      "shape": "step",
+      "authorized_public": false
     }
   ]
 }
