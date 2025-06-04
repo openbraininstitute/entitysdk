@@ -1,6 +1,7 @@
 from typing import ClassVar
 
 import pytest
+
 from entitysdk.models import base as test_module
 
 

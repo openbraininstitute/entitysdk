@@ -1,4 +1,5 @@
 import pytest
+
 from entitysdk import serdes as test_module
 from entitysdk.models.core import Identifiable, Struct
 

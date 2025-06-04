@@ -2,6 +2,7 @@ import os
 from unittest.mock import patch
 
 import pytest
+
 from entitysdk import token_manager as test_module
 from entitysdk.exception import EntitySDKError
 

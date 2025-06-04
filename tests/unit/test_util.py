@@ -1,5 +1,6 @@
 import httpx
 import pytest
+
 from entitysdk import util as test_module
 from entitysdk.exception import EntitySDKError
 

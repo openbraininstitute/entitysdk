@@ -1,4 +1,5 @@
 import pytest
+
 from entitysdk import result as test_module
 from entitysdk.exception import IteratorResultError
 

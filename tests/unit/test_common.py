@@ -1,4 +1,5 @@
 import pytest
+
 from entitysdk import common as test_module
 from entitysdk.exception import EntitySDKError
 from entitysdk.types import DeploymentEnvironment

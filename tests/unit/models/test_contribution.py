@@ -1,4 +1,5 @@
 import pytest
+
 from entitysdk.models import agent
 from entitysdk.models import contribution as test_module
 
