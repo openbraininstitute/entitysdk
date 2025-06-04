@@ -17,6 +17,7 @@ _ROUTES = {
     "IonChannelModel": "ion-channel-model",
     "License": "license",
     "MEModel": "memodel",
+    "MEModelCalibrationResult": "memodel-calibration-result",
     "MTypeClass": "mtype",
     "Organization": "organization",
     "Person": "person",

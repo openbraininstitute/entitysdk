@@ -8,6 +8,7 @@ from entitysdk.models.contribution import Contribution
 from entitysdk.models.emodel import EModel
 from entitysdk.models.entity import Entity
 from entitysdk.models.etype import ETypeClass
+from entitysdk.models.memodelcalibrationresult import MEModelCalibrationResult
 from entitysdk.models.morphology import (
     BrainRegion,
     License,
@@ -91,6 +92,12 @@ class MEModel(Entity):
         list[MTypeClass] | None,
         Field(
             description="The mtype classes of the memodel.",
+        ),
+    ] = None
+    calibration_result: Annotated[
+        MEModelCalibrationResult | None,
+        Field(
+            description="The calibration result of the memodel.",
         ),
     ] = None
     legacy_id: list[str] | None = None
