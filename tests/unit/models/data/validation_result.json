@@ -1,4 +1,5 @@
 {
+    "authorized_public": false,
 	"id" : "6fa52c8b-e9df-4f10-bdee-07c9af59a5ba",
 	"passed" : true,
 	"name" : "Simulatable Neuron Spiking Validation",

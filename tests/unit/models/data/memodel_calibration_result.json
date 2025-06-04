@@ -1,4 +1,5 @@
 {
+    "authorized_public": false,
     "id" : "cfecab84-b37c-4fa0-adaa-86457d660061",
     "holding_current" : 0.0,
     "threshold_current" : 0.06554153953301577,
