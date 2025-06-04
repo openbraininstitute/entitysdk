@@ -1,5 +1,4 @@
 import pytest
-
 from entitysdk.models.brain_region import BrainRegion
 
 

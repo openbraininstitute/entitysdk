@@ -1,5 +1,4 @@
 import pytest
-
 from entitysdk import route as test_module
 from entitysdk.exception import RouteNotFoundError
 from entitysdk.models.entity import Entity

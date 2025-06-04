@@ -1,9 +1,9 @@
 import uuid
 
 import pytest
-
 from entitysdk.client import Client
 from entitysdk.common import ProjectContext
+
 from tests.unit.util import PROJECT_ID, VIRTUAL_LAB_ID
 
 

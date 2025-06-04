@@ -4,7 +4,6 @@ import uuid
 from unittest.mock import patch
 
 import pytest
-
 from entitysdk.client import Client
 from entitysdk.config import settings
 from entitysdk.exception import EntitySDKError

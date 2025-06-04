@@ -2,7 +2,6 @@ import json
 from pathlib import Path
 
 import pytest
-
 from entitysdk.models.ion_channel_model import IonChannelModel
 
 from ..util import MOCK_UUID

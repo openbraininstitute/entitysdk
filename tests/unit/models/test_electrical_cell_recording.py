@@ -2,7 +2,6 @@ import json
 from pathlib import Path
 
 import pytest
-
 from entitysdk.models import ElectricalCellRecording
 
 from ..util import MOCK_UUID

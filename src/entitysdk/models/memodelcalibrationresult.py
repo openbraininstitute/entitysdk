@@ -21,7 +21,8 @@ class MEModelCalibrationResult(Entity):
     threshold_current: Annotated[
         float,
         Field(
-            description="The minimal amount of current needed to make the simulatable neuron spike, in nA.",
+            description="The minimal amount of current needed to make "
+            "the simulatable neuron spike, in nA.",
             example=0.1,
         ),
     ]
