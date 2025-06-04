@@ -1,0 +1,8 @@
+{
+    "authorized_public": false,
+    "id" : "cfecab84-b37c-4fa0-adaa-86457d660061",
+    "holding_current" : 0.0,
+    "threshold_current" : 0.06554153953301577,
+    "rin" : 100.03205800593804,
+    "calibrated_entity_id" : "54004e96-cef0-4f1c-8c89-d9cdf7b94e43"
+}

@@ -11,8 +11,13 @@ _ROUTES = {
     "BrainRegion": "brain-region",
     "Contribution": "contribution",
     "ElectricalCellRecording": "electrical-cell-recording",
+    "EModel": "emodel",
     "Entity": "entity",
+    "Ion": "ion",
+    "IonChannelModel": "ion-channel-model",
     "License": "license",
+    "MEModel": "memodel",
+    "MEModelCalibrationResult": "memodel-calibration-result",
     "MTypeClass": "mtype",
     "Organization": "organization",
     "Person": "person",
@@ -21,10 +26,7 @@ _ROUTES = {
     "Species": "species",
     "Strain": "strain",
     "Taxonomy": "taxonomy",
-    "IonChannelModel": "ion-channel-model",
-    "Ion": "ion",
-    "EModel": "emodel",
-    "MEModel": "memodel",
+    "ValidationResult": "validation-result",
 }
 
 

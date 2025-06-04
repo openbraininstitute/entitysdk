@@ -7,6 +7,7 @@ from entitysdk.models import (
     IonChannelModel,
     License,
     MEModel,
+    MEModelCalibrationResult,
     MTypeClass,
     Organization,
     Person,
@@ -14,6 +15,7 @@ from entitysdk.models import (
     Role,
     Species,
     Strain,
+    ValidationResult,
 )
 
 
@@ -33,6 +35,8 @@ from entitysdk.models import (
         EModel,
         MEModel,
         ElectricalCellRecording,
+        ValidationResult,
+        MEModelCalibrationResult,
     ],
 )
 def test_is_searchable(entity_type, client):
