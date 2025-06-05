@@ -3,6 +3,7 @@
 import io
 from collections.abc import Iterator
 from pathlib import Path
+from typing import TypeVar
 
 import httpx
 
@@ -12,6 +13,8 @@ from entitysdk.models.asset import Asset, LocalAssetMetadata
 from entitysdk.models.core import Identifiable
 from entitysdk.result import IteratorResult
 from entitysdk.util import make_db_api_request, stream_paginated_request
+
+TIdentifiable = TypeVar("TIdentifiable", bound=Identifiable)
 
 
 def search_entities(
@@ -55,11 +58,11 @@ def search_entities(
 def get_entity(
     url: str,
     *,
-    entity_type: type[Identifiable],
+    entity_type: type[TIdentifiable],
     project_context: ProjectContext | None = None,
     token: str,
     http_client: httpx.Client | None = None,
-) -> Identifiable:
+) -> TIdentifiable:
     """Instantiate entity with model ``entity_type`` from resource id."""
     response = make_db_api_request(
         url=url,

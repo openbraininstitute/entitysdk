@@ -1,6 +1,7 @@
 import io
 import re
 import uuid
+from pathlib import Path
 from unittest.mock import patch
 
 import pytest
@@ -237,7 +238,7 @@ def test_client_download_content(
     assert res == b"foo"
 
 
-def test_client_download_file(
+def test_client_download_file__output_file(
     tmp_path,
     client,
     httpx_mock,
@@ -249,6 +250,12 @@ def test_client_download_file(
     entity_id = uuid.uuid4()
     asset_id = uuid.uuid4()
 
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}",
+        match_headers=request_headers,
+        json=_mock_asset_response(asset_id) | {"path": "foo.h5"},
+    )
     httpx_mock.add_response(
         method="GET",
         url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download",
@@ -266,6 +273,140 @@ def test_client_download_file(
         token=auth_token,
     )
     assert output_path.read_bytes() == b"foo"
+
+
+def test_client_download_file__output_file__inconsistent_ext(
+    tmp_path,
+    client,
+    httpx_mock,
+    api_url,
+    project_context,
+    auth_token,
+    request_headers,
+):
+    """User must provide a path extension that is consitent with the asset path."""
+
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}",
+        match_headers=request_headers,
+        json=_mock_asset_response(asset_id) | {"path": "foo.swc"},
+    )
+    output_path = tmp_path / "foo.h5"
+
+    with pytest.raises(
+        EntitySDKError, match=f"File path {output_path} does not have expected extension .swc."
+    ):
+        client.download_file(
+            entity_id=entity_id,
+            entity_type=Entity,
+            asset_id=asset_id,
+            output_path=output_path,
+            token=auth_token,
+        )
+
+
+def test_client_download_file__output_file__user_subdirectory_path(
+    tmp_path,
+    client,
+    httpx_mock,
+    api_url,
+    project_context,
+    auth_token,
+    request_headers,
+):
+    """User provides a nested output path that overrides the asset path."""
+
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}",
+        match_headers=request_headers,
+        json=_mock_asset_response(asset_id) | {"path": "foo.h5"},
+    )
+
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download",
+        match_headers=request_headers,
+        content=b"foo",
+    )
+
+    output_path = tmp_path / "foo" / "bar" / "bar.h5"
+
+    client.download_file(
+        entity_id=entity_id,
+        entity_type=Entity,
+        asset_id=asset_id,
+        output_path=output_path,
+        token=auth_token,
+    )
+    assert output_path.read_bytes() == b"foo"
+
+
+def test_client_download_file__asset_subdirectory_paths(
+    tmp_path,
+    client,
+    httpx_mock,
+    api_url,
+    project_context,
+    auth_token,
+    request_headers,
+):
+    """User provides directory, relative file paths from assets are written to it."""
+
+    entity_id = uuid.uuid4()
+    asset1_id = uuid.uuid4()
+    asset2_id = uuid.uuid4()
+
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset1_id}",
+        match_headers=request_headers,
+        json=_mock_asset_response(asset1_id) | {"path": "foo/bar/foo.h5"},
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset1_id}/download",
+        match_headers=request_headers,
+        content=b"foo",
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset2_id}",
+        match_headers=request_headers,
+        json=_mock_asset_response(asset2_id) | {"path": "foo/bar/bar.swc"},
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset2_id}/download",
+        match_headers=request_headers,
+        content=b"bar",
+    )
+    output_path = tmp_path
+
+    client.download_file(
+        entity_id=entity_id,
+        entity_type=Entity,
+        asset_id=asset1_id,
+        output_path=output_path,
+        token=auth_token,
+    )
+    client.download_file(
+        entity_id=entity_id,
+        entity_type=Entity,
+        asset_id=asset2_id,
+        output_path=output_path,
+        token=auth_token,
+    )
+
+    assert Path(output_path, "foo/bar/foo.h5").read_bytes() == b"foo"
+    assert Path(output_path, "foo/bar/bar.swc").read_bytes() == b"bar"
 
 
 @patch("entitysdk.route.get_route_name")
