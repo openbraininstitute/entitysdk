@@ -37,9 +37,7 @@ token = get_token(environment="staging")
 
 ```python
 from uuid import UUID
-from entitysdk.client import Client
-from entitysdk.common import ProjectContext
-from entitysdk.models.morphology import ReconstructionMorphology
+from entitysdk import Client, ProjectContext, models
 
 # Initialize client
 client = Client(
@@ -52,7 +50,7 @@ client = Client(
 
 # Search for morphologies
 iterator = client.search_entity(
-    entity_type=ReconstructionMorphology,
+    entity_type=models.ReconstructionMorphology,
     query={"mtype__pref_label": "L5_TPC:A"},
     token=token,
     limit=1,
@@ -62,7 +60,7 @@ morphology = next(iterator)
 # Upload an asset
 client.upload_file(
     entity_id=morphology.id,
-    entity_type=ReconstructionMorphology,
+    entity_type=models.ReconstructionMorphology,
     file_path="path/to/file.swc",
     file_content_type="application/swc",
     token="your-token"
@@ -78,7 +76,7 @@ client.upload_file(
 Example configuration:
 ```python
 from uuid import UUID
-from entitysdk.common import ProjectContext
+from entitysdk import ProjectContext
 
 project_context = ProjectContext(
     project_id=UUID("12345678-1234-1234-1234-123456789012"),
