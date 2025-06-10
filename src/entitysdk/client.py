@@ -455,6 +455,7 @@ class Client:
         if not issubclass(type(entity), Entity):
             raise EntitySDKError(f"Type {type(entity)} has no assets.")
 
+        # make mypy happy as it doesn't get the correct type :(
         entity = cast(Entity, entity)
 
         if not entity.assets:
