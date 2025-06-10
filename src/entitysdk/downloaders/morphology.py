@@ -1,10 +1,9 @@
-"""Download functions for Morphology entities"""
+"""Download functions for Morphology entities."""
 
 import logging
 import pathlib
 
 from entitysdk.models.morphology import ReconstructionMorphology
-
 
 logger = logging.getLogger(__name__)
 
@@ -12,7 +11,8 @@ logger = logging.getLogger(__name__)
 def download_morphology(
     client, access_token, morphology, morph_dir="./morphology", file_type="asc"
 ):
-    """Download morphology file
+    """Download morphology file.
+
     Args:
         client (Client): EntitySDK client
         access_token (str): access token for authentication
@@ -37,7 +37,7 @@ def download_morphology(
     # fallback #1: we expect at least a asc or swc file
     if asset_id is None:
         for asset in morphology.assets:
-            if 'asc' in asset.content_type or 'swc' in asset.content_type:
+            if "asc" in asset.content_type or "swc" in asset.content_type:
                 logger.warning(
                     "No %s file found in the morphology %s, will select the one with %s.",
                     file_type,

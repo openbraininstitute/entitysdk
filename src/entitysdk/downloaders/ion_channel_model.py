@@ -4,7 +4,7 @@ from entitysdk.models.ion_channel_model import IonChannelModel
 
 
 def download_one_mechanism(client, access_token, ic, mechanisms_dir="./mechanisms"):
-    """Download one mechanism file
+    """Download one mechanism file.
 
     Args:
         client (Client): EntitySDK client

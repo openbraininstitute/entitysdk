@@ -6,7 +6,7 @@ from entitysdk.models.emodel import EModel
 
 
 def download_hoc(client, access_token, emodel, hoc_dir="./hoc"):
-    """Download hoc file
+    """Download hoc file.
 
     Args:
         client (Client): EntitySDK client
