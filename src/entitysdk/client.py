@@ -3,6 +3,7 @@
 import io
 import os
 from pathlib import Path
+from typing import Any, cast
 
 import httpx
 
@@ -11,7 +12,9 @@ from entitysdk.common import ProjectContext
 from entitysdk.exception import EntitySDKError
 from entitysdk.models.asset import Asset, LocalAssetMetadata
 from entitysdk.models.core import Identifiable
+from entitysdk.models.entity import Entity
 from entitysdk.result import IteratorResult
+from entitysdk.schemas.asset import DownloadedAsset
 from entitysdk.token_manager import TokenManager
 from entitysdk.types import ID, DeploymentEnvironment
 from entitysdk.util import (
@@ -19,6 +22,7 @@ from entitysdk.util import (
     create_intermediate_directories,
     validate_filename_extension_consistency,
 )
+from entitysdk.utils.asset import filter_assets
 
 
 class Client:
@@ -361,7 +365,7 @@ class Client:
         output_path: os.PathLike,
         project_context: ProjectContext | None = None,
         token: str | None = None,
-    ) -> None:
+    ) -> Path:
         """Download asset file to a file path.
 
         Args:
@@ -371,6 +375,9 @@ class Client:
             output_path: Either be a file path to write the file to or an output directory.
             project_context: Optional project context.
             token: Authorization access token.
+
+        Returns:
+            Output file path.
         """
         asset_endpoint = route.get_assets_endpoint(
             api_url=self.api_url,
@@ -401,6 +408,60 @@ class Client:
             output_path=path,
             http_client=self._http_client,
         )
+
+    def download_assets(
+        self,
+        *,
+        entity_or_id: Entity | tuple[ID, type[Entity]],
+        selection: dict[str, Any] | None = None,
+        output_path: Path,
+        project_context: ProjectContext | None = None,
+        token: str | None = None,
+    ) -> IteratorResult:
+        """Download assets."""
+
+        def _download_entity_asset(asset):
+            if asset.is_directory:
+                raise NotImplementedError
+            else:
+                path = self.download_file(
+                    entity_id=entity.id,
+                    entity_type=type(entity),
+                    asset_id=asset.id,
+                    output_path=output_path,
+                    project_context=context,
+                    token=token,
+                )
+
+            return DownloadedAsset(
+                asset=asset,
+                output_path=path,
+            )
+
+        token = self._get_token(override_token=token)
+        context = self._optional_user_context(override_context=project_context)
+        if isinstance(entity_or_id, tuple):
+            entity_id, entity_type = entity_or_id
+            entity = self.get_entity(
+                entity_id=entity_id,
+                entity_type=entity_type,
+                with_assets=True,
+                project_context=context,
+                token=token,
+            )
+        else:
+            entity = entity_or_id
+
+        if not issubclass(type(entity), Entity):
+            raise EntitySDKError(f"Type {type(entity)} has no assets.")
+
+        entity = cast(Entity, entity)
+
+        if not entity.assets:
+            raise EntitySDKError(f"Type {type(entity)} has no assets.")
+
+        assets = filter_assets(entity.assets, selection) if selection else entity.assets
+        return IteratorResult(map(_download_entity_asset, assets))
 
     def delete_asset(
         self,

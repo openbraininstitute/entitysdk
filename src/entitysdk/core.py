@@ -211,7 +211,7 @@ def download_asset_file(
     project_context: ProjectContext | None = None,
     token: str,
     http_client: httpx.Client | None = None,
-) -> None:
+) -> Path:
     """Download asset file to a file path.
 
     Args:
@@ -220,6 +220,9 @@ def download_asset_file(
         project_context: Project context.
         token: Authorization access token.
         http_client: HTTP client.
+
+    Returns:
+        Output file path.
     """
     bytes_content = download_asset_content(
         url=url,
@@ -228,6 +231,7 @@ def download_asset_file(
         http_client=http_client,
     )
     output_path.write_bytes(bytes_content)
+    return output_path
 
 
 def download_asset_content(

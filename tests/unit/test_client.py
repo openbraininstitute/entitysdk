@@ -409,6 +409,23 @@ def test_client_download_file__asset_subdirectory_paths(
     assert Path(output_path, "foo/bar/bar.swc").read_bytes() == b"bar"
 
 
+'''
+def test_client_download_file__match():
+    """Test matcing an asset."""
+    entity_id = uuid.uuid4()
+    asset1_id = uuid.uuid4()
+    asset2_id = uuid.uuid4()
+
+    client.download_file(
+        entity_id=entity_id,
+        entity_type=Entity,
+        match={"content_type": "application/json"},
+        output_path=output_path,
+        token=auth_token,
+    )
+'''
+
+
 @patch("entitysdk.route.get_route_name")
 def test_client_get(
     mock_route,
