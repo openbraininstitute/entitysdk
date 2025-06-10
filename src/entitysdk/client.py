@@ -107,7 +107,6 @@ class Client:
         entity_id: ID,
         *,
         entity_type: type[Identifiable],
-        with_assets: bool = True,
         project_context: ProjectContext | None = None,
         token: str | None = None,
     ) -> Identifiable:
@@ -130,28 +129,13 @@ class Client:
         )
         token = self._get_token(override_token=token)
         context = self._optional_user_context(override_context=project_context)
-        entity = core.get_entity(
+        return core.get_entity(
             url=url,
             token=token,
             entity_type=entity_type,
             project_context=context,
             http_client=self._http_client,
         )
-        if with_assets and "assets" in entity_type.model_fields:
-            url = route.get_assets_endpoint(
-                api_url=self.api_url,
-                entity_type=entity_type,
-                entity_id=entity_id,
-            )
-            assets = core.get_entity_assets(
-                url=url,
-                token=token,
-                project_context=context,
-                http_client=self._http_client,
-            )
-            entity = entity.evolve(assets=assets)
-
-        return entity
 
     def search_entity(
         self,
@@ -411,8 +395,8 @@ class Client:
 
     def download_assets(
         self,
-        *,
         entity_or_id: Entity | tuple[ID, type[Entity]],
+        *,
         selection: dict[str, Any] | None = None,
         output_path: Path,
         project_context: ProjectContext | None = None,
@@ -422,7 +406,7 @@ class Client:
 
         def _download_entity_asset(asset):
             if asset.is_directory:
-                raise NotImplementedError
+                raise NotImplementedError("Downloading asset directories is not supported yet.")
             else:
                 path = self.download_file(
                     entity_id=entity.id,
@@ -445,7 +429,6 @@ class Client:
             entity = self.get_entity(
                 entity_id=entity_id,
                 entity_type=entity_type,
-                with_assets=True,
                 project_context=context,
                 token=token,
             )

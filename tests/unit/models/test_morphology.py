@@ -28,7 +28,6 @@ def test_read_reconstruction_morphology(client, httpx_mock, auth_token, json_mor
         entity_id=MOCK_UUID,
         entity_type=ReconstructionMorphology,
         token=auth_token,
-        with_assets=False,
     )
     assert entity.model_dump(mode="json") == json_morphology_expanded | {"legacy_id": None}
 

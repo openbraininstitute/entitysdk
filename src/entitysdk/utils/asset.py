@@ -14,11 +14,11 @@ def filter_assets(assets: list[Asset], selection: dict[str, Any]) -> list[Asset]
     if not selection:
         return assets
 
-    if not selection.keys() <= assets[0].model_fields.keys():
+    if not selection.keys() <= Asset.model_fields.keys():
         raise EntitySDKError(
             "Selection keys are not matching asset metadata keys.\n"
             f"Selection: {sorted(selection.keys())}\n"
-            f"Available: {sorted(assets[0].model_fields.keys())}"
+            f"Available: {sorted(Asset.model_fields.keys())}"
         )
 
     def _selection_predicate(asset: Asset) -> bool:
