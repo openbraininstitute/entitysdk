@@ -3,12 +3,11 @@
 from pathlib import Path
 
 
-def download_one_mechanism(client, access_token, ic, mechanisms_dir="./mechanisms"):
+def download_one_mechanism(client, ic, mechanisms_dir="./mechanisms"):
     """Download one mechanism file.
 
     Args:
         client (Client): EntitySDK client
-        access_token (str): access token for authentication
         ic (IonChannelModel): IonChannelModel entitysdk object
         mechanisms_dir (str or Pathlib.Path): directory to save the mechanism file
     """
@@ -18,7 +17,6 @@ def download_one_mechanism(client, access_token, ic, mechanisms_dir="./mechanism
         ic,
         selection={"content_type": "application/neuron-mod"},
         output_path=mechanisms_dir,
-        token=access_token,
     ).one()
 
     return asset.output_path

@@ -7,13 +7,12 @@ logger = logging.getLogger(__name__)
 
 
 def download_morphology(
-    client, access_token, morphology, morph_dir="./morphology", file_type="asc"
+    client, morphology, morph_dir="./morphology", file_type="asc"
 ):
     """Download morphology file.
 
     Args:
         client (Client): EntitySDK client
-        access_token (str): access token for authentication
         morphology (ReconstructionMorphology): Morphology entitysdk object
         morph_dir (str or Pathlib.Path): directory to save the morphology file
         file_type (str or None): type of the morphology file (asc, swc or h5).
@@ -29,7 +28,6 @@ def download_morphology(
         morphology,
         selection={"content_type": f"application/{file_type}"},
         output_path=morph_dir,
-        token=access_token,
     ).one_or_none()
     # fallback #1: we expect at least a asc or swc file
     if asset is None:
@@ -37,14 +35,12 @@ def download_morphology(
             morphology,
             selection={"content_type": "application/asc"},
             output_path=morph_dir,
-            token=access_token,
         ).one_or_none()
         if asset is None:
             asset = client.download_assets(
                 morphology,
                 selection={"content_type": "application/swc"},
                 output_path=morph_dir,
-                token=access_token,
             ).one_or_none()
     # fallback #2: we take the first asset
     if asset is None:
@@ -56,7 +52,6 @@ def download_morphology(
         asset = client.download_assets(
             morphology,
             output_path=morph_dir,
-            token=access_token,
         ).first()
 
     return asset.output_path

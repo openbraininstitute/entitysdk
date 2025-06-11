@@ -3,12 +3,11 @@
 from pathlib import Path
 
 
-def download_hoc(client, access_token, emodel, hoc_dir="./hoc"):
+def download_hoc(client, emodel, hoc_dir="./hoc"):
     """Download hoc file.
 
     Args:
         client (Client): EntitySDK client
-        access_token (str): access token for authentication
         emodel (EModel): EModel entitysdk object
         hoc_dir (str or Pathlib.Path): directory to save the hoc file
     """
@@ -18,7 +17,6 @@ def download_hoc(client, access_token, emodel, hoc_dir="./hoc"):
         emodel,
         selection={"content_type": "application/hoc"},
         output_path=hoc_dir,
-        token=access_token,
     ).one()
 
     return asset.output_path
