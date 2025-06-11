@@ -16,57 +16,34 @@ from entitysdk.types import DeploymentEnvironment
 
 
 def test_client_api_url():
-    client = Client(api_url="foo")
+    client = Client(api_url="foo", token_manager="foo")
     assert client.api_url == "foo"
 
-    client = Client(api_url=None, environment="staging")
+    client = Client(api_url=None, environment="staging", token_manager="foo")
     assert client.api_url == settings.staging_api_url
 
-    client = Client(api_url=None, environment="production")
+    client = Client(api_url=None, environment="production", token_manager="foo")
     assert client.api_url == settings.production_api_url
 
     with pytest.raises(
         EntitySDKError, match="Either the api_url or environment must be defined, not both."
     ):
-        Client(api_url="foo", environment="staging")
+        Client(api_url="foo", environment="staging", token_manager="foo")
 
     with pytest.raises(EntitySDKError, match="Neither api_url nor environment have been defined."):
-        Client()
+        Client(token_manager="foo")
 
     with pytest.raises(EntitySDKError, match="Either api_url or environment is of the wrong type."):
-        Client(api_url=int)
+        Client(api_url=int, token_manager="foo")
 
     str_envs = [str(env) for env in DeploymentEnvironment]
     expected = f"'foo' is not a valid DeploymentEnvironment. Choose one of: {str_envs}"
     with pytest.raises(EntitySDKError, match=re.escape(expected)):
-        Client(environment="foo")
-
-
-def test_client_get_token():
-    class Foo:
-        def get_token(self):
-            return "foo"
-
-    client = Client(api_url="foo", project_context=None, token_manager=Foo())
-
-    res = client._get_token()
-    assert res == "foo"
-
-    res = client._get_token(override_token="override")
-    assert res == "override"
-
-
-def test_client__get_token__raises():
-    client = Client(api_url="foo", project_context=None)
-
-    with pytest.raises(
-        EntitySDKError, match="Either override_token or token_manager must be provided."
-    ):
-        client._get_token()
+        Client(environment="foo", token_manager="foo")
 
 
 def test_client_project_context__raises():
-    client = Client(api_url="foo", project_context=None)
+    client = Client(api_url="foo", project_context=None, token_manager="foo")
 
     with pytest.raises(EntitySDKError, match="A project context is mandatory for this operation."):
         client._required_user_context(override_context=None)
@@ -90,7 +67,6 @@ def test_client_search(client, httpx_mock, auth_token):
         client.search_entity(
             entity_type=Entity,
             query={"name": "foo"},
-            token=auth_token,
             limit=2,
         )
     )
@@ -116,7 +92,6 @@ def test_client_nupdate(mocked_route, client, httpx_mock, auth_token):
         entity_id=id1,
         entity_type=Foo,
         attrs_or_entity={"name": new_name},
-        token=auth_token,
     )
 
     assert res.id == id1
@@ -128,7 +103,6 @@ def test_client_nupdate(mocked_route, client, httpx_mock, auth_token):
         entity_id=id1,
         entity_type=Foo,
         attrs_or_entity=Foo(name=new_name),
-        token=auth_token,
     )
 
     assert res.id == id1
@@ -185,7 +159,6 @@ def test_client_upload_file(
         file_path=path,
         file_content_type="text/plain",
         file_metadata={"key": "value"},
-        token=auth_token,
     )
 
     assert res.id == asset_id
@@ -218,7 +191,6 @@ def test_client_upload_content(
         file_content=buffer,
         file_content_type="text/plain",
         file_metadata={"key": "value"},
-        token=auth_token,
     )
 
     assert res.id == asset_id
@@ -241,7 +213,6 @@ def test_client_download_content(
         entity_id=entity_id,
         entity_type=Entity,
         asset_id=asset_id,
-        token=auth_token,
     )
     assert res == b"foo"
 
@@ -278,7 +249,6 @@ def test_client_download_file__output_file(
         entity_type=Entity,
         asset_id=asset_id,
         output_path=output_path,
-        token=auth_token,
     )
     assert output_path.read_bytes() == b"foo"
 
@@ -313,7 +283,6 @@ def test_client_download_file__output_file__inconsistent_ext(
             entity_type=Entity,
             asset_id=asset_id,
             output_path=output_path,
-            token=auth_token,
         )
 
 
@@ -352,7 +321,6 @@ def test_client_download_file__output_file__user_subdirectory_path(
         entity_type=Entity,
         asset_id=asset_id,
         output_path=output_path,
-        token=auth_token,
     )
     assert output_path.read_bytes() == b"foo"
 
@@ -403,14 +371,12 @@ def test_client_download_file__asset_subdirectory_paths(
         entity_type=Entity,
         asset_id=asset1_id,
         output_path=output_path,
-        token=auth_token,
     )
     client.download_file(
         entity_id=entity_id,
         entity_type=Entity,
         asset_id=asset2_id,
         output_path=output_path,
-        token=auth_token,
     )
 
     assert Path(output_path, "foo/bar/foo.h5").read_bytes() == b"foo"
@@ -452,7 +418,6 @@ def test_client_get(
     res = client.get_entity(
         entity_id=str(entity_id),
         entity_type=Entity,
-        token=auth_token,
     )
     assert res.id == entity_id
     assert len(res.assets) == 2
@@ -500,7 +465,6 @@ def test_client_delete_asset(
         entity_id=entity_id,
         entity_type=None,
         asset_id=asset_id,
-        token=auth_token,
     )
 
     assert res.id == asset_id
@@ -546,7 +510,6 @@ def test_client_update_asset(
         file_name="foo.txt",
         file_content_type="application/swc",
         asset_id=asset_id,
-        token=auth_token,
     )
 
     assert res.id == asset_id
@@ -593,7 +556,6 @@ def test_client_download_assets(
         selection={"content_type": "application/swc"},
         output_path=tmp_path,
         project_context=project_context,
-        token=auth_token,
     ).one()
 
     assert res.asset.path == "foo/bar/bar.swc"
@@ -619,7 +581,6 @@ def test_client_download_assets__no_assets_raise(
             selection={"content_type": "application/swc"},
             output_path=tmp_path,
             project_context=project_context,
-            token=auth_token,
         ).one()
 
 
@@ -641,7 +602,6 @@ def test_client_download_assets__non_entity(
             selection={"content_type": "application/swc"},
             output_path=tmp_path,
             project_context=project_context,
-            token=auth_token,
         ).one()
 
 
@@ -666,7 +626,6 @@ def test_client_download_assets__directory_not_supported(
             (entity_id, Entity),
             output_path=tmp_path,
             project_context=project_context,
-            token=auth_token,
         ).one()
 
 
@@ -710,7 +669,6 @@ def test_client_download_assets__entity(
         selection={"content_type": "application/json"},
         output_path=tmp_path,
         project_context=project_context,
-        token=auth_token,
     ).all()
 
     assert len(res) == 1

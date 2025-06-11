@@ -27,7 +27,6 @@ def test_read_reconstruction_morphology(client, httpx_mock, auth_token, json_mor
     entity = client.get_entity(
         entity_id=MOCK_UUID,
         entity_type=ReconstructionMorphology,
-        token=auth_token,
     )
     assert entity.model_dump(mode="json") == json_morphology_expanded | {"legacy_id": None}
 
@@ -38,7 +37,7 @@ def test_register_reconstruction_morphology(
     httpx_mock.add_response(
         method="POST", json=morphology.model_dump(mode="json") | {"id": str(MOCK_UUID)}
     )
-    registered = client.register_entity(entity=morphology, token=auth_token)
+    registered = client.register_entity(entity=morphology)
     expected_json = json_morphology_expanded.copy() | {"id": str(MOCK_UUID)}
     assert registered.model_dump(mode="json") == expected_json | {"legacy_id": None}
 
@@ -54,7 +53,6 @@ def test_update_reconstruction_morphology(
         entity_id=morphology.id,
         entity_type=ReconstructionMorphology,
         attrs_or_entity={"name": "foo"},
-        token=auth_token,
     )
 
     expected_json = json_morphology_expanded.copy() | {"name": "foo"}

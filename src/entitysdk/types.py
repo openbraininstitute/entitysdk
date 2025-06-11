@@ -4,6 +4,7 @@ import uuid
 from enum import StrEnum, auto
 
 ID = uuid.UUID
+Token = str
 
 
 class DeploymentEnvironment(StrEnum):

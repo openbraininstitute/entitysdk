@@ -14,6 +14,8 @@ from entitysdk.models.memodel import MEModel
 from entitysdk.models.memodelcalibrationresult import MEModelCalibrationResult
 from entitysdk.models.morphology import ReconstructionMorphology
 from entitysdk.models.mtype import MTypeClass
+from entitysdk.models.simulation import Simulation
+from entitysdk.models.simulation_campaign import SimulationCampaign
 from entitysdk.models.subject import Subject
 from entitysdk.models.taxonomy import Species, Strain, Taxonomy
 from entitysdk.models.validation_result import ValidationResult
@@ -36,6 +38,8 @@ __all__ = [
     "Person",
     "ReconstructionMorphology",
     "Role",
+    "Simulation",
+    "SimulationCampaign",
     "Species",
     "Strain",
     "Subject",
