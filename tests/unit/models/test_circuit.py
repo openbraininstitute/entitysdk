@@ -26,7 +26,6 @@ def test_read_circuit(client, httpx_mock, auth_token, json_data):
         entity_id=MOCK_UUID,
         entity_type=Circuit,
         token=auth_token,
-        with_assets=False,
     )
     assert entity.model_dump(mode="json") == json_data | {"legacy_id": None}
 
