@@ -26,7 +26,6 @@ def test_read_ion_channel_model(client, httpx_mock, auth_token, json_ion_channel
         entity_id=MOCK_UUID,
         entity_type=IonChannelModel,
         token=auth_token,
-        with_assets=False,
     )
     assert entity.model_dump(mode="json") == json_ion_channel_expanded | {"legacy_id": None}
 

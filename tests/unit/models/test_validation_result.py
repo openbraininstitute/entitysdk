@@ -28,7 +28,6 @@ def test_read(client, httpx_mock, auth_token, json_data):
         entity_id=MOCK_UUID,
         entity_type=Model,
         token=auth_token,
-        with_assets=False,
     )
     assert entity.model_dump(mode="json", exclude_none=True) == json_data
 

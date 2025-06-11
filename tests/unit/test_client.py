@@ -9,6 +9,7 @@ import pytest
 from entitysdk.client import Client
 from entitysdk.config import settings
 from entitysdk.exception import EntitySDKError
+from entitysdk.models import Asset, MTypeClass
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.types import DeploymentEnvironment
@@ -132,6 +133,13 @@ def test_client_nupdate(mocked_route, client, httpx_mock, auth_token):
 
     assert res.id == id1
     assert res.name == new_name
+
+
+def _mock_entity_response(entity_id):
+    return {
+        "id": str(entity_id),
+        "description": "my-entity",
+    }
 
 
 def _mock_asset_response(asset_id):
@@ -423,32 +431,28 @@ def test_client_get(
     asset_id1 = uuid.uuid4()
     asset_id2 = uuid.uuid4()
 
-    class EntityWithAssets(Entity):
-        """Entity plus assets."""
-
     mock_route.return_value = "entity"
 
     httpx_mock.add_response(
         method="GET",
         url=f"{api_url}/entity/{entity_id}",
         match_headers=request_headers,
-        json={"id": str(entity_id), "name": "foo", "description": "bar", "type": "entity"},
-    )
-    httpx_mock.add_response(
-        method="GET",
-        url=f"{api_url}/entity/{entity_id}/assets",
-        match_headers=request_headers,
         json={
-            "data": [_mock_asset_response(asset_id1), _mock_asset_response(asset_id2)],
-            "pagination": {"page": 1, "page_size": 10, "total_items": 2},
+            "id": str(entity_id),
+            "name": "foo",
+            "description": "bar",
+            "type": "entity",
+            "assets": [
+                _mock_asset_response(asset_id1),
+                _mock_asset_response(asset_id2),
+            ],
         },
     )
 
     res = client.get_entity(
         entity_id=str(entity_id),
-        entity_type=EntityWithAssets,
+        entity_type=Entity,
         token=auth_token,
-        with_assets=True,
     )
     assert res.id == entity_id
     assert len(res.assets) == 2
@@ -547,3 +551,166 @@ def test_client_update_asset(
 
     assert res.id == asset_id
     assert res.status == "created"
+
+
+def test_client_download_assets(
+    tmp_path, api_url, client, project_context, auth_token, request_headers, httpx_mock
+):
+    entity_id = uuid.uuid4()
+    asset1_id = uuid.uuid4()
+    asset2_id = uuid.uuid4()
+
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}",
+        match_headers=request_headers,
+        json=_mock_entity_response(entity_id)
+        | {
+            "assets": [
+                _mock_asset_response(asset1_id)
+                | {"path": "foo/bar/bar.h5", "content_type": "application/hdf5"},
+                _mock_asset_response(asset2_id)
+                | {"path": "foo/bar/bar.swc", "content_type": "application/swc"},
+            ]
+        },
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset2_id}",
+        match_headers=request_headers,
+        json=_mock_asset_response(asset2_id)
+        | {"path": "foo/bar/bar.swc", "content_type": "application/swc"},
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset2_id}/download",
+        match_headers=request_headers,
+        content=b"bar",
+    )
+
+    res = client.download_assets(
+        (entity_id, Entity),
+        selection={"content_type": "application/swc"},
+        output_path=tmp_path,
+        project_context=project_context,
+        token=auth_token,
+    ).one()
+
+    assert res.asset.path == "foo/bar/bar.swc"
+    assert res.output_path == tmp_path / "foo/bar/bar.swc"
+    assert res.output_path.read_bytes() == b"bar"
+
+
+def test_client_download_assets__no_assets_raise(
+    tmp_path, api_url, client, project_context, auth_token, request_headers, httpx_mock
+):
+    entity_id = uuid.uuid4()
+
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}",
+        match_headers=request_headers,
+        json=_mock_entity_response(entity_id) | {"assets": []},
+    )
+
+    with pytest.raises(EntitySDKError, match="has no assets"):
+        client.download_assets(
+            (entity_id, Entity),
+            selection={"content_type": "application/swc"},
+            output_path=tmp_path,
+            project_context=project_context,
+            token=auth_token,
+        ).one()
+
+
+def test_client_download_assets__non_entity(
+    tmp_path, api_url, client, project_context, auth_token, request_headers, httpx_mock
+):
+    entity_id = uuid.uuid4()
+
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/mtype/{entity_id}",
+        match_headers=request_headers,
+        json=_mock_entity_response(entity_id) | {"pref_label": "foo", "definition": "bar"},
+    )
+
+    with pytest.raises(EntitySDKError, match="has no assets"):
+        client.download_assets(
+            (entity_id, MTypeClass),
+            selection={"content_type": "application/swc"},
+            output_path=tmp_path,
+            project_context=project_context,
+            token=auth_token,
+        ).one()
+
+
+def test_client_download_assets__directory_not_supported(
+    tmp_path, api_url, client, project_context, auth_token, request_headers, httpx_mock
+):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}",
+        match_headers=request_headers,
+        json=_mock_entity_response(entity_id)
+        | {"assets": [_mock_asset_response(asset_id) | {"is_directory": True}]},
+    )
+
+    with pytest.raises(
+        NotImplementedError, match="Downloading asset directories is not supported yet."
+    ):
+        client.download_assets(
+            (entity_id, Entity),
+            output_path=tmp_path,
+            project_context=project_context,
+            token=auth_token,
+        ).one()
+
+
+def test_client_download_assets__entity(
+    tmp_path, api_url, client, project_context, auth_token, request_headers, httpx_mock
+):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+
+    entity = Entity(
+        id=entity_id,
+        name="foo",
+        description="bar",
+        assets=[
+            Asset(
+                id=asset_id,
+                path="foo.json",
+                full_path="/foo/asset1",
+                is_directory=False,
+                content_type="application/json",
+                size=1,
+            ),
+        ],
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}",
+        match_headers=request_headers,
+        json=_mock_asset_response(asset_id)
+        | {"path": "foo.json", "content_type": "application/json"},
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download",
+        match_headers=request_headers,
+        content=b"bar",
+    )
+
+    res = client.download_assets(
+        entity,
+        selection={"content_type": "application/json"},
+        output_path=tmp_path,
+        project_context=project_context,
+        token=auth_token,
+    ).all()
+
+    assert len(res) == 1
