@@ -76,8 +76,3 @@ def test_filter_assets__invalid_keys(assets):
         test_module.filter_assets(
             assets, selection={"content_type": "application/json", "foo": "bar"}
         )
-
-    with pytest.raises(EntitySDKError, match="Selection keys are not matching asset metadata keys"):
-        test_module.filter_assets(
-            assets, selection={"content_type": "application/json", "foo": "bar"}
-        )
