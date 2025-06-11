@@ -1,24 +1,30 @@
 """Download functions for Morphology entities."""
 
 import logging
-import pathlib
+from pathlib import Path
+
+from entitysdk.client import Client
+from entitysdk.models.morphology import ReconstructionMorphology
 
 logger = logging.getLogger(__name__)
 
 
-def download_morphology(client, morphology, morph_dir="./morphology", file_type="asc"):
+def download_morphology(
+    client: Client,
+    morphology: ReconstructionMorphology,
+    morph_dir: str | Path,
+    file_type: str | None = "asc",
+) -> Path:
     """Download morphology file.
 
     Args:
         client (Client): EntitySDK client
         morphology (ReconstructionMorphology): Morphology entitysdk object
-        morph_dir (str or Pathlib.Path): directory to save the morphology file
+        morph_dir (str or Path): directory to save the morphology file
         file_type (str or None): type of the morphology file (asc, swc or h5).
             Will take the first one if None.
     """
-    if not morphology.assets:
-        raise ValueError(f"No assets found in the morphology {morphology.name}.")
-    morph_dir = pathlib.Path(morph_dir)
+    morph_dir = Path(morph_dir)
     morph_dir.mkdir(parents=True, exist_ok=True)
 
     # try to fetch morphology with the specified file type

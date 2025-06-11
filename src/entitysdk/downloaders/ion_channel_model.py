@@ -2,8 +2,14 @@
 
 from pathlib import Path
 
+from entitysdk.client import Client
+from entitysdk.models.ion_channel_model import IonChannelModel
 
-def download_one_mechanism(client, ic, mechanisms_dir="./mechanisms"):
+def download_one_mechanism(
+    client: Client,
+    ic: IonChannelModel,
+    mechanisms_dir: str | Path,
+) -> Path:
     """Download one mechanism file.
 
     Args:

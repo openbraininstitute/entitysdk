@@ -4,13 +4,16 @@ import itertools
 import pathlib
 from concurrent.futures import ThreadPoolExecutor
 
+from entitysdk.client import Client
 from entitysdk.downloaders.emodel import download_hoc
 from entitysdk.downloaders.ion_channel_model import download_one_mechanism
 from entitysdk.downloaders.morphology import download_morphology
 from entitysdk.models.emodel import EModel
+from entitysdk.models.memodel import MEModel
+from entitysdk.schemas.memodel import DownloadedMEModel
 
 
-def download_memodel(client, memodel):
+def download_memodel(client: Client, memodel: MEModel):
     """Download all assets needed to run an me-model: hoc, ion channel models, and morphology.
 
     Args:
@@ -40,4 +43,6 @@ def download_memodel(client, memodel):
         hoc_path = hoc_future.result()
         morphology_path = morph_future.result()
 
-    return hoc_path, mechanisms_dir, morphology_path
+    return DownloadedMEModel(
+        hoc_path=hoc_path, mechanisms_dir=mechanisms_dir, morphology_path=morphology_path
+    )
