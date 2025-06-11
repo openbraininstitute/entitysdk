@@ -102,7 +102,6 @@ class Client:
         Args:
             entity_id: Resource id of the entity.
             entity_type: Type of the entity.
-            with_assets: Whether to include assets in the response.
             project_context: Optional project context.
 
         Returns:

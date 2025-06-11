@@ -1,0 +1,133 @@
+{
+  "assets": [],
+  "id": "be2daf30-c2a0-4433-a0e2-5e20ccff5908",
+  "update_date": "2025-06-11T09:33:51.707275Z",
+  "creation_date": "2025-06-11T09:33:51.707275Z",
+  "name": "my-campaign",
+  "description": "my-campaign-description",
+  "type": "simulation_campaign",
+  "created_by": {
+    "id": "e8997b32-0183-42c8-b11f-1a61da933a89",
+    "update_date": null,
+    "creation_date": null,
+    "type": "person",
+    "pref_label": "Admin User",
+    "given_name": null,
+    "family_name": null
+  },
+  "updated_by": {
+    "id": "e8997b32-0183-42c8-b11f-1a61da933a89",
+    "update_date": null,
+    "creation_date": null,
+    "type": "person",
+    "pref_label": "Admin User",
+    "given_name": null,
+    "family_name": null
+  },
+  "authorized_public": false,
+  "authorized_project_id": "0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6",
+  "contributions": null,
+  "legacy_id": null,
+  "simulations": [
+    {
+      "assets": [],
+      "id": "32073304-a8cc-4461-9ef7-9d526527214b",
+      "update_date": null,
+      "creation_date": null,
+      "name": "sim-0",
+      "description": "sim-0",
+      "type": "simulation",
+      "created_by": null,
+      "updated_by": null,
+      "authorized_public": false,
+      "authorized_project_id": null,
+      "contributions": null,
+      "legacy_id": null,
+      "simulation_campaign_id": "be2daf30-c2a0-4433-a0e2-5e20ccff5908",
+      "entity_id": "de90ac58-bca9-4bb8-8cd4-9c3efce6ba64",
+      "scan_parameters": {
+        "foo": "bar"
+      }
+    },
+    {
+      "assets": [],
+      "id": "e2549cb6-c065-4827-ba09-005117a0a1a7",
+      "update_date": null,
+      "creation_date": null,
+      "name": "sim-1",
+      "description": "sim-1",
+      "type": "simulation",
+      "created_by": null,
+      "updated_by": null,
+      "authorized_public": false,
+      "authorized_project_id": null,
+      "contributions": null,
+      "legacy_id": null,
+      "simulation_campaign_id": "be2daf30-c2a0-4433-a0e2-5e20ccff5908",
+      "entity_id": "de90ac58-bca9-4bb8-8cd4-9c3efce6ba64",
+      "scan_parameters": {
+        "foo": "bar"
+      }
+    },
+    {
+      "assets": [],
+      "id": "fa6fee42-b551-403d-b81b-ff8ba3ebd9af",
+      "update_date": null,
+      "creation_date": null,
+      "name": "sim-2",
+      "description": "sim-2",
+      "type": "simulation",
+      "created_by": null,
+      "updated_by": null,
+      "authorized_public": false,
+      "authorized_project_id": null,
+      "contributions": null,
+      "legacy_id": null,
+      "simulation_campaign_id": "be2daf30-c2a0-4433-a0e2-5e20ccff5908",
+      "entity_id": "de90ac58-bca9-4bb8-8cd4-9c3efce6ba64",
+      "scan_parameters": {
+        "foo": "bar"
+      }
+    },
+    {
+      "assets": [],
+      "id": "0648c68d-71fa-4d10-842f-20bf13a194b1",
+      "update_date": null,
+      "creation_date": null,
+      "name": "sim-3",
+      "description": "sim-3",
+      "type": "simulation",
+      "created_by": null,
+      "updated_by": null,
+      "authorized_public": false,
+      "authorized_project_id": null,
+      "contributions": null,
+      "legacy_id": null,
+      "simulation_campaign_id": "be2daf30-c2a0-4433-a0e2-5e20ccff5908",
+      "entity_id": "de90ac58-bca9-4bb8-8cd4-9c3efce6ba64",
+      "scan_parameters": {
+        "foo": "bar"
+      }
+    },
+    {
+      "assets": [],
+      "id": "1919b9bb-e444-45ea-8bb9-30faa7641c1b",
+      "update_date": null,
+      "creation_date": null,
+      "name": "sim-4",
+      "description": "sim-4",
+      "type": "simulation",
+      "created_by": null,
+      "updated_by": null,
+      "authorized_public": false,
+      "authorized_project_id": null,
+      "contributions": null,
+      "legacy_id": null,
+      "simulation_campaign_id": "be2daf30-c2a0-4433-a0e2-5e20ccff5908",
+      "entity_id": "de90ac58-bca9-4bb8-8cd4-9c3efce6ba64",
+      "scan_parameters": {
+        "foo": "bar"
+      }
+    }
+  ]
+}
