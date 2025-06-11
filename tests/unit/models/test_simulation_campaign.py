@@ -25,7 +25,6 @@ def test_read_simulation_campaign(client, httpx_mock, auth_token, json_data):
     entity = client.get_entity(
         entity_id=MOCK_UUID,
         entity_type=SimulationCampaign,
-        token=auth_token,
     )
     assert entity.model_dump(mode="json") == json_data | {"legacy_id": None}
 
@@ -36,6 +35,6 @@ def test_register_simulation_campaign(
     httpx_mock.add_response(
         method="POST", json=simulation_campaign.model_dump(mode="json") | {"id": str(MOCK_UUID)}
     )
-    registered = client.register_entity(entity=simulation_campaign, token=auth_token)
+    registered = client.register_entity(entity=simulation_campaign)
     expected_json = json_data.copy() | {"id": str(MOCK_UUID)}
     assert registered.model_dump(mode="json") == expected_json | {"legacy_id": None}
