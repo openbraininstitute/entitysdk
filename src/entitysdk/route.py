@@ -9,6 +9,7 @@ _ROUTES = {
     "Activity": "activity",
     "BrainLocation": "brain-location",
     "BrainRegion": "brain-region",
+    "Circuit": "circuit",
     "Contribution": "contribution",
     "ElectricalCellRecording": "electrical-cell-recording",
     "EModel": "emodel",
@@ -25,6 +26,7 @@ _ROUTES = {
     "Role": "role",
     "Species": "species",
     "Strain": "strain",
+    "Subject": "subject",
     "Taxonomy": "taxonomy",
     "ValidationResult": "validation-result",
 }
