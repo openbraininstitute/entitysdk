@@ -6,9 +6,7 @@ import pathlib
 logger = logging.getLogger(__name__)
 
 
-def download_morphology(
-    client, morphology, morph_dir="./morphology", file_type="asc"
-):
+def download_morphology(client, morphology, morph_dir="./morphology", file_type="asc"):
     """Download morphology file.
 
     Args:

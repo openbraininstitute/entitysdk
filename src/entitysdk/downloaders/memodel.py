@@ -27,9 +27,7 @@ def download_memodel(client, memodel):
     max_workers = len(emodel.ion_channel_models) + 2
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         hoc_future = executor.submit(download_hoc, client, emodel, "./hoc")
-        morph_future = executor.submit(
-            download_morphology, client, morphology, "./morphology"
-        )
+        morph_future = executor.submit(download_morphology, client, morphology, "./morphology")
         mechanisms_dir = pathlib.Path("./mechanisms")
         mechanisms_dir.mkdir(parents=True, exist_ok=True)
         executor.map(
