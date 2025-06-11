@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 def download_morphology(
     client: Client,
     morphology: ReconstructionMorphology,
-    morph_dir: str | Path,
+    output_dir: str | Path,
     file_type: str | None = "asc",
 ) -> Path:
     """Download morphology file.
@@ -20,31 +20,31 @@ def download_morphology(
     Args:
         client (Client): EntitySDK client
         morphology (ReconstructionMorphology): Morphology entitysdk object
-        morph_dir (str or Path): directory to save the morphology file
+        output_dir (str or Path): directory to save the morphology file
         file_type (str or None): type of the morphology file (asc, swc or h5).
             Will take the first one if None.
     """
-    morph_dir = Path(morph_dir)
-    morph_dir.mkdir(parents=True, exist_ok=True)
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
 
     # try to fetch morphology with the specified file type
     asset = client.download_assets(
         morphology,
         selection={"content_type": f"application/{file_type}"},
-        output_path=morph_dir,
+        output_path=output_dir,
     ).one_or_none()
     # fallback #1: we expect at least a asc or swc file
     if asset is None:
         asset = client.download_assets(
             morphology,
             selection={"content_type": "application/asc"},
-            output_path=morph_dir,
+            output_path=output_dir,
         ).one_or_none()
         if asset is None:
             asset = client.download_assets(
                 morphology,
                 selection={"content_type": "application/swc"},
-                output_path=morph_dir,
+                output_path=output_dir,
             ).one_or_none()
     # fallback #2: we take the first asset
     if asset is None:
@@ -55,7 +55,7 @@ def download_morphology(
         )
         asset = client.download_assets(
             morphology,
-            output_path=morph_dir,
+            output_path=output_dir,
         ).first()
 
     return asset.output_path

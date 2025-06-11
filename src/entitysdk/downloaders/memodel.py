@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 from entitysdk.client import Client
 from entitysdk.downloaders.emodel import download_hoc
-from entitysdk.downloaders.ion_channel_model import download_one_mechanism
+from entitysdk.downloaders.ion_channel_model import download_ion_channel_mechanism
 from entitysdk.downloaders.morphology import download_morphology
 from entitysdk.models.emodel import EModel
 from entitysdk.models.memodel import MEModel
@@ -34,7 +34,7 @@ def download_memodel(client: Client, memodel: MEModel):
         mechanisms_dir = pathlib.Path("./mechanisms")
         mechanisms_dir.mkdir(parents=True, exist_ok=True)
         executor.map(
-            download_one_mechanism,
+            download_ion_channel_mechanism,
             itertools.repeat(client),
             emodel.ion_channel_models,
             itertools.repeat(mechanisms_dir),
