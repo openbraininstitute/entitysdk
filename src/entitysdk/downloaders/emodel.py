@@ -5,6 +5,7 @@ from pathlib import Path
 from entitysdk.client import Client
 from entitysdk.models.emodel import EModel
 
+
 def download_hoc(
     client: Client,
     emodel: EModel,

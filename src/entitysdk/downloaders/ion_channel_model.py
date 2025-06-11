@@ -5,6 +5,7 @@ from pathlib import Path
 from entitysdk.client import Client
 from entitysdk.models.ion_channel_model import IonChannelModel
 
+
 def download_ion_channel_mechanism(
     client: Client,
     ion_channel_model: IonChannelModel,
