@@ -6,6 +6,7 @@
   "name": "my-campaign",
   "description": "my-campaign-description",
   "type": "simulation_campaign",
+  "scan_parameters": {"foo": "bar"},
   "created_by": {
     "id": "e8997b32-0183-42c8-b11f-1a61da933a89",
     "update_date": null,

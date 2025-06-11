@@ -7,4 +7,5 @@ from entitysdk.models.simulation import Simulation
 class SimulationCampaign(Entity):
     """SimulationCampaign model."""
 
+    scan_parameters: dict
     simulations: list[Simulation] | None = None
