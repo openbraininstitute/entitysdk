@@ -23,6 +23,8 @@ _ROUTES = {
     "Organization": "organization",
     "Person": "person",
     "ReconstructionMorphology": "reconstruction-morphology",
+    "Simulation": "simulation",
+    "SimulationCampaign": "simulation-campaign",
     "Role": "role",
     "Species": "species",
     "Strain": "strain",
