@@ -4,6 +4,7 @@ from pathlib import Path
 
 from entitysdk.client import Client
 from entitysdk.models.ion_channel_model import IonChannelModel
+from entitysdk.utils.filesystem import create_dir
 
 
 def download_ion_channel_mechanism(
@@ -18,8 +19,7 @@ def download_ion_channel_mechanism(
         ion_channel_model (IonChannelModel): IonChannelModel entitysdk object
         output_dir (str or Pathlib.Path): directory to save the mechanism file
     """
-    output_dir = Path(output_dir)
-    output_dir.mkdir(parents=True, exist_ok=True)
+    output_dir = create_dir(output_dir)
     asset = client.download_assets(
         ion_channel_model,
         selection={"content_type": "application/neuron-mod"},

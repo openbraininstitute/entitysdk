@@ -1,10 +1,12 @@
 """Types definitions."""
 
+import os
 import uuid
 from enum import StrEnum, auto
 
 ID = uuid.UUID
 Token = str
+StrOrPath = str | os.PathLike[str]
 
 
 class DeploymentEnvironment(StrEnum):

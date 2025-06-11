@@ -5,6 +5,7 @@ from pathlib import Path
 
 from entitysdk.client import Client
 from entitysdk.models.morphology import ReconstructionMorphology
+from entitysdk.utils.filesystem import create_dir
 
 logger = logging.getLogger(__name__)
 
@@ -24,8 +25,7 @@ def download_morphology(
         file_type (str or None): type of the morphology file (asc, swc or h5).
             Will take the first one if None.
     """
-    output_dir = Path(output_dir)
-    output_dir.mkdir(parents=True, exist_ok=True)
+    output_dir = create_dir(output_dir)
 
     # try to fetch morphology with the specified file type
     asset = client.download_assets(

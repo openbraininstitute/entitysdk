@@ -1,7 +1,6 @@
 """Download functions for MEModel entities."""
 
 import itertools
-import pathlib
 from concurrent.futures import ThreadPoolExecutor
 
 from entitysdk.client import Client
@@ -11,6 +10,7 @@ from entitysdk.downloaders.morphology import download_morphology
 from entitysdk.models.emodel import EModel
 from entitysdk.models.memodel import MEModel
 from entitysdk.schemas.memodel import DownloadedMEModel
+from entitysdk.utils.filesystem import create_dir
 
 
 def download_memodel(client: Client, memodel: MEModel):
@@ -31,8 +31,7 @@ def download_memodel(client: Client, memodel: MEModel):
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         hoc_future = executor.submit(download_hoc, client, emodel, "./hoc")
         morph_future = executor.submit(download_morphology, client, morphology, "./morphology")
-        mechanisms_dir = pathlib.Path("./mechanisms")
-        mechanisms_dir.mkdir(parents=True, exist_ok=True)
+        mechanisms_dir = create_dir("./mechanisms")
         executor.map(
             download_ion_channel_mechanism,
             itertools.repeat(client),

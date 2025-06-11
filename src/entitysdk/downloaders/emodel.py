@@ -4,6 +4,7 @@ from pathlib import Path
 
 from entitysdk.client import Client
 from entitysdk.models.emodel import EModel
+from entitysdk.utils.filesystem import create_dir
 
 
 def download_hoc(
@@ -18,8 +19,7 @@ def download_hoc(
         emodel (EModel): EModel entitysdk object
         output_dir (str or Path): directory to save the hoc file
     """
-    output_dir = Path(output_dir)
-    output_dir.mkdir(parents=True, exist_ok=True)
+    output_dir = create_dir(output_dir)
     asset = client.download_assets(
         emodel,
         selection={"content_type": "application/hoc"},
