@@ -1,6 +1,6 @@
 """Download functions for IonChannelModel entities."""
 
-from entitysdk.models.ion_channel_model import IonChannelModel
+from pathlib import Path
 
 
 def download_one_mechanism(client, access_token, ic, mechanisms_dir="./mechanisms"):
@@ -12,15 +12,13 @@ def download_one_mechanism(client, access_token, ic, mechanisms_dir="./mechanism
         ic (IonChannelModel): IonChannelModel entitysdk object
         mechanisms_dir (str or Pathlib.Path): directory to save the mechanism file
     """
-    if not ic.assets:
-        raise ValueError(f"No assets found in the ion channel model {ic.name}.")
-    asset = ic.assets[0]
-    asset_id = asset.id
-    asset_path = asset.path
-    client.download_file(
-        asset_id=asset_id,
-        entity_id=ic.id,
-        entity_type=IonChannelModel,
+    mechanisms_dir = Path(mechanisms_dir)
+    mechanisms_dir.mkdir(parents=True, exist_ok=True)
+    asset = client.download_assets(
+        ic,
+        selection={"content_type": "application/neuron-mod"},
+        output_path=mechanisms_dir,
         token=access_token,
-        output_path=mechanisms_dir / asset_path,
-    )
+    ).one()
+
+    return asset.output_path

@@ -27,17 +27,17 @@ def download_memodel(client, access_token, memodel):
     # and always < 100, even for genetic models
     max_workers = len(emodel.ion_channel_models) + 2
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
-        hoc_future = executor.submit(download_hoc, emodel, client, access_token, "./hoc")
+        hoc_future = executor.submit(download_hoc, client, access_token, emodel, "./hoc")
         morph_future = executor.submit(
-            download_morphology, morphology, client, access_token, "./morphology"
+            download_morphology, client, access_token, morphology, "./morphology"
         )
         mechanisms_dir = pathlib.Path("./mechanisms")
         mechanisms_dir.mkdir(parents=True, exist_ok=True)
         executor.map(
             download_one_mechanism,
-            emodel.ion_channel_models,
             itertools.repeat(client),
             itertools.repeat(access_token),
+            emodel.ion_channel_models,
             itertools.repeat(mechanisms_dir),
         )
 
