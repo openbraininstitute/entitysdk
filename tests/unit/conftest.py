@@ -42,8 +42,8 @@ def request_headers_no_context(auth_token):
 
 
 @pytest.fixture
-def client(project_context, api_url):
-    return Client(api_url=api_url, project_context=project_context)
+def client(project_context, api_url, auth_token):
+    return Client(api_url=api_url, project_context=project_context, token_manager=auth_token)
 
 
 @pytest.fixture

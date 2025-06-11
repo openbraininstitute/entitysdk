@@ -27,7 +27,6 @@ def test_read(client, httpx_mock, auth_token, json_data):
     entity = client.get_entity(
         entity_id=MOCK_UUID,
         entity_type=Model,
-        token=auth_token,
     )
     assert entity.model_dump(mode="json", exclude_none=True) == json_data
 
@@ -36,6 +35,6 @@ def test_register(client, httpx_mock, auth_token, model, json_data):
     httpx_mock.add_response(
         method="POST", json=model.model_dump(mode="json") | {"id": str(MOCK_UUID)}
     )
-    registered = client.register_entity(entity=model, token=auth_token)
+    registered = client.register_entity(entity=model)
     expected_json = json_data | {"id": str(MOCK_UUID)}
     assert registered.model_dump(mode="json", exclude_none=True) == expected_json

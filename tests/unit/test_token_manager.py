@@ -18,3 +18,13 @@ def test_token_from_env__raises():
 
     with pytest.raises(EntitySDKError, match="Environment variable 'TOKEN' not found."):
         token_manager.get_token()
+
+
+def test_TokenFromValue():
+    token_manager = test_module.TokenFromValue(value="foo")
+    assert token_manager.get_token() == "foo"
+
+
+def test_TokenFromFunction():
+    token_manager = test_module.TokenFromFunction(function=lambda: "foo")
+    assert token_manager.get_token() == "foo"
