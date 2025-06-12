@@ -20,27 +20,14 @@ def download_memodel(client: Client, memodel: MEModel):
         client (Client): EntitySDK client
         memodel (MEModel): MEModel entitysdk object
     """
-    morphology = memodel.morphology
     # we have to get the emodel to get the ion channel models.
     emodel = client.get_entity(entity_id=memodel.emodel.id, entity_type=EModel)
 
-    # + 2 for hoc and morphology
-    # len of ion_channel_models should be around 10 for most cases,
-    # and always < 100, even for genetic models
-    max_workers = len(emodel.ion_channel_models) + 2
-    with ThreadPoolExecutor(max_workers=max_workers) as executor:
-        hoc_future = executor.submit(download_hoc, client, emodel, "./hoc")
-        morph_future = executor.submit(download_morphology, client, morphology, "./morphology")
-        mechanisms_dir = create_dir("./mechanisms")
-        executor.map(
-            download_ion_channel_mechanism,
-            itertools.repeat(client),
-            emodel.ion_channel_models,
-            itertools.repeat(mechanisms_dir),
-        )
-
-        hoc_path = hoc_future.result()
-        morphology_path = morph_future.result()
+    hoc_path = download_hoc(client, emodel, "./hoc")
+    morphology_path = download_morphology(client, memodel.morphology, "./morphology")
+    mechanisms_dir = create_dir("./mechanisms")
+    for ic in emodel.ion_channel_models:
+        download_ion_channel_mechanism(client, ic, mechanisms_dir)
 
     return DownloadedMEModel(
         hoc_path=hoc_path, mechanisms_dir=mechanisms_dir, morphology_path=morphology_path
