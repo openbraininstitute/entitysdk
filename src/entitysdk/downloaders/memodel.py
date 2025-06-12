@@ -25,7 +25,9 @@ def download_memodel(client: Client, memodel: MEModel):
     emodel = cast(EModel, client.get_entity(entity_id=memodel.emodel.id, entity_type=EModel))
 
     hoc_path = download_hoc(client, emodel, "./hoc")
-    morphology_path = download_morphology(client, memodel.morphology, "./morphology")
+    # only take .asc format for now.
+    # Will take specific format when morphology_format is integrated into MEModel
+    morphology_path = download_morphology(client, memodel.morphology, "./morphology", "asc")
     mechanisms_dir = create_dir("./mechanisms")
     for ic in emodel.ion_channel_models or []:
         download_ion_channel_mechanism(client, ic, mechanisms_dir)
