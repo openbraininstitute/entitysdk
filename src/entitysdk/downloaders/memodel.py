@@ -1,7 +1,6 @@
 """Download functions for MEModel entities."""
 
-import itertools
-from concurrent.futures import ThreadPoolExecutor
+from typing import cast
 
 from entitysdk.client import Client
 from entitysdk.downloaders.emodel import download_hoc
@@ -21,12 +20,14 @@ def download_memodel(client: Client, memodel: MEModel):
         memodel (MEModel): MEModel entitysdk object
     """
     # we have to get the emodel to get the ion channel models.
-    emodel = client.get_entity(entity_id=memodel.emodel.id, entity_type=EModel)
+    if memodel.emodel.id is None:
+        raise ValueError("memodel.emodel.id cannot be None.")
+    emodel = cast(EModel, client.get_entity(entity_id=memodel.emodel.id, entity_type=EModel))
 
     hoc_path = download_hoc(client, emodel, "./hoc")
     morphology_path = download_morphology(client, memodel.morphology, "./morphology")
     mechanisms_dir = create_dir("./mechanisms")
-    for ic in emodel.ion_channel_models:
+    for ic in emodel.ion_channel_models or []:
         download_ion_channel_mechanism(client, ic, mechanisms_dir)
 
     return DownloadedMEModel(

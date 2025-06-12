@@ -56,6 +56,6 @@ def download_morphology(
         asset = client.download_assets(
             morphology,
             output_path=output_dir,
-        ).first()
+        ).one()
 
     return asset.output_path
