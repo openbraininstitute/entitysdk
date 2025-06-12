@@ -20,9 +20,10 @@ def download_memodel(client: Client, memodel: MEModel):
         memodel (MEModel): MEModel entitysdk object
     """
     # we have to get the emodel to get the ion channel models.
-    if memodel.emodel.id is None:
-        raise ValueError("memodel.emodel.id cannot be None.")
-    emodel = cast(EModel, client.get_entity(entity_id=memodel.emodel.id, entity_type=EModel))
+    emodel = cast(
+        EModel,
+        client.get_entity(entity_id=memodel.emodel.id, entity_type=EModel),  # type: ignore
+    )
 
     hoc_path = download_hoc(client, emodel, "./hoc")
     # only take .asc format for now.
