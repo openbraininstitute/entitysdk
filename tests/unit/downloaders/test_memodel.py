@@ -1,11 +1,8 @@
-
 import os
 import uuid
 
 from entitysdk.downloaders.memodel import download_memodel
 from entitysdk.models.emodel import EModel
-from entitysdk.models.ion_channel_model import IonChannelModel
-from entitysdk.models.ion_channel_model import NeuronBlock
 from entitysdk.models.memodel import MEModel
 from entitysdk.models.morphology import ReconstructionMorphology
 from entitysdk.types import ValidationStatus
@@ -114,7 +111,7 @@ def test_download_memodel(
         method="GET",
         url=f"{api_url}/emodel/{emodel_id}",
         match_headers=request_headers,
-        json= {
+        json={
             "id": str(emodel_id),
             "name": "foo",
             "species": {"name": "foo", "taxonomy_id": "bar"},
@@ -124,7 +121,7 @@ def test_download_memodel(
                 "acronym": "bar",
                 "parent_structure_id": None,
                 "hierarchy_id": str(hierarchy_id),
-                "color_hex_triplet": "#FFFFFF"
+                "color_hex_triplet": "#FFFFFF",
             },
             "iteration": "foofoo",
             "score": 42,
@@ -142,23 +139,17 @@ def test_download_memodel(
                         "acronym": "bar",
                         "parent_structure_id": None,
                         "hierarchy_id": str(hierarchy_id),
-                        "color_hex_triplet": "#FFFFFF"
+                        "color_hex_triplet": "#FFFFFF",
                     },
                     "is_temperature_dependent": False,
                     "temperature_celsius": 34,
                     "neuron_block": {},
-                    "assets": [
-                        _mock_ic_asset_response(ic_asset_id)
-                    ]
+                    "assets": [_mock_ic_asset_response(ic_asset_id)],
                 }
             ],
-            "assets":[
-                _mock_emodel_asset_response(emodel_asset_id)
-            ]
+            "assets": [_mock_emodel_asset_response(emodel_asset_id)],
         },
     )
-
-
 
     memodel = MEModel(
         id=memodel_id,
@@ -170,15 +161,11 @@ def test_download_memodel(
             "acronym": "bar",
             "parent_structure_id": None,
             "hierarchy_id": str(hierarchy_id),
-            "color_hex_triplet": "#FFFFFF"
+            "color_hex_triplet": "#FFFFFF",
         },
         validation_status=ValidationStatus.done,
         morphology=ReconstructionMorphology(
-            id=morph_id,
-            name="foo",
-            assets=[
-                _mock_morph_asset_response(morph_asset_id)
-            ]
+            id=morph_id, name="foo", assets=[_mock_morph_asset_response(morph_asset_id)]
         ),
         emodel=EModel(
             id=emodel_id,
@@ -190,7 +177,7 @@ def test_download_memodel(
                 "acronym": "bar",
                 "parent_structure_id": None,
                 "hierarchy_id": str(hierarchy_id),
-                "color_hex_triplet": "#FFFFFF"
+                "color_hex_triplet": "#FFFFFF",
             },
             iteration="foofoo",
             score=42,
@@ -198,7 +185,7 @@ def test_download_memodel(
             # assets=[
             #     _mock_emodel_asset_response(emodel_asset_id)
             # ]
-        )
+        ),
     )
 
     downloaded_memodel = download_memodel(

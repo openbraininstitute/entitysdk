@@ -1,11 +1,10 @@
+import uuid
 
 import pytest
-import uuid
 
 from entitysdk.downloaders.morphology import download_morphology
 from entitysdk.exception import IteratorResultError
 from entitysdk.models.morphology import ReconstructionMorphology
-
 
 
 def _mock_asset_response(asset_id):
@@ -47,11 +46,7 @@ def test_download_morphology(
     )
 
     morphology = ReconstructionMorphology(
-        id=morph_id,
-        name="foo",
-        assets=[
-             _mock_asset_response(asset_id)
-        ]
+        id=morph_id, name="foo", assets=[_mock_asset_response(asset_id)]
     )
 
     output_path = download_morphology(

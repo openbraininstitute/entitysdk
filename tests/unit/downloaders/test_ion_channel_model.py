@@ -1,10 +1,7 @@
-
 import uuid
 
 from entitysdk.downloaders.ion_channel_model import download_ion_channel_mechanism
-from entitysdk.models.ion_channel_model import IonChannelModel
-from entitysdk.models.ion_channel_model import NeuronBlock
-
+from entitysdk.models.ion_channel_model import IonChannelModel, NeuronBlock
 
 
 def _mock_asset_response(asset_id):
@@ -58,14 +55,12 @@ def test_download_ion_channel_model(
             "acronym": "bar",
             "parent_structure_id": None,
             "hierarchy_id": str(hierarchy_id),
-            "color_hex_triplet": "#FFFFFF"
+            "color_hex_triplet": "#FFFFFF",
         },
         is_temperature_dependent=False,
         temperature_celsius=34,
         neuron_block=NeuronBlock(),
-        assets=[
-             _mock_asset_response(asset_id)
-        ]
+        assets=[_mock_asset_response(asset_id)],
     )
 
     output_path = download_ion_channel_mechanism(

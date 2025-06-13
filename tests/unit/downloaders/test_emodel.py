@@ -1,9 +1,7 @@
-
 import uuid
 
 from entitysdk.downloaders.emodel import download_hoc
 from entitysdk.models.emodel import EModel
-
 
 
 def _mock_asset_response(asset_id):
@@ -55,14 +53,12 @@ def test_download_hoc(
             "acronym": "bar",
             "parent_structure_id": None,
             "hierarchy_id": str(hierarchy_id),
-            "color_hex_triplet": "#FFFFFF"
+            "color_hex_triplet": "#FFFFFF",
         },
         iteration="foofoo",
         score=42,
         seed=0,
-        assets=[
-             _mock_asset_response(asset_id)
-        ]
+        assets=[_mock_asset_response(asset_id)],
     )
 
     output_path = download_hoc(
