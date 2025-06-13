@@ -1,5 +1,6 @@
 """Download functions for MEModel entities."""
 
+from pathlib import Path
 from typing import cast
 
 from entitysdk.client import Client
@@ -12,12 +13,13 @@ from entitysdk.schemas.memodel import DownloadedMEModel
 from entitysdk.utils.filesystem import create_dir
 
 
-def download_memodel(client: Client, memodel: MEModel):
+def download_memodel(client: Client, memodel: MEModel, output_dir=".") -> DownloadedMEModel:
     """Download all assets needed to run an me-model: hoc, ion channel models, and morphology.
 
     Args:
         client (Client): EntitySDK client
         memodel (MEModel): MEModel entitysdk object
+        output_dir (str): directory to save the downloaded files, defaults to current directory
     """
     # we have to get the emodel to get the ion channel models.
     emodel = cast(
@@ -25,11 +27,13 @@ def download_memodel(client: Client, memodel: MEModel):
         client.get_entity(entity_id=memodel.emodel.id, entity_type=EModel),  # type: ignore
     )
 
-    hoc_path = download_hoc(client, emodel, "./hoc")
+    hoc_path = download_hoc(client, emodel, Path(output_dir) / "hoc")
     # only take .asc format for now.
     # Will take specific format when morphology_format is integrated into MEModel
-    morphology_path = download_morphology(client, memodel.morphology, "./morphology", "asc")
-    mechanisms_dir = create_dir("./mechanisms")
+    morphology_path = download_morphology(
+        client, memodel.morphology, Path(output_dir) / "morphology", "asc"
+    )
+    mechanisms_dir = create_dir(Path(output_dir) / "mechanisms")
     for ic in emodel.ion_channel_models or []:
         download_ion_channel_mechanism(client, ic, mechanisms_dir)
 
