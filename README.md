@@ -45,14 +45,14 @@ client = Client(
         project_id=UUID("your-project-id"),
         virtual_lab_id=UUID("your-lab-id")
     ),
-    environment="staging"
+    environment="staging",
+    token_manager=token
 )
 
 # Search for morphologies
 iterator = client.search_entity(
     entity_type=models.ReconstructionMorphology,
     query={"mtype__pref_label": "L5_TPC:A"},
-    token=token,
     limit=1,
 )
 morphology = next(iterator)
@@ -63,7 +63,6 @@ client.upload_file(
     entity_type=models.ReconstructionMorphology,
     file_path="path/to/file.swc",
     file_content_type="application/swc",
-    token="your-token"
 )
 ```
 
