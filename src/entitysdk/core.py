@@ -9,7 +9,7 @@ import httpx
 
 from entitysdk import serdes
 from entitysdk.common import ProjectContext
-from entitysdk.models.asset import Asset, LocalAssetMetadata
+from entitysdk.models.asset import Asset, DetailedFileList, LocalAssetMetadata
 from entitysdk.models.core import Identifiable
 from entitysdk.result import IteratorResult
 from entitysdk.util import make_db_api_request, stream_paginated_request
@@ -176,10 +176,80 @@ def upload_asset_content(
     return serdes.deserialize_entity(response.json(), Asset)
 
 
+def upload_asset_directory(
+    url: str,
+    *,
+    directory_path: Path,
+    project_context: ProjectContext,
+    token: str,
+    http_client: httpx.Client | None = None,
+) -> Asset:
+    """Upload directory to an existing entity's endpoint from a directory path."""
+    files = []
+    for path in directory_path.rglob('*'):
+        if not path.is_file():
+            continue
+        if any(part.startswith('.') for part in path.parts): # skip hidden
+            continue
+        files.append(str(path.relative_to(directory_path)))
+
+    response = make_db_api_request(
+        url=url,
+        method="POST",
+        project_context=project_context,
+        token=token,
+        http_client=http_client,
+        json={"files": files}
+    )
+
+    js = response.json()
+    def upload(to_upload):
+        failed = {}
+        for path, url in to_upload.items():
+            with open(directory_path / path, 'rb') as fd:
+                response = http_client.request(
+                    method="PUT",
+                    url=url,
+                    content=fd,
+                    follow_redirects=True)
+            if response.status_code != 200:
+                failed[path] = url
+        return failed
+
+    to_upload = js["files"]
+    for _ in range(3):
+        to_upload = upload(to_upload)
+        if not to_upload:
+            break
+
+    if to_upload:
+        raise Exception(f"Uploading these files failed: {to_upload}", to_upload)
+
+    return serdes.deserialize_entity(js["asset"], Asset)
+
+
+def list_directory(
+    url: str,
+    *,
+    project_context: ProjectContext,
+    token: str,
+    http_client: httpx.Client | None = None) -> DetailedFileList:
+
+    response = make_db_api_request(
+        url=url,
+        method="GET",
+        project_context=project_context,
+        token=token,
+        http_client=http_client,
+    )
+    return serdes.deserialize_entity(response.json(), DetailedFileList)
+
+
 def download_asset_file(
     url: str,
     *,
     output_path: Path,
+    asset_path: Path | None = None,
     project_context: ProjectContext | None = None,
     token: str,
     http_client: httpx.Client | None = None,
@@ -198,6 +268,7 @@ def download_asset_file(
     """
     bytes_content = download_asset_content(
         url=url,
+        asset_path=asset_path,
         project_context=project_context,
         token=token,
         http_client=http_client,
@@ -209,6 +280,7 @@ def download_asset_file(
 def download_asset_content(
     url: str,
     *,
+    asset_path: Path | None = None,
     project_context: ProjectContext | None = None,
     token: str,
     http_client: httpx.Client | None = None,
@@ -227,6 +299,7 @@ def download_asset_content(
     response = make_db_api_request(
         url=url,
         method="GET",
+        parameters={"asset_path": str(asset_path)} if asset_path else {},
         project_context=project_context,
         token=token,
         http_client=http_client,
@@ -250,3 +323,4 @@ def delete_asset(
         http_client=http_client,
     )
     return serdes.deserialize_entity(response.json(), Asset)
+

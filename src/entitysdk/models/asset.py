@@ -1,5 +1,7 @@
 """Asset models."""
 
+import datetime
+import pathlib
 from typing import Annotated
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -89,3 +91,13 @@ class LocalAssetMetadata(BaseModel):
             description="The metadata of the asset.",
         ),
     ] = None
+
+
+class DetailedFile(BaseModel):
+    name: str
+    size: int
+    last_modified: datetime.datetime
+
+
+class DetailedFileList(BaseModel):
+    files: dict[pathlib.Path, DetailedFile]
