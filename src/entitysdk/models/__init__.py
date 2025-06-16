@@ -19,6 +19,9 @@ from entitysdk.models.simulation import Simulation
 from entitysdk.models.simulation_campaign import SimulationCampaign
 from entitysdk.models.single_neuron_simulation import SingleNeuronSimulation
 from entitysdk.models.single_neuron_synaptome_simulation import SingleNeuronSynaptomeSimulation
+from entitysdk.models.simulation_execution import SimulationExecution
+from entitysdk.models.simulation_generation import SimulationGeneration
+from entitysdk.models.simulation_result import SimulationResult
 from entitysdk.models.subject import Subject
 from entitysdk.models.synaptome import SingleNeuronSynaptome
 from entitysdk.models.taxonomy import Species, Strain, Taxonomy
@@ -49,6 +52,9 @@ __all__ = [
     "SingleNeuronSimulation",
     "SingleNeuronSynaptome",
     "SingleNeuronSynaptomeSimulation",
+    "SimulationExecution",
+    "SimulationGeneration",
+    "SimulationResult",
     "Species",
     "Strain",
     "Subject",

@@ -2,6 +2,7 @@
 
 from pydantic import TypeAdapter
 
+from entitysdk.models.activity import Activity
 from entitysdk.models.base import BaseModel
 
 SERIALIZATION_EXCLUDE_KEYS = {
@@ -12,14 +13,17 @@ SERIALIZATION_EXCLUDE_KEYS = {
 }
 
 
-def deserialize_entity(json_data: dict, entity_type: type[BaseModel]):
+def deserialize_model(json_data: dict, entity_type: type[BaseModel]):
     """Deserialize json into entity."""
     return entity_type.model_validate(json_data)
 
 
-def serialize_entity(entity: BaseModel) -> dict:
+def serialize_model(model: BaseModel) -> dict:
     """Serialize entity into json."""
-    data = entity.model_dump(
+    if isinstance(model, Activity):
+        return _serialize_activity(model)
+
+    data = model.model_dump(
         mode="json",
         exclude=SERIALIZATION_EXCLUDE_KEYS,
         exclude_none=False,
@@ -50,3 +54,20 @@ def _convert_identifiables_to_ids(data: dict) -> dict:
             result[key] = value
 
     return result
+
+
+def _serialize_activity(model: Activity) -> dict:
+    data = model.model_dump(
+        mode="json",
+        exclude=SERIALIZATION_EXCLUDE_KEYS,
+        exclude_none=False,
+    )
+
+    if used := data.pop("used"):
+        data["used_ids"] = [u["id"] for u in used]
+
+    if generated := data.pop("generated"):
+        data["generated_ids"] = [g["id"] for g in generated]
+
+    data = _convert_identifiables_to_ids(data)
+    return data

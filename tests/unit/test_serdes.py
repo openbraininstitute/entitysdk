@@ -45,8 +45,8 @@ class E3(Identifiable):
         ),
     ],
 )
-def test_serialize_entity(entity, expected):
-    result = test_module.serialize_entity(entity)
+def test_serialize_model(entity, expected):
+    result = test_module.serialize_model(entity)
     assert result == expected
 
 

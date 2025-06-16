@@ -113,3 +113,13 @@ class CircuitScale(StrEnum):
     region = auto()
     system = auto()
     whole_brain = auto()
+
+
+class SimulationExecutionStatus(StrEnum):
+    """Simulation execution activity status."""
+
+    created = auto()
+    pending = auto()
+    running = auto()
+    done = auto()
+    error = auto()

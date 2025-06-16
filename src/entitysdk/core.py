@@ -52,7 +52,7 @@ def search_entities(
         http_client=http_client,
     )
     return IteratorResult(
-        serdes.deserialize_entity(json_data, entity_type) for json_data in iterator
+        serdes.deserialize_model(json_data, entity_type) for json_data in iterator
     )
 
 
@@ -74,7 +74,7 @@ def get_entity(
         http_client=http_client,
     )
 
-    return serdes.deserialize_entity(response.json(), entity_type)
+    return serdes.deserialize_model(response.json(), entity_type)
 
 
 def register_entity(
@@ -86,7 +86,7 @@ def register_entity(
     http_client: httpx.Client | None = None,
 ) -> Identifiable:
     """Register entity."""
-    json_data = serdes.serialize_entity(entity)
+    json_data = serdes.serialize_model(entity)
 
     response = make_db_api_request(
         url=url,
@@ -96,7 +96,7 @@ def register_entity(
         token=token,
         http_client=http_client,
     )
-    return serdes.deserialize_entity(response.json(), type(entity))
+    return serdes.deserialize_model(response.json(), type(entity))
 
 
 def update_entity(
@@ -112,7 +112,7 @@ def update_entity(
     if isinstance(attrs_or_entity, dict):
         json_data = serdes.serialize_dict(attrs_or_entity)
     else:
-        json_data = serdes.serialize_entity(attrs_or_entity)
+        json_data = serdes.serialize_model(attrs_or_entity)
 
     response = make_db_api_request(
         url=url,
@@ -125,7 +125,7 @@ def update_entity(
 
     json_data = response.json()
 
-    return serdes.deserialize_entity(json_data, entity_type)
+    return serdes.deserialize_model(json_data, entity_type)
 
 
 def upload_asset_file(
@@ -174,7 +174,7 @@ def upload_asset_content(
         token=token,
         http_client=http_client,
     )
-    return serdes.deserialize_entity(response.json(), Asset)
+    return serdes.deserialize_model(response.json(), Asset)
 
 
 def upload_asset_directory(
@@ -330,4 +330,4 @@ def delete_asset(
         token=token,
         http_client=http_client,
     )
-    return serdes.deserialize_entity(response.json(), Asset)
+    return serdes.deserialize_model(response.json(), Asset)

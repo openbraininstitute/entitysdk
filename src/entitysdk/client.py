@@ -195,6 +195,7 @@ class Client:
             entity_type=entity_type,
             entity_id=entity_id,
         )
+        print(url)
         context = self._required_user_context(override_context=project_context)
         return core.update_entity(
             url=url,
