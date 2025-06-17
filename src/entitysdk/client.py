@@ -272,50 +272,20 @@ class Client:
             token=self._token_manager.get_token(),
         )
 
-    def upload_directory_by_path(
+    def upload_directory(
         self,
         *,
         entity_id: ID,
         entity_type: type[Identifiable],
-        directory_path: os.PathLike,
+        directory_or_paths: os.PathLike | dict[os.PathLike, os.PathLike],
         metadata: dict | None = None,
         label: str | None = None,
         project_context: ProjectContext | None = None,
     ) -> Asset:
-        """Upload directory to an existing entity's endpoint from a directory path."""
-        url = (
-            route.get_assets_endpoint(
-                api_url=self.api_url,
-                entity_type=entity_type,
-                entity_id=entity_id,
-                asset_id=None,
-            )
-            + "/directory/upload"
-        )
-        context = self._required_user_context(override_context=project_context)
-        return core.upload_asset_directory_by_path(
-            url=url,
-            directory_path=Path(directory_path),
-            metadata=metadata,
-            label=label,
-            project_context=context,
-            http_client=self._http_client,
-            token=self._token_manager.get_token(),
-        )
+        """Attach directory to an entity from a directory path or group of paths.
 
-    def upload_directory_by_paths(
-        self,
-        *,
-        entity_id: ID,
-        entity_type: type[Identifiable],
-        paths: dict[os.PathLike, os.PathLike],
-        metadata: dict | None = None,
-        label: str | None = None,
-        project_context: ProjectContext | None = None,
-    ) -> Asset:
-        """Upload a list of files to an existing entity's endpoint from a directory path.
-
-        Note: `paths` is a mapping from desired target to concrete path
+        When `directory_or_paths` is a directory, all the files will be uploaded,
+        otherwise, a dictionary of desired target to concrete paths is expected
         """
         url = (
             route.get_assets_endpoint(
@@ -327,10 +297,17 @@ class Client:
             + "/directory/upload"
         )
         context = self._required_user_context(override_context=project_context)
-        paths = {Path(k): Path(v) for k, v in paths.items()}
-        return core.upload_asset_directory_by_paths(
+
+        paths: Path | dict[Path, Path]
+        if isinstance(directory_or_paths, os.PathLike):
+            paths = Path(directory_or_paths)
+        else:
+            assert isinstance(directory_or_paths, dict)
+            paths = {Path(k): Path(v) for k, v in directory_or_paths.items()}
+
+        return core.upload_asset_directory(
             url=url,
-            paths=paths,
+            directory_or_paths=paths,
             metadata=metadata,
             label=label,
             project_context=context,

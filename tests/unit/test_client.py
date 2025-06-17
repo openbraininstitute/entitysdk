@@ -700,10 +700,10 @@ def test_upload_directory_by_path(
     httpx_mock.add_response(method="PUT", url="http://upload_url1")
     httpx_mock.add_response(method="PUT", url="http://upload_url2")
 
-    res = client.upload_directory_by_path(
+    res = client.upload_directory(
         entity_id=entity_id,
         entity_type=Entity,
-        directory_path=test_dir,
+        directory_or_paths=test_dir,
         label=None,
         metadata=None,
     )
@@ -760,10 +760,10 @@ def test_upload_directory_by_paths(
     httpx_mock.add_response(method="PUT", url="http://upload_url1")
     httpx_mock.add_response(method="PUT", url="http://upload_url2")
 
-    res = client.upload_directory_by_paths(
+    res = client.upload_directory(
         entity_id=entity_id,
         entity_type=Entity,
-        paths=paths,
+        directory_or_paths=paths,
         label=None,
         metadata=None,
     )

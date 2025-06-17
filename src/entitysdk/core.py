@@ -177,41 +177,10 @@ def upload_asset_content(
     return serdes.deserialize_entity(response.json(), Asset)
 
 
-def upload_asset_directory_by_path(
+def upload_asset_directory(
     url: str,
     *,
-    directory_path: Path,
-    metadata: dict | None = None,
-    label: str | None = None,
-    project_context: ProjectContext,
-    token: str,
-    http_client: httpx.Client | None = None,
-) -> Asset:
-    """Upload directory to an existing entity's endpoint from a directory path."""
-    paths = {}
-    for path in directory_path.rglob("*"):
-        if not path.is_file():
-            continue
-        if any(part.startswith(".") for part in path.parts):  # skip hidden
-            continue
-        path = path.relative_to(directory_path)
-        paths[path] = directory_path / path
-
-    return upload_asset_directory_by_paths(
-        url,
-        paths=paths,
-        metadata=metadata,
-        label=label,
-        project_context=project_context,
-        token=token,
-        http_client=http_client,
-    )
-
-
-def upload_asset_directory_by_paths(
-    url: str,
-    *,
-    paths: dict[Path, Path],
+    directory_or_paths: Path | dict[Path, Path],
     metadata: dict | None = None,
     label: str | None = None,
     project_context: ProjectContext,
@@ -219,10 +188,21 @@ def upload_asset_directory_by_paths(
     http_client: httpx.Client | None = None,
 ) -> Asset:
     """Upload a group of files to a directory."""
-    for concrete_path in paths.values():
-        if not concrete_path.exists():
-            msg = f"Path {concrete_path} does not exist"
-            raise Exception(msg)
+    if isinstance(directory_or_paths, Path):
+        paths = {}
+        for path in directory_or_paths.rglob("*"):
+            if not path.is_file():
+                continue
+            if any(part.startswith(".") for part in path.parts):  # skip hidden
+                continue
+            path = path.relative_to(directory_or_paths)
+            paths[path] = directory_or_paths / path
+    else:
+        for concrete_path in directory_or_paths.values():
+            if not concrete_path.exists():
+                msg = f"Path {concrete_path} does not exist"
+                raise Exception(msg)
+        paths = directory_or_paths
 
     response = make_db_api_request(
         url=url,
