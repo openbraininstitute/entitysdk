@@ -25,6 +25,8 @@ _ROUTES = {
     "ReconstructionMorphology": "reconstruction-morphology",
     "Simulation": "simulation",
     "SimulationCampaign": "simulation-campaign",
+    "SingleNeuronSimulation": "single-neuron-simulation",
+    "SingleNeuronSynaptomeSimulation": "single-neuron-synaptome-simulation",
     "Role": "role",
     "Species": "species",
     "Strain": "strain",

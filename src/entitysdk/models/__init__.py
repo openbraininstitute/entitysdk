@@ -16,6 +16,8 @@ from entitysdk.models.morphology import ReconstructionMorphology
 from entitysdk.models.mtype import MTypeClass
 from entitysdk.models.simulation import Simulation
 from entitysdk.models.simulation_campaign import SimulationCampaign
+from entitysdk.models.single_neuron_simulation import SingleNeuronSimulation
+from entitysdk.models.single_neuron_synaptome_simulation import SingleNeuronSynaptomeSimulation
 from entitysdk.models.subject import Subject
 from entitysdk.models.taxonomy import Species, Strain, Taxonomy
 from entitysdk.models.validation_result import ValidationResult
@@ -40,6 +42,8 @@ __all__ = [
     "Role",
     "Simulation",
     "SimulationCampaign",
+    "SingleNeuronSimulation",
+    "SingleNeuronSynaptomeSimulation",
     "Species",
     "Strain",
     "Subject",

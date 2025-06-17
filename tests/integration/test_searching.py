@@ -13,6 +13,8 @@ from entitysdk.models import (
     Person,
     ReconstructionMorphology,
     Role,
+    SingleNeuronSimulation,
+    SingleNeuronSynaptomeSimulation,
     Species,
     Strain,
     ValidationResult,
@@ -37,6 +39,8 @@ from entitysdk.models import (
         ElectricalCellRecording,
         ValidationResult,
         MEModelCalibrationResult,
+        SingleNeuronSimulation,
+        SingleNeuronSynaptomeSimulation,
     ],
 )
 def test_is_searchable(entity_type, client):

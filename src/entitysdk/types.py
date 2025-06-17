@@ -26,6 +26,14 @@ class ValidationStatus(StrEnum):
     error = auto()
 
 
+class SingleNeuronSimulationStatus(StrEnum):
+    """Single neuron simulation status."""
+
+    started = auto()
+    failure = auto()
+    success = auto()
+
+
 class ElectricalRecordingType(StrEnum):
     """Electrical cell recording type."""
 
