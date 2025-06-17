@@ -21,23 +21,25 @@ class SingleNeuronSimulation(Entity):
     injection_location: Annotated[
         list[str],
         Field(
-            description="List of locations where the stimuli were injected, in hoc-compatible format.",
-            example="soma[0]"
-        )
+            description="List of locations where the stimuli were injected, "
+            "in hoc-compatible format.",
+            example="soma[0]",
+        ),
     ]
-    recording_location:  Annotated[
+    recording_location: Annotated[
         list[str],
         Field(
-            description="List of locations where the stimuli were recorded, in hoc-compatible format.",
-            example="soma[0]"
-        )
+            description="List of locations where the stimuli were recorded, "
+            "in hoc-compatible format.",
+            example="soma[0]",
+        ),
     ]
     status: Annotated[
         SingleNeuronSimulationStatus,
         Field(
             description="Status of the simulation. Can be .started, .failure, .success",
-            example=SingleNeuronSimulationStatus.success
-        )
+            example=SingleNeuronSimulationStatus.success,
+        ),
     ]
     me_model_id: Annotated[
         ID,
