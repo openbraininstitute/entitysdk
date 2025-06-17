@@ -4,7 +4,7 @@ from typing import Annotated
 
 from pydantic import Field
 
-from entitysdk.core import Identifiable
+from entitysdk.models.core import Identifiable
 from entitysdk.types import ID
 
 
