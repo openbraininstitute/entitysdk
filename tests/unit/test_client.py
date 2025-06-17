@@ -10,6 +10,7 @@ from entitysdk.client import Client
 from entitysdk.config import settings
 from entitysdk.exception import EntitySDKError
 from entitysdk.models import Asset, MTypeClass
+from entitysdk.models.asset import DetailedFile, DetailedFileList
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.types import DeploymentEnvironment
@@ -672,3 +673,92 @@ def test_client_download_assets__entity(
     ).all()
 
     assert len(res) == 1
+
+
+def test_client_upload_directory(
+    tmp_path,
+    client,
+    httpx_mock,
+    api_url,
+    project_context,
+    request_headers,
+):
+    entity_id = uuid.uuid4()
+
+    test_dir = tmp_path / "test_directory"
+    (test_dir / "subdir0" / "subdir1").mkdir(parents=True)
+    (test_dir / "file0.txt").open("w")
+    (test_dir / "subdir0" / "file1.txt").open("w")
+    (test_dir / "subdir0" / "subdir1" /"file2.txt").open("w")
+    asset = {
+        "content_type": "application/vnd.directory",
+        "full_path": "asdf",
+        "id": "a370a57b-7211-4426-8046-970758ceaf68",
+        "is_directory": True,
+        "label": None,
+        "meta": {},
+        "path": "",
+        "sha256_digest": None,
+        "size": -1,
+        "status": "created"
+        }
+    httpx_mock.add_response(
+        method="POST",
+        url=f"{api_url}/entity/{entity_id}/assets/directory/upload",
+        match_headers=request_headers,
+        json={
+            "asset": asset,
+            "files": {
+                "file0.txt": "http://upload_url0",
+                "subdir0/file1.txt": "http://upload_url1",
+                "subdir0/subdir1/file2.txt": "http://upload_url2"
+                }
+            }
+    )
+
+    httpx_mock.add_response(method="PUT", url="http://upload_url0")
+    httpx_mock.add_response(method="PUT", url="http://upload_url1")
+    httpx_mock.add_response(method="PUT", url="http://upload_url2")
+
+    res = client.upload_directory(
+        entity_id=entity_id,
+        entity_type=Entity,
+        directory_path=test_dir,
+        label=None,
+        metadata=None,
+    )
+    assert res == Asset.model_validate(asset)
+
+
+def test_client_list_directory(
+    client,
+    httpx_mock,
+    api_url,
+    request_headers,
+):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+
+    date = "2025-01-01T00:00:00Z"
+    httpx_mock.add_response(
+        method="Get",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/list",
+        match_headers=request_headers,
+        json={
+            "files": {
+                'a/b/foo.txt': {"name":'a/b/foo.txt', "size":1, "last_modified": date},
+                'a/foo.txt': {"name":'a/foo.txt', "size":2, "last_modified": date},
+                'foo.txt': {"name":'foo.txt', "size":3, "last_modified": date},
+                }
+            }
+    )
+
+    res = client.list_directory(
+        entity_id=entity_id,
+        entity_type=Entity,
+        asset_id=asset_id,
+    )
+    assert isinstance(res, DetailedFileList)
+    assert len(res.files) == 3
+    assert isinstance(res.files[Path('a/b/foo.txt')], DetailedFile)
+    assert res.files[Path('a/b/foo.txt')].name == "a/b/foo.txt"
