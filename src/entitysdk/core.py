@@ -177,7 +177,7 @@ def upload_asset_content(
     return serdes.deserialize_entity(response.json(), Asset)
 
 
-def upload_asset_directory(
+def upload_asset_directory_by_path(
     url: str,
     *,
     directory_path: Path,
@@ -188,13 +188,41 @@ def upload_asset_directory(
     http_client: httpx.Client | None = None,
 ) -> Asset:
     """Upload directory to an existing entity's endpoint from a directory path."""
-    files = []
+    paths = {}
     for path in directory_path.rglob("*"):
         if not path.is_file():
             continue
         if any(part.startswith(".") for part in path.parts):  # skip hidden
             continue
-        files.append(str(path.relative_to(directory_path)))
+        path = path.relative_to(directory_path)
+        paths[path] = directory_path / path
+
+    return upload_asset_directory_by_paths(
+        url,
+        paths=paths,
+        metadata=metadata,
+        label=label,
+        project_context=project_context,
+        token=token,
+        http_client=http_client,
+    )
+
+
+def upload_asset_directory_by_paths(
+    url: str,
+    *,
+    paths: dict[Path, Path],
+    metadata: dict | None = None,
+    label: str | None = None,
+    project_context: ProjectContext,
+    token: str,
+    http_client: httpx.Client | None = None,
+) -> Asset:
+    """Upload a group of files to a directory."""
+    for concrete_path in paths.values():
+        if not concrete_path.exists():
+            msg = f"Path {concrete_path} does not exist"
+            raise Exception(msg)
 
     response = make_db_api_request(
         url=url,
@@ -202,7 +230,7 @@ def upload_asset_directory(
         project_context=project_context,
         token=token,
         http_client=http_client,
-        json={"files": files, "meta": metadata, "label": label},
+        json={"files": [str(p) for p in paths], "meta": metadata, "label": label},
     )
 
     js = response.json()
@@ -210,7 +238,7 @@ def upload_asset_directory(
     def upload(to_upload):
         failed = {}
         for path, url in to_upload.items():
-            with open(directory_path / path, "rb") as fd:
+            with open(paths[Path(path)], "rb") as fd:
                 response = http_client.request(
                     method="PUT", url=url, content=fd, follow_redirects=True
                 )

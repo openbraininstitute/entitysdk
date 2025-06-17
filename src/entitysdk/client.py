@@ -272,7 +272,7 @@ class Client:
             token=self._token_manager.get_token(),
         )
 
-    def upload_directory(
+    def upload_directory_by_path(
         self,
         *,
         entity_id: ID,
@@ -293,9 +293,44 @@ class Client:
             + "/directory/upload"
         )
         context = self._required_user_context(override_context=project_context)
-        return core.upload_asset_directory(
+        return core.upload_asset_directory_by_path(
             url=url,
             directory_path=Path(directory_path),
+            metadata=metadata,
+            label=label,
+            project_context=context,
+            http_client=self._http_client,
+            token=self._token_manager.get_token(),
+        )
+
+    def upload_directory_by_paths(
+        self,
+        *,
+        entity_id: ID,
+        entity_type: type[Identifiable],
+        paths: dict[os.PathLike, os.PathLike],
+        metadata: dict | None = None,
+        label: str | None = None,
+        project_context: ProjectContext | None = None,
+    ) -> Asset:
+        """Upload a list of files to an existing entity's endpoint from a directory path.
+
+        Note: `paths` is a mapping from desired target to concrete path
+        """
+        url = (
+            route.get_assets_endpoint(
+                api_url=self.api_url,
+                entity_type=entity_type,
+                entity_id=entity_id,
+                asset_id=None,
+            )
+            + "/directory/upload"
+        )
+        context = self._required_user_context(override_context=project_context)
+        paths = {Path(k): Path(v) for k, v in paths.items()}
+        return core.upload_asset_directory_by_paths(
+            url=url,
+            paths=paths,
             metadata=metadata,
             label=label,
             project_context=context,
