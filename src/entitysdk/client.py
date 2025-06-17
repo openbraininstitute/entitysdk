@@ -278,7 +278,8 @@ class Client:
         entity_id: ID,
         entity_type: type[Identifiable],
         directory_path: os.PathLike,
-        file_metadata: dict | None = None,
+        metadata: dict | None = None,
+        label: str | None = None,
         project_context: ProjectContext | None = None,
     ) -> Asset:
         """Upload directory to an existing entity's endpoint from a directory path."""
@@ -295,6 +296,8 @@ class Client:
         return core.upload_asset_directory(
             url=url,
             directory_path=Path(directory_path),
+            metadata=metadata,
+            label=label,
             project_context=context,
             http_client=self._http_client,
             token=self._token_manager.get_token(),

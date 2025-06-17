@@ -181,6 +181,8 @@ def upload_asset_directory(
     url: str,
     *,
     directory_path: Path,
+    metadata: dict | None = None,
+    label: str | None = None,
     project_context: ProjectContext,
     token: str,
     http_client: httpx.Client | None = None,
@@ -200,7 +202,7 @@ def upload_asset_directory(
         project_context=project_context,
         token=token,
         http_client=http_client,
-        json={"files": files},
+        json={"files": files, "meta": metadata, "label": label},
     )
 
     js = response.json()
