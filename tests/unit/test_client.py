@@ -50,7 +50,7 @@ def test_client_project_context__raises():
         client._required_user_context(override_context=None)
 
 
-def test_client_search(client, httpx_mock, auth_token):
+def test_client_search(client, httpx_mock):
     id1 = uuid.uuid4()
     id2 = uuid.uuid4()
 
@@ -77,7 +77,7 @@ def test_client_search(client, httpx_mock, auth_token):
 
 
 @patch("entitysdk.route.get_route_name")
-def test_client_nupdate(mocked_route, client, httpx_mock, auth_token):
+def test_client_nupdate(mocked_route, client, httpx_mock):
     class Foo(Identifiable):
         name: str
 
@@ -136,8 +136,6 @@ def test_client_upload_file(
     client,
     httpx_mock,
     api_url,
-    project_context,
-    auth_token,
     request_headers,
 ):
     entity_id = uuid.uuid4()
@@ -165,9 +163,7 @@ def test_client_upload_file(
     assert res.id == asset_id
 
 
-def test_client_upload_content(
-    client, httpx_mock, api_url, project_context, auth_token, request_headers
-):
+def test_client_upload_content(client, httpx_mock, api_url, request_headers):
     entity_id = uuid.uuid4()
     asset_id = uuid.uuid4()
 
@@ -197,9 +193,7 @@ def test_client_upload_content(
     assert res.id == asset_id
 
 
-def test_client_download_content(
-    client, httpx_mock, api_url, project_context, auth_token, request_headers
-):
+def test_client_download_content(client, httpx_mock, api_url, request_headers):
     entity_id = uuid.uuid4()
     asset_id = uuid.uuid4()
 
@@ -223,8 +217,6 @@ def test_client_download_file__output_file(
     client,
     httpx_mock,
     api_url,
-    project_context,
-    auth_token,
     request_headers,
 ):
     entity_id = uuid.uuid4()
@@ -259,8 +251,6 @@ def test_client_download_file__output_file__inconsistent_ext(
     client,
     httpx_mock,
     api_url,
-    project_context,
-    auth_token,
     request_headers,
 ):
     """User must provide a path extension that is consitent with the asset path."""
@@ -292,8 +282,6 @@ def test_client_download_file__output_file__user_subdirectory_path(
     client,
     httpx_mock,
     api_url,
-    project_context,
-    auth_token,
     request_headers,
 ):
     """User provides a nested output path that overrides the asset path."""
@@ -331,8 +319,6 @@ def test_client_download_file__asset_subdirectory_paths(
     client,
     httpx_mock,
     api_url,
-    project_context,
-    auth_token,
     request_headers,
 ):
     """User provides directory, relative file paths from assets are written to it."""
@@ -390,8 +376,6 @@ def test_client_get(
     client,
     httpx_mock,
     api_url,
-    project_context,
-    auth_token,
     request_headers,
 ):
     entity_id = uuid.uuid4()
@@ -446,8 +430,6 @@ def test_client_delete_asset(
     client,
     httpx_mock,
     api_url,
-    project_context,
-    auth_token,
     request_headers,
 ):
     mock_route.return_value = "reconstruction-morphology"
@@ -479,8 +461,6 @@ def test_client_update_asset(
     client,
     httpx_mock,
     api_url,
-    project_context,
-    auth_token,
     request_headers,
 ):
     mock_route.return_value = "reconstruction-morphology"
@@ -518,7 +498,7 @@ def test_client_update_asset(
 
 
 def test_client_download_assets(
-    tmp_path, api_url, client, project_context, auth_token, request_headers, httpx_mock
+    tmp_path, api_url, client, project_context, request_headers, httpx_mock
 ):
     entity_id = uuid.uuid4()
     asset1_id = uuid.uuid4()
@@ -565,7 +545,7 @@ def test_client_download_assets(
 
 
 def test_client_download_assets__no_assets_raise(
-    tmp_path, api_url, client, project_context, auth_token, request_headers, httpx_mock
+    tmp_path, api_url, client, project_context, request_headers, httpx_mock
 ):
     entity_id = uuid.uuid4()
 
@@ -586,7 +566,7 @@ def test_client_download_assets__no_assets_raise(
 
 
 def test_client_download_assets__non_entity(
-    tmp_path, api_url, client, project_context, auth_token, request_headers, httpx_mock
+    tmp_path, api_url, client, project_context, request_headers, httpx_mock
 ):
     entity_id = uuid.uuid4()
 
@@ -607,7 +587,7 @@ def test_client_download_assets__non_entity(
 
 
 def test_client_download_assets__directory_not_supported(
-    tmp_path, api_url, client, project_context, auth_token, request_headers, httpx_mock
+    tmp_path, api_url, client, project_context, request_headers, httpx_mock
 ):
     entity_id = uuid.uuid4()
     asset_id = uuid.uuid4()
@@ -631,7 +611,7 @@ def test_client_download_assets__directory_not_supported(
 
 
 def test_client_download_assets__entity(
-    tmp_path, api_url, client, project_context, auth_token, request_headers, httpx_mock
+    tmp_path, api_url, client, project_context, request_headers, httpx_mock
 ):
     entity_id = uuid.uuid4()
     asset_id = uuid.uuid4()
