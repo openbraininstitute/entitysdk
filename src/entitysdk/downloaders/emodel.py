@@ -22,7 +22,7 @@ def download_hoc(
     output_dir = create_dir(output_dir)
     asset = client.download_assets(
         emodel,
-        selection={"content_type": "application/hoc"},
+        selection={"content_type": "application/x-neuron-hoc"},
         output_path=output_dir,
     ).one()
 
