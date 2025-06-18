@@ -42,9 +42,9 @@ class SingleNeuronSynaptomeSimulation(Entity):
         ),
     ]
     synaptome_id: Annotated[
-        ID,
+        ID | None,
         Field(
             description="ID of the synaptome that was simulated.",
             example="85663316-a7ff-4107-9eb9-236de8868c5c",
         ),
-    ]
+    ] = None
