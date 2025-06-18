@@ -342,6 +342,7 @@ class Client:
         asset_id: ID,
         output_path: os.PathLike,
         project_context: ProjectContext | None = None,
+        ignore_directory_name: bool = False,
     ) -> list[Path]:
         """List directory existing entity's endpoint from a directory path."""
         output_path = Path(output_path)
@@ -349,6 +350,25 @@ class Client:
         if output_path.exists() and output_path.is_file():
             raise Exception(f"{output_path} exists and is a file")
         output_path.mkdir(parents=True, exist_ok=True)
+
+        context = self._optional_user_context(override_context=project_context)
+
+        if not ignore_directory_name:
+            asset_endpoint = route.get_assets_endpoint(
+                api_url=self.api_url,
+                entity_type=entity_type,
+                entity_id=entity_id,
+                asset_id=asset_id,
+            )
+            directory_name = core.get_entity(
+                asset_endpoint,
+                entity_type=Asset,
+                project_context=context,
+                http_client=self._http_client,
+                token=self._token_manager.get_token(),
+            ).path
+
+            output_path /= directory_name
 
         contents = self.list_directory(
             entity_id=entity_id,
@@ -366,7 +386,7 @@ class Client:
                     asset_id=asset_id,
                     output_path=output_path / path,
                     asset_path=path,
-                    project_context=project_context,
+                    project_context=context,
                 )
             )
 
