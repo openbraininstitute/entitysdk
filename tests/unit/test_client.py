@@ -120,8 +120,8 @@ def _mock_entity_response(entity_id):
 def _mock_asset_response(asset_id):
     return {
         "id": str(asset_id),
-        "path": "path/to/asset",
-        "full_path": "full/path/to/asset",
+        "path": "path_to_asset",
+        "full_path": "full/path_to_asset",
         "is_directory": False,
         "content_type": "text/plain",
         "size": 100,
@@ -312,6 +312,49 @@ def test_client_download_file__output_file__user_subdirectory_path(
         output_path=output_path,
     )
     assert output_path.read_bytes() == b"foo"
+
+
+def test_client_download_file__asset_path(
+    tmp_path,
+    client,
+    httpx_mock,
+    api_url,
+    request_headers,
+):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}",
+        match_headers=request_headers,
+        json=_mock_asset_response(asset_id) | {"is_directory": True},
+    )
+
+    with pytest.raises(EntitySDKError, match="require an `asset_path`"):
+        client.download_file(
+            entity_id=entity_id,
+            entity_type=Entity,
+            asset_id=asset_id,
+            output_path=tmp_path,
+            asset_path=None,
+        )
+
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}",
+        match_headers=request_headers,
+        json=_mock_asset_response(asset_id),
+    )
+
+    with pytest.raises(EntitySDKError, match="Cannot pass `asset_path`"):
+        client.download_file(
+            entity_id=entity_id,
+            entity_type=Entity,
+            asset_id=asset_id,
+            output_path=tmp_path,
+            asset_path="wrong/to/have/asset_path",
+        )
 
 
 def test_client_download_file__asset_subdirectory_paths(
@@ -666,10 +709,19 @@ def test_upload_directory_by_paths(
     entity_id = uuid.uuid4()
 
     paths = {
-        Path("foo/bar/baz/subdir0/file1.txt"): Path("subdir0/file1.txt"),
-        Path("foo/bar/baz/file0.txt"): Path("file0.txt"),
-        Path("subdir0/subdir1/file2.txt"): Path("subdir0/subdir1/file2.txt"),
+        Path("foo/bar/baz/subdir0/file1.txt"): tmp_path / "subdir0/file1.txt",
+        Path("foo/bar/baz/file0.txt"): tmp_path / "file0.txt",
+        Path("subdir0/subdir1/file2.txt"): tmp_path / "subdir0/subdir1/file2.txt",
     }
+    with pytest.raises(Exception, match="does not exist"):
+        client.upload_directory(
+            entity_id=entity_id,
+            entity_type=Entity,
+            name="test-directory",
+            paths=paths,
+            label=None,
+            metadata=None,
+        )
 
     for p in paths.values():
         p.parent.mkdir(parents=True, exist_ok=True)
@@ -715,6 +767,33 @@ def test_upload_directory_by_paths(
     )
     assert res == Asset.model_validate(asset)
 
+    # have s3 upload fail:
+    httpx_mock.add_response(
+        method="POST",
+        url=f"{api_url}/entity/{entity_id}/assets/directory/upload",
+        match_headers=request_headers,
+        json={
+            "asset": asset,
+            "files": {
+                "file0.txt": "http://upload_url0",
+            },
+        },
+    )
+
+    httpx_mock.add_response(method="PUT", url="http://upload_url0", status_code=404)
+    httpx_mock.add_response(method="PUT", url="http://upload_url0", status_code=404)
+    httpx_mock.add_response(method="PUT", url="http://upload_url0", status_code=404)
+
+    with pytest.raises(Exception, match="Uploading these files failed"):
+        client.upload_directory(
+            entity_id=entity_id,
+            entity_type=Entity,
+            name="test-directory",
+            paths={Path("file0.txt"): tmp_path / "file0.txt"},
+            label=None,
+            metadata=None,
+        )
+
 
 def test_client_list_directory(
     client,
@@ -727,7 +806,7 @@ def test_client_list_directory(
 
     date = "2025-01-01T00:00:00Z"
     httpx_mock.add_response(
-        method="Get",
+        method="GET",
         url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/list",
         match_headers=request_headers,
         json={
@@ -748,3 +827,113 @@ def test_client_list_directory(
     assert len(res.files) == 3
     assert isinstance(res.files[Path("a/b/foo.txt")], DetailedFile)
     assert res.files[Path("a/b/foo.txt")].name == "a/b/foo.txt"
+
+
+def test_client_download_directory_ignore_directory(
+    tmp_path,
+    client,
+    httpx_mock,
+    api_url,
+    request_headers,
+):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+
+    date = "2025-01-01T00:00:00Z"
+    # for listing dirs
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/list",
+        match_headers=request_headers,
+        json={
+            "files": {
+                "foo.txt": {"name": "foo.txt", "size": 3, "last_modified": date},
+            }
+        },
+    )
+    # for getting the asset
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}",
+        match_headers=request_headers,
+        json=_mock_asset_response(asset_id) | {"is_directory": True},
+    )
+
+    # for downloading the asset
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download?asset_path=foo.txt",
+        match_headers=request_headers,
+        text="file contents",
+    )
+
+    res = client.download_directory(
+        entity_id=entity_id,
+        entity_type=Entity,
+        asset_id=asset_id,
+        output_path=tmp_path,
+        ignore_directory_name=True,
+    )
+    assert len(res) == 1
+    assert res[0] == (tmp_path / "foo.txt").absolute()
+
+
+def test_client_download_directory(
+    tmp_path,
+    client,
+    httpx_mock,
+    api_url,
+    request_headers,
+):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+
+    date = "2025-01-01T00:00:00Z"
+    # for listing dirs
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/list",
+        match_headers=request_headers,
+        json={
+            "files": {
+                "foo.txt": {"name": "foo.txt", "size": 3, "last_modified": date},
+            }
+        },
+    )
+    # for getting the asset
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}",
+        match_headers=request_headers,
+        json=_mock_asset_response(asset_id) | {"is_directory": True},
+    )
+
+    # for downloading the asset
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download?asset_path=foo.txt",
+        match_headers=request_headers,
+        text="file contents",
+    )
+
+    res = client.download_directory(
+        entity_id=entity_id,
+        entity_type=Entity,
+        asset_id=asset_id,
+        output_path=tmp_path,
+        ignore_directory_name=False,
+    )
+    assert len(res) == 1
+    assert res[0] == (tmp_path / "path_to_asset/foo.txt").absolute()
+
+    # fail if file already exists
+    target = tmp_path / "foo"
+    target.open("w").close()
+    with pytest.raises(EntitySDKError):
+        res = client.download_directory(
+            entity_id=entity_id,
+            entity_type=Entity,
+            asset_id=asset_id,
+            output_path=target,
+            ignore_directory_name=False,
+        )

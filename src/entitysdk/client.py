@@ -348,11 +348,12 @@ class Client:
         output_path = Path(output_path)
 
         if output_path.exists() and output_path.is_file():
-            raise Exception(f"{output_path} exists and is a file")
+            raise EntitySDKError(f"{output_path} exists and is a file")
         output_path.mkdir(parents=True, exist_ok=True)
 
         context = self._optional_user_context(override_context=project_context)
 
+        asset = None
         if not ignore_directory_name:
             asset_endpoint = route.get_assets_endpoint(
                 api_url=self.api_url,
@@ -360,15 +361,15 @@ class Client:
                 entity_id=entity_id,
                 asset_id=asset_id,
             )
-            directory_name = core.get_entity(
+            asset = core.get_entity(
                 asset_endpoint,
                 entity_type=Asset,
                 project_context=context,
                 http_client=self._http_client,
                 token=self._token_manager.get_token(),
-            ).path
+            )
 
-            output_path /= directory_name
+            output_path /= asset.path
 
         contents = self.list_directory(
             entity_id=entity_id,
@@ -383,7 +384,7 @@ class Client:
                 self.download_file(
                     entity_id=entity_id,
                     entity_type=entity_type,
-                    asset_id=asset_id,
+                    asset_id=asset if asset else asset_id,
                     output_path=output_path / path,
                     asset_path=path,
                     project_context=context,
@@ -433,7 +434,7 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Identifiable],
-        asset_id: ID,
+        asset_id: ID | Asset,
         output_path: os.PathLike,
         asset_path: os.PathLike | None = None,
         project_context: ProjectContext | None = None,
@@ -451,28 +452,32 @@ class Client:
         Returns:
             Output file path.
         """
+        context = self._optional_user_context(override_context=project_context)
         asset_endpoint = route.get_assets_endpoint(
             api_url=self.api_url,
             entity_type=entity_type,
             entity_id=entity_id,
-            asset_id=asset_id,
+            asset_id=asset_id if isinstance(asset_id, ID) else asset_id.id,
         )
-        context = self._optional_user_context(override_context=project_context)
-        asset = core.get_entity(
-            asset_endpoint,
-            entity_type=Asset,
-            project_context=context,
-            http_client=self._http_client,
-            token=self._token_manager.get_token(),
-        )
+
+        if isinstance(asset_id, ID):
+            asset = core.get_entity(
+                asset_endpoint,
+                entity_type=Asset,
+                project_context=context,
+                http_client=self._http_client,
+                token=self._token_manager.get_token(),
+            )
+        else:
+            asset = asset_id
 
         path: Path = Path(output_path)
         if asset.is_directory:
             if not asset_path:
-                raise Exception("Directory from directories require an `asset_path`")
+                raise EntitySDKError("Directory from directories require an `asset_path`")
         else:
             if asset_path:
-                raise Exception("Cannot pass `asset_path` to non-directories")
+                raise EntitySDKError("Cannot pass `asset_path` to non-directories")
 
             path = (
                 path / asset.path

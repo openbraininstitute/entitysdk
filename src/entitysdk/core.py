@@ -228,7 +228,7 @@ def upload_asset_directory(
             break
 
     if to_upload:
-        raise Exception(f"Uploading these files failed: {to_upload}", to_upload)
+        raise Exception(f"Uploading these files failed: {to_upload}")
 
     return serdes.deserialize_entity(js["asset"], Asset)
 
