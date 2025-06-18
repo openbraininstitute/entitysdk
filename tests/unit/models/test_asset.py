@@ -25,6 +25,7 @@ def test_asset():
         "status": None,
         "sha256_digest": None,
         "meta": {},
+        "label": None,
     }
 
 
