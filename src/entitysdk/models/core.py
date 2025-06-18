@@ -36,7 +36,3 @@ class Identifiable(BaseModel):
             description="The date and time the resource was created.",
         ),
     ] = None
-
-
-class Activity(Identifiable):
-    """Activity model."""

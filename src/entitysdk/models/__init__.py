@@ -5,6 +5,7 @@ from entitysdk.models.asset import Asset
 from entitysdk.models.brain_location import BrainLocation
 from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.circuit import Circuit
+from entitysdk.models.classification import ETypeClassification, MTypeClassification
 from entitysdk.models.contribution import Contribution, Role
 from entitysdk.models.electrical_cell_recording import ElectricalCellRecording
 from entitysdk.models.emodel import EModel
@@ -28,11 +29,13 @@ __all__ = [
     "Contribution",
     "ElectricalCellRecording",
     "EModel",
+    "ETypeClassification",
     "IonChannelModel",
     "License",
     "MEModel",
     "MEModelCalibrationResult",
     "MTypeClass",
+    "MTypeClassification",
     "NeuronBlock",
     "Organization",
     "Person",
