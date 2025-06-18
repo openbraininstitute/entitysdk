@@ -4,7 +4,9 @@ from typing import Annotated
 
 from pydantic import Field
 
+from entitysdk.models.base import BaseModel
 from entitysdk.models.contribution import Contribution
+from entitysdk.models.core import Identifiable
 from entitysdk.models.emodel import EModel
 from entitysdk.models.entity import Entity
 from entitysdk.models.etype import ETypeClass
@@ -20,7 +22,49 @@ from entitysdk.models.mtype import MTypeClass
 from entitysdk.types import ValidationStatus
 
 
-class MEModel(Entity):
+class MEModelBase(BaseModel):
+    """Base for simulatable neuron model."""
+
+    name: Annotated[
+        str | None,
+        Field(
+            examples=["Entity 1"],
+            description="The name of the entity.",
+        ),
+    ] = None
+    description: Annotated[
+        str | None,
+        Field(
+            examples=["This is entity 1"],
+            description="The description of the entity.",
+        ),
+    ] = None
+    validation_status: Annotated[
+        ValidationStatus,
+        Field(
+            description="The validation status of the memodel.",
+        ),
+    ]
+
+
+class NestedMEModel(MEModelBase, Identifiable):
+    """Nested simulatable neuron model."""
+
+    etypes: Annotated[
+        list[ETypeClass] | None,
+        Field(
+            description="The etype classes of the memodel.",
+        ),
+    ] = None
+    mtypes: Annotated[
+        list[MTypeClass] | None,
+        Field(
+            description="The mtype classes of the memodel.",
+        ),
+    ] = None
+
+
+class MEModel(MEModelBase, Entity):
     """Simulatable neuron model."""
 
     species: Annotated[
@@ -50,12 +94,6 @@ class MEModel(Entity):
             examples="1372346",
         ),
     ] = None
-    validation_status: Annotated[
-        ValidationStatus,
-        Field(
-            description="The validation status of the memodel.",
-        ),
-    ]
     holding_current: Annotated[
         float | None,
         Field(
