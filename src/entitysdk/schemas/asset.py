@@ -6,8 +6,15 @@ from entitysdk.models.asset import Asset
 from entitysdk.schemas.base import Schema
 
 
-class DownloadedAsset(Schema):
-    """Downloaded asset."""
+class DownloadedAssetFile(Schema):
+    """Downloaded asset file."""
 
     asset: Asset
-    output_path: Path
+    path: Path
+
+
+class DownloadedAssetContent(Schema):
+    """Downloaded asset content."""
+
+    asset: Asset
+    content: bytes

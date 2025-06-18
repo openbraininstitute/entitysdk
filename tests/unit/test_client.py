@@ -595,8 +595,8 @@ def test_client_download_assets(
     ).one()
 
     assert res.asset.path == "foo/bar/bar.swc"
-    assert res.output_path == tmp_path / "foo/bar/bar.swc"
-    assert res.output_path.read_bytes() == b"bar"
+    assert res.path == tmp_path / "foo/bar/bar.swc"
+    assert res.path.read_bytes() == b"bar"
 
 
 def test_client_download_assets__no_assets_raise(

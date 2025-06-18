@@ -1,3 +1,5 @@
+import uuid
+
 import pytest
 
 from entitysdk.exception import EntitySDKError
@@ -9,6 +11,7 @@ from entitysdk.utils import asset as test_module
 def assets():
     return [
         Asset(
+            id=uuid.uuid4(),
             path="foo/asset1",
             full_path="/foo/asset1",
             is_directory=False,
@@ -16,6 +19,7 @@ def assets():
             size=1,
         ),
         Asset(
+            id=uuid.uuid4(),
             path="foo/asset2",
             full_path="/foo/asset2",
             is_directory=False,
@@ -23,6 +27,7 @@ def assets():
             size=1,
         ),
         Asset(
+            id=uuid.uuid4(),
             path="foo/asset3",
             full_path="/foo/asset3",
             is_directory=False,

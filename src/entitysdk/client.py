@@ -9,12 +9,13 @@ import httpx
 
 from entitysdk import core, route
 from entitysdk.common import ProjectContext
+from entitysdk.dependencies.entity import ensure_has_assets, ensure_has_id
 from entitysdk.exception import EntitySDKError
 from entitysdk.models.asset import Asset, DetailedFileList, LocalAssetMetadata
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.result import IteratorResult
-from entitysdk.schemas.asset import DownloadedAsset
+from entitysdk.schemas.asset import DownloadedAssetContent, DownloadedAssetFile
 from entitysdk.token_manager import TokenFromValue, TokenManager
 from entitysdk.types import ID, DeploymentEnvironment, Token
 from entitysdk.util import (
@@ -520,9 +521,9 @@ class Client:
                     project_context=context,
                 )
 
-            return DownloadedAsset(
+            return DownloadedAssetFile(
                 asset=asset,
-                output_path=path,
+                path=path,
             )
 
         context = self._optional_user_context(override_context=project_context)
@@ -602,3 +603,39 @@ class Client:
             file_metadata=file_metadata,
             project_context=project_context,
         )
+
+    def download_entity_asset_content(
+        self, entity: Entity, *, selection: dict, project_context: ProjectContext | None = None
+    ) -> DownloadedAssetContent:
+        """Thin wrapper to allow selecting an asset to download its content."""
+        ensure_has_id(entity)
+        ensure_has_assets(entity)
+        asset: Asset = IteratorResult(filter_assets(entity.assets, selection)).one()
+        content: bytes = self.download_content(
+            entity_id=cast(ID, entity.id),
+            entity_type=type(entity),
+            asset_id=asset.id,
+            project_context=project_context,
+        )
+        return DownloadedAssetContent(asset=asset, content=content)
+
+    def download_entity_asset_file(
+        self,
+        entity: Entity,
+        *,
+        selection: dict,
+        output_path: Path,
+        project_context: ProjectContext | None = None,
+    ) -> DownloadedAssetFile:
+        """Thin wrapper to allow selecting an asset to download its content."""
+        ensure_has_id(entity)
+        ensure_has_assets(entity)
+        asset: Asset = IteratorResult(filter_assets(entity.assets, selection)).one()
+        path: Path = self.download_file(
+            entity_id=cast(ID, entity.id),
+            entity_type=type(entity),
+            asset_id=asset.id,
+            project_context=project_context,
+            output_path=output_path,
+        )
+        return DownloadedAssetFile(asset=asset, path=path)
