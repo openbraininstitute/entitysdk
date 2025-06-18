@@ -9,6 +9,7 @@
   "authorized_project_id": "0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6",
   "assets": [
     {
+      "label": null,
       "id": "a90bab5c-8529-4829-99fc-e90a270e8b30",
       "update_date": null,
       "creation_date": null,
@@ -46,6 +47,7 @@
       }
     },
     {
+      "label": null,
       "id": "56394210-d2fb-4755-990c-8083a97a46fd",
       "update_date": null,
       "creation_date": null,

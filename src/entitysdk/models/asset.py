@@ -59,6 +59,7 @@ class Asset(Identifiable):
         dict,
         Field(description="Asset json metadata."),
     ] = {}
+    label: Annotated[str | None, Field(description="Optional asset label.")] = None
 
 
 class LocalAssetMetadata(BaseModel):
