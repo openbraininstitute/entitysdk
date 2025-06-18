@@ -349,7 +349,7 @@ class Client:
         asset_id: ID,
         output_path: os.PathLike,
         project_context: ProjectContext | None = None,
-    ):
+    ) -> list[Path]:
         """List directory existing entity's endpoint from a directory path."""
         output_path = Path(output_path)
 
@@ -364,15 +364,20 @@ class Client:
             project_context=project_context,
         )
 
+        paths = []
         for path in contents.files:
-            self.download_file(
-                entity_id=entity_id,
-                entity_type=entity_type,
-                asset_id=asset_id,
-                output_path=output_path / path,
-                asset_path=path,
-                project_context=project_context,
+            paths.append(
+                self.download_file(
+                    entity_id=entity_id,
+                    entity_type=entity_type,
+                    asset_id=asset_id,
+                    output_path=output_path / path,
+                    asset_path=path,
+                    project_context=project_context,
+                )
             )
+
+        return paths
 
     def download_content(
         self,
