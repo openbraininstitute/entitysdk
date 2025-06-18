@@ -123,3 +123,8 @@ class SimulationExecutionStatus(StrEnum):
     running = auto()
     done = auto()
     error = auto()
+
+
+class ContentType(StrEnum):
+    """Content types."""
+    json = "application/json"
