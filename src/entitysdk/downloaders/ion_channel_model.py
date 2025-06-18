@@ -26,4 +26,4 @@ def download_ion_channel_mechanism(
         output_path=output_dir,
     ).one()
 
-    return asset.output_path
+    return asset.path

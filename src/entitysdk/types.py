@@ -127,4 +127,5 @@ class SimulationExecutionStatus(StrEnum):
 
 class ContentType(StrEnum):
     """Content types."""
+
     json = "application/json"

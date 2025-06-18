@@ -8,10 +8,13 @@ from pydantic import ConfigDict, Field
 
 from entitysdk.models.base import BaseModel
 from entitysdk.models.core import Identifiable
+from entitysdk.types import ID
 
 
 class Asset(Identifiable):
     """Asset."""
+
+    id: ID
 
     path: Annotated[
         str,
