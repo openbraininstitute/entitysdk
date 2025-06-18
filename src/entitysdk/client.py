@@ -277,16 +277,13 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Identifiable],
-        directory_or_paths: os.PathLike | dict[os.PathLike, os.PathLike],
+        name: str,
+        paths: dict[os.PathLike, os.PathLike],
         metadata: dict | None = None,
         label: str | None = None,
         project_context: ProjectContext | None = None,
     ) -> Asset:
-        """Attach directory to an entity from a directory path or group of paths.
-
-        When `directory_or_paths` is a directory, all the files will be uploaded,
-        otherwise, a dictionary of desired target to concrete paths is expected
-        """
+        """Attach directory to an entity from with a group of paths."""
         url = (
             route.get_assets_endpoint(
                 api_url=self.api_url,
@@ -298,16 +295,12 @@ class Client:
         )
         context = self._required_user_context(override_context=project_context)
 
-        paths: Path | dict[Path, Path]
-        if isinstance(directory_or_paths, os.PathLike):
-            paths = Path(directory_or_paths)
-        else:
-            assert isinstance(directory_or_paths, dict)
-            paths = {Path(k): Path(v) for k, v in directory_or_paths.items()}
+        paths = {Path(k): Path(v) for k, v in paths.items()}
 
         return core.upload_asset_directory(
             url=url,
-            directory_or_paths=paths,
+            name=name,
+            paths=paths,
             metadata=metadata,
             label=label,
             project_context=context,

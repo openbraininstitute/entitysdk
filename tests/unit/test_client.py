@@ -655,61 +655,6 @@ def test_client_download_assets__entity(
     assert len(res) == 1
 
 
-def test_upload_directory_by_path(
-    tmp_path,
-    client,
-    httpx_mock,
-    api_url,
-    project_context,
-    request_headers,
-):
-    entity_id = uuid.uuid4()
-
-    test_dir = tmp_path / "test_directory"
-    (test_dir / "subdir0" / "subdir1").mkdir(parents=True)
-    (test_dir / "file0.txt").open("w").close()
-    (test_dir / "subdir0" / "file1.txt").open("w").close()
-    (test_dir / "subdir0" / "subdir1" / "file2.txt").open("w").close()
-    asset = {
-        "content_type": "application/vnd.directory",
-        "full_path": "asdf",
-        "id": "a370a57b-7211-4426-8046-970758ceaf68",
-        "is_directory": True,
-        "label": None,
-        "meta": {},
-        "path": "",
-        "sha256_digest": None,
-        "size": -1,
-        "status": "created",
-    }
-    httpx_mock.add_response(
-        method="POST",
-        url=f"{api_url}/entity/{entity_id}/assets/directory/upload",
-        match_headers=request_headers,
-        json={
-            "asset": asset,
-            "files": {
-                "file0.txt": "http://upload_url0",
-                "subdir0/file1.txt": "http://upload_url1",
-                "subdir0/subdir1/file2.txt": "http://upload_url2",
-            },
-        },
-    )
-
-    httpx_mock.add_response(method="PUT", url="http://upload_url0")
-    httpx_mock.add_response(method="PUT", url="http://upload_url1")
-    httpx_mock.add_response(method="PUT", url="http://upload_url2")
-
-    res = client.upload_directory(
-        entity_id=entity_id,
-        entity_type=Entity,
-        directory_or_paths=test_dir,
-        label=None,
-        metadata=None,
-    )
-    assert res == Asset.model_validate(asset)
-
-
 def test_upload_directory_by_paths(
     tmp_path,
     client,
@@ -763,7 +708,8 @@ def test_upload_directory_by_paths(
     res = client.upload_directory(
         entity_id=entity_id,
         entity_type=Entity,
-        directory_or_paths=paths,
+        name="test-directory",
+        paths=paths,
         label=None,
         metadata=None,
     )

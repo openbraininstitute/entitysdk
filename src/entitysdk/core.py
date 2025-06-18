@@ -180,7 +180,8 @@ def upload_asset_content(
 def upload_asset_directory(
     url: str,
     *,
-    directory_or_paths: Path | dict[Path, Path],
+    name: str,
+    paths: dict[Path, Path],
     metadata: dict | None = None,
     label: str | None = None,
     project_context: ProjectContext,
@@ -188,21 +189,10 @@ def upload_asset_directory(
     http_client: httpx.Client | None = None,
 ) -> Asset:
     """Upload a group of files to a directory."""
-    if isinstance(directory_or_paths, Path):
-        paths = {}
-        for path in directory_or_paths.rglob("*"):
-            if not path.is_file():
-                continue
-            if any(part.startswith(".") for part in path.parts):  # skip hidden
-                continue
-            path = path.relative_to(directory_or_paths)
-            paths[path] = directory_or_paths / path
-    else:
-        for concrete_path in directory_or_paths.values():
-            if not concrete_path.exists():
-                msg = f"Path {concrete_path} does not exist"
-                raise Exception(msg)
-        paths = directory_or_paths
+    for concrete_path in paths.values():
+        if not concrete_path.exists():
+            msg = f"Path {concrete_path} does not exist"
+            raise Exception(msg)
 
     response = make_db_api_request(
         url=url,
@@ -210,7 +200,12 @@ def upload_asset_directory(
         project_context=project_context,
         token=token,
         http_client=http_client,
-        json={"files": [str(p) for p in paths], "meta": metadata, "label": label},
+        json={
+            "files": [str(p) for p in paths],
+            "meta": metadata,
+            "label": label,
+            "directory_name": name,
+        },
     )
 
     js = response.json()
