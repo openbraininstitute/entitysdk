@@ -5,7 +5,8 @@ from typing import Annotated
 from pydantic import Field
 
 from entitysdk.models.entity import Entity
-from entitysdk.types import ID, SingleNeuronSimulationStatus
+from entitysdk.models.synaptome import NestedSynaptome
+from entitysdk.types import SingleNeuronSimulationStatus
 
 
 class SingleNeuronSynaptomeSimulation(Entity):
@@ -15,7 +16,7 @@ class SingleNeuronSynaptomeSimulation(Entity):
         int,
         Field(
             description="Random number generator seed used during the simulation.",
-            example=42,
+            examples=42,
         ),
     ]
     injection_location: Annotated[
@@ -23,7 +24,7 @@ class SingleNeuronSynaptomeSimulation(Entity):
         Field(
             description="List of locations where the stimuli were injected, "
             "in hoc-compatible format.",
-            example="soma[0]",
+            examples="soma[0]",
         ),
     ]
     recording_location: Annotated[
@@ -31,20 +32,20 @@ class SingleNeuronSynaptomeSimulation(Entity):
         Field(
             description="List of locations where the stimuli were recorded, "
             "in hoc-compatible format.",
-            example="soma[0]",
+            examples="soma[0]",
         ),
     ]
     status: Annotated[
         SingleNeuronSimulationStatus,
         Field(
             description="Status of the simulation. Can be .started, .failure, .success",
-            example=SingleNeuronSimulationStatus.success,
+            examples=SingleNeuronSimulationStatus.success,
         ),
     ]
-    synaptome_id: Annotated[
-        ID | None,
+    synaptome: Annotated[
+        NestedSynaptome,
         Field(
-            description="ID of the synaptome that was simulated.",
-            example="85663316-a7ff-4107-9eb9-236de8868c5c",
+            description="The synaptome that was simulated, in nested form.",
+            examples="85663316-a7ff-4107-9eb9-236de8868c5c",
         ),
-    ] = None
+    ]

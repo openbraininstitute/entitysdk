@@ -26,6 +26,7 @@ _ROUTES = {
     "Simulation": "simulation",
     "SimulationCampaign": "simulation-campaign",
     "SingleNeuronSimulation": "single-neuron-simulation",
+    "SingleNeuronSynaptome": "single-neuron-synaptome",
     "SingleNeuronSynaptomeSimulation": "single-neuron-synaptome-simulation",
     "Role": "role",
     "Species": "species",

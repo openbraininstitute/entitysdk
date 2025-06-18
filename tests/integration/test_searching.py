@@ -14,6 +14,7 @@ from entitysdk.models import (
     ReconstructionMorphology,
     Role,
     SingleNeuronSimulation,
+    SingleNeuronSynaptome,
     SingleNeuronSynaptomeSimulation,
     Species,
     Strain,
@@ -41,6 +42,7 @@ from entitysdk.models import (
         MEModelCalibrationResult,
         SingleNeuronSimulation,
         SingleNeuronSynaptomeSimulation,
+        SingleNeuronSynaptome,
     ],
 )
 def test_is_searchable(entity_type, client):
