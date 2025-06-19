@@ -45,7 +45,7 @@ def _mock_emodel_asset_response(asset_id):
         "path": "foo.hoc",
         "full_path": "foo.hoc",
         "is_directory": False,
-        "content_type": "application/x-neuron-hoc",
+        "content_type": "application/hoc",
         "size": 100,
         "status": "created",
         "meta": {},
