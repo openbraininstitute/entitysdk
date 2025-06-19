@@ -17,11 +17,11 @@ from entitysdk.models.morphology import ReconstructionMorphology
 from entitysdk.models.mtype import MTypeClass
 from entitysdk.models.simulation import Simulation
 from entitysdk.models.simulation_campaign import SimulationCampaign
-from entitysdk.models.single_neuron_simulation import SingleNeuronSimulation
-from entitysdk.models.single_neuron_synaptome_simulation import SingleNeuronSynaptomeSimulation
 from entitysdk.models.simulation_execution import SimulationExecution
 from entitysdk.models.simulation_generation import SimulationGeneration
 from entitysdk.models.simulation_result import SimulationResult
+from entitysdk.models.single_neuron_simulation import SingleNeuronSimulation
+from entitysdk.models.single_neuron_synaptome_simulation import SingleNeuronSynaptomeSimulation
 from entitysdk.models.subject import Subject
 from entitysdk.models.synaptome import SingleNeuronSynaptome
 from entitysdk.models.taxonomy import Species, Strain, Taxonomy
