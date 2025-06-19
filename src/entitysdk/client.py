@@ -630,12 +630,24 @@ class Client:
         """Thin wrapper to allow selecting an asset to download its content."""
         ensure_has_id(entity)
         ensure_has_assets(entity)
+        context = self._optional_user_context(override_context=project_context)
         asset: Asset = IteratorResult(filter_assets(entity.assets, selection)).one()
-        path: Path = self.download_file(
-            entity_id=cast(ID, entity.id),
+
+        asset_endpoint = route.get_assets_endpoint(
+            api_url=self.api_url,
             entity_type=type(entity),
+            entity_id=entity.id,
             asset_id=asset.id,
-            project_context=project_context,
-            output_path=output_path,
+        )
+
+        path = validate_filename_extension_consistency(Path(output_path), Path(asset.path).suffix)
+
+        create_intermediate_directories(path)
+        path = core.download_asset_file(
+            url=f"{asset_endpoint}/download",
+            project_context=context,
+            output_path=path,
+            http_client=self._http_client,
+            token=self._token_manager.get_token(),
         )
         return DownloadedAssetFile(asset=asset, path=path)
