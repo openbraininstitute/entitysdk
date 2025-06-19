@@ -1,6 +1,7 @@
 """Core SDK operations."""
 
 import io
+import os
 from collections.abc import Iterator
 from pathlib import Path
 from typing import TypeVar
@@ -9,7 +10,7 @@ import httpx
 
 from entitysdk import serdes
 from entitysdk.common import ProjectContext
-from entitysdk.models.asset import Asset, LocalAssetMetadata
+from entitysdk.models.asset import Asset, DetailedFileList, LocalAssetMetadata
 from entitysdk.models.core import Identifiable
 from entitysdk.result import IteratorResult
 from entitysdk.util import make_db_api_request, stream_paginated_request
@@ -176,10 +177,85 @@ def upload_asset_content(
     return serdes.deserialize_entity(response.json(), Asset)
 
 
+def upload_asset_directory(
+    url: str,
+    *,
+    name: str,
+    paths: dict[Path, Path],
+    metadata: dict | None = None,
+    label: str | None = None,
+    project_context: ProjectContext,
+    token: str,
+    http_client: httpx.Client | None = None,
+) -> Asset:
+    """Upload a group of files to a directory."""
+    for concrete_path in paths.values():
+        if not concrete_path.exists():
+            msg = f"Path {concrete_path} does not exist"
+            raise Exception(msg)
+
+    response = make_db_api_request(
+        url=url,
+        method="POST",
+        project_context=project_context,
+        token=token,
+        http_client=http_client,
+        json={
+            "files": [str(p) for p in paths],
+            "meta": metadata,
+            "label": label,
+            "directory_name": name,
+        },
+    )
+
+    js = response.json()
+
+    def upload(to_upload):
+        failed = {}
+        for path, url in to_upload.items():
+            with open(paths[Path(path)], "rb") as fd:
+                response = http_client.request(
+                    method="PUT", url=url, content=fd, follow_redirects=True
+                )
+            if response.status_code != 200:
+                failed[path] = url
+        return failed
+
+    to_upload = js["files"]
+    for _ in range(3):
+        to_upload = upload(to_upload)
+        if not to_upload:
+            break
+
+    if to_upload:
+        raise Exception(f"Uploading these files failed: {to_upload}")
+
+    return serdes.deserialize_entity(js["asset"], Asset)
+
+
+def list_directory(
+    url: str,
+    *,
+    project_context: ProjectContext,
+    token: str,
+    http_client: httpx.Client | None = None,
+) -> DetailedFileList:
+    """List all files within an asset directory."""
+    response = make_db_api_request(
+        url=url,
+        method="GET",
+        project_context=project_context,
+        token=token,
+        http_client=http_client,
+    )
+    return serdes.deserialize_entity(response.json(), DetailedFileList)
+
+
 def download_asset_file(
     url: str,
     *,
     output_path: Path,
+    asset_path: os.PathLike | None = None,
     project_context: ProjectContext | None = None,
     token: str,
     http_client: httpx.Client | None = None,
@@ -189,6 +265,7 @@ def download_asset_file(
     Args:
         url: URL of the asset.
         output_path: Path to save the file to.
+        asset_path: for asset directories, the path within the directory to the file
         project_context: Project context.
         token: Authorization access token.
         http_client: HTTP client.
@@ -198,6 +275,7 @@ def download_asset_file(
     """
     bytes_content = download_asset_content(
         url=url,
+        asset_path=asset_path,
         project_context=project_context,
         token=token,
         http_client=http_client,
@@ -209,6 +287,7 @@ def download_asset_file(
 def download_asset_content(
     url: str,
     *,
+    asset_path: os.PathLike | None = None,
     project_context: ProjectContext | None = None,
     token: str,
     http_client: httpx.Client | None = None,
@@ -217,6 +296,7 @@ def download_asset_content(
 
     Args:
         url: URL of the asset.
+        asset_path: for asset directories, the path within the directory to the file
         project_context: Project context.
         token: Authorization access token.
         http_client: HTTP client.
@@ -227,6 +307,7 @@ def download_asset_content(
     response = make_db_api_request(
         url=url,
         method="GET",
+        parameters={"asset_path": str(asset_path)} if asset_path else {},
         project_context=project_context,
         token=token,
         http_client=http_client,

@@ -1,9 +1,12 @@
 """Asset models."""
 
+import datetime
+import pathlib
 from typing import Annotated
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import ConfigDict, Field
 
+from entitysdk.models.base import BaseModel
 from entitysdk.models.core import Identifiable
 
 
@@ -90,3 +93,39 @@ class LocalAssetMetadata(BaseModel):
             description="The metadata of the asset.",
         ),
     ] = None
+
+
+class DetailedFile(BaseModel):
+    """File stored in a directory."""
+
+    name: Annotated[
+        str,
+        Field(
+            examples=["some_file_name.txt"],
+            description="The name of the file.",
+        ),
+    ]
+    size: Annotated[
+        int,
+        Field(
+            examples=["314159"],
+            description="Size of the file in bytes",
+        ),
+    ]
+    last_modified: Annotated[
+        datetime.datetime,
+        Field(
+            description="Date file was last modified",
+        ),
+    ]
+
+
+class DetailedFileList(BaseModel):
+    """List of files in a directory."""
+
+    files: Annotated[
+        dict[pathlib.Path, DetailedFile],
+        Field(
+            description="Mapping of paths to detailed information on file",
+        ),
+    ]

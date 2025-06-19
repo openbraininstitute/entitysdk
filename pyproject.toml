@@ -59,6 +59,7 @@ select = [
     "UP", # pyupgrade
 ]
 ignore = [
+    "S101", # allow `assert`
 ]
 
 [tool.ruff.lint.pydocstyle]

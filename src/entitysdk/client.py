@@ -10,7 +10,7 @@ import httpx
 from entitysdk import core, route
 from entitysdk.common import ProjectContext
 from entitysdk.exception import EntitySDKError
-from entitysdk.models.asset import Asset, LocalAssetMetadata
+from entitysdk.models.asset import Asset, DetailedFileList, LocalAssetMetadata
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.result import IteratorResult
@@ -272,6 +272,127 @@ class Client:
             token=self._token_manager.get_token(),
         )
 
+    def upload_directory(
+        self,
+        *,
+        entity_id: ID,
+        entity_type: type[Identifiable],
+        name: str,
+        paths: dict[os.PathLike, os.PathLike],
+        metadata: dict | None = None,
+        label: str | None = None,
+        project_context: ProjectContext | None = None,
+    ) -> Asset:
+        """Attach directory to an entity from with a group of paths."""
+        url = (
+            route.get_assets_endpoint(
+                api_url=self.api_url,
+                entity_type=entity_type,
+                entity_id=entity_id,
+                asset_id=None,
+            )
+            + "/directory/upload"
+        )
+        context = self._required_user_context(override_context=project_context)
+
+        paths = {Path(k): Path(v) for k, v in paths.items()}
+
+        return core.upload_asset_directory(
+            url=url,
+            name=name,
+            paths=paths,
+            metadata=metadata,
+            label=label,
+            project_context=context,
+            http_client=self._http_client,
+            token=self._token_manager.get_token(),
+        )
+
+    def list_directory(
+        self,
+        *,
+        entity_id: ID,
+        entity_type: type[Identifiable],
+        asset_id: ID,
+        project_context: ProjectContext | None = None,
+    ) -> DetailedFileList:
+        """List directory existing entity's endpoint from a directory path."""
+        url = (
+            route.get_assets_endpoint(
+                api_url=self.api_url,
+                entity_type=entity_type,
+                entity_id=entity_id,
+                asset_id=asset_id,
+            )
+            + "/list"
+        )
+        context = self._required_user_context(override_context=project_context)
+        return core.list_directory(
+            url=url,
+            project_context=context,
+            http_client=self._http_client,
+            token=self._token_manager.get_token(),
+        )
+
+    def download_directory(
+        self,
+        *,
+        entity_id: ID,
+        entity_type: type[Identifiable],
+        asset_id: ID,
+        output_path: os.PathLike,
+        project_context: ProjectContext | None = None,
+        ignore_directory_name: bool = False,
+    ) -> list[Path]:
+        """List directory existing entity's endpoint from a directory path."""
+        output_path = Path(output_path)
+
+        if output_path.exists() and output_path.is_file():
+            raise EntitySDKError(f"{output_path} exists and is a file")
+        output_path.mkdir(parents=True, exist_ok=True)
+
+        context = self._optional_user_context(override_context=project_context)
+
+        asset = None
+        if not ignore_directory_name:
+            asset_endpoint = route.get_assets_endpoint(
+                api_url=self.api_url,
+                entity_type=entity_type,
+                entity_id=entity_id,
+                asset_id=asset_id,
+            )
+            asset = core.get_entity(
+                asset_endpoint,
+                entity_type=Asset,
+                project_context=context,
+                http_client=self._http_client,
+                token=self._token_manager.get_token(),
+            )
+
+            output_path /= asset.path
+
+        contents = self.list_directory(
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=asset_id,
+            project_context=project_context,
+        )
+
+        paths = []
+        for path in contents.files:
+            paths.append(
+                self.download_file(
+                    entity_id=entity_id,
+                    entity_type=entity_type,
+                    asset_id=asset if asset else asset_id,
+                    output_path=output_path / path,
+                    asset_path=path,
+                    project_context=context,
+                )
+            )
+
+        return paths
+
     def download_content(
         self,
         *,
@@ -313,8 +434,9 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Identifiable],
-        asset_id: ID,
+        asset_id: ID | Asset,
         output_path: os.PathLike,
+        asset_path: os.PathLike | None = None,
         project_context: ProjectContext | None = None,
     ) -> Path:
         """Download asset file to a file path.
@@ -324,35 +446,49 @@ class Client:
             entity_type: Type of the entity.
             asset_id: Id of the asset.
             output_path: Either be a file path to write the file to or an output directory.
+            asset_path: for asset directories, the path within the directory to the file
             project_context: Optional project context.
 
         Returns:
             Output file path.
         """
+        context = self._optional_user_context(override_context=project_context)
         asset_endpoint = route.get_assets_endpoint(
             api_url=self.api_url,
             entity_type=entity_type,
             entity_id=entity_id,
-            asset_id=asset_id,
+            asset_id=asset_id if isinstance(asset_id, ID) else asset_id.id,
         )
-        context = self._optional_user_context(override_context=project_context)
-        asset = core.get_entity(
-            asset_endpoint,
-            entity_type=Asset,
-            project_context=context,
-            http_client=self._http_client,
-            token=self._token_manager.get_token(),
-        )
+
+        if isinstance(asset_id, ID):
+            asset = core.get_entity(
+                asset_endpoint,
+                entity_type=Asset,
+                project_context=context,
+                http_client=self._http_client,
+                token=self._token_manager.get_token(),
+            )
+        else:
+            asset = asset_id
+
         path: Path = Path(output_path)
-        path = (
-            path / asset.path
-            if path.is_dir()
-            else validate_filename_extension_consistency(path, Path(asset.path).suffix)
-        )
+        if asset.is_directory:
+            if not asset_path:
+                raise EntitySDKError("Directory from directories require an `asset_path`")
+        else:
+            if asset_path:
+                raise EntitySDKError("Cannot pass `asset_path` to non-directories")
+
+            path = (
+                path / asset.path
+                if path.is_dir()
+                else validate_filename_extension_consistency(path, Path(asset.path).suffix)
+            )
         create_intermediate_directories(path)
         return core.download_asset_file(
             url=f"{asset_endpoint}/download",
             project_context=context,
+            asset_path=asset_path,
             output_path=path,
             http_client=self._http_client,
             token=self._token_manager.get_token(),
