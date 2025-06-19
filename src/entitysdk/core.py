@@ -230,7 +230,7 @@ def upload_asset_directory(
     if to_upload:
         raise Exception(f"Uploading these files failed: {to_upload}")
 
-    return serdes.deserialize_entity(js["asset"], Asset)
+    return serdes.deserialize_model(js["asset"], Asset)
 
 
 def list_directory(
@@ -248,7 +248,7 @@ def list_directory(
         token=token,
         http_client=http_client,
     )
-    return serdes.deserialize_entity(response.json(), DetailedFileList)
+    return serdes.deserialize_model(response.json(), DetailedFileList)
 
 
 def download_asset_file(
