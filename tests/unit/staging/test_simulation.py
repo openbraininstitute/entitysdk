@@ -6,13 +6,15 @@ import pytest
 
 from entitysdk.models import Asset, Simulation
 from entitysdk.staging import simulation as test_module
+from entitysdk.utils.io import load_json
 
 DATA_DIR = Path(__file__).parent / "data"
 
 
-MOCK_CONFIG_ID = uuid.uuid4()
-MOCK_NODESETS_ID = uuid.uuid4()
-MOCK_SIMULATION_ID = uuid.uuid4()
+MOCK_SIMULATION_ID = uuid.UUID(int=0)
+MOCK_CONFIG_ID = uuid.UUID(int=1)
+MOCK_NODESETS_ID = uuid.UUID(int=2)
+
 
 @pytest.fixture
 def simulation_config():
@@ -38,17 +40,17 @@ def simulation():
                 id=MOCK_CONFIG_ID,
                 content_type="application/json",
                 label="sonata_simulation_config",
-                path="foo.txt",
-                full_path="/foo.txt",
+                path="foo.json",
+                full_path="/foo.json",
                 size=0,
                 is_directory=False,
             ),
             Asset(
-                id=MOCK_CONFIG_ID,
+                id=MOCK_NODESETS_ID,
                 content_type="application/json",
                 label="custom_node_sets",
-                path="bar.txt",
-                full_path="/bar.txt",
+                path="bar.json",
+                full_path="/bar.json",
                 size=0,
                 is_directory=False,
             ),
@@ -61,16 +63,16 @@ def test_stage_simulation(
 ):
     circuit_config_path = "/foo/bar/circuit_config.json"
 
-    #httpx_mock.add_response(
-    #    method="GET",
-    #    url=f"{api_url}/simulation/assets/{MOCK_CONFIG_ID}/download",
-    #    json=simulation_config,
-    #)
-    #httpx_mock.add_response(
-    #    method="GET",
-    #    url=f"{api_url}/simulation/assets/{MOCK_NODESETS_ID}/download",
-    #    json=simulation_config,
-    #)
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/simulation/{MOCK_SIMULATION_ID}/assets/{MOCK_CONFIG_ID}/download",
+        json=simulation_config,
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/simulation/{MOCK_SIMULATION_ID}/assets/{MOCK_NODESETS_ID}/download",
+        json=simulation_config,
+    )
 
     res = test_module.stage_simulation(
         client,
@@ -84,3 +86,7 @@ def test_stage_simulation(
 
     assert expected_simulation_config_path.exists()
     assert expected_node_sets_path.exists()
+
+    simulation_config = load_json(expected_simulation_config_path)
+    assert simulation_config["network"] == circuit_config_path
+    assert simulation_config["node_sets_file"] == str(expected_node_sets_path)
