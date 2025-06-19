@@ -8,6 +8,7 @@ from pydantic import ConfigDict, Field
 
 from entitysdk.models.base import BaseModel
 from entitysdk.models.core import Identifiable
+from entitysdk.types import AssetLabel, AssetStatus
 
 
 class Asset(Identifiable):
@@ -52,7 +53,7 @@ class Asset(Identifiable):
         ),
     ] = None
     status: Annotated[
-        str | None,
+        AssetStatus | None,
         Field(
             examples=["created", "deleted"],
             description="The status of the asset.",
@@ -62,7 +63,7 @@ class Asset(Identifiable):
         dict,
         Field(description="Asset json metadata."),
     ] = {}
-    label: Annotated[str | None, Field(description="Optional asset label.")] = None
+    label: Annotated[AssetLabel | None, Field(description="Optional asset label.")] = None
 
 
 class LocalAssetMetadata(BaseModel):
