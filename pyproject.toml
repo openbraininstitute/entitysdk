@@ -130,3 +130,7 @@ show_error_codes = true
 ignore_missing_imports = true
 allow_redefinition = true
 exclude = ["^_server_schemas\\.py$"]
+
+[[tool.mypy.overrides]]
+module = "entitysdk._server_schemas"
+ignore_errors = true
