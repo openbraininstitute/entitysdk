@@ -1,7 +1,8 @@
 {
   "version": 1,
+  "manifest": {"$BASE_DIR": "WRONG"},
   "target_simulator": "CORENEURON",
-  "network": "/Users/james/Documents/obi/additional_data/O1_data/O1_data/circuit_config.json",
+  "network": "circuit_config.json",
   "run": {
     "dt": 0.025,
     "random_seed": 1,
@@ -83,11 +84,30 @@
       "cells": "L1Stim",
       "module": "synapse_replay",
       "input_type": "spikes",
-      "spike_file": "PoissonInputStimulus_spikes.h5"
+      "spike_file": "PoissonInputStimulus_spikes_1.h5"
+    },
+    "PoissonInputStimulus_2": {
+      "delay": 0.0,
+      "duration": 800.0,
+      "cells": "L1Stim",
+      "module": "synapse_replay",
+      "input_type": "spikes",
+      "spike_file": "$BASE_DIR/PoissonInputStimulus_spikes_2.h5"
     }
   },
   "reports": {
-    "SomaVoltRec": {
+    "SomaVoltRec 1": {
+      "cells": "L1Rec",
+      "sections": "soma",
+      "type": "compartment",
+      "compartments": "center",
+      "variable_name": "v",
+      "unit": "mV",
+      "dt": 0.1,
+      "start_time": 0.0,
+      "end_time": 3000.0
+    },
+    "SomaVoltRec 2": {
       "cells": "L1Rec",
       "sections": "soma",
       "type": "compartment",
@@ -100,5 +120,9 @@
     }
   },
   "node_set": "L1All",
-  "node_sets_file": "node_sets.json"
+  "node_sets_file": "$BASE_DIR/node_sets.json"
+  "output": {
+      "output_dir": "output",
+      "spikes_file": "output/spikes.h5"
+  }
 }
