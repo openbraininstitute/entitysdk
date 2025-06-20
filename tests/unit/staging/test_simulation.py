@@ -6,36 +6,12 @@ from entitysdk.utils.io import load_json
 
 def test_stage_simulation(
     client,
-    simulation,
-    api_url,
-    httpx_mock,
     tmp_path,
+    simulation,
     simulation_config,
-    node_sets_file,
-    spike_replays,
+    simulation_httpx_mocks,
 ):
     circuit_config_path = "/foo/bar/circuit_config.json"
-
-    httpx_mock.add_response(
-        method="GET",
-        url=f"{api_url}/simulation/{simulation.id}/assets/{simulation.assets[0].id}/download",
-        json=simulation_config,
-    )
-    httpx_mock.add_response(
-        method="GET",
-        url=f"{api_url}/simulation/{simulation.id}/assets/{simulation.assets[1].id}/download",
-        json=simulation_config,
-    )
-    httpx_mock.add_response(
-        method="GET",
-        url=f"{api_url}/simulation/{simulation.id}/assets/{simulation.assets[2].id}/download",
-        content=spike_replays,
-    )
-    httpx_mock.add_response(
-        method="GET",
-        url=f"{api_url}/simulation/{simulation.id}/assets/{simulation.assets[3].id}/download",
-        content=spike_replays,
-    )
 
     res = test_module.stage_simulation(
         client,

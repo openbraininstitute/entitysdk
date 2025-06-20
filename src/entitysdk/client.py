@@ -3,7 +3,7 @@
 import io
 import os
 from pathlib import Path
-from typing import Any, cast
+from typing import Any, TypeVar, cast
 
 import httpx
 
@@ -23,6 +23,8 @@ from entitysdk.util import (
     validate_filename_extension_consistency,
 )
 from entitysdk.utils.asset import filter_assets
+
+TEntity = TypeVar("TEntity", bound=Entity)
 
 
 class Client:
@@ -94,9 +96,9 @@ class Client:
         self,
         entity_id: ID,
         *,
-        entity_type: type[Identifiable],
+        entity_type: type[TEntity],
         project_context: ProjectContext | None = None,
-    ) -> Identifiable:
+    ) -> TEntity:
         """Get entity from resource id.
 
         Args:
