@@ -9,13 +9,12 @@ import httpx
 
 from entitysdk import core, route
 from entitysdk.common import ProjectContext
-from entitysdk.dependencies.entity import ensure_has_assets, ensure_has_id
 from entitysdk.exception import EntitySDKError
 from entitysdk.models.asset import Asset, DetailedFileList, LocalAssetMetadata
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.result import IteratorResult
-from entitysdk.schemas.asset import DownloadedAssetContent, DownloadedAssetFile
+from entitysdk.schemas.asset import DownloadedAssetFile
 from entitysdk.token_manager import TokenFromValue, TokenManager
 from entitysdk.types import ID, DeploymentEnvironment, Token
 from entitysdk.util import (
@@ -439,8 +438,7 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Identifiable],
-        asset_id: ID | None = None,
-        asset: Asset | None = None,
+        asset_id: ID | Asset,
         output_path: os.PathLike,
         asset_path: os.PathLike | None = None,
         project_context: ProjectContext | None = None,
@@ -451,6 +449,7 @@ class Client:
             entity_id: Id of the entity.
             entity_type: Type of the entity.
             asset_id: Id of the asset.
+            asset: Asset to provide alternatively to asset_id
             output_path: Either be a file path to write the file to or an output directory.
             asset_path: for asset directories, the path within the directory to the file
             project_context: Optional project context.
@@ -459,8 +458,6 @@ class Client:
             Output file path.
         """
         context = self._optional_user_context(override_context=project_context)
-
-        assert not (asset and asset_id), "Cannot provide both asset and asset_id"
 
         asset_endpoint = route.get_assets_endpoint(
             api_url=self.api_url,
@@ -477,6 +474,8 @@ class Client:
                 http_client=self._http_client,
                 token=self._token_manager.get_token(),
             )
+        else:
+            asset = asset_id
 
         path: Path = Path(output_path)
         if asset.is_directory:
@@ -503,6 +502,7 @@ class Client:
 
     @staticmethod
     def select_assets(entity: Entity, selection: dict) -> IteratorResult:
+        """Select assets from entity based on selection."""
         return IteratorResult(filter_assets(entity.assets, selection))
 
     def download_assets(
@@ -609,51 +609,3 @@ class Client:
             file_metadata=file_metadata,
             project_context=project_context,
         )
-
-    def download_entity_asset_content(
-        self, entity: Entity, *, selection: dict, project_context: ProjectContext | None = None
-    ) -> DownloadedAssetContent:
-        """Thin wrapper to allow selecting an asset to download its content."""
-        ensure_has_id(entity)
-        ensure_has_assets(entity)
-        asset: Asset = IteratorResult(filter_assets(entity.assets, selection)).one()
-        content: bytes = self.download_content(
-            entity_id=cast(ID, entity.id),
-            entity_type=type(entity),
-            asset_id=asset.id,
-            project_context=project_context,
-        )
-        return DownloadedAssetContent(asset=asset, content=content)
-
-    def download_entity_asset_file(
-        self,
-        entity: Entity,
-        *,
-        selection: dict,
-        output_path: Path,
-        project_context: ProjectContext | None = None,
-    ) -> DownloadedAssetFile:
-        """Thin wrapper to allow selecting an asset to download its content."""
-        ensure_has_id(entity)
-        ensure_has_assets(entity)
-        context = self._optional_user_context(override_context=project_context)
-        asset: Asset = IteratorResult(filter_assets(entity.assets, selection)).one()
-
-        asset_endpoint = route.get_assets_endpoint(
-            api_url=self.api_url,
-            entity_type=type(entity),
-            entity_id=entity.id,
-            asset_id=asset.id,
-        )
-
-        path = validate_filename_extension_consistency(Path(output_path), Path(asset.path).suffix)
-
-        create_intermediate_directories(path)
-        path = core.download_asset_file(
-            url=f"{asset_endpoint}/download",
-            project_context=context,
-            output_path=path,
-            http_client=self._http_client,
-            token=self._token_manager.get_token(),
-        )
-        return DownloadedAssetFile(asset=asset, path=path)

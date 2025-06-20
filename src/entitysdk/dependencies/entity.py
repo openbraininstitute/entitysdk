@@ -14,5 +14,5 @@ def ensure_has_id(model: Entity) -> Entity:
 def ensure_has_assets(model: Entity) -> Entity:
     """Ensure entity has assets."""
     if not model.assets:
-        raise DependencyError(f"Model has no asset: {repr(model)}")
+        raise DependencyError(f"Model has no assets: {repr(model)}")
     return model

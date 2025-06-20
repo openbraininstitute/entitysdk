@@ -19,21 +19,21 @@ def test_stage_simulation_result(
     # )
     httpx_mock.add_response(
         method="GET",
-        url=f"{api_url}/simulation_result/{simulation_result.id}/assets/{simulation_result.assets[0].id}/download",
-        json=voltage_report_1,
+        url=f"{api_url}/simulation-result/{simulation_result.id}/assets/{simulation_result.assets[0].id}/download",
+        content=voltage_report_1,
     )
     httpx_mock.add_response(
         method="GET",
-        url=f"{api_url}/simulation_result/{simulation_result.id}/assets/{simulation_result.assets[1].id}/download",
-        json=voltage_report_2,
+        url=f"{api_url}/simulation-result/{simulation_result.id}/assets/{simulation_result.assets[1].id}/download",
+        content=voltage_report_2,
     )
     httpx_mock.add_response(
         method="GET",
-        url=f"{api_url}/simulation/{simulation_result.id}/assets/{simulation_result.assets[2].id}/download",
+        url=f"{api_url}/simulation-result/{simulation_result.id}/assets/{simulation_result.assets[2].id}/download",
         content=spike_report,
     )
 
-    res = test_module.stage_simulation_result(
+    test_module.stage_simulation_result(
         client,
         model=simulation_result,
         output_dir=tmp_path,

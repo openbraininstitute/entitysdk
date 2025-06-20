@@ -1,3 +1,5 @@
+"""Staging functions for Simulation."""
+
 import logging
 from copy import deepcopy
 from pathlib import Path
@@ -6,6 +8,7 @@ from entitysdk.client import Client
 from entitysdk.downloaders.simulation import (
     download_node_sets_file,
     download_simulation_config_content,
+    download_spike_replay_files,
 )
 from entitysdk.models import Simulation
 from entitysdk.types import StrOrPath
@@ -16,6 +19,7 @@ L = logging.getLogger(__name__)
 
 DEFAULT_NODE_SETS_FILENAME = "node_sets.json"
 DEFAULT_SIMULATION_CONFIG_FILENAME = "simulation_config.json"
+DEFAULT_CIRCUIT_DIR = "circuit"
 
 
 def stage_simulation(
@@ -30,11 +34,18 @@ def stage_simulation(
 
     simulation_config: dict = download_simulation_config_content(client, model=model)
     node_sets_file: Path = download_node_sets_file(
-        client, model=model, output_path=output_dir / DEFAULT_NODE_SETS_FILENAME
+        client,
+        model=model,
+        output_path=output_dir / DEFAULT_NODE_SETS_FILENAME,
     )
-    spike_paths: list[Path] = _download_spike_replay_files(
-        client, model=model, output_dir=output_dir
+    spike_paths: list[Path] = download_spike_replay_files(
+        client,
+        model=model,
+        output_dir=output_dir,
     )
+    if circuit_config_path is None:
+        L.info("Circuit will be downloaded simulation's metadata.")
+        circuit_config_path = output_dir / "circuit_config.json"
 
     transformed_simulation_config: dict = _transform_simulation_config(
         simulation_config=simulation_config,

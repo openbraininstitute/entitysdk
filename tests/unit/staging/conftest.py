@@ -79,14 +79,14 @@ def voltage_report_1():
     return Path(DATA_DIR, "SomaVoltRec 1.h5").read_bytes()
 
 
-@pytest.fixtyre
+@pytest.fixture
 def voltage_report_2():
     return Path(DATA_DIR, "SomaVoltRec 2.h5").read_bytes()
 
 
 @pytest.fixture
 def spike_report():
-    return Path(DATA_DIR, "spiked.h5").read_bytes()
+    return Path(DATA_DIR, "spikes.h5").read_bytes()
 
 
 @pytest.fixture
@@ -101,8 +101,8 @@ def simulation_result(simulation):
                 id=uuid.uuid4(),
                 content_type="application/x-hdf5",
                 label="voltage_report",
-                path=None,
-                full_path=None,
+                path="SomaVoltRec 1.h5",
+                full_path="/soma_voltage1.h5",
                 size=0,
                 is_directory=False,
             ),
@@ -110,8 +110,8 @@ def simulation_result(simulation):
                 id=uuid.uuid4(),
                 content_type="application/x-hdf5",
                 label="voltage_report",
-                path=None,
-                full_path=None,
+                path="SomaVoltRec 2.h5",
+                full_path="/soma_voltage2.h5",
                 size=0,
                 is_directory=False,
             ),
@@ -119,8 +119,8 @@ def simulation_result(simulation):
                 id=uuid.uuid4(),
                 content_type="application/x-hdf5",
                 label="spike_report",
-                path=None,
-                full_path=None,
+                path="out.h5",
+                full_path="/out.h5",
                 size=0,
                 is_directory=False,
             ),
