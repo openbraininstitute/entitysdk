@@ -1,77 +1,40 @@
-import json
-import uuid
 from pathlib import Path
 
-import pytest
-
-from entitysdk.models import Asset, Simulation
 from entitysdk.staging import simulation as test_module
 from entitysdk.utils.io import load_json
 
-DATA_DIR = Path(__file__).parent / "data"
-
-
-MOCK_SIMULATION_ID = uuid.UUID(int=0)
-MOCK_CONFIG_ID = uuid.UUID(int=1)
-MOCK_NODESETS_ID = uuid.UUID(int=2)
-
-
-@pytest.fixture
-def simulation_config():
-    return json.loads(Path(DATA_DIR / "simulation_config.json").read_bytes())
-
-
-@pytest.fixture
-def node_sets_file():
-    return json.loads(Path(DATA_DIR / "node_sets.json").read_bytes())
-
-
-@pytest.fixture
-def simulation():
-    return Simulation(
-        id=MOCK_SIMULATION_ID,
-        name="my-simulation",
-        description="my-description",
-        entity_id=uuid.uuid4(),
-        simulation_campaign_id=uuid.uuid4(),
-        scan_parameters={},
-        assets=[
-            Asset(
-                id=MOCK_CONFIG_ID,
-                content_type="application/json",
-                label="sonata_simulation_config",
-                path="foo.json",
-                full_path="/foo.json",
-                size=0,
-                is_directory=False,
-            ),
-            Asset(
-                id=MOCK_NODESETS_ID,
-                content_type="application/json",
-                label="custom_node_sets",
-                path="bar.json",
-                full_path="/bar.json",
-                size=0,
-                is_directory=False,
-            ),
-        ],
-    )
-
 
 def test_stage_simulation(
-    client, simulation, api_url, httpx_mock, tmp_path, simulation_config, node_sets_file
+    client,
+    simulation,
+    api_url,
+    httpx_mock,
+    tmp_path,
+    simulation_config,
+    node_sets_file,
+    spike_replays,
 ):
     circuit_config_path = "/foo/bar/circuit_config.json"
 
     httpx_mock.add_response(
         method="GET",
-        url=f"{api_url}/simulation/{MOCK_SIMULATION_ID}/assets/{MOCK_CONFIG_ID}/download",
+        url=f"{api_url}/simulation/{simulation.id}/assets/{simulation.assets[0].id}/download",
         json=simulation_config,
     )
     httpx_mock.add_response(
         method="GET",
-        url=f"{api_url}/simulation/{MOCK_SIMULATION_ID}/assets/{MOCK_NODESETS_ID}/download",
+        url=f"{api_url}/simulation/{simulation.id}/assets/{simulation.assets[1].id}/download",
         json=simulation_config,
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/simulation/{simulation.id}/assets/{simulation.assets[2].id}/download",
+        content=spike_replays,
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/simulation/{simulation.id}/assets/{simulation.assets[3].id}/download",
+        content=spike_replays,
     )
 
     res = test_module.stage_simulation(
@@ -83,10 +46,21 @@ def test_stage_simulation(
 
     expected_simulation_config_path = tmp_path / "simulation_config.json"
     expected_node_sets_path = tmp_path / "node_sets.json"
+    expected_spikes_1 = tmp_path / "PoissonInputStimulus_spikes_1.h5"
+    expected_spikes_2 = tmp_path / "PoissonInputStimulus_spikes_2.h5"
 
     assert expected_simulation_config_path.exists()
     assert expected_node_sets_path.exists()
+    assert expected_spikes_1.exists()
+    assert expected_spikes_2.exists()
 
-    simulation_config = load_json(expected_simulation_config_path)
-    assert simulation_config["network"] == circuit_config_path
-    assert simulation_config["node_sets_file"] == str(expected_node_sets_path)
+    res = load_json(expected_simulation_config_path)
+    assert res["network"] == circuit_config_path
+    assert res["node_sets_file"] == Path(expected_node_sets_path).name
+
+    assert res["reports"] == simulation_config["reports"]
+    assert res["conditions"] == simulation_config["conditions"]
+
+    assert len(res["inputs"]) == len(simulation_config["inputs"])
+    assert res["inputs"]["PoissonInputStimulus"]["spike_file"] == expected_spikes_1.name
+    assert res["inputs"]["PoissonInputStimulus_2"]["spike_file"] == expected_spikes_2.name

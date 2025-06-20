@@ -439,7 +439,8 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Identifiable],
-        asset_id: ID | Asset,
+        asset_id: ID | None = None,
+        asset: Asset | None = None,
         output_path: os.PathLike,
         asset_path: os.PathLike | None = None,
         project_context: ProjectContext | None = None,
@@ -458,6 +459,9 @@ class Client:
             Output file path.
         """
         context = self._optional_user_context(override_context=project_context)
+
+        assert not (asset and asset_id), "Cannot provide both asset and asset_id"
+
         asset_endpoint = route.get_assets_endpoint(
             api_url=self.api_url,
             entity_type=entity_type,
@@ -473,8 +477,6 @@ class Client:
                 http_client=self._http_client,
                 token=self._token_manager.get_token(),
             )
-        else:
-            asset = asset_id
 
         path: Path = Path(output_path)
         if asset.is_directory:
@@ -498,6 +500,10 @@ class Client:
             http_client=self._http_client,
             token=self._token_manager.get_token(),
         )
+
+    @staticmethod
+    def select_assets(entity: Entity, selection: dict) -> IteratorResult:
+        return IteratorResult(filter_assets(entity.assets, selection))
 
     def download_assets(
         self,
