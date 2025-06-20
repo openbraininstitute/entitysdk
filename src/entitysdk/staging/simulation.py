@@ -28,7 +28,7 @@ def stage_simulation(
     model: Simulation,
     output_dir: StrOrPath,
     circuit_config_path: Path | None = None,
-):
+) -> Path:
     """Stage a simulation entity into output_dir."""
     output_dir = create_dir(output_dir).resolve()
 
@@ -46,6 +46,7 @@ def stage_simulation(
     if circuit_config_path is None:
         L.info("Circuit will be downloaded simulation's metadata.")
         circuit_config_path = output_dir / "circuit_config.json"
+        raise NotImplementedError("Circuit staging not implemented yet.")
 
     transformed_simulation_config: dict = _transform_simulation_config(
         simulation_config=simulation_config,
@@ -55,10 +56,16 @@ def stage_simulation(
         output_dir=output_dir,
     )
 
+    output_simulation_config_file = output_dir / DEFAULT_SIMULATION_CONFIG_FILENAME
+
     write_json(
         data=transformed_simulation_config,
-        path=output_dir / DEFAULT_SIMULATION_CONFIG_FILENAME,
+        path=output_simulation_config_file,
     )
+
+    L.info("Staged Simulation %s at %s", model.id, output_dir)
+
+    return output_simulation_config_file
 
 
 def _transform_simulation_config(
