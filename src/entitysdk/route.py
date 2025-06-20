@@ -9,6 +9,7 @@ _ROUTES = {
     "Activity": "activity",
     "BrainLocation": "brain-location",
     "BrainRegion": "brain-region",
+    "BrainRegionHierarchy": "brain-region-hierarchy",
     "Circuit": "circuit",
     "Contribution": "contribution",
     "ElectricalCellRecording": "electrical-cell-recording",

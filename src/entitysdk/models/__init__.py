@@ -4,6 +4,7 @@ from entitysdk.models.agent import Organization, Person
 from entitysdk.models.asset import Asset
 from entitysdk.models.brain_location import BrainLocation
 from entitysdk.models.brain_region import BrainRegion
+from entitysdk.models.brain_region_hierarchy import BrainRegionHierarchy
 from entitysdk.models.circuit import Circuit
 from entitysdk.models.classification import ETypeClassification, MTypeClassification
 from entitysdk.models.contribution import Contribution, Role
@@ -31,6 +32,7 @@ __all__ = [
     "Asset",
     "BrainLocation",
     "BrainRegion",
+    "BrainRegionHierarchy",
     "Circuit",
     "Contribution",
     "ElectricalCellRecording",
