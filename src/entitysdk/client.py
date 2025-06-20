@@ -3,7 +3,7 @@
 import io
 import os
 from pathlib import Path
-from typing import Any, cast
+from typing import Any, TypeVar, cast
 
 import httpx
 
@@ -14,7 +14,7 @@ from entitysdk.models.asset import Asset, DetailedFileList, LocalAssetMetadata
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.result import IteratorResult
-from entitysdk.schemas.asset import DownloadedAsset
+from entitysdk.schemas.asset import DownloadedAssetFile
 from entitysdk.token_manager import TokenFromValue, TokenManager
 from entitysdk.types import ID, DeploymentEnvironment, Token
 from entitysdk.util import (
@@ -23,6 +23,8 @@ from entitysdk.util import (
     validate_filename_extension_consistency,
 )
 from entitysdk.utils.asset import filter_assets
+
+TEntity = TypeVar("TEntity", bound=Entity)
 
 
 class Client:
@@ -94,9 +96,9 @@ class Client:
         self,
         entity_id: ID,
         *,
-        entity_type: type[Identifiable],
+        entity_type: type[TEntity],
         project_context: ProjectContext | None = None,
-    ) -> Identifiable:
+    ) -> TEntity:
         """Get entity from resource id.
 
         Args:
@@ -453,6 +455,7 @@ class Client:
             Output file path.
         """
         context = self._optional_user_context(override_context=project_context)
+
         asset_endpoint = route.get_assets_endpoint(
             api_url=self.api_url,
             entity_type=entity_type,
@@ -494,6 +497,11 @@ class Client:
             token=self._token_manager.get_token(),
         )
 
+    @staticmethod
+    def select_assets(entity: Entity, selection: dict) -> IteratorResult:
+        """Select assets from entity based on selection."""
+        return IteratorResult(filter_assets(entity.assets, selection))
+
     def download_assets(
         self,
         entity_or_id: Entity | tuple[ID, type[Entity]],
@@ -516,9 +524,9 @@ class Client:
                     project_context=context,
                 )
 
-            return DownloadedAsset(
+            return DownloadedAssetFile(
                 asset=asset,
-                output_path=path,
+                path=path,
             )
 
         context = self._optional_user_context(override_context=project_context)
