@@ -58,8 +58,8 @@ def test_client_search(client, httpx_mock):
         method="GET",
         json={
             "data": [
-                {"id": str(id1), "name": "foo", "description": "bar", "type": "zee"},
-                {"id": str(id2), "name": "foo", "description": "bar", "type": "zee"},
+                {"id": str(id1), "name": "foo", "description": "bar", "type": "circuit"},
+                {"id": str(id2), "name": "foo", "description": "bar", "type": "circuit"},
             ],
             "pagination": {"page": 1, "page_size": 10, "total_items": 2},
         },
