@@ -46,7 +46,6 @@ def stage_simulation(
     if circuit_config_path is None:
         L.info("Circuit will be downloaded simulation's metadata.")
         circuit_config_path = output_dir / "circuit_config.json"
-        raise NotImplementedError("Circuit staging not implemented yet.")
 
     transformed_simulation_config: dict = _transform_simulation_config(
         simulation_config=simulation_config,
