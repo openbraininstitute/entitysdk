@@ -30,7 +30,7 @@ def _mock_ic_asset_response(asset_id):
         "path": "foo.mod",
         "full_path": "foo.mod",
         "is_directory": False,
-        "content_type": "application/neuron-mod",
+        "content_type": "application/mod",
         "size": 100,
         "status": "created",
         "meta": {},
