@@ -219,13 +219,18 @@ def upload_asset_directory(
             with open(paths[Path(path)], "rb") as fd:
                 try:
                     response = http_client.request(
-                        method="PUT", url=url, content=fd, follow_redirects=True
+                        method="PUT",
+                        url=url,
+                        content=fd,
+                        follow_redirects=True,
+                        timeout=20,
                     )
                 except httpx.HTTPError:
                     L.exception("Upload failed, will retry again")
                     failed[path] = url
-            if response.status_code != 200:
-                failed[path] = url
+                else:
+                    if response.status_code != 200:
+                        failed[path] = url
         return failed
 
     to_upload = js["files"]
