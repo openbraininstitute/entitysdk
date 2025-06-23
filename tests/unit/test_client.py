@@ -4,6 +4,7 @@ import uuid
 from pathlib import Path
 from unittest.mock import patch
 
+import httpx
 import pytest
 
 from entitysdk.client import Client
@@ -767,6 +768,19 @@ def test_upload_directory_by_paths(
     )
     assert res == Asset.model_validate(asset)
 
+    # have read error / exception
+    httpx_mock.add_exception(httpx.ReadTimeout("Unable to read within timeout"))
+
+    with pytest.raises(EntitySDKError):
+        client.upload_directory(
+            entity_id=entity_id,
+            entity_type=Entity,
+            name="test-directory",
+            paths=paths,
+            label=None,
+            metadata=None,
+        )
+
     # have s3 upload fail:
     httpx_mock.add_response(
         method="POST",
@@ -784,7 +798,7 @@ def test_upload_directory_by_paths(
     httpx_mock.add_response(method="PUT", url="http://upload_url0", status_code=404)
     httpx_mock.add_response(method="PUT", url="http://upload_url0", status_code=404)
 
-    with pytest.raises(Exception, match="Uploading these files failed"):
+    with pytest.raises(EntitySDKError, match="Uploading these files failed"):
         client.upload_directory(
             entity_id=entity_id,
             entity_type=Entity,

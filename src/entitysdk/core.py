@@ -1,6 +1,7 @@
 """Core SDK operations."""
 
 import io
+import logging
 import os
 from collections.abc import Iterator
 from pathlib import Path
@@ -10,11 +11,13 @@ import httpx
 
 from entitysdk import serdes
 from entitysdk.common import ProjectContext
+from entitysdk.exception import EntitySDKError
 from entitysdk.models.asset import Asset, DetailedFileList, LocalAssetMetadata
 from entitysdk.models.core import Identifiable
 from entitysdk.result import IteratorResult
 from entitysdk.util import make_db_api_request, stream_paginated_request
 
+L = logging.getLogger(__name__)
 TIdentifiable = TypeVar("TIdentifiable", bound=Identifiable)
 
 
@@ -192,7 +195,7 @@ def upload_asset_directory(
     for concrete_path in paths.values():
         if not concrete_path.exists():
             msg = f"Path {concrete_path} does not exist"
-            raise Exception(msg)
+            raise EntitySDKError(msg)
 
     response = make_db_api_request(
         url=url,
@@ -214,9 +217,13 @@ def upload_asset_directory(
         failed = {}
         for path, url in to_upload.items():
             with open(paths[Path(path)], "rb") as fd:
-                response = http_client.request(
-                    method="PUT", url=url, content=fd, follow_redirects=True
-                )
+                try:
+                    response = http_client.request(
+                        method="PUT", url=url, content=fd, follow_redirects=True
+                    )
+                except httpx.HTTPError:
+                    L.exception("Upload failed, will retry again")
+                    failed[path] = url
             if response.status_code != 200:
                 failed[path] = url
         return failed
@@ -228,7 +235,7 @@ def upload_asset_directory(
             break
 
     if to_upload:
-        raise Exception(f"Uploading these files failed: {to_upload}")
+        raise EntitySDKError(f"Uploading these files failed: {to_upload}")
 
     return serdes.deserialize_model(js["asset"], Asset)
 
