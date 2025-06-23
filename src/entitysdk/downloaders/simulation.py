@@ -63,10 +63,6 @@ def download_spike_replay_files(
 
     assets = client.select_assets(model, selection={"label": "spike_replays"}).all()
 
-    if not assets:
-        L.info("No spike replay assets found in simulation {%s}", model.id)
-        return []
-
     spike_files: list[Path] = [
         client.download_file(
             entity_id=cast(ID, model.id),

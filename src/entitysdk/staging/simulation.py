@@ -10,6 +10,7 @@ from entitysdk.downloaders.simulation import (
     download_simulation_config_content,
     download_spike_replay_files,
 )
+from entitysdk.exception import StagingError
 from entitysdk.models import Circuit, Simulation
 from entitysdk.staging.circuit import stage_circuit
 from entitysdk.types import StrOrPath
@@ -101,7 +102,9 @@ def _transform_inputs(inputs, spike_paths):
             path = Path(values["spike_file"]).name
 
             if path not in expected_spike_filenames:
-                raise
+                raise StagingError(
+                    f"Spike file name {path} not in expected file names: {expected_spike_filenames}"
+                )
 
             values["spike_file"] = str(path)
             L.debug("Spike file %s -> %s", values["spike_file"], path)

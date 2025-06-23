@@ -1,5 +1,8 @@
 from pathlib import Path
 
+import pytest
+
+from entitysdk.exception import StagingError
 from entitysdk.staging import simulation as test_module
 from entitysdk.utils.io import load_json
 
@@ -82,3 +85,10 @@ def test_stage_simulation__external_circuit_config(
     assert len(res["inputs"]) == len(simulation_config["inputs"])
     assert res["inputs"]["PoissonInputStimulus"]["spike_file"] == expected_spikes_1.name
     assert res["inputs"]["PoissonInputStimulus_2"]["spike_file"] == expected_spikes_2.name
+
+
+def test_transform_inputs__raises():
+    inputs = {"foo": {"input_type": "spikes", "spike_file": "foo.txt"}}
+
+    with pytest.raises(StagingError, match="not in expected file names"):
+        test_module._transform_inputs(inputs, {})

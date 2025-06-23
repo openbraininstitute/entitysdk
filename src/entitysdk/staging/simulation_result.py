@@ -33,16 +33,23 @@ def stage_simulation_result(
     output_dir: Path = create_dir(output_dir)
 
     if simulation_config_file is None:
+        L.info(
+            "Simulation will be staged from simulation result's simulation_id %s",
+            model.simulation_id,
+        )
         simulation_config_file = stage_simulation(
             client,
             model=client.get_entity(entity_id=model.simulation_id, entity_type=Simulation),
             output_dir=output_dir,
         )
     else:
-        assert Path(simulation_config_file).parent == output_dir
+        L.info(
+            "External simulation config provided at %s. Outputs will be staged relative to it.",
+            simulation_config_file,
+        )
 
     config: dict = load_json(simulation_config_file)
-    reports_dir, spikes_file = _get_output_paths(config, output_dir)
+    reports_dir, spikes_file = _get_output_paths(config, Path(simulation_config_file).parent)
     create_dir(reports_dir)
 
     download_spike_report_file(

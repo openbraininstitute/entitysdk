@@ -15,3 +15,7 @@ class IteratorResultError(EntitySDKError):
 
 class DependencyError(EntitySDKError):
     """Raised when a dependency check fails."""
+
+
+class StagingError(EntitySDKError):
+    """Raised when a staging operation has failed."""

@@ -46,10 +46,6 @@ def download_voltage_report_files(
         selection={"label": "voltage_report"},
     ).all()
 
-    if not assets:
-        L.info("No voltage reports found in SimulationResult {%s}", model.id)
-        return []
-
     files: list[Path] = [
         client.download_file(
             entity_id=cast(ID, model.id),
