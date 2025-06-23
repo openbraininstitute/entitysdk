@@ -768,10 +768,36 @@ def test_upload_directory_by_paths(
     )
     assert res == Asset.model_validate(asset)
 
-    # have read error / exception
-    httpx_mock.add_exception(httpx.ReadTimeout("Unable to read within timeout"))
+    httpx_mock.add_response(
+        method="POST",
+        url=f"{api_url}/entity/{entity_id}/assets/directory/upload",
+        match_headers=request_headers,
+        json={
+            "asset": asset,
+            "files": {
+                "foo/bar/baz/subdir0/file1.txt": "http://upload_url0",
+            },
+        },
+    )
 
-    with pytest.raises(EntitySDKError):
+    # have read error / exception
+    httpx_mock.add_exception(
+        httpx.ReadTimeout("Unable to read within timeout"),
+        method="PUT",
+        url="http://upload_url0",
+    )
+    httpx_mock.add_exception(
+        httpx.ReadTimeout("Unable to read within timeout"),
+        method="PUT",
+        url="http://upload_url0",
+    )
+    httpx_mock.add_exception(
+        httpx.ReadTimeout("Unable to read within timeout"),
+        method="PUT",
+        url="http://upload_url0",
+    )
+
+    with pytest.raises(EntitySDKError, match="Uploading these files failed"):
         client.upload_directory(
             entity_id=entity_id,
             entity_type=Entity,
