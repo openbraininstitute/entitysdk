@@ -173,6 +173,7 @@ def upload_asset_content(
         url=url,
         method="POST",
         files=files,
+        parameters={"label": asset_metadata.label} if asset_metadata.label else None,
         project_context=project_context,
         token=token,
         http_client=http_client,

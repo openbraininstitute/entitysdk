@@ -144,7 +144,7 @@ def test_client_upload_file(
 
     httpx_mock.add_response(
         method="POST",
-        url=f"{api_url}/entity/{entity_id}/assets",
+        url=f"{api_url}/entity/{entity_id}/assets?label=swc",
         match_headers=request_headers,
         json=_mock_asset_response(asset_id),
     )
@@ -159,6 +159,7 @@ def test_client_upload_file(
         file_path=path,
         file_content_type="text/plain",
         file_metadata={"key": "value"},
+        asset_label="swc",
     )
 
     assert res.id == asset_id
@@ -171,7 +172,7 @@ def test_client_upload_content(client, httpx_mock, api_url, request_headers):
     buffer = io.BytesIO(b"foo")
     httpx_mock.add_response(
         method="POST",
-        url=f"{api_url}/entity/{entity_id}/assets",
+        url=f"{api_url}/entity/{entity_id}/assets?label=swc",
         match_headers=request_headers,
         match_files={
             "file": (
@@ -189,6 +190,7 @@ def test_client_upload_content(client, httpx_mock, api_url, request_headers):
         file_content=buffer,
         file_content_type="text/plain",
         file_metadata={"key": "value"},
+        asset_label="swc",
     )
 
     assert res.id == asset_id
