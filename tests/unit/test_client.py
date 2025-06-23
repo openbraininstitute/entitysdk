@@ -555,7 +555,7 @@ def test_client_download_assets(
         | {
             "assets": [
                 _mock_asset_response(asset1_id)
-                | {"path": "foo/bar/bar.h5", "content_type": "application/hdf5"},
+                | {"path": "foo/bar/bar.h5", "content_type": "application/x-hdf5"},
                 _mock_asset_response(asset2_id)
                 | {"path": "foo/bar/bar.swc", "content_type": "application/swc"},
             ]

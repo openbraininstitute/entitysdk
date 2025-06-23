@@ -22,7 +22,7 @@ def download_ion_channel_mechanism(
     output_dir = create_dir(output_dir)
     asset = client.download_assets(
         ion_channel_model,
-        selection={"content_type": "application/neuron-mod"},
+        selection={"content_type": "application/mod"},
         output_path=output_dir,
     ).one()
 
