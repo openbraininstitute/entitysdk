@@ -10,7 +10,8 @@ from entitysdk.downloaders.simulation import (
     download_simulation_config_content,
     download_spike_replay_files,
 )
-from entitysdk.models import Simulation
+from entitysdk.models import Circuit, Simulation
+from entitysdk.staging.circuit import stage_circuit
 from entitysdk.types import StrOrPath
 from entitysdk.utils.filesystem import create_dir
 from entitysdk.utils.io import write_json
@@ -44,8 +45,18 @@ def stage_simulation(
         output_dir=output_dir,
     )
     if circuit_config_path is None:
-        L.info("Circuit will be downloaded simulation's metadata.")
-        circuit_config_path = output_dir / "circuit_config.json"
+        L.info(
+            "Circuit config path was not provided. Circuit is going to be staged from metadata. "
+            "Circuit id to be staged: %s"
+        )
+        circuit_config_path = stage_circuit(
+            client,
+            model=client.get_entity(
+                entity_id=model.entity_id,
+                entity_type=Circuit,
+            ),
+            output_dir=create_dir(output_dir / DEFAULT_CIRCUIT_DIR),
+        )
 
     transformed_simulation_config: dict = _transform_simulation_config(
         simulation_config=simulation_config,

@@ -4,9 +4,110 @@ from pathlib import Path
 
 import pytest
 
-from entitysdk.models import Asset, Simulation, SimulationResult
+from entitysdk.models import (
+    Asset,
+    BrainRegion,
+    Circuit,
+    Simulation,
+    SimulationResult,
+    Species,
+    Subject,
+)
 
 DATA_DIR = Path(__file__).parent / "data"
+
+
+@pytest.fixture
+def species():
+    return Species(
+        name="fake-species",
+        taxonomy_id="foo",
+    )
+
+
+@pytest.fixture
+def subject(species):
+    return Subject(
+        sex="male",
+        species=species,
+    )
+
+
+@pytest.fixture
+def brain_region():
+    return BrainRegion(
+        name="my-region",
+        annotation_value=1,
+        acronym="region",
+        hierarchy_id=uuid.uuid4(),
+        color_hex_triplet="foo",
+        parent_structure_id=None,
+    )
+
+
+@pytest.fixture
+def circuit(subject, brain_region):
+    return Circuit(
+        id=uuid.uuid4(),
+        subject=subject,
+        number_neurons=5,
+        number_synapses=10,
+        number_connections=None,
+        scale="microcircuit",
+        build_category="em_reconstruction",
+        brain_region=brain_region,
+        assets=[
+            Asset(
+                id=uuid.uuid4(),
+                content_type="application/vnd.directory",
+                label="circuit",
+                size=0,
+                path="circuit",
+                full_path="/circuit",
+                is_directory=True,
+            )
+        ],
+    )
+
+
+@pytest.fixture
+def circuit_files():
+    circuit_dir = DATA_DIR / "circuit"
+    return {
+        str(path.relative_to(circuit_dir)): path
+        for path in Path(circuit_dir).rglob("*")
+        if path.is_file()
+    }
+
+
+@pytest.fixture
+def circuit_httpx_mocks(api_url, circuit, httpx_mock, circuit_files):
+    """Mocks required to stage a Circuit directory."""
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/circuit/{circuit.id}",
+        json=circuit.model_dump(mode="json"),
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/circuit/{circuit.id}/assets/{circuit.assets[0].id}/list",
+        json={
+            "files": {
+                asset_path: {
+                    "name": Path(asset_path).name,
+                    "size": 0,
+                    "last_modified": "2025-01-01T00:00:00Z",
+                }
+                for asset_path in circuit_files
+            }
+        },
+    )
+    for asset_path in circuit_files:
+        httpx_mock.add_response(
+            method="GET",
+            url=f"{api_url}/circuit/{circuit.id}/assets/{circuit.assets[0].id}/download?asset_path={asset_path}",
+            content=circuit_files[asset_path].read_bytes(),
+        )
 
 
 @pytest.fixture
@@ -25,12 +126,12 @@ def spike_replays():
 
 
 @pytest.fixture
-def simulation():
+def simulation(circuit):
     return Simulation(
         id=uuid.uuid4(),
         name="my-simulation",
         description="my-description",
-        entity_id=uuid.uuid4(),
+        entity_id=circuit.id,
         simulation_campaign_id=uuid.uuid4(),
         scan_parameters={},
         assets=[

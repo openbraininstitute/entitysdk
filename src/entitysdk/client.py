@@ -359,28 +359,30 @@ class Client:
 
         context = self._optional_user_context(override_context=project_context)
 
-        asset = None
+        asset = cast(Asset, asset_id) if isinstance(asset_id, Asset) else None
+
         if not ignore_directory_name:
-            asset_endpoint = route.get_assets_endpoint(
-                api_url=self.api_url,
-                entity_type=entity_type,
-                entity_id=entity_id,
-                asset_id=asset_id,
-            )
-            asset = core.get_entity(
-                asset_endpoint,
-                entity_type=Asset,
-                project_context=context,
-                http_client=self._http_client,
-                token=self._token_manager.get_token(),
-            )
+            if asset is None:
+                asset_endpoint = route.get_assets_endpoint(
+                    api_url=self.api_url,
+                    entity_type=entity_type,
+                    entity_id=cast(ID, entity_id),
+                    asset_id=asset_id,
+                )
+                asset = core.get_entity(
+                    asset_endpoint,
+                    entity_type=Asset,
+                    project_context=context,
+                    http_client=self._http_client,
+                    token=self._token_manager.get_token(),
+                )
 
             output_path /= asset.path
 
         contents = self.list_directory(
             entity_id=entity_id,
             entity_type=entity_type,
-            asset_id=asset_id,
+            asset_id=asset_id if isinstance(asset_id, ID) else asset.id,
             project_context=project_context,
         )
 
