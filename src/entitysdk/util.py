@@ -19,6 +19,7 @@ def make_db_api_request(
     *,
     method: str,
     json: dict | None = None,
+    data: dict | None = None,
     parameters: dict | None = None,
     files: dict | None = None,
     project_context: ProjectContext | None = None,
@@ -42,6 +43,7 @@ def make_db_api_request(
             headers=headers,
             json=json,
             files=files,
+            data=data,
             params=parameters,
             follow_redirects=True,
         )
@@ -53,6 +55,7 @@ def make_db_api_request(
     except httpx.HTTPStatusError as e:
         message = (
             f"HTTP error {response.status_code} for {method} {url}\n"
+            f"data       : {data}\n"
             f"json       : {dumps(json, indent=2)}\n"
             f"params     : {parameters}\n"
             f"response   : {response.text}"
