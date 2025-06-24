@@ -156,7 +156,7 @@ def simulation(circuit):
             Asset(
                 id=uuid.uuid4(),
                 content_type="application/x-hdf5",
-                label="spike_replays",
+                label="replay_spikes",
                 path="PoissonInputStimulus_spikes_1.h5",
                 full_path="/PoissonInputStimulus_spikes_1.h5",
                 size=0,
@@ -165,7 +165,7 @@ def simulation(circuit):
             Asset(
                 id=uuid.uuid4(),
                 content_type="application/x-hdf5",
-                label="spike_replays",
+                label="replay_spikes",
                 path="PoissonInputStimulus_spikes_2.h5",
                 full_path="/PoissonInputStimulus_spikes_2.h5",
                 size=0,
