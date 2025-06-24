@@ -39,4 +39,5 @@ def test_local_asset_metadata():
         "file_name": "file_name",
         "content_type": "text/plain",
         "metadata": {"key": "value"},
+        "label": None,
     }

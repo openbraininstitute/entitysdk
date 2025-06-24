@@ -93,6 +93,7 @@ class LocalAssetMetadata(BaseModel):
             description="The metadata of the asset.",
         ),
     ] = None
+    label: Annotated[str | None, Field(description="Optional asset label.")] = None
 
 
 class DetailedFile(BaseModel):

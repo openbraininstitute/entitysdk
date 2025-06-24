@@ -214,6 +214,7 @@ class Client:
         file_content_type: str,
         file_name: str | None = None,
         file_metadata: dict | None = None,
+        asset_label: str | None = None,
         project_context: ProjectContext | None = None,
     ) -> Asset:
         """Upload asset to an existing entity's endpoint from a file path."""
@@ -229,6 +230,7 @@ class Client:
             file_name=file_name or path.name,
             content_type=file_content_type,
             metadata=file_metadata,
+            label=asset_label,
         )
         return core.upload_asset_file(
             url=url,
@@ -248,6 +250,7 @@ class Client:
         file_name: str,
         file_content_type: str,
         file_metadata: dict | None = None,
+        asset_label: str | None = None,
         project_context: ProjectContext | None = None,
     ) -> Asset:
         """Upload asset to an existing entity's endpoint from a file-like object."""
@@ -261,6 +264,7 @@ class Client:
             file_name=file_name,
             content_type=file_content_type,
             metadata=file_metadata or {},
+            label=asset_label,
         )
         context = self._required_user_context(override_context=project_context)
         return core.upload_asset_content(
