@@ -61,7 +61,7 @@ def download_spike_replay_files(
     ensure_has_id(model)
     ensure_has_assets(model)
 
-    assets = client.select_assets(model, selection={"label": "spike_replays"}).all()
+    assets = client.select_assets(model, selection={"label": "replay_spikes"}).all()
 
     spike_files: list[Path] = [
         client.download_file(
