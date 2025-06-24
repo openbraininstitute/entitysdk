@@ -595,8 +595,8 @@ def test_client_download_assets(
     ).one()
 
     assert res.asset.path == "foo/bar/bar.swc"
-    assert res.output_path == tmp_path / "foo/bar/bar.swc"
-    assert res.output_path.read_bytes() == b"bar"
+    assert res.path == tmp_path / "foo/bar/bar.swc"
+    assert res.path.read_bytes() == b"bar"
 
 
 def test_client_download_assets__no_assets_raise(
@@ -988,3 +988,55 @@ def test_client_download_directory(
             output_path=target,
             ignore_directory_name=False,
         )
+
+
+def test_client_download_directory__asset(
+    tmp_path,
+    client,
+    httpx_mock,
+    api_url,
+    request_headers,
+):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+
+    date = "2025-01-01T00:00:00Z"
+
+    asset = Asset(
+        id=asset_id,
+        path="path_to_asset",
+        full_path="/circuit",
+        is_directory=True,
+        size=0,
+        content_type="application/vnd.directory",
+    )
+
+    # for listing dirs
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/list",
+        match_headers=request_headers,
+        json={
+            "files": {
+                "foo.txt": {"name": "foo.txt", "size": 3, "last_modified": date},
+            }
+        },
+    )
+
+    # for downloading the asset
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download?asset_path=foo.txt",
+        match_headers=request_headers,
+        text="file contents",
+    )
+
+    res = client.download_directory(
+        entity_id=entity_id,
+        entity_type=Entity,
+        asset_id=asset,
+        output_path=tmp_path,
+        ignore_directory_name=False,
+    )
+    assert len(res) == 1
+    assert res[0] == (tmp_path / "path_to_asset/foo.txt").absolute()

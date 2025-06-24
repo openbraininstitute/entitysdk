@@ -33,4 +33,4 @@ def download_morphology(
         output_path=output_dir,
     ).one()
 
-    return asset.output_path
+    return asset.path

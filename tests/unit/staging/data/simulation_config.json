@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "manifest": {"$BASE_DIR": "WRONG"},
+  "target_simulator": "CORENEURON",
+  "network": "circuit_config.json",
+  "run": {
+    "dt": 0.025,
+    "random_seed": 1,
+    "tstop": 3000.0
+  },
+  "conditions": {
+    "extracellular_calcium": 1.1,
+    "v_init": -80.0,
+    "spike_location": "soma",
+    "mechanisms": {
+      "ProbAMPANMDA_EMS": {
+        "init_depleted": true,
+        "minis_single_vesicle": true
+      },
+      "ProbGABAAB_EMS": {
+        "init_depleted": true,
+        "minis_single_vesicle": true
+      }
+    }
+  },
+  "inputs": {
+    "CurrentStimulus_0": {
+      "delay": 0.0,
+      "duration": 5.0,
+      "cells": "L1Stim",
+      "module": "linear",
+      "input_type": "current_clamp",
+      "amp_start": 0.2,
+      "represents_physical_electrode": false
+    },
+    "CurrentStimulus_1": {
+      "delay": 1000.0,
+      "duration": 5.0,
+      "cells": "L1Stim",
+      "module": "linear",
+      "input_type": "current_clamp",
+      "amp_start": 0.2,
+      "represents_physical_electrode": false
+    },
+    "CurrentStimulus_2": {
+      "delay": 2000.0,
+      "duration": 5.0,
+      "cells": "L1Stim",
+      "module": "linear",
+      "input_type": "current_clamp",
+      "amp_start": 0.2,
+      "represents_physical_electrode": false
+    },
+    "SyncCurrentStimulus_0": {
+      "delay": 0.0,
+      "duration": 100.0,
+      "cells": "L1Stim",
+      "module": "linear",
+      "input_type": "current_clamp",
+      "amp_start": 0.1,
+      "represents_physical_electrode": false
+    },
+    "SyncCurrentStimulus_1": {
+      "delay": 1000.0,
+      "duration": 100.0,
+      "cells": "L1Stim",
+      "module": "linear",
+      "input_type": "current_clamp",
+      "amp_start": 0.1,
+      "represents_physical_electrode": false
+    },
+    "SyncCurrentStimulus_2": {
+      "delay": 2000.0,
+      "duration": 100.0,
+      "cells": "L1Stim",
+      "module": "linear",
+      "input_type": "current_clamp",
+      "amp_start": 0.1,
+      "represents_physical_electrode": false
+    },
+    "PoissonInputStimulus": {
+      "delay": 0.0,
+      "duration": 800.0,
+      "cells": "L1Stim",
+      "module": "synapse_replay",
+      "input_type": "spikes",
+      "spike_file": "PoissonInputStimulus_spikes_1.h5"
+    },
+    "PoissonInputStimulus_2": {
+      "delay": 0.0,
+      "duration": 800.0,
+      "cells": "L1Stim",
+      "module": "synapse_replay",
+      "input_type": "spikes",
+      "spike_file": "$BASE_DIR/PoissonInputStimulus_spikes_2.h5"
+    }
+  },
+  "reports": {
+    "SomaVoltRec 1": {
+      "cells": "L1Rec",
+      "sections": "soma",
+      "type": "compartment",
+      "compartments": "center",
+      "variable_name": "v",
+      "unit": "mV",
+      "dt": 0.1,
+      "start_time": 0.0,
+      "end_time": 3000.0
+    },
+    "SomaVoltRec 2": {
+      "cells": "L1Rec",
+      "sections": "soma",
+      "type": "compartment",
+      "compartments": "center",
+      "variable_name": "v",
+      "unit": "mV",
+      "dt": 0.1,
+      "start_time": 0.0,
+      "end_time": 3000.0
+    }
+  },
+  "node_set": "L1All",
+  "node_sets_file": "$BASE_DIR/node_sets.json",
+  "output": {
+      "output_dir": "output",
+      "spikes_file": "output/spikes.h5"
+  }
+}

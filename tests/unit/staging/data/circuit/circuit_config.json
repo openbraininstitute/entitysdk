@@ -1,0 +1,36 @@
+{
+  "manifest": {
+    "$BASE_DIR": ".",
+  },
+  "node_sets_file": "$BASE_DIR/node_sets.json",
+  "networks": {
+    "nodes": [
+      {
+        "nodes_file": "$BASE_DIR/nodes.h5",
+        "populations": {
+          "default": {
+            "type": "biophysical"
+          },
+          "default2": {
+            "type": "biophysical",
+            "spatial_segment_index_dir": "path/to/node/dir"
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "edges_file": "$BASE_DIR/edges.h5",
+        "populations": {
+          "default": {
+            "type": "chemical"
+          },
+          "default2": {
+            "type": "chemical",
+            "spatial_synapse_index_dir": "path/to/edge/dir"
+          }
+        }
+      }
+    ]
+  }
+}
