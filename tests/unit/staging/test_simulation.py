@@ -19,6 +19,7 @@ def test_stage_simulation(
         client,
         model=simulation,
         output_dir=tmp_path,
+        override_results_dir="foo/bar",
     )
 
     expected_simulation_config_path = tmp_path / "simulation_config.json"
@@ -47,6 +48,9 @@ def test_stage_simulation(
     assert len(res["inputs"]) == len(simulation_config["inputs"])
     assert res["inputs"]["PoissonInputStimulus"]["spike_file"] == expected_spikes_1.name
     assert res["inputs"]["PoissonInputStimulus_2"]["spike_file"] == expected_spikes_2.name
+
+    assert res["output"]["output_dir"] == "foo/bar"
+    assert res["output"]["spikes_file"] == "foo/bar/spikes.h5"
 
 
 def test_stage_simulation__external_circuit_config(
@@ -90,5 +94,5 @@ def test_stage_simulation__external_circuit_config(
 def test_transform_inputs__raises():
     inputs = {"foo": {"input_type": "spikes", "spike_file": "foo.txt"}}
 
-    with pytest.raises(StagingError, match="not in expected file names"):
+    with pytest.raises(StagingError, match="not present in spike asset file names"):
         test_module._transform_inputs(inputs, {})

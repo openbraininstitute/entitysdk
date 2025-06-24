@@ -30,8 +30,21 @@ def stage_simulation(
     model: Simulation,
     output_dir: StrOrPath,
     circuit_config_path: Path | None = None,
+    override_results_dir: Path | None = None,
 ) -> Path:
-    """Stage a simulation entity into output_dir."""
+    """Stage a simulation entity into output_dir.
+
+    Args:
+        client: The client to use to stage the simulation.
+        model: The simulation entity to stage.
+        output_dir: The directory to stage the simulation into.
+        circuit_config_path: The path to the circuit config file.
+            If not provided, the circuit will be staged from metadata.
+        override_results_dir: Directory to update the simulation config section to point to.
+
+    Returns:
+        The path to the staged simulation config file.
+    """
     output_dir = create_dir(output_dir).resolve()
 
     simulation_config: dict = download_simulation_config_content(client, model=model)
@@ -65,6 +78,7 @@ def stage_simulation(
         node_sets_path=node_sets_file,
         spike_paths=spike_paths,
         output_dir=output_dir,
+        override_results_dir=override_results_dir,
     )
 
     output_simulation_config_file = output_dir / DEFAULT_SIMULATION_CONFIG_FILENAME
@@ -85,15 +99,17 @@ def _transform_simulation_config(
     node_sets_path: Path,
     spike_paths: list[Path],
     output_dir: Path,
+    override_results_dir: Path | None,
 ) -> dict:
     return simulation_config | {
         "network": str(circuit_config_path),
         "node_sets_file": str(node_sets_path.relative_to(output_dir)),
         "inputs": _transform_inputs(simulation_config["inputs"], spike_paths),
+        "output": _transform_output(simulation_config["output"], override_results_dir),
     }
 
 
-def _transform_inputs(inputs, spike_paths):
+def _transform_inputs(inputs: dict, spike_paths: list[Path]) -> dict:
     expected_spike_filenames = {p.name for p in spike_paths}
 
     transformed_inputs = deepcopy(inputs)
@@ -103,10 +119,24 @@ def _transform_inputs(inputs, spike_paths):
 
             if path not in expected_spike_filenames:
                 raise StagingError(
-                    f"Spike file name {path} not in expected file names: {expected_spike_filenames}"
+                    f"Spike file name in config is not present in spike asset file names.\n"
+                    f"Config file name: {path}\n"
+                    f"Asset file names: {expected_spike_filenames}"
                 )
 
             values["spike_file"] = str(path)
             L.debug("Spike file %s -> %s", values["spike_file"], path)
 
     return transformed_inputs
+
+
+def _transform_output(output: dict, override_results_dir: StrOrPath | None) -> dict:
+    if override_results_dir is None:
+        return output
+
+    path = Path(override_results_dir)
+
+    return {
+        "output_dir": str(path),
+        "spikes_file": str(path / "spikes.h5"),
+    }
