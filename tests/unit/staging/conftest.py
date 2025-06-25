@@ -60,7 +60,7 @@ def circuit(subject, brain_region):
             Asset(
                 id=uuid.uuid4(),
                 content_type="application/vnd.directory",
-                label="circuit",
+                label="sonata_circuit",
                 size=0,
                 path="circuit",
                 full_path="/circuit",
