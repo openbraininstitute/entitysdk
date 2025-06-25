@@ -22,6 +22,7 @@ def stage_circuit(client: Client, *, model: Circuit, output_dir: Path) -> Path:
         selection={
             "content_type": "application/vnd.directory",
             "is_directory": True,
+            "path": "circuit",
         },
     ).one()
 
