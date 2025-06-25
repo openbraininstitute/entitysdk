@@ -388,10 +388,9 @@ class Client:
             project_context=project_context,
         )
 
-        with concurrent.futures.ThreadPoolExecutor(max_workers=max_concurrent) as executor:
-            futures = [
-                executor.submit(
-                    self.download_file,
+        if max_concurrent == 1:
+            paths = [
+                self.download_file(
                     entity_id=entity_id,
                     entity_type=entity_type,
                     asset_id=asset if asset else asset_id,
@@ -401,7 +400,21 @@ class Client:
                 )
                 for path in contents.files
             ]
-            paths = [future.result() for future in futures]
+        else:
+            with concurrent.futures.ThreadPoolExecutor(max_workers=max_concurrent) as executor:
+                futures = [
+                    executor.submit(
+                        self.download_file,
+                        entity_id=entity_id,
+                        entity_type=entity_type,
+                        asset_id=asset if asset else asset_id,
+                        output_path=output_path / path,
+                        asset_path=path,
+                        project_context=context,
+                    )
+                    for path in contents.files
+                ]
+                paths = [future.result() for future in futures]
 
         return paths
 
