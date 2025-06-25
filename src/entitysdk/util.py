@@ -14,6 +14,21 @@ from entitysdk.models.response import ListResponse
 from entitysdk.types import DeploymentEnvironment
 
 
+def get_request_headers(
+    *,
+    project_context: ProjectContext | None = None,
+    token: str,
+    ):
+    """Return a dictionary with the required headers for a request."""
+    headers = {"Authorization": f"Bearer {token}"}
+
+    if project_context:
+        headers["project-id"] = str(project_context.project_id)
+        headers["virtual-lab-id"] = str(project_context.virtual_lab_id)
+
+    return headers
+
+
 def make_db_api_request(
     url: str,
     *,
@@ -30,11 +45,7 @@ def make_db_api_request(
     if http_client is None:
         http_client = httpx.Client()
 
-    headers = {"Authorization": f"Bearer {token}"}
-
-    if project_context:
-        headers["project-id"] = str(project_context.project_id)
-        headers["virtual-lab-id"] = str(project_context.virtual_lab_id)
+    headers = get_request_headers(project_context=project_context, token=token)
 
     try:
         response = http_client.request(

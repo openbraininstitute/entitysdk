@@ -1,6 +1,8 @@
 """Identifiable SDK client."""
 
+import asyncio
 import io
+import logging
 import os
 from pathlib import Path
 from typing import Any, cast
@@ -20,10 +22,12 @@ from entitysdk.types import ID, DeploymentEnvironment, Token
 from entitysdk.util import (
     build_api_url,
     create_intermediate_directories,
+    get_request_headers,
     validate_filename_extension_consistency,
 )
 from entitysdk.utils.asset import filter_assets
 
+L = logging.getLogger(__name__)
 
 class Client:
     """Client for entitysdk."""
@@ -348,13 +352,14 @@ class Client:
         project_context: ProjectContext | None = None,
         ignore_directory_name: bool = False,
     ) -> list[Path]:
-        """List directory existing entity's endpoint from a directory path."""
+        """Download a directory to directory path."""
         output_path = Path(output_path)
 
         if output_path.exists() and output_path.is_file():
             raise EntitySDKError(f"{output_path} exists and is a file")
         output_path.mkdir(parents=True, exist_ok=True)
 
+        token = self._token_manager.get_token()
         context = self._optional_user_context(override_context=project_context)
 
         asset = None
@@ -370,7 +375,7 @@ class Client:
                 entity_type=Asset,
                 project_context=context,
                 http_client=self._http_client,
-                token=self._token_manager.get_token(),
+                token=token,
             )
 
             output_path /= asset.path
@@ -382,20 +387,84 @@ class Client:
             project_context=project_context,
         )
 
-        paths = []
-        for path in contents.files:
-            paths.append(
-                self.download_file(
-                    entity_id=entity_id,
-                    entity_type=entity_type,
-                    asset_id=asset if asset else asset_id,
-                    output_path=output_path / path,
-                    asset_path=path,
-                    project_context=context,
-                )
+        asset_endpoint = route.get_assets_endpoint(
+            api_url=self.api_url,
+            entity_type=entity_type,
+            entity_id=entity_id,
+            asset_id=asset_id
+        )
+
+        paths = [
+            self.download_file(
+                entity_id=entity_id,
+                entity_type=entity_type,
+                asset_id=asset if asset else asset_id,
+                output_path=output_path / path,
+                asset_path=path,
+                project_context=context,
             )
+            for path in contents.files
+            ]
 
         return paths
+
+    async def async_download_directory(
+        self,
+        *,
+        entity_id: ID,
+        entity_type: type[Identifiable],
+        asset_id: ID,
+        output_path: os.PathLike,
+        project_context: ProjectContext | None = None,
+        ignore_directory_name: bool = False,
+    ) -> list[Path]:
+        """List directory existing entity's endpoint from a directory path."""
+        contents = self.list_directory(
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=asset_id,
+            project_context=project_context,
+        )
+
+        asset_endpoint = route.get_assets_endpoint(
+            api_url=self.api_url,
+            entity_type=entity_type,
+            entity_id=entity_id,
+            asset_id=asset_id
+        )
+
+        url = f"{asset_endpoint}/download"
+
+
+        context = self._optional_user_context(override_context=project_context)
+        token = self._token_manager.get_token()
+        headers = get_request_headers(project_context=context, token=token)
+
+        max_concurrent = 8
+        semaphore = asyncio.Semaphore(max_concurrent)
+        async def download_file(client, base_url, asset_path, path):
+            path.parent.mkdir(parents=True, exist_ok=True)
+            async with semaphore:
+                async with client.stream('GET',
+                                         url,
+                                         headers=headers,
+                                         params={"asset_path": str(asset_path)},
+                                         follow_redirects=True,
+                                         ) as response:
+                    response.raise_for_status()
+                    with path.open('wb') as fd:
+                        async for chunk in response.aiter_bytes():
+                            fd.write(chunk)
+            return path
+
+        client = httpx.AsyncClient()
+        tasks = [
+            download_file(client, url, path, output_path / path)
+            for path in contents.files
+        ]
+
+        results = await asyncio.gather(*tasks)
+        return results
 
     def download_content(
         self,
