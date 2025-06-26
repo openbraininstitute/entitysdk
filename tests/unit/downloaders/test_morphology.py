@@ -14,6 +14,7 @@ def _mock_asset_response(asset_id):
         "full_path": "foo.asc",
         "is_directory": False,
         "content_type": "application/asc",
+        "label": "morphology",
         "size": 100,
         "status": "created",
         "meta": {},

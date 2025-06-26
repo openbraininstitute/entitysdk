@@ -65,7 +65,7 @@ class Asset(Identifiable):
         dict,
         Field(description="Asset json metadata."),
     ] = {}
-    label: Annotated[str | None, Field(description="Optional asset label.")] = None
+    label: Annotated[str, Field(description="Asset label.")]
 
 
 class LocalAssetMetadata(BaseModel):
@@ -96,7 +96,7 @@ class LocalAssetMetadata(BaseModel):
             description="The metadata of the asset.",
         ),
     ] = None
-    label: Annotated[str | None, Field(description="Optional asset label.")] = None
+    label: Annotated[str, Field(description="Optional asset label.")]
 
 
 class DetailedFile(BaseModel):
