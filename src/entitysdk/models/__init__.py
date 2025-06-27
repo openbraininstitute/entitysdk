@@ -9,6 +9,7 @@ from entitysdk.models.circuit import Circuit
 from entitysdk.models.classification import ETypeClassification, MTypeClassification
 from entitysdk.models.contribution import Contribution, Role
 from entitysdk.models.derivation import Derivation
+from entitysdk.models.core import Organization, Person
 from entitysdk.models.electrical_cell_recording import ElectricalCellRecording
 from entitysdk.models.emodel import EModel
 from entitysdk.models.ion_channel_model import IonChannelModel, NeuronBlock, UseIon

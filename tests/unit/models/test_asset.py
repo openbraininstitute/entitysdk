@@ -28,6 +28,8 @@ def test_asset():
         "sha256_digest": None,
         "meta": {},
         "label": AssetLabel.sonata_circuit,
+        "created_by": None,
+        "updated_by": None,
     }
 
 

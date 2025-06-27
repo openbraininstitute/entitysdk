@@ -45,7 +45,9 @@
           },
           "encodingFormat": "application/swc"
         }
-      }
+      },
+      "created_by": null,
+      "updated_by": null
     },
     {
       "label": "morphology",
@@ -84,7 +86,9 @@
           },
           "encodingFormat": "application/asc"
         }
-      }
+      },
+      "created_by": null,
+      "updated_by": null
     }
   ],
   "name": "mpg150211_A_idA",
@@ -98,7 +102,9 @@
     "acronym": "ACVI",
     "parent_structure_id": "596305b3-71b2-41e4-afd3-b9f2e90f79f8",
     "hierarchy_id": "e3e70682-c209-4cac-a29f-6fbed82c07cd",
-    "color_hex_triplet": "1000"
+    "color_hex_triplet": "1000",
+    "created_by": null,
+    "updated_by": null
   },
   "description": "Neuronal morphology of excitatory neuron cell 'mpg150211_A_idA' in Field CA1, pyramidal layer of cell type SR_PC. A neuron that releases excitatory neurotransmitters. This neuron doesn't have axon, has a basal dendrite and apical dendrite.",
   "species": {
@@ -106,7 +112,9 @@
     "update_date": "2025-03-29T16:48:36.175090Z",
     "creation_date": "2025-03-29T16:48:36.175090Z",
     "name": "Mus musculus",
-    "taxonomy_id": "NCBITaxon:10090"
+    "taxonomy_id": "NCBITaxon:10090",
+    "created_by": null,
+    "updated_by": null
   },
   "strain": null,
   "license": null,
@@ -122,16 +130,22 @@
         "type": "person",
         "pref_label": "Maurizio Pezzoli Gonzalez",
         "given_name": "Maurizio",
-        "family_name": "Pezzoli Gonzalez"
+        "family_name": "Pezzoli Gonzalez",
+        "created_by": null,
+        "updated_by": null
       },
       "role": {
         "id": "8b06e557-277b-4b0c-a439-bfb02d41927c",
         "update_date": "2025-03-29T16:48:36.192831Z",
         "creation_date": "2025-03-29T16:48:36.192831Z",
         "name": "unspecified",
-        "role_id": "unspecified"
+        "role_id": "unspecified",
+        "created_by": null,
+        "updated_by": null
       },
-      "entity": null
+      "entity": null,
+      "created_by": null,
+      "updated_by": null
     },
     {
       "id": "7f43ce20-e63d-48c1-bc73-dabb38ee181b",
@@ -143,16 +157,22 @@
         "creation_date": "2021-04-14T09:51:14.062000Z",
         "type": "organization",
         "pref_label": "École Polytechnique Fédérale de Lausanne",
-        "alternative_name": ""
+        "alternative_name": "",
+        "created_by": null,
+        "updated_by": null
       },
       "role": {
         "id": "8b06e557-277b-4b0c-a439-bfb02d41927c",
         "update_date": "2025-03-29T16:48:36.192831Z",
         "creation_date": "2025-03-29T16:48:36.192831Z",
         "name": "unspecified",
-        "role_id": "unspecified"
+        "role_id": "unspecified",
+        "created_by": null,
+        "updated_by": null
       },
-      "entity": null
+      "entity": null,
+      "created_by": null,
+      "updated_by": null
     }
   ],
   "mtypes": [
@@ -162,7 +182,9 @@
       "creation_date": "2021-09-06T15:47:04.890000Z",
       "pref_label": "SR_PC",
       "definition": "",
-      "alt_label": ""
+      "alt_label": "",
+      "created_by": null,
+      "updated_by": null
     }
   ]
 }

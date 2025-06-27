@@ -1,6 +1,6 @@
 import pytest
 
-from entitysdk.models import agent
+from entitysdk.models import Organization, Person
 from entitysdk.models import contribution as test_module
 
 
@@ -15,7 +15,7 @@ def test_role(role):
 
 
 def test_contribution(role):
-    person = agent.Person(type="person", given_name="foo", family_name="bar", pref_label="test")
+    person = Person(type="person", given_name="foo", family_name="bar", pref_label="test")
 
     res = test_module.Contribution(
         agent=person,
@@ -25,9 +25,7 @@ def test_contribution(role):
     assert res.agent == person
     assert res.role == role
 
-    organization = agent.Organization(
-        type="organization", pref_label="test", alternative_name="test"
-    )
+    organization = Organization(type="organization", pref_label="test", alternative_name="test")
 
     res = test_module.Contribution(
         agent=organization,
