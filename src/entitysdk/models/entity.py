@@ -6,7 +6,6 @@ from uuid import UUID
 from pydantic import Field
 
 from entitysdk.mixin import HasAssets
-from entitysdk.models.agent import AgentUnion
 from entitysdk.models.core import Identifiable
 from entitysdk.types import ID, EntityType
 
@@ -33,16 +32,6 @@ class Entity(Identifiable, HasAssets):
         Field(
             examples=["license"],
             description="The type of this Entity.",
-        ),
-    ] = None
-    created_by: Annotated[
-        AgentUnion | None,
-        Field(description="The agent that created this entity."),
-    ] = None
-    updated_by: Annotated[
-        AgentUnion | None,
-        Field(
-            description="The agent that updated this entity.",
         ),
     ] = None
     authorized_public: Annotated[

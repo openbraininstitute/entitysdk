@@ -4,8 +4,7 @@ from typing import Annotated
 
 from pydantic import Field
 
-from entitysdk.models.agent import AgentUnion
-from entitysdk.models.core import Identifiable
+from entitysdk.models.core import AgentUnion, Identifiable
 
 
 class Role(Identifiable):

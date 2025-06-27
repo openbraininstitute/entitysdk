@@ -18,7 +18,9 @@
     "acronym": "ACVI",
     "parent_structure_id": "596305b3-71b2-41e4-afd3-b9f2e90f79f8",
     "hierarchy_id": "e3e70682-c209-4cac-a29f-6fbed82c07cd",
-    "color_hex_triplet": "1000"
+    "color_hex_triplet": "1000",
+    "created_by": null,
+    "updated_by": null
   },
   "description": "High-voltage activated calcium channel",
   "species": {
@@ -26,7 +28,9 @@
     "update_date": "2025-03-29T16:48:36.175090Z",
     "creation_date": "2025-03-29T16:48:36.175090Z",
     "name": "Rattus norvegicus",
-    "taxonomy_id": "NCBITaxon:10116"
+    "taxonomy_id": "NCBITaxon:10116",
+    "created_by": null,
+    "updated_by": null
   },
   "strain": null,
   "license": null,
@@ -41,16 +45,22 @@
         "creation_date": "2021-04-14T09:51:14.062000Z",
         "type": "organization",
         "pref_label": "École Polytechnique Fédérale de Lausanne",
-        "alternative_name": ""
+        "alternative_name": "",
+        "created_by": null,
+        "updated_by": null
       },
       "role": {
         "id": "8b06e557-277b-4b0c-a439-bfb02d41927c",
         "update_date": "2025-03-29T16:48:36.192831Z",
         "creation_date": "2025-03-29T16:48:36.192831Z",
         "name": "unspecified",
-        "role_id": "unspecified"
+        "role_id": "unspecified",
+        "created_by": null,
+        "updated_by": null
       },
-      "entity": null
+      "entity": null,
+      "created_by": null,
+      "updated_by": null
     }
   ],
   "is_ljp_corrected": false,
@@ -108,7 +118,9 @@
           "contentSize": {"value": 561221, "unitCode": "bytes"},
           "encodingFormat": "application/mod"
         }
-      }
+      },
+      "created_by": null,
+      "updated_by": null
     }
   ]
 }
