@@ -15,6 +15,8 @@ def json_data():
         "parent_structure_id": "596305b3-71b2-41e4-afd3-b9f2e90f79f8",
         "hierarchy_id": "e3e70682-c209-4cac-a29f-6fbed82c07cd",
         "color_hex_triplet": "188064",
+        "created_by": None,
+        "updated_by": None,
     }
 
 
