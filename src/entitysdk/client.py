@@ -16,7 +16,7 @@ from entitysdk.models.entity import Entity
 from entitysdk.result import IteratorResult
 from entitysdk.schemas.asset import DownloadedAssetFile
 from entitysdk.token_manager import TokenFromValue, TokenManager
-from entitysdk.types import ID, DeploymentEnvironment, Token
+from entitysdk.types import ID, AssetLabel, ContentType, DeploymentEnvironment, Token
 from entitysdk.util import (
     build_api_url,
     create_intermediate_directories,
@@ -213,10 +213,10 @@ class Client:
         entity_id: ID,
         entity_type: type[Identifiable],
         file_path: os.PathLike,
-        file_content_type: str,
+        file_content_type: ContentType,
         file_name: str | None = None,
         file_metadata: dict | None = None,
-        asset_label: str,
+        asset_label: AssetLabel,
         project_context: ProjectContext | None = None,
     ) -> Asset:
         """Upload asset to an existing entity's endpoint from a file path."""
@@ -250,9 +250,9 @@ class Client:
         entity_type: type[Identifiable],
         file_content: io.BufferedIOBase,
         file_name: str,
-        file_content_type: str,
+        file_content_type: ContentType,
         file_metadata: dict | None = None,
-        asset_label: str,
+        asset_label: AssetLabel,
         project_context: ProjectContext | None = None,
     ) -> Asset:
         """Upload asset to an existing entity's endpoint from a file-like object."""
@@ -286,7 +286,7 @@ class Client:
         name: str,
         paths: dict[os.PathLike, os.PathLike],
         metadata: dict | None = None,
-        label: str,
+        label: AssetLabel,
         project_context: ProjectContext | None = None,
     ) -> Asset:
         """Attach directory to an entity from with a group of paths."""
@@ -588,7 +588,7 @@ class Client:
         entity_type: type[Identifiable],
         asset_id: ID,
         file_path: os.PathLike,
-        file_content_type: str,
+        file_content_type: ContentType,
         file_name: str | None = None,
         file_metadata: dict | None = None,
         project_context: ProjectContext | None = None,

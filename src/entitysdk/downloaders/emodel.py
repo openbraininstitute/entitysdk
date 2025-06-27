@@ -4,6 +4,7 @@ from pathlib import Path
 
 from entitysdk.client import Client
 from entitysdk.models.emodel import EModel
+from entitysdk.types import ContentType
 from entitysdk.utils.filesystem import create_dir
 
 
@@ -22,7 +23,7 @@ def download_hoc(
     output_dir = create_dir(output_dir)
     asset = client.download_assets(
         emodel,
-        selection={"content_type": "application/hoc"},
+        selection={"content_type": ContentType.application_hoc},
         output_path=output_dir,
     ).one()
 
