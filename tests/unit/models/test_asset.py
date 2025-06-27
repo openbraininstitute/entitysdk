@@ -26,6 +26,8 @@ def test_asset():
         "sha256_digest": None,
         "meta": {},
         "label": None,
+        "created_by": None,
+        "updated_by": None,
     }
 
 

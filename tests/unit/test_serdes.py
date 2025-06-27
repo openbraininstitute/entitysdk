@@ -35,7 +35,7 @@ class E3(Identifiable):
         ),
         (
             E2(id=MOCK_UUID, a="foo", b=1),
-            {"a": "foo", "b": 1},
+            {"a": "foo", "b": 1, "created_by": None, "updated_by": None},
         ),
         (
             E3(
@@ -46,6 +46,8 @@ class E3(Identifiable):
             {
                 "a": {"a": "foo", "b": 1},
                 "b_id": str(MOCK_UUID),
+                "created_by": None,
+                "updated_by": None,
             },
         ),
     ],
