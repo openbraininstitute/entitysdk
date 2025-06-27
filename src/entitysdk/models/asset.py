@@ -8,7 +8,7 @@ from pydantic import ConfigDict, Field
 
 from entitysdk.models.base import BaseModel
 from entitysdk.models.core import Identifiable
-from entitysdk.types import ID
+from entitysdk.types import ID, AssetLabel, AssetStatus, ContentType
 
 
 class Asset(Identifiable):
@@ -35,7 +35,7 @@ class Asset(Identifiable):
         ),
     ]
     content_type: Annotated[
-        str,
+        ContentType,
         Field(
             examples=["image/png", "application/json"],
             description="The content type of the asset.",
@@ -55,7 +55,7 @@ class Asset(Identifiable):
         ),
     ] = None
     status: Annotated[
-        str | None,
+        AssetStatus | None,
         Field(
             examples=["created", "deleted"],
             description="The status of the asset.",
@@ -65,7 +65,7 @@ class Asset(Identifiable):
         dict,
         Field(description="Asset json metadata."),
     ] = {}
-    label: Annotated[str, Field(description="Asset label.")]
+    label: Annotated[AssetLabel, Field(description="Asset label.")]
 
 
 class LocalAssetMetadata(BaseModel):
@@ -84,7 +84,7 @@ class LocalAssetMetadata(BaseModel):
         ),
     ]
     content_type: Annotated[
-        str,
+        ContentType,
         Field(
             examples=["image/png"],
             description="The content type of the asset.",
@@ -96,7 +96,7 @@ class LocalAssetMetadata(BaseModel):
             description="The metadata of the asset.",
         ),
     ] = None
-    label: Annotated[str, Field(description="Optional asset label.")]
+    label: Annotated[AssetLabel, Field(description="Optional asset label.")]
 
 
 class DetailedFile(BaseModel):

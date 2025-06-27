@@ -4,6 +4,7 @@ from pathlib import Path
 
 from entitysdk.client import Client
 from entitysdk.models.ion_channel_model import IonChannelModel
+from entitysdk.types import ContentType
 from entitysdk.utils.filesystem import create_dir
 
 
@@ -22,7 +23,7 @@ def download_ion_channel_mechanism(
     output_dir = create_dir(output_dir)
     asset = client.download_assets(
         ion_channel_model,
-        selection={"content_type": "application/mod"},
+        selection={"content_type": ContentType.application_mod},
         output_path=output_dir,
     ).one()
 

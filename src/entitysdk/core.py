@@ -15,6 +15,7 @@ from entitysdk.exception import EntitySDKError
 from entitysdk.models.asset import Asset, DetailedFileList, LocalAssetMetadata
 from entitysdk.models.core import Identifiable
 from entitysdk.result import IteratorResult
+from entitysdk.types import AssetLabel
 from entitysdk.util import make_db_api_request, stream_paginated_request
 
 L = logging.getLogger(__name__)
@@ -187,7 +188,7 @@ def upload_asset_directory(
     name: str,
     paths: dict[Path, Path],
     metadata: dict | None = None,
-    label: str,
+    label: AssetLabel,
     project_context: ProjectContext,
     token: str,
     http_client: httpx.Client | None = None,
