@@ -1,7 +1,7 @@
 """Core models."""
 
 from datetime import datetime
-from typing import Annotated
+from typing import Annotated, Literal
 
 from pydantic import Field
 
@@ -22,13 +22,6 @@ class Identifiable(BaseModel):
             description="The primary key identifier of the resource.",
         ),
     ] = None
-    update_date: Annotated[
-        datetime | None,
-        Field(
-            examples=[datetime(2025, 1, 1)],
-            description="The date and time the resource was last updated.",
-        ),
-    ] = None
     creation_date: Annotated[
         datetime | None,
         Field(
@@ -36,3 +29,88 @@ class Identifiable(BaseModel):
             description="The date and time the resource was created.",
         ),
     ] = None
+    update_date: Annotated[
+        datetime | None,
+        Field(
+            examples=[datetime(2025, 1, 1)],
+            description="The date and time the resource was last updated.",
+        ),
+    ] = None
+    created_by: Annotated[
+        "Person | None",
+        Field(description="The agent that created this entity."),
+    ] = None
+    updated_by: Annotated[
+        "Person | None",
+        Field(
+            description="The agent that updated this entity.",
+        ),
+    ] = None
+
+
+class Agent(Identifiable):
+    """Agent model."""
+
+    type: Annotated[
+        str,
+        Field(
+            description="The type of this agent.",
+        ),
+    ]
+    pref_label: Annotated[
+        str,
+        Field(
+            description="The preferred label of the agent.",
+        ),
+    ]
+
+
+class Person(Agent):
+    """Person model."""
+
+    type: Annotated[
+        Literal["person"],
+        Field(
+            description="The type of this agent. Should be 'agent'",
+        ),
+    ] = "person"
+    given_name: Annotated[
+        str | None,
+        Field(
+            examples=["John", "Jane"],
+            description="The given name of the person.",
+        ),
+    ] = None
+    family_name: Annotated[
+        str | None,
+        Field(
+            examples=["Doe", "Smith"],
+            description="The family name of the person.",
+        ),
+    ] = None
+
+
+# update forward reference in Identifiable's created_by/uodated_by
+Identifiable.model_rebuild()
+
+
+class Organization(Agent):
+    """Organization model."""
+
+    type: Annotated[
+        Literal["organization"],
+        Field(
+            default="organization",
+            description="The organization type. Should be 'organization'",
+        ),
+    ] = "organization"
+    alternative_name: Annotated[
+        str | None,
+        Field(
+            examples=["Open Brain Institute"],
+            description="The alternative name of the organization.",
+        ),
+    ] = None
+
+
+AgentUnion = Annotated[Person | Organization, Field(discriminator="type")]
