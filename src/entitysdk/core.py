@@ -187,7 +187,7 @@ def upload_asset_directory(
     name: str,
     paths: dict[Path, Path],
     metadata: dict | None = None,
-    label: str | None = None,
+    label: str,
     project_context: ProjectContext,
     token: str,
     http_client: httpx.Client | None = None,

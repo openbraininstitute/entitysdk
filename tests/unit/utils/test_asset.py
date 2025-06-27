@@ -17,6 +17,7 @@ def assets():
             is_directory=False,
             content_type="application/json",
             size=1,
+            label="json",
         ),
         Asset(
             id=uuid.uuid4(),
@@ -25,6 +26,7 @@ def assets():
             is_directory=False,
             content_type="application/csv",
             size=1,
+            label="csv",
         ),
         Asset(
             id=uuid.uuid4(),
@@ -33,6 +35,7 @@ def assets():
             is_directory=False,
             content_type="application/csv",
             size=1,
+            label="csv",
         ),
     ]
 
