@@ -12,7 +12,9 @@ from entitysdk.types import ID
 L = logging.getLogger(__name__)
 
 
-def stage_circuit(client: Client, *, model: Circuit, output_dir: Path) -> Path:
+def stage_circuit(
+    client: Client, *, model: Circuit, output_dir: Path, max_concurrent: int = 1
+) -> Path:
     """Stage a Circuit directory into output_dir."""
     ensure_has_id(model)
     ensure_has_assets(model)
@@ -32,6 +34,7 @@ def stage_circuit(client: Client, *, model: Circuit, output_dir: Path) -> Path:
         asset_id=asset,
         output_path=output_dir,
         ignore_directory_name=True,
+        max_concurrent=max_concurrent,
     )
 
     L.debug("Downloaded circuit %s paths: %s", model.id, paths)
