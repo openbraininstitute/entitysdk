@@ -1,5 +1,6 @@
 """Identifiable SDK client."""
 
+import concurrent.futures
 import io
 import os
 from pathlib import Path
@@ -349,8 +350,9 @@ class Client:
         output_path: os.PathLike,
         project_context: ProjectContext | None = None,
         ignore_directory_name: bool = False,
+        max_concurrent: int = 1,
     ) -> list[Path]:
-        """List directory existing entity's endpoint from a directory path."""
+        """Download directory of assets."""
         output_path = Path(output_path)
 
         if output_path.exists() and output_path.is_file():
@@ -386,9 +388,8 @@ class Client:
             project_context=project_context,
         )
 
-        paths = []
-        for path in contents.files:
-            paths.append(
+        if max_concurrent == 1:
+            paths = [
                 self.download_file(
                     entity_id=entity_id,
                     entity_type=entity_type,
@@ -397,7 +398,24 @@ class Client:
                     asset_path=path,
                     project_context=context,
                 )
-            )
+                for path in contents.files
+            ]
+        else:
+            with concurrent.futures.ThreadPoolExecutor(max_workers=max_concurrent) as executor:
+                futures = [
+                    executor.submit(
+                        self.download_file,
+                        entity_id=entity_id,
+                        entity_type=entity_type,
+                        asset_id=asset if asset else asset_id,
+                        output_path=output_path / path,
+                        asset_path=path,
+                        project_context=context,
+                    )
+                    for path in contents.files
+                ]
+                result = concurrent.futures.wait(futures)
+                paths = [res.result() for res in result.done]
 
         return paths
 
