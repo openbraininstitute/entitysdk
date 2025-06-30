@@ -350,7 +350,7 @@ class Client:
         output_path: os.PathLike,
         project_context: ProjectContext | None = None,
         ignore_directory_name: bool = False,
-        max_concurrent: int = 4,
+        max_concurrent: int = 1,
     ) -> list[Path]:
         """Download directory of assets."""
         output_path = Path(output_path)
@@ -414,7 +414,8 @@ class Client:
                     )
                     for path in contents.files
                 ]
-                paths = [future.result() for future in futures]
+                result = concurrent.futures.wait(futures)
+                paths = [res.result() for res in result.done]
 
         return paths
 

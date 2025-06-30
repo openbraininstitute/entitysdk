@@ -871,12 +871,14 @@ def test_client_list_directory(
     assert res.files[Path("a/b/foo.txt")].name == "a/b/foo.txt"
 
 
+@pytest.mark.parametrize("max_concurrent", [1, 4])
 def test_client_download_directory_ignore_directory(
     tmp_path,
     client,
     httpx_mock,
     api_url,
     request_headers,
+    max_concurrent,
 ):
     entity_id = uuid.uuid4()
     asset_id = uuid.uuid4()
@@ -915,17 +917,20 @@ def test_client_download_directory_ignore_directory(
         asset_id=asset_id,
         output_path=tmp_path,
         ignore_directory_name=True,
+        max_concurrent=max_concurrent,
     )
     assert len(res) == 1
     assert res[0] == (tmp_path / "foo.txt").absolute()
 
 
+@pytest.mark.parametrize("max_concurrent", [1, 4])
 def test_client_download_directory(
     tmp_path,
     client,
     httpx_mock,
     api_url,
     request_headers,
+    max_concurrent,
 ):
     entity_id = uuid.uuid4()
     asset_id = uuid.uuid4()
@@ -978,15 +983,18 @@ def test_client_download_directory(
             asset_id=asset_id,
             output_path=target,
             ignore_directory_name=False,
+            max_concurrent=max_concurrent,
         )
 
 
+@pytest.mark.parametrize("max_concurrent", [1, 4])
 def test_client_download_directory__asset(
     tmp_path,
     client,
     httpx_mock,
     api_url,
     request_headers,
+    max_concurrent,
 ):
     entity_id = uuid.uuid4()
     asset_id = uuid.uuid4()
@@ -1029,6 +1037,7 @@ def test_client_download_directory__asset(
         asset_id=asset,
         output_path=tmp_path,
         ignore_directory_name=False,
+        max_concurrent=max_concurrent,
     )
     assert len(res) == 1
     assert res[0] == (tmp_path / "path_to_asset/foo.txt").absolute()
