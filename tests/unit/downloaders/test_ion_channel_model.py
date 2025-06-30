@@ -11,6 +11,7 @@ def _mock_asset_response(asset_id):
         "full_path": "foo.mod",
         "is_directory": False,
         "content_type": "application/mod",
+        "label": "neuron_mechanisms",
         "size": 100,
         "status": "created",
         "meta": {},

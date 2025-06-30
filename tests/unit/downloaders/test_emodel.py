@@ -11,6 +11,7 @@ def _mock_asset_response(asset_id):
         "full_path": "foo.hoc",
         "is_directory": False,
         "content_type": "application/hoc",
+        "label": "neuron_hoc",
         "size": 100,
         "status": "created",
         "meta": {},

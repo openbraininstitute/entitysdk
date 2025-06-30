@@ -8,6 +8,7 @@ def test_asset():
         id=MOCK_UUID,
         path="path/to/asset",
         full_path="full/path/to/asset",
+        label="mock",
         is_directory=False,
         content_type="text/plain",
         size=100,
@@ -25,7 +26,7 @@ def test_asset():
         "status": None,
         "sha256_digest": None,
         "meta": {},
-        "label": None,
+        "label": "mock",
     }
 
 
@@ -34,10 +35,11 @@ def test_local_asset_metadata():
         file_name="file_name",
         content_type="text/plain",
         metadata={"key": "value"},
+        label="mock",
     )
     assert res.model_dump() == {
         "file_name": "file_name",
         "content_type": "text/plain",
         "metadata": {"key": "value"},
-        "label": None,
+        "label": "mock",
     }

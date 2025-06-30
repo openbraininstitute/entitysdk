@@ -217,7 +217,7 @@ class Client:
         file_content_type: str,
         file_name: str | None = None,
         file_metadata: dict | None = None,
-        asset_label: str | None = None,
+        asset_label: str,
         project_context: ProjectContext | None = None,
     ) -> Asset:
         """Upload asset to an existing entity's endpoint from a file path."""
@@ -253,7 +253,7 @@ class Client:
         file_name: str,
         file_content_type: str,
         file_metadata: dict | None = None,
-        asset_label: str | None = None,
+        asset_label: str,
         project_context: ProjectContext | None = None,
     ) -> Asset:
         """Upload asset to an existing entity's endpoint from a file-like object."""
@@ -287,7 +287,7 @@ class Client:
         name: str,
         paths: dict[os.PathLike, os.PathLike],
         metadata: dict | None = None,
-        label: str | None = None,
+        label: str,
         project_context: ProjectContext | None = None,
     ) -> Asset:
         """Attach directory to an entity from with a group of paths."""
@@ -614,7 +614,7 @@ class Client:
 
         Note: This operation is not atomic. Deletion can succeed and upload can fail.
         """
-        self.delete_asset(
+        deleted_asset = self.delete_asset(
             entity_id=entity_id,
             entity_type=entity_type,
             asset_id=asset_id,
@@ -628,4 +628,5 @@ class Client:
             file_name=file_name,
             file_metadata=file_metadata,
             project_context=project_context,
+            asset_label=deleted_asset.label,
         )

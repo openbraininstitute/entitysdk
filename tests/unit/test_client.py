@@ -129,6 +129,7 @@ def _mock_asset_response(asset_id):
         "status": "created",
         "meta": {},
         "sha256_digest": "sha256_digest",
+        "label": "morphology",
     }
 
 
@@ -146,14 +147,8 @@ def test_client_upload_file(
         method="POST",
         url=f"{api_url}/entity/{entity_id}/assets",
         match_headers=request_headers,
-        match_files={
-            "file": (
-                "foo",
-                b"foo",
-                "text/plain",
-            )
-        },
-        match_data={"label": "swc"},
+        match_files={"file": ("foo", b"foo", "application/swc")},
+        match_data={"label": "morphology"},
         json=_mock_asset_response(asset_id),
     )
 
@@ -165,9 +160,9 @@ def test_client_upload_file(
         entity_type=Entity,
         file_name="foo",
         file_path=path,
-        file_content_type="text/plain",
+        file_content_type="application/swc",
         file_metadata={"key": "value"},
-        asset_label="swc",
+        asset_label="morphology",
     )
 
     assert res.id == asset_id
@@ -182,24 +177,18 @@ def test_client_upload_content(client, httpx_mock, api_url, request_headers):
         method="POST",
         url=f"{api_url}/entity/{entity_id}/assets",
         match_headers=request_headers,
-        match_files={
-            "file": (
-                "foo.txt",
-                buffer,
-                "text/plain",
-            )
-        },
-        match_data={"label": "swc"},
+        match_files={"file": ("foo.swc", buffer, "application/swc")},
+        match_data={"label": "morphology"},
         json=_mock_asset_response(asset_id),
     )
     res = client.upload_content(
         entity_id=entity_id,
         entity_type=Entity,
-        file_name="foo.txt",
+        file_name="foo.swc",
         file_content=buffer,
-        file_content_type="text/plain",
+        file_content_type="application/swc",
         file_metadata={"key": "value"},
-        asset_label="swc",
+        asset_label="morphology",
     )
 
     assert res.id == asset_id
@@ -468,9 +457,10 @@ def test_client_get(
 def _mock_asset_delete_response(asset_id):
     return {
         "path": "buffer.h5",
-        "full_path": "private/103d7868/103d7868/assets/reconstruction_morphology/8703/buffer.h5",
+        "full_path": "private/103d7868/103d7868/assets/reconstruction_morphology/8703/buffer.swc",
         "is_directory": False,
         "content_type": "application/swc",
+        "label": "morphology",
         "size": 18,
         "sha256_digest": "47ddc1b6e05dcbfbd2db9dcec4a49d83c6f9f10ad595649bacdcb629671fd954",
         "meta": {},
@@ -682,6 +672,7 @@ def test_client_download_assets__entity(
                 full_path="/foo/asset1",
                 is_directory=False,
                 content_type="application/json",
+                label="cell_composition_summary",
                 size=1,
             ),
         ],
@@ -731,7 +722,7 @@ def test_upload_directory_by_paths(
             entity_type=Entity,
             name="test-directory",
             paths=paths,
-            label=None,
+            label="sonata_circuit",
             metadata=None,
         )
 
@@ -744,7 +735,7 @@ def test_upload_directory_by_paths(
         "full_path": "asdf",
         "id": "a370a57b-7211-4426-8046-970758ceaf68",
         "is_directory": True,
-        "label": None,
+        "label": "sonata_circuit",
         "meta": {},
         "path": "",
         "sha256_digest": None,
@@ -1009,6 +1000,7 @@ def test_client_download_directory__asset(
         is_directory=True,
         size=0,
         content_type="application/vnd.directory",
+        label="sonata_circuit",
     )
 
     # for listing dirs
