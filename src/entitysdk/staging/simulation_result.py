@@ -68,5 +68,5 @@ def stage_simulation_result(
 
 def _get_output_paths(config: dict, output_dir: Path) -> tuple[Path, Path]:
     reports_dir = output_dir / config["output"]["output_dir"]
-    spikes_file = output_dir / config["output"]["spikes_file"]
+    spikes_file = reports_dir / config["output"]["spikes_file"]
     return reports_dir, spikes_file
