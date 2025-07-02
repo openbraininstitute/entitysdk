@@ -29,6 +29,7 @@ def stage_simulation(
     *,
     model: Simulation,
     output_dir: StrOrPath,
+    spike_replay_files_path: StrOrPath | None = None,
     circuit_config_path: Path | None = None,
     override_results_dir: Path | None = None,
 ) -> Path:
@@ -56,7 +57,7 @@ def stage_simulation(
     spike_paths: list[Path] = download_spike_replay_files(
         client,
         model=model,
-        output_dir=output_dir,
+        output_dir=spike_replay_files_path,
     )
     if circuit_config_path is None:
         L.info(
