@@ -7,13 +7,14 @@ from pydantic import Field
 
 from entitysdk.models.entity import Entity
 from entitysdk.models.taxonomy import Species
+from entitysdk.types import AgePeriod, Sex
 
 
 class Subject(Entity):
     """Subject model."""
 
     sex: Annotated[
-        str,
+        Sex,
         Field(title="Sex", description="Sex of the subject"),
     ]
     weight: Annotated[
@@ -32,7 +33,7 @@ class Subject(Entity):
         timedelta | None,
         Field(title="Maximum age range", description="Maximum age range", gt=timedelta(0)),
     ] = None
-    age_period: str | None = None
+    age_period: AgePeriod | None = None
     species: Annotated[
         Species,
         Field(

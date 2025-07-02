@@ -5,7 +5,7 @@ from entitysdk.downloaders.memodel import download_memodel
 from entitysdk.models.emodel import EModel
 from entitysdk.models.memodel import MEModel
 from entitysdk.models.morphology import ReconstructionMorphology
-from entitysdk.types import ValidationStatus
+from entitysdk.types import AssetLabel, ContentType, ValidationStatus
 
 
 def _mock_morph_asset_response(asset_id):
@@ -15,8 +15,8 @@ def _mock_morph_asset_response(asset_id):
         "path": "foo.asc",
         "full_path": "foo.asc",
         "is_directory": False,
-        "content_type": "application/asc",
-        "label": "morphology",
+        "label": AssetLabel.morphology,
+        "content_type": ContentType.application_asc,
         "size": 100,
         "status": "created",
         "meta": {},
@@ -31,8 +31,8 @@ def _mock_ic_asset_response(asset_id):
         "path": "foo.mod",
         "full_path": "foo.mod",
         "is_directory": False,
-        "content_type": "application/mod",
-        "label": "neuron_mechanisms",
+        "label": AssetLabel.neuron_mechanisms,
+        "content_type": ContentType.application_mod,
         "size": 100,
         "status": "created",
         "meta": {},
@@ -47,8 +47,8 @@ def _mock_emodel_asset_response(asset_id):
         "path": "foo.hoc",
         "full_path": "foo.hoc",
         "is_directory": False,
-        "content_type": "application/hoc",
-        "label": "neuron_hoc",
+        "label": AssetLabel.neuron_hoc,
+        "content_type": ContentType.application_hoc,
         "size": 100,
         "status": "created",
         "meta": {},
