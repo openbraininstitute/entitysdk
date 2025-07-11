@@ -8,7 +8,7 @@ from pydantic import Field
 from entitysdk.mixin import HasAssets
 from entitysdk.models.agent import AgentUnion
 from entitysdk.models.core import Identifiable
-from entitysdk.types import ID
+from entitysdk.types import ID, EntityType
 
 
 class Entity(Identifiable, HasAssets):
@@ -29,7 +29,7 @@ class Entity(Identifiable, HasAssets):
         ),
     ] = None
     type: Annotated[
-        str | None,
+        EntityType | None,
         Field(
             examples=["license"],
             description="The type of this Entity.",

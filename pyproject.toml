@@ -79,6 +79,7 @@ convention = "google"
     "SIM117",  # Use a single `with` statement with multiple contexts
     "SLF001",  # private member access
 ]
+"_server_schemas.py" = ["ALL"]
 
 [tool.ruff.lint.pylint]
 # Maximum number of arguments for function / method
@@ -129,3 +130,8 @@ fail_under = 80
 show_error_codes = true
 ignore_missing_imports = true
 allow_redefinition = true
+exclude = ["^_server_schemas\\.py$"]
+
+[[tool.mypy.overrides]]
+module = "entitysdk._server_schemas"
+ignore_errors = true

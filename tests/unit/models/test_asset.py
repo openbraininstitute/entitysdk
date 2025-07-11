@@ -1,4 +1,5 @@
 from entitysdk.models import asset as test_module
+from entitysdk.types import AssetLabel, ContentType
 
 from ..util import MOCK_UUID
 
@@ -8,9 +9,9 @@ def test_asset():
         id=MOCK_UUID,
         path="path/to/asset",
         full_path="full/path/to/asset",
-        label="mock",
+        label=AssetLabel.sonata_circuit,
         is_directory=False,
-        content_type="text/plain",
+        content_type=ContentType.text_plain,
         size=100,
         meta={},
     )
@@ -21,25 +22,25 @@ def test_asset():
         "path": "path/to/asset",
         "full_path": "full/path/to/asset",
         "is_directory": False,
-        "content_type": "text/plain",
+        "content_type": ContentType.text_plain,
         "size": 100,
         "status": None,
         "sha256_digest": None,
         "meta": {},
-        "label": "mock",
+        "label": AssetLabel.sonata_circuit,
     }
 
 
 def test_local_asset_metadata():
     res = test_module.LocalAssetMetadata(
         file_name="file_name",
-        content_type="text/plain",
+        content_type=ContentType.text_plain,
         metadata={"key": "value"},
-        label="mock",
+        label=AssetLabel.sonata_circuit,
     )
     assert res.model_dump() == {
         "file_name": "file_name",
-        "content_type": "text/plain",
+        "content_type": ContentType.text_plain,
         "metadata": {"key": "value"},
-        "label": "mock",
+        "label": AssetLabel.sonata_circuit,
     }

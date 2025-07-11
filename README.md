@@ -98,6 +98,22 @@ git clone https://github.com/your-org/entitysdk.git
 tox
 ```
 
+### Auto-generate server schemas
+
+Server schemas at src/entitysdk/_server_schemas.py, which are currently used for importing enum
+types, can be updated with the following tox command:
+
+```bash
+tox -e generate-server-schemas
+```
+
+Please note that a manual step is required following the generation of the schemas. Importing
+future annotations requires to be moved at the top of the file:
+
+```python
+from __future__ import annotations
+```
+
 ## Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.

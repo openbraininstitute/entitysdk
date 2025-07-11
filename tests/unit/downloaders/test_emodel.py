@@ -2,6 +2,7 @@ import uuid
 
 from entitysdk.downloaders.emodel import download_hoc
 from entitysdk.models.emodel import EModel
+from entitysdk.types import AssetLabel, ContentType
 
 
 def _mock_asset_response(asset_id):
@@ -10,8 +11,8 @@ def _mock_asset_response(asset_id):
         "path": "foo.hoc",
         "full_path": "foo.hoc",
         "is_directory": False,
-        "content_type": "application/hoc",
-        "label": "neuron_hoc",
+        "label": AssetLabel.neuron_hoc,
+        "content_type": ContentType.application_hoc,
         "size": 100,
         "status": "created",
         "meta": {},
