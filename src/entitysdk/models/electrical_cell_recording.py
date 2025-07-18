@@ -6,6 +6,7 @@ from pydantic import Field
 
 from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.entity import Entity
+from entitysdk.models.etype import ETypeClass
 from entitysdk.models.license import License
 from entitysdk.models.subject import Subject
 from entitysdk.types import (
@@ -88,5 +89,11 @@ class ElectricalCellRecording(Entity):
         License | None,
         Field(
             description="The license attached to the morphology.",
+        ),
+    ] = None
+    etypes: Annotated[
+        list[ETypeClass] | None,
+        Field(
+            description="The etypes of the emodel.",
         ),
     ] = None
