@@ -16,6 +16,7 @@ _ROUTES = {
     "EModel": "emodel",
     "Entity": "entity",
     "ETypeClassification": "etype-classification",
+    "ETypeClass": "etype",
     "Ion": "ion",
     "IonChannelModel": "ion-channel-model",
     "License": "license",
