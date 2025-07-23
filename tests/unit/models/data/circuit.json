@@ -6,6 +6,7 @@
   "name": "my-circuit",
   "description": "my-circuit",
   "type": "circuit",
+  "published_in": null,
   "created_by": {
     "id": "e8997b32-0183-42c8-b11f-1a61da933a89",
     "update_date": null,
@@ -29,7 +30,7 @@
   "contributions": null,
   "legacy_id": null,
   "experiment_date": null,
-  "contact_id": null,
+  "contact_email": null,
   "atlas_id": null,
   "subject": {
     "assets": [],

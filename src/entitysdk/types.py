@@ -13,6 +13,7 @@ from entitysdk._server_schemas import AssetStatus as AssetStatus
 from entitysdk._server_schemas import CircuitBuildCategory as CircuitBuildCategory
 from entitysdk._server_schemas import CircuitScale as CircuitScale
 from entitysdk._server_schemas import ContentType as ContentType
+from entitysdk._server_schemas import DerivationType as DerivationType
 from entitysdk._server_schemas import ElectricalRecordingOrigin as ElectricalRecordingOrigin
 from entitysdk._server_schemas import (
     ElectricalRecordingStimulusShape as ElectricalRecordingStimulusShape,
@@ -22,6 +23,7 @@ from entitysdk._server_schemas import (
 )
 from entitysdk._server_schemas import ElectricalRecordingType as ElectricalRecordingType
 from entitysdk._server_schemas import EntityType as EntityType
+from entitysdk._server_schemas import PublicationType as PublicationType
 from entitysdk._server_schemas import Sex as Sex
 from entitysdk._server_schemas import SimulationExecutionStatus as SimulationExecutionStatus
 from entitysdk._server_schemas import SingleNeuronSimulationStatus as SingleNeuronSimulationStatus

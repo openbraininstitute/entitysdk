@@ -19,8 +19,10 @@ from entitysdk.models.asset import (
     LocalAssetMetadata,
 )
 from entitysdk.models.core import Identifiable
+from entitysdk.models.entity import Entity
 from entitysdk.result import IteratorResult
-from entitysdk.types import AssetLabel
+from entitysdk.route import get_entity_derivations_endpoint
+from entitysdk.types import ID, AssetLabel, DerivationType
 from entitysdk.util import make_db_api_request, stream_paginated_request
 
 L = logging.getLogger(__name__)
@@ -84,6 +86,38 @@ def get_entity(
     )
 
     return serdes.deserialize_model(response.json(), entity_type)
+
+
+def get_entity_derivations(
+    *,
+    api_url: str,
+    entity_id: ID,
+    entity_type: type[Entity],
+    project_context: ProjectContext,
+    derivation_type: DerivationType | None,
+    token: str,
+    http_client: httpx.Client | None = None,
+):
+    """Get derivations for entity."""
+    url = get_entity_derivations_endpoint(
+        api_url=api_url,
+        entity_type=entity_type,
+        entity_id=entity_id,
+    )
+
+    params = {"derivation_type": DerivationType(derivation_type)} if derivation_type else None
+
+    response = make_db_api_request(
+        url=url,
+        method="GET",
+        project_context=project_context,
+        token=token,
+        http_client=http_client,
+        parameters=params,
+    )
+    return IteratorResult(
+        serdes.deserialize_model(json_data, entity_type) for json_data in response.json()["data"]
+    )
 
 
 def register_entity(

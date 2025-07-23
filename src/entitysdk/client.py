@@ -22,7 +22,15 @@ from entitysdk.models.entity import Entity
 from entitysdk.result import IteratorResult
 from entitysdk.schemas.asset import DownloadedAssetFile
 from entitysdk.token_manager import TokenFromValue, TokenManager
-from entitysdk.types import ID, AssetLabel, ContentType, DeploymentEnvironment, StorageType, Token
+from entitysdk.types import (
+    ID,
+    AssetLabel,
+    ContentType,
+    DeploymentEnvironment,
+    DerivationType,
+    StorageType,
+    Token,
+)
 from entitysdk.util import (
     build_api_url,
     create_intermediate_directories,
@@ -154,6 +162,24 @@ class Client:
             project_context=context,
             entity_type=entity_type,
             http_client=self._http_client,
+            token=self._token_manager.get_token(),
+        )
+
+    def get_entity_derivations(
+        self,
+        *,
+        entity_id: ID,
+        entity_type: type[Entity],
+        derivation_type: str | DerivationType | None = None,
+        project_context: ProjectContext | None = None,
+    ):
+        """Get all the derivation for an entity."""
+        return core.get_entity_derivations(
+            api_url=self.api_url,
+            entity_id=entity_id,
+            entity_type=entity_type,
+            derivation_type=DerivationType(derivation_type) if derivation_type else None,
+            project_context=self._required_user_context(override_context=project_context),
             token=self._token_manager.get_token(),
         )
 

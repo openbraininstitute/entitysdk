@@ -2,6 +2,7 @@
 
 from entitysdk.exception import RouteNotFoundError
 from entitysdk.models.core import Identifiable
+from entitysdk.models.entity import Entity
 from entitysdk.types import ID
 
 # Mapping of entity type to api route name.
@@ -13,6 +14,7 @@ _ROUTES = {
     "Circuit": "circuit",
     "Consortium": "consortium",
     "Contribution": "contribution",
+    "Derivation": "derivation",
     "ElectricalCellRecording": "electrical-cell-recording",
     "EModel": "emodel",
     "Entity": "entity",
@@ -68,6 +70,17 @@ def get_entities_endpoint(
     route_name = get_route_name(entity_type)
     endpoint = route_name if entity_id is None else f"{route_name}/{entity_id}"
     return f"{api_url}/{endpoint}"
+
+
+def get_entity_derivations_endpoint(
+    *,
+    api_url: str,
+    entity_type: type[Entity],
+    entity_id: ID,
+):
+    """Get endpoint for entity derivations."""
+    route_name = get_route_name(entity_type)
+    return f"{api_url}/{route_name}/{entity_id}/derived-from"
 
 
 def get_assets_endpoint(

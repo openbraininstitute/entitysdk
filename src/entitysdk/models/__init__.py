@@ -8,6 +8,7 @@ from entitysdk.models.brain_region_hierarchy import BrainRegionHierarchy
 from entitysdk.models.circuit import Circuit
 from entitysdk.models.classification import ETypeClassification, MTypeClassification
 from entitysdk.models.contribution import Contribution, Role
+from entitysdk.models.derivation import Derivation
 from entitysdk.models.electrical_cell_recording import ElectricalCellRecording
 from entitysdk.models.emodel import EModel
 from entitysdk.models.ion_channel_model import IonChannelModel, NeuronBlock, UseIon
@@ -16,6 +17,8 @@ from entitysdk.models.memodel import MEModel
 from entitysdk.models.memodelcalibrationresult import MEModelCalibrationResult
 from entitysdk.models.morphology import ReconstructionMorphology
 from entitysdk.models.mtype import MTypeClass
+from entitysdk.models.publication import Publication
+from entitysdk.models.scientific_artifact_publication_link import ScientificArtifactPublicationLink
 from entitysdk.models.simulation import Simulation
 from entitysdk.models.simulation_campaign import SimulationCampaign
 from entitysdk.models.simulation_execution import SimulationExecution
@@ -36,6 +39,7 @@ __all__ = [
     "Circuit",
     "Consortium",
     "Contribution",
+    "Derivation",
     "ElectricalCellRecording",
     "EModel",
     "ETypeClassification",
@@ -48,8 +52,10 @@ __all__ = [
     "NeuronBlock",
     "Organization",
     "Person",
+    "Publication",
     "ReconstructionMorphology",
     "Role",
+    "ScientificArtifactPublicationLink",
     "Simulation",
     "SimulationCampaign",
     "SingleNeuronSimulation",
