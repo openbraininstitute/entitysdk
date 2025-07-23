@@ -1,6 +1,6 @@
 """Derivation model."""
 
-from entitysdk.models.base import Identifiable
+from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 
 
