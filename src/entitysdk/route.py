@@ -12,6 +12,7 @@ _ROUTES = {
     "BrainRegionHierarchy": "brain-region-hierarchy",
     "Circuit": "circuit",
     "Contribution": "contribution",
+    "Derivation": "derivation",
     "ElectricalCellRecording": "electrical-cell-recording",
     "EModel": "emodel",
     "Entity": "entity",
