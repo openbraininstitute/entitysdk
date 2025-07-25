@@ -1,5 +1,7 @@
 """Serialization and deserialization of entities."""
 
+from typing import TypeVar
+
 from pydantic import TypeAdapter
 
 from entitysdk.models.activity import Activity
@@ -12,8 +14,10 @@ SERIALIZATION_EXCLUDE_KEYS = {
     "update_date",
 }
 
+TBaseModel = TypeVar("TBaseModel", bound=BaseModel)
 
-def deserialize_model(json_data: dict, entity_type: type[BaseModel]):
+
+def deserialize_model(json_data: dict, entity_type: type[TBaseModel]) -> TBaseModel:
     """Deserialize json into entity."""
     return entity_type.model_validate(json_data)
 

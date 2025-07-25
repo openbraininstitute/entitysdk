@@ -14,7 +14,7 @@ from entitysdk.models import Asset, MTypeClass
 from entitysdk.models.asset import DetailedFile, DetailedFileList
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
-from entitysdk.types import DeploymentEnvironment
+from entitysdk.types import AssetLabel, ContentType, DeploymentEnvironment, StorageType
 
 
 def test_client_api_url():
@@ -1041,3 +1041,38 @@ def test_client_download_directory__asset(
     )
     assert len(res) == 1
     assert res[0] == (tmp_path / "path_to_asset/foo.txt").absolute()
+
+
+@patch("entitysdk.route.get_route_name")
+def test_client_register_asset(
+    mock_route,
+    client,
+    httpx_mock,
+    api_url,
+    request_headers,
+):
+    mock_route.return_value = "reconstruction-morphology"
+
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+
+    httpx_mock.add_response(
+        method="POST",
+        url=f"{api_url}/reconstruction-morphology/{entity_id}/assets/register",
+        match_headers=request_headers,
+        json=_mock_asset_response(asset_id),
+    )
+
+    res = client.register_asset(
+        entity_id=entity_id,
+        entity_type=None,
+        name="foo.swc",
+        storage_path="path/to/foo.swc",
+        storage_type=StorageType.aws_s3_open,
+        is_directory=False,
+        content_type=ContentType.application_swc,
+        asset_label=AssetLabel.morphology,
+    )
+
+    assert res.id == asset_id
+    assert res.status == "created"

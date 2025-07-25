@@ -1,5 +1,5 @@
 from entitysdk.models import asset as test_module
-from entitysdk.types import AssetLabel, ContentType
+from entitysdk.types import AssetLabel, ContentType, StorageType
 
 from ..util import MOCK_UUID
 
@@ -43,4 +43,23 @@ def test_local_asset_metadata():
         "content_type": ContentType.text_plain,
         "metadata": {"key": "value"},
         "label": AssetLabel.sonata_circuit,
+    }
+
+
+def test_existing_asset_metadata():
+    res = test_module.ExistingAssetMetadata(
+        path="custom_name.txt",
+        full_path="path/to/original_name.txt",
+        storage_type=StorageType.aws_s3_open,
+        is_directory=False,
+        content_type=ContentType.text_plain,
+        label=AssetLabel.morphology,
+    )
+    assert res.model_dump() == {
+        "path": "custom_name.txt",
+        "full_path": "path/to/original_name.txt",
+        "storage_type": StorageType.aws_s3_open,
+        "is_directory": False,
+        "content_type": ContentType.text_plain,
+        "label": AssetLabel.morphology,
     }
