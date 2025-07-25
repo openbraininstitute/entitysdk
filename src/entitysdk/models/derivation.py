@@ -2,6 +2,7 @@
 
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
+from entitysdk.types import DerivationType
 
 
 class Derivation(Identifiable):
@@ -9,6 +10,4 @@ class Derivation(Identifiable):
 
     used: Entity
     generated: Entity
-
-    # TODO: Fetch enum type from server schema when latest changes land on staging
-    derivation_type: str | None = None
+    derivation_type: DerivationType | None = None
