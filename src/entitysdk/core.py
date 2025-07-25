@@ -364,7 +364,7 @@ def register_asset(
     response = make_db_api_request(
         url=url,
         method="POST",
-        data=asset_metadata.model_dump(),
+        json=asset_metadata.model_dump(),
         project_context=project_context,
         token=token,
         http_client=http_client,
