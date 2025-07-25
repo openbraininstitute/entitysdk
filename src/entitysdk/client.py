@@ -11,13 +11,18 @@ import httpx
 from entitysdk import core, route
 from entitysdk.common import ProjectContext
 from entitysdk.exception import EntitySDKError
-from entitysdk.models.asset import Asset, DetailedFileList, LocalAssetMetadata
+from entitysdk.models.asset import (
+    Asset,
+    DetailedFileList,
+    ExistingAssetMetadata,
+    LocalAssetMetadata,
+)
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.result import IteratorResult
 from entitysdk.schemas.asset import DownloadedAssetFile
 from entitysdk.token_manager import TokenFromValue, TokenManager
-from entitysdk.types import ID, AssetLabel, ContentType, DeploymentEnvironment, Token
+from entitysdk.types import ID, AssetLabel, ContentType, DeploymentEnvironment, StorageType, Token
 from entitysdk.util import (
     build_api_url,
     create_intermediate_directories,
@@ -630,4 +635,44 @@ class Client:
             file_metadata=file_metadata,
             project_context=project_context,
             asset_label=deleted_asset.label,
+        )
+
+    def register_asset(
+        self,
+        *,
+        entity_id: ID,
+        entity_type: type[Identifiable],
+        name: str,
+        storage_path: str,
+        storage_type: StorageType,
+        is_directory: bool,
+        content_type: ContentType,
+        asset_label: AssetLabel,
+        project_context: ProjectContext | None = None,
+    ) -> Asset:
+        """Register a file or directory already existing."""
+        url = (
+            route.get_assets_endpoint(
+                api_url=self.api_url,
+                entity_type=entity_type,
+                entity_id=entity_id,
+                asset_id=None,
+            )
+            + "/register"
+        )
+        asset_metadata = ExistingAssetMetadata(
+            path=name,
+            full_path=storage_path,
+            storage_type=storage_type,
+            is_directory=is_directory,
+            content_type=content_type,
+            label=asset_label,
+        )
+        context = self._required_user_context(override_context=project_context)
+        return core.register_asset(
+            url=url,
+            project_context=context,
+            asset_metadata=asset_metadata,
+            http_client=self._http_client,
+            token=self._token_manager.get_token(),
         )
