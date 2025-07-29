@@ -12,7 +12,12 @@ import httpx
 from entitysdk import serdes
 from entitysdk.common import ProjectContext
 from entitysdk.exception import EntitySDKError
-from entitysdk.models.asset import Asset, DetailedFileList, LocalAssetMetadata
+from entitysdk.models.asset import (
+    Asset,
+    DetailedFileList,
+    ExistingAssetMetadata,
+    LocalAssetMetadata,
+)
 from entitysdk.models.core import Identifiable
 from entitysdk.result import IteratorResult
 from entitysdk.types import AssetLabel
@@ -340,6 +345,26 @@ def delete_asset(
     response = make_db_api_request(
         url=url,
         method="DELETE",
+        project_context=project_context,
+        token=token,
+        http_client=http_client,
+    )
+    return serdes.deserialize_model(response.json(), Asset)
+
+
+def register_asset(
+    url: str,
+    *,
+    asset_metadata: ExistingAssetMetadata,
+    project_context: ProjectContext,
+    token: str,
+    http_client: httpx.Client | None = None,
+) -> Asset:
+    """Register a file or directory already existing."""
+    response = make_db_api_request(
+        url=url,
+        method="POST",
+        json=asset_metadata.model_dump(),
         project_context=project_context,
         token=token,
         http_client=http_client,

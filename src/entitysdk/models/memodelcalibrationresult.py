@@ -15,7 +15,7 @@ class MEModelCalibrationResult(Entity):
         float,
         Field(
             description="The holding current to apply to the simulatable neuron, in nA.",
-            example=-0.016,
+            examples=[-0.016],
         ),
     ]
     threshold_current: Annotated[
@@ -23,20 +23,20 @@ class MEModelCalibrationResult(Entity):
         Field(
             description="The minimal amount of current needed to make "
             "the simulatable neuron spike, in nA.",
-            example=0.1,
+            examples=[0.1],
         ),
     ]
     rin: Annotated[
         float | None,
         Field(
             description="The input resistance of the simulatable neuron, in MOhm.",
-            example=0.1,
+            examples=[0.1],
         ),
     ] = None
     calibrated_entity_id: Annotated[
         ID,
         Field(
             description="ID of the calibrated entity.",
-            example="85663316-a7ff-4107-9eb9-236de8868c5c",
+            examples=["85663316-a7ff-4107-9eb9-236de8868c5c"],
         ),
     ]

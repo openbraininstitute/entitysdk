@@ -25,6 +25,7 @@ from entitysdk._server_schemas import EntityType as EntityType
 from entitysdk._server_schemas import Sex as Sex
 from entitysdk._server_schemas import SimulationExecutionStatus as SimulationExecutionStatus
 from entitysdk._server_schemas import SingleNeuronSimulationStatus as SingleNeuronSimulationStatus
+from entitysdk._server_schemas import StorageType as StorageType
 from entitysdk._server_schemas import StructuralDomain as StructuralDomain
 from entitysdk._server_schemas import ValidationStatus as ValidationStatus
 
