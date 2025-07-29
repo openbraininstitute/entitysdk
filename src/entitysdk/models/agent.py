@@ -80,7 +80,7 @@ class Consortium(Agent):
         str | None,
         Field(
             examples=["Open Brain Institute"],
-            description="The alternative name of the consirtium.",
+            description="The alternative name of the consortium.",
         ),
     ] = None
 
