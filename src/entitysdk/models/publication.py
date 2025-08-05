@@ -2,7 +2,7 @@
 
 import sys
 
-if sys.version_info < (3, 12):
+if sys.version_info < (3, 12):  # pragma: no cover
     from typing_extensions import TypedDict
 else:
     from typing import TypedDict
