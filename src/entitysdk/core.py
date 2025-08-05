@@ -116,7 +116,7 @@ def get_entity_derivations(
         parameters=params,
     )
     return IteratorResult(
-        serdes.deserialize_model(json_data, entity_type) for json_data in response.json()["data"]
+        serdes.deserialize_model(json_data, Entity) for json_data in response.json()["data"]
     )
 
 
