@@ -27,7 +27,6 @@ from entitysdk.types import (
     AssetLabel,
     ContentType,
     DeploymentEnvironment,
-    DerivationType,
     StorageType,
     Token,
 )
@@ -170,7 +169,6 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Entity],
-        derivation_type: str | DerivationType | None = None,
         project_context: ProjectContext | None = None,
     ):
         """Get all the derivation for an entity."""
@@ -178,7 +176,7 @@ class Client:
             api_url=self.api_url,
             entity_id=entity_id,
             entity_type=entity_type,
-            derivation_type=DerivationType(derivation_type) if derivation_type else None,
+            derivation_type=None,
             project_context=self._required_user_context(override_context=project_context),
             token=self._token_manager.get_token(),
         )
