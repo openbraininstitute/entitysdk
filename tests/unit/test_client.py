@@ -10,11 +10,17 @@ import pytest
 from entitysdk.client import Client
 from entitysdk.config import settings
 from entitysdk.exception import EntitySDKError
-from entitysdk.models import Asset, MTypeClass
+from entitysdk.models import Asset, Circuit, MTypeClass
 from entitysdk.models.asset import DetailedFile, DetailedFileList
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
-from entitysdk.types import AssetLabel, ContentType, DeploymentEnvironment, StorageType
+from entitysdk.types import (
+    AssetLabel,
+    ContentType,
+    DeploymentEnvironment,
+    DerivationType,
+    StorageType,
+)
 
 
 def test_client_api_url():
@@ -1076,3 +1082,44 @@ def test_client_register_asset(
 
     assert res.id == asset_id
     assert res.status == "created"
+
+
+@patch("entitysdk.route.get_route_name")
+def test_client_get_entity_derivations(mock_route, client, httpx_mock, api_url, request_headers):
+    mock_route.return_value = "circuit"
+    entity_id = uuid.uuid4()
+
+    derivation_1 = uuid.uuid4()
+    derivation_2 = uuid.uuid4()
+
+    used_id = uuid.uuid4()
+    generated_id = uuid.uuid4()
+
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/circuit/{entity_id}/derived-from",
+        match_headers=request_headers,
+        json={
+            "data": [
+                {
+                    "id": str(derivation_1),
+                    "used_id": str(used_id),
+                    "generated_id": str(generated_id),
+                },
+                {
+                    "id": str(derivation_2),
+                    "used_id": str(used_id),
+                    "generated_id": str(generated_id),
+                    "derivation_type": DerivationType.circuit_extraction,
+                },
+            ]
+        },
+    )
+
+    res = client.get_entity_derivations(
+        entity_id=entity_id,
+        entity_type=Circuit,
+    ).all()
+    assert len(res) == 2
+    assert res[0].id == derivation_1
+    assert res[1].id == derivation_2

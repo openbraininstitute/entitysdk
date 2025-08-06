@@ -8,6 +8,7 @@ dependencies = [
     "httpx",
     "pydantic",
     "pydantic-settings",
+    "typing_extensions; python_version < '3.12'",
 ]
 authors = [
     {name = "Open Brain Institute", email = "info@openbraininstitute.org"}

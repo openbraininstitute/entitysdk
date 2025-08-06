@@ -13,10 +13,9 @@ class ScientificArtifact(Entity):
     """Scientific artifact base model."""
 
     experiment_date: datetime | None = None
-    contact_id: ID | None = None
+    contact_email: str | None = None
     atlas_id: ID | None = None
-
     subject: Subject
     brain_region: BrainRegion
-
     license: License | None = None
+    published_in: str | None = None

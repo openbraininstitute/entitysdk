@@ -33,3 +33,10 @@ def test_get_assets_endpoint(api_url):
         api_url=api_url, entity_type=Entity, entity_id="1", asset_id="2"
     )
     assert res == f"{api_url}/entity/1/assets/2"
+
+
+def test_get_entity_derivations_endpoint(api_url):
+    res = test_module.get_entity_derivations_endpoint(
+        api_url=api_url, entity_type=Entity, entity_id="1"
+    )
+    assert res == f"{api_url}/entity/1/derived-from"
