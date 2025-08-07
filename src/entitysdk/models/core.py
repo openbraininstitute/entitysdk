@@ -113,4 +113,22 @@ class Organization(Agent):
     ] = None
 
 
-AgentUnion = Annotated[Person | Organization, Field(discriminator="type")]
+class Consortium(Agent):
+    """Consortium model."""
+
+    type: Annotated[
+        Literal["consortium"],
+        Field(
+            description="The Consortium type. Should be 'consortium'",
+        ),
+    ] = "consortium"
+    alternative_name: Annotated[
+        str | None,
+        Field(
+            examples=["Open Brain Institute"],
+            description="The alternative name of the consortium.",
+        ),
+    ] = None
+
+
+AgentUnion = Annotated[Person | Organization | Consortium, Field(discriminator="type")]
