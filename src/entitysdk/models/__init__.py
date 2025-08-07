@@ -1,6 +1,5 @@
 """Models for entitysdk."""
 
-from entitysdk.models.agent import Consortium, Organization, Person
 from entitysdk.models.asset import Asset
 from entitysdk.models.brain_location import BrainLocation
 from entitysdk.models.brain_region import BrainRegion
@@ -16,6 +15,7 @@ from entitysdk.models.circuit_extraction import (
 )
 from entitysdk.models.classification import ETypeClassification, MTypeClassification
 from entitysdk.models.contribution import Contribution, Role
+from entitysdk.models.core import Consortium, Organization, Person
 from entitysdk.models.derivation import Derivation
 from entitysdk.models.electrical_cell_recording import ElectricalCellRecording
 from entitysdk.models.electrical_recording import ElectricalRecordingStimulus
