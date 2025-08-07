@@ -22,8 +22,8 @@ def test_contribution(role):
         role=role,
     )
 
-    assert res.agent == person
-    assert res.role == role
+    assert res.agent.model_dump() == person.model_dump()
+    assert res.role.model_dump() == role.model_dump()
 
     organization = Organization(type="organization", pref_label="test", alternative_name="test")
 
@@ -32,8 +32,8 @@ def test_contribution(role):
         role=role,
     )
 
-    assert res.agent == organization
-    assert res.role == role
+    assert res.agent.model_dump() == organization.model_dump()
+    assert res.role.model_dump() == role.model_dump()
 
     res = test_module.Contribution.model_validate(
         {
@@ -41,8 +41,8 @@ def test_contribution(role):
             "role": role.model_dump(mode="json"),
         }
     )
-    assert res.agent == person
-    assert res.role == role
+    assert res.agent.model_dump() == person.model_dump()
+    assert res.role.model_dump() == role.model_dump()
 
     res = test_module.Contribution.model_validate(
         {
@@ -50,5 +50,5 @@ def test_contribution(role):
             "role": role.model_dump(mode="json"),
         }
     )
-    assert res.agent == organization
-    assert res.role == role
+    assert res.agent.model_dump() == organization.model_dump()
+    assert res.role.model_dump() == role.model_dump()
