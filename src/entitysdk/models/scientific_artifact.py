@@ -15,7 +15,7 @@ class ScientificArtifact(Entity):
     experiment_date: datetime | None = None
     contact_email: str | None = None
     atlas_id: ID | None = None
-    subject: Subject
-    brain_region: BrainRegion
+    subject: Subject | None = None
+    brain_region: BrainRegion | None = None
     license: License | None = None
     published_in: str | None = None
