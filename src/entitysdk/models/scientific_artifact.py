@@ -6,7 +6,6 @@ from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.entity import Entity
 from entitysdk.models.license import License
 from entitysdk.models.subject import Subject
-from entitysdk.types import ID
 
 
 class ScientificArtifact(Entity):
@@ -14,7 +13,6 @@ class ScientificArtifact(Entity):
 
     experiment_date: datetime | None = None
     contact_email: str | None = None
-    atlas_id: ID | None = None
     subject: Subject | None = None
     brain_region: BrainRegion | None = None
     license: License | None = None
