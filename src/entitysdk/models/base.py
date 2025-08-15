@@ -1,9 +1,14 @@
 """Base model."""
 
-from typing import Self
+import sys
 
 from pydantic import BaseModel as PydanticBaseModel
 from pydantic import ConfigDict
+
+if sys.version_info < (3, 11):  # pragma: no cover
+    from typing_extensions import Self
+else:
+    from typing import Self
 
 
 class BaseModel(PydanticBaseModel):

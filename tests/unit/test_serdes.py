@@ -1,5 +1,5 @@
 import uuid
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 
 import pytest
 
@@ -9,6 +9,8 @@ from entitysdk.models.core import Identifiable, Struct
 from entitysdk.models.entity import Entity
 
 from .util import MOCK_UUID
+
+UTC = timezone.utc
 
 
 class E1(Struct):
