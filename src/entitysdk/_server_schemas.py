@@ -8,14 +8,11 @@ else:
     from enum import StrEnum
 
 
-from __future__ import annotations
-
 from enum import Enum
-from pathlib import Path
-from typing import Annotated, Any
 from uuid import UUID
-
-from pydantic import UUID4, AnyUrl, AwareDatetime, BaseModel, Field, RootModel
+from typing import Annotated, Any
+from pydantic import AnyUrl, AwareDatetime, BaseModel, Field, RootModel, UUID4
+from pathlib import Path
 
 
 class ActivityType(StrEnum):
