@@ -1,13 +1,18 @@
 """Common stuff."""
 
 import re
-from typing import Self
+import sys
 from uuid import UUID
 
 from pydantic import BaseModel
 
 from entitysdk.exception import EntitySDKError
 from entitysdk.types import DeploymentEnvironment
+
+if sys.version_info < (3, 11):  # pragma: no cover
+    from typing_extensions import Self
+else:
+    from typing import Self
 
 UUID_RE = "[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}"
 

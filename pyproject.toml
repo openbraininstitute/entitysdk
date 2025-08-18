@@ -9,6 +9,7 @@ dependencies = [
     "pydantic",
     "pydantic-settings",
     "typing_extensions; python_version < '3.12'",
+    "backports.strenum; python_version < '3.11'",
 ]
 authors = [
     {name = "Open Brain Institute", email = "info@openbraininstitute.org"}
@@ -18,9 +19,10 @@ maintainers = [
 ]
 description = "Python library for interacting with the entitycore service"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 license = {text = "Apache-2.0"}
 classifiers = [
+    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
@@ -46,7 +48,7 @@ addopts = [
 
 [tool.ruff]
 line-length = 100
-target-version = "py311"
+target-version = "py310"
 include = ["pyproject.toml", "src/**/*.py", "tests/**/*.py", "examples/**/*.py"]
 
 [tool.ruff.lint]

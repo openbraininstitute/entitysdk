@@ -1,8 +1,13 @@
 """Types definitions."""
 
 import os
+import sys
 import uuid
-from enum import StrEnum
+
+if sys.version_info < (3, 11):  # pragma: no cover
+    from backports.strenum import StrEnum
+else:
+    from enum import StrEnum
 
 from entitysdk._server_schemas import ActivityType as ActivityType
 from entitysdk._server_schemas import AgePeriod as AgePeriod
