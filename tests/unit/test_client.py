@@ -219,6 +219,32 @@ def test_client_download_content(client, httpx_mock, api_url, request_headers):
     assert res == b"foo"
 
 
+def test_client_download_content__asset_path(
+    client,
+    httpx_mock,
+    api_url,
+    request_headers,
+):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+
+    # for downloading the asset
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download?asset_path=foo.txt",
+        match_headers=request_headers,
+        content=b"foo",
+    )
+
+    res = client.download_content(
+        entity_id=entity_id,
+        entity_type=Entity,
+        asset_id=asset_id,
+        asset_path="foo.txt",
+    )
+    assert res == b"foo"
+
+
 def test_client_download_file__output_file(
     tmp_path,
     client,

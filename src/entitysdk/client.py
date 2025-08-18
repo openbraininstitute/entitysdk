@@ -454,6 +454,7 @@ class Client:
         entity_id: ID,
         entity_type: type[Identifiable],
         asset_id: ID,
+        asset_path: os.PathLike | None = None,
         project_context: ProjectContext | None = None,
     ) -> bytes:
         """Download asset content.
@@ -462,6 +463,7 @@ class Client:
             entity_id: Id of the entity.
             entity_type: Type of the entity.
             asset_id: Id of the asset.
+            asset_path: for asset directories, the path within the directory to the file.
             project_context: Optional project context.
 
         Returns:
@@ -480,6 +482,7 @@ class Client:
         return core.download_asset_content(
             url=url,
             project_context=context,
+            asset_path=asset_path,
             http_client=self._http_client,
             token=self._token_manager.get_token(),
         )
@@ -501,7 +504,7 @@ class Client:
             entity_type: Type of the entity.
             asset_id: Id of the asset.
             output_path: Either be a file path to write the file to or an output directory.
-            asset_path: for asset directories, the path within the directory to the file
+            asset_path: for asset directories, the path within the directory to the file.
             project_context: Optional project context.
 
         Returns:
