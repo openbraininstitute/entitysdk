@@ -21,31 +21,8 @@
       "size": 561221,
       "sha256_digest": "8b850eface3e7b881db62c361dc5da62be008ca81501c406a59646bf7075c95b",
       "status": "created",
-      "meta": {
-        "legacy": {
-          "@id": "https://bbp.epfl.ch/data/public/morphologies/42315b31-081f-4d40-8b94-b72dbd16c99e",
-          "name": "mpg150211_A_idA.swc",
-          "@type": "DataDownload",
-          "digest": {
-            "value": "8b850eface3e7b881db62c361dc5da62be008ca81501c406a59646bf7075c95b",
-            "algorithm": "SHA-256"
-          },
-          "atLocation": {
-            "@type": "Location",
-            "store": {
-              "@id": "nxv:diskStorageDefault",
-              "_rev": 1,
-              "@type": "DiskStorage"
-            }
-          },
-          "contentUrl": "https://bbp.epfl.ch/nexus/v1/files/public/morphologies/https:%2F%2Fbbp.epfl.ch%2Fdata%2Fpublic%2Fmorphologies%2F42315b31-081f-4d40-8b94-b72dbd16c99e",
-          "contentSize": {
-            "value": 561221,
-            "unitCode": "bytes"
-          },
-          "encodingFormat": "application/swc"
-        }
-      }
+      "storage_type": "aws_s3_internal",
+      "meta": {}
     },
     {
       "label": "morphology",
@@ -60,31 +37,8 @@
       "size": 525332,
       "sha256_digest": "bf00878444539ead825f2d451cdf6f87072526f9a82c87de35fca5563ae5596b",
       "status": "created",
-      "meta": {
-        "legacy": {
-          "@id": "https://bbp.epfl.ch/data/public/morphologies/7f422a37-48f0-4ea4-8760-f1481403d51f",
-          "name": "mpg150211_A_idA.ASC",
-          "@type": "DataDownload",
-          "digest": {
-            "value": "bf00878444539ead825f2d451cdf6f87072526f9a82c87de35fca5563ae5596b",
-            "algorithm": "SHA-256"
-          },
-          "atLocation": {
-            "@type": "Location",
-            "store": {
-              "@id": "nxv:diskStorageDefault",
-              "_rev": 1,
-              "@type": "DiskStorage"
-            }
-          },
-          "contentUrl": "https://bbp.epfl.ch/nexus/v1/files/public/morphologies/https:%2F%2Fbbp.epfl.ch%2Fdata%2Fpublic%2Fmorphologies%2F7f422a37-48f0-4ea4-8760-f1481403d51f",
-          "contentSize": {
-            "value": 525332,
-            "unitCode": "bytes"
-          },
-          "encodingFormat": "application/asc"
-        }
-      }
+      "storage_type": "aws_s3_internal",
+      "meta": {}
     }
   ],
   "name": "mpg150211_A_idA",

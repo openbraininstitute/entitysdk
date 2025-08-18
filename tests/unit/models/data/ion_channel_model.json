@@ -79,36 +79,19 @@
   },
   "assets": [
     {
-      "label": "neuron_mechanisms",
       "id": "a90bab5c-8529-4829-99fc-e90a270e8b30",
       "path": "Ca_HVA.mod",
       "full_path": "public/a98b7abc-fc46-4700-9e3d-37137812c730/0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6/assets/ion_channel_model/9720aa4a-0cd1-4f10-b6ad-04deb8f997b6/Ca_HVA.mod",
       "is_directory": false,
       "content_type": "application/mod",
       "label": "neuron_mechanisms",
+      "storage_type": "aws_s3_internal",
       "size": 561221,
       "sha256_digest": "8b850eface3e7b881db62c361dc5da62be008ca81501c406a59646bf7075c95b",
       "status": "created",
       "creation_date": null,
       "update_date": null,
-      "meta": {
-        "legacy": {
-          "@id": "https://bbp.epfl.ch/data/public/morphologies/42315b31-081f-4d40-8b94-b72dbd16c99e",
-          "name": "Ca_HVA.mod",
-          "@type": "DataDownload",
-          "digest": {
-            "value": "8b850eface3e7b881db62c361dc5da62be008ca81501c406a59646bf7075c95b",
-            "algorithm": "SHA-256"
-          },
-          "atLocation": {
-            "@type": "Location",
-            "store": {"@id": "nxv:diskStorageDefault", "_rev": 1, "@type": "DiskStorage"}
-          },
-          "contentUrl": "https://bbp.epfl.ch/nexus/v1/files/public/morphologies/https:%2F%2Fbbp.epfl.ch%2Fdata%2Fpublic%2Fmorphologies%2F42315b31-081f-4d40-8b94-b72dbd16c99e",
-          "contentSize": {"value": 561221, "unitCode": "bytes"},
-          "encodingFormat": "application/mod"
-        }
-      }
+      "meta": {}
     }
   ]
 }
