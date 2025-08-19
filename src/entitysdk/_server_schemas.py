@@ -18,6 +18,8 @@ from pathlib import Path
 class ActivityType(StrEnum):
     simulation_execution = "simulation_execution"
     simulation_generation = "simulation_generation"
+    validation = "validation"
+    calibration = "calibration"
 
 
 class AgePeriod(StrEnum):
@@ -117,6 +119,21 @@ class BrainRegionRead(BaseModel):
     color_hex_triplet: Annotated[str, Field(title="Color Hex Triplet")]
     parent_structure_id: Annotated[UUID | None, Field(title="Parent Structure Id")] = None
     hierarchy_id: Annotated[UUID, Field(title="Hierarchy Id")]
+
+
+class CalibrationCreate(BaseModel):
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
+    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
+    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
+
+
+class CalibrationUpdate(BaseModel):
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
+    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = None
 
 
 class CircuitBuildCategory(StrEnum):
@@ -514,7 +531,6 @@ class NestedScientificArtifactRead(BaseModel):
     experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
     contact_email: Annotated[str | None, Field(title="Contact Email")] = None
     published_in: Annotated[str | None, Field(title="Published In")] = None
-    atlas_id: Annotated[UUID | None, Field(title="Atlas Id")] = None
 
 
 class NestedSimulationRead(BaseModel):
@@ -869,6 +885,29 @@ class UseIon(BaseModel):
     main_ion: Annotated[bool | None, Field(title="Main Ion")] = None
 
 
+class ValidationCreate(BaseModel):
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
+    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
+    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
+
+
+class ValidationRead(BaseModel):
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    id: Annotated[UUID, Field(title="Id")]
+    type: ActivityType | None = None
+    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
+    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    used: Annotated[list[NestedEntityRead], Field(title="Used")]
+    generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
+
+
 class ValidationResultCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     name: Annotated[str, Field(title="Name")]
@@ -895,6 +934,13 @@ class ValidationStatus(StrEnum):
     running = "running"
     done = "done"
     error = "error"
+
+
+class ValidationUpdate(BaseModel):
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
+    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = None
 
 
 class AgentRead(RootModel[NestedPersonRead | NestedOrganizationRead | NestedConsortiumRead]):
@@ -962,6 +1008,21 @@ class BrainRegionHierarchyRead(BaseModel):
     name: Annotated[str, Field(title="Name")]
 
 
+class CalibrationRead(BaseModel):
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    id: Annotated[UUID, Field(title="Id")]
+    type: ActivityType | None = None
+    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
+    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    used: Annotated[list[NestedEntityRead], Field(title="Used")]
+    generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
+
+
 class CircuitCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
@@ -970,7 +1031,6 @@ class CircuitCreate(BaseModel):
     experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
     contact_email: Annotated[str | None, Field(title="Contact Email")] = None
     published_in: Annotated[str | None, Field(title="Published In")] = None
-    atlas_id: Annotated[UUID | None, Field(title="Atlas Id")] = None
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     has_morphologies: Annotated[bool | None, Field(title="Has Morphologies")] = False
@@ -985,6 +1045,7 @@ class CircuitCreate(BaseModel):
     scale: CircuitScale
     build_category: CircuitBuildCategory
     root_circuit_id: Annotated[UUID | None, Field(title="Root Circuit Id")] = None
+    atlas_id: Annotated[UUID | None, Field(title="Atlas Id")] = None
 
 
 class ConsortiumRead(BaseModel):
@@ -1040,7 +1101,6 @@ class ElectricalCellRecordingCreate(BaseModel):
     experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
     contact_email: Annotated[str | None, Field(title="Contact Email")] = None
     published_in: Annotated[str | None, Field(title="Published In")] = None
-    atlas_id: Annotated[UUID | None, Field(title="Atlas Id")] = None
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     ljp: Annotated[
@@ -1176,6 +1236,12 @@ class ListResponseBrainRegionRead(BaseModel):
     facets: Facets | None = None
 
 
+class ListResponseCalibrationRead(BaseModel):
+    data: Annotated[list[CalibrationRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
 class ListResponseConsortiumRead(BaseModel):
     data: Annotated[list[ConsortiumRead], Field(title="Data")]
     pagination: PaginationResponse
@@ -1250,6 +1316,12 @@ class ListResponseStrainRead(BaseModel):
 
 class ListResponseSubjectRead(BaseModel):
     data: Annotated[list[SubjectRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
+class ListResponseValidationRead(BaseModel):
+    data: Annotated[list[ValidationRead], Field(title="Data")]
     pagination: PaginationResponse
     facets: Facets | None = None
 
@@ -1576,7 +1648,6 @@ class CircuitRead(BaseModel):
     experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
     contact_email: Annotated[str | None, Field(title="Contact Email")] = None
     published_in: Annotated[str | None, Field(title="Published In")] = None
-    atlas_id: Annotated[UUID | None, Field(title="Atlas Id")] = None
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     has_morphologies: Annotated[bool | None, Field(title="Has Morphologies")] = False
@@ -1591,6 +1662,7 @@ class CircuitRead(BaseModel):
     scale: CircuitScale
     build_category: CircuitBuildCategory
     root_circuit_id: Annotated[UUID | None, Field(title="Root Circuit Id")] = None
+    atlas_id: Annotated[UUID | None, Field(title="Atlas Id")] = None
 
 
 class EModelRead(BaseModel):
@@ -1638,7 +1710,6 @@ class ElectricalCellRecordingRead(BaseModel):
     experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
     contact_email: Annotated[str | None, Field(title="Contact Email")] = None
     published_in: Annotated[str | None, Field(title="Published In")] = None
-    atlas_id: Annotated[UUID | None, Field(title="Atlas Id")] = None
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     ljp: Annotated[
