@@ -21,6 +21,7 @@ def _mock_morph_asset_response(asset_id):
         "status": "created",
         "meta": {},
         "sha256_digest": "sha256_digest",
+        "storage_type": "aws_s3_internal",
     }
 
 
@@ -37,6 +38,7 @@ def _mock_ic_asset_response(asset_id):
         "status": "created",
         "meta": {},
         "sha256_digest": "sha256_digest",
+        "storage_type": "aws_s3_internal",
     }
 
 
@@ -53,6 +55,7 @@ def _mock_emodel_asset_response(asset_id):
         "status": "created",
         "meta": {},
         "sha256_digest": "sha256_digest",
+        "storage_type": "aws_s3_internal",
     }
 
 
