@@ -21,7 +21,6 @@
       "size": 561221,
       "sha256_digest": "8b850eface3e7b881db62c361dc5da62be008ca81501c406a59646bf7075c95b",
       "status": "created",
-      "storage_type": "aws_s3_internal",
       "meta": {}
     },
     {
@@ -37,7 +36,6 @@
       "size": 525332,
       "sha256_digest": "bf00878444539ead825f2d451cdf6f87072526f9a82c87de35fca5563ae5596b",
       "status": "created",
-      "storage_type": "aws_s3_internal",
       "meta": {}
     }
   ],

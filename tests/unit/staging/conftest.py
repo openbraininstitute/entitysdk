@@ -13,7 +13,6 @@ from entitysdk.models import (
     Species,
     Subject,
 )
-from entitysdk.types import StorageType
 
 DATA_DIR = Path(__file__).parent / "data"
 
@@ -66,7 +65,6 @@ def circuit(subject, brain_region):
                 path="circuit",
                 full_path="/circuit",
                 is_directory=True,
-                storage_type=StorageType.aws_s3_internal,
             )
         ],
     )
@@ -145,7 +143,6 @@ def simulation(circuit):
                 full_path="/foo.json",
                 size=0,
                 is_directory=False,
-                storage_type=StorageType.aws_s3_internal,
             ),
             Asset(
                 id=uuid.uuid4(),
@@ -155,7 +152,6 @@ def simulation(circuit):
                 full_path="/bar.json",
                 size=0,
                 is_directory=False,
-                storage_type=StorageType.aws_s3_internal,
             ),
             Asset(
                 id=uuid.uuid4(),
@@ -165,7 +161,6 @@ def simulation(circuit):
                 full_path="/PoissonInputStimulus_spikes_1.h5",
                 size=0,
                 is_directory=False,
-                storage_type=StorageType.aws_s3_internal,
             ),
             Asset(
                 id=uuid.uuid4(),
@@ -175,7 +170,6 @@ def simulation(circuit):
                 full_path="/PoissonInputStimulus_spikes_2.h5",
                 size=0,
                 is_directory=False,
-                storage_type=StorageType.aws_s3_internal,
             ),
         ],
     )
@@ -238,7 +232,6 @@ def simulation_result(simulation):
                 full_path="/soma_voltage1.h5",
                 size=0,
                 is_directory=False,
-                storage_type=StorageType.aws_s3_internal,
             ),
             Asset(
                 id=uuid.uuid4(),
@@ -248,7 +241,6 @@ def simulation_result(simulation):
                 full_path="/soma_voltage2.h5",
                 size=0,
                 is_directory=False,
-                storage_type=StorageType.aws_s3_internal,
             ),
             Asset(
                 id=uuid.uuid4(),
@@ -258,7 +250,6 @@ def simulation_result(simulation):
                 full_path="/out.h5",
                 size=0,
                 is_directory=False,
-                storage_type=StorageType.aws_s3_internal,
             ),
         ],
     )

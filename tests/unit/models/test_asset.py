@@ -9,7 +9,6 @@ def test_asset():
         id=MOCK_UUID,
         path="path/to/asset",
         full_path="full/path/to/asset",
-        storage_type=StorageType.aws_s3_internal,
         label=AssetLabel.sonata_circuit,
         is_directory=False,
         content_type=ContentType.text_plain,
@@ -29,7 +28,6 @@ def test_asset():
         "sha256_digest": None,
         "meta": {},
         "label": AssetLabel.sonata_circuit,
-        "storage_type": StorageType.aws_s3_internal,
     }
 
 

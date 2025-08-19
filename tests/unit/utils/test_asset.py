@@ -4,7 +4,7 @@ import pytest
 
 from entitysdk.exception import EntitySDKError
 from entitysdk.models import Asset
-from entitysdk.types import AssetLabel, ContentType, StorageType
+from entitysdk.types import AssetLabel, ContentType
 from entitysdk.utils import asset as test_module
 
 
@@ -15,7 +15,6 @@ def assets():
             id=uuid.uuid4(),
             path="foo/asset1",
             full_path="/foo/asset1",
-            storage_type=StorageType.aws_s3_internal,
             is_directory=False,
             content_type=ContentType.application_json,
             size=1,
@@ -25,7 +24,6 @@ def assets():
             id=uuid.uuid4(),
             path="foo/asset2",
             full_path="/foo/asset2",
-            storage_type=StorageType.aws_s3_internal,
             is_directory=False,
             content_type=ContentType.text_plain,
             size=1,
@@ -35,7 +33,6 @@ def assets():
             id=uuid.uuid4(),
             path="foo/asset3",
             full_path="/foo/asset3",
-            storage_type=StorageType.aws_s3_internal,
             is_directory=False,
             content_type=ContentType.text_plain,
             size=1,

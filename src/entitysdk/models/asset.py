@@ -28,13 +28,6 @@ class Asset(Identifiable):
             description="The full s3 path of the asset.",
         ),
     ]
-    storage_type: Annotated[
-        StorageType,
-        Field(
-            examples=["aws_s3_open"],
-            description="Storage where the asset is located.",
-        ),
-    ]
     is_directory: Annotated[
         bool,
         Field(
