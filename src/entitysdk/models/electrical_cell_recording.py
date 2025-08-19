@@ -4,12 +4,11 @@ from typing import Annotated
 
 from pydantic import Field
 
-from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.entity import Entity
 from entitysdk.models.etype import ETypeClass
-from entitysdk.models.license import License
-from entitysdk.models.subject import Subject
+from entitysdk.models.scientific_artifact import ScientificArtifact
 from entitysdk.types import (
+    ID,
     ElectricalRecordingOrigin,
     ElectricalRecordingStimulusShape,
     ElectricalRecordingStimulusType,
@@ -25,9 +24,10 @@ class ElectricalRecordingStimulus(Entity):
     shape: ElectricalRecordingStimulusShape
     start_time: float | None = None
     end_time: float | None = None
+    recording_id: ID | None = None
 
 
-class ElectricalCellRecording(Entity):
+class ElectricalCellRecording(ScientificArtifact):
     """Electrical cell recording model."""
 
     ljp: Annotated[
@@ -61,6 +61,14 @@ class ElectricalCellRecording(Entity):
             description="Recording origin.",
         ),
     ]
+    temperature: Annotated[
+        float | None,
+        Field(
+            title="Temperature",
+            description="Temperature at which the recording was performed, in degrees Celsius.",
+            examples=[36.5],
+        ),
+    ] = None
     comment: Annotated[
         str | None,
         Field(
@@ -68,27 +76,11 @@ class ElectricalCellRecording(Entity):
             description="Comment with further details.",
         ),
     ] = None
-    brain_region: Annotated[
-        BrainRegion,
-        Field(
-            description="The region of the brain where the morphology is located.",
-        ),
-    ]
-    subject: Annotated[
-        Subject,
-        Field(title="Subject", description="The subject of the electrical cell recording."),
-    ]
     stimuli: Annotated[
         list[ElectricalRecordingStimulus] | None,
         Field(
             title="Electrical Recording Stimuli",
             description="List of stimuli applied to the cell with their respective time steps",
-        ),
-    ] = None
-    license: Annotated[
-        License | None,
-        Field(
-            description="The license attached to the morphology.",
         ),
     ] = None
     etypes: Annotated[

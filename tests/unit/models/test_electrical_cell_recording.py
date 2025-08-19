@@ -28,13 +28,12 @@ def test_read(client, httpx_mock, auth_token, json_data):
         entity_id=MOCK_UUID,
         entity_type=Model,
     )
-    assert entity.model_dump(mode="json", exclude_none=True) == json_data
+    assert entity.model_dump(mode="json", exclude_unset=True) == json_data
 
 
 def test_register(client, httpx_mock, auth_token, model, json_data):
-    httpx_mock.add_response(
-        method="POST", json=model.model_dump(mode="json") | {"id": str(MOCK_UUID)}
-    )
+    post_json = model.model_dump(mode="json", exclude_unset=True) | {"id": str(MOCK_UUID)}
+    httpx_mock.add_response(method="POST", json=post_json)
     registered = client.register_entity(entity=model)
     expected_json = json_data | {"id": str(MOCK_UUID)}
-    assert registered.model_dump(mode="json", exclude_none=True) == expected_json
+    assert registered.model_dump(mode="json", exclude_unset=True) == expected_json
