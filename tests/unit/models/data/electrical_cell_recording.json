@@ -44,6 +44,7 @@
       "content_type": "application/nwb",
       "meta": {},
       "label": "nwb",
+      "storage_type": "aws_s3_internal",
       "id": "898ef0f4-d36f-4426-8af7-145cdb202004",
       "status": "created"
     }
