@@ -6,8 +6,8 @@ from pydantic import Field
 
 from entitysdk.models.base import BaseModel
 from entitysdk.models.contribution import Contribution
-from entitysdk.models.entity import Entity
 from entitysdk.models.morphology import BrainRegion, License, Species, Strain
+from entitysdk.models.scientific_artifact import ScientificArtifact
 
 
 class UseIon(BaseModel):
@@ -82,7 +82,7 @@ class NeuronBlock(BaseModel):
     ] = None
 
 
-class IonChannelModel(Entity):
+class IonChannelModel(ScientificArtifact):
     """Ion channel mechanism model."""
 
     name: Annotated[
@@ -107,22 +107,6 @@ class IonChannelModel(Entity):
             examples="High-voltage activated calcium channel",
         ),
     ]
-    species: Annotated[
-        Species,
-        Field(description="The species for which the mechanism applies."),
-    ]
-    strain: Annotated[
-        Strain | None,
-        Field(description="The specific strain of the species, if applicable."),
-    ] = None
-    brain_region: Annotated[
-        BrainRegion,
-        Field(description="The brain region where the mechanism is used or applies."),
-    ]
-    license: Annotated[
-        License | None,
-        Field(description="License under which the mechanism is distributed."),
-    ] = None
     contributions: Annotated[
         list[Contribution] | None,
         Field(description="List of contributions related to this mechanism."),
