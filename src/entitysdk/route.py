@@ -16,6 +16,7 @@ _ROUTES = {
     "Contribution": "contribution",
     "Derivation": "derivation",
     "ElectricalCellRecording": "electrical-cell-recording",
+    "ElectricalRecordingStimulus": "electrical-recording-stimulus",
     "EModel": "emodel",
     "Entity": "entity",
     "ETypeClassification": "etype-classification",
