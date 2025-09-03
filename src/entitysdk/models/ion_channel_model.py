@@ -6,7 +6,6 @@ from pydantic import Field
 
 from entitysdk.models.base import BaseModel
 from entitysdk.models.contribution import Contribution
-from entitysdk.models.morphology import BrainRegion, License, Species, Strain
 from entitysdk.models.scientific_artifact import ScientificArtifact
 
 
