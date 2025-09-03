@@ -9,7 +9,10 @@ from entitysdk.models.circuit import Circuit
 from entitysdk.models.classification import ETypeClassification, MTypeClassification
 from entitysdk.models.contribution import Contribution, Role
 from entitysdk.models.derivation import Derivation
-from entitysdk.models.electrical_cell_recording import ElectricalCellRecording
+from entitysdk.models.electrical_cell_recording import (
+    ElectricalCellRecording,
+    ElectricalRecordingStimulus,
+)
 from entitysdk.models.emodel import EModel
 from entitysdk.models.ion_channel_model import IonChannelModel, NeuronBlock, UseIon
 from entitysdk.models.license import License
@@ -41,6 +44,7 @@ __all__ = [
     "Contribution",
     "Derivation",
     "ElectricalCellRecording",
+    "ElectricalRecordingStimulus",
     "EModel",
     "ETypeClassification",
     "IonChannelModel",
