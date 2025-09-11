@@ -276,6 +276,7 @@ class EntityRoute(StrEnum):
     experimental_bouton_density = "experimental-bouton-density"
     experimental_neuron_density = "experimental-neuron-density"
     experimental_synapses_per_connection = "experimental-synapses-per-connection"
+    external_url = "external-url"
     ion_channel_model = "ion-channel-model"
     memodel = "memodel"
     mesh = "mesh"
@@ -308,6 +309,7 @@ class EntityType(StrEnum):
     experimental_bouton_density = "experimental_bouton_density"
     experimental_neuron_density = "experimental_neuron_density"
     experimental_synapses_per_connection = "experimental_synapses_per_connection"
+    external_url = "external_url"
     ion_channel_model = "ion_channel_model"
     memodel = "memodel"
     mesh = "mesh"
@@ -386,6 +388,19 @@ class ExperimentalSynapsesPerConnectionCreate(BaseModel):
     post_mtype_id: Annotated[UUID, Field(title="Post Mtype Id")]
     pre_region_id: Annotated[UUID, Field(title="Pre Region Id")]
     post_region_id: Annotated[UUID, Field(title="Post Region Id")]
+
+
+class ExternalSource(StrEnum):
+    channelpedia = "channelpedia"
+    modeldb = "modeldb"
+    icgenealogy = "icgenealogy"
+
+
+class ExternalUrlCreate(BaseModel):
+    source: ExternalSource
+    url: Annotated[AnyUrl, Field(title="Url")]
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
 
 
 class Facet(BaseModel):
@@ -496,6 +511,15 @@ class NestedEntityRead(BaseModel):
     type: Annotated[str, Field(title="Type")]
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
+
+
+class NestedExternalUrlRead(BaseModel):
+    id: Annotated[UUID, Field(title="Id")]
+    source: ExternalSource
+    url: Annotated[AnyUrl, Field(title="Url")]
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    source_name: Annotated[str, Field(title="Source Name")]
 
 
 class NestedOrganizationRead(BaseModel):
@@ -668,6 +692,19 @@ class RoleRead(BaseModel):
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     name: Annotated[str, Field(title="Name")]
     role_id: Annotated[str, Field(title="Role Id")]
+
+
+class ScientificArtifactExternalUrlLinkCreate(BaseModel):
+    external_url_id: Annotated[UUID, Field(title="External Url Id")]
+    scientific_artifact_id: Annotated[UUID, Field(title="Scientific Artifact Id")]
+
+
+class ScientificArtifactExternalUrlLinkRead(BaseModel):
+    id: Annotated[UUID, Field(title="Id")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    external_url: NestedExternalUrlRead
+    scientific_artifact: NestedScientificArtifactRead
 
 
 class ScientificArtifactPublicationLinkCreate(BaseModel):
@@ -910,19 +947,6 @@ class ValidationRead(BaseModel):
 
 class ValidationResultCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    name: Annotated[str, Field(title="Name")]
-    passed: Annotated[bool, Field(title="Passed")]
-    validated_entity_id: Annotated[UUID, Field(title="Validated Entity Id")]
-
-
-class ValidationResultRead(BaseModel):
-    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
-    id: Annotated[UUID, Field(title="Id")]
-    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
-    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     name: Annotated[str, Field(title="Name")]
     passed: Annotated[bool, Field(title="Passed")]
     validated_entity_id: Annotated[UUID, Field(title="Validated Entity Id")]
@@ -1194,6 +1218,19 @@ class ExemplarMorphology(BaseModel):
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
 
 
+class ExternalUrlRead(BaseModel):
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    id: Annotated[UUID, Field(title="Id")]
+    source: ExternalSource
+    url: Annotated[AnyUrl, Field(title="Url")]
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    source_name: Annotated[str, Field(title="Source Name")]
+
+
 class ListResponseAnnotation(BaseModel):
     data: Annotated[list[Annotation], Field(title="Data")]
     pagination: PaginationResponse
@@ -1260,6 +1297,12 @@ class ListResponseElectricalRecordingStimulusRead(BaseModel):
     facets: Facets | None = None
 
 
+class ListResponseExternalUrlRead(BaseModel):
+    data: Annotated[list[ExternalUrlRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
 class ListResponseLicenseRead(BaseModel):
     data: Annotated[list[LicenseRead], Field(title="Data")]
     pagination: PaginationResponse
@@ -1286,6 +1329,12 @@ class ListResponsePublicationRead(BaseModel):
 
 class ListResponseRoleRead(BaseModel):
     data: Annotated[list[RoleRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
+class ListResponseScientificArtifactExternalUrlLinkRead(BaseModel):
+    data: Annotated[list[ScientificArtifactExternalUrlLinkRead], Field(title="Data")]
     pagination: PaginationResponse
     facets: Facets | None = None
 
@@ -1322,12 +1371,6 @@ class ListResponseSubjectRead(BaseModel):
 
 class ListResponseValidationRead(BaseModel):
     data: Annotated[list[ValidationRead], Field(title="Data")]
-    pagination: PaginationResponse
-    facets: Facets | None = None
-
-
-class ListResponseValidationResultRead(BaseModel):
-    data: Annotated[list[ValidationResultRead], Field(title="Data")]
     pagination: PaginationResponse
     facets: Facets | None = None
 
@@ -1609,6 +1652,20 @@ class SingleNeuronSynaptomeSimulationRead(BaseModel):
     synaptome: NestedSynaptome
 
 
+class ValidationResultRead(BaseModel):
+    assets: Annotated[list[AssetRead], Field(title="Assets")]
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    id: Annotated[UUID, Field(title="Id")]
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    name: Annotated[str, Field(title="Name")]
+    passed: Annotated[bool, Field(title="Passed")]
+    validated_entity_id: Annotated[UUID, Field(title="Validated Entity Id")]
+
+
 class AssetAndPresignedURLS(BaseModel):
     asset: AssetRead
     files: Annotated[dict[str, AnyUrl], Field(title="Files")]
@@ -1833,6 +1890,12 @@ class ExperimentalSynapsesPerConnectionRead(BaseModel):
 
 class IonChannelModelCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    license_id: Annotated[UUID | None, Field(title="License Id")] = None
+    brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
+    subject_id: Annotated[UUID, Field(title="Subject Id")]
+    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
+    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
+    published_in: Annotated[str | None, Field(title="Published In")] = None
     description: Annotated[str, Field(title="Description")]
     name: Annotated[str, Field(title="Name")]
     nmodl_suffix: Annotated[str, Field(title="Nmodl Suffix")]
@@ -1843,24 +1906,27 @@ class IonChannelModelCreate(BaseModel):
     temperature_celsius: Annotated[int, Field(title="Temperature Celsius")]
     is_stochastic: Annotated[bool | None, Field(title="Is Stochastic")] = False
     neuron_block: NeuronBlock
-    species_id: Annotated[UUID, Field(title="Species Id")]
-    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
-    brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
 
 
 class IonChannelModelExpanded(BaseModel):
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")] = (
         None
     )
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
     assets: Annotated[list[AssetRead], Field(title="Assets")]
-    type: EntityType | None = None
-    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    id: Annotated[UUID, Field(title="Id")]
+    license: LicenseRead | None = None
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    brain_region: BrainRegionRead
+    subject: NestedSubjectRead
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    type: EntityType | None = None
+    id: Annotated[UUID, Field(title="Id")]
+    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
+    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
+    published_in: Annotated[str | None, Field(title="Published In")] = None
     description: Annotated[str, Field(title="Description")]
     name: Annotated[str, Field(title="Name")]
     nmodl_suffix: Annotated[str, Field(title="Nmodl Suffix")]
@@ -1871,18 +1937,20 @@ class IonChannelModelExpanded(BaseModel):
     temperature_celsius: Annotated[int, Field(title="Temperature Celsius")]
     is_stochastic: Annotated[bool | None, Field(title="Is Stochastic")] = False
     neuron_block: NeuronBlock
-    species: NestedSpeciesRead
-    strain: NestedStrainRead | None = None
-    brain_region: BrainRegionRead
 
 
 class IonChannelModelRead(BaseModel):
-    type: EntityType | None = None
-    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    id: Annotated[UUID, Field(title="Id")]
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    brain_region: BrainRegionRead
+    subject: NestedSubjectRead
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    type: EntityType | None = None
+    id: Annotated[UUID, Field(title="Id")]
+    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
+    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
+    published_in: Annotated[str | None, Field(title="Published In")] = None
     description: Annotated[str, Field(title="Description")]
     name: Annotated[str, Field(title="Name")]
     nmodl_suffix: Annotated[str, Field(title="Nmodl Suffix")]
@@ -1893,19 +1961,21 @@ class IonChannelModelRead(BaseModel):
     temperature_celsius: Annotated[int, Field(title="Temperature Celsius")]
     is_stochastic: Annotated[bool | None, Field(title="Is Stochastic")] = False
     neuron_block: NeuronBlock
-    species: NestedSpeciesRead
-    strain: NestedStrainRead | None = None
-    brain_region: BrainRegionRead
 
 
 class IonChannelModelWAssets(BaseModel):
     assets: Annotated[list[AssetRead], Field(title="Assets")]
-    type: EntityType | None = None
-    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    id: Annotated[UUID, Field(title="Id")]
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    brain_region: BrainRegionRead
+    subject: NestedSubjectRead
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    type: EntityType | None = None
+    id: Annotated[UUID, Field(title="Id")]
+    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
+    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
+    published_in: Annotated[str | None, Field(title="Published In")] = None
     description: Annotated[str, Field(title="Description")]
     name: Annotated[str, Field(title="Name")]
     nmodl_suffix: Annotated[str, Field(title="Nmodl Suffix")]
@@ -1916,9 +1986,6 @@ class IonChannelModelWAssets(BaseModel):
     temperature_celsius: Annotated[int, Field(title="Temperature Celsius")]
     is_stochastic: Annotated[bool | None, Field(title="Is Stochastic")] = False
     neuron_block: NeuronBlock
-    species: NestedSpeciesRead
-    strain: NestedStrainRead | None = None
-    brain_region: BrainRegionRead
 
 
 class ListResponseCellCompositionRead(BaseModel):
@@ -2013,6 +2080,12 @@ class ListResponseSingleNeuronSynaptomeRead(BaseModel):
 
 class ListResponseSingleNeuronSynaptomeSimulationRead(BaseModel):
     data: Annotated[list[SingleNeuronSynaptomeSimulationRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
+class ListResponseValidationResultRead(BaseModel):
+    data: Annotated[list[ValidationResultRead], Field(title="Data")]
     pagination: PaginationResponse
     facets: Facets | None = None
 

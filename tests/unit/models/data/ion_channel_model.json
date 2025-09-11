@@ -20,15 +20,38 @@
     "hierarchy_id": "e3e70682-c209-4cac-a29f-6fbed82c07cd",
     "color_hex_triplet": "1000"
   },
+  "contact_email": null,
+  "experiment_date": null,
+  "published_in": null,
   "description": "High-voltage activated calcium channel",
-  "species": {
-    "id": "0895fa61-fa6d-4674-9014-7300f9edf8da",
-    "update_date": "2025-03-29T16:48:36.175090Z",
-    "creation_date": "2025-03-29T16:48:36.175090Z",
-    "name": "Rattus norvegicus",
-    "taxonomy_id": "NCBITaxon:10116"
+  "subject": {
+    "id": "9fb86d35-6bda-4b8d-9eb3-2715c98fff3b",
+    "name": "Unknown",
+    "description": "",
+    "assets": [],
+    "authorized_project_id": null,
+    "authorized_public": false,
+    "contributions": null,
+    "created_by": null,
+    "creation_date": null,
+    "legacy_id": null,
+    "type": null,
+    "update_date": null,
+    "updated_by": null,
+    "sex": "unknown",
+    "weight": null,
+    "age_value": null,
+    "age_min": null,
+    "age_max": null,
+    "age_period": null,
+    "species": {
+      "id": "3b1c2a25-b4fb-468d-98d2-d2d431ac8b4a",
+      "name": "Rattus norvegicus",
+      "taxonomy_id": "NCBITaxon:10116",
+      "creation_date": null,
+      "update_date": null
+    }
   },
-  "strain": null,
   "license": null,
   "contributions": [
     {
