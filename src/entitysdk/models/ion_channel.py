@@ -30,17 +30,15 @@ class IonChannel(Identifiable):
         Field(
             title="Ion channel label",
             description="Unique label for the ion channel.",
-            example="K<SUB>v<\/SUB>1.1"
+            example="K<SUB>v</SUB>1.1",
         ),
     ]
     gene: Annotated[
         str,
         Field(
             title="Gene",
-            description=(
-                "The gene that encodes the ion channel, from the RGD database."
-            ),
-            example="Kcna1"
+            description=("The gene that encodes the ion channel, from the RGD database."),
+            example="Kcna1",
         ),
     ]
     synonyms: Annotated[

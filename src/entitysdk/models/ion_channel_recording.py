@@ -21,9 +21,7 @@ class IonChannelRecording(ElectricalRecording):
         str,
         Field(
             title="Cell line",
-            description=(
-                "Cell line used to host the ion channel."
-            ),
-            example="CHO"
+            description=("Cell line used to host the ion channel."),
+            example="CHO",
         ),
     ]
