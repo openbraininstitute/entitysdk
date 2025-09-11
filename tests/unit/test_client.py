@@ -117,25 +117,37 @@ def test_client_nupdate(mocked_route, client, httpx_mock):
     assert res.name == new_name
 
 
-def _mock_entity_response(entity_id):
-    return {
+def _mock_entity_response(entity_id, assets=None):
+    data = {
         "id": str(entity_id),
+        "name": "my-entity",
         "description": "my-entity",
     }
+    if assets:
+        data["assets"] = assets
+
+    return data
 
 
-def _mock_asset_response(asset_id):
+def _mock_asset_response(
+    *,
+    asset_id,
+    path: str = "path_to_asset",
+    content_type: str = "text/plain",
+    status: str = "created",
+    label: str = "morphology",
+):
     return {
         "id": str(asset_id),
-        "path": "path_to_asset",
+        "path": path,
         "full_path": "full/path_to_asset",
         "is_directory": False,
-        "content_type": "text/plain",
+        "content_type": content_type,
         "size": 100,
-        "status": "created",
+        "status": status,
         "meta": {},
         "sha256_digest": "sha256_digest",
-        "label": "morphology",
+        "label": label,
     }
 
 
@@ -155,7 +167,7 @@ def test_client_upload_file(
         match_headers=request_headers,
         match_files={"file": ("foo", b"foo", "application/swc")},
         match_data={"label": "morphology"},
-        json=_mock_asset_response(asset_id),
+        json=_mock_asset_response(asset_id=asset_id),
     )
 
     path = tmp_path / "foo.h5"
@@ -185,7 +197,7 @@ def test_client_upload_content(client, httpx_mock, api_url, request_headers):
         match_headers=request_headers,
         match_files={"file": ("foo.swc", buffer, "application/swc")},
         match_data={"label": "morphology"},
-        json=_mock_asset_response(asset_id),
+        json=_mock_asset_response(asset_id=asset_id),
     )
     res = client.upload_content(
         entity_id=entity_id,
@@ -259,7 +271,7 @@ def test_client_download_file__output_file(
         method="GET",
         url=f"{api_url}/entity/{entity_id}/assets/{asset_id}",
         match_headers=request_headers,
-        json=_mock_asset_response(asset_id) | {"path": "foo.h5"},
+        json=_mock_asset_response(asset_id=asset_id, path="foo.h5"),
     )
     httpx_mock.add_response(
         method="GET",
@@ -295,7 +307,7 @@ def test_client_download_file__output_file__inconsistent_ext(
         method="GET",
         url=f"{api_url}/entity/{entity_id}/assets/{asset_id}",
         match_headers=request_headers,
-        json=_mock_asset_response(asset_id) | {"path": "foo.swc"},
+        json=_mock_asset_response(asset_id=asset_id, path="foo.swc"),
     )
     output_path = tmp_path / "foo.h5"
 
@@ -326,7 +338,7 @@ def test_client_download_file__output_file__user_subdirectory_path(
         method="GET",
         url=f"{api_url}/entity/{entity_id}/assets/{asset_id}",
         match_headers=request_headers,
-        json=_mock_asset_response(asset_id) | {"path": "foo.h5"},
+        json=_mock_asset_response(asset_id=asset_id, path="foo.h5"),
     )
 
     httpx_mock.add_response(
@@ -361,7 +373,7 @@ def test_client_download_file__asset_path(
         method="GET",
         url=f"{api_url}/entity/{entity_id}/assets/{asset_id}",
         match_headers=request_headers,
-        json=_mock_asset_response(asset_id) | {"is_directory": True},
+        json=_mock_asset_response(asset_id=asset_id) | {"is_directory": True},
     )
 
     with pytest.raises(EntitySDKError, match="require an `asset_path`"):
@@ -377,7 +389,7 @@ def test_client_download_file__asset_path(
         method="GET",
         url=f"{api_url}/entity/{entity_id}/assets/{asset_id}",
         match_headers=request_headers,
-        json=_mock_asset_response(asset_id),
+        json=_mock_asset_response(asset_id=asset_id),
     )
 
     with pytest.raises(EntitySDKError, match="Cannot pass `asset_path`"):
@@ -407,7 +419,7 @@ def test_client_download_file__asset_subdirectory_paths(
         method="GET",
         url=f"{api_url}/entity/{entity_id}/assets/{asset1_id}",
         match_headers=request_headers,
-        json=_mock_asset_response(asset1_id) | {"path": "foo/bar/foo.h5"},
+        json=_mock_asset_response(asset_id=asset1_id) | {"path": "foo/bar/foo.h5"},
     )
     httpx_mock.add_response(
         method="GET",
@@ -419,7 +431,7 @@ def test_client_download_file__asset_subdirectory_paths(
         method="GET",
         url=f"{api_url}/entity/{entity_id}/assets/{asset2_id}",
         match_headers=request_headers,
-        json=_mock_asset_response(asset2_id) | {"path": "foo/bar/bar.swc"},
+        json=_mock_asset_response(asset_id=asset2_id) | {"path": "foo/bar/bar.swc"},
     )
     httpx_mock.add_response(
         method="GET",
@@ -464,14 +476,51 @@ def test_client_get(
         method="GET",
         url=f"{api_url}/entity/{entity_id}",
         match_headers=request_headers,
+        json=_mock_entity_response(
+            entity_id=str(entity_id),
+            assets=[
+                _mock_asset_response(asset_id=asset_id1),
+                _mock_asset_response(asset_id=asset_id2),
+            ],
+        ),
+    )
+
+    res = client.get_entity(
+        entity_id=str(entity_id),
+        entity_type=Entity,
+    )
+    assert res.id == entity_id
+    assert len(res.assets) == 2
+    assert res.assets[0].id == asset_id1
+    assert res.assets[1].id == asset_id2
+
+
+@patch("entitysdk.route.get_route_name")
+def test_client_admin_get(
+    mock_route,
+    client,
+    httpx_mock,
+    api_url,
+    request_headers_no_context,
+):
+    entity_id = uuid.uuid4()
+    asset_id1 = uuid.uuid4()
+    asset_id2 = uuid.uuid4()
+
+    mock_route.return_value = "entity"
+
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/admin/entity/{entity_id}",
+        match_headers=request_headers_no_context,
         json={
             "id": str(entity_id),
             "name": "foo",
             "description": "bar",
             "type": "circuit",
             "assets": [
-                _mock_asset_response(asset_id1),
-                _mock_asset_response(asset_id2),
+                _mock_asset_response(asset_id=asset_id1),
+                _mock_asset_response(asset_id=asset_id2),
             ],
         },
     )
@@ -479,6 +528,7 @@ def test_client_get(
     res = client.get_entity(
         entity_id=str(entity_id),
         entity_type=Entity,
+        admin=True,
     )
     assert res.id == entity_id
     assert len(res.assets) == 2
@@ -549,13 +599,13 @@ def test_client_update_asset(
         method="DELETE",
         url=f"{api_url}/cell-morphology/{entity_id}/assets/{asset_id}",
         match_headers=request_headers,
-        json=_mock_asset_response(asset_id),
+        json=_mock_asset_response(asset_id=asset_id),
     )
     httpx_mock.add_response(
         method="POST",
         url=f"{api_url}/cell-morphology/{entity_id}/assets",
         match_headers=request_headers,
-        json=_mock_asset_response(asset_id),
+        json=_mock_asset_response(asset_id=asset_id),
     )
 
     path = tmp_path / "file.txt"
@@ -585,22 +635,31 @@ def test_client_download_assets(
         method="GET",
         url=f"{api_url}/entity/{entity_id}",
         match_headers=request_headers,
-        json=_mock_entity_response(entity_id)
-        | {
-            "assets": [
-                _mock_asset_response(asset1_id)
-                | {"path": "foo/bar/bar.h5", "content_type": "application/x-hdf5"},
-                _mock_asset_response(asset2_id)
-                | {"path": "foo/bar/bar.swc", "content_type": "application/swc"},
-            ]
-        },
+        json=_mock_entity_response(
+            entity_id=entity_id,
+            assets=[
+                _mock_asset_response(
+                    asset_id=asset1_id,
+                    path="foo/bar/bar.h5",
+                    content_type="application/x-hdf5",
+                ),
+                _mock_asset_response(
+                    asset_id=asset2_id,
+                    path="foo/bar/bar.swc",
+                    content_type="application/swc",
+                ),
+            ],
+        ),
     )
     httpx_mock.add_response(
         method="GET",
         url=f"{api_url}/entity/{entity_id}/assets/{asset2_id}",
         match_headers=request_headers,
-        json=_mock_asset_response(asset2_id)
-        | {"path": "foo/bar/bar.swc", "content_type": "application/swc"},
+        json=_mock_asset_response(
+            asset_id=asset2_id,
+            path="foo/bar/bar.swc",
+            content_type="application/swc",
+        ),
     )
     httpx_mock.add_response(
         method="GET",
@@ -630,7 +689,7 @@ def test_client_download_assets__no_assets_raise(
         method="GET",
         url=f"{api_url}/entity/{entity_id}",
         match_headers=request_headers,
-        json=_mock_entity_response(entity_id) | {"assets": []},
+        json=_mock_entity_response(entity_id, assets=[]),
     )
 
     with pytest.raises(EntitySDKError, match="has no assets"):
@@ -674,7 +733,7 @@ def test_client_download_assets__directory_not_supported(
         url=f"{api_url}/entity/{entity_id}",
         match_headers=request_headers,
         json=_mock_entity_response(entity_id)
-        | {"assets": [_mock_asset_response(asset_id) | {"is_directory": True}]},
+        | {"assets": [_mock_asset_response(asset_id=asset_id) | {"is_directory": True}]},
     )
 
     with pytest.raises(
@@ -713,7 +772,7 @@ def test_client_download_assets__entity(
         method="GET",
         url=f"{api_url}/entity/{entity_id}/assets/{asset_id}",
         match_headers=request_headers,
-        json=_mock_asset_response(asset_id)
+        json=_mock_asset_response(asset_id=asset_id)
         | {"path": "foo.json", "content_type": "application/json"},
     )
     httpx_mock.add_response(
@@ -932,7 +991,7 @@ def test_client_download_directory_ignore_directory(
         method="GET",
         url=f"{api_url}/entity/{entity_id}/assets/{asset_id}",
         match_headers=request_headers,
-        json=_mock_asset_response(asset_id) | {"is_directory": True},
+        json=_mock_asset_response(asset_id=asset_id) | {"is_directory": True},
     )
 
     # for downloading the asset
@@ -984,7 +1043,7 @@ def test_client_download_directory(
         method="GET",
         url=f"{api_url}/entity/{entity_id}/assets/{asset_id}",
         match_headers=request_headers,
-        json=_mock_asset_response(asset_id) | {"is_directory": True},
+        json=_mock_asset_response(asset_id=asset_id) | {"is_directory": True},
     )
 
     # for downloading the asset
@@ -1092,7 +1151,7 @@ def test_client_register_asset(
         method="POST",
         url=f"{api_url}/cell-morphology/{entity_id}/assets/register",
         match_headers=request_headers,
-        json=_mock_asset_response(asset_id),
+        json=_mock_asset_response(asset_id=asset_id),
     )
 
     res = client.register_asset(
@@ -1167,3 +1226,83 @@ def test_client_get_entity_derivations(mock_route, client, httpx_mock, api_url, 
     assert len(res) == 2
     assert res[0].id == derivation_1
     assert res[1].id == derivation_2
+
+
+def _mock_list_response(list_data):
+    return {
+        "data": list_data,
+        "pagination": {"page": 1, "page_size": 10, "total_items": 2},
+    }
+
+
+@patch("entitysdk.route.get_route_name")
+def test_client_get_entity_assets(
+    mock_route, client, httpx_mock, api_url, request_headers, request_headers_no_context
+):
+    entity_id = uuid.uuid4()
+    entity_type = "circuit"
+    asset_id1 = uuid.uuid4()
+    asset_id2 = uuid.uuid4()
+
+    mock_route.return_value = entity_type
+
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/circuit/{entity_id}/assets",
+        match_headers=request_headers,
+        json=_mock_list_response(
+            [
+                _mock_asset_response(asset_id=asset_id1),
+                _mock_asset_response(asset_id=asset_id2),
+            ],
+        ),
+    )
+
+    assets = client.get_entity_assets(
+        entity_id=entity_id,
+        entity_type=Circuit,
+    ).all()
+    assert len(assets) == 2
+
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/admin/circuit/{entity_id}/assets",
+        match_headers=request_headers_no_context,
+        json=_mock_list_response(
+            [
+                _mock_asset_response(asset_id=asset_id1),
+            ],
+        ),
+    )
+
+    assets = client.get_entity_assets(
+        entity_id=entity_id,
+        entity_type=Circuit,
+        admin=True,
+    ).all()
+    assert len(assets) == 1
+
+
+@patch("entitysdk.route.get_route_name")
+def test_client_delete_entity(mock_route, clients, httpx_mock, api_url, request_headers_no_context):
+    mock_route.return_value = "entity"
+
+    entity_id = uuid.uuid4()
+
+    httpx_mock.add_response(
+        method="DELETE",
+        url=f"{api_url}/entity/{entity_id}",
+        match_headers=request_headers_no_context,
+        json={"id": str(entity_id)},
+    )
+
+    clients.wout_context.delete_entity(entity_id=entity_id, entity_type=Entity)
+
+    httpx_mock.add_response(
+        method="DELETE",
+        url=f"{api_url}/admin/entity/{entity_id}",
+        match_headers=request_headers_no_context,
+        json={"id": str(entity_id)},
+    )
+
+    clients.wout_context.delete_entity(entity_id=entity_id, entity_type=Entity, admin=True)

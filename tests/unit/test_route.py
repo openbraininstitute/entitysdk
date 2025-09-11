@@ -19,6 +19,12 @@ def test_get_entities_endpoint(api_url):
     res = test_module.get_entities_endpoint(api_url=api_url, entity_type=Entity)
     assert res == f"{api_url}/entity"
 
+    res = test_module.get_entities_endpoint(api_url=api_url, entity_type=Entity, admin=False)
+    assert res == f"{api_url}/entity"
+
+    res = test_module.get_entities_endpoint(api_url=api_url, entity_type=Entity, admin=True)
+    assert res == f"{api_url}/admin/entity"
+
 
 def test_get_entities_endpoint__with_entity_id(api_url):
     res = test_module.get_entities_endpoint(api_url=api_url, entity_type=Entity, entity_id="1")

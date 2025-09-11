@@ -32,6 +32,9 @@ from entitysdk._server_schemas import ElectricalRecordingType as ElectricalRecor
 from entitysdk._server_schemas import EMCellMeshGenerationMethod as EMCellMeshGenerationMethod
 from entitysdk._server_schemas import EMCellMeshType as EMCellMeshType
 from entitysdk._server_schemas import EntityType as EntityType
+from entitysdk._server_schemas import MeasurableEntity as MeasurableEntity
+from entitysdk._server_schemas import MeasurementStatistic as MeasurementStatistic
+from entitysdk._server_schemas import MeasurementUnit as MeasurementUnit
 from entitysdk._server_schemas import ModifiedMorphologyMethodType as ModifiedMorphologyMethodType
 from entitysdk._server_schemas import PublicationType as PublicationType
 from entitysdk._server_schemas import Sex as Sex
