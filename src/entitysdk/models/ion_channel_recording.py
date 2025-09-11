@@ -4,11 +4,11 @@ from typing import Annotated
 
 from pydantic import Field
 
-from entitysdk.models.electrical_cell_recording import ElectricalCellRecording
+from entitysdk.models.electrical_recording import ElectricalRecording
 from entitysdk.models.ion_channel import IonChannel
 
 
-class IonChannelRecording(ElectricalCellRecording):
+class IonChannelRecording(ElectricalRecording):
     """Ion channel recording model."""
 
     ion_channel: Annotated[
