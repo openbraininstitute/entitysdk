@@ -19,16 +19,16 @@
   "update_date": "2025-04-15T12:41:30.454420Z",
   "created_by": {
     "id": "83844b40-ffa9-49f1-9c14-bc4a829e07b0",
-    "given_name": "Tanguy",
-    "family_name": "Damart",
-    "pref_label": "Tanguy Damart",
+    "given_name": "John",
+    "family_name": "Doe",
+    "pref_label": "John Doe",
     "type": "person"
   },
   "updated_by": {
     "id": "59cc60b1-7604-44b4-a736-95c3e652c71a",
-    "given_name": "service-account-obp-singlecell-uploader-sa",
-    "family_name": "service-account-obp-singlecell-uploader-sa",
-    "pref_label": "service-account-obp-singlecell-uploader-sa service-account-obp-singlecell-uploader-sa",
+    "given_name": "service-account",
+    "family_name": "service-account",
+    "pref_label": "service-account",
     "type": "person"
   },
   "brain_region": {
@@ -65,7 +65,7 @@
   "experiment_date": null,
   "contact_email": null,
   "published_in": null,
-  "description": "Ca_HVA2 Channel. Reuveni, Friedman, Amitai, and Gutnick, J.Neurosci. 1993, activation from Sayer, Schwindt and Crill (1990) inactivation from Dichter and Zona 1989. LJP: OK, inactivation corrected by 12.3 mV",
+  "description": "Ca_HVA2 Channel.",
   "name": "Ca_HVA2",
   "nmodl_suffix": "Ca_HVA2",
   "is_ljp_corrected": true,
