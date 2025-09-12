@@ -17,6 +17,7 @@ def _mock_asset_response(asset_id):
         "status": "created",
         "meta": {},
         "sha256_digest": "sha256_digest",
+        "storage_type": "aws_s3_internal",
     }
 
 
