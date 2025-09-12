@@ -38,6 +38,7 @@ from entitysdk.util import (
 from entitysdk.utils.asset import filter_assets
 
 TEntity = TypeVar("TEntity", bound=Entity)
+TIdentifiable = TypeVar("TIdentifiable", bound=Identifiable)
 
 
 class Client:
@@ -109,9 +110,9 @@ class Client:
         self,
         entity_id: ID,
         *,
-        entity_type: type[TEntity],
+        entity_type: type[TIdentifiable],
         project_context: ProjectContext | None = None,
-    ) -> TEntity:
+    ) -> TIdentifiable:
         """Get entity from resource id.
 
         Args:
