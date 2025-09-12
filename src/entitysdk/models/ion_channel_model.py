@@ -16,35 +16,35 @@ class UseIon(BaseModel):
         str,
         Field(
             description="The name of the ion involved.",
-            examples="Ca",
+            examples=["Ca"],
         ),
     ]
     read: Annotated[
         list[str] | None,
         Field(
             description="Variables listed in the READ statement for this ion.",
-            examples=["eca", "ica"],
+            examples=[["eca", "ica"]],
         ),
     ]
     write: Annotated[
         list[str] | None,
         Field(
             description="Variables listed in the WRITE statement for this ion.",
-            examples=["ica"],
+            examples=[["ica"]],
         ),
     ]
     valence: Annotated[
         int | None,
         Field(
             description="VALENCE of the ion, if specified.",
-            examples=2,
+            examples=[2],
         ),
     ]
     main_ion: Annotated[
         bool | None,
         Field(
             description="Whether this ion is the main ion for the mechanism.",
-            examples=True,
+            examples=[True],
         ),
     ] = None
 
@@ -56,14 +56,15 @@ class NeuronBlock(BaseModel):
         list[dict[str, str | None]] | None,
         Field(
             description="Variables listed in the GLOBAL statement, with associated units.",
-            examples=[{"celsius": "degree C"}],
+            examples=[[{"celsius": "degree C"}]],
+            alias="global",
         ),
     ] = None
     range: Annotated[
         list[dict[str, str | None]] | None,
         Field(
             description="Variables listed in the RANGE statement, with associated units.",
-            examples=[{"gCa_HVAbar": "S/cm2"}, {"ica": "mA/cm2"}],
+            examples=[[{"gCa_HVAbar": "S/cm2"}, {"ica": "mA/cm2"}]],
         ),
     ] = None
     useion: Annotated[
@@ -76,7 +77,7 @@ class NeuronBlock(BaseModel):
         list[dict[str, str | None]] | None,
         Field(
             description="Variables listed in NONSPECIFIC_CURRENT statements.",
-            examples=[{"ihcn": "mA/cm2"}],
+            examples=[[{"ihcn": "mA/cm2"}]],
         ),
     ] = None
 
@@ -89,21 +90,21 @@ class IonChannelModel(ScientificArtifact):
         Field(
             description="The name of the ion channel model "
             "(e.g., the SUFFIX or POINT_PROCESS name).",
-            examples="Ca_HVA",
+            examples=["Ca_HVA"],
         ),
     ]
     nmodl_suffix: Annotated[
         str,
         Field(
             description="The SUFFIX of the ion channel model as defined in the NMODL file ",
-            examples="Ca_HVA",
+            examples=["Ca_HVA"],
         ),
     ]
     description: Annotated[
         str,
         Field(
             description="A description of the ion channel mechanism.",
-            examples="High-voltage activated calcium channel",
+            examples=["High-voltage activated calcium channel"],
         ),
     ]
     contributions: Annotated[
