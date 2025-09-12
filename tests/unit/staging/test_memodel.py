@@ -139,12 +139,28 @@ def test_create_json_configs(tmp_path):
         assert node_sets["All"]["node_id"] == [0]
 
 
-def test_missing_files_raise(tmp_path):
+def test_missing_hoc_file_raise(tmp_path):
     memodel_path = tmp_path / "memodel"
     memodel_path.mkdir()
     (memodel_path / "morphology").mkdir()
     (memodel_path / "mechanisms").mkdir()
     with pytest.raises(FileNotFoundError, match="No .hoc files found"):
+        memodel_mod.generate_sonata_files_from_memodel(
+            memodel_path=memodel_path,
+            output_path=tmp_path,
+            mtype="Test",
+            threshold_current=0.2,
+            holding_current=-0.1,
+        )
+
+
+def test_missing_morphology_file_raises(tmp_path):
+    memodel_path = tmp_path / "memodel"
+    memodel_path.mkdir()
+    (memodel_path / "hoc").mkdir()
+    (memodel_path / "mechanisms").mkdir()
+    (memodel_path / "hoc" / "cell.hoc").write_text("hoc content")
+    with pytest.raises(FileNotFoundError, match="No .asc morphology file found"):
         memodel_mod.generate_sonata_files_from_memodel(
             memodel_path=memodel_path,
             output_path=tmp_path,
