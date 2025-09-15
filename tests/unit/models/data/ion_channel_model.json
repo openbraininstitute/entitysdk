@@ -23,16 +23,6 @@
     "updated_by": null
   },
   "description": "High-voltage activated calcium channel",
-  "species": {
-    "id": "0895fa61-fa6d-4674-9014-7300f9edf8da",
-    "update_date": "2025-03-29T16:48:36.175090Z",
-    "creation_date": "2025-03-29T16:48:36.175090Z",
-    "name": "Rattus norvegicus",
-    "taxonomy_id": "NCBITaxon:10116",
-    "created_by": null,
-    "updated_by": null
-  },
-  "strain": null,
   "license": null,
   "contributions": [
     {
