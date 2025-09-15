@@ -26,7 +26,7 @@ def test_read_ion_channel_model(client, httpx_mock, auth_token, json_ion_channel
         entity_id=MOCK_UUID,
         entity_type=IonChannelModel,
     )
-    assert entity.model_dump(mode="json", exclude_unset=True) == json_ion_channel_expanded
+    assert entity.model_dump(mode="json", exclude_unset=True, exclude_none=True) == json_ion_channel_expanded
 
 
 def test_register_ion_channel_model(
@@ -35,7 +35,7 @@ def test_register_ion_channel_model(
     httpx_mock.add_response(method="POST", json=json_ion_channel_expanded | {"id": str(MOCK_UUID)})
     registered = client.register_entity(entity=ion_channel_model)
     expected_json = json_ion_channel_expanded | {"id": str(MOCK_UUID)}
-    assert registered.model_dump(mode="json", exclude_unset=True) == expected_json
+    assert registered.model_dump(mode="json", exclude_unset=True, exclude_none=True) == expected_json
 
 
 def test_update_ion_channel_model(
@@ -52,4 +52,4 @@ def test_update_ion_channel_model(
     )
 
     expected_json = json_ion_channel_expanded | {"name": "foo"}
-    assert updated.model_dump(mode="json", exclude_unset=True) == expected_json
+    assert updated.model_dump(mode="json", exclude_unset=True, exclude_none=True) == expected_json

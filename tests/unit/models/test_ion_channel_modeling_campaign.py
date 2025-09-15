@@ -26,7 +26,7 @@ def test_read_ion_channel_modeling_campaign(client, httpx_mock, auth_token, json
         entity_id=MOCK_UUID,
         entity_type=IonChannelModelingCampaign,
     )
-    assert entity.model_dump(mode="json") == json_data | {"legacy_id": None}
+    assert entity.model_dump(mode="json", exclude_none=True) == json_data
 
 
 def test_register_ion_channel_modeling_campaign(
@@ -38,4 +38,4 @@ def test_register_ion_channel_modeling_campaign(
     )
     registered = client.register_entity(entity=ion_channel_modeling_campaign)
     expected_json = json_data.copy() | {"id": str(MOCK_UUID)}
-    assert registered.model_dump(mode="json") == expected_json | {"legacy_id": None}
+    assert registered.model_dump(mode="json", exclude_none=True) == expected_json
