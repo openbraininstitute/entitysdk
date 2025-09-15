@@ -23,8 +23,7 @@ def download_mesh_file(
         client (Client): EntitySDK client
         em_cell_mesh (EMCellMesh): EM Cell Mesh entitysdk object
         output_dir (str or Path): directory to save the mesh file
-        file_type (str): type of the mesh file ('obj', h5)
-            Will take the first one if None.
+        file_type (str): type of the mesh file ('obj', 'h5')
 
     Returns:
         Path: Path to the downloaded file
