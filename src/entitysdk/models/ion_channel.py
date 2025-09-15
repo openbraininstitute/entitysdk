@@ -15,7 +15,7 @@ class IonChannel(Identifiable):
         Field(
             title="Ion channel name",
             description="Name of the ion channel.",
-            example="Kv1.1",
+            examples=["Kv1.1"],
         ),
     ]
     description: Annotated[
@@ -30,7 +30,7 @@ class IonChannel(Identifiable):
         Field(
             title="Ion channel label",
             description="Unique label for the ion channel.",
-            example="K<SUB>v</SUB>1.1",
+            examples=["K<SUB>v</SUB>1.1"],
         ),
     ]
     gene: Annotated[
@@ -38,7 +38,7 @@ class IonChannel(Identifiable):
         Field(
             title="Gene",
             description=("The gene that encodes the ion channel, from the RGD database."),
-            example="Kcna1",
+            examples=["Kcna1"],
         ),
     ]
     synonyms: Annotated[
@@ -46,6 +46,6 @@ class IonChannel(Identifiable):
         Field(
             title="Synonyms",
             description="Other names for the ion channel.",
-            example=["HBK1", "Kcn1", "MBK1", "RCK1", "AEMK", "HUK1", "Shak", "Kcna", "Kcpvd"],
+            examples=[["HBK1", "Kcn1", "MBK1", "RCK1", "AEMK", "HUK1", "Shak", "Kcna", "Kcpvd"]],
         ),
     ]
