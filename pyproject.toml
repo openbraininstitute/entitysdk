@@ -50,9 +50,6 @@ addopts = [
     "--durations=10",
     "--durations-min=1.0",
 ]
-filterwarnings = [
-    "error::pydantic.warnings.PydanticDeprecatedSince20"
-]
 
 [tool.ruff]
 line-length = 100
