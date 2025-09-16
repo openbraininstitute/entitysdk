@@ -1,0 +1,11 @@
+{
+
+  "creation_date": "2021-06-15T09:42:25.311000Z",
+  "update_date": "2024-01-11T07:56:56.842835Z",
+  "id": "98dece14-e154-4ff1-9c1d-34e1563cdd0a",
+  "label": "K<SUB>v<\/SUB>1.1",
+  "gene": "Kcna1",
+  "synonyms": ["HBK1", "Kcn1", "MBK1", "RCK1", "AEMK", "HUK1", "Shak", "Kcna", "Kcpvd"],
+  "name": "Kv1.1",
+  "description": ""
+}
