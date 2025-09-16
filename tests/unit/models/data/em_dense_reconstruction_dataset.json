@@ -1,0 +1,74 @@
+{
+  "id": "123e4567-e89b-12d3-a456-426614174007",
+  "name": "Test EM Dense Reconstruction Dataset",
+  "description": "A test EM dense reconstruction dataset for unit testing",
+  "type": "em_dense_reconstruction_dataset",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "update_date": "2025-01-01T00:00:00Z",
+  "created_by": {
+    "id": "123e4567-e89b-12d3-a456-426614174001",
+    "type": "person",
+    "pref_label": "Test User"
+  },
+  "updated_by": {
+    "id": "123e4567-e89b-12d3-a456-426614174001",
+    "type": "person",
+    "pref_label": "Test User"
+  },
+  "authorized_project_id": "123e4567-e89b-12d3-a456-426614174002",
+  "authorized_public": false,
+  "contributions": [],
+  "assets": [],
+  "license": {
+    "id": "123e4567-e89b-12d3-a456-426614174003",
+    "name": "Test License",
+    "description": "A test license",
+    "label": "test-license"
+  },
+  "brain_region": {
+    "creation_date": "2025-06-27T11:10:27.186088Z",
+    "update_date": "2025-06-27T11:10:27.186088Z",
+    "id": "4642cddb-4fbe-4aae-bbf7-0946d6ada066",
+    "annotation_value": 8,
+    "name": "Basic cell groups and regions",
+    "acronym": "grey",
+    "color_hex_triplet": "BFDAE3",
+    "parent_structure_id": "eb1167b3-67a9-4378-bc65-c1e582e2e662",
+    "hierarchy_id": "e3e70682-c209-4cac-a29f-6fbed82c07cd"
+  },
+  "subject": {
+    "id": "9edb44c6-33b5-403b-8ab6-0890cfb12d07",
+    "name": "Generic Mus musculus",
+    "description": "",
+    "sex": "unknown",
+    "species": {
+      "id": "b7ad4cca-4ac2-4095-9781-37fb68fe9ca1",
+      "name": "Mus musculus",
+      "taxonomy_id": "NCBITaxon:10090"
+    }
+  },
+  "experiment_date": "2025-01-01T00:00:00Z",
+  "contact_email": "test@example.com",
+  "published_in": "Test Journal",
+  "protocol_document": "https://example.com/protocol.pdf",
+  "fixation": "Glutaraldehyde",
+  "staining_type": "Osmium tetroxide",
+  "slicing_thickness": 50.0,
+  "tissue_shrinkage": 0.1,
+  "microscope_type": "FIB-SEM",
+  "detector": "Backscattered electron detector",
+  "slicing_direction": "coronal",
+  "landmarks": "Bregma, Lambda",
+  "voltage": 1.2,
+  "current": 0.5,
+  "dose": 1.0,
+  "temperature": 4.0,
+  "volume_resolution_x_nm": 8.0,
+  "volume_resolution_y_nm": 8.0,
+  "volume_resolution_z_nm": 8.0,
+  "release_url": "https://example.com/dataset",
+  "cave_client_url": "https://cave.example.com",
+  "cave_datastack": "test_datastack",
+  "precomputed_mesh_url": "https://example.com/meshes",
+  "cell_identifying_property": "cell_id"
+}

@@ -1,0 +1,73 @@
+{
+  "id": "123e4567-e89b-12d3-a456-426614174000",
+  "name": "Test EM Cell Mesh",
+  "description": "A test EM cell mesh for unit testing",
+  "type": "em_cell_mesh",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "update_date": "2025-01-01T00:00:00Z",
+  "created_by": {
+    "id": "83844b40-ffa9-49f1-9c14-bc4a829e07b0",
+    "given_name": "John",
+    "family_name": "Doe",
+    "pref_label": "John Doe",
+    "type": "person"
+  },
+  "updated_by": {
+    "id": "59cc60b1-7604-44b4-a736-95c3e652c71a",
+    "given_name": "service-account",
+    "family_name": "service-account",
+    "pref_label": "service-account",
+    "type": "person"
+  },
+  "authorized_project_id": "123e4567-e89b-12d3-a456-426614174002",
+  "authorized_public": false,
+  "contributions": [],
+  "assets": [],
+  "license": {
+    "id": "123e4567-e89b-12d3-a456-426614174003",
+    "name": "Test License",
+    "description": "A test license",
+    "label": "test-license"
+  },
+  "brain_region": {
+    "creation_date": "2025-06-27T11:10:27.186088Z",
+    "update_date": "2025-06-27T11:10:27.186088Z",
+    "id": "4642cddb-4fbe-4aae-bbf7-0946d6ada066",
+    "annotation_value": 8,
+    "name": "Basic cell groups and regions",
+    "acronym": "grey",
+    "color_hex_triplet": "BFDAE3",
+    "parent_structure_id": "eb1167b3-67a9-4378-bc65-c1e582e2e662",
+    "hierarchy_id": "e3e70682-c209-4cac-a29f-6fbed82c07cd"
+  },
+  "subject": {
+    "id": "9edb44c6-33b5-403b-8ab6-0890cfb12d07",
+    "name": "Generic Mus musculus",
+    "description": "",
+    "sex": "unknown",
+    "species": {
+      "id": "b7ad4cca-4ac2-4095-9781-37fb68fe9ca1",
+      "name": "Mus musculus",
+      "taxonomy_id": "NCBITaxon:10090"
+    }
+  },
+  "experiment_date": "2025-01-01T00:00:00Z",
+  "contact_email": "test@example.com",
+  "published_in": "Test Journal",
+  "release_version": 1,
+  "dense_reconstruction_cell_id": 12345,
+  "generation_method": "marching_cubes",
+  "level_of_detail": 5,
+  "generation_parameters": {
+    "threshold": 0.5,
+    "smoothing": true
+  },
+  "mesh_type": "static",
+  "em_dense_reconstruction_dataset": {
+    "id": "123e4567-e89b-12d3-a456-426614174006",
+    "name": "Test Dataset",
+    "type": "em_dense_reconstruction_dataset",
+    "assets": [],
+    "authorized_public": false
+  }
+}

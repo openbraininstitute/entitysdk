@@ -17,6 +17,8 @@ _ROUTES = {
     "Derivation": "derivation",
     "ElectricalCellRecording": "electrical-cell-recording",
     "ElectricalRecordingStimulus": "electrical-recording-stimulus",
+    "EMCellMesh": "em-cell-mesh",
+    "EMDenseReconstructionDataset": "em-dense-reconstruction-dataset",
     "EModel": "emodel",
     "Entity": "entity",
     "ETypeClassification": "etype-classification",
