@@ -9,10 +9,8 @@ from entitysdk.models.circuit import Circuit
 from entitysdk.models.classification import ETypeClassification, MTypeClassification
 from entitysdk.models.contribution import Contribution, Role
 from entitysdk.models.derivation import Derivation
-from entitysdk.models.electrical_cell_recording import (
-    ElectricalCellRecording,
-    ElectricalRecordingStimulus,
-)
+from entitysdk.models.electrical_cell_recording import ElectricalCellRecording
+from entitysdk.models.electrical_recording import ElectricalRecordingStimulus
 from entitysdk.models.em_cell_mesh import EMCellMesh, EMCellMeshGenerationMethod, EMCellMeshType
 from entitysdk.models.em_dense_reconstruction_dataset import (
     EMDenseReconstructionDataset,
