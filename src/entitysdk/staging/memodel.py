@@ -17,6 +17,8 @@ from entitysdk.utils.io import write_json
 
 L = logging.getLogger(__name__)
 
+DEFAULT_CIRCUIT_CONFIG_FILENAME = "circuit_config.json"
+
 
 def stage_sonata_from_memodel(
     client: Client,
@@ -48,7 +50,7 @@ def stage_sonata_from_memodel(
         holding_current=holding_current,
     )
 
-    config_path = output_dir / "circuit_config.json"
+    config_path = output_dir / DEFAULT_CIRCUIT_CONFIG_FILENAME
     if not config_path.exists():
         raise FileNotFoundError(f"Expected circuit config not found at: {config_path}")
 
