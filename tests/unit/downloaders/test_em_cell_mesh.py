@@ -2,6 +2,7 @@ import uuid
 
 from entitysdk.downloaders.em_cell_mesh import download_mesh_file
 from entitysdk.models.em_cell_mesh import EMCellMesh
+from entitysdk.types import ContentType
 
 
 def _mock_asset_response(asset_id):
@@ -58,7 +59,7 @@ def test_download_mesh_file(
         client=client,
         em_cell_mesh=em_cell_mesh,
         output_dir=tmp_path,
-        file_type="obj",
+        content_type=ContentType.application_obj,
     )
 
     assert output_path.is_file()
