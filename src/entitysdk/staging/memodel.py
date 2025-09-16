@@ -13,6 +13,7 @@ from entitysdk.client import Client
 from entitysdk.downloaders.memodel import download_memodel
 from entitysdk.models.memodel import MEModel
 from entitysdk.exception import StagingError
+from entitysdk.utils.io import write_json
 
 L = logging.getLogger(__name__)
 
@@ -243,6 +244,5 @@ def create_node_sets_file(
     """
     node_sets = {node_set_name: {"population": node_population_name, "node_id": [node_id]}}
     node_sets_path = output_path / "node_sets.json"
-    with open(node_sets_path, "w") as f:
-        json.dump(node_sets, f, indent=2)
+    write_json(node_sets, node_sets_path)
     L.debug(f"Successfully created node_sets.json at {node_sets_path}")
