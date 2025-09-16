@@ -8,7 +8,6 @@ dependencies = [
     "httpx",
     "pydantic",
     "pydantic-settings",
-    "h5py",
     "typing_extensions; python_version < '3.12'",
     "backports.strenum; python_version < '3.11'",
 ]
@@ -29,6 +28,11 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
 ]
 dynamic = ["version"]
+
+[project.optional-dependencies]
+staging = [
+    "h5py",
+]
 
 [project.urls]
 documentation = "https://entitysdk.readthedocs.io/en/stable"
