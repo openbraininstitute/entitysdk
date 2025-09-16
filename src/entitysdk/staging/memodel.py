@@ -10,7 +10,7 @@ from pathlib import Path
 import h5py
 
 from entitysdk.client import Client
-from entitysdk.downloaders.memodel import download_memodel
+from entitysdk.downloaders.memodel import download_memodel, DownloadedMEModel
 from entitysdk.models.memodel import MEModel
 from entitysdk.exception import StagingError
 from entitysdk.utils.io import write_json
@@ -34,7 +34,7 @@ def stage_sonata_from_memodel(
     """
     with tempfile.TemporaryDirectory() as tmp_dir:
 
-        download_memodel(client, memodel=memodel, output_dir=tmp_dir)
+        downloaded_me_model = download_memodel(client, memodel=memodel, output_dir=tmp_dir)
         mtype = memodel.mtypes[0].pref_label if memodel.mtypes else ""
 
         if memodel.calibration_result is None:
@@ -44,7 +44,7 @@ def stage_sonata_from_memodel(
         holding_current = memodel.calibration_result.holding_current
 
         generate_sonata_files_from_memodel(
-            memodel_path=tmp_dir,
+            downloaded_memodel=downloaded_me_model,
             output_path=output_dir,
             mtype=mtype,
             threshold_current=threshold_current,
@@ -61,7 +61,7 @@ def stage_sonata_from_memodel(
 
 
 def generate_sonata_files_from_memodel(
-    memodel_path: Path,
+    downloaded_memodel: DownloadedMEModel, # Was memodel_path
     output_path: Path,
     mtype: str,
     threshold_current: float,
@@ -70,7 +70,7 @@ def generate_sonata_files_from_memodel(
     """Generate SONATA single cell circuit structure from a downloaded MEModel folder.
 
     Args:
-        memodel_path (str or Path): Path to the downloaded MEModel folder.
+        downloaded_memodel (DownloadedMEModel): The downloaded MEModel object.
         output_path (str or Path): Path to the output 'sonata' folder.
         mtype (str): Cell mtype.
         threshold_current (float): Threshold current.
@@ -86,23 +86,23 @@ def generate_sonata_files_from_memodel(
         path.mkdir(parents=True, exist_ok=True)
 
     # Copy hoc file
-    hoc_file = next((memodel_path / "hoc").glob("*.hoc"), None)
+    hoc_file = next(downloaded_memodel.hoc_path.glob("*.hoc"), None)
     if not hoc_file:
-        raise FileNotFoundError(f"No .hoc files found in {memodel_path / 'hoc'}")
+        raise FileNotFoundError(f"No .hoc files found in {downloaded_memodel.hoc_path}")
     hoc_dst = subdirs["hocs"] / hoc_file.name
     if hoc_file.resolve() != hoc_dst.resolve():
         shutil.copy(hoc_file, hoc_dst)
 
     # Copy morphology file
-    morph_file = next((memodel_path / "morphology").glob("*.asc"), None)
+    morph_file = next(downloaded_memodel.morphology_path.glob("*.asc"), None)
     if not morph_file:
-        raise FileNotFoundError(f"No .asc morphology file found in {memodel_path / 'morphology'}")
+        raise FileNotFoundError(f"No .asc morphology file found in {downloaded_memodel.morphology_path}")
     morph_dst = subdirs["morphologies"] / morph_file.name
     if morph_file.resolve() != morph_dst.resolve():
         shutil.copy(morph_file, morph_dst)
 
     # Copy mechanisms
-    for file in (memodel_path / "mechanisms").iterdir():
+    for file in (downloaded_memodel.mechanisms_path).iterdir():
         if file.is_file():
             target = subdirs["mechanisms"] / file.name
             if file.resolve() != target.resolve():
