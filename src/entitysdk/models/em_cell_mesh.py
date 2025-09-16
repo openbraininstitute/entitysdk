@@ -1,68 +1,17 @@
 """EM Cell Mesh models."""
 
-from enum import Enum
 from typing import Annotated
 
 from pydantic import Field
 
-from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.entity import Entity
-from entitysdk.models.license import License
-from entitysdk.models.subject import Subject
+from entitysdk.models.scientific_artifact import ScientificArtifact
+from entitysdk.types import EMCellMeshGenerationMethod, EMCellMeshType
 
 
-class EMCellMeshGenerationMethod(str, Enum):
-    """EM Cell Mesh generation method."""
-
-    MARCHING_CUBES = "marching_cubes"
-
-
-class EMCellMeshType(str, Enum):
-    """EM Cell Mesh type."""
-
-    STATIC = "static"
-    DYNAMIC = "dynamic"
-
-
-class EMCellMesh(Entity):
+class EMCellMesh(ScientificArtifact):
     """EM Cell Mesh model."""
 
-    brain_region: Annotated[
-        BrainRegion | None,
-        Field(
-            description="The brain region where the mesh is located.",
-        ),
-    ] = None
-    subject: Annotated[
-        Subject | None,
-        Field(
-            description="The subject from which the mesh was generated.",
-        ),
-    ] = None
-    license: Annotated[
-        License | None,
-        Field(
-            description="The license attached to the mesh.",
-        ),
-    ] = None
-    experiment_date: Annotated[
-        str | None,
-        Field(
-            description="The date when the experiment was performed.",
-        ),
-    ] = None
-    contact_email: Annotated[
-        str | None,
-        Field(
-            description="Contact email for the mesh.",
-        ),
-    ] = None
-    published_in: Annotated[
-        str | None,
-        Field(
-            description="Publication where the mesh was described.",
-        ),
-    ] = None
     release_version: Annotated[
         int,
         Field(

@@ -1,64 +1,16 @@
 """EM Dense Reconstruction Dataset models."""
 
-from enum import Enum
 from typing import Annotated
 
 from pydantic import Field
 
-from entitysdk.models.brain_region import BrainRegion
-from entitysdk.models.entity import Entity
-from entitysdk.models.license import License
-from entitysdk.models.subject import Subject
+from entitysdk.models.scientific_artifact import ScientificArtifact
+from entitysdk.types import SlicingDirectionType
 
 
-class SlicingDirectionType(str, Enum):
-    """Slicing direction type."""
-
-    CORONAL = "coronal"
-    SAGITTAL = "sagittal"
-    HORIZONTAL = "horizontal"
-    CUSTOM = "custom"
-
-
-class EMDenseReconstructionDataset(Entity):
+class EMDenseReconstructionDataset(ScientificArtifact):
     """EM Dense Reconstruction Dataset model."""
 
-    brain_region: Annotated[
-        BrainRegion | None,
-        Field(
-            description="The brain region where the dataset is located.",
-        ),
-    ] = None
-    subject: Annotated[
-        Subject | None,
-        Field(
-            description="The subject from which the dataset was generated.",
-        ),
-    ] = None
-    license: Annotated[
-        License | None,
-        Field(
-            description="The license attached to the dataset.",
-        ),
-    ] = None
-    experiment_date: Annotated[
-        str | None,
-        Field(
-            description="The date when the experiment was performed.",
-        ),
-    ] = None
-    contact_email: Annotated[
-        str | None,
-        Field(
-            description="Contact email for the dataset.",
-        ),
-    ] = None
-    published_in: Annotated[
-        str | None,
-        Field(
-            description="Publication where the dataset was described.",
-        ),
-    ] = None
     protocol_document: Annotated[
         str | None,
         Field(
