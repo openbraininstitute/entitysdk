@@ -61,7 +61,7 @@ def stage_sonata_from_memodel(
 
 
 def generate_sonata_files_from_memodel(
-    downloaded_memodel: DownloadedMEModel, # Was memodel_path
+    downloaded_memodel: DownloadedMEModel,
     output_path: Path,
     mtype: str,
     threshold_current: float,
@@ -102,9 +102,9 @@ def generate_sonata_files_from_memodel(
         shutil.copy(morph_file, morph_dst)
 
     # Copy mechanisms
-    for file in (downloaded_memodel.mechanisms_path).iterdir():
+    for file in downloaded_memodel.mechanism_files:
         if file.is_file():
-            target = subdirs["mechanisms"] / file.name
+            target = downloaded_memodel.mechanisms_dir / file.name
             if file.resolve() != target.resolve():
                 shutil.copy(file, target)
 

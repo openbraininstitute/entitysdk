@@ -40,9 +40,14 @@ def download_memodel(client: Client, memodel: MEModel, output_dir=".") -> Downlo
             client, memodel.morphology, Path(output_dir) / "morphology", "swc"
         )
     mechanisms_dir = create_dir(Path(output_dir) / "mechanisms")
+    mechanism_files = []
     for ic in emodel.ion_channel_models or []:
-        download_ion_channel_mechanism(client, ic, mechanisms_dir)
+        ion_channel_path = download_ion_channel_mechanism(client, ic, mechanisms_dir)
+        mechanism_files.append(ion_channel_path.name)
 
     return DownloadedMEModel(
-        hoc_path=hoc_path, mechanisms_dir=mechanisms_dir, morphology_path=morphology_path
+        hoc_path=hoc_path, 
+        mechanisms_dir=mechanisms_dir, 
+        mechanism_files=mechanism_files,
+        morphology_path=morphology_path
     )
