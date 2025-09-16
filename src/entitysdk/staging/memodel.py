@@ -32,23 +32,24 @@ def stage_sonata_from_memodel(
     Returns:
         Path to generated circuit_config.json (inside SONATA folder).
     """
-    tmp_dir = Path(tempfile.mkdtemp(prefix="memodel_"))
-    download_memodel(client, memodel=memodel, output_dir=tmp_dir)
-    mtype = memodel.mtypes[0].pref_label if memodel.mtypes else ""
+    with tempfile.TemporaryDirectory() as tmp_dir:
 
-    if memodel.calibration_result is None:
-        raise StagingError(f"MEModel {memodel.id} has no calibration result.")
+        download_memodel(client, memodel=memodel, output_dir=tmp_dir)
+        mtype = memodel.mtypes[0].pref_label if memodel.mtypes else ""
 
-    threshold_current = memodel.calibration_result.threshold_current
-    holding_current = memodel.calibration_result.holding_current
+        if memodel.calibration_result is None:
+            raise StagingError(f"MEModel {memodel.id} has no calibration result.")
 
-    generate_sonata_files_from_memodel(
-        memodel_path=tmp_dir,
-        output_path=output_dir,
-        mtype=mtype,
-        threshold_current=threshold_current,
-        holding_current=holding_current,
-    )
+        threshold_current = memodel.calibration_result.threshold_current
+        holding_current = memodel.calibration_result.holding_current
+
+        generate_sonata_files_from_memodel(
+            memodel_path=tmp_dir,
+            output_path=output_dir,
+            mtype=mtype,
+            threshold_current=threshold_current,
+            holding_current=holding_current,
+        )
 
     config_path = output_dir / DEFAULT_CIRCUIT_CONFIG_FILENAME
     if not config_path.exists():
