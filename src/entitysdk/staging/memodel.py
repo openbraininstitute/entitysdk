@@ -12,6 +12,7 @@ import h5py
 from entitysdk.client import Client
 from entitysdk.downloaders.memodel import download_memodel
 from entitysdk.models.memodel import MEModel
+from entitysdk.exception import StagingError
 
 L = logging.getLogger(__name__)
 
@@ -33,7 +34,7 @@ def stage_sonata_from_memodel(
     mtype = memodel.mtypes[0].pref_label if memodel.mtypes else ""
 
     if memodel.calibration_result is None:
-        raise ValueError(f"MEModel {memodel.id} has no calibration result.")
+        raise StagingError(f"MEModel {memodel.id} has no calibration result.")
 
     threshold_current = memodel.calibration_result.threshold_current
     holding_current = memodel.calibration_result.holding_current
