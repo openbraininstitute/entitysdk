@@ -44,7 +44,7 @@ def test_stage_sonata_from_memodel_success(tmp_path, fake_memodel, fake_client):
 
     with (
         mock.patch.object(memodel_mod, "download_memodel") as mock_dl,
-        mock.patch.object(memodel_mod, "generate_sonata_files_from_memodel") as mock_gen,
+        mock.patch.object(memodel_mod, "_generate_sonata_files_from_memodel") as mock_gen,
     ):
         result = memodel_mod.stage_sonata_from_memodel(
             fake_client, fake_memodel, output_dir=tmp_path
@@ -65,7 +65,7 @@ def test_stage_sonata_from_memodel_no_calibration(tmp_path, fake_memodel_no_cali
 def test_stage_sonata_from_memodel_missing_config(tmp_path, fake_memodel, fake_client):
     with (
         mock.patch.object(memodel_mod, "download_memodel"),
-        mock.patch.object(memodel_mod, "generate_sonata_files_from_memodel"),
+        mock.patch.object(memodel_mod, "_generate_sonata_files_from_memodel"),
     ):
         with pytest.raises(FileNotFoundError, match="Expected circuit config not found"):
             memodel_mod.stage_sonata_from_memodel(fake_client, fake_memodel, output_dir=tmp_path)
@@ -86,7 +86,7 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
     (mech_dir / "mech.mod").write_text("mod content")
 
     output_path = tmp_path / "sonata"
-    memodel_mod.generate_sonata_files_from_memodel(
+    memodel_mod._generate_sonata_files_from_memodel(
         memodel_path=memodel_path,
         output_path=output_path,
         mtype="L5_TTPC1",
@@ -145,7 +145,7 @@ def test_missing_hoc_file_raise(tmp_path):
     (memodel_path / "morphology").mkdir()
     (memodel_path / "mechanisms").mkdir()
     with pytest.raises(FileNotFoundError, match="No .hoc files found"):
-        memodel_mod.generate_sonata_files_from_memodel(
+        memodel_mod._generate_sonata_files_from_memodel(
             memodel_path=memodel_path,
             output_path=tmp_path,
             mtype="Test",
@@ -161,7 +161,7 @@ def test_missing_morphology_file_raises(tmp_path):
     (memodel_path / "mechanisms").mkdir()
     (memodel_path / "hoc" / "cell.hoc").write_text("hoc content")
     with pytest.raises(FileNotFoundError, match="No .asc morphology file found"):
-        memodel_mod.generate_sonata_files_from_memodel(
+        memodel_mod._generate_sonata_files_from_memodel(
             memodel_path=memodel_path,
             output_path=tmp_path,
             mtype="Test",
