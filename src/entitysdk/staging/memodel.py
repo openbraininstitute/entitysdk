@@ -43,7 +43,7 @@ def stage_sonata_from_memodel(
         threshold_current = memodel.calibration_result.threshold_current
         holding_current = memodel.calibration_result.holding_current
 
-        generate_sonata_files_from_memodel(
+        _generate_sonata_files_from_memodel(
             downloaded_memodel=downloaded_me_model,
             output_path=output_dir,
             mtype=mtype,
@@ -60,7 +60,7 @@ def stage_sonata_from_memodel(
     return config_path
 
 
-def generate_sonata_files_from_memodel(
+def _generate_sonata_files_from_memodel(
     downloaded_memodel: DownloadedMEModel,
     output_path: Path,
     mtype: str,
