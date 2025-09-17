@@ -1117,51 +1117,53 @@ def test_client_get_entity_derivations(mock_route, client, httpx_mock, api_url, 
 
     derivation_1 = uuid.uuid4()
     derivation_2 = uuid.uuid4()
-    derivation_3 = uuid.uuid4()
-    derivation_4 = uuid.uuid4()
 
     used_id = uuid.uuid4()
     generated_id = uuid.uuid4()
 
-    httpx_mock.add_response(
-        method="GET",
-        url=f"{api_url}/circuit/{entity_id}/derived-from",
-        match_headers=request_headers,
-        json={
-            "data": [
-                {
-                    "id": str(derivation_1),
-                    "used_id": str(used_id),
-                    "generated_id": str(generated_id),
-                },
-                {
-                    "id": str(derivation_2),
-                    "used_id": str(used_id),
-                    "generated_id": str(generated_id),
-                    "derivation_type": DerivationType.circuit_extraction,
-                },
-                {
-                    "id": str(derivation_3),
-                    "used_id": str(used_id),
-                    "generated_id": str(generated_id),
-                    "derivation_type": DerivationType.circuit_rewiring,
-                },
-                {
-                    "id": str(derivation_4),
-                    "used_id": str(used_id),
-                    "generated_id": str(generated_id),
-                    "derivation_type": DerivationType.unspecified,
-                },
-            ]
-        },
-    )
+    def add_response(derivation_type: DerivationType):
+        httpx_mock.add_response(
+            method="GET",
+            url=f"{api_url}/circuit/{entity_id}/derived-from?derivation_type={derivation_type}",
+            match_headers=request_headers,
+            json={
+                "data": [
+                    {
+                        "id": str(derivation_1),
+                        "used_id": str(used_id),
+                        "generated_id": str(generated_id),
+                        "derivation_type": derivation_type,
+                    },
+                    {
+                        "id": str(derivation_2),
+                        "used_id": str(used_id),
+                        "generated_id": str(generated_id),
+                        "derivation_type": derivation_type,
+                    },
+                ]
+            },
+        )
 
+    add_response(DerivationType.circuit_extraction)
     res = client.get_entity_derivations(
-        entity_id=entity_id,
-        entity_type=Circuit,
+        entity_id=entity_id, entity_type=Circuit, derivation_type=DerivationType.circuit_extraction
     ).all()
-    assert len(res) == 4
+    assert len(res) == 2
     assert res[0].id == derivation_1
     assert res[1].id == derivation_2
-    assert res[2].id == derivation_3
-    assert res[3].id == derivation_4
+
+    add_response(DerivationType.circuit_rewiring)
+    res = client.get_entity_derivations(
+        entity_id=entity_id, entity_type=Circuit, derivation_type=DerivationType.circuit_rewiring
+    ).all()
+    assert len(res) == 2
+    assert res[0].id == derivation_1
+    assert res[1].id == derivation_2
+
+    add_response(DerivationType.unspecified)
+    res = client.get_entity_derivations(
+        entity_id=entity_id, entity_type=Circuit, derivation_type=DerivationType.unspecified
+    ).all()
+    assert len(res) == 2
+    assert res[0].id == derivation_1
+    assert res[1].id == derivation_2

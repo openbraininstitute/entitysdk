@@ -171,7 +171,7 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Entity],
-        derivation_type: DerivationType | None = None,
+        derivation_type: DerivationType,
         project_context: ProjectContext | None = None,
     ):
         """Get all the derivation for an entity."""
