@@ -27,7 +27,6 @@ from entitysdk.util import make_db_api_request, stream_paginated_request
 
 L = logging.getLogger(__name__)
 
-TEntity = TypeVar("TEntity", bound=Entity)
 TIdentifiable = TypeVar("TIdentifiable", bound=Identifiable)
 
 

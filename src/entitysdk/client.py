@@ -37,7 +37,6 @@ from entitysdk.util import (
 )
 from entitysdk.utils.asset import filter_assets
 
-TEntity = TypeVar("TEntity", bound=Entity)
 TIdentifiable = TypeVar("TIdentifiable", bound=Identifiable)
 
 
