@@ -37,7 +37,6 @@ from entitysdk.util import (
 )
 from entitysdk.utils.asset import filter_assets
 
-TEntity = TypeVar("TEntity", bound=Entity)
 TIdentifiable = TypeVar("TIdentifiable", bound=Identifiable)
 
 
@@ -140,11 +139,11 @@ class Client:
     def search_entity(
         self,
         *,
-        entity_type: type[Identifiable],
+        entity_type: type[TIdentifiable],
         query: dict | None = None,
         limit: int | None = None,
         project_context: ProjectContext | None = None,
-    ) -> IteratorResult[Identifiable]:
+    ) -> IteratorResult[TIdentifiable]:
         """Search for entities.
 
         Args:
@@ -171,7 +170,7 @@ class Client:
         entity_id: ID,
         entity_type: type[Entity],
         project_context: ProjectContext | None = None,
-    ):
+    ) -> IteratorResult[Entity]:
         """Get all the derivation for an entity."""
         return core.get_entity_derivations(
             api_url=self.api_url,
@@ -184,10 +183,10 @@ class Client:
 
     def register_entity(
         self,
-        entity: Identifiable,
+        entity: TIdentifiable,
         *,
         project_context: ProjectContext | None = None,
-    ) -> Identifiable:
+    ) -> TIdentifiable:
         """Register entity.
 
         Args:
@@ -210,11 +209,11 @@ class Client:
     def update_entity(
         self,
         entity_id: ID,
-        entity_type: type[Identifiable],
+        entity_type: type[TIdentifiable],
         attrs_or_entity: dict | Identifiable,
         *,
         project_context: ProjectContext | None = None,
-    ) -> Identifiable:
+    ) -> TIdentifiable:
         """Update an entity.
 
         Args:
