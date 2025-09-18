@@ -95,7 +95,7 @@ def get_entity_derivations(
     entity_id: ID,
     entity_type: type[Entity],
     project_context: ProjectContext,
-    derivation_type: DerivationType | None,
+    derivation_type: DerivationType,
     token: str,
     http_client: httpx.Client | None = None,
 ) -> IteratorResult[Entity]:
@@ -106,7 +106,7 @@ def get_entity_derivations(
         entity_id=entity_id,
     )
 
-    params = {"derivation_type": DerivationType(derivation_type)} if derivation_type else None
+    params = {"derivation_type": DerivationType(derivation_type)}
 
     response = make_db_api_request(
         url=url,

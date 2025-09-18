@@ -213,6 +213,7 @@ class ContributionCreate(BaseModel):
 class DerivationType(StrEnum):
     circuit_extraction = "circuit_extraction"
     circuit_rewiring = "circuit_rewiring"
+    unspecified = "unspecified"
 
 
 class DetailedFile(BaseModel):
