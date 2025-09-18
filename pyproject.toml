@@ -29,6 +29,11 @@ classifiers = [
 ]
 dynamic = ["version"]
 
+[project.optional-dependencies]
+staging = [
+    "h5py",
+]
+
 [project.urls]
 documentation = "https://entitysdk.readthedocs.io/en/stable"
 repository = "https://github.com/openbraininstitute/entitysdk"
