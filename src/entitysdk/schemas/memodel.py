@@ -9,6 +9,7 @@ class DownloadedMEModel(Schema):
     """Downloaded asset."""
 
     hoc_path: Path
+    hoc_files: list[str]
     mechanisms_dir: Path
     mechanism_files: list[str]
     morphology_path: Path

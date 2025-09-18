@@ -53,7 +53,7 @@ def stage_sonata_from_memodel(
 
     config_path = output_dir / DEFAULT_CIRCUIT_CONFIG_FILENAME
     if not config_path.exists():
-        raise FileNotFoundError(f"Expected circuit config not found at: {config_path}")
+        raise StagingError(f"Expected circuit config not found at: {config_path}")
 
     L.info("Single-Cell %s staged at %s", memodel.id, config_path)
 
@@ -86,9 +86,7 @@ def _generate_sonata_files_from_memodel(
         path.mkdir(parents=True, exist_ok=True)
 
     # Copy hoc file
-    hoc_file = next(downloaded_memodel.hoc_path.glob("*.hoc"), None)
-    if not hoc_file:
-        raise FileNotFoundError(f"No .hoc files found in {downloaded_memodel.hoc_path}")
+    hoc_file = downloaded_memodel.hoc_path / downloaded_memodel.hoc_files[0]
     hoc_dst = subdirs["hocs"] / hoc_file.name
     if hoc_file.resolve() != hoc_dst.resolve():
         shutil.copy(hoc_file, hoc_dst)

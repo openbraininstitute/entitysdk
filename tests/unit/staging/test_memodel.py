@@ -5,6 +5,7 @@ import h5py
 import pytest
 
 from entitysdk.staging import memodel as memodel_mod
+from entitysdk.schemas.memodel import DownloadedMEModel
 
 
 class FakeMType:
@@ -86,8 +87,17 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
     (mech_dir / "mech.mod").write_text("mod content")
 
     output_path = tmp_path / "sonata"
+
+    downloaded_me_model = DownloadedMEModel(
+        hoc_path=hoc_dir,
+        hoc_files=["cell.hoc"],
+        mechanisms_dir=mech_dir,
+        mechanism_files=["mech.mod"],
+        morphology_path=morph_dir,
+    )
+
     memodel_mod._generate_sonata_files_from_memodel(
-        memodel_path=memodel_path,
+        downloaded_memodel=downloaded_me_model,
         output_path=output_path,
         mtype="L5_TTPC1",
         threshold_current=0.2,
@@ -144,9 +154,20 @@ def test_missing_hoc_file_raise(tmp_path):
     memodel_path.mkdir()
     (memodel_path / "morphology").mkdir()
     (memodel_path / "mechanisms").mkdir()
-    with pytest.raises(FileNotFoundError, match="No .hoc files found"):
+    (memodel_path / "hoc").mkdir()
+
+    hoc_path = memodel_path / "hoc"
+
+    downloaded_me_model = DownloadedMEModel(
+        hoc_path=hoc_path,
+        hoc_files=[],
+        mechanisms_dir=memodel_path / "mechanisms",
+        mechanism_files=["mech.mod"],
+        morphology_path=memodel_path / "morphology",
+    )
+    with pytest.raises(FileNotFoundError, match=f"No .hoc files found in {hoc_path}"):
         memodel_mod._generate_sonata_files_from_memodel(
-            memodel_path=memodel_path,
+            downloaded_memodel=downloaded_me_model,
             output_path=tmp_path,
             mtype="Test",
             threshold_current=0.2,
@@ -160,9 +181,17 @@ def test_missing_morphology_file_raises(tmp_path):
     (memodel_path / "hoc").mkdir()
     (memodel_path / "mechanisms").mkdir()
     (memodel_path / "hoc" / "cell.hoc").write_text("hoc content")
+
+    downloaded_me_model = DownloadedMEModel(
+        hoc_path=memodel_path / "hoc",
+        hoc_files=["cell.hoc"],
+        mechanisms_dir=memodel_path / "mechanisms",
+        mechanism_files=["mech.mod"],
+        morphology_path=memodel_path / "morphology",
+    )
     with pytest.raises(FileNotFoundError, match="No .asc morphology file found"):
         memodel_mod._generate_sonata_files_from_memodel(
-            memodel_path=memodel_path,
+            downloaded_memodel=downloaded_me_model,
             output_path=tmp_path,
             mtype="Test",
             threshold_current=0.2,
