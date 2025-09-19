@@ -1533,12 +1533,15 @@ class CalibrationRead(BaseModel):
 class CellMorphologyCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
+    brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
+    subject_id: Annotated[UUID, Field(title="Subject Id")]
+    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
+    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
+    published_in: Annotated[str | None, Field(title="Published In")] = None
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     location: PointLocationBase | None = None
     legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = None
-    subject_id: Annotated[UUID, Field(title="Subject Id")]
-    brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
     cell_morphology_protocol_id: Annotated[
         UUID | None, Field(title="Cell Morphology Protocol Id")
     ] = None
@@ -1546,12 +1549,15 @@ class CellMorphologyCreate(BaseModel):
 
 class CellMorphologyUpdate(BaseModel):
     license_id: Annotated[UUID | None, Field(title="License Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    subject_id: Annotated[UUID | None, Field(title="Subject Id")] = "<NOT_SET>"
+    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = "<NOT_SET>"
+    contact_email: Annotated[str | None, Field(title="Contact Email")] = "<NOT_SET>"
+    published_in: Annotated[str | None, Field(title="Published In")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
     location: PointLocationBase | None = "<NOT_SET>"
     legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = "<NOT_SET>"
-    subject_id: Annotated[UUID | None, Field(title="Subject Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
     cell_morphology_protocol_id: Annotated[
         UUID | None, Field(title="Cell Morphology Protocol Id")
     ] = "<NOT_SET>"
@@ -3040,21 +3046,24 @@ class NestedCellMorphologyProtocolRead(
 
 
 class CellMorphologyAnnotationExpandedRead(BaseModel):
-    brain_region: BrainRegionRead
-    subject: NestedSubjectRead
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")] = (
         None
     )
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
-    type: EntityType | None = None
     assets: Annotated[list[AssetRead], Field(title="Assets")]
-    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     license: LicenseRead | None = None
-    id: Annotated[UUID, Field(title="Id")]
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    brain_region: BrainRegionRead
+    subject: NestedSubjectRead
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    type: EntityType | None = None
+    id: Annotated[UUID, Field(title="Id")]
+    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
+    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
+    published_in: Annotated[str | None, Field(title="Published In")] = None
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     location: PointLocationBase | None = None
@@ -3065,21 +3074,24 @@ class CellMorphologyAnnotationExpandedRead(BaseModel):
 
 
 class CellMorphologyRead(BaseModel):
-    brain_region: BrainRegionRead
-    subject: NestedSubjectRead
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")] = (
         None
     )
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
-    type: EntityType | None = None
     assets: Annotated[list[AssetRead], Field(title="Assets")]
-    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     license: LicenseRead | None = None
-    id: Annotated[UUID, Field(title="Id")]
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    brain_region: BrainRegionRead
+    subject: NestedSubjectRead
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    type: EntityType | None = None
+    id: Annotated[UUID, Field(title="Id")]
+    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
+    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
+    published_in: Annotated[str | None, Field(title="Published In")] = None
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     location: PointLocationBase | None = None
