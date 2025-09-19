@@ -5,20 +5,17 @@ from typing import Annotated
 from pydantic import Field
 
 from entitysdk.models.base import BaseModel
+from entitysdk.models.brain_region import BrainRegion
+from entitysdk.models.cell_morphology import CellMorphology
 from entitysdk.models.contribution import Contribution
 from entitysdk.models.core import Identifiable
 from entitysdk.models.emodel import EModel
 from entitysdk.models.entity import Entity
 from entitysdk.models.etype import ETypeClass
+from entitysdk.models.license import License
 from entitysdk.models.memodelcalibrationresult import MEModelCalibrationResult
-from entitysdk.models.morphology import (
-    BrainRegion,
-    License,
-    ReconstructionMorphology,
-    Species,
-    Strain,
-)
 from entitysdk.models.mtype import MTypeClass
+from entitysdk.models.taxonomy import Species, Strain
 from entitysdk.types import ValidationStatus
 
 
@@ -91,25 +88,25 @@ class MEModel(MEModelBase, Entity):
         str | None,
         Field(
             description="The iteration of the memodel used during optimisation.",
-            examples="1372346",
+            examples=["1372346"],
         ),
     ] = None
     holding_current: Annotated[
         float | None,
         Field(
             description="The holding current of the memodel.",
-            examples=0.0,
+            examples=[0.0],
         ),
     ] = None
     threshold_current: Annotated[
         float | None,
         Field(
             description="The threshold current of the memodel.",
-            examples=0.1,
+            examples=[0.1],
         ),
     ] = None
     morphology: Annotated[
-        ReconstructionMorphology,
+        CellMorphology,
         Field(
             description="The morphology of the memodel.",
         ),

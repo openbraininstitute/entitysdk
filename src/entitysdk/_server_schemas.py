@@ -10,7 +10,7 @@ else:
 
 from enum import Enum
 from uuid import UUID
-from typing import Annotated, Any
+from typing import Annotated, Any, Literal
 from pydantic import AnyUrl, AwareDatetime, BaseModel, Field, RootModel, UUID4
 from pathlib import Path
 from datetime import timedelta
@@ -56,10 +56,13 @@ class ApiErrorCode(StrEnum):
     ASSET_INVALID_CONTENT_TYPE = "ASSET_INVALID_CONTENT_TYPE"
     ION_NAME_NOT_FOUND = "ION_NAME_NOT_FOUND"
     S3_CANNOT_CREATE_PRESIGNED_URL = "S3_CANNOT_CREATE_PRESIGNED_URL"
+    OPENAI_API_KEY_MISSING = "OPENAI_API_KEY_MISSING"
+    OPENAI_API_ERROR = "OPENAI_API_ERROR"
 
 
 class AssetLabel(StrEnum):
     morphology = "morphology"
+    morphology_with_spines = "morphology_with_spines"
     cell_composition_summary = "cell_composition_summary"
     cell_composition_volumes = "cell_composition_volumes"
     single_neuron_synaptome_config = "single_neuron_synaptome_config"
@@ -138,6 +141,19 @@ class CalibrationUpdate(BaseModel):
     generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = None
 
 
+class CellMorphologyGenerationType(StrEnum):
+    digital_reconstruction = "digital_reconstruction"
+    modified_reconstruction = "modified_reconstruction"
+    computationally_synthesized = "computationally_synthesized"
+    placeholder = "placeholder"
+
+
+class CellMorphologyProtocolDesign(StrEnum):
+    electron_microscopy = "electron_microscopy"
+    cell_patch = "cell_patch"
+    fluorophore = "fluorophore"
+
+
 class CircuitBuildCategory(StrEnum):
     computational_model = "computational_model"
     em_reconstruction = "em_reconstruction"
@@ -175,6 +191,23 @@ class CircuitUpdate(BaseModel):
     build_category: CircuitBuildCategory | None = "<NOT_SET>"
     root_circuit_id: Annotated[UUID | None, Field(title="Root Circuit Id")] = "<NOT_SET>"
     atlas_id: Annotated[UUID | None, Field(title="Atlas Id")] = "<NOT_SET>"
+
+
+class ProtocolDocument(RootModel[AnyUrl]):
+    root: Annotated[AnyUrl, Field(title="Protocol Document")]
+
+
+class ComputationallySynthesizedCellMorphologyProtocolCreate(BaseModel):
+    protocol_document: Annotated[ProtocolDocument | None, Field(title="Protocol Document")] = None
+    protocol_design: CellMorphologyProtocolDesign
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    type: Annotated[Literal["cell_morphology_protocol"], Field(title="Type")] = (
+        "cell_morphology_protocol"
+    )
+    generation_type: Annotated[
+        Literal["computationally_synthesized"], Field(title="Generation Type")
+    ]
+    method_type: Annotated[str, Field(title="Method Type")]
 
 
 class ConsortiumCreate(BaseModel):
@@ -226,6 +259,14 @@ class DetailedFileList(BaseModel):
     files: Annotated[dict[str, DetailedFile], Field(title="Files")]
 
 
+class Magnification(RootModel[float]):
+    root: Annotated[float, Field(ge=0.0, title="Magnification")]
+
+
+class TissueShrinkage(RootModel[float]):
+    root: Annotated[float, Field(ge=0.0, title="Tissue Shrinkage")]
+
+
 class DirectoryUpload(BaseModel):
     directory_name: Annotated[Path, Field(title="Directory Name")]
     files: Annotated[list[Path], Field(title="Files")]
@@ -262,10 +303,6 @@ class EMCellMeshUpdate(BaseModel):
     em_dense_reconstruction_dataset_id: Annotated[
         UUID | None, Field(title="Em Dense Reconstruction Dataset Id")
     ] = "<NOT_SET>"
-
-
-class ProtocolDocument(RootModel[AnyUrl]):
-    root: Annotated[AnyUrl, Field(title="Protocol Document")]
 
 
 class EModelCreate(BaseModel):
@@ -357,6 +394,8 @@ class EntityRoute(StrEnum):
     brain_atlas = "brain-atlas"
     brain_atlas_region = "brain-atlas-region"
     cell_composition = "cell-composition"
+    cell_morphology = "cell-morphology"
+    cell_morphology_protocol = "cell-morphology-protocol"
     electrical_cell_recording = "electrical-cell-recording"
     electrical_recording = "electrical-recording"
     electrical_recording_stimulus = "electrical-recording-stimulus"
@@ -371,7 +410,6 @@ class EntityRoute(StrEnum):
     memodel = "memodel"
     memodel_calibration_result = "memodel-calibration-result"
     me_type_density = "me-type-density"
-    reconstruction_morphology = "reconstruction-morphology"
     simulation = "simulation"
     simulation_campaign = "simulation-campaign"
     simulation_campaign_generation = "simulation-campaign-generation"
@@ -393,6 +431,8 @@ class EntityType(StrEnum):
     brain_atlas = "brain_atlas"
     brain_atlas_region = "brain_atlas_region"
     cell_composition = "cell_composition"
+    cell_morphology = "cell_morphology"
+    cell_morphology_protocol = "cell_morphology_protocol"
     electrical_cell_recording = "electrical_cell_recording"
     electrical_recording = "electrical_recording"
     electrical_recording_stimulus = "electrical_recording_stimulus"
@@ -407,7 +447,6 @@ class EntityType(StrEnum):
     memodel = "memodel"
     memodel_calibration_result = "memodel_calibration_result"
     me_type_density = "me_type_density"
-    reconstruction_morphology = "reconstruction_morphology"
     simulation = "simulation"
     simulation_campaign = "simulation_campaign"
     simulation_campaign_generation = "simulation_campaign_generation"
@@ -427,6 +466,7 @@ class EntityType(StrEnum):
 class EntityTypeWithBrainRegion(StrEnum):
     brain_atlas_region = "brain_atlas_region"
     cell_composition = "cell_composition"
+    cell_morphology = "cell_morphology"
     circuit = "circuit"
     electrical_cell_recording = "electrical_cell_recording"
     electrical_recording = "electrical_recording"
@@ -440,7 +480,6 @@ class EntityTypeWithBrainRegion(StrEnum):
     ion_channel_recording = "ion_channel_recording"
     me_type_density = "me_type_density"
     memodel = "memodel"
-    reconstruction_morphology = "reconstruction_morphology"
     scientific_artifact = "scientific_artifact"
     single_neuron_simulation = "single_neuron_simulation"
     single_neuron_synaptome = "single_neuron_synaptome"
@@ -684,7 +723,7 @@ class MTypeClassificationCreate(BaseModel):
 
 
 class MeasurableEntity(StrEnum):
-    reconstruction_morphology = "reconstruction_morphology"
+    cell_morphology = "cell_morphology"
 
 
 class MeasurementStatistic(StrEnum):
@@ -710,6 +749,37 @@ class MeasurementUnit(StrEnum):
     μm_ = "μm²"
     μm__1 = "μm³"
     radian = "radian"
+
+
+class ModifiedMorphologyMethodType(StrEnum):
+    cloned = "cloned"
+    mix_and_match = "mix_and_match"
+    mousified = "mousified"
+    ratified = "ratified"
+
+
+class ModifiedReconstructionCellMorphologyProtocolCreate(BaseModel):
+    protocol_document: Annotated[ProtocolDocument | None, Field(title="Protocol Document")] = None
+    protocol_design: CellMorphologyProtocolDesign
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    type: Annotated[Literal["cell_morphology_protocol"], Field(title="Type")] = (
+        "cell_morphology_protocol"
+    )
+    generation_type: Annotated[Literal["modified_reconstruction"], Field(title="Generation Type")]
+    method_type: ModifiedMorphologyMethodType
+
+
+class NestedComputationallySynthesizedCellMorphologyProtocolRead(BaseModel):
+    protocol_document: Annotated[ProtocolDocument | None, Field(title="Protocol Document")] = None
+    protocol_design: CellMorphologyProtocolDesign
+    id: Annotated[UUID, Field(title="Id")]
+    type: Annotated[Literal["cell_morphology_protocol"], Field(title="Type")] = (
+        "cell_morphology_protocol"
+    )
+    generation_type: Annotated[
+        Literal["computationally_synthesized"], Field(title="Generation Type")
+    ]
+    method_type: Annotated[str, Field(title="Method Type")]
 
 
 class NestedConsortiumRead(BaseModel):
@@ -757,6 +827,17 @@ class NestedIonChannelRead(BaseModel):
     synonyms: Annotated[list[str], Field(title="Synonyms")]
 
 
+class NestedModifiedReconstructionCellMorphologyProtocolRead(BaseModel):
+    protocol_document: Annotated[ProtocolDocument | None, Field(title="Protocol Document")] = None
+    protocol_design: CellMorphologyProtocolDesign
+    id: Annotated[UUID, Field(title="Id")]
+    type: Annotated[Literal["cell_morphology_protocol"], Field(title="Type")] = (
+        "cell_morphology_protocol"
+    )
+    generation_type: Annotated[Literal["modified_reconstruction"], Field(title="Generation Type")]
+    method_type: ModifiedMorphologyMethodType
+
+
 class NestedOrganizationRead(BaseModel):
     id: Annotated[UUID, Field(title="Id")]
     pref_label: Annotated[str, Field(title="Pref Label")]
@@ -771,6 +852,14 @@ class NestedPersonRead(BaseModel):
     pref_label: Annotated[str, Field(title="Pref Label")]
     type: Annotated[str, Field(title="Type")]
     sub_id: Annotated[UUID | None, Field(title="Sub Id")] = None
+
+
+class NestedPlaceholderCellMorphologyProtocolRead(BaseModel):
+    id: Annotated[UUID, Field(title="Id")]
+    type: Annotated[Literal["cell_morphology_protocol"], Field(title="Type")] = (
+        "cell_morphology_protocol"
+    )
+    generation_type: Annotated[Literal["placeholder"], Field(title="Generation Type")]
 
 
 class NestedPublicationRead(BaseModel):
@@ -871,6 +960,28 @@ class PersonRead(BaseModel):
     sub_id: Annotated[UUID | None, Field(title="Sub Id")] = None
 
 
+class PlaceholderCellMorphologyProtocolCreate(BaseModel):
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    type: Annotated[Literal["cell_morphology_protocol"], Field(title="Type")] = (
+        "cell_morphology_protocol"
+    )
+    generation_type: Annotated[Literal["placeholder"], Field(title="Generation Type")]
+
+
+class PlaceholderCellMorphologyProtocolRead(BaseModel):
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    id: Annotated[UUID, Field(title="Id")]
+    type: Annotated[Literal["cell_morphology_protocol"], Field(title="Type")] = (
+        "cell_morphology_protocol"
+    )
+    generation_type: Annotated[Literal["placeholder"], Field(title="Generation Type")]
+
+
 class PointLocationBase(BaseModel):
     x: Annotated[float, Field(title="X")]
     y: Annotated[float, Field(title="Y")]
@@ -904,29 +1015,6 @@ class PublicationType(StrEnum):
     application = "application"
 
 
-class ReconstructionMorphologyCreate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    license_id: Annotated[UUID | None, Field(title="License Id")] = None
-    name: Annotated[str, Field(title="Name")]
-    description: Annotated[str, Field(title="Description")]
-    location: PointLocationBase | None = None
-    legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = None
-    species_id: Annotated[UUID, Field(title="Species Id")]
-    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
-    brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
-
-
-class ReconstructionMorphologyUpdate(BaseModel):
-    license_id: Annotated[UUID | None, Field(title="License Id")] = "<NOT_SET>"
-    name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
-    description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    location: PointLocationBase | None = "<NOT_SET>"
-    legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = "<NOT_SET>"
-    species_id: Annotated[UUID | None, Field(title="Species Id")] = "<NOT_SET>"
-    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
-
-
 class ResourceRoute(StrEnum):
     analysis_software_source_code = "analysis-software-source-code"
     brain_atlas = "brain-atlas"
@@ -934,6 +1022,8 @@ class ResourceRoute(StrEnum):
     brain_region = "brain-region"
     brain_region_hierarchy = "brain-region-hierarchy"
     cell_composition = "cell-composition"
+    cell_morphology = "cell-morphology"
+    cell_morphology_protocol = "cell-morphology-protocol"
     circuit = "circuit"
     consortium = "consortium"
     contribution = "contribution"
@@ -964,7 +1054,6 @@ class ResourceRoute(StrEnum):
     organization = "organization"
     person = "person"
     publication = "publication"
-    reconstruction_morphology = "reconstruction-morphology"
     role = "role"
     scientific_artifact = "scientific-artifact"
     scientific_artifact_external_url_link = "scientific-artifact-external-url-link"
@@ -1202,6 +1291,17 @@ class SpeciesRead(BaseModel):
     taxonomy_id: Annotated[str, Field(title="Taxonomy Id")]
 
 
+class StainingType(StrEnum):
+    golgi = "golgi"
+    nissl = "nissl"
+    luxol_fast_blue = "luxol_fast_blue"
+    fluorescent_nissl = "fluorescent_nissl"
+    fluorescent_dyes = "fluorescent_dyes"
+    fluorescent_protein_expression = "fluorescent_protein_expression"
+    immunohistochemistry = "immunohistochemistry"
+    other = "other"
+
+
 class StorageType(StrEnum):
     aws_s3_internal = "aws_s3_internal"
     aws_s3_open = "aws_s3_open"
@@ -1249,6 +1349,7 @@ class SubjectCreate(BaseModel):
     age_period: AgePeriod | None = None
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     species_id: Annotated[UUID, Field(title="Species Id")]
+    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
 
 
 class SubjectRead(BaseModel):
@@ -1274,6 +1375,7 @@ class SubjectRead(BaseModel):
     ] = None
     age_period: AgePeriod | None = None
     species: NestedSpeciesRead
+    strain: NestedStrainRead | None = None
 
 
 class SubjectUpdate(BaseModel):
@@ -1286,6 +1388,7 @@ class SubjectUpdate(BaseModel):
     age_max: Annotated[timedelta | None, Field(title="Age Max")] = "<NOT_SET>"
     age_period: AgePeriod | None = "<NOT_SET>"
     species_id: Annotated[UUID | None, Field(title="Species Id")] = "<NOT_SET>"
+    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = "<NOT_SET>"
 
 
 class UseIon(BaseModel):
@@ -1427,6 +1530,33 @@ class CalibrationRead(BaseModel):
     generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
 
 
+class CellMorphologyCreate(BaseModel):
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    license_id: Annotated[UUID | None, Field(title="License Id")] = None
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    location: PointLocationBase | None = None
+    legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = None
+    subject_id: Annotated[UUID, Field(title="Subject Id")]
+    brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
+    cell_morphology_protocol_id: Annotated[
+        UUID | None, Field(title="Cell Morphology Protocol Id")
+    ] = None
+
+
+class CellMorphologyUpdate(BaseModel):
+    license_id: Annotated[UUID | None, Field(title="License Id")] = "<NOT_SET>"
+    name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
+    description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
+    location: PointLocationBase | None = "<NOT_SET>"
+    legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = "<NOT_SET>"
+    subject_id: Annotated[UUID | None, Field(title="Subject Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    cell_morphology_protocol_id: Annotated[
+        UUID | None, Field(title="Cell Morphology Protocol Id")
+    ] = "<NOT_SET>"
+
+
 class CircuitCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
@@ -1450,6 +1580,25 @@ class CircuitCreate(BaseModel):
     build_category: CircuitBuildCategory
     root_circuit_id: Annotated[UUID | None, Field(title="Root Circuit Id")] = None
     atlas_id: Annotated[UUID | None, Field(title="Atlas Id")] = None
+
+
+class ComputationallySynthesizedCellMorphologyProtocolRead(BaseModel):
+    protocol_document: Annotated[ProtocolDocument | None, Field(title="Protocol Document")] = None
+    protocol_design: CellMorphologyProtocolDesign
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    id: Annotated[UUID, Field(title="Id")]
+    type: Annotated[Literal["cell_morphology_protocol"], Field(title="Type")] = (
+        "cell_morphology_protocol"
+    )
+    generation_type: Annotated[
+        Literal["computationally_synthesized"], Field(title="Generation Type")
+    ]
+    method_type: Annotated[str, Field(title="Method Type")]
 
 
 class ConsortiumRead(BaseModel):
@@ -1477,13 +1626,51 @@ class ContributionRead(BaseModel):
 class DerivationCreate(BaseModel):
     used_id: Annotated[UUID, Field(title="Used Id")]
     generated_id: Annotated[UUID, Field(title="Generated Id")]
-    derivation_type: DerivationType | None = None
+    derivation_type: DerivationType
 
 
 class DerivationRead(BaseModel):
     used: BasicEntityRead
     generated: BasicEntityRead
-    derivation_type: DerivationType | None = None
+    derivation_type: DerivationType
+
+
+class DigitalReconstructionCellMorphologyProtocolCreate(BaseModel):
+    protocol_document: Annotated[ProtocolDocument | None, Field(title="Protocol Document")] = None
+    protocol_design: CellMorphologyProtocolDesign
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    type: Annotated[Literal["cell_morphology_protocol"], Field(title="Type")] = (
+        "cell_morphology_protocol"
+    )
+    generation_type: Annotated[Literal["digital_reconstruction"], Field(title="Generation Type")]
+    staining_type: StainingType | None = None
+    slicing_thickness: Annotated[float, Field(ge=0.0, title="Slicing Thickness")]
+    slicing_direction: SlicingDirectionType | None = None
+    magnification: Annotated[Magnification | None, Field(title="Magnification")] = None
+    tissue_shrinkage: Annotated[TissueShrinkage | None, Field(title="Tissue Shrinkage")] = None
+    corrected_for_shrinkage: Annotated[bool | None, Field(title="Corrected For Shrinkage")] = None
+
+
+class DigitalReconstructionCellMorphologyProtocolRead(BaseModel):
+    protocol_document: Annotated[ProtocolDocument | None, Field(title="Protocol Document")] = None
+    protocol_design: CellMorphologyProtocolDesign
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    id: Annotated[UUID, Field(title="Id")]
+    type: Annotated[Literal["cell_morphology_protocol"], Field(title="Type")] = (
+        "cell_morphology_protocol"
+    )
+    generation_type: Annotated[Literal["digital_reconstruction"], Field(title="Generation Type")]
+    staining_type: StainingType | None = None
+    slicing_thickness: Annotated[float, Field(ge=0.0, title="Slicing Thickness")]
+    slicing_direction: SlicingDirectionType | None = None
+    magnification: Annotated[Magnification | None, Field(title="Magnification")] = None
+    tissue_shrinkage: Annotated[TissueShrinkage | None, Field(title="Tissue Shrinkage")] = None
+    corrected_for_shrinkage: Annotated[bool | None, Field(title="Corrected For Shrinkage")] = None
 
 
 class EMCellMeshCreate(BaseModel):
@@ -1927,10 +2114,43 @@ class MeasurementRead(BaseModel):
     value: Annotated[float, Field(title="Value")]
 
 
+class ModifiedReconstructionCellMorphologyProtocolRead(BaseModel):
+    protocol_document: Annotated[ProtocolDocument | None, Field(title="Protocol Document")] = None
+    protocol_design: CellMorphologyProtocolDesign
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    id: Annotated[UUID, Field(title="Id")]
+    type: Annotated[Literal["cell_morphology_protocol"], Field(title="Type")] = (
+        "cell_morphology_protocol"
+    )
+    generation_type: Annotated[Literal["modified_reconstruction"], Field(title="Generation Type")]
+    method_type: ModifiedMorphologyMethodType
+
+
 class NestedContributionRead(BaseModel):
     id: Annotated[UUID, Field(title="Id")]
     agent: AgentRead
     role: RoleRead
+
+
+class NestedDigitalReconstructionCellMorphologyProtocolRead(BaseModel):
+    protocol_document: Annotated[ProtocolDocument | None, Field(title="Protocol Document")] = None
+    protocol_design: CellMorphologyProtocolDesign
+    id: Annotated[UUID, Field(title="Id")]
+    type: Annotated[Literal["cell_morphology_protocol"], Field(title="Type")] = (
+        "cell_morphology_protocol"
+    )
+    generation_type: Annotated[Literal["digital_reconstruction"], Field(title="Generation Type")]
+    staining_type: StainingType | None = None
+    slicing_thickness: Annotated[float, Field(ge=0.0, title="Slicing Thickness")]
+    slicing_direction: SlicingDirectionType | None = None
+    magnification: Annotated[Magnification | None, Field(title="Magnification")] = None
+    tissue_shrinkage: Annotated[TissueShrinkage | None, Field(title="Tissue Shrinkage")] = None
+    corrected_for_shrinkage: Annotated[bool | None, Field(title="Corrected For Shrinkage")] = None
 
 
 class NestedMEModel(BaseModel):
@@ -1961,6 +2181,7 @@ class NestedSubjectRead(BaseModel):
     ] = None
     age_period: AgePeriod | None = None
     species: NestedSpeciesRead
+    strain: NestedStrainRead | None = None
 
 
 class NeuronBlock(BaseModel):
@@ -1970,30 +2191,6 @@ class NeuronBlock(BaseModel):
     range: Annotated[list[dict[str, str | None]] | None, Field(title="Range")] = []
     useion: Annotated[list[UseIon] | None, Field(title="Useion")] = []
     nonspecific: Annotated[list[dict[str, str | None]] | None, Field(title="Nonspecific")] = []
-
-
-class ReconstructionMorphologyRead(BaseModel):
-    contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")] = (
-        None
-    )
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
-    type: EntityType | None = None
-    assets: Annotated[list[AssetRead], Field(title="Assets")]
-    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    license: LicenseRead | None = None
-    id: Annotated[UUID, Field(title="Id")]
-    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
-    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
-    name: Annotated[str, Field(title="Name")]
-    description: Annotated[str, Field(title="Description")]
-    location: PointLocationBase | None = None
-    legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = None
-    species: NestedSpeciesRead
-    strain: NestedStrainRead | None = None
-    brain_region: BrainRegionRead
-    mtypes: Annotated[list[Annotation] | None, Field(title="Mtypes")] = None
 
 
 class SimulationCampaignRead(BaseModel):
@@ -2174,6 +2371,40 @@ class CellCompositionRead(BaseModel):
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
+
+
+class CellMorphologyProtocolCreate(
+    RootModel[
+        DigitalReconstructionCellMorphologyProtocolCreate
+        | ModifiedReconstructionCellMorphologyProtocolCreate
+        | ComputationallySynthesizedCellMorphologyProtocolCreate
+        | PlaceholderCellMorphologyProtocolCreate
+    ]
+):
+    root: Annotated[
+        DigitalReconstructionCellMorphologyProtocolCreate
+        | ModifiedReconstructionCellMorphologyProtocolCreate
+        | ComputationallySynthesizedCellMorphologyProtocolCreate
+        | PlaceholderCellMorphologyProtocolCreate,
+        Field(discriminator="generation_type"),
+    ]
+
+
+class CellMorphologyProtocolRead(
+    RootModel[
+        DigitalReconstructionCellMorphologyProtocolRead
+        | ModifiedReconstructionCellMorphologyProtocolRead
+        | ComputationallySynthesizedCellMorphologyProtocolRead
+        | PlaceholderCellMorphologyProtocolRead
+    ]
+):
+    root: Annotated[
+        DigitalReconstructionCellMorphologyProtocolRead
+        | ModifiedReconstructionCellMorphologyProtocolRead
+        | ComputationallySynthesizedCellMorphologyProtocolRead
+        | PlaceholderCellMorphologyProtocolRead,
+        Field(discriminator="generation_type"),
+    ]
 
 
 class CircuitRead(BaseModel):
@@ -2656,6 +2887,12 @@ class ListResponseCellCompositionRead(BaseModel):
     facets: Facets | None = None
 
 
+class ListResponseCellMorphologyProtocolRead(BaseModel):
+    data: Annotated[list[CellMorphologyProtocolRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
 class ListResponseCircuitRead(BaseModel):
     data: Annotated[list[CircuitRead], Field(title="Data")]
     pagination: PaginationResponse
@@ -2722,12 +2959,6 @@ class ListResponseMTypeClassificationRead(BaseModel):
     facets: Facets | None = None
 
 
-class ListResponseReconstructionMorphologyRead(BaseModel):
-    data: Annotated[list[ReconstructionMorphologyRead], Field(title="Data")]
-    pagination: PaginationResponse
-    facets: Facets | None = None
-
-
 class ListResponseSimulationCampaignRead(BaseModel):
     data: Annotated[list[SimulationCampaignRead], Field(title="Data")]
     pagination: PaginationResponse
@@ -2776,31 +3007,6 @@ class ListResponseValidationResultRead(BaseModel):
     facets: Facets | None = None
 
 
-class MEModelRead(BaseModel):
-    contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")] = (
-        None
-    )
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
-    type: EntityType | None = None
-    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
-    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
-    name: Annotated[str, Field(title="Name")]
-    description: Annotated[str, Field(title="Description")]
-    validation_status: ValidationStatus | None = "created"
-    id: Annotated[UUID, Field(title="Id")]
-    species: NestedSpeciesRead
-    strain: NestedStrainRead | None = None
-    brain_region: BrainRegionRead
-    mtypes: Annotated[list[Annotation] | None, Field(title="Mtypes")] = None
-    etypes: Annotated[list[Annotation] | None, Field(title="Etypes")] = None
-    morphology: ReconstructionMorphologyRead
-    emodel: EModelRead
-    calibration_result: MEModelCalibrationResultRead | None = None
-
-
 class MeasurementAnnotationCreate(BaseModel):
     entity_id: Annotated[UUID, Field(title="Entity Id")]
     entity_type: MeasurableEntity
@@ -2816,7 +3022,26 @@ class MeasurementAnnotationRead(BaseModel):
     measurement_kinds: Annotated[list[MeasurementKindRead], Field(title="Measurement Kinds")]
 
 
-class ReconstructionMorphologyAnnotationExpandedRead(BaseModel):
+class NestedCellMorphologyProtocolRead(
+    RootModel[
+        NestedDigitalReconstructionCellMorphologyProtocolRead
+        | NestedModifiedReconstructionCellMorphologyProtocolRead
+        | NestedComputationallySynthesizedCellMorphologyProtocolRead
+        | NestedPlaceholderCellMorphologyProtocolRead
+    ]
+):
+    root: Annotated[
+        NestedDigitalReconstructionCellMorphologyProtocolRead
+        | NestedModifiedReconstructionCellMorphologyProtocolRead
+        | NestedComputationallySynthesizedCellMorphologyProtocolRead
+        | NestedPlaceholderCellMorphologyProtocolRead,
+        Field(discriminator="generation_type"),
+    ]
+
+
+class CellMorphologyAnnotationExpandedRead(BaseModel):
+    brain_region: BrainRegionRead
+    subject: NestedSubjectRead
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")] = (
         None
     )
@@ -2834,11 +3059,33 @@ class ReconstructionMorphologyAnnotationExpandedRead(BaseModel):
     description: Annotated[str, Field(title="Description")]
     location: PointLocationBase | None = None
     legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = None
-    species: NestedSpeciesRead
-    strain: NestedStrainRead | None = None
-    brain_region: BrainRegionRead
     mtypes: Annotated[list[Annotation] | None, Field(title="Mtypes")] = None
+    cell_morphology_protocol: NestedCellMorphologyProtocolRead | None = None
     measurement_annotation: MeasurementAnnotationRead | None = None
+
+
+class CellMorphologyRead(BaseModel):
+    brain_region: BrainRegionRead
+    subject: NestedSubjectRead
+    contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")] = (
+        None
+    )
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    type: EntityType | None = None
+    assets: Annotated[list[AssetRead], Field(title="Assets")]
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    license: LicenseRead | None = None
+    id: Annotated[UUID, Field(title="Id")]
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    location: PointLocationBase | None = None
+    legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = None
+    mtypes: Annotated[list[Annotation] | None, Field(title="Mtypes")] = None
+    cell_morphology_protocol: NestedCellMorphologyProtocolRead | None = None
 
 
 class EModelReadExpanded(BaseModel):
@@ -2868,20 +3115,51 @@ class EModelReadExpanded(BaseModel):
     ion_channel_models: Annotated[list[IonChannelModelWAssets], Field(title="Ion Channel Models")]
 
 
+class ListResponseCellMorphologyRead(BaseModel):
+    data: Annotated[list[CellMorphologyRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
 class ListResponseEModelReadExpanded(BaseModel):
     data: Annotated[list[EModelReadExpanded], Field(title="Data")]
     pagination: PaginationResponse
     facets: Facets | None = None
 
 
-class ListResponseMEModelRead(BaseModel):
-    data: Annotated[list[MEModelRead], Field(title="Data")]
+class ListResponseMeasurementAnnotationRead(BaseModel):
+    data: Annotated[list[MeasurementAnnotationRead], Field(title="Data")]
     pagination: PaginationResponse
     facets: Facets | None = None
 
 
-class ListResponseMeasurementAnnotationRead(BaseModel):
-    data: Annotated[list[MeasurementAnnotationRead], Field(title="Data")]
+class MEModelRead(BaseModel):
+    contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")] = (
+        None
+    )
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    type: EntityType | None = None
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    validation_status: ValidationStatus | None = "created"
+    id: Annotated[UUID, Field(title="Id")]
+    species: NestedSpeciesRead
+    strain: NestedStrainRead | None = None
+    brain_region: BrainRegionRead
+    mtypes: Annotated[list[Annotation] | None, Field(title="Mtypes")] = None
+    etypes: Annotated[list[Annotation] | None, Field(title="Etypes")] = None
+    morphology: CellMorphologyRead
+    emodel: EModelRead
+    calibration_result: MEModelCalibrationResultRead | None = None
+
+
+class ListResponseMEModelRead(BaseModel):
+    data: Annotated[list[MEModelRead], Field(title="Data")]
     pagination: PaginationResponse
     facets: Facets | None = None
 

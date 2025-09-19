@@ -1,6 +1,8 @@
 import pytest
 
 from entitysdk.models import (
+    CellMorphology,
+    CellMorphologyProtocol,
     Contribution,
     ElectricalCellRecording,
     EModel,
@@ -13,7 +15,6 @@ from entitysdk.models import (
     MTypeClass,
     Organization,
     Person,
-    ReconstructionMorphology,
     Role,
     SingleNeuronSimulation,
     SingleNeuronSynaptome,
@@ -27,6 +28,8 @@ from entitysdk.models import (
 @pytest.mark.parametrize(
     "entity_type",
     [
+        CellMorphology,
+        CellMorphologyProtocol,
         Contribution,
         IonChannel,
         IonChannelModel,
@@ -34,7 +37,6 @@ from entitysdk.models import (
         License,
         MTypeClass,
         Person,
-        ReconstructionMorphology,
         Role,
         Species,
         Strain,

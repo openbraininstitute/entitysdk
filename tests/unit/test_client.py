@@ -489,7 +489,7 @@ def test_client_get(
 def _mock_asset_delete_response(asset_id):
     return {
         "path": "buffer.h5",
-        "full_path": "private/103d7868/103d7868/assets/reconstruction_morphology/8703/buffer.swc",
+        "full_path": "private/103d7868/103d7868/assets/cell_morphology/8703/buffer.swc",
         "is_directory": False,
         "content_type": "application/swc",
         "label": "morphology",
@@ -509,14 +509,14 @@ def test_client_delete_asset(
     api_url,
     request_headers,
 ):
-    mock_route.return_value = "reconstruction-morphology"
+    mock_route.return_value = "cell-morphology"
 
     entity_id = uuid.uuid4()
     asset_id = uuid.uuid4()
 
     httpx_mock.add_response(
         method="DELETE",
-        url=f"{api_url}/reconstruction-morphology/{entity_id}/assets/{asset_id}",
+        url=f"{api_url}/cell-morphology/{entity_id}/assets/{asset_id}",
         match_headers=request_headers,
         json=_mock_asset_delete_response(asset_id),
     )
@@ -540,20 +540,20 @@ def test_client_update_asset(
     api_url,
     request_headers,
 ):
-    mock_route.return_value = "reconstruction-morphology"
+    mock_route.return_value = "cell-morphology"
 
     entity_id = uuid.uuid4()
     asset_id = uuid.uuid4()
 
     httpx_mock.add_response(
         method="DELETE",
-        url=f"{api_url}/reconstruction-morphology/{entity_id}/assets/{asset_id}",
+        url=f"{api_url}/cell-morphology/{entity_id}/assets/{asset_id}",
         match_headers=request_headers,
         json=_mock_asset_response(asset_id),
     )
     httpx_mock.add_response(
         method="POST",
-        url=f"{api_url}/reconstruction-morphology/{entity_id}/assets",
+        url=f"{api_url}/cell-morphology/{entity_id}/assets",
         match_headers=request_headers,
         json=_mock_asset_response(asset_id),
     )
@@ -1083,14 +1083,14 @@ def test_client_register_asset(
     api_url,
     request_headers,
 ):
-    mock_route.return_value = "reconstruction-morphology"
+    mock_route.return_value = "cell-morphology"
 
     entity_id = uuid.uuid4()
     asset_id = uuid.uuid4()
 
     httpx_mock.add_response(
         method="POST",
-        url=f"{api_url}/reconstruction-morphology/{entity_id}/assets/register",
+        url=f"{api_url}/cell-morphology/{entity_id}/assets/register",
         match_headers=request_headers,
         json=_mock_asset_response(asset_id),
     )
