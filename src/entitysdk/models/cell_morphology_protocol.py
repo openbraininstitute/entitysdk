@@ -99,7 +99,20 @@ CellMorphologyProtocolUnion = Annotated[
 
 
 class CellMorphologyProtocol(BaseModel):
-    """Wrapper for consistent API, to be used for retrieving all the protocol types."""
+    """Polymorphic wrapper for consistent API, to be used for searching and retrieving.
+
+    The correct specific protocols are automatically instantiated.
+
+    For the registration it's possible to use any of the specific classes:
+
+    - `DigitalReconstructionCellMorphologyProtocol`
+    - `ModifiedReconstructionCellMorphologyProtocol`
+    - `ComputationallySynthesizedCellMorphologyProtocol`
+    - `PlaceholderCellMorphologyProtocol`
+
+    or this polymorphic class `CellMorphologyProtocol`, but in that case the instance should be
+    created with `CellMorphologyProtocol.model_validate()` to instantiate the correct object.
+    """
 
     _adapter: ClassVar[TypeAdapter] = TypeAdapter(CellMorphologyProtocolUnion)
 
