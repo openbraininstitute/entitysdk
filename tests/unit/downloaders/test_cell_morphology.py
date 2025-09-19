@@ -2,9 +2,9 @@ import uuid
 
 import pytest
 
-from entitysdk.downloaders.morphology import download_morphology
+from entitysdk.downloaders.cell_morphology import download_morphology
 from entitysdk.exception import IteratorResultError
-from entitysdk.models.morphology import ReconstructionMorphology
+from entitysdk.models.cell_morphology import CellMorphology
 
 
 def _mock_asset_response(asset_id):
@@ -35,20 +35,18 @@ def test_download_morphology(
 
     httpx_mock.add_response(
         method="GET",
-        url=f"{api_url}/reconstruction-morphology/{morph_id}/assets/{asset_id}",
+        url=f"{api_url}/cell-morphology/{morph_id}/assets/{asset_id}",
         match_headers=request_headers,
         json=_mock_asset_response(asset_id) | {"path": "foo.asc"},
     )
     httpx_mock.add_response(
         method="GET",
-        url=f"{api_url}/reconstruction-morphology/{morph_id}/assets/{asset_id}/download",
+        url=f"{api_url}/cell-morphology/{morph_id}/assets/{asset_id}/download",
         match_headers=request_headers,
         content="foo",
     )
 
-    morphology = ReconstructionMorphology(
-        id=morph_id, name="foo", assets=[_mock_asset_response(asset_id)]
-    )
+    morphology = CellMorphology(id=morph_id, name="foo", assets=[_mock_asset_response(asset_id)])
 
     output_path = download_morphology(
         client=client,

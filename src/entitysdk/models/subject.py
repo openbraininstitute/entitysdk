@@ -6,7 +6,7 @@ from typing import Annotated
 from pydantic import Field
 
 from entitysdk.models.entity import Entity
-from entitysdk.models.taxonomy import Species
+from entitysdk.models.taxonomy import Species, Strain
 from entitysdk.types import AgePeriod, Sex
 
 
@@ -40,3 +40,9 @@ class Subject(Entity):
             description="The species of the subject.",
         ),
     ]
+    strain: Annotated[
+        Strain | None,
+        Field(
+            description="The optional strain of the subject.",
+        ),
+    ] = None

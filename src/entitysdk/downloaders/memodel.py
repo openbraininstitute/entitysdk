@@ -4,9 +4,9 @@ from pathlib import Path
 from typing import cast
 
 from entitysdk.client import Client
+from entitysdk.downloaders.cell_morphology import download_morphology
 from entitysdk.downloaders.emodel import download_hoc
 from entitysdk.downloaders.ion_channel_model import download_ion_channel_mechanism
-from entitysdk.downloaders.morphology import download_morphology
 from entitysdk.exception import IteratorResultError
 from entitysdk.models.emodel import EModel
 from entitysdk.models.memodel import MEModel

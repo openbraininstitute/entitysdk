@@ -4,18 +4,15 @@ from typing import Annotated
 
 from pydantic import Field
 
+from entitysdk.models.brain_region import BrainRegion
+from entitysdk.models.cell_morphology import CellMorphology
 from entitysdk.models.contribution import Contribution
 from entitysdk.models.entity import Entity
 from entitysdk.models.etype import ETypeClass
 from entitysdk.models.ion_channel_model import IonChannelModel
-from entitysdk.models.morphology import (
-    BrainRegion,
-    License,
-    ReconstructionMorphology,
-    Species,
-    Strain,
-)
+from entitysdk.models.license import License
 from entitysdk.models.mtype import MTypeClass
+from entitysdk.models.taxonomy import Species, Strain
 
 
 class EModel(Entity):
@@ -45,25 +42,25 @@ class EModel(Entity):
         str,
         Field(
             description="The iteration of the emodel used during optimisation.",
-            examples="1372346",
+            examples=["1372346"],
         ),
     ]
     score: Annotated[
         float,
         Field(
             description="The score of the emodel gotten during validation.",
-            examples=54.0,
+            examples=[54.0],
         ),
     ]
     seed: Annotated[
         int,
         Field(
             description="The RNG seed used during optimisation.",
-            examples=13,
+            examples=[13],
         ),
     ]
     exemplar_morphology: Annotated[
-        ReconstructionMorphology | None,
+        CellMorphology | None,
         Field(
             description="The morphology used during optimisation.",
         ),

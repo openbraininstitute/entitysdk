@@ -58,7 +58,8 @@
       "creation_date": null,
       "name": "Mus musculus",
       "taxonomy_id": "NCBITaxon:10090"
-    }
+    },
+    "strain": null
   },
   "brain_region": {
     "id": "53125ffd-f655-460b-9d32-e231eb561699",

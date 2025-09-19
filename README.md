@@ -51,7 +51,7 @@ client = Client(
 
 # Search for morphologies
 iterator = client.search_entity(
-    entity_type=models.ReconstructionMorphology,
+    entity_type=models.CellMorphology,
     query={"mtype__pref_label": "L5_TPC:A"},
     limit=1,
 )
@@ -60,7 +60,7 @@ morphology = next(iterator)
 # Upload an asset
 client.upload_file(
     entity_id=morphology.id,
-    entity_type=models.ReconstructionMorphology,
+    entity_type=models.CellMorphology,
     file_path="path/to/file.swc",
     file_content_type="application/swc",
 )

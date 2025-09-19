@@ -5,11 +5,11 @@ from typing import Annotated
 from pydantic import Field
 
 from entitysdk.models.base import BaseModel
+from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.contribution import Contribution
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.models.memodel import NestedMEModel
-from entitysdk.models.morphology import BrainRegion
 
 
 class SingleNeuronSynaptomeBase(BaseModel):
@@ -33,7 +33,7 @@ class SingleNeuronSynaptomeBase(BaseModel):
         int,
         Field(
             description="Random number generator seed.",
-            examples=42,
+            examples=[42],
         ),
     ]
 
