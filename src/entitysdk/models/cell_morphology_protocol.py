@@ -2,8 +2,9 @@
 
 from typing import Annotated, Any, ClassVar, Literal
 
-from pydantic import BaseModel, Field, HttpUrl, TypeAdapter
+from pydantic import ConfigDict, Field, HttpUrl, TypeAdapter
 
+from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.types import (
     CellMorphologyGenerationType,
@@ -16,9 +17,17 @@ from entitysdk.types import (
 
 
 class CellMorphologyProtocolBase(Entity):
-    """Cell Morphology Protocol Base, used by all the protocols except placeholder."""
+    """Cell Morphology Protocol Base, used by all the protocols."""
+
+    # forbid extra parameters to prevent providing attributes of other classes by mistake
+    model_config = ConfigDict(extra="forbid")
 
     type: EntityType | None = EntityType.cell_morphology_protocol
+
+
+class CellMorphologyProtocolExtendedBase(CellMorphologyProtocolBase):
+    """Cell Morphology Protocol Extended Base, used by all the protocols except placeholder."""
+
     protocol_document: Annotated[
         HttpUrl | None,
         Field(description="URL link to protocol document or publication."),
@@ -30,7 +39,7 @@ class CellMorphologyProtocolBase(Entity):
 
 
 class DigitalReconstructionCellMorphologyProtocol(
-    CellMorphologyProtocolBase,
+    CellMorphologyProtocolExtendedBase,
 ):
     """Experimental morphology method for capturing cell morphology data."""
 
@@ -58,7 +67,7 @@ class DigitalReconstructionCellMorphologyProtocol(
 
 
 class ModifiedReconstructionCellMorphologyProtocol(
-    CellMorphologyProtocolBase,
+    CellMorphologyProtocolExtendedBase,
 ):
     """Modified Reconstruction Cell Morphology Protocol."""
 
@@ -69,7 +78,7 @@ class ModifiedReconstructionCellMorphologyProtocol(
 
 
 class ComputationallySynthesizedCellMorphologyProtocol(
-    CellMorphologyProtocolBase,
+    CellMorphologyProtocolExtendedBase,
 ):
     """Computationally Synthesized Cell Morphology Protocol."""
 
@@ -80,7 +89,7 @@ class ComputationallySynthesizedCellMorphologyProtocol(
 
 
 class PlaceholderCellMorphologyProtocol(
-    Entity,
+    CellMorphologyProtocolBase,
 ):
     """Placeholder Cell Morphology Protocol."""
 
@@ -98,23 +107,30 @@ CellMorphologyProtocolUnion = Annotated[
 ]
 
 
-class CellMorphologyProtocol(BaseModel):
+class CellMorphologyProtocol(Identifiable):
     """Polymorphic wrapper for consistent API, to be used for searching and retrieving.
 
     The correct specific protocols are automatically instantiated.
 
-    For the registration it's possible to use any of the specific classes:
+    For the registration it's possible to use this same class, or any of the specific classes:
 
     - `DigitalReconstructionCellMorphologyProtocol`
     - `ModifiedReconstructionCellMorphologyProtocol`
     - `ComputationallySynthesizedCellMorphologyProtocol`
     - `PlaceholderCellMorphologyProtocol`
-
-    or this polymorphic class `CellMorphologyProtocol`, but in that case the instance should be
-    created with `CellMorphologyProtocol.model_validate()` to instantiate the correct object.
     """
 
     _adapter: ClassVar[TypeAdapter] = TypeAdapter(CellMorphologyProtocolUnion)
+
+    def __new__(cls, *args, **kwargs) -> CellMorphologyProtocolUnion:  # type: ignore[misc]
+        """Construct a CellMorphologyProtocol from keyword arguments."""
+        if args:
+            msg = "Positional args not supported, use keyword args instead."
+            raise TypeError(msg)
+        return cls._adapter.validate_python(kwargs)
+
+    def __init__(self, **kwargs: Any) -> None:
+        """Catch-all to satisfy type checkers."""
 
     @classmethod
     def model_validate(cls, obj: Any, *args, **kwargs) -> CellMorphologyProtocolUnion:  # type: ignore[override]
