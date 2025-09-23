@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 
 import pytest
+from pydantic import ValidationError
 
 from entitysdk.models.cell_morphology_protocol import (
     CellMorphologyProtocol,
@@ -110,6 +111,32 @@ def test_register(request, client, httpx_mock, auth_token, json_data_fixture, mo
     registered = client.register_entity(entity=model)
     expected_json = json_data | {"id": str(MOCK_UUID)}
     assert registered.model_dump(mode="json", exclude_unset=True) == expected_json
+
+
+@pytest.mark.parametrize(
+    ("json_data_fixture", "model_fixture"),
+    [
+        ("json_digital_reconstruction", "model_digital_reconstruction"),
+        ("json_modified_reconstruction", "model_modified_reconstruction"),
+        ("json_computationally_synthesized", "model_computationally_synthesized"),
+        ("json_placeholder", "model_placeholder"),
+    ],
+)
+def test_adapter(request, json_data_fixture, model_fixture):
+    json_data = request.getfixturevalue(json_data_fixture)
+    model = request.getfixturevalue(model_fixture)
+
+    new_model = Model(**json_data)
+    assert new_model == model
+
+    new_model = Model.model_validate(json_data)
+    assert new_model == model
+
+    with pytest.raises(TypeError, match="Positional args not supported"):
+        Model("name")
+
+    with pytest.raises(ValidationError, match="Extra inputs are not permitted"):
+        Model(generation_type=json_data["generation_type"], invalid_input="invalid")
 
 
 @pytest.mark.parametrize(
