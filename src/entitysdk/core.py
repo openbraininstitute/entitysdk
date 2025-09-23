@@ -26,19 +26,20 @@ from entitysdk.types import ID, AssetLabel, DerivationType
 from entitysdk.util import make_db_api_request, stream_paginated_request
 
 L = logging.getLogger(__name__)
+
 TIdentifiable = TypeVar("TIdentifiable", bound=Identifiable)
 
 
 def search_entities(
     url: str,
     *,
-    entity_type: type[Identifiable],
+    entity_type: type[TIdentifiable],
     query: dict | None = None,
     limit: int | None,
     project_context: ProjectContext | None = None,
     token: str,
     http_client: httpx.Client | None = None,
-) -> IteratorResult[Identifiable]:
+) -> IteratorResult[TIdentifiable]:
     """Search for entities.
 
     Args:
@@ -94,10 +95,10 @@ def get_entity_derivations(
     entity_id: ID,
     entity_type: type[Entity],
     project_context: ProjectContext,
-    derivation_type: DerivationType | None,
+    derivation_type: DerivationType,
     token: str,
     http_client: httpx.Client | None = None,
-):
+) -> IteratorResult[Entity]:
     """Get derivations for entity."""
     url = get_entity_derivations_endpoint(
         api_url=api_url,
@@ -105,7 +106,7 @@ def get_entity_derivations(
         entity_id=entity_id,
     )
 
-    params = {"derivation_type": DerivationType(derivation_type)} if derivation_type else None
+    params = {"derivation_type": DerivationType(derivation_type)}
 
     response = make_db_api_request(
         url=url,
@@ -123,11 +124,11 @@ def get_entity_derivations(
 def register_entity(
     url: str,
     *,
-    entity: Identifiable,
+    entity: TIdentifiable,
     project_context: ProjectContext,
     token: str,
     http_client: httpx.Client | None = None,
-) -> Identifiable:
+) -> TIdentifiable:
     """Register entity."""
     json_data = serdes.serialize_model(entity)
 
@@ -145,12 +146,12 @@ def register_entity(
 def update_entity(
     url: str,
     *,
-    entity_type: type[Identifiable],
+    entity_type: type[TIdentifiable],
     attrs_or_entity: dict | Identifiable,
     project_context: ProjectContext,
     token: str,
     http_client: httpx.Client | None = None,
-) -> Identifiable:
+) -> TIdentifiable:
     """Update entity."""
     if isinstance(attrs_or_entity, dict):
         json_data = serdes.serialize_dict(attrs_or_entity)

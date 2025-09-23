@@ -1,43 +1,51 @@
 {
-  "id": "b8f38c7f-2675-4c6a-a394-f3a60a9a3e6f",
-  "type": "ion_channel_model",
-  "update_date": "2024-10-29T13:36:30.827776Z",
-  "creation_date": "2024-09-10T14:25:03.707956Z",
-  "created_by": null,
-  "updated_by": null,
-  "authorized_public": true,
-  "authorized_project_id": "c73ac3a5-3b7d-41bc-92e7-9f9309a49300",
-  "name": "Ca_HVA",
-  "nmodl_suffix": "Ca_HVA",
-  "brain_region": {
-    "id": "38553ac8-7d71-4591-bfee-2fc72e2dffdf",
-    "update_date": "2025-05-09T13:32:18.034672Z",
-    "creation_date": "2025-05-09T13:32:18.034672Z",
-    "name": "Accessory abducens nucleus",
-    "annotation_value": 568,
-    "acronym": "ACVI",
-    "parent_structure_id": "596305b3-71b2-41e4-afd3-b9f2e90f79f8",
-    "hierarchy_id": "e3e70682-c209-4cac-a29f-6fbed82c07cd",
-    "color_hex_triplet": "1000"
+  "contributions": [],
+  "assets": [
+    {
+      "size": 1188,
+      "sha256_digest": "e80d50df8f069863e4dd1f361a8a049933402ed233342f4ddaafab87064943fb",
+      "path": "Ca_HVA2.mod",
+      "full_path": "public/a98b7abc-fc46-4700-9e3d-37137812c730/0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6/assets/ion_channel_model/21ebb7ab-b41b-441d-b494-6665075d26b0/Ca_HVA2.mod",
+      "is_directory": false,
+      "content_type": "application/mod",
+      "meta": {},
+      "label": "neuron_mechanisms",
+      "id": "73e5c7ef-5cb6-484d-b534-2c1209f9f280",
+      "status": "created"
+    }
+  ],
+  "license": null,
+  "creation_date": "2022-10-20T13:05:35.588000Z",
+  "update_date": "2025-04-15T12:41:30.454420Z",
+  "created_by": {
+    "id": "83844b40-ffa9-49f1-9c14-bc4a829e07b0",
+    "given_name": "John",
+    "family_name": "Doe",
+    "pref_label": "John Doe",
+    "type": "person"
   },
-  "contact_email": null,
-  "experiment_date": null,
-  "published_in": null,
-  "description": "High-voltage activated calcium channel",
+  "updated_by": {
+    "id": "59cc60b1-7604-44b4-a736-95c3e652c71a",
+    "given_name": "service-account",
+    "family_name": "service-account",
+    "pref_label": "service-account",
+    "type": "person"
+  },
+  "brain_region": {
+    "creation_date": "2025-06-27T11:10:27.186088Z",
+    "update_date": "2025-06-27T11:10:27.186088Z",
+    "id": "4642cddb-4fbe-4aae-bbf7-0946d6ada066",
+    "annotation_value": 8,
+    "name": "Basic cell groups and regions",
+    "acronym": "grey",
+    "color_hex_triplet": "BFDAE3",
+    "parent_structure_id": "eb1167b3-67a9-4378-bc65-c1e582e2e662",
+    "hierarchy_id": "e3e70682-c209-4cac-a29f-6fbed82c07cd"
+  },
   "subject": {
-    "id": "9fb86d35-6bda-4b8d-9eb3-2715c98fff3b",
-    "name": "Unknown",
+    "id": "9edb44c6-33b5-403b-8ab6-0890cfb12d07",
+    "name": "Generic Mus musculus",
     "description": "",
-    "assets": [],
-    "authorized_project_id": null,
-    "authorized_public": false,
-    "contributions": null,
-    "created_by": null,
-    "creation_date": null,
-    "legacy_id": null,
-    "type": null,
-    "update_date": null,
-    "updated_by": null,
     "sex": "unknown",
     "weight": null,
     "age_value": null,
@@ -45,75 +53,51 @@
     "age_max": null,
     "age_period": null,
     "species": {
-      "id": "3b1c2a25-b4fb-468d-98d2-d2d431ac8b4a",
-      "name": "Rattus norvegicus",
-      "taxonomy_id": "NCBITaxon:10116",
-      "creation_date": null,
-      "update_date": null
+      "id": "b7ad4cca-4ac2-4095-9781-37fb68fe9ca1",
+      "name": "Mus musculus",
+      "taxonomy_id": "NCBITaxon:10090"
     }
   },
-  "license": null,
-  "contributions": [
-    {
-      "id": "7f43ce20-e63d-48c1-bc73-dabb38ee181b",
-      "update_date": "2025-03-29T16:49:12.449364Z",
-      "creation_date": "2025-03-29T16:49:12.449364Z",
-      "agent": {
-        "id": "f27cfa11-d1bc-4a14-b651-174bb53674ff",
-        "update_date": "2021-04-14T09:51:14.062000Z",
-        "creation_date": "2021-04-14T09:51:14.062000Z",
-        "type": "organization",
-        "pref_label": "École Polytechnique Fédérale de Lausanne",
-        "alternative_name": ""
-      },
-      "role": {
-        "id": "8b06e557-277b-4b0c-a439-bfb02d41927c",
-        "update_date": "2025-03-29T16:48:36.192831Z",
-        "creation_date": "2025-03-29T16:48:36.192831Z",
-        "name": "unspecified",
-        "role_id": "unspecified"
-      },
-      "entity": null
-    }
-  ],
-  "is_ljp_corrected": false,
-  "is_temperature_dependent": true,
-  "temperature_celsius": 36,
-  "is_stochastic": true,
+  "authorized_project_id": "0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6",
+  "authorized_public": true,
+  "type": "ion_channel_model",
+  "id": "21ebb7ab-b41b-441d-b494-6665075d26b0",
+  "experiment_date": null,
+  "contact_email": null,
+  "published_in": null,
+  "description": "Ca_HVA2 Channel.",
+  "name": "Ca_HVA2",
+  "nmodl_suffix": "Ca_HVA2",
+  "is_ljp_corrected": true,
+  "is_temperature_dependent": false,
+  "temperature_celsius": 34,
+  "is_stochastic": false,
   "neuron_block": {
-    "global_": [
-      {"gna": "S/cm2"},
-      {"gk": "S/cm2"}
-    ],
+    "global": [{"celsius": "degree C"}],
     "range": [
-      {"gCa_HVAbar": "S/cm2"},
-      {"ica": "mA/cm2"}
+      {
+        "gCa_HVAbar": "S/cm2"
+      },
+      {
+        "gCa_HVA": null
+      },
+      {
+        "ica": "mA/cm2"
+      }
     ],
     "useion": [
       {
-        "ion_name": "Ca",
-        "read": ["eca"],
-        "write": ["ica"],
-        "valence": 2,
+        "ion_name": "ca",
+        "read": [
+          "eca"
+        ],
+        "write": [
+          "ica"
+        ],
+        "valence": null,
         "main_ion": true
       }
     ],
-    "nonspecific": [{"ihcn": "mA/cm2"}]
-  },
-  "assets": [
-    {
-      "id": "a90bab5c-8529-4829-99fc-e90a270e8b30",
-      "path": "Ca_HVA.mod",
-      "full_path": "public/a98b7abc-fc46-4700-9e3d-37137812c730/0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6/assets/ion_channel_model/9720aa4a-0cd1-4f10-b6ad-04deb8f997b6/Ca_HVA.mod",
-      "is_directory": false,
-      "content_type": "application/mod",
-      "label": "neuron_mechanisms",
-      "size": 561221,
-      "sha256_digest": "8b850eface3e7b881db62c361dc5da62be008ca81501c406a59646bf7075c95b",
-      "status": "created",
-      "creation_date": null,
-      "update_date": null,
-      "meta": {}
-    }
-  ]
+    "nonspecific": []
+  }
 }

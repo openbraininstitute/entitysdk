@@ -27,6 +27,7 @@ from entitysdk.types import (
     AssetLabel,
     ContentType,
     DeploymentEnvironment,
+    DerivationType,
     StorageType,
     Token,
 )
@@ -37,7 +38,7 @@ from entitysdk.util import (
 )
 from entitysdk.utils.asset import filter_assets
 
-TEntity = TypeVar("TEntity", bound=Entity)
+TIdentifiable = TypeVar("TIdentifiable", bound=Identifiable)
 
 
 class Client:
@@ -109,9 +110,9 @@ class Client:
         self,
         entity_id: ID,
         *,
-        entity_type: type[TEntity],
+        entity_type: type[TIdentifiable],
         project_context: ProjectContext | None = None,
-    ) -> TEntity:
+    ) -> TIdentifiable:
         """Get entity from resource id.
 
         Args:
@@ -139,11 +140,11 @@ class Client:
     def search_entity(
         self,
         *,
-        entity_type: type[Identifiable],
+        entity_type: type[TIdentifiable],
         query: dict | None = None,
         limit: int | None = None,
         project_context: ProjectContext | None = None,
-    ) -> IteratorResult[Identifiable]:
+    ) -> IteratorResult[TIdentifiable]:
         """Search for entities.
 
         Args:
@@ -169,24 +170,25 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Entity],
+        derivation_type: DerivationType,
         project_context: ProjectContext | None = None,
-    ):
+    ) -> IteratorResult[Entity]:
         """Get all the derivation for an entity."""
         return core.get_entity_derivations(
             api_url=self.api_url,
             entity_id=entity_id,
             entity_type=entity_type,
-            derivation_type=None,
+            derivation_type=derivation_type,
             project_context=self._required_user_context(override_context=project_context),
             token=self._token_manager.get_token(),
         )
 
     def register_entity(
         self,
-        entity: Identifiable,
+        entity: TIdentifiable,
         *,
         project_context: ProjectContext | None = None,
-    ) -> Identifiable:
+    ) -> TIdentifiable:
         """Register entity.
 
         Args:
@@ -209,11 +211,11 @@ class Client:
     def update_entity(
         self,
         entity_id: ID,
-        entity_type: type[Identifiable],
+        entity_type: type[TIdentifiable],
         attrs_or_entity: dict | Identifiable,
         *,
         project_context: ProjectContext | None = None,
-    ) -> Identifiable:
+    ) -> TIdentifiable:
         """Update an entity.
 
         Args:

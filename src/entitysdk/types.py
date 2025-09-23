@@ -27,11 +27,14 @@ from entitysdk._server_schemas import (
     ElectricalRecordingStimulusType as ElectricalRecordingStimulusType,
 )
 from entitysdk._server_schemas import ElectricalRecordingType as ElectricalRecordingType
+from entitysdk._server_schemas import EMCellMeshGenerationMethod as EMCellMeshGenerationMethod
+from entitysdk._server_schemas import EMCellMeshType as EMCellMeshType
 from entitysdk._server_schemas import EntityType as EntityType
 from entitysdk._server_schemas import PublicationType as PublicationType
 from entitysdk._server_schemas import Sex as Sex
 from entitysdk._server_schemas import SimulationExecutionStatus as SimulationExecutionStatus
 from entitysdk._server_schemas import SingleNeuronSimulationStatus as SingleNeuronSimulationStatus
+from entitysdk._server_schemas import SlicingDirectionType as SlicingDirectionType
 from entitysdk._server_schemas import StorageType as StorageType
 from entitysdk._server_schemas import StructuralDomain as StructuralDomain
 from entitysdk._server_schemas import ValidationStatus as ValidationStatus

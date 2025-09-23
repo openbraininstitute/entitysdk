@@ -18,6 +18,7 @@ class BaseModel(PydanticBaseModel):
         frozen=True,
         from_attributes=True,
         extra="ignore",
+        serialize_by_alias=True,
     )
 
     def evolve(self, **model_attributes) -> Self:
