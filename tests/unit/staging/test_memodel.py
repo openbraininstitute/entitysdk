@@ -1,6 +1,7 @@
 import json
 from unittest import mock
 
+from entitysdk.exception import StagingError
 import h5py
 import pytest
 
@@ -57,43 +58,33 @@ def test_stage_sonata_from_memodel_success(tmp_path, fake_memodel, fake_client):
 
 def test_stage_sonata_from_memodel_no_calibration(tmp_path, fake_memodel_no_calib, fake_client):
     with mock.patch.object(memodel_mod, "download_memodel"):
-        with pytest.raises(ValueError, match="has no calibration result"):
+        with pytest.raises(StagingError, match="has no calibration result"):
             memodel_mod.stage_sonata_from_memodel(
                 fake_client, fake_memodel_no_calib, output_dir=tmp_path
             )
 
 
-def test_stage_sonata_from_memodel_missing_config(tmp_path, fake_memodel, fake_client):
-    with (
-        mock.patch.object(memodel_mod, "download_memodel"),
-        mock.patch.object(memodel_mod, "_generate_sonata_files_from_memodel"),
-    ):
-        with pytest.raises(FileNotFoundError, match="Expected circuit config not found"):
-            memodel_mod.stage_sonata_from_memodel(fake_client, fake_memodel, output_dir=tmp_path)
-
-
 def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
     memodel_path = tmp_path / "memodel"
-    hoc_dir = memodel_path / "hoc"
-    morph_dir = memodel_path / "morphology"
+    hoc_path = memodel_path / "hoc" / "cell.hoc"
+    morph_path = memodel_path / "morphology" / "cell.asc"
     mech_dir = memodel_path / "mechanisms"
 
-    hoc_dir.mkdir(parents=True)
-    morph_dir.mkdir()
+    hoc_path.parent.mkdir(parents=True)
+    morph_path.parent.mkdir()
     mech_dir.mkdir()
 
-    (hoc_dir / "cell.hoc").write_text("hoc content")
-    (morph_dir / "cell.asc").write_text("morph content")
+    (hoc_path).write_text("hoc content")
+    (morph_path).write_text("morph content")
     (mech_dir / "mech.mod").write_text("mod content")
 
     output_path = tmp_path / "sonata"
 
     downloaded_me_model = DownloadedMEModel(
-        hoc_path=hoc_dir,
-        hoc_files=["cell.hoc"],
+        hoc_path=hoc_path,
         mechanisms_dir=mech_dir,
         mechanism_files=["mech.mod"],
-        morphology_path=morph_dir,
+        morphology_path=morph_path,
     )
 
     memodel_mod._generate_sonata_files_from_memodel(
@@ -129,7 +120,7 @@ def test_create_json_configs(tmp_path):
     memodel_mod.create_nodes_file(
         hoc_file=str(hoc_file),
         morph_file=str(morph_file),
-        output_path=network_dir,
+        output_file=network_dir / "nodes.h5",
         mtype="L5_TTPC1",
         threshold_current=0.2,
         holding_current=-0.1,
@@ -141,9 +132,9 @@ def test_create_json_configs(tmp_path):
     with open(tmp_path / "circuit_config.json") as f:
         config = json.load(f)
         assert "networks" in config
-        assert config["networks"]["nodes"][0]["nodes_file"] == "$NETWORK_DIR/nodes.h5"
+        assert config["networks"]["nodes"][0]["nodes_file"] == "$BASE_DIR/network/nodes.h5"
 
-    memodel_mod.create_node_sets_file(output_path=tmp_path)
+    memodel_mod.create_node_sets_file(output_file=tmp_path / "node_sets.json")
     with open(tmp_path / "node_sets.json") as f:
         node_sets = json.load(f)
         assert node_sets["All"]["node_id"] == [0]
@@ -155,17 +146,17 @@ def test_missing_hoc_file_raise(tmp_path):
     (memodel_path / "morphology").mkdir()
     (memodel_path / "mechanisms").mkdir()
     (memodel_path / "hoc").mkdir()
+    (memodel_path / "morphology" / "cell.asc").write_text("asc content")
 
-    hoc_path = memodel_path / "hoc"
+    hoc_path = memodel_path / "hoc" / "missing.hoc"
 
     downloaded_me_model = DownloadedMEModel(
         hoc_path=hoc_path,
-        hoc_files=[],
         mechanisms_dir=memodel_path / "mechanisms",
         mechanism_files=["mech.mod"],
-        morphology_path=memodel_path / "morphology",
+        morphology_path=memodel_path / "morphology" / "cell.asc",
     )
-    with pytest.raises(FileNotFoundError, match=f"No .hoc files found in {hoc_path}"):
+    with pytest.raises(FileNotFoundError, match=f"No HOC file found {hoc_path}"):
         memodel_mod._generate_sonata_files_from_memodel(
             downloaded_memodel=downloaded_me_model,
             output_path=tmp_path,
@@ -180,16 +171,16 @@ def test_missing_morphology_file_raises(tmp_path):
     memodel_path.mkdir()
     (memodel_path / "hoc").mkdir()
     (memodel_path / "mechanisms").mkdir()
+    (memodel_path / "morphology").mkdir()
     (memodel_path / "hoc" / "cell.hoc").write_text("hoc content")
 
     downloaded_me_model = DownloadedMEModel(
-        hoc_path=memodel_path / "hoc",
-        hoc_files=["cell.hoc"],
+        hoc_path=memodel_path / "hoc" / "cell.hoc",
         mechanisms_dir=memodel_path / "mechanisms",
         mechanism_files=["mech.mod"],
-        morphology_path=memodel_path / "morphology",
+        morphology_path=memodel_path / "morphology" / "missing.asc",
     )
-    with pytest.raises(FileNotFoundError, match="No .asc morphology file found"):
+    with pytest.raises(FileNotFoundError, match="No morphology file found"):
         memodel_mod._generate_sonata_files_from_memodel(
             downloaded_memodel=downloaded_me_model,
             output_path=tmp_path,
