@@ -7,8 +7,7 @@ from entitysdk.client import Client
 from entitysdk.downloaders.emodel import download_hoc
 from entitysdk.downloaders.ion_channel_model import download_ion_channel_mechanism
 from entitysdk.downloaders.morphology import download_morphology
-from entitysdk.exception import StagingError
-from entitysdk.exception import IteratorResultError
+from entitysdk.exception import IteratorResultError, StagingError
 from entitysdk.models.emodel import EModel
 from entitysdk.models.memodel import MEModel
 from entitysdk.schemas.memodel import DownloadedMEModel

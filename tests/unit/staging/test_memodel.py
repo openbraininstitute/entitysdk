@@ -1,12 +1,12 @@
 import json
 from unittest import mock
 
-from entitysdk.exception import StagingError
 import h5py
 import pytest
 
-from entitysdk.staging import memodel as memodel_mod
+from entitysdk.exception import StagingError
 from entitysdk.schemas.memodel import DownloadedMEModel
+from entitysdk.staging import memodel as memodel_mod
 
 
 class FakeMType:

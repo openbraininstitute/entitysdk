@@ -2,7 +2,6 @@
 
 import json
 import logging
-import os
 import shutil
 import tempfile
 from pathlib import Path
@@ -10,11 +9,11 @@ from pathlib import Path
 import h5py
 
 from entitysdk.client import Client
-from entitysdk.downloaders.memodel import download_memodel, DownloadedMEModel
-from entitysdk.models.memodel import MEModel
+from entitysdk.downloaders.memodel import DownloadedMEModel, download_memodel
 from entitysdk.exception import StagingError
-from entitysdk.utils.io import write_json
+from entitysdk.models.memodel import MEModel
 from entitysdk.utils.filesystem import create_dir
+from entitysdk.utils.io import write_json
 
 L = logging.getLogger(__name__)
 
