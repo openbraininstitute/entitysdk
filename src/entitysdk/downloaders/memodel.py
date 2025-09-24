@@ -30,13 +30,9 @@ def download_memodel(client: Client, memodel: MEModel, output_dir=".") -> Downlo
     )
 
     hoc_path = download_hoc(client, emodel, Path(output_dir) / "hoc")
-    if hoc_path and hoc_path.exists():
-        hoc_files = [f.name for f in hoc_path.glob("*.hoc") if f.is_file()]
-        if len(hoc_files) == 0:
-            raise StagingError(f"No .hoc files found in {hoc_path}")
-    else:
-        raise StagingError(f"HOC path does not exist: {hoc_path}")
-    
+    if not hoc_path.exists():
+        raise StagingError(f"HOC does not exist: {hoc_path}")
+
     # only take .asc format for now.
     # Will take specific format when morphology_format is integrated into MEModel
     try:
@@ -54,9 +50,8 @@ def download_memodel(client: Client, memodel: MEModel, output_dir=".") -> Downlo
         mechanism_files.append(ion_channel_path.name)
 
     return DownloadedMEModel(
-        hoc_path=hoc_path, 
-        hoc_files=hoc_files,
-        mechanisms_dir=mechanisms_dir, 
+        hoc_path=hoc_path,
+        mechanisms_dir=mechanisms_dir,
         mechanism_files=mechanism_files,
-        morphology_path=morphology_path
+        morphology_path=morphology_path,
     )
