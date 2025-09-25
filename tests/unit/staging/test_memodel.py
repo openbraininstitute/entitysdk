@@ -64,6 +64,29 @@ def test_stage_sonata_from_memodel_no_calibration(tmp_path, fake_memodel_no_cali
             )
 
 
+def test_stage_sonata_from_memodel_no_mtypes(tmp_path):
+    class DummyClient:
+        def get_entity(self, entity_id, entity_type):
+            class DummyEModel:
+                id = "dummy_emodel_id"
+                ion_channel_models = []
+
+            return DummyEModel()
+
+    class DummyEModelObj:
+        id = "dummy_emodel_id"
+
+    class DummyMEModel:
+        id = "dummy_id"
+        mtypes = None
+        calibration_result = None
+        emodel = DummyEModelObj()
+        morphology = "dummy_morphology"
+
+    with pytest.raises(StagingError, match="has no mtypes defined"):
+        memodel_mod.stage_sonata_from_memodel(DummyClient(), DummyMEModel(), output_dir=tmp_path)
+
+
 def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
     memodel_path = tmp_path / "memodel"
     hoc_path = memodel_path / "hoc" / "cell.hoc"
