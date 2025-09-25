@@ -11,6 +11,7 @@ _ROUTES = {
     "BrainLocation": "brain-location",
     "BrainRegion": "brain-region",
     "BrainRegionHierarchy": "brain-region-hierarchy",
+    "CellMorphology": "cell-morphology",
     "Circuit": "circuit",
     "Consortium": "consortium",
     "Contribution": "contribution",
@@ -35,7 +36,6 @@ _ROUTES = {
     "Organization": "organization",
     "Person": "person",
     "Publication": "publication",
-    "ReconstructionMorphology": "reconstruction-morphology",
     "ScientificArtifactPublicationLink": "scientific-artifact-publication-link",
     "Simulation": "simulation",
     "SimulationCampaign": "simulation-campaign",
@@ -51,6 +51,13 @@ _ROUTES = {
     "Subject": "subject",
     "Taxonomy": "taxonomy",
     "ValidationResult": "validation-result",
+    # CellMorphologyProtocol type for retrieving
+    "CellMorphologyProtocol": "cell-morphology-protocol",
+    # CellMorphologyProtocol types for registering
+    "DigitalReconstructionCellMorphologyProtocol": "cell-morphology-protocol",
+    "ModifiedReconstructionCellMorphologyProtocol": "cell-morphology-protocol",
+    "ComputationallySynthesizedCellMorphologyProtocol": "cell-morphology-protocol",
+    "PlaceholderCellMorphologyProtocol": "cell-morphology-protocol",
 }
 
 

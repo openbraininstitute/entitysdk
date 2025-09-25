@@ -5,6 +5,8 @@ from entitysdk.models.asset import Asset
 from entitysdk.models.brain_location import BrainLocation
 from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.brain_region_hierarchy import BrainRegionHierarchy
+from entitysdk.models.cell_morphology import CellMorphology
+from entitysdk.models.cell_morphology_protocol import CellMorphologyProtocol
 from entitysdk.models.circuit import Circuit
 from entitysdk.models.classification import ETypeClassification, MTypeClassification
 from entitysdk.models.contribution import Contribution, Role
@@ -23,7 +25,6 @@ from entitysdk.models.ion_channel_recording import IonChannelRecording
 from entitysdk.models.license import License
 from entitysdk.models.memodel import MEModel
 from entitysdk.models.memodelcalibrationresult import MEModelCalibrationResult
-from entitysdk.models.morphology import ReconstructionMorphology
 from entitysdk.models.mtype import MTypeClass
 from entitysdk.models.publication import Publication
 from entitysdk.models.scientific_artifact_publication_link import ScientificArtifactPublicationLink
@@ -44,6 +45,8 @@ __all__ = [
     "BrainLocation",
     "BrainRegion",
     "BrainRegionHierarchy",
+    "CellMorphology",
+    "CellMorphologyProtocol",
     "Circuit",
     "Consortium",
     "Contribution",
@@ -68,7 +71,6 @@ __all__ = [
     "Organization",
     "Person",
     "Publication",
-    "ReconstructionMorphology",
     "Role",
     "ScientificArtifactPublicationLink",
     "Simulation",

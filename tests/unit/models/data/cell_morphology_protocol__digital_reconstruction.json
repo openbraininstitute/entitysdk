@@ -1,0 +1,31 @@
+{
+  "protocol_document": "https://example.com/",
+  "protocol_design": "cell_patch",
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "created_by": {
+    "id": "8e0631b4-776a-4f26-992f-3cd2d36a3b59",
+    "given_name": null,
+    "family_name": null,
+    "pref_label": "Regular User With Project Id",
+    "type": "person"
+  },
+  "updated_by": {
+    "id": "8e0631b4-776a-4f26-992f-3cd2d36a3b59",
+    "given_name": null,
+    "family_name": null,
+    "pref_label": "Regular User With Project Id",
+    "type": "person"
+  },
+  "creation_date": "2025-09-18T15:19:38.503173Z",
+  "update_date": "2025-09-18T15:19:38.503173Z",
+  "id": "23e89555-ecd8-46d0-8d30-be7fc3413d07",
+  "type": "cell_morphology_protocol",
+  "generation_type": "digital_reconstruction",
+  "staining_type": null,
+  "slicing_thickness": 200.0,
+  "slicing_direction": "horizontal",
+  "magnification": null,
+  "tissue_shrinkage": null,
+  "corrected_for_shrinkage": null
+}

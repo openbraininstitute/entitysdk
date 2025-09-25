@@ -1,0 +1,26 @@
+{
+  "protocol_document": null,
+  "protocol_design": "electron_microscopy",
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "created_by": {
+    "id": "8369dbbb-c06a-473b-9d18-904826d72788",
+    "given_name": null,
+    "family_name": null,
+    "pref_label": "Regular User With Project Id",
+    "type": "person"
+  },
+  "updated_by": {
+    "id": "8369dbbb-c06a-473b-9d18-904826d72788",
+    "given_name": null,
+    "family_name": null,
+    "pref_label": "Regular User With Project Id",
+    "type": "person"
+  },
+  "creation_date": "2025-09-18T15:19:39.118196Z",
+  "update_date": "2025-09-18T15:19:39.118196Z",
+  "id": "50c0b93a-5332-4f56-85f4-4c2663ac1068",
+  "type": "cell_morphology_protocol",
+  "generation_type": "computationally_synthesized",
+  "method_type": "free-text"
+}

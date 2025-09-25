@@ -1,0 +1,23 @@
+{
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "created_by": {
+    "id": "c917186f-eb7b-4808-981a-ae015e6eb4b9",
+    "given_name": null,
+    "family_name": null,
+    "pref_label": "Regular User With Project Id",
+    "type": "person"
+  },
+  "updated_by": {
+    "id": "c917186f-eb7b-4808-981a-ae015e6eb4b9",
+    "given_name": null,
+    "family_name": null,
+    "pref_label": "Regular User With Project Id",
+    "type": "person"
+  },
+  "creation_date": "2025-09-18T15:19:39.372474Z",
+  "update_date": "2025-09-18T15:19:39.372474Z",
+  "id": "68c2d393-4b26-4e56-81ac-011f4b472a7f",
+  "type": "cell_morphology_protocol",
+  "generation_type": "placeholder"
+}
