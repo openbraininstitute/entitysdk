@@ -1,7 +1,10 @@
 import os
 import uuid
 
+import pytest
+
 from entitysdk.downloaders.memodel import download_memodel
+from entitysdk.exception import IteratorResultError, StagingError
 from entitysdk.models.emodel import EModel
 from entitysdk.models.memodel import MEModel
 from entitysdk.models.morphology import ReconstructionMorphology
@@ -200,3 +203,55 @@ def test_download_memodel(
     assert downloaded_memodel.morphology_path.is_file()
     assert downloaded_memodel.mechanisms_dir.is_dir()
     assert len(os.listdir(downloaded_memodel.mechanisms_dir)) == 1
+
+
+class DummyClient:
+    def get_entity(self, entity_id, entity_type):
+        class DummyEModel:
+            ion_channel_models = []
+            id = "dummy_id"
+
+        return DummyEModel()
+
+
+def test_download_memodel_hoc_missing(tmp_path):
+    class DummyMEModel:
+        emodel = type("EModel", (), {"id": "dummy_id"})()
+        morphology = "dummy_morphology"
+
+    def dummy_download_hoc(client, emodel, path):
+        return tmp_path / "nonexistent_hoc_file.hoc"
+
+    import entitysdk.downloaders.memodel as memodel_mod
+
+    memodel_mod.download_hoc = dummy_download_hoc
+    with pytest.raises(StagingError) as excinfo:
+        download_memodel(DummyClient(), DummyMEModel(), tmp_path)
+    assert "HOC does not exist" in str(excinfo.value)
+
+
+def test_download_memodel_morphology_asc_fallback_to_swc(tmp_path):
+    class DummyMEModel:
+        emodel = type("EModel", (), {"id": "dummy_id"})()
+        morphology = "dummy_morphology"
+
+    def dummy_download_hoc(client, emodel, path):
+        hoc_file = tmp_path / "dummy.hoc"
+        hoc_file.write_text("hoc")
+        return hoc_file
+
+    def dummy_download_morphology(client, morphology, path, fmt):
+        if fmt == "asc":
+            raise IteratorResultError("asc not available")
+        elif fmt == "swc":
+            swc_file = path / "dummy.swc"
+            swc_file.parent.mkdir(parents=True, exist_ok=True)
+            swc_file.write_text("swc")
+            return swc_file
+
+    import entitysdk.downloaders.memodel as memodel_mod
+
+    memodel_mod.download_hoc = dummy_download_hoc
+    memodel_mod.download_morphology = dummy_download_morphology
+    result = download_memodel(DummyClient(), DummyMEModel(), tmp_path)
+    assert result.morphology_path.name == "dummy.swc"
