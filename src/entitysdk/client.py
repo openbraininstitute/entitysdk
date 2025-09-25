@@ -38,6 +38,7 @@ from entitysdk.util import (
 )
 from entitysdk.utils.asset import filter_assets
 
+TEntity = TypeVar("TEntity", bound=Entity)
 TIdentifiable = TypeVar("TIdentifiable", bound=Identifiable)
 
 
@@ -112,6 +113,7 @@ class Client:
         *,
         entity_type: type[TIdentifiable],
         project_context: ProjectContext | None = None,
+        admin: bool = False,
     ) -> TIdentifiable:
         """Get entity from resource id.
 
@@ -119,6 +121,7 @@ class Client:
             entity_id: Resource id of the entity.
             entity_type: Type of the entity.
             project_context: Optional project context.
+            admin: Whether to use the admin endpoint or not.
 
         Returns:
             entity_type instantiated by deserializing the response.
@@ -127,8 +130,11 @@ class Client:
             api_url=self.api_url,
             entity_type=entity_type,
             entity_id=entity_id,
+            admin=admin,
         )
-        context = self._optional_user_context(override_context=project_context)
+        context = (
+            self._optional_user_context(override_context=project_context) if not admin else None
+        )
         return core.get_entity(
             url=url,
             entity_type=entity_type,
@@ -208,6 +214,28 @@ class Client:
             token=self._token_manager.get_token(),
         )
 
+    def get_entity_assets(
+        self,
+        entity_id: ID,
+        *,
+        entity_type: type[TEntity],
+        project_context: ProjectContext | None = None,
+        admin: bool = False,
+    ) -> IteratorResult[Asset]:
+        """Get all assets of an entity."""
+        context = (
+            self._optional_user_context(override_context=project_context) if not admin else None
+        )
+        return core.get_entity_assets(
+            api_url=self.api_url,
+            entity_id=entity_id,
+            entity_type=entity_type,
+            project_context=context,
+            http_client=self._http_client,
+            token=self._token_manager.get_token(),
+            admin=admin,
+        )
+
     def update_entity(
         self,
         entity_id: ID,
@@ -215,6 +243,7 @@ class Client:
         attrs_or_entity: dict | Identifiable,
         *,
         project_context: ProjectContext | None = None,
+        admin: bool = False,
     ) -> TIdentifiable:
         """Update an entity.
 
@@ -223,18 +252,43 @@ class Client:
             entity_type: Type of the entity.
             attrs_or_entity: Attributes or entity to update.
             project_context: Optional project context.
+            admin: whether to use the admin endpoint or not.
         """
         url = route.get_entities_endpoint(
             api_url=self.api_url,
             entity_type=entity_type,
             entity_id=entity_id,
+            admin=admin,
         )
-        context = self._required_user_context(override_context=project_context)
+        context = (
+            self._optional_user_context(override_context=project_context) if not admin else None
+        )
         return core.update_entity(
             url=url,
             project_context=context,
             entity_type=entity_type,
             attrs_or_entity=attrs_or_entity,
+            http_client=self._http_client,
+            token=self._token_manager.get_token(),
+        )
+
+    def delete_entity(
+        self,
+        entity_id: ID,
+        entity_type: type[Identifiable],
+        *,
+        admin: bool = False,
+    ) -> None:
+        """Delete an entity."""
+        url = route.get_entities_endpoint(
+            api_url=self.api_url,
+            entity_type=entity_type,
+            entity_id=entity_id,
+            admin=admin,
+        )
+        core.delete_entity(
+            url=url,
+            entity_type=entity_type,
             http_client=self._http_client,
             token=self._token_manager.get_token(),
         )
@@ -617,6 +671,7 @@ class Client:
         entity_type: type[Identifiable],
         asset_id: ID,
         project_context: ProjectContext | None = None,
+        admin: bool = False,
     ) -> Asset:
         """Delete an entity's asset."""
         url = route.get_assets_endpoint(
@@ -624,8 +679,11 @@ class Client:
             entity_type=entity_type,
             entity_id=entity_id,
             asset_id=asset_id,
+            admin=admin,
         )
-        context = self._required_user_context(override_context=project_context)
+        context = (
+            self._required_user_context(override_context=project_context) if not admin else None
+        )
         return core.delete_asset(
             url=url,
             project_context=context,
