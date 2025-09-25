@@ -211,3 +211,30 @@ def test_missing_morphology_file_raises(tmp_path):
             threshold_current=0.2,
             holding_current=-0.1,
         )
+
+
+def test_mechanism_file_not_exists(tmp_path):
+    memodel_path = tmp_path / "memodel"
+    memodel_path.mkdir()
+    (memodel_path / "hoc").mkdir()
+    (memodel_path / "mechanisms").mkdir()
+    (memodel_path / "morphology").mkdir()
+    (memodel_path / "hoc" / "cell.hoc").write_text("hoc content")
+    (memodel_path / "morphology" / "cell.asc").write_text("asc content")
+    # Do not create the mechanism file
+    downloaded_me_model = DownloadedMEModel(
+        hoc_path=memodel_path / "hoc" / "cell.hoc",
+        mechanisms_dir=memodel_path / "mechanisms",
+        mechanism_files=["missing.mod"],
+        morphology_path=memodel_path / "morphology" / "cell.asc",
+    )
+    # Should not raise, just skip missing file
+    memodel_mod._generate_sonata_files_from_memodel(
+        downloaded_memodel=downloaded_me_model,
+        output_path=tmp_path,
+        mtype="Test",
+        threshold_current=0.2,
+        holding_current=-0.1,
+    )
+    # The missing file should not be copied
+    assert not (tmp_path / "mechanisms" / "missing.mod").exists()
