@@ -5,9 +5,9 @@ import pytest
 
 from entitysdk.downloaders.memodel import download_memodel
 from entitysdk.exception import IteratorResultError, StagingError
+from entitysdk.models.cell_morphology import CellMorphology
 from entitysdk.models.emodel import EModel
 from entitysdk.models.memodel import MEModel
-from entitysdk.models.morphology import ReconstructionMorphology
 from entitysdk.types import AssetLabel, ContentType, ValidationStatus
 
 
@@ -78,13 +78,13 @@ def test_download_memodel(
 
     httpx_mock.add_response(
         method="GET",
-        url=f"{api_url}/reconstruction-morphology/{morph_id}/assets/{morph_asset_id}",
+        url=f"{api_url}/cell-morphology/{morph_id}/assets/{morph_asset_id}",
         match_headers=request_headers,
         json=_mock_morph_asset_response(morph_id) | {"path": "foo.asc"},
     )
     httpx_mock.add_response(
         method="GET",
-        url=f"{api_url}/reconstruction-morphology/{morph_id}/assets/{morph_asset_id}/download",
+        url=f"{api_url}/cell-morphology/{morph_id}/assets/{morph_asset_id}/download",
         match_headers=request_headers,
         content="foo",
     )
@@ -170,7 +170,7 @@ def test_download_memodel(
             "color_hex_triplet": "#FFFFFF",
         },
         validation_status=ValidationStatus.done,
-        morphology=ReconstructionMorphology(
+        morphology=CellMorphology(
             id=morph_id, name="foo", assets=[_mock_morph_asset_response(morph_asset_id)]
         ),
         emodel=EModel(

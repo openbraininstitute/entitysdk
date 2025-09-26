@@ -2,7 +2,7 @@
 
 from typing import Annotated
 
-from pydantic import Field
+from pydantic import Field, HttpUrl
 
 from entitysdk.models.scientific_artifact import ScientificArtifact
 from entitysdk.types import SlicingDirectionType
@@ -12,7 +12,7 @@ class EMDenseReconstructionDataset(ScientificArtifact):
     """EM Dense Reconstruction Dataset model."""
 
     protocol_document: Annotated[
-        str | None,
+        HttpUrl | None,
         Field(
             description="URL to the protocol document.",
         ),

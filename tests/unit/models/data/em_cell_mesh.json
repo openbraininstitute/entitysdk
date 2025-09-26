@@ -49,7 +49,8 @@
       "id": "b7ad4cca-4ac2-4095-9781-37fb68fe9ca1",
       "name": "Mus musculus",
       "taxonomy_id": "NCBITaxon:10090"
-    }
+    },
+    "strain": null
   },
   "experiment_date": "2025-01-01T00:00:00Z",
   "contact_email": "test@example.com",

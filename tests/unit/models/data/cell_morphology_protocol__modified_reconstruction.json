@@ -1,0 +1,26 @@
+{
+  "protocol_document": null,
+  "protocol_design": "fluorophore",
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "created_by": {
+    "id": "18488eae-06ff-4d0c-9913-e770c0066779",
+    "given_name": null,
+    "family_name": null,
+    "pref_label": "Regular User With Project Id",
+    "type": "person"
+  },
+  "updated_by": {
+    "id": "18488eae-06ff-4d0c-9913-e770c0066779",
+    "given_name": null,
+    "family_name": null,
+    "pref_label": "Regular User With Project Id",
+    "type": "person"
+  },
+  "creation_date": "2025-09-18T15:19:38.860273Z",
+  "update_date": "2025-09-18T15:19:38.860273Z",
+  "id": "38d3cfe7-5d74-4beb-b7ca-7124e8ddd7f6",
+  "type": "cell_morphology_protocol",
+  "generation_type": "modified_reconstruction",
+  "method_type": "cloned"
+}

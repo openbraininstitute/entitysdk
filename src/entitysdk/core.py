@@ -21,7 +21,7 @@ from entitysdk.models.asset import (
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.result import IteratorResult
-from entitysdk.route import get_entity_derivations_endpoint
+from entitysdk.route import get_assets_endpoint, get_entity_derivations_endpoint
 from entitysdk.types import ID, AssetLabel, DerivationType
 from entitysdk.util import make_db_api_request, stream_paginated_request
 
@@ -74,6 +74,7 @@ def get_entity(
     entity_type: type[TIdentifiable],
     project_context: ProjectContext | None = None,
     token: str,
+    options: dict | None = None,
     http_client: httpx.Client | None = None,
 ) -> TIdentifiable:
     """Instantiate entity with model ``entity_type`` from resource id."""
@@ -81,6 +82,7 @@ def get_entity(
         url=url,
         method="GET",
         json=None,
+        parameters=options,
         project_context=project_context,
         token=token,
         http_client=http_client,
@@ -121,6 +123,36 @@ def get_entity_derivations(
     )
 
 
+def get_entity_assets(
+    *,
+    api_url: str,
+    entity_id: ID,
+    entity_type: type[Entity],
+    project_context: ProjectContext | None,
+    token: str,
+    http_client: httpx.Client | None = None,
+    admin: bool = False,
+):
+    """Get all assets of an entity."""
+    url = get_assets_endpoint(
+        api_url=api_url,
+        entity_type=entity_type,
+        entity_id=entity_id,
+        asset_id=None,
+        admin=admin,
+    )
+    response = make_db_api_request(
+        url=url,
+        method="GET",
+        project_context=project_context,
+        token=token,
+        http_client=http_client,
+    )
+    return IteratorResult(
+        serdes.deserialize_model(json_data, Asset) for json_data in response.json()["data"]
+    )
+
+
 def register_entity(
     url: str,
     *,
@@ -148,7 +180,7 @@ def update_entity(
     *,
     entity_type: type[TIdentifiable],
     attrs_or_entity: dict | Identifiable,
-    project_context: ProjectContext,
+    project_context: ProjectContext | None,
     token: str,
     http_client: httpx.Client | None = None,
 ) -> TIdentifiable:
@@ -170,6 +202,22 @@ def update_entity(
     json_data = response.json()
 
     return serdes.deserialize_model(json_data, entity_type)
+
+
+def delete_entity(
+    url: str,
+    *,
+    entity_type: type[Identifiable],
+    token: str,
+    http_client: httpx.Client | None = None,
+):
+    """Delete entity."""
+    make_db_api_request(
+        url=url,
+        method="DELETE",
+        token=token,
+        http_client=http_client,
+    )
 
 
 def upload_asset_file(
@@ -372,7 +420,7 @@ def download_asset_content(
 def delete_asset(
     url: str,
     *,
-    project_context: ProjectContext,
+    project_context: ProjectContext | None,
     token: str,
     http_client: httpx.Client | None = None,
 ) -> Asset:

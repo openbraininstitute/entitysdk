@@ -97,7 +97,8 @@
       "id": "3b1c2a25-b4fb-468d-98d2-d2d431ac8b4a",
       "name": "Rattus norvegicus",
       "taxonomy_id": "NCBITaxon:10116"
-    }
+    },
+    "strain": null
   },
   "authorized_project_id": "0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6",
   "authorized_public": true,
