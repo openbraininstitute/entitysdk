@@ -1,0 +1,547 @@
+{
+  "assets": [],
+  "id": "3ba6c735-c321-4890-bb8e-60be11777567",
+  "update_date": "2025-04-17T16:21:58.346924Z",
+  "creation_date": "2025-03-20T10:07:20.567196Z",
+  "name": "MEM__C060114A5__cADpyr_L5_TPC:A",
+  "description": "This MEModel is part of OBI curated dataset of morpho-electric models.",
+  "type": "memodel",
+  "created_by": {
+    "id": "59cc60b1-7604-44b4-a736-95c3e652c71a",
+    "type": "person",
+    "pref_label": "service-account-obp-singlecell-uploader-sa service-account-obp-singlecell-uploader-sa",
+    "given_name": "service-account-obp-singlecell-uploader-sa",
+    "family_name": "service-account-obp-singlecell-uploader-sa"
+  },
+  "updated_by": {
+    "id": "59cc60b1-7604-44b4-a736-95c3e652c71a",
+    "type": "person",
+    "pref_label": "service-account-obp-singlecell-uploader-sa service-account-obp-singlecell-uploader-sa",
+    "given_name": "service-account-obp-singlecell-uploader-sa",
+    "family_name": "service-account-obp-singlecell-uploader-sa"
+  },
+  "authorized_public": true,
+  "authorized_project_id": "0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6",
+  "contributions": [
+    {
+      "id": "913eb7a4-16e6-4934-82b8-1c62f65afe09",
+      "agent": {
+        "id": "d08f1bb2-531d-4460-b0ca-eef038c89b38",
+        "type": "person",
+        "pref_label": "Darshan Mandge",
+        "given_name": "Darshan",
+        "family_name": "Mandge"
+      },
+      "role": {
+        "id": "a48b7ff5-1284-4e47-9680-6cfb1f5c88de",
+        "update_date": "2025-06-27T11:10:53.209515Z",
+        "creation_date": "2025-06-27T11:10:53.209515Z",
+        "name": "unspecified",
+        "role_id": "unspecified"
+      }
+    },
+    {
+      "id": "c7b2b6ec-4676-4d01-8b31-692be3b78a9c",
+      "agent": {
+        "id": "49781137-8624-457a-ac2a-f60d70583376",
+        "type": "person",
+        "pref_label": "Aur\u00e9lien Tristan Jaquier",
+        "given_name": "Aur\u00e9lien Tristan",
+        "family_name": "Jaquier"
+      },
+      "role": {
+        "id": "a48b7ff5-1284-4e47-9680-6cfb1f5c88de",
+        "update_date": "2025-06-27T11:10:53.209515Z",
+        "creation_date": "2025-06-27T11:10:53.209515Z",
+        "name": "unspecified",
+        "role_id": "unspecified"
+      }
+    },
+    {
+      "id": "06d897dc-08a2-499a-b521-b0a332876ceb",
+      "agent": {
+        "id": "9770935e-c132-46a3-90c0-fbaaa88d09b0",
+        "type": "person",
+        "pref_label": "Ilkan Kilic",
+        "given_name": "Ilkan",
+        "family_name": "Kilic"
+      },
+      "role": {
+        "id": "a48b7ff5-1284-4e47-9680-6cfb1f5c88de",
+        "update_date": "2025-06-27T11:10:53.209515Z",
+        "creation_date": "2025-06-27T11:10:53.209515Z",
+        "name": "unspecified",
+        "role_id": "unspecified"
+      }
+    },
+    {
+      "id": "59ec2e70-bc8c-4064-b6d8-9af1ef8a7e4a",
+      "agent": {
+        "id": "83844b40-ffa9-49f1-9c14-bc4a829e07b0",
+        "type": "person",
+        "pref_label": "Tanguy Damart",
+        "given_name": "Tanguy",
+        "family_name": "Damart"
+      },
+      "role": {
+        "id": "a48b7ff5-1284-4e47-9680-6cfb1f5c88de",
+        "update_date": "2025-06-27T11:10:53.209515Z",
+        "creation_date": "2025-06-27T11:10:53.209515Z",
+        "name": "unspecified",
+        "role_id": "unspecified"
+      }
+    }
+  ],
+  "validation_status": "initialized",
+  "species": {
+    "id": "b7ad4cca-4ac2-4095-9781-37fb68fe9ca1",
+    "name": "Mus musculus",
+    "taxonomy_id": "NCBITaxon:10090"
+  },
+  "brain_region": {
+    "id": "4642cddb-4fbe-4aae-bbf7-0946d6ada066",
+    "update_date": "2025-06-27T11:10:27.186088Z",
+    "creation_date": "2025-06-27T11:10:27.186088Z",
+    "name": "Basic cell groups and regions",
+    "annotation_value": 8,
+    "acronym": "grey",
+    "parent_structure_id": "eb1167b3-67a9-4378-bc65-c1e582e2e662",
+    "hierarchy_id": "e3e70682-c209-4cac-a29f-6fbed82c07cd",
+    "color_hex_triplet": "BFDAE3"
+  },
+  "morphology": {
+    "assets": [
+      {
+        "id": "6d6ded50-cc83-47cb-99ef-2c83a0f1f767",
+        "path": "C060114A5.h5",
+        "full_path": "public/a98b7abc-fc46-4700-9e3d-37137812c730/0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6/assets/reconstruction_morphology/e496e38d-1b2e-4de7-9694-33aefb3c267f/C060114A5.h5",
+        "is_directory": false,
+        "content_type": "application/x-hdf5",
+        "size": 400096,
+        "sha256_digest": "f6f5c9cbf6472411bd34f24fcf960ddcebc61aa311f27e2472f75544b99cbe06",
+        "status": "created",
+        "meta": {},
+        "label": "morphology"
+      },
+      {
+        "id": "47182e1b-23aa-49fb-b89a-e88021d079e5",
+        "path": "C060114A5.asc",
+        "full_path": "public/a98b7abc-fc46-4700-9e3d-37137812c730/0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6/assets/reconstruction_morphology/e496e38d-1b2e-4de7-9694-33aefb3c267f/C060114A5.asc",
+        "is_directory": false,
+        "content_type": "application/asc",
+        "size": 911410,
+        "sha256_digest": "f42d6a64f9a554d5fd7e52c34643073ef4d28dfebb5a3acd7f470c6f1b014b9d",
+        "status": "created",
+        "meta": {},
+        "label": "morphology"
+      },
+      {
+        "id": "1b9522df-a741-4da8-a479-7a648c9a14a0",
+        "path": "C060114A5.swc",
+        "full_path": "public/a98b7abc-fc46-4700-9e3d-37137812c730/0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6/assets/reconstruction_morphology/e496e38d-1b2e-4de7-9694-33aefb3c267f/C060114A5.swc",
+        "is_directory": false,
+        "content_type": "application/swc",
+        "size": 1031014,
+        "sha256_digest": "44a476456bd6db40eea5ef9a6202a708a37c9d6aeba5f3edb9f8ba6e3eec10b6",
+        "status": "created",
+        "meta": {},
+        "label": "morphology"
+      }
+    ],
+    "id": "e496e38d-1b2e-4de7-9694-33aefb3c267f",
+    "update_date": "2025-04-01T13:27:12.351880Z",
+    "creation_date": "2024-03-13T10:41:47.769838Z",
+    "name": "C060114A5",
+    "description": "Translated to mouse from rat data. This dataset is about an in vitro-filled neuron morphology from layer 5 with m-type L5_TPC:A. The distribution contains the neuron morphology in ASC, h5, and SWC file format.",
+    "type": "reconstruction_morphology",
+    "created_by": {
+      "id": "cf1822ff-bc68-4778-ab49-1044d5e34124",
+      "type": "person",
+      "pref_label": "Niccol\u00f2 Ricardi",
+      "given_name": "Niccol\u00f2",
+      "family_name": "Ricardi"
+    },
+    "updated_by": {
+      "id": "59cc60b1-7604-44b4-a736-95c3e652c71a",
+      "type": "person",
+      "pref_label": "service-account-obp-singlecell-uploader-sa service-account-obp-singlecell-uploader-sa",
+      "given_name": "service-account-obp-singlecell-uploader-sa",
+      "family_name": "service-account-obp-singlecell-uploader-sa"
+    },
+    "authorized_public": true,
+    "authorized_project_id": "0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6",
+    "contributions": [
+      {
+        "id": "d21741b3-c3ca-4c35-8686-1091b8184278",
+        "agent": {
+          "id": "c3aba2f4-c866-4cb3-9bca-24abfec109fb",
+          "type": "person",
+          "pref_label": "Michael Gevaert",
+          "given_name": "Michael",
+          "family_name": "Gevaert"
+        },
+        "role": {
+          "id": "92bb41a0-9e3c-40eb-8b4b-8f3977231962",
+          "update_date": "2025-06-27T11:11:03.525497Z",
+          "creation_date": "2025-06-27T11:11:03.525497Z",
+          "name": "data transformation role",
+          "role_id": "obo:CRO_0000072"
+        }
+      },
+      {
+        "id": "93a91931-b8eb-4b5d-be9c-6cf0b5c7fa31",
+        "agent": {
+          "id": "36b621f5-5d56-45a2-9b49-f36261142cc4",
+          "type": "organization",
+          "pref_label": "\u00c9cole Polytechnique F\u00e9d\u00e9rale de Lausanne",
+          "alternative_name": ""
+        },
+        "role": {
+          "id": "a48b7ff5-1284-4e47-9680-6cfb1f5c88de",
+          "update_date": "2025-06-27T11:10:53.209515Z",
+          "creation_date": "2025-06-27T11:10:53.209515Z",
+          "name": "unspecified",
+          "role_id": "unspecified"
+        }
+      },
+      {
+        "id": "bc84a8c1-f97c-48a3-98f4-34e13bceeee0",
+        "agent": {
+          "id": "0db6eaa3-829a-4993-a492-3e422e304ca0",
+          "type": "person",
+          "pref_label": "Lida Kanari",
+          "given_name": "Lida",
+          "family_name": "Kanari"
+        },
+        "role": {
+          "id": "a48b7ff5-1284-4e47-9680-6cfb1f5c88de",
+          "update_date": "2025-06-27T11:10:53.209515Z",
+          "creation_date": "2025-06-27T11:10:53.209515Z",
+          "name": "unspecified",
+          "role_id": "unspecified"
+        }
+      },
+      {
+        "id": "8982bd7d-da6b-4484-9f13-9f1e922ebc47",
+        "agent": {
+          "id": "182c8eb9-d0e9-4504-ad68-0ac5a66bf90e",
+          "type": "person",
+          "pref_label": "Ying Shi",
+          "given_name": "Ying",
+          "family_name": "Shi"
+        },
+        "role": {
+          "id": "a48b7ff5-1284-4e47-9680-6cfb1f5c88de",
+          "update_date": "2025-06-27T11:10:53.209515Z",
+          "creation_date": "2025-06-27T11:10:53.209515Z",
+          "name": "unspecified",
+          "role_id": "unspecified"
+        }
+      },
+      {
+        "id": "4752e825-aa27-4242-bfde-0389b3e857ff",
+        "agent": {
+          "id": "5c2ff4ed-78f5-44d4-a5de-a412b4949aea",
+          "type": "person",
+          "pref_label": "Rodrigo Perin",
+          "given_name": "Rodrigo",
+          "family_name": "Perin"
+        },
+        "role": {
+          "id": "a48b7ff5-1284-4e47-9680-6cfb1f5c88de",
+          "update_date": "2025-06-27T11:10:53.209515Z",
+          "creation_date": "2025-06-27T11:10:53.209515Z",
+          "name": "unspecified",
+          "role_id": "unspecified"
+        }
+      },
+      {
+        "id": "e7e3dad2-8211-4a93-960e-d4e715419f19",
+        "agent": {
+          "id": "e5f0bff6-6ab1-4f7e-8e69-f788258117a5",
+          "type": "person",
+          "pref_label": "Shruti Muralidhar",
+          "given_name": "Shruti",
+          "family_name": "Muralidhar"
+        },
+        "role": {
+          "id": "a48b7ff5-1284-4e47-9680-6cfb1f5c88de",
+          "update_date": "2025-06-27T11:10:53.209515Z",
+          "creation_date": "2025-06-27T11:10:53.209515Z",
+          "name": "unspecified",
+          "role_id": "unspecified"
+        }
+      },
+      {
+        "id": "78e6276f-6f6b-4c6b-a9d1-d40b1a047158",
+        "agent": {
+          "id": "69897f7f-af70-4536-9fd5-349d04e0cb95",
+          "type": "person",
+          "pref_label": "Thomas Berger",
+          "given_name": "Thomas",
+          "family_name": "Berger"
+        },
+        "role": {
+          "id": "a48b7ff5-1284-4e47-9680-6cfb1f5c88de",
+          "update_date": "2025-06-27T11:10:53.209515Z",
+          "creation_date": "2025-06-27T11:10:53.209515Z",
+          "name": "unspecified",
+          "role_id": "unspecified"
+        }
+      }
+    ],
+    "legacy_id": [
+      "https://bbp.epfl.ch/data/bbp/mmb-point-neuron-framework-model/8325c79c-d0ff-4de6-aac5-a703a85785c9"
+    ],
+    "brain_region": {
+      "id": "61d89b07-dfa0-439a-9187-7ebfe60e212b",
+      "update_date": "2025-06-27T11:10:27.186088Z",
+      "creation_date": "2025-06-27T11:10:27.186088Z",
+      "name": "Primary somatosensory area",
+      "annotation_value": 322,
+      "acronym": "SSp",
+      "parent_structure_id": "9680c40f-ccfe-4804-851f-1024ff0d6409",
+      "hierarchy_id": "e3e70682-c209-4cac-a29f-6fbed82c07cd",
+      "color_hex_triplet": "188064"
+    },
+    "species": {
+      "id": "b7ad4cca-4ac2-4095-9781-37fb68fe9ca1",
+      "name": "Mus musculus",
+      "taxonomy_id": "NCBITaxon:10090"
+    },
+    "license": {
+      "id": "ad8686db-3cdd-4e3f-bcbd-812380a9eba7",
+      "update_date": "2024-01-16T14:51:05.847971Z",
+      "creation_date": "2024-01-10T15:58:46.007611Z",
+      "name": "https://creativecommons.org/licenses/by/4.0/",
+      "description": "Creative Commons Corporation (\"Creative Commons\") is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an \"as-is\" basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information. Creative Commons disclaims all liability for damages resulting from their use to the fullest extent possible.",
+      "label": "CC BY 4.0 Deed"
+    },
+    "mtypes": [
+      {
+        "id": "9020139d-4f19-472b-8f35-de4fd0306503",
+        "update_date": "2024-11-22T11:17:53.031582Z",
+        "creation_date": "2020-03-16T10:34:23.103000Z",
+        "pref_label": "L5_TPC:A",
+        "definition": "The L5_TPC_A (thick-tufted PC_A) have a vertically projecting apical dendrite with a distal broad, thick tuft and multiple oblique dendrites emerging proximally",
+        "alt_label": "Layer 5 Late Bifurcating Tufted Pyramidal Cell"
+      }
+    ]
+  },
+  "emodel": {
+    "assets": [
+      {
+        "id": "69675103-b5c0-4f71-97f0-4ab3b5a5aafc",
+        "path": "model.hoc",
+        "full_path": "public/a98b7abc-fc46-4700-9e3d-37137812c730/0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6/assets/emodel/d153053e-cbd7-420e-8f3e-17487271ab20/model.hoc",
+        "is_directory": false,
+        "content_type": "application/hoc",
+        "size": 12839,
+        "sha256_digest": "69b206cfdfacdba2b406b6fc8a7e305577d0bc407e6edcd128e703f7081c2eed",
+        "status": "created",
+        "meta": {},
+        "label": "neuron_hoc"
+      },
+      {
+        "id": "02ff960b-2b70-40b4-b827-3fc2aa067f1e",
+        "path": "EM__emodel=cADpyr__etype=cADpyr__mtype=L5_TPC_A__species=mouse__brain_region=grey__iteration=1372346__13.json",
+        "full_path": "public/a98b7abc-fc46-4700-9e3d-37137812c730/0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6/assets/emodel/d153053e-cbd7-420e-8f3e-17487271ab20/EM__emodel=cADpyr__etype=cADpyr__mtype=L5_TPC_A__species=mouse__brain_region=grey__iteration=1372346__13.json",
+        "is_directory": false,
+        "content_type": "application/json",
+        "size": 36845,
+        "sha256_digest": "5d9b58544d7b82b82d07e97e1a5698a488a4b1bf5f49d1984ba72b1ce280abe1",
+        "status": "created",
+        "meta": {},
+        "label": "emodel_optimization_output"
+      }
+    ],
+    "id": "d153053e-cbd7-420e-8f3e-17487271ab20",
+    "update_date": "2025-04-07T12:14:01.435543Z",
+    "creation_date": "2024-02-13T15:15:40.374483Z",
+    "name": "EM__1372346__cADpyr__13",
+    "description": "Canonical detailed morphology e-model",
+    "type": "emodel",
+    "created_by": {
+      "id": "a8acb513-7c92-40dc-b4e0-88a9b9492f25",
+      "type": "person",
+      "pref_label": "Aurelien Jaquier",
+      "given_name": "Aurelien",
+      "family_name": "Jaquier"
+    },
+    "updated_by": {
+      "id": "59cc60b1-7604-44b4-a736-95c3e652c71a",
+      "type": "person",
+      "pref_label": "service-account-obp-singlecell-uploader-sa service-account-obp-singlecell-uploader-sa",
+      "given_name": "service-account-obp-singlecell-uploader-sa",
+      "family_name": "service-account-obp-singlecell-uploader-sa"
+    },
+    "authorized_public": true,
+    "authorized_project_id": "0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6",
+    "contributions": [
+      {
+        "id": "d863230a-2840-496f-af15-05a30102dc58",
+        "agent": {
+          "id": "d08f1bb2-531d-4460-b0ca-eef038c89b38",
+          "type": "person",
+          "pref_label": "Darshan Mandge",
+          "given_name": "Darshan",
+          "family_name": "Mandge"
+        },
+        "role": {
+          "id": "a48b7ff5-1284-4e47-9680-6cfb1f5c88de",
+          "update_date": "2025-06-27T11:10:53.209515Z",
+          "creation_date": "2025-06-27T11:10:53.209515Z",
+          "name": "unspecified",
+          "role_id": "unspecified"
+        }
+      },
+      {
+        "id": "d564463d-0874-4f5a-9f56-7a20099806df",
+        "agent": {
+          "id": "49781137-8624-457a-ac2a-f60d70583376",
+          "type": "person",
+          "pref_label": "Aur\u00e9lien Tristan Jaquier",
+          "given_name": "Aur\u00e9lien Tristan",
+          "family_name": "Jaquier"
+        },
+        "role": {
+          "id": "a48b7ff5-1284-4e47-9680-6cfb1f5c88de",
+          "update_date": "2025-06-27T11:10:53.209515Z",
+          "creation_date": "2025-06-27T11:10:53.209515Z",
+          "name": "unspecified",
+          "role_id": "unspecified"
+        }
+      },
+      {
+        "id": "26de3cc6-536b-44fd-9b9c-6c8f018da2d4",
+        "agent": {
+          "id": "9770935e-c132-46a3-90c0-fbaaa88d09b0",
+          "type": "person",
+          "pref_label": "Ilkan Kilic",
+          "given_name": "Ilkan",
+          "family_name": "Kilic"
+        },
+        "role": {
+          "id": "a48b7ff5-1284-4e47-9680-6cfb1f5c88de",
+          "update_date": "2025-06-27T11:10:53.209515Z",
+          "creation_date": "2025-06-27T11:10:53.209515Z",
+          "name": "unspecified",
+          "role_id": "unspecified"
+        }
+      },
+      {
+        "id": "a75ba5fc-4c39-4728-9586-069d8271e56f",
+        "agent": {
+          "id": "83844b40-ffa9-49f1-9c14-bc4a829e07b0",
+          "type": "person",
+          "pref_label": "Tanguy Damart",
+          "given_name": "Tanguy",
+          "family_name": "Damart"
+        },
+        "role": {
+          "id": "a48b7ff5-1284-4e47-9680-6cfb1f5c88de",
+          "update_date": "2025-06-27T11:10:53.209515Z",
+          "creation_date": "2025-06-27T11:10:53.209515Z",
+          "name": "unspecified",
+          "role_id": "unspecified"
+        }
+      }
+    ],
+    "species": {
+      "id": "b7ad4cca-4ac2-4095-9781-37fb68fe9ca1",
+      "name": "Mus musculus",
+      "taxonomy_id": "NCBITaxon:10090"
+    },
+    "brain_region": {
+      "id": "4642cddb-4fbe-4aae-bbf7-0946d6ada066",
+      "update_date": "2025-06-27T11:10:27.186088Z",
+      "creation_date": "2025-06-27T11:10:27.186088Z",
+      "name": "Basic cell groups and regions",
+      "annotation_value": 8,
+      "acronym": "grey",
+      "parent_structure_id": "eb1167b3-67a9-4378-bc65-c1e582e2e662",
+      "hierarchy_id": "e3e70682-c209-4cac-a29f-6fbed82c07cd",
+      "color_hex_triplet": "BFDAE3"
+    },
+    "iteration": "1372346",
+    "score": 109.87290760782248,
+    "seed": 13,
+    "exemplar_morphology": {
+      "assets": [],
+      "id": "e496e38d-1b2e-4de7-9694-33aefb3c267f",
+      "update_date": "2025-04-01T13:27:12.351880Z",
+      "creation_date": "2024-03-13T10:41:47.769838Z",
+      "name": "C060114A5",
+      "description": "Translated to mouse from rat data. This dataset is about an in vitro-filled neuron morphology from layer 5 with m-type L5_TPC:A. The distribution contains the neuron morphology in ASC, h5, and SWC file format.",
+      "authorized_public": false,
+      "legacy_id": [
+        "https://bbp.epfl.ch/data/bbp/mmb-point-neuron-framework-model/8325c79c-d0ff-4de6-aac5-a703a85785c9"
+      ]
+    },
+    "etypes": [
+      {
+        "id": "75703892-27a4-4588-9f12-145b08051db5",
+        "update_date": "2024-11-22T11:16:48.019501Z",
+        "creation_date": "2020-03-16T12:03:48.322000Z",
+        "pref_label": "cADpyr",
+        "definition": "Continuous adapting pyramidal cell electrical type",
+        "alt_label": "Continuous adapting pyramidal cell electrical type"
+      }
+    ],
+    "mtypes": [
+      {
+        "id": "9020139d-4f19-472b-8f35-de4fd0306503",
+        "update_date": "2024-11-22T11:17:53.031582Z",
+        "creation_date": "2020-03-16T10:34:23.103000Z",
+        "pref_label": "L5_TPC:A",
+        "definition": "The L5_TPC_A (thick-tufted PC_A) have a vertically projecting apical dendrite with a distal broad, thick tuft and multiple oblique dendrites emerging proximally",
+        "alt_label": "Layer 5 Late Bifurcating Tufted Pyramidal Cell"
+      }
+    ]
+  },
+  "etypes": [
+    {
+      "id": "75703892-27a4-4588-9f12-145b08051db5",
+      "update_date": "2024-11-22T11:16:48.019501Z",
+      "creation_date": "2020-03-16T12:03:48.322000Z",
+      "pref_label": "cADpyr",
+      "definition": "Continuous adapting pyramidal cell electrical type",
+      "alt_label": "Continuous adapting pyramidal cell electrical type"
+    }
+  ],
+  "mtypes": [
+    {
+      "id": "9020139d-4f19-472b-8f35-de4fd0306503",
+      "update_date": "2024-11-22T11:17:53.031582Z",
+      "creation_date": "2020-03-16T10:34:23.103000Z",
+      "pref_label": "L5_TPC:A",
+      "definition": "The L5_TPC_A (thick-tufted PC_A) have a vertically projecting apical dendrite with a distal broad, thick tuft and multiple oblique dendrites emerging proximally",
+      "alt_label": "Layer 5 Late Bifurcating Tufted Pyramidal Cell"
+    }
+  ],
+  "calibration_result": {
+    "assets": [],
+    "id": "e316f889-a71a-4081-8d80-c341bf271319",
+    "update_date": "2025-04-17T16:21:58.346924Z",
+    "creation_date": "2025-03-20T10:07:20.567196Z",
+    "created_by": {
+      "id": "59cc60b1-7604-44b4-a736-95c3e652c71a",
+      "type": "person",
+      "pref_label": "service-account-obp-singlecell-uploader-sa service-account-obp-singlecell-uploader-sa",
+      "given_name": "service-account-obp-singlecell-uploader-sa",
+      "family_name": "service-account-obp-singlecell-uploader-sa"
+    },
+    "updated_by": {
+      "id": "59cc60b1-7604-44b4-a736-95c3e652c71a",
+      "type": "person",
+      "pref_label": "service-account-obp-singlecell-uploader-sa service-account-obp-singlecell-uploader-sa",
+      "given_name": "service-account-obp-singlecell-uploader-sa",
+      "family_name": "service-account-obp-singlecell-uploader-sa"
+    },
+    "authorized_public": true,
+    "authorized_project_id": "0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6",
+    "holding_current": -0.08750000000000001,
+    "threshold_current": 0.1624028733588378,
+    "calibrated_entity_id": "3ba6c735-c321-4890-bb8e-60be11777567"
+  }
+}
