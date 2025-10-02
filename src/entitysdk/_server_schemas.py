@@ -108,7 +108,7 @@ class AssetLabel(StrEnum):
     network_stats_a = "network_stats_a"
     network_stats_b = "network_stats_b"
     cell_surface_mesh = "cell_surface_mesh"
-    ion_channel_model_figure = "ion_channel_figure"
+    ion_channel_model_figure = "ion_channel_model_figure"
 
 
 class AssetStatus(StrEnum):
