@@ -21,12 +21,69 @@ class ActivityType(StrEnum):
     simulation_generation = "simulation_generation"
     validation = "validation"
     calibration = "calibration"
+    analysis_notebook_execution = "analysis_notebook_execution"
 
 
 class AgePeriod(StrEnum):
     prenatal = "prenatal"
     postnatal = "postnatal"
     unknown = "unknown"
+
+
+class AnalysisNotebookExecutionAdminUpdate(BaseModel):
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    start_time: Annotated[AwareDatetime | str | None, Field(title="Start Time")] = "<NOT_SET>"
+    end_time: Annotated[AwareDatetime | str | None, Field(title="End Time")] = "<NOT_SET>"
+    used_ids: Annotated[list[UUID] | str | None, Field(title="Used Ids")] = "<NOT_SET>"
+    generated_ids: Annotated[list[UUID] | str | None, Field(title="Generated Ids")] = "<NOT_SET>"
+    analysis_notebook_template_id: Annotated[
+        UUID | str | None, Field(title="Analysis Notebook Template Id")
+    ] = "<NOT_SET>"
+    analysis_notebook_environment_id: Annotated[
+        UUID | str | None, Field(title="Analysis Notebook Environment Id")
+    ] = "<NOT_SET>"
+
+
+class AnalysisNotebookExecutionCreate(BaseModel):
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
+    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
+    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
+    analysis_notebook_template_id: Annotated[
+        UUID | None, Field(title="Analysis Notebook Template Id")
+    ] = None
+    analysis_notebook_environment_id: Annotated[
+        UUID, Field(title="Analysis Notebook Environment Id")
+    ]
+
+
+class AnalysisNotebookResultAdminUpdate(BaseModel):
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
+    description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
+
+
+class AnalysisNotebookResultCreate(BaseModel):
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+
+
+class AnalysisNotebookResultUpdate(BaseModel):
+    name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
+    description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
+
+
+class CountMax(RootModel[int]):
+    root: Annotated[int, Field(ge=0, title="Count Max")]
+
+
+class AnalysisScale(StrEnum):
+    subcellular = "subcellular"
+    cellular = "cellular"
+    circuit = "circuit"
+    system = "system"
 
 
 class AnnotationAdminUpdate(BaseModel):
@@ -108,6 +165,9 @@ class AssetLabel(StrEnum):
     network_stats_a = "network_stats_a"
     network_stats_b = "network_stats_b"
     cell_surface_mesh = "cell_surface_mesh"
+    jupyter_notebook = "jupyter_notebook"
+    requirements = "requirements"
+    ion_channel_model_figure = "ion_channel_model_figure"
 
 
 class AssetStatus(StrEnum):
@@ -127,12 +187,14 @@ class BodyUploadEntityAssetEntityRouteEntityIdAssetsPost(BaseModel):
 
 
 class BrainRegionAdminUpdate(BaseModel):
-    annotation_value: Annotated[int | None, Field(title="Annotation Value")] = "<NOT_SET>"
+    annotation_value: Annotated[int | str | None, Field(title="Annotation Value")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     acronym: Annotated[str | None, Field(title="Acronym")] = "<NOT_SET>"
     color_hex_triplet: Annotated[str | None, Field(title="Color Hex Triplet")] = "<NOT_SET>"
-    parent_structure_id: Annotated[UUID | None, Field(title="Parent Structure Id")] = "<NOT_SET>"
-    hierarchy_id: Annotated[UUID | None, Field(title="Hierarchy Id")] = "<NOT_SET>"
+    parent_structure_id: Annotated[UUID | str | None, Field(title="Parent Structure Id")] = (
+        "<NOT_SET>"
+    )
+    hierarchy_id: Annotated[UUID | str | None, Field(title="Hierarchy Id")] = "<NOT_SET>"
 
 
 class BrainRegionCreate(BaseModel):
@@ -157,11 +219,11 @@ class BrainRegionRead(BaseModel):
 
 
 class CalibrationAdminUpdate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
-    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = "<NOT_SET>"
-    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = "<NOT_SET>"
-    used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = "<NOT_SET>"
-    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    start_time: Annotated[AwareDatetime | str | None, Field(title="Start Time")] = "<NOT_SET>"
+    end_time: Annotated[AwareDatetime | str | None, Field(title="End Time")] = "<NOT_SET>"
+    used_ids: Annotated[list[UUID] | str | None, Field(title="Used Ids")] = "<NOT_SET>"
+    generated_ids: Annotated[list[UUID] | str | None, Field(title="Generated Ids")] = "<NOT_SET>"
 
 
 class CalibrationCreate(BaseModel):
@@ -201,27 +263,31 @@ class CircuitScale(StrEnum):
 
 
 class CircuitUserUpdate(BaseModel):
-    license_id: Annotated[UUID | None, Field(title="License Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
-    subject_id: Annotated[UUID | None, Field(title="Subject Id")] = "<NOT_SET>"
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = "<NOT_SET>"
+    license_id: Annotated[UUID | str | None, Field(title="License Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    subject_id: Annotated[UUID | str | None, Field(title="Subject Id")] = "<NOT_SET>"
+    experiment_date: Annotated[AwareDatetime | str | None, Field(title="Experiment Date")] = (
+        "<NOT_SET>"
+    )
     contact_email: Annotated[str | None, Field(title="Contact Email")] = "<NOT_SET>"
     published_in: Annotated[str | None, Field(title="Published In")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    has_morphologies: Annotated[bool | None, Field(title="Has Morphologies")] = "<NOT_SET>"
-    has_point_neurons: Annotated[bool | None, Field(title="Has Point Neurons")] = "<NOT_SET>"
+    has_morphologies: Annotated[bool | str | None, Field(title="Has Morphologies")] = "<NOT_SET>"
+    has_point_neurons: Annotated[bool | str | None, Field(title="Has Point Neurons")] = "<NOT_SET>"
     has_electrical_cell_models: Annotated[
-        bool | None, Field(title="Has Electrical Cell Models")
+        bool | str | None, Field(title="Has Electrical Cell Models")
     ] = "<NOT_SET>"
-    has_spines: Annotated[bool | None, Field(title="Has Spines")] = "<NOT_SET>"
-    number_neurons: Annotated[int | None, Field(title="Number Neurons")] = "<NOT_SET>"
-    number_synapses: Annotated[int | None, Field(title="Number Synapses")] = "<NOT_SET>"
-    number_connections: Annotated[int | None, Field(title="Number Connections")] = "<NOT_SET>"
-    scale: CircuitScale | None = "<NOT_SET>"
-    build_category: CircuitBuildCategory | None = "<NOT_SET>"
-    root_circuit_id: Annotated[UUID | None, Field(title="Root Circuit Id")] = "<NOT_SET>"
-    atlas_id: Annotated[UUID | None, Field(title="Atlas Id")] = "<NOT_SET>"
+    has_spines: Annotated[bool | str | None, Field(title="Has Spines")] = "<NOT_SET>"
+    number_neurons: Annotated[int | str | None, Field(title="Number Neurons")] = "<NOT_SET>"
+    number_synapses: Annotated[int | str | None, Field(title="Number Synapses")] = "<NOT_SET>"
+    number_connections: Annotated[int | str | None, Field(title="Number Connections")] = "<NOT_SET>"
+    scale: Annotated[CircuitScale | str | None, Field(title="Scale")] = "<NOT_SET>"
+    build_category: Annotated[CircuitBuildCategory | str | None, Field(title="Build Category")] = (
+        "<NOT_SET>"
+    )
+    root_circuit_id: Annotated[UUID | str | None, Field(title="Root Circuit Id")] = "<NOT_SET>"
+    atlas_id: Annotated[UUID | str | None, Field(title="Atlas Id")] = "<NOT_SET>"
 
 
 class ProtocolDocument(RootModel[AnyUrl]):
@@ -266,12 +332,17 @@ class ContentType(StrEnum):
     model_gltf_binary = "model/gltf-binary"
     application_gzip = "application/gzip"
     image_webp = "image/webp"
+    application_x_ipynb_json = "application/x-ipynb+json"
 
 
 class ContributionCreate(BaseModel):
     agent_id: Annotated[UUID, Field(title="Agent Id")]
     role_id: Annotated[UUID, Field(title="Role Id")]
     entity_id: Annotated[UUID, Field(title="Entity Id")]
+
+
+class DeleteResponse(BaseModel):
+    id: Annotated[UUID, Field(title="Id")]
 
 
 class DerivationType(StrEnum):
@@ -305,6 +376,40 @@ class DirectoryUpload(BaseModel):
     label: AssetLabel
 
 
+class DockerDependency(BaseModel):
+    image_repository: Annotated[
+        str, Field(examples=["openbraininstitute/obi-notebook-image"], title="Image Repository")
+    ]
+    image_tag: Annotated[str | None, Field(examples=[">=2025.09.24-2"], title="Image Tag")] = None
+    image_digest: Annotated[
+        str | None,
+        Field(
+            description="SHA256 digest",
+            examples=["3406990b6e4c7192317b6fdc5680498744f6142f01f0287f4ee0420d8c74063c"],
+            title="Image Digest",
+        ),
+    ] = None
+    docker_version: Annotated[
+        str | None, Field(examples=[">=20.10,<29.0"], title="Docker Version")
+    ] = None
+
+
+class DockerRuntimeInfo(BaseModel):
+    image_repository: Annotated[
+        str, Field(examples=["openbraininstitute/obi-notebook-image"], title="Image Repository")
+    ]
+    image_tag: Annotated[str, Field(examples=["2025.09.24-2"], title="Image Tag")]
+    image_digest: Annotated[
+        str | None,
+        Field(
+            description="SHA256 digest",
+            examples=["3406990b6e4c7192317b6fdc5680498744f6142f01f0287f4ee0420d8c74063c"],
+            title="Image Digest",
+        ),
+    ] = None
+    docker_version: Annotated[str | None, Field(examples=["28.4.0"], title="Docker Version")] = None
+
+
 class EMCellMeshGenerationMethod(StrEnum):
     marching_cubes = "marching_cubes"
 
@@ -315,38 +420,42 @@ class EMCellMeshType(StrEnum):
 
 
 class EMCellMeshUserUpdate(BaseModel):
-    license_id: Annotated[UUID | None, Field(title="License Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
-    subject_id: Annotated[UUID | None, Field(title="Subject Id")] = "<NOT_SET>"
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = "<NOT_SET>"
+    license_id: Annotated[UUID | str | None, Field(title="License Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    subject_id: Annotated[UUID | str | None, Field(title="Subject Id")] = "<NOT_SET>"
+    experiment_date: Annotated[AwareDatetime | str | None, Field(title="Experiment Date")] = (
+        "<NOT_SET>"
+    )
     contact_email: Annotated[str | None, Field(title="Contact Email")] = "<NOT_SET>"
     published_in: Annotated[str | None, Field(title="Published In")] = "<NOT_SET>"
-    release_version: Annotated[int | None, Field(title="Release Version")] = "<NOT_SET>"
+    release_version: Annotated[int | str | None, Field(title="Release Version")] = "<NOT_SET>"
     dense_reconstruction_cell_id: Annotated[
-        int | None, Field(title="Dense Reconstruction Cell Id")
+        int | str | None, Field(title="Dense Reconstruction Cell Id")
     ] = "<NOT_SET>"
-    generation_method: EMCellMeshGenerationMethod | None = "<NOT_SET>"
-    level_of_detail: Annotated[int | None, Field(title="Level Of Detail")] = "<NOT_SET>"
+    generation_method: Annotated[
+        EMCellMeshGenerationMethod | str | None, Field(title="Generation Method")
+    ] = "<NOT_SET>"
+    level_of_detail: Annotated[int | str | None, Field(title="Level Of Detail")] = "<NOT_SET>"
     generation_parameters: Annotated[
-        dict[str, Any] | None, Field(title="Generation Parameters")
+        dict[str, Any] | str | None, Field(title="Generation Parameters")
     ] = "<NOT_SET>"
-    mesh_type: EMCellMeshType | None = "<NOT_SET>"
+    mesh_type: Annotated[EMCellMeshType | str | None, Field(title="Mesh Type")] = "<NOT_SET>"
     em_dense_reconstruction_dataset_id: Annotated[
-        UUID | None, Field(title="Em Dense Reconstruction Dataset Id")
+        UUID | str | None, Field(title="Em Dense Reconstruction Dataset Id")
     ] = "<NOT_SET>"
 
 
 class EModelAdminUpdate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     iteration: Annotated[str | None, Field(title="Iteration")] = "<NOT_SET>"
-    score: Annotated[float | None, Field(title="Score")] = "<NOT_SET>"
-    seed: Annotated[int | None, Field(title="Seed")] = "<NOT_SET>"
-    species_id: Annotated[UUID | None, Field(title="Species Id")] = "<NOT_SET>"
-    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
-    exemplar_morphology_id: Annotated[UUID | None, Field(title="Exemplar Morphology Id")] = (
+    score: Annotated[float | str | None, Field(title="Score")] = "<NOT_SET>"
+    seed: Annotated[int | str | None, Field(title="Seed")] = "<NOT_SET>"
+    species_id: Annotated[UUID | str | None, Field(title="Species Id")] = "<NOT_SET>"
+    strain_id: Annotated[UUID | str | None, Field(title="Strain Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    exemplar_morphology_id: Annotated[UUID | str | None, Field(title="Exemplar Morphology Id")] = (
         "<NOT_SET>"
     )
 
@@ -368,12 +477,12 @@ class EModelUserUpdate(BaseModel):
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     iteration: Annotated[str | None, Field(title="Iteration")] = "<NOT_SET>"
-    score: Annotated[float | None, Field(title="Score")] = "<NOT_SET>"
-    seed: Annotated[int | None, Field(title="Seed")] = "<NOT_SET>"
-    species_id: Annotated[UUID | None, Field(title="Species Id")] = "<NOT_SET>"
-    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
-    exemplar_morphology_id: Annotated[UUID | None, Field(title="Exemplar Morphology Id")] = (
+    score: Annotated[float | str | None, Field(title="Score")] = "<NOT_SET>"
+    seed: Annotated[int | str | None, Field(title="Seed")] = "<NOT_SET>"
+    species_id: Annotated[UUID | str | None, Field(title="Species Id")] = "<NOT_SET>"
+    strain_id: Annotated[UUID | str | None, Field(title="Strain Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    exemplar_morphology_id: Annotated[UUID | str | None, Field(title="Exemplar Morphology Id")] = (
         "<NOT_SET>"
     )
 
@@ -416,12 +525,16 @@ class ElectricalRecordingStimulusType(StrEnum):
 class ElectricalRecordingStimulusUserUpdate(BaseModel):
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    dt: Annotated[float | None, Field(title="Dt")] = "<NOT_SET>"
-    injection_type: ElectricalRecordingStimulusType | None = "<NOT_SET>"
-    shape: ElectricalRecordingStimulusShape | None = "<NOT_SET>"
-    start_time: Annotated[float | None, Field(title="Start Time")] = "<NOT_SET>"
-    end_time: Annotated[float | None, Field(title="End Time")] = "<NOT_SET>"
-    recording_id: Annotated[UUID | None, Field(title="Recording Id")] = "<NOT_SET>"
+    dt: Annotated[float | str | None, Field(title="Dt")] = "<NOT_SET>"
+    injection_type: Annotated[
+        ElectricalRecordingStimulusType | str | None, Field(title="Injection Type")
+    ] = "<NOT_SET>"
+    shape: Annotated[ElectricalRecordingStimulusShape | str | None, Field(title="Shape")] = (
+        "<NOT_SET>"
+    )
+    start_time: Annotated[float | str | None, Field(title="Start Time")] = "<NOT_SET>"
+    end_time: Annotated[float | str | None, Field(title="End Time")] = "<NOT_SET>"
+    recording_id: Annotated[UUID | str | None, Field(title="Recording Id")] = "<NOT_SET>"
 
 
 class ElectricalRecordingType(StrEnum):
@@ -431,8 +544,8 @@ class ElectricalRecordingType(StrEnum):
     unknown = "unknown"
 
 
-class EntityCountRead(RootModel[dict[str, int] | None]):
-    root: dict[str, int] | None = None
+class EntityCountRead(RootModel[dict[str, int]]):
+    root: dict[str, int]
 
 
 class EntityRoute(StrEnum):
@@ -450,7 +563,6 @@ class EntityRoute(StrEnum):
     experimental_neuron_density = "experimental-neuron-density"
     experimental_synapses_per_connection = "experimental-synapses-per-connection"
     external_url = "external-url"
-    ion_channel = "ion-channel"
     ion_channel_model = "ion-channel-model"
     ion_channel_recording = "ion-channel-recording"
     memodel = "memodel"
@@ -468,6 +580,9 @@ class EntityRoute(StrEnum):
     circuit = "circuit"
     em_dense_reconstruction_dataset = "em-dense-reconstruction-dataset"
     em_cell_mesh = "em-cell-mesh"
+    analysis_notebook_template = "analysis-notebook-template"
+    analysis_notebook_environment = "analysis-notebook-environment"
+    analysis_notebook_result = "analysis-notebook-result"
 
 
 class EntityType(StrEnum):
@@ -485,7 +600,6 @@ class EntityType(StrEnum):
     experimental_neuron_density = "experimental_neuron_density"
     experimental_synapses_per_connection = "experimental_synapses_per_connection"
     external_url = "external_url"
-    ion_channel = "ion_channel"
     ion_channel_model = "ion_channel_model"
     ion_channel_recording = "ion_channel_recording"
     memodel = "memodel"
@@ -503,6 +617,9 @@ class EntityType(StrEnum):
     circuit = "circuit"
     em_dense_reconstruction_dataset = "em_dense_reconstruction_dataset"
     em_cell_mesh = "em_cell_mesh"
+    analysis_notebook_template = "analysis_notebook_template"
+    analysis_notebook_environment = "analysis_notebook_environment"
+    analysis_notebook_result = "analysis_notebook_result"
 
 
 class EntityTypeWithBrainRegion(StrEnum):
@@ -535,12 +652,12 @@ class ErrorResponse(BaseModel):
 
 
 class ExperimentalBoutonDensityAdminUpdate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
-    license_id: Annotated[UUID | None, Field(title="License Id")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    license_id: Annotated[UUID | str | None, Field(title="License Id")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    subject_id: Annotated[UUID | None, Field(title="Subject Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    subject_id: Annotated[UUID | str | None, Field(title="Subject Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
     legacy_id: Annotated[str | None, Field(title="Legacy Id")] = "<NOT_SET>"
 
 
@@ -555,21 +672,21 @@ class ExperimentalBoutonDensityCreate(BaseModel):
 
 
 class ExperimentalBoutonDensityUserUpdate(BaseModel):
-    license_id: Annotated[UUID | None, Field(title="License Id")] = "<NOT_SET>"
+    license_id: Annotated[UUID | str | None, Field(title="License Id")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    subject_id: Annotated[UUID | None, Field(title="Subject Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    subject_id: Annotated[UUID | str | None, Field(title="Subject Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
     legacy_id: Annotated[str | None, Field(title="Legacy Id")] = "<NOT_SET>"
 
 
 class ExperimentalNeuronDensityAdminUpdate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
-    license_id: Annotated[UUID | None, Field(title="License Id")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    license_id: Annotated[UUID | str | None, Field(title="License Id")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    subject_id: Annotated[UUID | None, Field(title="Subject Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    subject_id: Annotated[UUID | str | None, Field(title="Subject Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
     legacy_id: Annotated[str | None, Field(title="Legacy Id")] = "<NOT_SET>"
 
 
@@ -584,26 +701,26 @@ class ExperimentalNeuronDensityCreate(BaseModel):
 
 
 class ExperimentalNeuronDensityUserUpdate(BaseModel):
-    license_id: Annotated[UUID | None, Field(title="License Id")] = "<NOT_SET>"
+    license_id: Annotated[UUID | str | None, Field(title="License Id")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    subject_id: Annotated[UUID | None, Field(title="Subject Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    subject_id: Annotated[UUID | str | None, Field(title="Subject Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
     legacy_id: Annotated[str | None, Field(title="Legacy Id")] = "<NOT_SET>"
 
 
 class ExperimentalSynapsesPerConnectionAdminUpdate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
-    license_id: Annotated[UUID | None, Field(title="License Id")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    license_id: Annotated[UUID | str | None, Field(title="License Id")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    subject_id: Annotated[UUID | None, Field(title="Subject Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    subject_id: Annotated[UUID | str | None, Field(title="Subject Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
     legacy_id: Annotated[str | None, Field(title="Legacy Id")] = "<NOT_SET>"
-    pre_mtype_id: Annotated[UUID | None, Field(title="Pre Mtype Id")] = "<NOT_SET>"
-    post_mtype_id: Annotated[UUID | None, Field(title="Post Mtype Id")] = "<NOT_SET>"
-    pre_region_id: Annotated[UUID | None, Field(title="Pre Region Id")] = "<NOT_SET>"
-    post_region_id: Annotated[UUID | None, Field(title="Post Region Id")] = "<NOT_SET>"
+    pre_mtype_id: Annotated[UUID | str | None, Field(title="Pre Mtype Id")] = "<NOT_SET>"
+    post_mtype_id: Annotated[UUID | str | None, Field(title="Post Mtype Id")] = "<NOT_SET>"
+    pre_region_id: Annotated[UUID | str | None, Field(title="Pre Region Id")] = "<NOT_SET>"
+    post_region_id: Annotated[UUID | str | None, Field(title="Post Region Id")] = "<NOT_SET>"
 
 
 class ExperimentalSynapsesPerConnectionCreate(BaseModel):
@@ -621,16 +738,16 @@ class ExperimentalSynapsesPerConnectionCreate(BaseModel):
 
 
 class ExperimentalSynapsesPerConnectionUserUpdate(BaseModel):
-    license_id: Annotated[UUID | None, Field(title="License Id")] = "<NOT_SET>"
+    license_id: Annotated[UUID | str | None, Field(title="License Id")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    subject_id: Annotated[UUID | None, Field(title="Subject Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    subject_id: Annotated[UUID | str | None, Field(title="Subject Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
     legacy_id: Annotated[str | None, Field(title="Legacy Id")] = "<NOT_SET>"
-    pre_mtype_id: Annotated[UUID | None, Field(title="Pre Mtype Id")] = "<NOT_SET>"
-    post_mtype_id: Annotated[UUID | None, Field(title="Post Mtype Id")] = "<NOT_SET>"
-    pre_region_id: Annotated[UUID | None, Field(title="Pre Region Id")] = "<NOT_SET>"
-    post_region_id: Annotated[UUID | None, Field(title="Post Region Id")] = "<NOT_SET>"
+    pre_mtype_id: Annotated[UUID | str | None, Field(title="Pre Mtype Id")] = "<NOT_SET>"
+    post_mtype_id: Annotated[UUID | str | None, Field(title="Post Mtype Id")] = "<NOT_SET>"
+    pre_region_id: Annotated[UUID | str | None, Field(title="Pre Region Id")] = "<NOT_SET>"
+    post_region_id: Annotated[UUID | str | None, Field(title="Post Region Id")] = "<NOT_SET>"
 
 
 class ExternalSource(StrEnum):
@@ -653,8 +770,8 @@ class Facet(BaseModel):
     type: Annotated[str | None, Field(title="Type")] = None
 
 
-class Facets(RootModel[dict[str, list[Facet]] | None]):
-    root: dict[str, list[Facet]] | None = None
+class Facets(RootModel[dict[str, list[Facet]]]):
+    root: dict[str, list[Facet]]
 
 
 class HierarchyNode(BaseModel):
@@ -676,7 +793,7 @@ class IonChannelAdminUpdate(BaseModel):
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
     label: Annotated[str | None, Field(title="Label")] = "<NOT_SET>"
     gene: Annotated[str | None, Field(title="Gene")] = "<NOT_SET>"
-    synonyms: Annotated[list[str] | None, Field(title="Synonyms")] = "<NOT_SET>"
+    synonyms: Annotated[list[str] | str | None, Field(title="Synonyms")] = "<NOT_SET>"
 
 
 class IonChannelCreate(BaseModel):
@@ -688,24 +805,32 @@ class IonChannelCreate(BaseModel):
 
 
 class IonChannelRecordingAdminUpdate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
-    license_id: Annotated[UUID | None, Field(title="License Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
-    subject_id: Annotated[UUID | None, Field(title="Subject Id")] = "<NOT_SET>"
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    license_id: Annotated[UUID | str | None, Field(title="License Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    subject_id: Annotated[UUID | str | None, Field(title="Subject Id")] = "<NOT_SET>"
+    experiment_date: Annotated[AwareDatetime | str | None, Field(title="Experiment Date")] = (
+        "<NOT_SET>"
+    )
     contact_email: Annotated[str | None, Field(title="Contact Email")] = "<NOT_SET>"
     published_in: Annotated[str | None, Field(title="Published In")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    ljp: Annotated[float | None, Field(title="Ljp")] = "<NOT_SET>"
-    recording_location: Annotated[list[str] | None, Field(title="Recording Location")] = "<NOT_SET>"
-    recording_type: ElectricalRecordingType | None = "<NOT_SET>"
-    recording_origin: ElectricalRecordingOrigin | None = "<NOT_SET>"
-    temperature: Annotated[float | None, Field(title="Temperature")] = "<NOT_SET>"
+    ljp: Annotated[float | str | None, Field(title="Ljp")] = "<NOT_SET>"
+    recording_location: Annotated[list[str] | str | None, Field(title="Recording Location")] = (
+        "<NOT_SET>"
+    )
+    recording_type: Annotated[
+        ElectricalRecordingType | str | None, Field(title="Recording Type")
+    ] = "<NOT_SET>"
+    recording_origin: Annotated[
+        ElectricalRecordingOrigin | str | None, Field(title="Recording Origin")
+    ] = "<NOT_SET>"
+    temperature: Annotated[float | str | None, Field(title="Temperature")] = "<NOT_SET>"
     comment: Annotated[str | None, Field(title="Comment")] = "<NOT_SET>"
-    legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = "<NOT_SET>"
+    legacy_id: Annotated[list[str] | str | None, Field(title="Legacy Id")] = "<NOT_SET>"
     cell_line: Annotated[str | None, Field(title="Cell Line")] = "<NOT_SET>"
-    ion_channel_id: Annotated[UUID | None, Field(title="Ion Channel Id")] = "<NOT_SET>"
+    ion_channel_id: Annotated[UUID | str | None, Field(title="Ion Channel Id")] = "<NOT_SET>"
 
 
 class IonChannelRecordingCreate(BaseModel):
@@ -772,23 +897,31 @@ class IonChannelRecordingCreate(BaseModel):
 
 
 class IonChannelRecordingUserUpdate(BaseModel):
-    license_id: Annotated[UUID | None, Field(title="License Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
-    subject_id: Annotated[UUID | None, Field(title="Subject Id")] = "<NOT_SET>"
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = "<NOT_SET>"
+    license_id: Annotated[UUID | str | None, Field(title="License Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    subject_id: Annotated[UUID | str | None, Field(title="Subject Id")] = "<NOT_SET>"
+    experiment_date: Annotated[AwareDatetime | str | None, Field(title="Experiment Date")] = (
+        "<NOT_SET>"
+    )
     contact_email: Annotated[str | None, Field(title="Contact Email")] = "<NOT_SET>"
     published_in: Annotated[str | None, Field(title="Published In")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    ljp: Annotated[float | None, Field(title="Ljp")] = "<NOT_SET>"
-    recording_location: Annotated[list[str] | None, Field(title="Recording Location")] = "<NOT_SET>"
-    recording_type: ElectricalRecordingType | None = "<NOT_SET>"
-    recording_origin: ElectricalRecordingOrigin | None = "<NOT_SET>"
-    temperature: Annotated[float | None, Field(title="Temperature")] = "<NOT_SET>"
+    ljp: Annotated[float | str | None, Field(title="Ljp")] = "<NOT_SET>"
+    recording_location: Annotated[list[str] | str | None, Field(title="Recording Location")] = (
+        "<NOT_SET>"
+    )
+    recording_type: Annotated[
+        ElectricalRecordingType | str | None, Field(title="Recording Type")
+    ] = "<NOT_SET>"
+    recording_origin: Annotated[
+        ElectricalRecordingOrigin | str | None, Field(title="Recording Origin")
+    ] = "<NOT_SET>"
+    temperature: Annotated[float | str | None, Field(title="Temperature")] = "<NOT_SET>"
     comment: Annotated[str | None, Field(title="Comment")] = "<NOT_SET>"
-    legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = "<NOT_SET>"
+    legacy_id: Annotated[list[str] | str | None, Field(title="Legacy Id")] = "<NOT_SET>"
     cell_line: Annotated[str | None, Field(title="Cell Line")] = "<NOT_SET>"
-    ion_channel_id: Annotated[UUID | None, Field(title="Ion Channel Id")] = "<NOT_SET>"
+    ion_channel_id: Annotated[UUID | str | None, Field(title="Ion Channel Id")] = "<NOT_SET>"
 
 
 class LicenseAdminUpdate(BaseModel):
@@ -813,11 +946,13 @@ class LicenseRead(BaseModel):
 
 
 class MEModelCalibrationResultAdminUpdate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
-    holding_current: Annotated[float | None, Field(title="Holding Current")] = "<NOT_SET>"
-    threshold_current: Annotated[float | None, Field(title="Threshold Current")] = "<NOT_SET>"
-    rin: Annotated[float | None, Field(title="Rin")] = "<NOT_SET>"
-    calibrated_entity_id: Annotated[UUID | None, Field(title="Calibrated Entity Id")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    holding_current: Annotated[float | str | None, Field(title="Holding Current")] = "<NOT_SET>"
+    threshold_current: Annotated[float | str | None, Field(title="Threshold Current")] = "<NOT_SET>"
+    rin: Annotated[float | str | None, Field(title="Rin")] = "<NOT_SET>"
+    calibrated_entity_id: Annotated[UUID | str | None, Field(title="Calibrated Entity Id")] = (
+        "<NOT_SET>"
+    )
 
 
 class MEModelCalibrationResultCreate(BaseModel):
@@ -829,10 +964,12 @@ class MEModelCalibrationResultCreate(BaseModel):
 
 
 class MEModelCalibrationResultUserUpdate(BaseModel):
-    holding_current: Annotated[float | None, Field(title="Holding Current")] = "<NOT_SET>"
-    threshold_current: Annotated[float | None, Field(title="Threshold Current")] = "<NOT_SET>"
-    rin: Annotated[float | None, Field(title="Rin")] = "<NOT_SET>"
-    calibrated_entity_id: Annotated[UUID | None, Field(title="Calibrated Entity Id")] = "<NOT_SET>"
+    holding_current: Annotated[float | str | None, Field(title="Holding Current")] = "<NOT_SET>"
+    threshold_current: Annotated[float | str | None, Field(title="Threshold Current")] = "<NOT_SET>"
+    rin: Annotated[float | str | None, Field(title="Rin")] = "<NOT_SET>"
+    calibrated_entity_id: Annotated[UUID | str | None, Field(title="Calibrated Entity Id")] = (
+        "<NOT_SET>"
+    )
 
 
 class MTypeClassificationCreate(BaseModel):
@@ -1057,6 +1194,38 @@ class OrganizationRead(BaseModel):
     type: Annotated[str, Field(title="Type")]
 
 
+class OsRuntimeInfo(BaseModel):
+    system: Annotated[
+        str, Field(description="Output of `platform.system()`", examples=["Linux"], title="System")
+    ]
+    release: Annotated[
+        str,
+        Field(
+            description="Output of `platform.release()`",
+            examples=["5.14.0-427.28.1.el9_4.x86_64"],
+            title="Release",
+        ),
+    ]
+    version: Annotated[
+        str,
+        Field(
+            description="Output of `platform.version()`",
+            examples=["#1 SMP PREEMPT_DYNAMIC Fri Aug 2 03:44:10 EDT 2024"],
+            title="Version",
+        ),
+    ]
+    machine: Annotated[
+        str,
+        Field(description="Output of `platform.machine()`", examples=["x86_64"], title="Machine"),
+    ]
+    processor: Annotated[
+        str,
+        Field(
+            description="Output of `platform.processor()`", examples=["x86_64"], title="Processor"
+        ),
+    ]
+
+
 class PaginationResponse(BaseModel):
     page: Annotated[int, Field(title="Page")]
     page_size: Annotated[int, Field(title="Page Size")]
@@ -1114,8 +1283,8 @@ class PointLocationBase(BaseModel):
 class PublicationAdminUpdate(BaseModel):
     DOI: Annotated[str | None, Field(title="Doi")] = "<NOT_SET>"
     title: Annotated[str | None, Field(title="Title")] = "<NOT_SET>"
-    authors: Annotated[list[Author] | None, Field(title="Authors")] = "<NOT_SET>"
-    publication_year: Annotated[int | None, Field(title="Publication Year")] = "<NOT_SET>"
+    authors: Annotated[list[Author] | str | None, Field(title="Authors")] = "<NOT_SET>"
+    publication_year: Annotated[int | str | None, Field(title="Publication Year")] = "<NOT_SET>"
     abstract: Annotated[str | None, Field(title="Abstract")] = "<NOT_SET>"
 
 
@@ -1146,7 +1315,42 @@ class PublicationType(StrEnum):
     application = "application"
 
 
+class PythonDependency(BaseModel):
+    version: Annotated[str, Field(examples=[">=3.10,<3.12"], title="Version")]
+
+
+class PythonRuntimeInfo(BaseModel):
+    version: Annotated[
+        str,
+        Field(
+            description="Output of `platform.python_version()`",
+            examples=["3.9.21"],
+            title="Version",
+        ),
+    ]
+    implementation: Annotated[
+        str,
+        Field(
+            description="Output of `platform.python_implementation()`",
+            examples=["CPython"],
+            title="Implementation",
+        ),
+    ]
+    executable: Annotated[
+        str,
+        Field(
+            description="Output of `sys.executable`",
+            examples=["/usr/bin/python"],
+            title="Executable",
+        ),
+    ]
+
+
 class ResourceRoute(StrEnum):
+    analysis_notebook_environment = "analysis-notebook-environment"
+    analysis_notebook_execution = "analysis-notebook-execution"
+    analysis_notebook_result = "analysis-notebook-result"
+    analysis_notebook_template = "analysis-notebook-template"
     analysis_software_source_code = "analysis-software-source-code"
     brain_atlas = "brain-atlas"
     brain_atlas_region = "brain-atlas-region"
@@ -1223,6 +1427,13 @@ class RoleRead(BaseModel):
     role_id: Annotated[str, Field(title="Role Id")]
 
 
+class RuntimeInfo(BaseModel):
+    schema_version: Annotated[int | None, Field(title="Schema Version")] = 1
+    python: PythonRuntimeInfo
+    docker: DockerRuntimeInfo | None = None
+    os: OsRuntimeInfo | None = None
+
+
 class ScientificArtifactExternalUrlLinkCreate(BaseModel):
     external_url_id: Annotated[UUID, Field(title="External Url Id")]
     scientific_artifact_id: Annotated[UUID, Field(title="Scientific Artifact Id")]
@@ -1258,22 +1469,26 @@ class Sex(StrEnum):
 
 
 class SimulationAdminUpdate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    simulation_campaign_id: Annotated[UUID | None, Field(title="Simulation Campaign Id")] = (
+    simulation_campaign_id: Annotated[UUID | str | None, Field(title="Simulation Campaign Id")] = (
         "<NOT_SET>"
     )
-    entity_id: Annotated[UUID | None, Field(title="Entity Id")] = "<NOT_SET>"
-    scan_parameters: Annotated[dict[str, Any] | None, Field(title="Scan Parameters")] = "<NOT_SET>"
+    entity_id: Annotated[UUID | str | None, Field(title="Entity Id")] = "<NOT_SET>"
+    scan_parameters: Annotated[dict[str, Any] | str | None, Field(title="Scan Parameters")] = (
+        "<NOT_SET>"
+    )
 
 
 class SimulationCampaignAdminUpdate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    scan_parameters: Annotated[dict[str, Any] | None, Field(title="Scan Parameters")] = "<NOT_SET>"
-    entity_id: Annotated[UUID | None, Field(title="Entity Id")] = "<NOT_SET>"
+    scan_parameters: Annotated[dict[str, Any] | str | None, Field(title="Scan Parameters")] = (
+        "<NOT_SET>"
+    )
+    entity_id: Annotated[UUID | str | None, Field(title="Entity Id")] = "<NOT_SET>"
 
 
 class SimulationCampaignCreate(BaseModel):
@@ -1287,8 +1502,10 @@ class SimulationCampaignCreate(BaseModel):
 class SimulationCampaignUserUpdate(BaseModel):
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    scan_parameters: Annotated[dict[str, Any] | None, Field(title="Scan Parameters")] = "<NOT_SET>"
-    entity_id: Annotated[UUID | None, Field(title="Entity Id")] = "<NOT_SET>"
+    scan_parameters: Annotated[dict[str, Any] | str | None, Field(title="Scan Parameters")] = (
+        "<NOT_SET>"
+    )
+    entity_id: Annotated[UUID | str | None, Field(title="Entity Id")] = "<NOT_SET>"
 
 
 class SimulationCreate(BaseModel):
@@ -1316,11 +1533,11 @@ class SimulationExecutionUserUpdate(BaseModel):
 
 
 class SimulationGenerationAdminUpdate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
-    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = "<NOT_SET>"
-    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = "<NOT_SET>"
-    used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = "<NOT_SET>"
-    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    start_time: Annotated[AwareDatetime | str | None, Field(title="Start Time")] = "<NOT_SET>"
+    end_time: Annotated[AwareDatetime | str | None, Field(title="End Time")] = "<NOT_SET>"
+    used_ids: Annotated[list[UUID] | str | None, Field(title="Used Ids")] = "<NOT_SET>"
+    generated_ids: Annotated[list[UUID] | str | None, Field(title="Generated Ids")] = "<NOT_SET>"
 
 
 class SimulationGenerationCreate(BaseModel):
@@ -1353,10 +1570,10 @@ class SimulationGenerationUserUpdate(BaseModel):
 
 
 class SimulationResultAdminUpdate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    simulation_id: Annotated[UUID | None, Field(title="Simulation Id")] = "<NOT_SET>"
+    simulation_id: Annotated[UUID | str | None, Field(title="Simulation Id")] = "<NOT_SET>"
 
 
 class SimulationResultCreate(BaseModel):
@@ -1369,17 +1586,19 @@ class SimulationResultCreate(BaseModel):
 class SimulationResultUserUpdate(BaseModel):
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    simulation_id: Annotated[UUID | None, Field(title="Simulation Id")] = "<NOT_SET>"
+    simulation_id: Annotated[UUID | str | None, Field(title="Simulation Id")] = "<NOT_SET>"
 
 
 class SimulationUserUpdate(BaseModel):
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    simulation_campaign_id: Annotated[UUID | None, Field(title="Simulation Campaign Id")] = (
+    simulation_campaign_id: Annotated[UUID | str | None, Field(title="Simulation Campaign Id")] = (
         "<NOT_SET>"
     )
-    entity_id: Annotated[UUID | None, Field(title="Entity Id")] = "<NOT_SET>"
-    scan_parameters: Annotated[dict[str, Any] | None, Field(title="Scan Parameters")] = "<NOT_SET>"
+    entity_id: Annotated[UUID | str | None, Field(title="Entity Id")] = "<NOT_SET>"
+    scan_parameters: Annotated[dict[str, Any] | str | None, Field(title="Scan Parameters")] = (
+        "<NOT_SET>"
+    )
 
 
 class SingleNeuronSimulationStatus(StrEnum):
@@ -1389,23 +1608,29 @@ class SingleNeuronSimulationStatus(StrEnum):
 
 
 class SingleNeuronSimulationUserUpdate(BaseModel):
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    seed: Annotated[int | None, Field(title="Seed")] = "<NOT_SET>"
-    status: SingleNeuronSimulationStatus | None = "<NOT_SET>"
-    injection_location: Annotated[list[str] | None, Field(title="Injection Location")] = "<NOT_SET>"
-    recording_location: Annotated[list[str] | None, Field(title="Recording Location")] = "<NOT_SET>"
-    me_model_id: Annotated[UUID | None, Field(title="Me Model Id")] = "<NOT_SET>"
+    seed: Annotated[int | str | None, Field(title="Seed")] = "<NOT_SET>"
+    status: Annotated[SingleNeuronSimulationStatus | str | None, Field(title="Status")] = (
+        "<NOT_SET>"
+    )
+    injection_location: Annotated[list[str] | str | None, Field(title="Injection Location")] = (
+        "<NOT_SET>"
+    )
+    recording_location: Annotated[list[str] | str | None, Field(title="Recording Location")] = (
+        "<NOT_SET>"
+    )
+    me_model_id: Annotated[UUID | str | None, Field(title="Me Model Id")] = "<NOT_SET>"
 
 
 class SingleNeuronSynaptomeAdminUpdate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    seed: Annotated[int | None, Field(title="Seed")] = "<NOT_SET>"
-    me_model_id: Annotated[UUID | None, Field(title="Me Model Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    seed: Annotated[int | str | None, Field(title="Seed")] = "<NOT_SET>"
+    me_model_id: Annotated[UUID | str | None, Field(title="Me Model Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
 
 
 class SingleNeuronSynaptomeCreate(BaseModel):
@@ -1418,15 +1643,21 @@ class SingleNeuronSynaptomeCreate(BaseModel):
 
 
 class SingleNeuronSynaptomeSimulationAdminUpdate(BaseModel):
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    seed: Annotated[int | None, Field(title="Seed")] = "<NOT_SET>"
-    status: SingleNeuronSimulationStatus | None = "<NOT_SET>"
-    injection_location: Annotated[list[str] | None, Field(title="Injection Location")] = "<NOT_SET>"
-    recording_location: Annotated[list[str] | None, Field(title="Recording Location")] = "<NOT_SET>"
-    synaptome_id: Annotated[UUID | None, Field(title="Synaptome Id")] = "<NOT_SET>"
+    seed: Annotated[int | str | None, Field(title="Seed")] = "<NOT_SET>"
+    status: Annotated[SingleNeuronSimulationStatus | str | None, Field(title="Status")] = (
+        "<NOT_SET>"
+    )
+    injection_location: Annotated[list[str] | str | None, Field(title="Injection Location")] = (
+        "<NOT_SET>"
+    )
+    recording_location: Annotated[list[str] | str | None, Field(title="Recording Location")] = (
+        "<NOT_SET>"
+    )
+    synaptome_id: Annotated[UUID | str | None, Field(title="Synaptome Id")] = "<NOT_SET>"
 
 
 class SingleNeuronSynaptomeSimulationCreate(BaseModel):
@@ -1442,22 +1673,28 @@ class SingleNeuronSynaptomeSimulationCreate(BaseModel):
 
 
 class SingleNeuronSynaptomeSimulationUserUpdate(BaseModel):
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    seed: Annotated[int | None, Field(title="Seed")] = "<NOT_SET>"
-    status: SingleNeuronSimulationStatus | None = "<NOT_SET>"
-    injection_location: Annotated[list[str] | None, Field(title="Injection Location")] = "<NOT_SET>"
-    recording_location: Annotated[list[str] | None, Field(title="Recording Location")] = "<NOT_SET>"
-    synaptome_id: Annotated[UUID | None, Field(title="Synaptome Id")] = "<NOT_SET>"
+    seed: Annotated[int | str | None, Field(title="Seed")] = "<NOT_SET>"
+    status: Annotated[SingleNeuronSimulationStatus | str | None, Field(title="Status")] = (
+        "<NOT_SET>"
+    )
+    injection_location: Annotated[list[str] | str | None, Field(title="Injection Location")] = (
+        "<NOT_SET>"
+    )
+    recording_location: Annotated[list[str] | str | None, Field(title="Recording Location")] = (
+        "<NOT_SET>"
+    )
+    synaptome_id: Annotated[UUID | str | None, Field(title="Synaptome Id")] = "<NOT_SET>"
 
 
 class SingleNeuronSynaptomeUserUpdate(BaseModel):
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    seed: Annotated[int | None, Field(title="Seed")] = "<NOT_SET>"
-    me_model_id: Annotated[UUID | None, Field(title="Me Model Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    seed: Annotated[int | str | None, Field(title="Seed")] = "<NOT_SET>"
+    me_model_id: Annotated[UUID | str | None, Field(title="Me Model Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
 
 
 class SlicingDirectionType(StrEnum):
@@ -1506,7 +1743,7 @@ class StorageType(StrEnum):
 class StrainAdminUpdate(BaseModel):
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     taxonomy_id: Annotated[str | None, Field(title="Taxonomy Id")] = "<NOT_SET>"
-    species_id: Annotated[UUID | None, Field(title="Species Id")] = "<NOT_SET>"
+    species_id: Annotated[UUID | str | None, Field(title="Species Id")] = "<NOT_SET>"
 
 
 class StrainCreate(BaseModel):
@@ -1537,15 +1774,15 @@ class StructuralDomain(StrEnum):
 class SubjectAdminUpdate(BaseModel):
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    sex: Sex | None = "<NOT_SET>"
-    weight: Annotated[float | None, Field(title="Weight")] = "<NOT_SET>"
-    age_value: Annotated[timedelta | None, Field(title="Age Value")] = "<NOT_SET>"
-    age_min: Annotated[timedelta | None, Field(title="Age Min")] = "<NOT_SET>"
-    age_max: Annotated[timedelta | None, Field(title="Age Max")] = "<NOT_SET>"
-    age_period: AgePeriod | None = "<NOT_SET>"
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
-    species_id: Annotated[UUID | None, Field(title="Species Id")] = "<NOT_SET>"
-    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = "<NOT_SET>"
+    sex: Annotated[Sex | str | None, Field(title="Sex")] = "<NOT_SET>"
+    weight: Annotated[float | str | None, Field(title="Weight")] = "<NOT_SET>"
+    age_value: Annotated[timedelta | str | None, Field(title="Age Value")] = "<NOT_SET>"
+    age_min: Annotated[timedelta | str | None, Field(title="Age Min")] = "<NOT_SET>"
+    age_max: Annotated[timedelta | str | None, Field(title="Age Max")] = "<NOT_SET>"
+    age_period: Annotated[AgePeriod | str | None, Field(title="Age Period")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    species_id: Annotated[UUID | str | None, Field(title="Species Id")] = "<NOT_SET>"
+    strain_id: Annotated[UUID | str | None, Field(title="Strain Id")] = "<NOT_SET>"
 
 
 class SubjectCreate(BaseModel):
@@ -1597,14 +1834,14 @@ class SubjectRead(BaseModel):
 class SubjectUserUpdate(BaseModel):
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    sex: Sex | None = "<NOT_SET>"
-    weight: Annotated[float | None, Field(title="Weight")] = "<NOT_SET>"
-    age_value: Annotated[timedelta | None, Field(title="Age Value")] = "<NOT_SET>"
-    age_min: Annotated[timedelta | None, Field(title="Age Min")] = "<NOT_SET>"
-    age_max: Annotated[timedelta | None, Field(title="Age Max")] = "<NOT_SET>"
-    age_period: AgePeriod | None = "<NOT_SET>"
-    species_id: Annotated[UUID | None, Field(title="Species Id")] = "<NOT_SET>"
-    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = "<NOT_SET>"
+    sex: Annotated[Sex | str | None, Field(title="Sex")] = "<NOT_SET>"
+    weight: Annotated[float | str | None, Field(title="Weight")] = "<NOT_SET>"
+    age_value: Annotated[timedelta | str | None, Field(title="Age Value")] = "<NOT_SET>"
+    age_min: Annotated[timedelta | str | None, Field(title="Age Min")] = "<NOT_SET>"
+    age_max: Annotated[timedelta | str | None, Field(title="Age Max")] = "<NOT_SET>"
+    age_period: Annotated[AgePeriod | str | None, Field(title="Age Period")] = "<NOT_SET>"
+    species_id: Annotated[UUID | str | None, Field(title="Species Id")] = "<NOT_SET>"
+    strain_id: Annotated[UUID | str | None, Field(title="Strain Id")] = "<NOT_SET>"
 
 
 class UseIon(BaseModel):
@@ -1616,11 +1853,11 @@ class UseIon(BaseModel):
 
 
 class ValidationAdminUpdate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
-    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = "<NOT_SET>"
-    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = "<NOT_SET>"
-    used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = "<NOT_SET>"
-    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    start_time: Annotated[AwareDatetime | str | None, Field(title="Start Time")] = "<NOT_SET>"
+    end_time: Annotated[AwareDatetime | str | None, Field(title="End Time")] = "<NOT_SET>"
+    used_ids: Annotated[list[UUID] | str | None, Field(title="Used Ids")] = "<NOT_SET>"
+    generated_ids: Annotated[list[UUID] | str | None, Field(title="Generated Ids")] = "<NOT_SET>"
 
 
 class ValidationCreate(BaseModel):
@@ -1647,10 +1884,12 @@ class ValidationRead(BaseModel):
 
 
 class ValidationResultAdminUpdate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
-    passed: Annotated[bool | None, Field(title="Passed")] = "<NOT_SET>"
-    validated_entity_id: Annotated[UUID | None, Field(title="Validated Entity Id")] = "<NOT_SET>"
+    passed: Annotated[bool | str | None, Field(title="Passed")] = "<NOT_SET>"
+    validated_entity_id: Annotated[UUID | str | None, Field(title="Validated Entity Id")] = (
+        "<NOT_SET>"
+    )
 
 
 class ValidationResultCreate(BaseModel):
@@ -1662,8 +1901,10 @@ class ValidationResultCreate(BaseModel):
 
 class ValidationResultUserUpdate(BaseModel):
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
-    passed: Annotated[bool | None, Field(title="Passed")] = "<NOT_SET>"
-    validated_entity_id: Annotated[UUID | None, Field(title="Validated Entity Id")] = "<NOT_SET>"
+    passed: Annotated[bool | str | None, Field(title="Passed")] = "<NOT_SET>"
+    validated_entity_id: Annotated[UUID | str | None, Field(title="Validated Entity Id")] = (
+        "<NOT_SET>"
+    )
 
 
 class ValidationStatus(StrEnum):
@@ -1682,6 +1923,63 @@ class ValidationUserUpdate(BaseModel):
 
 class AgentRead(RootModel[NestedPersonRead | NestedOrganizationRead | NestedConsortiumRead]):
     root: NestedPersonRead | NestedOrganizationRead | NestedConsortiumRead
+
+
+class AnalysisNotebookEnvironmentAdminUpdate(BaseModel):
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    runtime_info: Annotated[RuntimeInfo | str | None, Field(title="Runtime Info")] = "<NOT_SET>"
+
+
+class AnalysisNotebookEnvironmentCreate(BaseModel):
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    runtime_info: RuntimeInfo | None = None
+
+
+class AnalysisNotebookEnvironmentUpdate(BaseModel):
+    runtime_info: Annotated[RuntimeInfo | str | None, Field(title="Runtime Info")] = "<NOT_SET>"
+
+
+class AnalysisNotebookExecutionUpdate(BaseModel):
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
+    analysis_notebook_template_id: Annotated[
+        UUID | None, Field(title="Analysis Notebook Template Id")
+    ] = None
+    analysis_notebook_environment_id: Annotated[
+        UUID | None, Field(title="Analysis Notebook Environment Id")
+    ] = None
+
+
+class AnalysisNotebookTemplateInputType(BaseModel):
+    name: Annotated[str, Field(title="Name")]
+    entity_type: EntityType
+    is_list: Annotated[bool | None, Field(title="Is List")] = False
+    count_min: Annotated[int | None, Field(ge=0, title="Count Min")] = 1
+    count_max: Annotated[CountMax | None, Field(title="Count Max")] = 1
+
+
+class AnalysisNotebookTemplateSpecificationsInput(BaseModel):
+    schema_version: Annotated[int | None, Field(title="Schema Version")] = 1
+    python: PythonDependency | None = None
+    docker: DockerDependency | None = None
+    inputs: Annotated[list[AnalysisNotebookTemplateInputType] | None, Field(title="Inputs")] = []
+
+
+class AnalysisNotebookTemplateSpecificationsOutput(BaseModel):
+    schema_version: Annotated[int | None, Field(title="Schema Version")] = 1
+    python: PythonDependency | None = None
+    docker: DockerDependency | None = None
+    inputs: Annotated[list[AnalysisNotebookTemplateInputType] | None, Field(title="Inputs")] = []
+
+
+class AnalysisNotebookTemplateUpdate(BaseModel):
+    name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
+    description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
+    specifications: Annotated[
+        AnalysisNotebookTemplateSpecificationsInput | str | None, Field(title="Specifications")
+    ] = "<NOT_SET>"
+    scale: Annotated[AnalysisScale | str | None, Field(title="Scale")] = "<NOT_SET>"
 
 
 class AssetRead(BaseModel):
@@ -1767,19 +2065,21 @@ class CalibrationUserUpdate(BaseModel):
 
 
 class CellMorphologyAdminUpdate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
-    license_id: Annotated[UUID | None, Field(title="License Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
-    subject_id: Annotated[UUID | None, Field(title="Subject Id")] = "<NOT_SET>"
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    license_id: Annotated[UUID | str | None, Field(title="License Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    subject_id: Annotated[UUID | str | None, Field(title="Subject Id")] = "<NOT_SET>"
+    experiment_date: Annotated[AwareDatetime | str | None, Field(title="Experiment Date")] = (
+        "<NOT_SET>"
+    )
     contact_email: Annotated[str | None, Field(title="Contact Email")] = "<NOT_SET>"
     published_in: Annotated[str | None, Field(title="Published In")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    location: PointLocationBase | None = "<NOT_SET>"
-    legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = "<NOT_SET>"
+    location: Annotated[PointLocationBase | str | None, Field(title="Location")] = "<NOT_SET>"
+    legacy_id: Annotated[list[str] | str | None, Field(title="Legacy Id")] = "<NOT_SET>"
     cell_morphology_protocol_id: Annotated[
-        UUID | None, Field(title="Cell Morphology Protocol Id")
+        UUID | str | None, Field(title="Cell Morphology Protocol Id")
     ] = "<NOT_SET>"
 
 
@@ -1801,44 +2101,50 @@ class CellMorphologyCreate(BaseModel):
 
 
 class CellMorphologyUserUpdate(BaseModel):
-    license_id: Annotated[UUID | None, Field(title="License Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
-    subject_id: Annotated[UUID | None, Field(title="Subject Id")] = "<NOT_SET>"
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = "<NOT_SET>"
+    license_id: Annotated[UUID | str | None, Field(title="License Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    subject_id: Annotated[UUID | str | None, Field(title="Subject Id")] = "<NOT_SET>"
+    experiment_date: Annotated[AwareDatetime | str | None, Field(title="Experiment Date")] = (
+        "<NOT_SET>"
+    )
     contact_email: Annotated[str | None, Field(title="Contact Email")] = "<NOT_SET>"
     published_in: Annotated[str | None, Field(title="Published In")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    location: PointLocationBase | None = "<NOT_SET>"
-    legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = "<NOT_SET>"
+    location: Annotated[PointLocationBase | str | None, Field(title="Location")] = "<NOT_SET>"
+    legacy_id: Annotated[list[str] | str | None, Field(title="Legacy Id")] = "<NOT_SET>"
     cell_morphology_protocol_id: Annotated[
-        UUID | None, Field(title="Cell Morphology Protocol Id")
+        UUID | str | None, Field(title="Cell Morphology Protocol Id")
     ] = "<NOT_SET>"
 
 
 class CircuitAdminUpdate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
-    license_id: Annotated[UUID | None, Field(title="License Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
-    subject_id: Annotated[UUID | None, Field(title="Subject Id")] = "<NOT_SET>"
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    license_id: Annotated[UUID | str | None, Field(title="License Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    subject_id: Annotated[UUID | str | None, Field(title="Subject Id")] = "<NOT_SET>"
+    experiment_date: Annotated[AwareDatetime | str | None, Field(title="Experiment Date")] = (
+        "<NOT_SET>"
+    )
     contact_email: Annotated[str | None, Field(title="Contact Email")] = "<NOT_SET>"
     published_in: Annotated[str | None, Field(title="Published In")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    has_morphologies: Annotated[bool | None, Field(title="Has Morphologies")] = "<NOT_SET>"
-    has_point_neurons: Annotated[bool | None, Field(title="Has Point Neurons")] = "<NOT_SET>"
+    has_morphologies: Annotated[bool | str | None, Field(title="Has Morphologies")] = "<NOT_SET>"
+    has_point_neurons: Annotated[bool | str | None, Field(title="Has Point Neurons")] = "<NOT_SET>"
     has_electrical_cell_models: Annotated[
-        bool | None, Field(title="Has Electrical Cell Models")
+        bool | str | None, Field(title="Has Electrical Cell Models")
     ] = "<NOT_SET>"
-    has_spines: Annotated[bool | None, Field(title="Has Spines")] = "<NOT_SET>"
-    number_neurons: Annotated[int | None, Field(title="Number Neurons")] = "<NOT_SET>"
-    number_synapses: Annotated[int | None, Field(title="Number Synapses")] = "<NOT_SET>"
-    number_connections: Annotated[int | None, Field(title="Number Connections")] = "<NOT_SET>"
-    scale: CircuitScale | None = "<NOT_SET>"
-    build_category: CircuitBuildCategory | None = "<NOT_SET>"
-    root_circuit_id: Annotated[UUID | None, Field(title="Root Circuit Id")] = "<NOT_SET>"
-    atlas_id: Annotated[UUID | None, Field(title="Atlas Id")] = "<NOT_SET>"
+    has_spines: Annotated[bool | str | None, Field(title="Has Spines")] = "<NOT_SET>"
+    number_neurons: Annotated[int | str | None, Field(title="Number Neurons")] = "<NOT_SET>"
+    number_synapses: Annotated[int | str | None, Field(title="Number Synapses")] = "<NOT_SET>"
+    number_connections: Annotated[int | str | None, Field(title="Number Connections")] = "<NOT_SET>"
+    scale: Annotated[CircuitScale | str | None, Field(title="Scale")] = "<NOT_SET>"
+    build_category: Annotated[CircuitBuildCategory | str | None, Field(title="Build Category")] = (
+        "<NOT_SET>"
+    )
+    root_circuit_id: Annotated[UUID | str | None, Field(title="Root Circuit Id")] = "<NOT_SET>"
+    atlas_id: Annotated[UUID | str | None, Field(title="Atlas Id")] = "<NOT_SET>"
 
 
 class CircuitCreate(BaseModel):
@@ -2024,22 +2330,30 @@ class ETypeClassificationRead(BaseModel):
 
 
 class ElectricalCellRecordingAdminUpdate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
-    license_id: Annotated[UUID | None, Field(title="License Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
-    subject_id: Annotated[UUID | None, Field(title="Subject Id")] = "<NOT_SET>"
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    license_id: Annotated[UUID | str | None, Field(title="License Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    subject_id: Annotated[UUID | str | None, Field(title="Subject Id")] = "<NOT_SET>"
+    experiment_date: Annotated[AwareDatetime | str | None, Field(title="Experiment Date")] = (
+        "<NOT_SET>"
+    )
     contact_email: Annotated[str | None, Field(title="Contact Email")] = "<NOT_SET>"
     published_in: Annotated[str | None, Field(title="Published In")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    ljp: Annotated[float | None, Field(title="Ljp")] = "<NOT_SET>"
-    recording_location: Annotated[list[str] | None, Field(title="Recording Location")] = "<NOT_SET>"
-    recording_type: ElectricalRecordingType | None = "<NOT_SET>"
-    recording_origin: ElectricalRecordingOrigin | None = "<NOT_SET>"
-    temperature: Annotated[float | None, Field(title="Temperature")] = "<NOT_SET>"
+    ljp: Annotated[float | str | None, Field(title="Ljp")] = "<NOT_SET>"
+    recording_location: Annotated[list[str] | str | None, Field(title="Recording Location")] = (
+        "<NOT_SET>"
+    )
+    recording_type: Annotated[
+        ElectricalRecordingType | str | None, Field(title="Recording Type")
+    ] = "<NOT_SET>"
+    recording_origin: Annotated[
+        ElectricalRecordingOrigin | str | None, Field(title="Recording Origin")
+    ] = "<NOT_SET>"
+    temperature: Annotated[float | str | None, Field(title="Temperature")] = "<NOT_SET>"
     comment: Annotated[str | None, Field(title="Comment")] = "<NOT_SET>"
-    legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = "<NOT_SET>"
+    legacy_id: Annotated[list[str] | str | None, Field(title="Legacy Id")] = "<NOT_SET>"
 
 
 class ElectricalCellRecordingCreate(BaseModel):
@@ -2094,33 +2408,45 @@ class ElectricalCellRecordingCreate(BaseModel):
 
 
 class ElectricalCellRecordingUserUpdate(BaseModel):
-    license_id: Annotated[UUID | None, Field(title="License Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
-    subject_id: Annotated[UUID | None, Field(title="Subject Id")] = "<NOT_SET>"
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = "<NOT_SET>"
+    license_id: Annotated[UUID | str | None, Field(title="License Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    subject_id: Annotated[UUID | str | None, Field(title="Subject Id")] = "<NOT_SET>"
+    experiment_date: Annotated[AwareDatetime | str | None, Field(title="Experiment Date")] = (
+        "<NOT_SET>"
+    )
     contact_email: Annotated[str | None, Field(title="Contact Email")] = "<NOT_SET>"
     published_in: Annotated[str | None, Field(title="Published In")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    ljp: Annotated[float | None, Field(title="Ljp")] = "<NOT_SET>"
-    recording_location: Annotated[list[str] | None, Field(title="Recording Location")] = "<NOT_SET>"
-    recording_type: ElectricalRecordingType | None = "<NOT_SET>"
-    recording_origin: ElectricalRecordingOrigin | None = "<NOT_SET>"
-    temperature: Annotated[float | None, Field(title="Temperature")] = "<NOT_SET>"
+    ljp: Annotated[float | str | None, Field(title="Ljp")] = "<NOT_SET>"
+    recording_location: Annotated[list[str] | str | None, Field(title="Recording Location")] = (
+        "<NOT_SET>"
+    )
+    recording_type: Annotated[
+        ElectricalRecordingType | str | None, Field(title="Recording Type")
+    ] = "<NOT_SET>"
+    recording_origin: Annotated[
+        ElectricalRecordingOrigin | str | None, Field(title="Recording Origin")
+    ] = "<NOT_SET>"
+    temperature: Annotated[float | str | None, Field(title="Temperature")] = "<NOT_SET>"
     comment: Annotated[str | None, Field(title="Comment")] = "<NOT_SET>"
-    legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = "<NOT_SET>"
+    legacy_id: Annotated[list[str] | str | None, Field(title="Legacy Id")] = "<NOT_SET>"
 
 
 class ElectricalRecordingStimulusAdminUpdate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    dt: Annotated[float | None, Field(title="Dt")] = "<NOT_SET>"
-    injection_type: ElectricalRecordingStimulusType | None = "<NOT_SET>"
-    shape: ElectricalRecordingStimulusShape | None = "<NOT_SET>"
-    start_time: Annotated[float | None, Field(title="Start Time")] = "<NOT_SET>"
-    end_time: Annotated[float | None, Field(title="End Time")] = "<NOT_SET>"
-    recording_id: Annotated[UUID | None, Field(title="Recording Id")] = "<NOT_SET>"
+    dt: Annotated[float | str | None, Field(title="Dt")] = "<NOT_SET>"
+    injection_type: Annotated[
+        ElectricalRecordingStimulusType | str | None, Field(title="Injection Type")
+    ] = "<NOT_SET>"
+    shape: Annotated[ElectricalRecordingStimulusShape | str | None, Field(title="Shape")] = (
+        "<NOT_SET>"
+    )
+    start_time: Annotated[float | str | None, Field(title="Start Time")] = "<NOT_SET>"
+    end_time: Annotated[float | str | None, Field(title="End Time")] = "<NOT_SET>"
+    recording_id: Annotated[UUID | str | None, Field(title="Recording Id")] = "<NOT_SET>"
 
 
 class ElectricalRecordingStimulusCreate(BaseModel):
@@ -2356,15 +2682,17 @@ class ListResponseValidationRead(BaseModel):
 
 
 class MEModelAdminUpdate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    validation_status: ValidationStatus | None = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
-    morphology_id: Annotated[UUID | None, Field(title="Morphology Id")] = "<NOT_SET>"
-    emodel_id: Annotated[UUID | None, Field(title="Emodel Id")] = "<NOT_SET>"
-    species_id: Annotated[UUID | None, Field(title="Species Id")] = "<NOT_SET>"
-    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = "<NOT_SET>"
+    validation_status: Annotated[
+        ValidationStatus | str | None, Field(title="Validation Status")
+    ] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    morphology_id: Annotated[UUID | str | None, Field(title="Morphology Id")] = "<NOT_SET>"
+    emodel_id: Annotated[UUID | str | None, Field(title="Emodel Id")] = "<NOT_SET>"
+    species_id: Annotated[UUID | str | None, Field(title="Species Id")] = "<NOT_SET>"
+    strain_id: Annotated[UUID | str | None, Field(title="Strain Id")] = "<NOT_SET>"
 
 
 class MEModelCalibrationResultRead(BaseModel):
@@ -2396,12 +2724,14 @@ class MEModelCreate(BaseModel):
 class MEModelUserUpdate(BaseModel):
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    validation_status: ValidationStatus | None = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
-    morphology_id: Annotated[UUID | None, Field(title="Morphology Id")] = "<NOT_SET>"
-    emodel_id: Annotated[UUID | None, Field(title="Emodel Id")] = "<NOT_SET>"
-    species_id: Annotated[UUID | None, Field(title="Species Id")] = "<NOT_SET>"
-    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = "<NOT_SET>"
+    validation_status: Annotated[
+        ValidationStatus | str | None, Field(title="Validation Status")
+    ] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    morphology_id: Annotated[UUID | str | None, Field(title="Morphology Id")] = "<NOT_SET>"
+    emodel_id: Annotated[UUID | str | None, Field(title="Emodel Id")] = "<NOT_SET>"
+    species_id: Annotated[UUID | str | None, Field(title="Species Id")] = "<NOT_SET>"
+    strain_id: Annotated[UUID | str | None, Field(title="Strain Id")] = "<NOT_SET>"
 
 
 class MTypeClassificationRead(BaseModel):
@@ -2456,6 +2786,21 @@ class ModifiedReconstructionCellMorphologyProtocolRead(BaseModel):
     )
     generation_type: Annotated[Literal["modified_reconstruction"], Field(title="Generation Type")]
     method_type: ModifiedMorphologyMethodType
+
+
+class NestedAnalysisNotebookEnvironmentRead(BaseModel):
+    id: Annotated[UUID, Field(title="Id")]
+    type: EntityType | None = None
+    runtime_info: RuntimeInfo | None = None
+
+
+class NestedAnalysisNotebookTemplateRead(BaseModel):
+    id: Annotated[UUID, Field(title="Id")]
+    type: EntityType | None = None
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    specifications: AnalysisNotebookTemplateSpecificationsOutput | None = None
+    scale: AnalysisScale
 
 
 class NestedContributionRead(BaseModel):
@@ -2538,12 +2883,12 @@ class SimulationCampaignRead(BaseModel):
 
 
 class SimulationExecutionAdminUpdate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
-    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = "<NOT_SET>"
-    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = "<NOT_SET>"
-    used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = "<NOT_SET>"
-    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = "<NOT_SET>"
-    status: SimulationExecutionStatus | None = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    start_time: Annotated[AwareDatetime | str | None, Field(title="Start Time")] = "<NOT_SET>"
+    end_time: Annotated[AwareDatetime | str | None, Field(title="End Time")] = "<NOT_SET>"
+    used_ids: Annotated[list[UUID] | str | None, Field(title="Used Ids")] = "<NOT_SET>"
+    generated_ids: Annotated[list[UUID] | str | None, Field(title="Generated Ids")] = "<NOT_SET>"
+    status: Annotated[SimulationExecutionStatus | str | None, Field(title="Status")] = "<NOT_SET>"
 
 
 class SimulationExecutionCreate(BaseModel):
@@ -2604,15 +2949,21 @@ class SimulationResultRead(BaseModel):
 
 
 class SingleNeuronSimulationAdminUpdate(BaseModel):
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
-    seed: Annotated[int | None, Field(title="Seed")] = "<NOT_SET>"
-    status: SingleNeuronSimulationStatus | None = "<NOT_SET>"
-    injection_location: Annotated[list[str] | None, Field(title="Injection Location")] = "<NOT_SET>"
-    recording_location: Annotated[list[str] | None, Field(title="Recording Location")] = "<NOT_SET>"
-    me_model_id: Annotated[UUID | None, Field(title="Me Model Id")] = "<NOT_SET>"
+    seed: Annotated[int | str | None, Field(title="Seed")] = "<NOT_SET>"
+    status: Annotated[SingleNeuronSimulationStatus | str | None, Field(title="Status")] = (
+        "<NOT_SET>"
+    )
+    injection_location: Annotated[list[str] | str | None, Field(title="Injection Location")] = (
+        "<NOT_SET>"
+    )
+    recording_location: Annotated[list[str] | str | None, Field(title="Recording Location")] = (
+        "<NOT_SET>"
+    )
+    me_model_id: Annotated[UUID | str | None, Field(title="Me Model Id")] = "<NOT_SET>"
 
 
 class SingleNeuronSimulationCreate(BaseModel):
@@ -2699,6 +3050,84 @@ class ValidationResultRead(BaseModel):
     name: Annotated[str, Field(title="Name")]
     passed: Annotated[bool, Field(title="Passed")]
     validated_entity_id: Annotated[UUID, Field(title="Validated Entity Id")]
+
+
+class AnalysisNotebookEnvironmentRead(BaseModel):
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    assets: Annotated[list[AssetRead], Field(title="Assets")]
+    id: Annotated[UUID, Field(title="Id")]
+    type: EntityType | None = None
+    runtime_info: RuntimeInfo | None = None
+
+
+class AnalysisNotebookExecutionRead(BaseModel):
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    id: Annotated[UUID, Field(title="Id")]
+    type: ActivityType | None = None
+    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
+    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    used: Annotated[list[NestedEntityRead], Field(title="Used")]
+    generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
+    analysis_notebook_template: NestedAnalysisNotebookTemplateRead | None = None
+    analysis_notebook_environment: NestedAnalysisNotebookEnvironmentRead
+
+
+class AnalysisNotebookResultRead(BaseModel):
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    assets: Annotated[list[AssetRead], Field(title="Assets")]
+    id: Annotated[UUID, Field(title="Id")]
+    type: EntityType | None = None
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+
+
+class AnalysisNotebookTemplateAdminUpdate(BaseModel):
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
+    description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
+    specifications: Annotated[
+        AnalysisNotebookTemplateSpecificationsInput | str | None, Field(title="Specifications")
+    ] = "<NOT_SET>"
+    scale: Annotated[AnalysisScale | str | None, Field(title="Scale")] = "<NOT_SET>"
+
+
+class AnalysisNotebookTemplateCreate(BaseModel):
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    specifications: AnalysisNotebookTemplateSpecificationsInput | None = None
+    scale: AnalysisScale
+
+
+class AnalysisNotebookTemplateRead(BaseModel):
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    assets: Annotated[list[AssetRead], Field(title="Assets")]
+    id: Annotated[UUID, Field(title="Id")]
+    type: EntityType | None = None
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    specifications: AnalysisNotebookTemplateSpecificationsOutput | None = None
+    scale: AnalysisScale
 
 
 class AssetAndPresignedURLS(BaseModel):
@@ -3032,23 +3461,27 @@ class ExperimentalSynapsesPerConnectionRead(BaseModel):
 
 
 class IonChannelModelAdminUpdate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = "<NOT_SET>"
-    license_id: Annotated[UUID | None, Field(title="License Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
-    subject_id: Annotated[UUID | None, Field(title="Subject Id")] = "<NOT_SET>"
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = "<NOT_SET>"
+    authorized_public: Annotated[bool | str | None, Field(title="Authorized Public")] = "<NOT_SET>"
+    license_id: Annotated[UUID | str | None, Field(title="License Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    subject_id: Annotated[UUID | str | None, Field(title="Subject Id")] = "<NOT_SET>"
+    experiment_date: Annotated[AwareDatetime | str | None, Field(title="Experiment Date")] = (
+        "<NOT_SET>"
+    )
     contact_email: Annotated[str | None, Field(title="Contact Email")] = "<NOT_SET>"
     published_in: Annotated[str | None, Field(title="Published In")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     nmodl_suffix: Annotated[str | None, Field(title="Nmodl Suffix")] = "<NOT_SET>"
-    is_ljp_corrected: Annotated[bool | None, Field(title="Is Ljp Corrected")] = "<NOT_SET>"
-    is_temperature_dependent: Annotated[bool | None, Field(title="Is Temperature Dependent")] = (
+    is_ljp_corrected: Annotated[bool | str | None, Field(title="Is Ljp Corrected")] = "<NOT_SET>"
+    is_temperature_dependent: Annotated[
+        bool | str | None, Field(title="Is Temperature Dependent")
+    ] = "<NOT_SET>"
+    temperature_celsius: Annotated[int | str | None, Field(title="Temperature Celsius")] = (
         "<NOT_SET>"
     )
-    temperature_celsius: Annotated[int | None, Field(title="Temperature Celsius")] = "<NOT_SET>"
-    is_stochastic: Annotated[bool | None, Field(title="Is Stochastic")] = "<NOT_SET>"
-    neuron_block: NeuronBlock | None = "<NOT_SET>"
+    is_stochastic: Annotated[bool | str | None, Field(title="Is Stochastic")] = "<NOT_SET>"
+    neuron_block: Annotated[NeuronBlock | str | None, Field(title="Neuron Block")] = "<NOT_SET>"
 
 
 class IonChannelModelCreate(BaseModel):
@@ -3127,22 +3560,26 @@ class IonChannelModelRead(BaseModel):
 
 
 class IonChannelModelUserUpdate(BaseModel):
-    license_id: Annotated[UUID | None, Field(title="License Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = "<NOT_SET>"
-    subject_id: Annotated[UUID | None, Field(title="Subject Id")] = "<NOT_SET>"
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = "<NOT_SET>"
+    license_id: Annotated[UUID | str | None, Field(title="License Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+    subject_id: Annotated[UUID | str | None, Field(title="Subject Id")] = "<NOT_SET>"
+    experiment_date: Annotated[AwareDatetime | str | None, Field(title="Experiment Date")] = (
+        "<NOT_SET>"
+    )
     contact_email: Annotated[str | None, Field(title="Contact Email")] = "<NOT_SET>"
     published_in: Annotated[str | None, Field(title="Published In")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     nmodl_suffix: Annotated[str | None, Field(title="Nmodl Suffix")] = "<NOT_SET>"
-    is_ljp_corrected: Annotated[bool | None, Field(title="Is Ljp Corrected")] = "<NOT_SET>"
-    is_temperature_dependent: Annotated[bool | None, Field(title="Is Temperature Dependent")] = (
+    is_ljp_corrected: Annotated[bool | str | None, Field(title="Is Ljp Corrected")] = "<NOT_SET>"
+    is_temperature_dependent: Annotated[
+        bool | str | None, Field(title="Is Temperature Dependent")
+    ] = "<NOT_SET>"
+    temperature_celsius: Annotated[int | str | None, Field(title="Temperature Celsius")] = (
         "<NOT_SET>"
     )
-    temperature_celsius: Annotated[int | None, Field(title="Temperature Celsius")] = "<NOT_SET>"
-    is_stochastic: Annotated[bool | None, Field(title="Is Stochastic")] = "<NOT_SET>"
-    neuron_block: NeuronBlock | None = "<NOT_SET>"
+    is_stochastic: Annotated[bool | str | None, Field(title="Is Stochastic")] = "<NOT_SET>"
+    neuron_block: Annotated[NeuronBlock | str | None, Field(title="Neuron Block")] = "<NOT_SET>"
 
 
 class IonChannelModelWAssets(BaseModel):
@@ -3247,6 +3684,30 @@ class IonChannelRecordingRead(BaseModel):
             title="Electrical Recording Stimuli",
         ),
     ] = None
+
+
+class ListResponseAnalysisNotebookEnvironmentRead(BaseModel):
+    data: Annotated[list[AnalysisNotebookEnvironmentRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
+class ListResponseAnalysisNotebookExecutionRead(BaseModel):
+    data: Annotated[list[AnalysisNotebookExecutionRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
+class ListResponseAnalysisNotebookResultRead(BaseModel):
+    data: Annotated[list[AnalysisNotebookResultRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
+class ListResponseAnalysisNotebookTemplateRead(BaseModel):
+    data: Annotated[list[AnalysisNotebookTemplateRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
 
 
 class ListResponseCellCompositionRead(BaseModel):
@@ -3376,10 +3837,10 @@ class ListResponseValidationResultRead(BaseModel):
 
 
 class MeasurementAnnotationAdminUpdate(BaseModel):
-    entity_id: Annotated[UUID | None, Field(title="Entity Id")] = "<NOT_SET>"
-    entity_type: MeasurableEntity | None = "<NOT_SET>"
+    entity_id: Annotated[UUID | str | None, Field(title="Entity Id")] = "<NOT_SET>"
+    entity_type: Annotated[MeasurableEntity | str | None, Field(title="Entity Type")] = "<NOT_SET>"
     measurement_kinds: Annotated[
-        list[MeasurementKindCreate] | None, Field(title="Measurement Kinds")
+        list[MeasurementKindCreate] | str | None, Field(title="Measurement Kinds")
     ] = "<NOT_SET>"
 
 
@@ -3399,10 +3860,10 @@ class MeasurementAnnotationRead(BaseModel):
 
 
 class MeasurementAnnotationUserUpdate(BaseModel):
-    entity_id: Annotated[UUID | None, Field(title="Entity Id")] = "<NOT_SET>"
-    entity_type: MeasurableEntity | None = "<NOT_SET>"
+    entity_id: Annotated[UUID | str | None, Field(title="Entity Id")] = "<NOT_SET>"
+    entity_type: Annotated[MeasurableEntity | str | None, Field(title="Entity Type")] = "<NOT_SET>"
     measurement_kinds: Annotated[
-        list[MeasurementKindCreate] | None, Field(title="Measurement Kinds")
+        list[MeasurementKindCreate] | str | None, Field(title="Measurement Kinds")
     ] = "<NOT_SET>"
 
 
