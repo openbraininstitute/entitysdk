@@ -2,14 +2,13 @@
 
 import sys
 from collections.abc import Iterator
-from json import dumps
 from pathlib import Path
 
 import httpx
 
 from entitysdk.common import ProjectContext
 from entitysdk.config import settings
-from entitysdk.exception import EntitySDKError
+from entitysdk.exception import EntitySDKError, ServerError
 from entitysdk.models.response import ListResponse
 from entitysdk.types import DeploymentEnvironment
 
@@ -53,14 +52,7 @@ def make_db_api_request(
     try:
         response.raise_for_status()
     except httpx.HTTPStatusError as e:
-        message = (
-            f"HTTP error {response.status_code} for {method} {url}\n"
-            f"data       : {data}\n"
-            f"json       : {dumps(json, indent=2)}\n"
-            f"params     : {parameters}\n"
-            f"response   : {response.text}"
-        )
-        raise EntitySDKError(message) from e
+        raise ServerError(response=response) from e
     return response
 
 
