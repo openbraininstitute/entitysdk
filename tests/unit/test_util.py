@@ -1,3 +1,5 @@
+import json
+
 import httpx
 import pytest
 
@@ -107,14 +109,16 @@ def test_make_db_api_request_with_none_http_client__raises(
             )
         error = exc_info.value
         assert error.summary == {
-            "Request": {
+            "request": {
                 "method": "POST",
                 "url": "http://mock-host:8000/api/v1/entity/person?foo=bar",
-                "payload": {"name": "John Doe"},
+                "json": {"name": "John Doe"},
+                "text": '{"name":"John Doe"}',
             },
-            "Response": {
+            "response": {
                 "status_code": 404,
-                "payload": {"error_code": "NOT_FOUND", "details": "lorem"},
+                "json": {"error_code": "NOT_FOUND", "details": "lorem"},
+                "text": '{"error_code":"NOT_FOUND","details":"lorem"}',
             },
         }
         assert error.response
@@ -501,29 +505,27 @@ def test_server_error_with_html_response(httpx_mock, api_url, project_context, a
         headers={"Content-Type": "text/html"},
     )
 
+    payload = {"name": "John Doe"}
+
     with httpx.Client() as http_client:
         with pytest.raises(ServerError) as exc_info:
             test_module.make_db_api_request(
                 url=url,
                 method="POST",
-                json={"name": "John Doe"},
+                json=payload,
                 project_context=project_context,
                 token=auth_token,
                 http_client=http_client,
             )
 
         error = exc_info.value
-        assert error.summary == {
-            "Request": {
-                "method": "POST",
-                "url": "http://mock-host:8000/api/v1/entity/person",
-                "payload": {"name": "John Doe"},
-            },
-            "Response": {
-                "status_code": 500,
-                "payload": html_response,
-            },
-        }
+        assert error.summary["request"]["method"] == "POST"
+        assert error.summary["request"]["url"] == url
+        assert error.summary["request"]["json"] == payload
+        assert error.summary["request"]["text"] == _compact_dumps(payload)
+        assert error.summary["response"]["status_code"] == 500
+        assert error.summary["response"]["json"] is None
+        assert error.summary["response"]["text"] == html_response
 
 
 def test_server_error_with_plain_text_response(httpx_mock, api_url, project_context, auth_token):
@@ -539,20 +541,27 @@ def test_server_error_with_plain_text_response(httpx_mock, api_url, project_cont
         headers={"Content-Type": "text/plain"},
     )
 
+    payload = {"name": "John Doe"}
+
     with httpx.Client() as http_client:
         with pytest.raises(ServerError) as exc_info:
             test_module.make_db_api_request(
                 url=url,
                 method="POST",
-                json={"name": "John Doe"},
+                json=payload,
                 project_context=project_context,
                 token=auth_token,
                 http_client=http_client,
             )
 
         error = exc_info.value
-        assert error.summary["Response"]["status_code"] == 503
-        assert error.summary["Response"]["payload"] == text_response
+        assert error.summary["request"]["method"] == "POST"
+        assert error.summary["request"]["url"] == url
+        assert error.summary["request"]["json"] == payload
+        assert error.summary["request"]["text"] == _compact_dumps(payload)
+        assert error.summary["response"]["status_code"] == 503
+        assert error.summary["response"]["json"] is None
+        assert error.summary["response"]["text"] == text_response
 
 
 def test_server_error_with_empty_response_body(httpx_mock, api_url, project_context, auth_token):
@@ -567,20 +576,27 @@ def test_server_error_with_empty_response_body(httpx_mock, api_url, project_cont
         headers={"Content-Type": "application/json"},
     )
 
+    payload = {"name": "John Doe"}
+
     with httpx.Client() as http_client:
         with pytest.raises(ServerError) as exc_info:
             test_module.make_db_api_request(
                 url=url,
                 method="POST",
-                json={"name": "John Doe"},
+                json=payload,
                 project_context=project_context,
                 token=auth_token,
                 http_client=http_client,
             )
 
         error = exc_info.value
-        assert error.summary["Response"]["status_code"] == 404
-        assert error.summary["Response"]["payload"] == ""
+        assert error.summary["request"]["method"] == "POST"
+        assert error.summary["request"]["url"] == url
+        assert error.summary["request"]["json"] == payload
+        assert error.summary["request"]["text"] == _compact_dumps(payload)
+        assert error.summary["response"]["status_code"] == 404
+        assert error.summary["response"]["json"] is None
+        assert error.summary["response"]["text"] == ""
 
 
 def test_server_error_with_malformed_json_response(
@@ -589,6 +605,8 @@ def test_server_error_with_malformed_json_response(
     """Test ServerError handling when server returns malformed JSON."""
     url = f"{api_url}/api/v1/entity/person"
     malformed_json = '{"error": "incomplete json'
+
+    payload = {"name": "John Doe"}
 
     httpx_mock.add_response(
         method="POST",
@@ -603,16 +621,20 @@ def test_server_error_with_malformed_json_response(
             test_module.make_db_api_request(
                 url=url,
                 method="POST",
-                json={"name": "John Doe"},
+                json=payload,
                 project_context=project_context,
                 token=auth_token,
                 http_client=http_client,
             )
 
         error = exc_info.value
-        assert error.summary["Response"]["status_code"] == 500
-        # Should handle malformed JSON gracefully
-        assert error.summary["Response"]["payload"] == malformed_json
+        assert error.summary["request"]["method"] == "POST"
+        assert error.summary["request"]["url"] == url
+        assert error.summary["request"]["json"] == payload
+        assert error.summary["request"]["text"] == _compact_dumps(payload)
+        assert error.summary["response"]["status_code"] == 500
+        assert error.summary["response"]["text"] == malformed_json
+        assert error.summary["response"]["json"] is None
 
 
 def test_server_error_with_form_data_request(httpx_mock, api_url, project_context, auth_token):
@@ -634,10 +656,12 @@ def test_server_error_with_form_data_request(httpx_mock, api_url, project_contex
             )
 
         error = exc_info.value
-        assert error.summary == {
-            "Request": {"method": "POST", "url": url, "payload": "name=John+Doe&age=30"},
-            "Response": {"status_code": 422, "payload": {"error": "Invalid form data"}},
-        }
+        assert error.summary["request"]["method"] == "POST"
+        assert error.summary["request"]["text"] == "name=John+Doe&age=30"
+        assert error.summary["request"]["json"] == "name=John+Doe&age=30"
+        assert error.summary["response"]["status_code"] == 422
+        assert error.summary["response"]["json"] == error_response
+        assert error.summary["response"]["text"] == _compact_dumps(error_response)
 
 
 def test_server_error_with_file_upload_request(httpx_mock, api_url, project_context, auth_token):
@@ -659,36 +683,13 @@ def test_server_error_with_file_upload_request(httpx_mock, api_url, project_cont
             )
 
         error = exc_info.value
-        assert error.summary["Response"]["status_code"] == 413
-        assert error.summary["Response"]["payload"] == error_response
-
-
-def test_server_error_with_custom_headers(httpx_mock, api_url, project_context, auth_token):
-    """Test ServerError handling with custom headers in request."""
-    url = f"{api_url}/api/v1/entity/person"
-    error_response = {"error": "Custom header validation failed"}
-
-    httpx_mock.add_response(method="POST", url=url, status_code=400, json=error_response)
-
-    with httpx.Client() as http_client:
-        with pytest.raises(ServerError) as exc_info:
-            test_module.make_db_api_request(
-                url=url,
-                method="POST",
-                json={"name": "John Doe"},
-                project_context=project_context,
-                token=auth_token,
-                http_client=http_client,
-            )
-
-        error = exc_info.value
-        assert error.summary == {
-            "Request": {"method": "POST", "url": url, "payload": {"name": "John Doe"}},
-            "Response": {
-                "status_code": 400,
-                "payload": {"error": "Custom header validation failed"},
-            },
-        }
+        assert error.summary["request"]["method"] == "POST"
+        assert error.summary["request"]["url"] == url
+        assert error.summary["request"]["json"] is not None
+        assert error.summary["request"]["text"] is not None
+        assert error.summary["response"]["status_code"] == 413
+        assert error.summary["response"]["json"] == error_response
+        assert error.summary["response"]["text"] == _compact_dumps(error_response)
 
 
 def test_server_error_with_empty_json_object(httpx_mock, api_url, project_context, auth_token):
@@ -702,22 +703,31 @@ def test_server_error_with_empty_json_object(httpx_mock, api_url, project_contex
         json={},  # Empty JSON object
     )
 
+    payload = {"name": "John Doe"}
+
     with httpx.Client() as http_client:
         with pytest.raises(ServerError) as exc_info:
             test_module.make_db_api_request(
                 url=url,
                 method="POST",
-                json={"name": "John Doe"},
+                json=payload,
                 project_context=project_context,
                 token=auth_token,
                 http_client=http_client,
             )
 
         error = exc_info.value
-        assert error.summary == {
-            "Request": {"method": "POST", "url": url, "payload": {"name": "John Doe"}},
-            "Response": {"status_code": 500, "payload": {}},
-        }
+        assert error.summary["request"]["method"] == "POST"
+        assert error.summary["request"]["url"] == url
+        assert error.summary["request"]["json"] == payload
+        assert error.summary["request"]["text"] == _compact_dumps(payload)
+        assert error.summary["response"]["status_code"] == 500
+        assert error.summary["response"]["json"] == {}
+        assert error.summary["response"]["text"] == "{}"
+
+
+def _compact_dumps(data):
+    return json.dumps(data, separators=(",", ":"))
 
 
 def test_server_error_with_null_json_response(httpx_mock, api_url, project_context, auth_token):
@@ -731,22 +741,27 @@ def test_server_error_with_null_json_response(httpx_mock, api_url, project_conte
         json=None,  # Null JSON
     )
 
+    payload = {"name": "John Doe"}
+
     with httpx.Client() as http_client:
         with pytest.raises(ServerError) as exc_info:
             test_module.make_db_api_request(
                 url=url,
                 method="POST",
-                json={"name": "John Doe"},
+                json=payload,
                 project_context=project_context,
                 token=auth_token,
                 http_client=http_client,
             )
 
         error = exc_info.value
-        assert error.summary == {
-            "Request": {"method": "POST", "url": url, "payload": {"name": "John Doe"}},
-            "Response": {"status_code": 500, "payload": ""},
-        }
+        assert error.summary["request"]["method"] == "POST"
+        assert error.summary["request"]["url"] == url
+        assert error.summary["request"]["json"] == payload
+        assert error.summary["request"]["text"] == _compact_dumps(payload)
+        assert error.summary["response"]["status_code"] == 500
+        assert error.summary["response"]["json"] is None
+        assert error.summary["response"]["text"] == ""
 
 
 def test_server_error_with_array_json_response(httpx_mock, api_url, project_context, auth_token):
@@ -760,26 +775,24 @@ def test_server_error_with_array_json_response(httpx_mock, api_url, project_cont
 
     httpx_mock.add_response(method="POST", url=url, status_code=400, json=array_error_response)
 
+    payload = {"name": "John Doe"}
+
     with httpx.Client() as http_client:
         with pytest.raises(ServerError) as exc_info:
             test_module.make_db_api_request(
                 url=url,
                 method="POST",
-                json={"name": "John Doe"},
+                json=payload,
                 project_context=project_context,
                 token=auth_token,
                 http_client=http_client,
             )
 
         error = exc_info.value
-        assert error.summary == {
-            "Request": {"method": "POST", "url": url, "payload": {"name": "John Doe"}},
-            "Response": {
-                "status_code": 400,
-                "payload": [
-                    {"error": "First error"},
-                    {"error": "Second error"},
-                    {"error": "Third error"},
-                ],
-            },
-        }
+        assert error.summary["request"]["method"] == "POST"
+        assert error.summary["request"]["url"] == url
+        assert error.summary["request"]["json"] == payload
+        assert error.summary["request"]["text"] == _compact_dumps(payload)
+        assert error.summary["response"]["status_code"] == 400
+        assert error.summary["response"]["json"] == array_error_response
+        assert error.summary["response"]["text"] == _compact_dumps(array_error_response)

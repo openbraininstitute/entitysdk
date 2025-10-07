@@ -1,5 +1,6 @@
 """Exception classes."""
 
+import base64
 from json import dumps, loads
 from json.decoder import JSONDecodeError
 
@@ -29,28 +30,50 @@ class ServerError(EntitySDKError):
 
     def __init__(self, response):
         """Store response for server error."""
-        try:
-            response_payload = response.json()
-        except JSONDecodeError:
-            response_payload = response.content.decode()
-
         request = response.request
         try:
-            request_payload = loads(request.content.decode())
+            json_response_data = response.json()
         except JSONDecodeError:
-            request_payload = request.content.decode()
+            json_response_data = None
+        try:
+            text_response_data = response.text
+        except (UnicodeDecodeError, LookupError):
+            text_response_data = None
+        try:
+            json_request_data = loads(request.content.decode())
+        except JSONDecodeError:
+            json_request_data = request.content.decode()
+        try:
+            text_request_data = request.content.decode("utf-8")
+        except UnicodeDecodeError:
+            # Binary fallback: base64 encode to preserve data
+            text_request_data = base64.b64encode(request.content).decode("ascii")
 
         self.summary = {
-            "Request": {
+            "request": {
                 "method": request.method,
                 "url": str(request.url),
-                "payload": request_payload,
+                "text": text_request_data,
+                "json": json_request_data,
             },
-            "Response": {
+            "response": {
                 "status_code": response.status_code,
-                "payload": response_payload,
+                "text": text_response_data,
+                "json": json_response_data,
             },
         }
         self.response = response
 
-        super().__init__(dumps(self.summary, indent=2))
+        # for printing do not include empty entries
+        message_summary = {
+            transaction: {k: v for k, v in info.items() if v}
+            for transaction, info in self.summary.items()
+        }
+        # and if there is a json, do not show text for less noise
+        for transaction in ("request", "response"):
+            if message_summary[transaction].get("text") and message_summary[transaction].get(
+                "json"
+            ):
+                del message_summary[transaction]["text"]
+
+        super().__init__(dumps(message_summary, indent=2))
