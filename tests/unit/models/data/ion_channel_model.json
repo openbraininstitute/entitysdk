@@ -1,19 +1,5 @@
 {
   "contributions": [],
-  "assets": [
-    {
-      "size": 1188,
-      "sha256_digest": "e80d50df8f069863e4dd1f361a8a049933402ed233342f4ddaafab87064943fb",
-      "path": "Ca_HVA2.mod",
-      "full_path": "public/a98b7abc-fc46-4700-9e3d-37137812c730/0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6/assets/ion_channel_model/21ebb7ab-b41b-441d-b494-6665075d26b0/Ca_HVA2.mod",
-      "is_directory": false,
-      "content_type": "application/mod",
-      "meta": {},
-      "label": "neuron_mechanisms",
-      "id": "73e5c7ef-5cb6-484d-b534-2c1209f9f280",
-      "status": "created"
-    }
-  ],
   "license": null,
   "creation_date": "2022-10-20T13:05:35.588000Z",
   "update_date": "2025-04-15T12:41:30.454420Z",

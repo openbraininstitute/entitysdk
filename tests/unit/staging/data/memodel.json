@@ -121,6 +121,7 @@
         "sha256_digest": "f6f5c9cbf6472411bd34f24fcf960ddcebc61aa311f27e2472f75544b99cbe06",
         "status": "created",
         "meta": {},
+        "storage_type": "aws_s3_internal",
         "label": "morphology"
       },
       {
@@ -133,6 +134,7 @@
         "sha256_digest": "f42d6a64f9a554d5fd7e52c34643073ef4d28dfebb5a3acd7f470c6f1b014b9d",
         "status": "created",
         "meta": {},
+        "storage_type": "aws_s3_internal",
         "label": "morphology"
       },
       {
@@ -145,6 +147,7 @@
         "sha256_digest": "44a476456bd6db40eea5ef9a6202a708a37c9d6aeba5f3edb9f8ba6e3eec10b6",
         "status": "created",
         "meta": {},
+        "storage_type": "aws_s3_internal",
         "label": "morphology"
       }
     ],
@@ -340,6 +343,7 @@
         "sha256_digest": "69b206cfdfacdba2b406b6fc8a7e305577d0bc407e6edcd128e703f7081c2eed",
         "status": "created",
         "meta": {},
+        "storage_type": "aws_s3_internal",
         "label": "neuron_hoc"
       },
       {
@@ -352,6 +356,7 @@
         "sha256_digest": "5d9b58544d7b82b82d07e97e1a5698a488a4b1bf5f49d1984ba72b1ce280abe1",
         "status": "created",
         "meta": {},
+        "storage_type": "aws_s3_internal",
         "label": "emodel_optimization_output"
       }
     ],
