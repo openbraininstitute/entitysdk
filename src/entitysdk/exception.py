@@ -1,6 +1,5 @@
 """Exception classes."""
 
-import base64
 from json import dumps, loads
 from json.decoder import JSONDecodeError
 
@@ -33,21 +32,17 @@ class ServerError(EntitySDKError):
         request = response.request
         try:
             json_response_data = response.json()
-        except JSONDecodeError:
+        except (JSONDecodeError, UnicodeDecodeError):
             json_response_data = None
-        try:
-            text_response_data = response.text
-        except (UnicodeDecodeError, LookupError):
-            text_response_data = None
+
+        text_response_data = response.text
+
         try:
             json_request_data = loads(request.content.decode())
         except JSONDecodeError:
             json_request_data = request.content.decode()
-        try:
-            text_request_data = request.content.decode("utf-8")
-        except UnicodeDecodeError:
-            # Binary fallback: base64 encode to preserve data
-            text_request_data = base64.b64encode(request.content).decode("ascii")
+
+        text_request_data = request.content.decode("utf-8")
 
         self.summary = {
             "request": {
