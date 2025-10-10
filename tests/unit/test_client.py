@@ -584,6 +584,69 @@ def test_client_delete_asset(
 
 
 @patch("entitysdk.route.get_route_name")
+def test_client_delete_asset__hard(
+    mock_route,
+    client,
+    httpx_mock,
+    api_url,
+    request_headers,
+):
+    mock_route.return_value = "cell-morphology"
+
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+
+    httpx_mock.add_response(
+        method="DELETE",
+        url=f"{api_url}/cell-morphology/{entity_id}/assets/{asset_id}?hard=true",
+        match_headers=request_headers,
+        json=_mock_asset_delete_response(asset_id),
+    )
+
+    res = client.delete_asset(
+        entity_id=entity_id,
+        entity_type=None,
+        asset_id=asset_id,
+        hard=True,
+    )
+
+    assert res.id == asset_id
+    assert res.status == "deleted"
+
+
+@patch("entitysdk.route.get_route_name")
+def test_client_delete_asset__hard_admin(
+    mock_route,
+    client,
+    httpx_mock,
+    api_url,
+    request_headers,
+):
+    mock_route.return_value = "cell-morphology"
+
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+
+    httpx_mock.add_response(
+        method="DELETE",
+        url=f"{api_url}/admin/cell-morphology/{entity_id}/assets/{asset_id}",
+        json=_mock_asset_delete_response(asset_id),
+    )
+
+    # ensure hard is ignored if admin = True because admin endpoint is always hard
+    res = client.delete_asset(
+        entity_id=entity_id,
+        entity_type=None,
+        asset_id=asset_id,
+        hard=True,
+        admin=True,
+    )
+
+    assert res.id == asset_id
+    assert res.status == "deleted"
+
+
+@patch("entitysdk.route.get_route_name")
 def test_client_update_asset(
     mock_route,
     tmp_path,

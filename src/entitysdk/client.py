@@ -671,6 +671,7 @@ class Client:
         entity_type: type[Identifiable],
         asset_id: ID,
         project_context: ProjectContext | None = None,
+        hard: bool = False,
         admin: bool = False,
     ) -> Asset:
         """Delete an entity's asset."""
@@ -689,6 +690,7 @@ class Client:
             project_context=context,
             http_client=self._http_client,
             token=self._token_manager.get_token(),
+            hard=hard if not admin else False,
         )
 
     def update_asset_file(
