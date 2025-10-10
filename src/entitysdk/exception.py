@@ -44,7 +44,7 @@ class ServerError(EntitySDKError):
 
         text_request_data = request.content.decode("utf-8")
 
-        self.summary = {
+        self.details = {
             "request": {
                 "method": request.method,
                 "url": str(request.url),
@@ -61,7 +61,7 @@ class ServerError(EntitySDKError):
         # for printing do not include empty entries
         message_summary = {
             transaction: {k: v for k, v in info.items() if v}
-            for transaction, info in self.summary.items()
+            for transaction, info in self.details.items()
         }
         # and if there is a json, do not show text for less noise
         for transaction in ("request", "response"):

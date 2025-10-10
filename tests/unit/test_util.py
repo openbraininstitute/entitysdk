@@ -1,4 +1,5 @@
 import json
+from unittest.mock import ANY
 
 import httpx
 import pytest
@@ -108,7 +109,7 @@ def test_make_db_api_request_with_none_http_client__raises(
                 http_client=http_client,
             )
         error = exc_info.value
-        assert error.summary == {
+        assert error.details == {
             "request": {
                 "method": "POST",
                 "url": "http://mock-host:8000/api/v1/entity/person?foo=bar",
@@ -517,14 +518,19 @@ def test_server_error_with_html_response(httpx_mock, api_url, project_context, a
                 http_client=http_client,
             )
 
-        error = exc_info.value
-        assert error.summary["request"]["method"] == "POST"
-        assert error.summary["request"]["url"] == url
-        assert error.summary["request"]["json"] == payload
-        assert error.summary["request"]["text"] == _compact_dumps(payload)
-        assert error.summary["response"]["status_code"] == 500
-        assert error.summary["response"]["json"] is None
-        assert error.summary["response"]["text"] == html_response
+        assert exc_info.value.details == {
+            "request": {
+                "method": "POST",
+                "url": url,
+                "json": payload,
+                "text": _compact_dumps(payload),
+            },
+            "response": {
+                "status_code": 500,
+                "json": None,
+                "text": html_response,
+            },
+        }
 
 
 def test_server_error_with_plain_text_response(httpx_mock, api_url, project_context, auth_token):
@@ -553,14 +559,19 @@ def test_server_error_with_plain_text_response(httpx_mock, api_url, project_cont
                 http_client=http_client,
             )
 
-        error = exc_info.value
-        assert error.summary["request"]["method"] == "POST"
-        assert error.summary["request"]["url"] == url
-        assert error.summary["request"]["json"] == payload
-        assert error.summary["request"]["text"] == _compact_dumps(payload)
-        assert error.summary["response"]["status_code"] == 503
-        assert error.summary["response"]["json"] is None
-        assert error.summary["response"]["text"] == text_response
+        assert exc_info.value.details == {
+            "request": {
+                "method": "POST",
+                "url": url,
+                "json": payload,
+                "text": _compact_dumps(payload),
+            },
+            "response": {
+                "status_code": 503,
+                "json": None,
+                "text": text_response,
+            },
+        }
 
 
 def test_server_error_with_empty_response_body(httpx_mock, api_url, project_context, auth_token):
@@ -588,14 +599,19 @@ def test_server_error_with_empty_response_body(httpx_mock, api_url, project_cont
                 http_client=http_client,
             )
 
-        error = exc_info.value
-        assert error.summary["request"]["method"] == "POST"
-        assert error.summary["request"]["url"] == url
-        assert error.summary["request"]["json"] == payload
-        assert error.summary["request"]["text"] == _compact_dumps(payload)
-        assert error.summary["response"]["status_code"] == 404
-        assert error.summary["response"]["json"] is None
-        assert error.summary["response"]["text"] == ""
+        assert exc_info.value.details == {
+            "request": {
+                "method": "POST",
+                "url": url,
+                "json": payload,
+                "text": _compact_dumps(payload),
+            },
+            "response": {
+                "status_code": 404,
+                "json": None,
+                "text": "",
+            },
+        }
 
 
 def test_server_error_with_malformed_json_response(
@@ -626,14 +642,19 @@ def test_server_error_with_malformed_json_response(
                 http_client=http_client,
             )
 
-        error = exc_info.value
-        assert error.summary["request"]["method"] == "POST"
-        assert error.summary["request"]["url"] == url
-        assert error.summary["request"]["json"] == payload
-        assert error.summary["request"]["text"] == _compact_dumps(payload)
-        assert error.summary["response"]["status_code"] == 500
-        assert error.summary["response"]["text"] == malformed_json
-        assert error.summary["response"]["json"] is None
+        assert exc_info.value.details == {
+            "request": {
+                "method": "POST",
+                "url": url,
+                "json": payload,
+                "text": _compact_dumps(payload),
+            },
+            "response": {
+                "status_code": 500,
+                "json": None,
+                "text": malformed_json,
+            },
+        }
 
 
 def test_server_error_with_form_data_request(httpx_mock, api_url, project_context, auth_token):
@@ -654,13 +675,19 @@ def test_server_error_with_form_data_request(httpx_mock, api_url, project_contex
                 http_client=http_client,
             )
 
-        error = exc_info.value
-        assert error.summary["request"]["method"] == "POST"
-        assert error.summary["request"]["text"] == "name=John+Doe&age=30"
-        assert error.summary["request"]["json"] == "name=John+Doe&age=30"
-        assert error.summary["response"]["status_code"] == 422
-        assert error.summary["response"]["json"] == error_response
-        assert error.summary["response"]["text"] == _compact_dumps(error_response)
+        assert exc_info.value.details == {
+            "request": {
+                "method": "POST",
+                "url": url,
+                "json": "name=John+Doe&age=30",
+                "text": "name=John+Doe&age=30",
+            },
+            "response": {
+                "status_code": 422,
+                "json": error_response,
+                "text": _compact_dumps(error_response),
+            },
+        }
 
 
 def test_server_error_with_file_upload_request(httpx_mock, api_url, project_context, auth_token):
@@ -681,14 +708,19 @@ def test_server_error_with_file_upload_request(httpx_mock, api_url, project_cont
                 http_client=http_client,
             )
 
-        error = exc_info.value
-        assert error.summary["request"]["method"] == "POST"
-        assert error.summary["request"]["url"] == url
-        assert error.summary["request"]["json"] is not None
-        assert error.summary["request"]["text"] is not None
-        assert error.summary["response"]["status_code"] == 413
-        assert error.summary["response"]["json"] == error_response
-        assert error.summary["response"]["text"] == _compact_dumps(error_response)
+        assert exc_info.value.details == {
+            "request": {
+                "method": "POST",
+                "url": url,
+                "json": ANY,
+                "text": ANY,
+            },
+            "response": {
+                "status_code": 413,
+                "json": error_response,
+                "text": _compact_dumps(error_response),
+            },
+        }
 
 
 def test_server_error_with_empty_json_object(httpx_mock, api_url, project_context, auth_token):
@@ -715,14 +747,19 @@ def test_server_error_with_empty_json_object(httpx_mock, api_url, project_contex
                 http_client=http_client,
             )
 
-        error = exc_info.value
-        assert error.summary["request"]["method"] == "POST"
-        assert error.summary["request"]["url"] == url
-        assert error.summary["request"]["json"] == payload
-        assert error.summary["request"]["text"] == _compact_dumps(payload)
-        assert error.summary["response"]["status_code"] == 500
-        assert error.summary["response"]["json"] == {}
-        assert error.summary["response"]["text"] == "{}"
+        assert exc_info.value.details == {
+            "request": {
+                "method": "POST",
+                "url": url,
+                "json": payload,
+                "text": _compact_dumps(payload),
+            },
+            "response": {
+                "status_code": 500,
+                "json": {},
+                "text": "{}",
+            },
+        }
 
 
 def _compact_dumps(data):
@@ -753,14 +790,19 @@ def test_server_error_with_null_json_response(httpx_mock, api_url, project_conte
                 http_client=http_client,
             )
 
-        error = exc_info.value
-        assert error.summary["request"]["method"] == "POST"
-        assert error.summary["request"]["url"] == url
-        assert error.summary["request"]["json"] == payload
-        assert error.summary["request"]["text"] == _compact_dumps(payload)
-        assert error.summary["response"]["status_code"] == 500
-        assert error.summary["response"]["json"] is None
-        assert error.summary["response"]["text"] == ""
+        assert exc_info.value.details == {
+            "request": {
+                "method": "POST",
+                "url": url,
+                "json": payload,
+                "text": _compact_dumps(payload),
+            },
+            "response": {
+                "status_code": 500,
+                "json": None,
+                "text": "",
+            },
+        }
 
 
 def test_server_error_with_array_json_response(httpx_mock, api_url, project_context, auth_token):
@@ -787,11 +829,16 @@ def test_server_error_with_array_json_response(httpx_mock, api_url, project_cont
                 http_client=http_client,
             )
 
-        error = exc_info.value
-        assert error.summary["request"]["method"] == "POST"
-        assert error.summary["request"]["url"] == url
-        assert error.summary["request"]["json"] == payload
-        assert error.summary["request"]["text"] == _compact_dumps(payload)
-        assert error.summary["response"]["status_code"] == 400
-        assert error.summary["response"]["json"] == array_error_response
-        assert error.summary["response"]["text"] == _compact_dumps(array_error_response)
+        assert exc_info.value.details == {
+            "request": {
+                "method": "POST",
+                "url": url,
+                "json": payload,
+                "text": _compact_dumps(payload),
+            },
+            "response": {
+                "status_code": 400,
+                "json": array_error_response,
+                "text": _compact_dumps(array_error_response),
+            },
+        }
