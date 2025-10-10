@@ -148,6 +148,7 @@ def _mock_asset_response(
         "meta": {},
         "sha256_digest": "sha256_digest",
         "label": label,
+        "storage_type": "aws_s3_internal",
     }
 
 
@@ -548,6 +549,7 @@ def _mock_asset_delete_response(asset_id):
         "meta": {},
         "id": str(asset_id),
         "status": "deleted",
+        "storage_type": "aws_s3_internal",
     }
 
 
@@ -761,6 +763,7 @@ def test_client_download_assets__entity(
                 id=asset_id,
                 path="foo.json",
                 full_path="/foo/asset1",
+                storage_type=StorageType.aws_s3_internal,
                 is_directory=False,
                 content_type="application/json",
                 label="cell_composition_summary",
@@ -832,6 +835,7 @@ def test_upload_directory_by_paths(
         "sha256_digest": None,
         "size": -1,
         "status": "created",
+        "storage_type": "aws_s3_internal",
     }
     httpx_mock.add_response(
         method="POST",
@@ -1096,6 +1100,7 @@ def test_client_download_directory__asset(
         id=asset_id,
         path="path_to_asset",
         full_path="/circuit",
+        storage_type=StorageType.aws_s3_internal,
         is_directory=True,
         size=0,
         content_type="application/vnd.directory",

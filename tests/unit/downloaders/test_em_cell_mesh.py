@@ -17,6 +17,7 @@ def _mock_asset_response(asset_id):
         "meta": {},
         "sha256_digest": "sha256_digest",
         "label": "cell_surface_mesh",
+        "storage_type": "aws_s3_internal",
     }
 
 

@@ -45,6 +45,7 @@
       "meta": {},
       "label": "morphology",
       "id": "8c73ebe9-fe8a-4621-bc83-1f4dfc9bf5df",
+      "storage_type": "aws_s3_internal",
       "status": "created"
     },
     {
@@ -57,6 +58,7 @@
       "meta": {},
       "label": "morphology",
       "id": "4f63feb5-ee64-489b-9af3-59f3654c769c",
+      "storage_type": "aws_s3_internal",
       "status": "created"
     }
   ],
