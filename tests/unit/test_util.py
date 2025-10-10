@@ -109,6 +109,7 @@ def test_make_db_api_request_with_none_http_client__raises(
                 http_client=http_client,
             )
         error = exc_info.value
+        assert "request" in str(error)
         assert error.details == {
             "request": {
                 "method": "POST",
