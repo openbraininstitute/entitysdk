@@ -121,7 +121,6 @@ def test_make_db_api_request_with_none_http_client__raises(
                 "text": '{"error_code":"NOT_FOUND","details":"lorem"}',
             },
         }
-        assert error.response
 
 
 def test_make_db_api_request_with_none_http_client__client_none(

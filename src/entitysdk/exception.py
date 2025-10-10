@@ -57,7 +57,6 @@ class ServerError(EntitySDKError):
                 "json": json_response_data,
             },
         }
-        self.response = response
 
         # for printing do not include empty entries
         message_summary = {
