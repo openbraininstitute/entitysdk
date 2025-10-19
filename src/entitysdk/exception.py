@@ -27,7 +27,7 @@ class StagingError(EntitySDKError):
 class ServerError(EntitySDKError):
     """Raises when a server request error is encountered."""
 
-    def __init__(self, response):
+    def __init__(self, *, response, message):
         """Store response for server error."""
         request = response.request
         try:
@@ -58,8 +58,12 @@ class ServerError(EntitySDKError):
             },
         }
 
+        super().__init__(message)
+
+    def __str__(self):
+        """Return string representation of the error details."""
         # for printing do not include empty entries
-        message_summary = {
+        message_summary = {"message": self.args[0]} | {
             transaction: {k: v for k, v in info.items() if v}
             for transaction, info in self.details.items()
         }
@@ -69,5 +73,4 @@ class ServerError(EntitySDKError):
                 "json"
             ):
                 del message_summary[transaction]["text"]
-
-        super().__init__(dumps(message_summary, indent=2))
+        return dumps(message_summary, indent=2)

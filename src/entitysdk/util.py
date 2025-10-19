@@ -52,7 +52,7 @@ def make_db_api_request(
     try:
         response.raise_for_status()
     except (httpx.HTTPStatusError, UnicodeDecodeError) as e:
-        raise ServerError(response=response) from e
+        raise ServerError(response=response, message="Server request failed.") from e
     return response
 
 
