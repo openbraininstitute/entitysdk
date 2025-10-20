@@ -53,6 +53,7 @@ class Client:
         http_client: httpx.Client | None = None,
         token_manager: TokenManager | Token,
         environment: DeploymentEnvironment | str | None = None,
+        data_mount: DataMount | None = None,
     ) -> None:
         """Initialize client.
 
@@ -585,6 +586,9 @@ class Client:
             )
         else:
             asset = asset_id
+
+        if self._data_mount and self._data_mount.path_exists(asset.storage_type, asset.full_path):
+
 
         path: Path = Path(output_path)
         if asset.is_directory:

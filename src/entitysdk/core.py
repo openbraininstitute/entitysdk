@@ -361,6 +361,7 @@ def download_asset_file(
     project_context: ProjectContext | None = None,
     token: str,
     http_client: httpx.Client | None = None,
+    data_mount: DataMount | None = None,
 ) -> Path:
     """Download asset file to a file path.
 
