@@ -64,15 +64,8 @@ def stage_simulation(
             try:
                 entity = client.get_entity(entity_id=model.entity_id, entity_type=entity_type)
                 break
-            except Exception as e:
-                L.debug(
-                    "Failed to get entity %s as %s%s: %s",
-                    model.entity_id,
-                    entity_type.__name__,
-                    f" (from simulation {model.entity_id})" if model.entity_id else "",
-                    e,
-                )
-                pass
+            except Exception:  # noqa: S112
+                continue
 
         if entity is None:
             raise StagingError(f"Could not resolve entity {model.entity_id} as Circuit or MEModel.")
