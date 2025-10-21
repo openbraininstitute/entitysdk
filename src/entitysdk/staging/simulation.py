@@ -11,8 +11,9 @@ from entitysdk.downloaders.simulation import (
     download_spike_replay_files,
 )
 from entitysdk.exception import StagingError
-from entitysdk.models import Circuit, Simulation
+from entitysdk.models import Circuit, MEModel, Simulation
 from entitysdk.staging.circuit import stage_circuit
+from entitysdk.staging.memodel import stage_sonata_from_memodel
 from entitysdk.types import StrOrPath
 from entitysdk.utils.filesystem import create_dir
 from entitysdk.utils.io import write_json
@@ -23,11 +24,6 @@ DEFAULT_NODE_SETS_FILENAME = "node_sets.json"
 DEFAULT_SIMULATION_CONFIG_FILENAME = "simulation_config.json"
 DEFAULT_CIRCUIT_DIR = "circuit"
 
-
-from entitysdk.exception import IteratorResultError
-from entitysdk.models.memodel import MEModel
-from entitysdk.models import Circuit
-from entitysdk.staging.memodel import stage_sonata_from_memodel
 
 def stage_simulation(
     client: Client,
@@ -68,13 +64,18 @@ def stage_simulation(
             try:
                 entity = client.get_entity(entity_id=model.entity_id, entity_type=entity_type)
                 break
-            except Exception:
-                continue
+            except Exception as e:
+                L.debug(
+                    "Failed to get entity %s as %s%s: %s",
+                    model.entity_id,
+                    entity_type.__name__,
+                    f" (from simulation {model.entity_id})" if model.entity_id else "",
+                    e,
+                )
+                pass
 
         if entity is None:
-            raise StagingError(
-                f"Could not resolve entity {model.entity_id} as Circuit or MEModel."
-            )
+            raise StagingError(f"Could not resolve entity {model.entity_id} as Circuit or MEModel.")
 
         if isinstance(entity, MEModel):
             L.info(
@@ -93,7 +94,7 @@ def stage_simulation(
                 "Staging SONATA circuit from Circuit %s",
                 entity.id,
             )
-            node_sets_file: Path = download_node_sets_file(
+            node_sets_file = download_node_sets_file(
                 client,
                 model=model,
                 output_path=output_dir / DEFAULT_NODE_SETS_FILENAME,
@@ -108,13 +109,11 @@ def stage_simulation(
                 f"Simulation {model.id} references unsupported entity type: {type(entity).__name__}"
             )
     else:
-        node_sets_file: Path = download_node_sets_file(
+        node_sets_file = download_node_sets_file(
             client,
             model=model,
             output_path=output_dir / DEFAULT_NODE_SETS_FILENAME,
         )
-
-
 
     transformed_simulation_config: dict = _transform_simulation_config(
         simulation_config=simulation_config,
