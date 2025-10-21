@@ -24,6 +24,11 @@ DEFAULT_SIMULATION_CONFIG_FILENAME = "simulation_config.json"
 DEFAULT_CIRCUIT_DIR = "circuit"
 
 
+from entitysdk.exception import IteratorResultError
+from entitysdk.models.memodel import MEModel
+from entitysdk.models import Circuit
+from entitysdk.staging.memodel import stage_sonata_from_memodel
+
 def stage_simulation(
     client: Client,
     *,
@@ -48,11 +53,6 @@ def stage_simulation(
     output_dir = create_dir(output_dir).resolve()
 
     simulation_config: dict = download_simulation_config_content(client, model=model)
-    node_sets_file: Path = download_node_sets_file(
-        client,
-        model=model,
-        output_path=output_dir / DEFAULT_NODE_SETS_FILENAME,
-    )
     spike_paths: list[Path] = download_spike_replay_files(
         client,
         model=model,
@@ -63,14 +63,51 @@ def stage_simulation(
             "Circuit config path was not provided. Circuit is going to be staged from metadata. "
             "Circuit id to be staged: %s"
         )
-        circuit_config_path = stage_circuit(
-            client,
-            model=client.get_entity(
-                entity_id=model.entity_id,
-                entity_type=Circuit,
-            ),
-            output_dir=create_dir(output_dir / DEFAULT_CIRCUIT_DIR),
-        )
+        entity = None
+        for entity_type in (Circuit, MEModel):
+            try:
+                entity = client.get_entity(entity_id=model.entity_id, entity_type=entity_type)
+                break
+            except Exception:
+                continue
+
+        if entity is None:
+            raise StagingError(
+                f"Could not resolve entity {model.entity_id} as Circuit or MEModel."
+            )
+
+        if isinstance(entity, MEModel):
+            L.info(
+                "Staging single-cell SONATA circuit from MEModel %s",
+                entity.id,
+            )
+            node_sets_file = output_dir / DEFAULT_CIRCUIT_DIR / "node_sets.json"
+
+            circuit_config_path = stage_sonata_from_memodel(
+                client,
+                memodel=entity,
+                output_dir=create_dir(output_dir / DEFAULT_CIRCUIT_DIR),
+            )
+        elif isinstance(entity, Circuit):
+            L.info(
+                "Staging SONATA circuit from Circuit %s",
+                entity.id,
+            )
+            node_sets_file: Path = download_node_sets_file(
+                client,
+                model=model,
+                output_path=output_dir / DEFAULT_NODE_SETS_FILENAME,
+            )
+            circuit_config_path = stage_circuit(
+                client,
+                model=entity,
+                output_dir=create_dir(output_dir / DEFAULT_CIRCUIT_DIR),
+            )
+        else:
+            raise StagingError(
+                f"Simulation {model.id} references unsupported entity type: {type(entity).__name__}"
+            )
+
 
     transformed_simulation_config: dict = _transform_simulation_config(
         simulation_config=simulation_config,
@@ -82,14 +119,9 @@ def stage_simulation(
     )
 
     output_simulation_config_file = output_dir / DEFAULT_SIMULATION_CONFIG_FILENAME
-
-    write_json(
-        data=transformed_simulation_config,
-        path=output_simulation_config_file,
-    )
+    write_json(data=transformed_simulation_config, path=output_simulation_config_file)
 
     L.info("Staged Simulation %s at %s", model.id, output_dir)
-
     return output_simulation_config_file
 
 

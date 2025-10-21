@@ -143,7 +143,7 @@ def create_nodes_file(
     output_file.parent.mkdir(parents=True, exist_ok=True)
     with h5py.File(output_file, "w") as f:
         nodes = f.create_group("nodes")
-        population = nodes.create_group("All")
+        population = nodes.create_group("Default All Biophysical Neurons")
         population.create_dataset("node_type_id", (1,), dtype="int64")[0] = -1
         group_0 = population.create_group("0")
 
@@ -192,7 +192,7 @@ def create_nodes_file(
     L.debug(f"Successfully created file at {output_file}")
 
 
-def create_circuit_config(output_path: Path, node_population_name: str = "All"):
+def create_circuit_config(output_path: Path, node_population_name: str = "Default All Biophysical Neurons"):
     """Create a SONATA circuit_config.json for a single cell.
 
     Args:
@@ -227,8 +227,8 @@ def create_circuit_config(output_path: Path, node_population_name: str = "All"):
 
 def create_node_sets_file(
     output_file: Path,
-    node_population_name: str = "All",
-    node_set_name: str = "All",
+    node_population_name: str = "Default All Biophysical Neurons",
+    node_set_name: str = "Default All Biophysical Neurons",
     node_id: int = 0,
 ):
     """Create a node_sets.json file for a single cell.
