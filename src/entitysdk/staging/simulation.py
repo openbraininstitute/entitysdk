@@ -107,6 +107,13 @@ def stage_simulation(
             raise StagingError(
                 f"Simulation {model.id} references unsupported entity type: {type(entity).__name__}"
             )
+    else:
+        node_sets_file: Path = download_node_sets_file(
+            client,
+            model=model,
+            output_path=output_dir / DEFAULT_NODE_SETS_FILENAME,
+        )
+
 
 
     transformed_simulation_config: dict = _transform_simulation_config(
