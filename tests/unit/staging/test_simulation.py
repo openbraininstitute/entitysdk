@@ -1,4 +1,5 @@
 from pathlib import Path
+from unittest import mock
 
 import pytest
 
@@ -96,3 +97,61 @@ def test_transform_inputs__raises():
 
     with pytest.raises(StagingError, match="not present in spike asset file names"):
         test_module._transform_inputs(inputs, {})
+
+
+def test_stage_simulation__entity_loop_success_after_failure(client, tmp_path):
+    sim = mock.Mock()
+    sim.id = "sim-1"
+    sim.entity_id = "mem-1"
+
+    fake_memodel = mock.Mock(spec=test_module.MEModel)
+    fake_memodel.id = "mem-1"
+
+    def fake_get_entity(entity_id, entity_type):
+        if entity_type is test_module.Circuit:
+            raise Exception("not circuit")
+        return fake_memodel
+
+    client.get_entity = mock.Mock(side_effect=fake_get_entity)
+
+    with (
+        mock.patch.object(
+            test_module,
+            "download_simulation_config_content",
+            return_value={"inputs": {}, "output": {}},
+        ),
+        mock.patch.object(test_module, "download_spike_replay_files", return_value=[]),
+        mock.patch.object(
+            test_module,
+            "stage_sonata_from_memodel",
+            return_value=tmp_path / "circuit" / "circuit_config.json",
+        ),
+    ):
+        result = test_module.stage_simulation(client, model=sim, output_dir=tmp_path)
+
+    assert result.exists()
+    client.get_entity.assert_called()
+
+
+def test_stage_simulation__entity_none_raises(client, tmp_path):
+    sim = mock.Mock()
+    sim.id = "sim-2"
+    sim.entity_id = "bad-id"
+    client.get_entity = mock.Mock(side_effect=Exception("not found"))
+
+    with (
+        mock.patch.object(
+            test_module,
+            "download_simulation_config_content",
+            return_value={"inputs": {}, "output": {}},
+        ),
+        mock.patch.object(test_module, "download_spike_replay_files", return_value=[]),
+    ):
+        with pytest.raises(StagingError, match="Could not resolve entity"):
+            test_module.stage_simulation(client, model=sim, output_dir=tmp_path)
+
+
+def test_transform_output__no_override_results_dir():
+    output = {"output_dir": "x", "spikes_file": "y"}
+    result = test_module._transform_output(output, None)
+    assert result == output
