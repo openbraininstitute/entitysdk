@@ -192,9 +192,7 @@ def create_nodes_file(
     L.debug(f"Successfully created file at {output_file}")
 
 
-def create_circuit_config(
-    output_path: Path, node_population_name: str = "All"
-):
+def create_circuit_config(output_path: Path, node_population_name: str = "All"):
     """Create a SONATA circuit_config.json for a single cell.
 
     Args:
