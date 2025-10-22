@@ -75,7 +75,13 @@ def stage_simulation(
                 "Staging single-cell SONATA circuit from MEModel %s",
                 entity.id,
             )
-            node_sets_file = output_dir / DEFAULT_CIRCUIT_DIR / "node_sets.json"
+
+            node_set_name = simulation_config.get("node_set", "All")
+            node_sets_file = output_dir / "node_sets.json"
+            write_json(
+                {node_set_name: {"population": "All", "node_id": [0]}},
+                node_sets_file,
+            )
 
             circuit_config_path = stage_sonata_from_memodel(
                 client,

@@ -127,7 +127,7 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
 
     # Validate content inside nodes.h5
     with h5py.File(output_path / "network" / "nodes.h5", "r") as f:
-        group = f["nodes"]["Default All Biophysical Neurons"]["0"]
+        group = f["nodes"]["All"]["0"]
         assert group["mtype"][0].decode() == "L5_TTPC1"
         assert group["dynamics_params"]["holding_current"][0] == pytest.approx(-0.1)
         assert group["dynamics_params"]["threshold_current"][0] == pytest.approx(0.2)
@@ -160,7 +160,7 @@ def test_create_json_configs(tmp_path):
     memodel_mod.create_node_sets_file(output_file=tmp_path / "node_sets.json")
     with open(tmp_path / "node_sets.json") as f:
         node_sets = json.load(f)
-        assert node_sets["Default All Biophysical Neurons"]["node_id"] == [0]
+        assert node_sets["All"]["node_id"] == [0]
 
 
 def test_missing_hoc_file_raise(tmp_path):
