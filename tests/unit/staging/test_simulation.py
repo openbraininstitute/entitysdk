@@ -155,3 +155,22 @@ def test_transform_output__no_override_results_dir():
     output = {"output_dir": "x", "spikes_file": "y"}
     result = test_module._transform_output(output, None)
     assert result == output
+
+
+def test_stage_simulation__unsupported_entity_type(client, tmp_path):
+    sim = mock.Mock()
+    sim.id = "sim-unsupported"
+    sim.entity_id = "weird-entity"
+
+    client.get_entity = mock.Mock(return_value=object())
+
+    with (
+        mock.patch.object(
+            test_module,
+            "download_simulation_config_content",
+            return_value={"inputs": {}, "output": {}},
+        ),
+        mock.patch.object(test_module, "download_spike_replay_files", return_value=[]),
+    ):
+        with pytest.raises(StagingError, match="unsupported entity type"):
+            test_module.stage_simulation(client, model=sim, output_dir=tmp_path)
