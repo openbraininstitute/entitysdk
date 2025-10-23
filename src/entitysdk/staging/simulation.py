@@ -59,16 +59,9 @@ def stage_simulation(
             "Circuit config path was not provided. Circuit is going to be staged from metadata. "
             "Circuit id to be staged: %s"
         )
-        entity = None
-        for entity_type in (Circuit, MEModel):
-            try:
-                entity = client.get_entity(entity_id=model.entity_id, entity_type=entity_type)
-                break
-            except Exception:  # noqa: S112
-                continue
-
+        entity = client.get_entity(entity_id=model.entity_id, entity_type=model.type)  # type: ignore[arg-type, var-annotated]
         if entity is None:
-            raise StagingError(f"Could not resolve entity {model.entity_id} as Circuit or MEModel.")
+            raise StagingError(f"Could not resolve entity {model.entity_id} as {model.type}.")
 
         if isinstance(entity, MEModel):
             L.info(

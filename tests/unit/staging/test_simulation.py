@@ -4,6 +4,9 @@ from unittest import mock
 import pytest
 
 from entitysdk.exception import StagingError
+from entitysdk.models.agent import Person
+from entitysdk.models.circuit import Circuit
+from entitysdk.models.memodel import MEModel
 from entitysdk.staging import simulation as test_module
 from entitysdk.utils.io import load_json
 
@@ -16,6 +19,7 @@ def test_stage_simulation(
     circuit_httpx_mocks,
     simulation_httpx_mocks,
 ):
+    simulation = simulation.model_copy(update={"type": Circuit})
     res = test_module.stage_simulation(
         client,
         model=simulation,
@@ -103,6 +107,7 @@ def test_stage_simulation__entity_loop_success_after_failure(client, tmp_path):
     sim = mock.Mock()
     sim.id = "sim-1"
     sim.entity_id = "mem-1"
+    sim.type = MEModel
 
     fake_memodel = mock.Mock(spec=test_module.MEModel)
     fake_memodel.id = "mem-1"
@@ -137,7 +142,8 @@ def test_stage_simulation__entity_none_raises(client, tmp_path):
     sim = mock.Mock()
     sim.id = "sim-2"
     sim.entity_id = "bad-id"
-    client.get_entity = mock.Mock(side_effect=Exception("not found"))
+    sim.type = Circuit
+    client.get_entity = mock.Mock(return_value=None)
 
     with (
         mock.patch.object(
@@ -147,7 +153,9 @@ def test_stage_simulation__entity_none_raises(client, tmp_path):
         ),
         mock.patch.object(test_module, "download_spike_replay_files", return_value=[]),
     ):
-        with pytest.raises(StagingError, match="Could not resolve entity"):
+        with pytest.raises(
+            StagingError, match=f"Could not resolve entity {sim.entity_id} as {sim.type}."
+        ):
             test_module.stage_simulation(client, model=sim, output_dir=tmp_path)
 
 
@@ -161,6 +169,7 @@ def test_stage_simulation__unsupported_entity_type(client, tmp_path):
     sim = mock.Mock()
     sim.id = "sim-unsupported"
     sim.entity_id = "weird-entity"
+    sim.type = Person
 
     client.get_entity = mock.Mock(return_value=object())
 

@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from entitysdk.models.circuit import Circuit
 from entitysdk.staging import simulation_result as test_module
 from entitysdk.utils.io import load_json, write_json
 
@@ -59,11 +60,23 @@ def test_stage_simulation_result(
     simulation_result_httpx_mocks,
     httpx_mock,
 ):
+    simulation_json = simulation.model_copy(update={"type": "circuit"}).model_dump(mode="json")
     httpx_mock.add_response(
         method="GET",
         url=f"{api_url}/simulation/{simulation.id}",
-        json=simulation.model_dump(mode="json"),
+        json=simulation_json,
     )
+
+    original_get_entity = client.get_entity
+
+    def patched_get_entity(entity_id, entity_type):
+        entity = original_get_entity(entity_id=entity_id, entity_type=entity_type)
+        if hasattr(entity, "type") and getattr(entity.type, "value", entity.type) == "circuit":
+            entity = entity.model_copy(update={"type": Circuit})
+        return entity
+
+    client.get_entity = patched_get_entity
+
     test_module.stage_simulation_result(
         client,
         model=simulation_result,
