@@ -12,6 +12,10 @@ from entitysdk.client import Client
 from entitysdk.downloaders.memodel import DownloadedMEModel, download_memodel
 from entitysdk.exception import StagingError
 from entitysdk.models.memodel import MEModel
+from entitysdk.staging.constants import (
+    MEMODEL_CIRCUIT_STAGING_POPULATION_NAME,
+    MEMODEL_CIRCUIT_STAGING_NODE_SET_NAME,
+)
 from entitysdk.utils.filesystem import create_dir
 from entitysdk.utils.io import write_json
 
@@ -143,7 +147,7 @@ def create_nodes_file(
     output_file.parent.mkdir(parents=True, exist_ok=True)
     with h5py.File(output_file, "w") as f:
         nodes = f.create_group("nodes")
-        population = nodes.create_group("All")
+        population = nodes.create_group(MEMODEL_CIRCUIT_STAGING_POPULATION_NAME)
         population.create_dataset("node_type_id", (1,), dtype="int64")[0] = -1
         group_0 = population.create_group("0")
 
@@ -192,12 +196,12 @@ def create_nodes_file(
     L.debug(f"Successfully created file at {output_file}")
 
 
-def create_circuit_config(output_path: Path, node_population_name: str = "All"):
+def create_circuit_config(output_path: Path, node_population_name: str = MEMODEL_CIRCUIT_STAGING_POPULATION_NAME):
     """Create a SONATA circuit_config.json for a single cell.
 
     Args:
         output_path (str): Directory where circuit_config.json will be written.
-        node_population_name (str): Name of the node population (default: 'All').
+        node_population_name (str): Name of the node population (default: MEMODEL_CIRCUIT_STAGING_POPULATION_NAME).
     """
     config = {
         "manifest": {"$BASE_DIR": "."},
@@ -227,16 +231,16 @@ def create_circuit_config(output_path: Path, node_population_name: str = "All"):
 
 def create_node_sets_file(
     output_file: Path,
-    node_population_name: str = "All",
-    node_set_name: str = "All",
+    node_population_name: str = MEMODEL_CIRCUIT_STAGING_POPULATION_NAME,
+    node_set_name: str = MEMODEL_CIRCUIT_STAGING_NODE_SET_NAME,
     node_id: int = 0,
 ):
     """Create a node_sets.json file for a single cell.
 
     Args:
         output_file (Path): Output file path for node_sets.json.
-        node_population_name (str): Name of the node population (default: 'All').
-        node_set_name (str): Name of the node set (default: 'All').
+        node_population_name (str): Name of the node population (default: MEMODEL_CIRCUIT_STAGING_POPULATION_NAME).
+        node_set_name (str): Name of the node set (default: MEMODEL_CIRCUIT_STAGING_NODE_SET_NAME).
         node_id (int): Node ID to include (default: 0).
     """
     node_sets = {node_set_name: {"population": node_population_name, "node_id": [node_id]}}

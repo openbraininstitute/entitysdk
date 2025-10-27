@@ -12,6 +12,10 @@ from entitysdk.downloaders.simulation import (
 )
 from entitysdk.exception import StagingError
 from entitysdk.models import Circuit, MEModel, Simulation
+from entitysdk.staging.constants import (
+    MEMODEL_CIRCUIT_STAGING_POPULATION_NAME,
+    MEMODEL_CIRCUIT_STAGING_NODE_SET_NAME,
+)
 from entitysdk.models.entity import Entity
 from entitysdk.staging.circuit import stage_circuit
 from entitysdk.staging.memodel import stage_sonata_from_memodel
@@ -78,10 +82,10 @@ def stage_simulation(
                 entity.id,
             )
 
-            node_set_name = simulation_config.get("node_set", "All")
+            node_set_name = simulation_config.get("node_set", MEMODEL_CIRCUIT_STAGING_NODE_SET_NAME)
             node_sets_file = output_dir / "node_sets.json"
             write_json(
-                {node_set_name: {"population": "All", "node_id": [0]}},
+                {node_set_name: {"population": MEMODEL_CIRCUIT_STAGING_POPULATION_NAME, "node_id": [0]}},
                 node_sets_file,
             )
 
