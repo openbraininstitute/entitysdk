@@ -73,8 +73,6 @@ def stage_simulation(
         }
 
         entity = client.get_entity(entity_id=model.entity_id, entity_type=str_to_class_type[entity.type])  # type: ignore[arg-type, var-annotated]
-        if entity is None:
-            raise StagingError(f"Could not resolve entity {model.entity_id} as {model.type}.")
 
         if isinstance(entity, MEModel):
             L.info(
