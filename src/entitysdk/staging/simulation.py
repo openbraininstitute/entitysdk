@@ -12,6 +12,7 @@ from entitysdk.downloaders.simulation import (
 )
 from entitysdk.exception import StagingError
 from entitysdk.models import Circuit, MEModel, Simulation
+from entitysdk.models.entity import Entity
 from entitysdk.staging.circuit import stage_circuit
 from entitysdk.staging.memodel import stage_sonata_from_memodel
 from entitysdk.types import StrOrPath
@@ -59,7 +60,14 @@ def stage_simulation(
             "Circuit config path was not provided. Circuit is going to be staged from metadata. "
             "Circuit id to be staged: %s"
         )
-        entity = client.get_entity(entity_id=model.entity_id, entity_type=model.type)  # type: ignore[arg-type, var-annotated]
+        entity = client.get_entity(entity_id=model.entity_id, entity_type=Entity)
+        L.info(entity.type)
+        str_to_class_type = {
+            "MEModel": MEModel,
+            "Circuit": Circuit,
+        }
+
+        entity = client.get_entity(entity_id=model.entity_id, entity_type=str_to_class_type[entity.type])  # type: ignore[arg-type, var-annotated]
         if entity is None:
             raise StagingError(f"Could not resolve entity {model.entity_id} as {model.type}.")
 
