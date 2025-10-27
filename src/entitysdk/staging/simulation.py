@@ -18,6 +18,7 @@ from entitysdk.staging.memodel import stage_sonata_from_memodel
 from entitysdk.types import StrOrPath
 from entitysdk.utils.filesystem import create_dir
 from entitysdk.utils.io import write_json
+from entitysdk._server_schemas import EntityType as EntityType
 
 L = logging.getLogger(__name__)
 
@@ -61,10 +62,10 @@ def stage_simulation(
             "Circuit id to be staged: %s"
         )
         entity = client.get_entity(entity_id=model.entity_id, entity_type=Entity)
-        L.info(entity.type)
+        
         str_to_class_type = {
-            "MEModel": MEModel,
-            "Circuit": Circuit,
+            EntityType.memodel: MEModel,
+            EntityType.circuit: Circuit,
         }
 
         entity = client.get_entity(entity_id=model.entity_id, entity_type=str_to_class_type[entity.type])  # type: ignore[arg-type, var-annotated]
