@@ -1,6 +1,5 @@
 from pathlib import Path
 
-from entitysdk.models.circuit import Circuit
 from entitysdk.staging import simulation_result as test_module
 from entitysdk.utils.io import load_json, write_json
 
@@ -48,7 +47,7 @@ def _check_circuit(tmp_path):
     assert expected_circuit_edges_path.exists()
 
 
-def test_stage_simulation_result(
+def test_stage_simulation_result__circuit(
     api_url,
     client,
     tmp_path,
@@ -60,23 +59,16 @@ def test_stage_simulation_result(
     simulation_result_httpx_mocks,
     httpx_mock,
 ):
-    simulation_json = simulation.model_copy(update={"type": "circuit"}).model_dump(mode="json")
     httpx_mock.add_response(
         method="GET",
         url=f"{api_url}/simulation/{simulation.id}",
-        json=simulation_json,
+        json=simulation.model_dump(mode="json"),
     )
-
-    original_get_entity = client.get_entity
-
-    def patched_get_entity(entity_id, entity_type):
-        entity = original_get_entity(entity_id=entity_id, entity_type=entity_type)
-        if hasattr(entity, "type") and getattr(entity.type, "value", entity.type) == "circuit":
-            entity = entity.model_copy(update={"type": Circuit})
-        return entity
-
-    client.get_entity = patched_get_entity
-
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{simulation.entity_id}",
+        json={"id": str(simulation.entity_id), "type": "circuit"},
+    )
     test_module.stage_simulation_result(
         client,
         model=simulation_result,
@@ -91,6 +83,55 @@ def test_stage_simulation_result(
 
     # circuit should also have been staged in /circuit directory because not explicitly passed
     _check_circuit(tmp_path)
+
+
+def test_stage_simulation_result__memodel(
+    api_url,
+    client,
+    tmp_path,
+    simulation,
+    simulation_config,
+    simulation_result,
+    emodel,
+    memodel,
+    httpx_mock,
+    emodel_httpx_mocks,
+    simulation_httpx_mocks,
+    simulation_result_httpx_mocks,
+):
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/simulation/{simulation_result.simulation_id}",
+        json=simulation.model_dump(mode="json"),
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{simulation.entity_id}",
+        json={"id": str(simulation.entity_id), "type": "memodel"},
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/memodel/{simulation.entity_id}",
+        json=memodel.model_dump(mode="json"),
+    )
+    test_module.stage_simulation_result(
+        client,
+        model=simulation_result,
+        output_dir=tmp_path,
+    )
+
+    _check_simulation_result(tmp_path)
+
+    # simulation should also have been staged in the same directory because a simulation config
+    # was not explicitly passed as an argument.
+    _check_simulation(tmp_path, simulation_config)
+
+    # circuit should also have been staged in /circuit directory because not explicitly passed
+    expected_circuit_config_path = tmp_path / "circuit" / "circuit_config.json"
+    expected_circuit_nodes_path = tmp_path / "circuit" / "network" / "nodes.h5"
+
+    assert expected_circuit_config_path.exists()
+    assert expected_circuit_nodes_path.exists()
 
 
 def test_stage_simulation_result__external_simulation_config(

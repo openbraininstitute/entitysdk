@@ -7,7 +7,13 @@ import pytest
 from entitysdk.models import (
     Asset,
     BrainRegion,
+    CellMorphology,
     Circuit,
+    EModel,
+    ETypeClass,
+    MEModel,
+    MEModelCalibrationResult,
+    MTypeClass,
     Simulation,
     SimulationResult,
     Species,
@@ -16,6 +22,10 @@ from entitysdk.models import (
 from entitysdk.types import StorageType
 
 DATA_DIR = Path(__file__).parent / "data"
+
+
+def _download_url(api_url, route, entity_id, asset_id):
+    return f"{api_url}/{route}/{entity_id}/assets/{asset_id}/download"
 
 
 @pytest.fixture
@@ -44,6 +54,19 @@ def brain_region():
         color_hex_triplet="foo",
         parent_structure_id=None,
     )
+
+
+@pytest.fixture
+def mtype():
+    return MTypeClass(
+        pref_label="L5_TPC",
+        definition="L5 tufted pyramidal cell",
+    )
+
+
+@pytest.fixture
+def etype():
+    return ETypeClass(pref_label="foo", definition="Foo etype.")
 
 
 @pytest.fixture
@@ -194,6 +217,7 @@ def simulation_httpx_mocks(
         method="GET",
         url=f"{api_url}/simulation/{simulation.id}/assets/{simulation.assets[1].id}/download",
         json=node_sets,
+        is_optional=True,
     )
     httpx_mock.add_response(
         method="GET",
@@ -287,4 +311,163 @@ def simulation_result_httpx_mocks(
         method="GET",
         url=f"{api_url}/simulation-result/{simulation_result.id}/assets/{simulation_result.assets[2].id}/download",
         content=spike_report,
+    )
+
+
+@pytest.fixture
+def cell_morphology(brain_region, subject, mtype):
+    return CellMorphology(
+        name="cell-morphology",
+        description="cell-morphology-description",
+        brain_region=brain_region,
+        subject=subject,
+        mtypes=[mtype],
+        assets=[
+            Asset(
+                id=uuid.uuid4(),
+                content_type="application/swc",
+                label="morphology",
+                path="morph.swc",
+                full_path="/morph.swc",
+                size=0,
+                is_directory=False,
+                storage_type=StorageType.aws_s3_internal,
+            ),
+            Asset(
+                id=uuid.uuid4(),
+                content_type="application/asc",
+                label="morphology",
+                path="morph.asc",
+                full_path="/morph.asc",
+                size=0,
+                is_directory=False,
+                storage_type=StorageType.aws_s3_internal,
+            ),
+            Asset(
+                id=uuid.uuid4(),
+                content_type="application/x-hdf5",
+                label="morphology",
+                path="morph.h5",
+                full_path="/morph.h5",
+                size=0,
+                is_directory=False,
+                storage_type=StorageType.aws_s3_internal,
+            ),
+        ],
+    )
+
+
+@pytest.fixture
+def cell_morphology_httpx_mocks(
+    api_url,
+    httpx_mock,
+    cell_morphology,
+):
+    route = "cell-morphology"
+    entity_id = cell_morphology.id
+    assets = cell_morphology.assets
+
+    httpx_mock.add_response(
+        method="GET",
+        url=_download_url(api_url, route, entity_id, assets[0].id),
+        content=Path(DATA_DIR, "morph.swc").read_bytes(),
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=_download_url(api_url, route, entity_id, assets[1].id),
+        content=Path(DATA_DIR, "morph.asc").read_bytes(),
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=_download_url(api_url, route, entity_id, assets[2].id),
+        content=Path(DATA_DIR, "morph.h5").read_bytes(),
+    )
+
+
+@pytest.fixture
+def emodel(brain_region, etype, species):
+    return EModel(
+        id=uuid.uuid4(),
+        name="emodel",
+        description="emodel-description",
+        species=species,
+        brain_region=brain_region,
+        iteration="1",
+        score=100,
+        seed=0,
+        etypes=[etype],
+        assets=[
+            Asset(
+                id=uuid.uuid4(),
+                size=0,
+                content_type="application/json",
+                label="emodel_optimization_output",
+                path="emodel_optimization_output.json",
+                full_path="/emodel_optimization_output.json",
+                is_directory=False,
+                storage_type=StorageType.aws_s3_internal,
+            ),
+            Asset(
+                id=uuid.uuid4(),
+                size=0,
+                content_type="application/hoc",
+                label="neuron_hoc",
+                path="neuron_hoc.hoc",
+                full_path="/neuron_hoc.hoc",
+                is_directory=False,
+                storage_type=StorageType.aws_s3_internal,
+            ),
+        ],
+    )
+
+
+@pytest.fixture
+def emodel_httpx_mocks(
+    api_url,
+    emodel,
+    httpx_mock,
+):
+    route = "emodel"
+    entity_id = emodel.id
+    assets = emodel.assets
+
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/emodel/{emodel.id}",
+        json=emodel.model_dump(mode="json"),
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=_download_url(api_url, route, entity_id, assets[0].id),
+        content=Path(DATA_DIR, "emodel_optimization_output.json").read_bytes(),
+        is_optional=True,
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=_download_url(api_url, route, entity_id, assets[1].id),
+        content=Path(DATA_DIR, "neuron_hoc.hoc").read_bytes(),
+        is_optional=True,
+    )
+
+
+@pytest.fixture
+def memodel(brain_region, mtype, species, cell_morphology, emodel):
+    memodel_id = uuid.uuid4()
+    calibration_result = MEModelCalibrationResult(
+        holding_current=-0.016,
+        threshold_current=0.1,
+        rin=0.1,
+        calibrated_entity_id=memodel_id,
+    )
+    return MEModel(
+        id=memodel_id,
+        name="my-memodel",
+        description="my-memodel-description",
+        validation_status="done",
+        species=species,
+        morphology=cell_morphology,
+        emodel=emodel,
+        brain_region=brain_region,
+        calibration_result=calibration_result,
+        mtypes=[mtype],
     )

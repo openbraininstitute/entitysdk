@@ -1,12 +1,8 @@
 from pathlib import Path
-from unittest import mock
 
 import pytest
 
 from entitysdk.exception import StagingError
-from entitysdk.models.agent import Person
-from entitysdk.models.circuit import Circuit
-from entitysdk.models.memodel import MEModel
 from entitysdk.staging import simulation as test_module
 from entitysdk.utils.io import load_json
 
@@ -18,8 +14,14 @@ def test_stage_simulation(
     simulation_config,
     circuit_httpx_mocks,
     simulation_httpx_mocks,
+    httpx_mock,
+    api_url,
 ):
-    simulation = simulation.model_copy(update={"type": Circuit})
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{simulation.entity_id}",
+        json={"id": str(simulation.entity_id), "type": "circuit"},
+    )
     res = test_module.stage_simulation(
         client,
         model=simulation,
@@ -103,83 +105,24 @@ def test_transform_inputs__raises():
         test_module._transform_inputs(inputs, {})
 
 
-def test_stage_simulation__entity_loop_success_after_failure(client, tmp_path):
-    sim = mock.Mock()
-    sim.id = "sim-1"
-    sim.entity_id = "mem-1"
-    sim.type = MEModel
+def test_stage_simulation__wrong_entity_Type(
+    client,
+    tmp_path,
+    simulation,
+    simulation_config,
+    simulation_httpx_mocks,
+    httpx_mock,
+    api_url,
+):
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{simulation.entity_id}",
+        json={"id": str(simulation.entity_id), "type": "cell_morphology"},
+    )
 
-    fake_memodel = mock.Mock(spec=test_module.MEModel)
-    fake_memodel.id = "mem-1"
-
-    def fake_get_entity(entity_id, entity_type):
-        if entity_type is test_module.Circuit:
-            raise Exception("not circuit")
-        return fake_memodel
-
-    client.get_entity = mock.Mock(side_effect=fake_get_entity)
-
-    with (
-        mock.patch.object(
-            test_module,
-            "download_simulation_config_content",
-            return_value={"inputs": {}, "output": {}},
-        ),
-        mock.patch.object(test_module, "download_spike_replay_files", return_value=[]),
-        mock.patch.object(
-            test_module,
-            "stage_sonata_from_memodel",
-            return_value=tmp_path / "circuit" / "circuit_config.json",
-        ),
-    ):
-        result = test_module.stage_simulation(client, model=sim, output_dir=tmp_path)
-
-    assert result.exists()
-    client.get_entity.assert_called()
-
-
-def test_stage_simulation__entity_none_raises(client, tmp_path):
-    sim = mock.Mock()
-    sim.id = "sim-2"
-    sim.entity_id = "bad-id"
-    sim.type = Circuit
-    client.get_entity = mock.Mock(return_value=None)
-
-    with (
-        mock.patch.object(
-            test_module,
-            "download_simulation_config_content",
-            return_value={"inputs": {}, "output": {}},
-        ),
-        mock.patch.object(test_module, "download_spike_replay_files", return_value=[]),
-    ):
-        with pytest.raises(
-            StagingError, match=f"Could not resolve entity {sim.entity_id} as {sim.type}."
-        ):
-            test_module.stage_simulation(client, model=sim, output_dir=tmp_path)
-
-
-def test_transform_output__no_override_results_dir():
-    output = {"output_dir": "x", "spikes_file": "y"}
-    result = test_module._transform_output(output, None)
-    assert result == output
-
-
-def test_stage_simulation__unsupported_entity_type(client, tmp_path):
-    sim = mock.Mock()
-    sim.id = "sim-unsupported"
-    sim.entity_id = "weird-entity"
-    sim.type = Person
-
-    client.get_entity = mock.Mock(return_value=object())
-
-    with (
-        mock.patch.object(
-            test_module,
-            "download_simulation_config_content",
-            return_value={"inputs": {}, "output": {}},
-        ),
-        mock.patch.object(test_module, "download_spike_replay_files", return_value=[]),
-    ):
-        with pytest.raises(StagingError, match="unsupported entity type"):
-            test_module.stage_simulation(client, model=sim, output_dir=tmp_path)
+    with pytest.raises(StagingError, match="references unsupported type cell_morphology"):
+        test_module.stage_simulation(
+            client,
+            model=simulation,
+            output_dir=tmp_path,
+        )
