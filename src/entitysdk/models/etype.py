@@ -25,4 +25,4 @@ class ETypeClass(Identifiable):
     alt_label: Annotated[
         str | None,
         Field(description="The alternative label of th etype class."),
-    ]
+    ] = None

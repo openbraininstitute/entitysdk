@@ -14,7 +14,14 @@ def test_stage_simulation(
     simulation_config,
     circuit_httpx_mocks,
     simulation_httpx_mocks,
+    httpx_mock,
+    api_url,
 ):
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{simulation.entity_id}",
+        json={"id": str(simulation.entity_id), "type": "circuit"},
+    )
     res = test_module.stage_simulation(
         client,
         model=simulation,
@@ -96,3 +103,26 @@ def test_transform_inputs__raises():
 
     with pytest.raises(StagingError, match="not present in spike asset file names"):
         test_module._transform_inputs(inputs, {})
+
+
+def test_stage_simulation__wrong_entity_Type(
+    client,
+    tmp_path,
+    simulation,
+    simulation_config,
+    simulation_httpx_mocks,
+    httpx_mock,
+    api_url,
+):
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{simulation.entity_id}",
+        json={"id": str(simulation.entity_id), "type": "cell_morphology"},
+    )
+
+    with pytest.raises(StagingError, match="references unsupported type cell_morphology"):
+        test_module.stage_simulation(
+            client,
+            model=simulation,
+            output_dir=tmp_path,
+        )

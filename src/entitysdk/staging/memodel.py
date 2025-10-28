@@ -1,6 +1,5 @@
 """Staging functions for Single-Cell."""
 
-import json
 import logging
 import shutil
 import tempfile
@@ -12,6 +11,10 @@ from entitysdk.client import Client
 from entitysdk.downloaders.memodel import DownloadedMEModel, download_memodel
 from entitysdk.exception import StagingError
 from entitysdk.models.memodel import MEModel
+from entitysdk.staging.constants import (
+    DEFAULT_NODE_POPULATION_NAME,
+    DEFAULT_NODE_SET_NAME,
+)
 from entitysdk.utils.filesystem import create_dir
 from entitysdk.utils.io import write_json
 
@@ -143,7 +146,7 @@ def create_nodes_file(
     output_file.parent.mkdir(parents=True, exist_ok=True)
     with h5py.File(output_file, "w") as f:
         nodes = f.create_group("nodes")
-        population = nodes.create_group("All")
+        population = nodes.create_group(DEFAULT_NODE_POPULATION_NAME)
         population.create_dataset("node_type_id", (1,), dtype="int64")[0] = -1
         group_0 = population.create_group("0")
 
@@ -192,12 +195,15 @@ def create_nodes_file(
     L.debug(f"Successfully created file at {output_file}")
 
 
-def create_circuit_config(output_path: Path, node_population_name: str = "All"):
+def create_circuit_config(
+    output_path: Path,
+    node_population_name: str = DEFAULT_NODE_POPULATION_NAME,
+):
     """Create a SONATA circuit_config.json for a single cell.
 
     Args:
-        output_path (str): Directory where circuit_config.json will be written.
-        node_population_name (str): Name of the node population (default: 'All').
+        output_path: Directory where circuit_config.json will be written.
+        node_population_name: Name of the node population.
     """
     config = {
         "manifest": {"$BASE_DIR": "."},
@@ -219,25 +225,24 @@ def create_circuit_config(output_path: Path, node_population_name: str = "All"):
             "edges": [],
         },
     }
-    config_path = output_path / "circuit_config.json"
-    with open(config_path, "w") as f:
-        json.dump(config, f, indent=2)
+    config_path = output_path / DEFAULT_CIRCUIT_CONFIG_FILENAME
+    write_json(data=config, path=config_path, indent=2)
     L.debug(f"Successfully created circuit_config.json at {config_path}")
 
 
 def create_node_sets_file(
     output_file: Path,
-    node_population_name: str = "All",
-    node_set_name: str = "All",
+    node_population_name: str = DEFAULT_NODE_POPULATION_NAME,
+    node_set_name: str = DEFAULT_NODE_SET_NAME,
     node_id: int = 0,
 ):
     """Create a node_sets.json file for a single cell.
 
     Args:
-        output_file (Path): Output file path for node_sets.json.
-        node_population_name (str): Name of the node population (default: 'All').
-        node_set_name (str): Name of the node set (default: 'All').
-        node_id (int): Node ID to include (default: 0).
+        output_file: Output file path for node_sets.json.
+        node_population_name: Name of the node population.
+        node_set_name: Name of the node set (default: MEMODEL_CIRCUIT_STAGING_NODE_SET_NAME).
+        node_id: Node ID to include (default: 0).
     """
     node_sets = {node_set_name: {"population": node_population_name, "node_id": [node_id]}}
     write_json(node_sets, output_file)

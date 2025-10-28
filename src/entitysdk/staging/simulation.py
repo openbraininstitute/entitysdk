@@ -4,6 +4,7 @@ import logging
 from copy import deepcopy
 from pathlib import Path
 
+from entitysdk._server_schemas import EntityType as EntityType
 from entitysdk.client import Client
 from entitysdk.downloaders.simulation import (
     download_node_sets_file,
@@ -11,8 +12,14 @@ from entitysdk.downloaders.simulation import (
     download_spike_replay_files,
 )
 from entitysdk.exception import StagingError
-from entitysdk.models import Circuit, Simulation
+from entitysdk.models import Circuit, MEModel, Simulation
+from entitysdk.models.entity import Entity
 from entitysdk.staging.circuit import stage_circuit
+from entitysdk.staging.constants import (
+    DEFAULT_NODE_POPULATION_NAME,
+    DEFAULT_NODE_SET_NAME,
+)
+from entitysdk.staging.memodel import stage_sonata_from_memodel
 from entitysdk.types import StrOrPath
 from entitysdk.utils.filesystem import create_dir
 from entitysdk.utils.io import write_json
@@ -46,13 +53,7 @@ def stage_simulation(
         The path to the staged simulation config file.
     """
     output_dir = create_dir(output_dir).resolve()
-
     simulation_config: dict = download_simulation_config_content(client, model=model)
-    node_sets_file: Path = download_node_sets_file(
-        client,
-        model=model,
-        output_path=output_dir / DEFAULT_NODE_SETS_FILENAME,
-    )
     spike_paths: list[Path] = download_spike_replay_files(
         client,
         model=model,
@@ -63,13 +64,48 @@ def stage_simulation(
             "Circuit config path was not provided. Circuit is going to be staged from metadata. "
             "Circuit id to be staged: %s"
         )
-        circuit_config_path = stage_circuit(
+        base_entity = client.get_entity(entity_id=model.entity_id, entity_type=Entity)
+        match base_entity.type:
+            case EntityType.memodel:
+                memodel = client.get_entity(entity_id=model.entity_id, entity_type=MEModel)
+                L.info(
+                    "Staging single-cell SONATA circuit from MEModel %s",
+                    memodel.id,
+                )
+                node_sets_file = _stage_single_cell_node_sets_file(
+                    node_set_name=simulation_config.get("node_set", DEFAULT_NODE_SET_NAME),
+                    output_path=output_dir / DEFAULT_NODE_SETS_FILENAME,
+                )
+                circuit_config_path = stage_sonata_from_memodel(
+                    client,
+                    memodel=memodel,
+                    output_dir=create_dir(output_dir / DEFAULT_CIRCUIT_DIR),
+                )
+            case EntityType.circuit:
+                circuit = client.get_entity(entity_id=model.entity_id, entity_type=Circuit)
+                L.info(
+                    "Staging SONATA circuit from Circuit %s",
+                    circuit.id,
+                )
+                node_sets_file = download_node_sets_file(
+                    client,
+                    model=model,
+                    output_path=output_dir / DEFAULT_NODE_SETS_FILENAME,
+                )
+                circuit_config_path = stage_circuit(
+                    client,
+                    model=circuit,
+                    output_dir=create_dir(output_dir / DEFAULT_CIRCUIT_DIR),
+                )
+            case _:
+                raise StagingError(
+                    f"Simulation {model.id} references unsupported type {base_entity.type}"
+                )
+    else:
+        node_sets_file = download_node_sets_file(
             client,
-            model=client.get_entity(
-                entity_id=model.entity_id,
-                entity_type=Circuit,
-            ),
-            output_dir=create_dir(output_dir / DEFAULT_CIRCUIT_DIR),
+            model=model,
+            output_path=output_dir / DEFAULT_NODE_SETS_FILENAME,
         )
 
     transformed_simulation_config: dict = _transform_simulation_config(
@@ -82,15 +118,26 @@ def stage_simulation(
     )
 
     output_simulation_config_file = output_dir / DEFAULT_SIMULATION_CONFIG_FILENAME
-
-    write_json(
-        data=transformed_simulation_config,
-        path=output_simulation_config_file,
-    )
+    write_json(data=transformed_simulation_config, path=output_simulation_config_file)
 
     L.info("Staged Simulation %s at %s", model.id, output_dir)
-
     return output_simulation_config_file
+
+
+def _stage_single_cell_node_sets_file(
+    node_set_name: str,
+    output_path: Path,
+) -> Path:
+    write_json(
+        {
+            node_set_name: {
+                "population": DEFAULT_NODE_POPULATION_NAME,
+                "node_id": [0],
+            }
+        },
+        output_path,
+    )
+    return output_path
 
 
 def _transform_simulation_config(

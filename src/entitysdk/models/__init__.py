@@ -19,6 +19,7 @@ from entitysdk.models.em_dense_reconstruction_dataset import (
     SlicingDirectionType,
 )
 from entitysdk.models.emodel import EModel
+from entitysdk.models.etype import ETypeClass
 from entitysdk.models.ion_channel import IonChannel
 from entitysdk.models.ion_channel_model import IonChannelModel, NeuronBlock, UseIon
 from entitysdk.models.ion_channel_recording import IonChannelRecording
@@ -59,6 +60,7 @@ __all__ = [
     "EMCellMeshType",
     "EMDenseReconstructionDataset",
     "EModel",
+    "ETypeClass",
     "ETypeClassification",
     "IonChannel",
     "IonChannelModel",
