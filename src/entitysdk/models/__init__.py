@@ -8,6 +8,12 @@ from entitysdk.models.brain_region_hierarchy import BrainRegionHierarchy
 from entitysdk.models.cell_morphology import CellMorphology
 from entitysdk.models.cell_morphology_protocol import CellMorphologyProtocol
 from entitysdk.models.circuit import Circuit
+from entitysdk.models.circuit_extraction import (
+    CircuitExtractionCampaign,
+    CircuitExtractionConfig,
+    CircuitExtractionConfigGeneration,
+    CircuitExtractionExecution,
+)
 from entitysdk.models.classification import ETypeClassification, MTypeClassification
 from entitysdk.models.contribution import Contribution, Role
 from entitysdk.models.derivation import Derivation
@@ -50,6 +56,10 @@ __all__ = [
     "CellMorphology",
     "CellMorphologyProtocol",
     "Circuit",
+    "CircuitExtractionCampaign",
+    "CircuitExtractionConfig",
+    "CircuitExtractionExecution",
+    "CircuitExtractionConfigGeneration",
     "Consortium",
     "Contribution",
     "Derivation",

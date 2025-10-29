@@ -18,6 +18,9 @@ from entitysdk._server_schemas import AssetStatus as AssetStatus
 from entitysdk._server_schemas import CellMorphologyGenerationType as CellMorphologyGenerationType
 from entitysdk._server_schemas import CellMorphologyProtocolDesign as CellMorphologyProtocolDesign
 from entitysdk._server_schemas import CircuitBuildCategory as CircuitBuildCategory
+from entitysdk._server_schemas import (
+    CircuitExtractionExecutionStatus as CircuitExtractionExecutionStatus,
+)
 from entitysdk._server_schemas import CircuitScale as CircuitScale
 from entitysdk._server_schemas import ContentType as ContentType
 from entitysdk._server_schemas import DerivationType as DerivationType
