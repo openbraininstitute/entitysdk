@@ -9,44 +9,12 @@
   "scan_parameters": {"foo": "bar"},
   "input_recordings": [
     {
-        "contributions": [
-            {
-              "id": "05dd09b6-0553-4d8e-a7bf-4b5841a697ae",
-              "agent": {
-                "id": "30189f0d-9f0a-4d2e-8869-2706399986cc",
-                "given_name": "Anil",
-                "family_name": "Tuncel",
-                "pref_label": "Anil Tuncel",
-                "type": "person"
-              },
-              "role": {
-                "id": "a48b7ff5-1284-4e47-9680-6cfb1f5c88de",
-                "creation_date": "2025-06-27T11:10:53.209515Z",
-                "update_date": "2025-06-27T11:10:53.209515Z",
-                "name": "unspecified",
-                "role_id": "unspecified"
-              }
-            },
-            {
-              "id": "8fcdd90d-c36e-411c-a1f4-dea613c4acdf",
-              "agent": {
-                "id": "36b621f5-5d56-45a2-9b49-f36261142cc4",
-                "pref_label": "École Polytechnique Fédérale de Lausanne",
-                "alternative_name": "",
-                "type": "organization"
-              },
-              "role": {
-                "id": "a48b7ff5-1284-4e47-9680-6cfb1f5c88de",
-                "creation_date": "2025-06-27T11:10:53.209515Z",
-                "update_date": "2025-06-27T11:10:53.209515Z",
-                "name": "unspecified",
-                "role_id": "unspecified"
-              }
-            }
-          ],
+        "contributions": [],
           "assets": [
             {
               "size": 1657656,
+              "creation_date": null,
+              "update_date": null,
               "sha256_digest": "96cc3960ce65133a79be19af9b8b5fa614eb42328cb2e4c67fbe0f96c51c28e2",
               "path": "S1FL_L5_DBC_cIR_4.nwb",
               "full_path": "public/a98b7abc-fc46-4700-9e3d-37137812c730/0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6/assets/electrical_cell_recording/98dece14-e154-4ff1-9c1d-34e1563cdd0a/S1FL_L5_DBC_cIR_4.nwb",
@@ -74,14 +42,18 @@
             "given_name": "Anna-Kristin",
             "family_name": "Kaufmann",
             "pref_label": "Anna-Kristin Kaufmann",
-            "type": "person"
+            "type": "person",
+            "creation_date": null,
+            "update_date": null
           },
           "updated_by": {
             "id": "bd143fa9-b714-410c-a65d-7435c1066932",
             "given_name": "Christina",
             "family_name": "Gonzalez",
             "pref_label": "Christina Gonzalez",
-            "type": "person"
+            "type": "person",
+            "creation_date": null,
+            "update_date": null
           },
           "brain_region": {
             "creation_date": "2025-06-27T11:10:27.186088Z",
@@ -107,9 +79,21 @@
             "species": {
               "id": "3b1c2a25-b4fb-468d-98d2-d2d431ac8b4a",
               "name": "Rattus norvegicus",
-              "taxonomy_id": "NCBITaxon:10116"
+              "taxonomy_id": "NCBITaxon:10116",
+              "creation_date": null,
+              "update_date": null
             },
-            "strain": null
+            "strain": null,
+            "assets": [],
+            "creation_date": null,
+            "update_date": null,
+            "type": null,
+            "authorized_project_id": null,
+            "authorized_public": false,
+            "contributions": null,
+            "created_by": null,
+            "legacy_id": null,
+            "updated_by": null
           },
           "authorized_project_id": "0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6",
           "authorized_public": true,
@@ -126,8 +110,15 @@
           "recording_origin": "in_silico",
           "temperature": null,
           "comment": "RTR (30 min pre-incubation in HBSS)",
+          "legacy_id": null,
           "stimuli": [
             {
+              "assets": [],
+              "authorized_project_id": null,
+              "authorized_public": false,
+              "contributions": null,
+              "created_by": null,
+              "updated_by": null,
               "type": "electrical_recording_stimulus",
               "id": "b487b0da-33dd-4cf1-a9c7-6d19a2b55ab7",
               "name": "GenericStep",
@@ -137,9 +128,21 @@
               "shape": "step",
               "start_time": null,
               "end_time": null,
-              "recording_id": "98dece14-e154-4ff1-9c1d-34e1563cdd0a"
+              "recording_id": "98dece14-e154-4ff1-9c1d-34e1563cdd0a",
+              "creation_date": null,
+              "update_date": null,
+              "legacy_id": null
             },
             {
+              "assets": [],
+              "authorized_project_id": null,
+              "authorized_public": false,
+              "contributions": null,
+              "created_by": null,
+              "updated_by": null,
+              "creation_date": null,
+              "legacy_id": null,
+              "update_date": null,
               "type": "electrical_recording_stimulus",
               "id": "fed29e0c-cf49-4841-9025-213606ab1bc4",
               "name": "GenericStep",
@@ -152,6 +155,15 @@
               "recording_id": "98dece14-e154-4ff1-9c1d-34e1563cdd0a"
             },
             {
+              "assets": [],
+              "authorized_project_id": null,
+              "authorized_public": false,
+              "contributions": null,
+              "created_by": null,
+              "updated_by": null,
+              "creation_date": null,
+              "legacy_id": null,
+              "update_date": null,
               "type": "electrical_recording_stimulus",
               "id": "5d0664fd-7785-48e0-b760-532a73f59f14",
               "name": "GenericStep",
@@ -214,7 +226,7 @@
       "authorized_project_id": null,
       "contributions": null,
       "legacy_id": null,
-      "simulation_campaign_id": "be2daf30-c2a0-4433-a0e2-5e20ccff5908",
+      "ion_channel_modeling_campaign_id": "be2daf30-c2a0-4433-a0e2-5e20ccff5908",
       "scan_parameters": {
         "foo": "bar"
       }
@@ -233,7 +245,7 @@
       "authorized_project_id": null,
       "contributions": null,
       "legacy_id": null,
-      "simulation_campaign_id": "be2daf30-c2a0-4433-a0e2-5e20ccff5908",
+      "ion_channel_modeling_campaign_id": "be2daf30-c2a0-4433-a0e2-5e20ccff5908",
       "scan_parameters": {
         "foo": "bar"
       }
