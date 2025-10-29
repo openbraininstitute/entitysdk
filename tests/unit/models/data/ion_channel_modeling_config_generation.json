@@ -1,0 +1,57 @@
+{
+    "id": null,
+    "creation_date": null,
+    "update_date": null,
+    "start_time": "2025-06-11T09:33:51.707275Z",
+    "end_time": "2025-06-11T09:43:51.707275Z",
+    "used": [
+        {
+            "assets": [],
+            "id": "be2daf30-c2a0-4433-a0e2-5e20ccff5908",
+            "update_date": "2025-06-11T09:33:51.707275Z",
+            "creation_date": "2025-06-11T09:33:51.707275Z",
+            "name": "my-campaign",
+            "description": "my-campaign-description",
+            "type": "ion_channel_modeling_campaign",
+            "authorized_project_id": null,
+            "authorized_public": false,
+            "contributions": null,
+            "created_by": null,
+            "updated_by": null,
+            "legacy_id": null
+        }
+    ],
+    "generated": [
+        {
+            "assets": [],
+            "id": "32073304-a8cc-4461-9ef7-9d526527214b",
+            "update_date": null,
+            "creation_date": null,
+            "name": "ion-channel-modeling-config-0",
+            "description": "ion-channel-modeling-config-0",
+            "type": "ion_channel_modeling_config",
+            "created_by": null,
+            "updated_by": null,
+            "authorized_public": false,
+            "authorized_project_id": null,
+            "contributions": null,
+            "legacy_id": null
+        },
+        {
+            "assets": [],
+            "id": "e2549cb6-c065-4827-ba09-005117a0a1a7",
+            "update_date": null,
+            "creation_date": null,
+            "name": "ion-channel-modeling-config-1",
+            "description": "ion-channel-modeling-config-1",
+            "type": "ion_channel_modeling_config",
+            "created_by": null,
+            "updated_by": null,
+            "authorized_public": false,
+            "authorized_project_id": null,
+            "contributions": null,
+            "legacy_id": null
+        }
+    ],
+    "type": "ion_channel_modeling_config_generation"
+}

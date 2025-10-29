@@ -28,6 +28,12 @@ from entitysdk.models.emodel import EModel
 from entitysdk.models.etype import ETypeClass
 from entitysdk.models.ion_channel import IonChannel
 from entitysdk.models.ion_channel_model import IonChannelModel, NeuronBlock, UseIon
+from entitysdk.models.ion_channel_modeling_campaign import IonChannelModelingCampaign
+from entitysdk.models.ion_channel_modeling_config import IonChannelModelingConfig
+from entitysdk.models.ion_channel_modeling_config_generation import (
+    IonChannelModelingConfigGeneration,
+)
+from entitysdk.models.ion_channel_modeling_execution import IonChannelModelingExecution
 from entitysdk.models.ion_channel_recording import IonChannelRecording
 from entitysdk.models.license import License
 from entitysdk.models.measurement_annotation import MeasurementAnnotation
@@ -74,6 +80,10 @@ __all__ = [
     "ETypeClassification",
     "IonChannel",
     "IonChannelModel",
+    "IonChannelModelingCampaign",
+    "IonChannelModelingConfig",
+    "IonChannelModelingConfigGeneration",
+    "IonChannelModelingExecution",
     "IonChannelRecording",
     "License",
     "MeasurementAnnotation",

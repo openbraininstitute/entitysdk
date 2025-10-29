@@ -1,0 +1,151 @@
+{
+    "start_time": "2025-06-11T09:33:51.707275Z",
+    "end_time": "2025-06-11T09:43:51.707275Z",
+    "status": "done",
+    "used": [
+        {
+            "assets": [],
+            "id": "32073304-a8cc-4461-9ef7-9d526527214b",
+            "update_date": "2025-06-11T09:33:51.707275Z",
+            "creation_date": "2025-06-11T09:33:51.707275Z",
+            "name": "ion-channel-modeling-config-0",
+            "description": "ion-channel-modeling-config-0",
+            "type": "ion_channel_modeling_config",
+            "created_by": {
+                "id": "e8997b32-0183-42c8-b11f-1a61da933a89",
+                "update_date": null,
+                "creation_date": null,
+                "type": "person",
+                "pref_label": "Admin User",
+                "given_name": null,
+                "family_name": null
+            },
+            "updated_by": {
+                "id": "e8997b32-0183-42c8-b11f-1a61da933a89",
+                "update_date": null,
+                "creation_date": null,
+                "type": "person",
+                "pref_label": "Admin User",
+                "given_name": null,
+                "family_name": null
+            },
+            "authorized_public": false,
+            "authorized_project_id": "0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6",
+            "contributions": null,
+            "legacy_id": null,
+            "simulation_campaign_id": "be2daf30-c2a0-4433-a0e2-5e20ccff5908",
+            "scan_parameters": {
+                "foo": "bar"
+            }
+        }
+    ],
+    "generated": [
+        {
+            "contributions": [],
+            "license": null,
+            "creation_date": "2022-10-20T13:05:35.588000Z",
+            "update_date": "2025-04-15T12:41:30.454420Z",
+            "created_by": {
+              "id": "83844b40-ffa9-49f1-9c14-bc4a829e07b0",
+              "given_name": "John",
+              "family_name": "Doe",
+              "pref_label": "John Doe",
+              "type": "person"
+            },
+            "updated_by": {
+              "id": "59cc60b1-7604-44b4-a736-95c3e652c71a",
+              "given_name": "service-account",
+              "family_name": "service-account",
+              "pref_label": "service-account",
+              "type": "person"
+            },
+            "brain_region": {
+              "creation_date": "2025-06-27T11:10:27.186088Z",
+              "update_date": "2025-06-27T11:10:27.186088Z",
+              "id": "4642cddb-4fbe-4aae-bbf7-0946d6ada066",
+              "annotation_value": 8,
+              "name": "Basic cell groups and regions",
+              "acronym": "grey",
+              "color_hex_triplet": "BFDAE3",
+              "parent_structure_id": "eb1167b3-67a9-4378-bc65-c1e582e2e662",
+              "hierarchy_id": "e3e70682-c209-4cac-a29f-6fbed82c07cd"
+            },
+            "subject": {
+              "id": "9edb44c6-33b5-403b-8ab6-0890cfb12d07",
+              "name": "Generic Mus musculus",
+              "description": "",
+              "sex": "unknown",
+              "weight": null,
+              "age_value": null,
+              "age_min": null,
+              "age_max": null,
+              "age_period": null,
+              "species": {
+                "id": "b7ad4cca-4ac2-4095-9781-37fb68fe9ca1",
+                "name": "Mus musculus",
+                "taxonomy_id": "NCBITaxon:10090"
+              },
+              "strain": null
+            },
+            "authorized_project_id": "0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6",
+            "authorized_public": false,
+            "type": "ion_channel_model",
+            "id": "21ebb7ab-b41b-441d-b494-6665075d26b0",
+            "experiment_date": null,
+            "contact_email": null,
+            "published_in": null,
+            "description": "Ca_HVA2 Channel.",
+            "name": "Ca_HVA2",
+            "nmodl_suffix": "Ca_HVA2",
+            "is_ljp_corrected": true,
+            "is_temperature_dependent": false,
+            "temperature_celsius": 34,
+            "is_stochastic": false,
+            "neuron_block": {
+              "global": [{"celsius": "degree C"}],
+              "range": [
+                {
+                  "gCa_HVAbar": "S/cm2"
+                },
+                {
+                  "gCa_HVA": null
+                },
+                {
+                  "ica": "mA/cm2"
+                }
+              ],
+              "useion": [
+                {
+                  "ion_name": "ca",
+                  "read": [
+                    "eca"
+                  ],
+                  "write": [
+                    "ica"
+                  ],
+                  "valence": null,
+                  "main_ion": true
+                }
+              ],
+              "nonspecific": [{"ihcn": "mA/cm2"}]
+            },
+            "assets": [
+              {
+                "id": "a90bab5c-8529-4829-99fc-e90a270e8b30",
+                "path": "Ca_HVA.mod",
+                "full_path": "public/a98b7abc-fc46-4700-9e3d-37137812c730/0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6/assets/ion_channel_model/9720aa4a-0cd1-4f10-b6ad-04deb8f997b6/Ca_HVA.mod",
+                "is_directory": false,
+                "content_type": "application/mod",
+                "label": "neuron_mechanisms",
+                "storage_type": "aws_s3_internal",
+                "size": 561221,
+                "sha256_digest": "8b850eface3e7b881db62c361dc5da62be008ca81501c406a59646bf7075c95b",
+                "status": "created",
+                "creation_date": null,
+                "update_date": null,
+                "meta": {}
+              }
+            ]
+          }
+    ]
+}

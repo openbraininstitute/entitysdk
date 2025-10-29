@@ -1,0 +1,35 @@
+{
+    "assets": [],
+    "id": "32073304-a8cc-4461-9ef7-9d526527214b",
+    "update_date": "2025-06-11T09:33:51.707275Z",
+    "creation_date": "2025-06-11T09:33:51.707275Z",
+    "name": "ion-channel-modeling-config-0",
+    "description": "ion-channel-modeling-config-0",
+    "type": "ion_channel_modeling_config",
+    "created_by": {
+        "id": "e8997b32-0183-42c8-b11f-1a61da933a89",
+        "update_date": null,
+        "creation_date": null,
+        "type": "person",
+        "pref_label": "Admin User",
+        "given_name": null,
+        "family_name": null
+    },
+    "updated_by": {
+        "id": "e8997b32-0183-42c8-b11f-1a61da933a89",
+        "update_date": null,
+        "creation_date": null,
+        "type": "person",
+        "pref_label": "Admin User",
+        "given_name": null,
+        "family_name": null
+    },
+    "authorized_public": false,
+    "authorized_project_id": "0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6",
+    "contributions": null,
+    "legacy_id": null,
+    "ion_channel_modeling_campaign_id": "be2daf30-c2a0-4433-a0e2-5e20ccff5908",
+    "scan_parameters": {
+        "foo": "bar"
+    }
+}
