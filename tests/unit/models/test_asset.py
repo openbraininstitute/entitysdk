@@ -30,6 +30,8 @@ def test_asset():
         "meta": {},
         "label": AssetLabel.sonata_circuit,
         "storage_type": StorageType.aws_s3_internal,
+        "created_by": None,
+        "updated_by": None,
     }
 
 

@@ -1,6 +1,6 @@
 import pytest
 
-from entitysdk.models import agent
+from entitysdk.models import Organization, Person
 from entitysdk.models import contribution as test_module
 
 
@@ -15,27 +15,25 @@ def test_role(role):
 
 
 def test_contribution(role):
-    person = agent.Person(type="person", given_name="foo", family_name="bar", pref_label="test")
+    person = Person(type="person", given_name="foo", family_name="bar", pref_label="test")
 
     res = test_module.Contribution(
         agent=person,
         role=role,
     )
 
-    assert res.agent == person
-    assert res.role == role
+    assert res.agent.model_dump() == person.model_dump()
+    assert res.role.model_dump() == role.model_dump()
 
-    organization = agent.Organization(
-        type="organization", pref_label="test", alternative_name="test"
-    )
+    organization = Organization(type="organization", pref_label="test", alternative_name="test")
 
     res = test_module.Contribution(
         agent=organization,
         role=role,
     )
 
-    assert res.agent == organization
-    assert res.role == role
+    assert res.agent.model_dump() == organization.model_dump()
+    assert res.role.model_dump() == role.model_dump()
 
     res = test_module.Contribution.model_validate(
         {
@@ -43,8 +41,8 @@ def test_contribution(role):
             "role": role.model_dump(mode="json"),
         }
     )
-    assert res.agent == person
-    assert res.role == role
+    assert res.agent.model_dump() == person.model_dump()
+    assert res.role.model_dump() == role.model_dump()
 
     res = test_module.Contribution.model_validate(
         {
@@ -52,5 +50,5 @@ def test_contribution(role):
             "role": role.model_dump(mode="json"),
         }
     )
-    assert res.agent == organization
-    assert res.role == role
+    assert res.agent.model_dump() == organization.model_dump()
+    assert res.role.model_dump() == role.model_dump()

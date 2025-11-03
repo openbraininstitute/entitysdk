@@ -53,5 +53,7 @@
             "legacy_id": null
         }
     ],
-    "type": "ion_channel_modeling_config_generation"
+    "type": "ion_channel_modeling_config_generation",
+    "created_by": null,
+    "updated_by": null
 }

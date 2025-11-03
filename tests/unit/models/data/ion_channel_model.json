@@ -1,6 +1,25 @@
 {
   "contributions": [],
-  "license": null,
+  "id": "b8f38c7f-2675-4c6a-a394-f3a60a9a3e6f",
+  "type": "ion_channel_model",
+  "update_date": "2024-10-29T13:36:30.827776Z",
+  "creation_date": "2024-09-10T14:25:03.707956Z",
+  "authorized_public": true,
+  "authorized_project_id": "c73ac3a5-3b7d-41bc-92e7-9f9309a49300",
+  "name": "Ca_HVA",
+  "nmodl_suffix": "Ca_HVA",
+  "brain_region": {
+    "id": "38553ac8-7d71-4591-bfee-2fc72e2dffdf",
+    "update_date": "2025-05-09T13:32:18.034672Z",
+    "creation_date": "2025-05-09T13:32:18.034672Z",
+    "name": "Accessory abducens nucleus",
+    "annotation_value": 568,
+    "acronym": "ACVI",
+    "parent_structure_id": "596305b3-71b2-41e4-afd3-b9f2e90f79f8",
+    "hierarchy_id": "e3e70682-c209-4cac-a29f-6fbed82c07cd",
+    "color_hex_triplet": "1000"
+  },
+  "description": "High-voltage activated calcium channel",
   "creation_date": "2022-10-20T13:05:35.588000Z",
   "update_date": "2025-04-15T12:41:30.454420Z",
   "created_by": {
@@ -33,25 +52,16 @@
     "name": "Generic Mus musculus",
     "description": "",
     "sex": "unknown",
-    "weight": null,
-    "age_value": null,
-    "age_min": null,
-    "age_max": null,
-    "age_period": null,
     "species": {
       "id": "b7ad4cca-4ac2-4095-9781-37fb68fe9ca1",
       "name": "Mus musculus",
       "taxonomy_id": "NCBITaxon:10090"
-    },
-    "strain": null
+    }
   },
   "authorized_project_id": "0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6",
   "authorized_public": true,
   "type": "ion_channel_model",
   "id": "21ebb7ab-b41b-441d-b494-6665075d26b0",
-  "experiment_date": null,
-  "contact_email": null,
-  "published_in": null,
   "description": "Ca_HVA2 Channel.",
   "name": "Ca_HVA2",
   "nmodl_suffix": "Ca_HVA2",
@@ -81,7 +91,7 @@
         "write": [
           "ica"
         ],
-        "valence": null,
+        "valence": 10,
         "main_ion": true
       }
     ],
@@ -89,6 +99,7 @@
   },
   "assets": [
     {
+      "label": "neuron_mechanisms",
       "id": "a90bab5c-8529-4829-99fc-e90a270e8b30",
       "path": "Ca_HVA.mod",
       "full_path": "public/a98b7abc-fc46-4700-9e3d-37137812c730/0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6/assets/ion_channel_model/9720aa4a-0cd1-4f10-b6ad-04deb8f997b6/Ca_HVA.mod",
@@ -99,8 +110,6 @@
       "size": 561221,
       "sha256_digest": "8b850eface3e7b881db62c361dc5da62be008ca81501c406a59646bf7075c95b",
       "status": "created",
-      "creation_date": null,
-      "update_date": null,
       "meta": {}
     }
   ]

@@ -14,7 +14,9 @@
     "type": "person",
     "pref_label": "Admin User",
     "given_name": null,
-    "family_name": null
+    "family_name": null,
+    "created_by": null,
+    "updated_by": null
   },
   "updated_by": {
     "id": "e8997b32-0183-42c8-b11f-1a61da933a89",
@@ -23,7 +25,9 @@
     "type": "person",
     "pref_label": "Admin User",
     "given_name": null,
-    "family_name": null
+    "family_name": null,
+    "created_by": null,
+    "updated_by": null
   },
   "authorized_public": false,
   "authorized_project_id": "0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6",
@@ -57,7 +61,9 @@
       "update_date": null,
       "creation_date": null,
       "name": "Mus musculus",
-      "taxonomy_id": "NCBITaxon:10090"
+      "taxonomy_id": "NCBITaxon:10090",
+      "created_by": null,
+      "updated_by": null
     },
     "strain": null
   },
@@ -70,7 +76,9 @@
     "acronym": "CB",
     "parent_structure_id": "7f22cd12-07b6-408e-aac1-ca75afb918c8",
     "hierarchy_id": "f728b4fa-4248-4e3a-8a5d-2f346baa9455",
-    "color_hex_triplet": "F0F080"
+    "color_hex_triplet": "F0F080",
+    "created_by": null,
+    "updated_by": null
   },
   "license": null,
   "has_morphologies": false,
