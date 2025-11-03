@@ -8,6 +8,10 @@ from entitysdk.types import ID
 # Mapping of entity type to api route name.
 _ROUTES = {
     "Activity": "activity",
+    "AnalysisNotebookEnvironment": "analysis-notebook-environment",
+    "AnalysisNotebookExecution": "analysis-notebook-execution",
+    "AnalysisNotebookResult": "analysis-notebook-result",
+    "AnalysisNotebookTemplate": "analysis-notebook-template",
     "BrainLocation": "brain-location",
     "BrainRegion": "brain-region",
     "BrainRegionHierarchy": "brain-region-hierarchy",

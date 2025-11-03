@@ -11,6 +11,7 @@ else:
 
 from entitysdk._server_schemas import ActivityType as ActivityType
 from entitysdk._server_schemas import AgePeriod as AgePeriod
+from entitysdk._server_schemas import AnalysisScale as AnalysisScale
 from entitysdk._server_schemas import AssetLabel as AssetLabel
 from entitysdk._server_schemas import AssetStatus as AssetStatus
 

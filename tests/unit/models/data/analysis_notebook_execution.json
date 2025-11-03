@@ -1,0 +1,100 @@
+{
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "creation_date": "2025-11-03T08:40:59.768782Z",
+  "update_date": "2025-11-03T08:40:59.768782Z",
+  "created_by": {
+    "id": "991b195f-64d1-428b-b503-cc0f4d61aac3",
+    "given_name": "John",
+    "family_name": "Doe",
+    "pref_label": "John Doe",
+    "type": "person",
+    "sub_id": "00000000-0000-0000-0000-000000000001"
+  },
+  "updated_by": {
+    "id": "991b195f-64d1-428b-b503-cc0f4d61aac3",
+    "given_name": "John",
+    "family_name": "Doe",
+    "pref_label": "John Doe",
+    "type": "person",
+    "sub_id": "00000000-0000-0000-0000-000000000001"
+  },
+  "id": "654c1fb4-4027-4ff6-85ae-787ce2b68069",
+  "type": "analysis_notebook_execution",
+  "start_time": "2025-11-03T08:40:59.794310Z",
+  "end_time": "2025-11-03T08:40:59.794317Z",
+  "used": [
+    {
+      "id": "6e0259a4-56a5-43a7-afc3-66726928c0e1",
+      "type": "circuit",
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false
+    }
+  ],
+  "generated": [
+    {
+      "id": "4abfe02b-f938-4460-a3b5-664f4052ef09",
+      "type": "analysis_notebook_result",
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false
+    }
+  ],
+  "analysis_notebook_template": {
+    "id": "cf9c0dce-505c-4e99-938a-31613742eb51",
+    "type": "analysis_notebook_template",
+    "name": "analysis-notebook-template",
+    "description": "analysis-notebook-template-description",
+    "specifications": {
+      "schema_version": 1,
+      "python": { "version": ">=3.10" },
+      "docker": {
+        "image_repository": "obi-notebook-image",
+        "image_tag": null,
+        "image_digest": null,
+        "docker_version": null
+      },
+      "inputs": [
+        {
+          "name": "my-simulation-campaign",
+          "entity_type": "simulation_campaign",
+          "is_list": false,
+          "count_min": 1,
+          "count_max": 1
+        },
+        {
+          "name": "my-circuit",
+          "entity_type": "circuit",
+          "is_list": true,
+          "count_min": 1,
+          "count_max": 3
+        }
+      ]
+    },
+    "scale": "cellular"
+  },
+  "analysis_notebook_environment": {
+    "id": "64cbb6b9-90ab-42d0-9295-3992f38d84b4",
+    "type": "analysis_notebook_environment",
+    "runtime_info": {
+      "schema_version": 1,
+      "python": {
+        "version": "3.13.7",
+        "implementation": "CPython",
+        "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13"
+      },
+      "docker": {
+        "image_repository": "obi-notebook-image",
+        "image_tag": ">=2025.09.24-2",
+        "image_digest": null,
+        "docker_version": null
+      },
+      "os": {
+        "system": "Darwin",
+        "release": "24.5.0",
+        "version": "Darwin Kernel Version 24.5.0...",
+        "machine": "arm64",
+        "processor": "arm"
+      }
+    }
+  }
+}
