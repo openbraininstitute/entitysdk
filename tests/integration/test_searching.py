@@ -1,6 +1,10 @@
 import pytest
 
 from entitysdk.models import (
+    AnalysisNotebookEnvironment,
+    AnalysisNotebookExecution,
+    AnalysisNotebookResult,
+    AnalysisNotebookTemplate,
     CellMorphology,
     CellMorphologyProtocol,
     Contribution,
@@ -32,6 +36,10 @@ from entitysdk.models import (
 @pytest.mark.parametrize(
     "entity_type",
     [
+        AnalysisNotebookEnvironment,
+        AnalysisNotebookExecution,
+        AnalysisNotebookResult,
+        AnalysisNotebookTemplate,
         CellMorphology,
         CellMorphologyProtocol,
         Contribution,

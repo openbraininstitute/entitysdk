@@ -1,0 +1,27 @@
+{
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "creation_date": "2025-11-03T08:35:47.305305Z",
+  "update_date": "2025-11-03T08:35:47.305305Z",
+  "created_by": {
+    "id": "c8e9c076-efe1-4f80-b253-712cd7ee008d",
+    "given_name": "John",
+    "family_name": "Doe",
+    "pref_label": "John Doe",
+    "type": "person",
+    "sub_id": "00000000-0000-0000-0000-000000000001"
+  },
+  "updated_by": {
+    "id": "c8e9c076-efe1-4f80-b253-712cd7ee008d",
+    "given_name": "John",
+    "family_name": "Doe",
+    "pref_label": "John Doe",
+    "type": "person",
+    "sub_id": "00000000-0000-0000-0000-000000000001"
+  },
+  "assets": [],
+  "id": "c705c0b4-1ae3-46bd-91fa-1a6b52b3b775",
+  "type": "analysis_notebook_result",
+  "name": "analysis-notebook-result",
+  "description": "analysis-notebook-result-description"
+}

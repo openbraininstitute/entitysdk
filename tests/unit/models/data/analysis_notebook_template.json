@@ -1,0 +1,54 @@
+{
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "creation_date": "2025-11-03T08:45:43.280418Z",
+  "update_date": "2025-11-03T08:45:43.280418Z",
+  "created_by": {
+    "id": "cc16ae7e-23d7-4f1d-b2c4-5ff0e97f0b47",
+    "given_name": "John",
+    "family_name": "Doe",
+    "pref_label": "John Doe",
+    "type": "person",
+    "sub_id": "00000000-0000-0000-0000-000000000001"
+  },
+  "updated_by": {
+    "id": "cc16ae7e-23d7-4f1d-b2c4-5ff0e97f0b47",
+    "given_name": "John",
+    "family_name": "Doe",
+    "pref_label": "John Doe",
+    "type": "person",
+    "sub_id": "00000000-0000-0000-0000-000000000001"
+  },
+  "assets": [],
+  "id": "a8d7fc9c-418e-42af-b494-c9c5de3c77d3",
+  "type": "analysis_notebook_template",
+  "name": "analysis-notebook-template",
+  "description": "analysis-notebook-template-description",
+  "specifications": {
+    "schema_version": 1,
+    "python": { "version": ">=3.10" },
+    "docker": {
+      "image_repository": "obi-notebook-image",
+      "image_tag": null,
+      "image_digest": null,
+      "docker_version": null
+    },
+    "inputs": [
+      {
+        "name": "my-simulation-campaign",
+        "entity_type": "simulation_campaign",
+        "is_list": false,
+        "count_min": 1,
+        "count_max": 1
+      },
+      {
+        "name": "my-circuit",
+        "entity_type": "circuit",
+        "is_list": true,
+        "count_min": 1,
+        "count_max": 3
+      }
+    ]
+  },
+  "scale": "cellular"
+}

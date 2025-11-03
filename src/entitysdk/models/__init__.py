@@ -1,5 +1,9 @@
 """Models for entitysdk."""
 
+from entitysdk.models.analysis_notebook_environment import AnalysisNotebookEnvironment
+from entitysdk.models.analysis_notebook_execution import AnalysisNotebookExecution
+from entitysdk.models.analysis_notebook_result import AnalysisNotebookResult
+from entitysdk.models.analysis_notebook_template import AnalysisNotebookTemplate
 from entitysdk.models.asset import Asset
 from entitysdk.models.brain_location import BrainLocation
 from entitysdk.models.brain_region import BrainRegion
@@ -55,6 +59,10 @@ from entitysdk.models.taxonomy import Species, Strain, Taxonomy
 from entitysdk.models.validation_result import ValidationResult
 
 __all__ = [
+    "AnalysisNotebookEnvironment",
+    "AnalysisNotebookExecution",
+    "AnalysisNotebookResult",
+    "AnalysisNotebookTemplate",
     "Asset",
     "BrainLocation",
     "BrainRegion",
