@@ -11,14 +11,16 @@
     "type": "person",
     "pref_label": "service-account-obp-singlecell-uploader-sa service-account-obp-singlecell-uploader-sa",
     "given_name": "service-account-obp-singlecell-uploader-sa",
-    "family_name": "service-account-obp-singlecell-uploader-sa"
+    "family_name": "service-account-obp-singlecell-uploader-sa",
+    "sub_id": "00000000-0000-0000-0000-000000000001"
   },
   "updated_by": {
     "id": "59cc60b1-7604-44b4-a736-95c3e652c71a",
     "type": "person",
     "pref_label": "service-account-obp-singlecell-uploader-sa service-account-obp-singlecell-uploader-sa",
     "given_name": "service-account-obp-singlecell-uploader-sa",
-    "family_name": "service-account-obp-singlecell-uploader-sa"
+    "family_name": "service-account-obp-singlecell-uploader-sa",
+    "sub_id": "00000000-0000-0000-0000-000000000001"
   },
   "authorized_public": true,
   "authorized_project_id": "0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6",
@@ -162,14 +164,16 @@
       "type": "person",
       "pref_label": "Niccol\u00f2 Ricardi",
       "given_name": "Niccol\u00f2",
-      "family_name": "Ricardi"
+      "family_name": "Ricardi",
+      "sub_id": "00000000-0000-0000-0000-000000000001"
     },
     "updated_by": {
       "id": "59cc60b1-7604-44b4-a736-95c3e652c71a",
       "type": "person",
       "pref_label": "service-account-obp-singlecell-uploader-sa service-account-obp-singlecell-uploader-sa",
       "given_name": "service-account-obp-singlecell-uploader-sa",
-      "family_name": "service-account-obp-singlecell-uploader-sa"
+      "family_name": "service-account-obp-singlecell-uploader-sa",
+      "sub_id": "00000000-0000-0000-0000-000000000001"
     },
     "authorized_public": true,
     "authorized_project_id": "0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6",
@@ -371,14 +375,16 @@
       "type": "person",
       "pref_label": "Aurelien Jaquier",
       "given_name": "Aurelien",
-      "family_name": "Jaquier"
+      "family_name": "Jaquier",
+      "sub_id": "00000000-0000-0000-0000-000000000001"
     },
     "updated_by": {
       "id": "59cc60b1-7604-44b4-a736-95c3e652c71a",
       "type": "person",
       "pref_label": "service-account-obp-singlecell-uploader-sa service-account-obp-singlecell-uploader-sa",
       "given_name": "service-account-obp-singlecell-uploader-sa",
-      "family_name": "service-account-obp-singlecell-uploader-sa"
+      "family_name": "service-account-obp-singlecell-uploader-sa",
+      "sub_id": "00000000-0000-0000-0000-000000000001"
     },
     "authorized_public": true,
     "authorized_project_id": "0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6",
@@ -534,14 +540,16 @@
       "type": "person",
       "pref_label": "service-account-obp-singlecell-uploader-sa service-account-obp-singlecell-uploader-sa",
       "given_name": "service-account-obp-singlecell-uploader-sa",
-      "family_name": "service-account-obp-singlecell-uploader-sa"
+      "family_name": "service-account-obp-singlecell-uploader-sa",
+      "sub_id": "00000000-0000-0000-0000-000000000001"
     },
     "updated_by": {
       "id": "59cc60b1-7604-44b4-a736-95c3e652c71a",
       "type": "person",
       "pref_label": "service-account-obp-singlecell-uploader-sa service-account-obp-singlecell-uploader-sa",
       "given_name": "service-account-obp-singlecell-uploader-sa",
-      "family_name": "service-account-obp-singlecell-uploader-sa"
+      "family_name": "service-account-obp-singlecell-uploader-sa",
+      "sub_id": "00000000-0000-0000-0000-000000000001"
     },
     "authorized_public": true,
     "authorized_project_id": "0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6",

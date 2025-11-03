@@ -70,14 +70,16 @@
     "given_name": "Jane",
     "family_name": "Doe",
     "pref_label": "Jane Doe",
-    "type": "person"
+    "type": "person",
+    "sub_id": "00000000-0000-0000-0000-000000000001"
   },
   "updated_by": {
     "id": "7f81375e-ecc1-4b63-8773-3e847d718d73",
     "given_name": "service-account-bbp-dke-data-pipelines-sa",
     "family_name": "service-account-bbp-dke-data-pipelines-sa",
     "pref_label": "service-account-bbp-dke-data-pipelines-sa service-account-bbp-dke-data-pipelines-sa",
-    "type": "person"
+    "type": "person",
+    "sub_id": "00000000-0000-0000-0000-000000000001"
   },
   "brain_region": {
     "creation_date": "2025-06-27T11:10:27.186088Z",

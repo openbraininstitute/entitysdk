@@ -45,7 +45,7 @@ class Entity(Identifiable, HasAssets):
         ID | None,
         Field(
             examples=[UUID("12345678-1234-1234-1234-123456789012")],
-            description="The project ID the resource is authorized to be public.",
+            description="The project ID owning the resource.",
         ),
     ] = None
     contributions: Annotated[

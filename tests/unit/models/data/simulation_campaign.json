@@ -17,7 +17,8 @@
     "given_name": null,
     "family_name": null,
     "created_by": null,
-    "updated_by": null
+    "updated_by": null,
+    "sub_id": "00000000-0000-0000-0000-000000000001"
   },
   "updated_by": {
     "id": "e8997b32-0183-42c8-b11f-1a61da933a89",
@@ -28,7 +29,8 @@
     "given_name": null,
     "family_name": null,
     "created_by": null,
-    "updated_by": null
+    "updated_by": null,
+    "sub_id": "00000000-0000-0000-0000-000000000001"
   },
   "authorized_public": false,
   "authorized_project_id": "0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6",

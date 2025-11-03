@@ -7,7 +7,7 @@ from pydantic import Field
 
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
-from entitysdk.types import ActivityType
+from entitysdk.types import ID, ActivityType
 
 
 class Activity(Identifiable):
@@ -16,6 +16,19 @@ class Activity(Identifiable):
     type: Annotated[
         ActivityType | None,
         Field(description="The type of the activity."),
+    ] = None
+
+    authorized_public: Annotated[
+        bool,
+        Field(
+            description="Whether the resource is authorized to be public.",
+        ),
+    ] = False
+    authorized_project_id: Annotated[
+        ID | None,
+        Field(
+            description="The project ID owning the resource.",
+        ),
     ] = None
 
     start_time: Annotated[

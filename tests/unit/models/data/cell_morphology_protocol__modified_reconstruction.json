@@ -8,14 +8,16 @@
     "given_name": null,
     "family_name": null,
     "pref_label": "Regular User With Project Id",
-    "type": "person"
+    "type": "person",
+    "sub_id": "00000000-0000-0000-0000-000000000001"
   },
   "updated_by": {
     "id": "18488eae-06ff-4d0c-9913-e770c0066779",
     "given_name": null,
     "family_name": null,
     "pref_label": "Regular User With Project Id",
-    "type": "person"
+    "type": "person",
+    "sub_id": "00000000-0000-0000-0000-000000000001"
   },
   "creation_date": "2025-09-18T15:19:38.860273Z",
   "update_date": "2025-09-18T15:19:38.860273Z",
