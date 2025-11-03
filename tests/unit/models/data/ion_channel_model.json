@@ -27,14 +27,16 @@
     "given_name": "John",
     "family_name": "Doe",
     "pref_label": "John Doe",
-    "type": "person"
+    "type": "person",
+    "sub_id": "00000000-0000-0000-0000-000000000001"
   },
   "updated_by": {
     "id": "59cc60b1-7604-44b4-a736-95c3e652c71a",
     "given_name": "service-account",
     "family_name": "service-account",
     "pref_label": "service-account",
-    "type": "person"
+    "type": "person",
+    "sub_id": "00000000-0000-0000-0000-000000000001"
   },
   "brain_region": {
     "creation_date": "2025-06-27T11:10:27.186088Z",

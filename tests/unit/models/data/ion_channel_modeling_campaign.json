@@ -40,14 +40,16 @@
             "given_name": "Anna-Kristin",
             "family_name": "Kaufmann",
             "pref_label": "Anna-Kristin Kaufmann",
-            "type": "person"
+            "type": "person",
+            "sub_id": "00000000-0000-0000-0000-000000000001"
           },
           "updated_by": {
             "id": "bd143fa9-b714-410c-a65d-7435c1066932",
             "given_name": "Christina",
             "family_name": "Gonzalez",
             "pref_label": "Christina Gonzalez",
-            "type": "person"
+            "type": "person",
+            "sub_id": "00000000-0000-0000-0000-000000000001"
           },
           "brain_region": {
             "creation_date": "2025-06-27T11:10:27.186088Z",
@@ -135,12 +137,14 @@
   "created_by": {
     "id": "e8997b32-0183-42c8-b11f-1a61da933a89",
     "type": "person",
-    "pref_label": "Admin User"
+    "pref_label": "Admin User",
+    "sub_id": "00000000-0000-0000-0000-000000000001"
   },
   "updated_by": {
     "id": "e8997b32-0183-42c8-b11f-1a61da933a89",
     "type": "person",
-    "pref_label": "Admin User"
+    "pref_label": "Admin User",
+    "sub_id": "00000000-0000-0000-0000-000000000001"
   },
   "authorized_public": false,
   "authorized_project_id": "0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6",

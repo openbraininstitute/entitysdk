@@ -8,12 +8,14 @@
   "created_by": {
     "id": "123e4567-e89b-12d3-a456-426614174001",
     "type": "person",
-    "pref_label": "Test User"
+    "pref_label": "Test User",
+    "sub_id": "00000000-0000-0000-0000-000000000001"
   },
   "updated_by": {
     "id": "123e4567-e89b-12d3-a456-426614174001",
     "type": "person",
-    "pref_label": "Test User"
+    "pref_label": "Test User",
+    "sub_id": "00000000-0000-0000-0000-000000000001"
   },
   "authorized_project_id": "123e4567-e89b-12d3-a456-426614174002",
   "authorized_public": false,

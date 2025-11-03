@@ -88,6 +88,7 @@ class Person(Agent):
             description="The family name of the person.",
         ),
     ] = None
+    sub_id: Annotated[ID | None, Field(description="External subject id on Keycloak")] = None
 
 
 # update forward reference in Identifiable's created_by/uodated_by
@@ -100,7 +101,6 @@ class Organization(Agent):
     type: Annotated[
         Literal["organization"],
         Field(
-            default="organization",
             description="The organization type. Should be 'organization'",
         ),
     ] = "organization"

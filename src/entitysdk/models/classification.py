@@ -21,7 +21,7 @@ class Classification(Identifiable):
     authorized_project_id: Annotated[
         ID | None,
         Field(
-            description="The project ID the resource is authorized to be public.",
+            description="The project ID owning the resource.",
         ),
     ] = None
 

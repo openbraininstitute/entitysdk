@@ -4,7 +4,6 @@ import logging
 from copy import deepcopy
 from pathlib import Path
 
-from entitysdk._server_schemas import EntityType as EntityType
 from entitysdk.client import Client
 from entitysdk.downloaders.simulation import (
     download_node_sets_file,
@@ -20,7 +19,7 @@ from entitysdk.staging.constants import (
     DEFAULT_NODE_SET_NAME,
 )
 from entitysdk.staging.memodel import stage_sonata_from_memodel
-from entitysdk.types import StrOrPath
+from entitysdk.types import EntityType, StrOrPath
 from entitysdk.utils.filesystem import create_dir
 from entitysdk.utils.io import write_json
 
