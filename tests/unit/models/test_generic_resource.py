@@ -2,10 +2,9 @@ import json
 from pathlib import Path
 
 import pytest
+from pydantic import BaseModel
 
 from entitysdk import models
-from entitysdk.models.activity import Activity
-from entitysdk.models.entity import Entity
 
 from ..util import MOCK_UUID
 
@@ -27,15 +26,92 @@ MODELS = [
         "class": models.AnalysisNotebookTemplate,
         "file": DATA_DIR / "analysis_notebook_template.json",
     },
+    {
+        "class": models.CellMorphology,
+        "file": DATA_DIR / "cell_morphology.json",
+    },
+    {
+        "class": models.CellMorphologyProtocol,
+        "file": DATA_DIR / "cell_morphology_protocol__digital_reconstruction.json",
+    },
+    {
+        "class": models.CellMorphologyProtocol,
+        "file": DATA_DIR / "cell_morphology_protocol__modified_reconstruction.json",
+    },
+    {
+        "class": models.CellMorphologyProtocol,
+        "file": DATA_DIR / "cell_morphology_protocol__computationally_synthesized.json",
+    },
+    {
+        "class": models.CellMorphologyProtocol,
+        "file": DATA_DIR / "cell_morphology_protocol__placeholder.json",
+    },
+    {
+        "class": models.Circuit,
+        "file": DATA_DIR / "circuit.json",
+    },
+    {
+        "class": models.ElectricalCellRecording,
+        "file": DATA_DIR / "electrical_cell_recording.json",
+    },
+    {
+        "class": models.EMCellMesh,
+        "file": DATA_DIR / "em_cell_mesh.json",
+    },
+    {
+        "class": models.EMDenseReconstructionDataset,
+        "file": DATA_DIR / "em_dense_reconstruction_dataset.json",
+    },
+    {
+        "class": models.IonChannelModel,
+        "file": DATA_DIR / "ion_channel_model.json",
+    },
+    {
+        "class": models.IonChannelModelingCampaign,
+        "file": DATA_DIR / "ion_channel_modeling_campaign.json",
+    },
+    {
+        "class": models.IonChannelModelingConfigGeneration,
+        "file": DATA_DIR / "ion_channel_modeling_config_generation.json",
+    },
+    {
+        "class": models.IonChannelModelingConfig,
+        "file": DATA_DIR / "ion_channel_modeling_config.json",
+    },
+    {
+        "class": models.IonChannelModelingExecution,
+        "file": DATA_DIR / "ion_channel_modeling_execution.json",
+    },
+    {
+        "class": models.IonChannelRecording,
+        "file": DATA_DIR / "ion_channel_recording.json",
+    },
+    {
+        "class": models.IonChannel,
+        "file": DATA_DIR / "ion_channel.json",
+    },
+    {
+        "class": models.MEModelCalibrationResult,
+        "file": DATA_DIR / "memodel_calibration_result.json",
+    },
+    {
+        "class": models.SimulationCampaign,
+        "file": DATA_DIR / "simulation_campaign.json",
+    },
+    {
+        "class": models.ValidationResult,
+        "file": DATA_DIR / "validation_result.json",
+    },
 ]
+ENTITY_ADAPTERS = {models.CellMorphologyProtocol}
 
 
-def _get_update_data(model_class):
-    if issubclass(model_class, Entity):
+def _get_update_data(model_class: type[BaseModel]):
+    if "name" in model_class.model_fields or model_class in ENTITY_ADAPTERS:
         return {"name": "New Name"}
-    if issubclass(model_class, Activity):
+    if "end_time" in model_class.model_fields:
         return {"end_time": "2025-11-03T12:40:59.794317Z"}
-    msg = f"Invalid class: {model_class.__name__}"
+    msg = f"Unsupported class: {model_class.__name__}"
     raise RuntimeError(msg)
 
 
