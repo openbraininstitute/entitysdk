@@ -53,6 +53,8 @@ from entitysdk.models.simulation_generation import SimulationGeneration
 from entitysdk.models.simulation_result import SimulationResult
 from entitysdk.models.single_neuron_simulation import SingleNeuronSimulation
 from entitysdk.models.single_neuron_synaptome_simulation import SingleNeuronSynaptomeSimulation
+from entitysdk.models.skeletonization_config import SkeletonizationConfig
+from entitysdk.models.skeletonization_execution import SkeletonizationExecution
 from entitysdk.models.subject import Subject
 from entitysdk.models.synaptome import SingleNeuronSynaptome
 from entitysdk.models.taxonomy import Species, Strain, Taxonomy
@@ -113,6 +115,8 @@ __all__ = [
     "SimulationExecution",
     "SimulationGeneration",
     "SimulationResult",
+    "SkeletonizationConfig",
+    "SkeletonizationExecution",
     "SlicingDirectionType",
     "Species",
     "Strain",

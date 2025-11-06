@@ -26,6 +26,7 @@ class ActivityType(StrEnum):
     ion_channel_modeling_config_generation = "ion_channel_modeling_config_generation"
     circuit_extraction_config_generation = "circuit_extraction_config_generation"
     circuit_extraction_execution = "circuit_extraction_execution"
+    skeletonization_execution = "skeletonization_execution"
 
 
 class AgePeriod(StrEnum):
@@ -608,6 +609,7 @@ class EntityRoute(StrEnum):
     analysis_notebook_template = "analysis-notebook-template"
     analysis_notebook_environment = "analysis-notebook-environment"
     analysis_notebook_result = "analysis-notebook-result"
+    skeletonization_config = "skeletonization-config"
 
 
 class EntityType(StrEnum):
@@ -649,6 +651,7 @@ class EntityType(StrEnum):
     analysis_notebook_template = "analysis_notebook_template"
     analysis_notebook_environment = "analysis_notebook_environment"
     analysis_notebook_result = "analysis_notebook_result"
+    skeletonization_config = "skeletonization_config"
 
 
 class EntityTypeWithBrainRegion(StrEnum):
@@ -1578,6 +1581,36 @@ class SingleNeuronSynaptomeUserUpdate(BaseModel):
     seed: Annotated[int | str | None, Field(title="Seed")] = "<NOT_SET>"
     me_model_id: Annotated[UUID | str | None, Field(title="Me Model Id")] = "<NOT_SET>"
     brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
+
+
+class SkeletonizationConfigCreate(BaseModel):
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
+
+
+class SkeletonizationConfigUserUpdate(BaseModel):
+    name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
+    description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
+    scan_parameters: Annotated[dict[str, Any] | str | None, Field(title="Scan Parameters")] = (
+        "<NOT_SET>"
+    )
+
+
+class SkeletonizationExecutionStatus(StrEnum):
+    created = "created"
+    pending = "pending"
+    running = "running"
+    done = "done"
+    error = "error"
+
+
+class SkeletonizationExecutionUserUpdate(BaseModel):
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
+    status: SkeletonizationExecutionStatus | None = None
 
 
 class SlicingDirectionType(StrEnum):
@@ -2889,6 +2922,49 @@ class SingleNeuronSynaptomeSimulationRead(BaseModel):
     synaptome: NestedSynaptome
 
 
+class SkeletonizationConfigRead(BaseModel):
+    contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")] = (
+        None
+    )
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    assets: Annotated[list[AssetRead], Field(title="Assets")]
+    id: Annotated[UUID, Field(title="Id")]
+    type: EntityType | None = None
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
+
+
+class SkeletonizationExecutionCreate(BaseModel):
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
+    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
+    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
+    status: SkeletonizationExecutionStatus
+
+
+class SkeletonizationExecutionRead(BaseModel):
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    id: Annotated[UUID, Field(title="Id")]
+    type: ActivityType | None = None
+    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
+    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    used: Annotated[list[NestedEntityRead], Field(title="Used")]
+    generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
+    status: SkeletonizationExecutionStatus
+
+
 class ValidationResultRead(BaseModel):
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
@@ -3826,6 +3902,18 @@ class ListResponseSingleNeuronSynaptomeRead(BaseModel):
 
 class ListResponseSingleNeuronSynaptomeSimulationRead(BaseModel):
     data: Annotated[list[SingleNeuronSynaptomeSimulationRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
+class ListResponseSkeletonizationConfigRead(BaseModel):
+    data: Annotated[list[SkeletonizationConfigRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
+class ListResponseSkeletonizationExecutionRead(BaseModel):
+    data: Annotated[list[SkeletonizationExecutionRead], Field(title="Data")]
     pagination: PaginationResponse
     facets: Facets | None = None
 

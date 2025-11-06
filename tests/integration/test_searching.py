@@ -27,6 +27,8 @@ from entitysdk.models import (
     SingleNeuronSimulation,
     SingleNeuronSynaptome,
     SingleNeuronSynaptomeSimulation,
+    SkeletonizationConfig,
+    SkeletonizationExecution,
     Species,
     Strain,
     ValidationResult,
@@ -65,6 +67,8 @@ from entitysdk.models import (
         SingleNeuronSimulation,
         SingleNeuronSynaptomeSimulation,
         SingleNeuronSynaptome,
+        SkeletonizationConfig,
+        SkeletonizationExecution,
     ],
 )
 def test_is_searchable(entity_type, client):

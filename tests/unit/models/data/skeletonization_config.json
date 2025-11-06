@@ -1,0 +1,29 @@
+{
+  "contributions": [],
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "creation_date": "2025-11-06T08:23:11.505476Z",
+  "update_date": "2025-11-06T08:23:11.505476Z",
+  "created_by": {
+    "id": "10e46121-e8c8-49e5-aea7-bc1558b88e16",
+    "given_name": null,
+    "family_name": null,
+    "pref_label": "Regular User With Project Id",
+    "type": "person",
+    "sub_id": "00000000-0000-0000-0000-000000000001"
+  },
+  "updated_by": {
+    "id": "10e46121-e8c8-49e5-aea7-bc1558b88e16",
+    "given_name": null,
+    "family_name": null,
+    "pref_label": "Regular User With Project Id",
+    "type": "person",
+    "sub_id": "00000000-0000-0000-0000-000000000001"
+  },
+  "assets": [],
+  "id": "78b99b37-b0b7-4912-8487-c58c03de5169",
+  "type": "skeletonization_config",
+  "name": "skeletonization-config",
+  "description": "my-skeletonization-config",
+  "scan_parameters": { "foo": "bar" }
+}

@@ -47,6 +47,9 @@ from entitysdk._server_schemas import PublicationType as PublicationType
 from entitysdk._server_schemas import Sex as Sex
 from entitysdk._server_schemas import SimulationExecutionStatus as SimulationExecutionStatus
 from entitysdk._server_schemas import SingleNeuronSimulationStatus as SingleNeuronSimulationStatus
+from entitysdk._server_schemas import (
+    SkeletonizationExecutionStatus as SkeletonizationExecutionStatus,
+)
 from entitysdk._server_schemas import SlicingDirectionType as SlicingDirectionType
 from entitysdk._server_schemas import StainingType as StainingType
 from entitysdk._server_schemas import StorageType as StorageType
