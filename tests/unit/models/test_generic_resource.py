@@ -99,8 +99,16 @@ MODELS = [
         "file": DATA_DIR / "simulation_campaign.json",
     },
     {
+        "class": models.SkeletonizationCampaign,
+        "file": DATA_DIR / "skeletonization_campaign.json",
+    },
+    {
         "class": models.SkeletonizationConfig,
         "file": DATA_DIR / "skeletonization_config.json",
+    },
+    {
+        "class": models.SkeletonizationConfigGeneration,
+        "file": DATA_DIR / "skeletonization_config_generation.json",
     },
     {
         "class": models.SkeletonizationExecution,
