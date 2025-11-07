@@ -1,4 +1,3 @@
-from datetime import UTC, datetime
 from pathlib import Path
 from uuid import UUID
 
@@ -9,7 +8,7 @@ from entitysdk.models import Asset, CellMorphology
 from entitysdk.mount import DataMount
 from entitysdk.route import get_assets_endpoint
 
-MOCK_DATE = datetime.now(UTC)
+MOCK_DATE = "2025-11-07 13:59:27.938208+00:00"
 
 
 @pytest.fixture(scope="module")
@@ -174,7 +173,7 @@ def public_asset_directory_list_httpx_mock(
                 "dir_cell.swc": {
                     "name": "dir_cell.swc",
                     "size": 0,
-                    "last_modified": str(MOCK_DATE),
+                    "last_modified": MOCK_DATE,
                 },
                 "dir_cell.h5": {"name": "dir_cell.h5", "size": 0, "last_modified": str(MOCK_DATE)},
             }
