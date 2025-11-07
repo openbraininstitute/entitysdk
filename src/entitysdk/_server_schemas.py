@@ -27,6 +27,7 @@ class ActivityType(StrEnum):
     circuit_extraction_config_generation = "circuit_extraction_config_generation"
     circuit_extraction_execution = "circuit_extraction_execution"
     skeletonization_execution = "skeletonization_execution"
+    skeletonization_config_generation = "skeletonization_config_generation"
 
 
 class AgePeriod(StrEnum):
@@ -610,6 +611,7 @@ class EntityRoute(StrEnum):
     analysis_notebook_environment = "analysis-notebook-environment"
     analysis_notebook_result = "analysis-notebook-result"
     skeletonization_config = "skeletonization-config"
+    skeletonization_campaign = "skeletonization-campaign"
 
 
 class EntityType(StrEnum):
@@ -652,6 +654,7 @@ class EntityType(StrEnum):
     analysis_notebook_environment = "analysis_notebook_environment"
     analysis_notebook_result = "analysis_notebook_result"
     skeletonization_config = "skeletonization_config"
+    skeletonization_campaign = "skeletonization_campaign"
 
 
 class EntityTypeWithBrainRegion(StrEnum):
@@ -991,6 +994,24 @@ class NestedConsortiumRead(BaseModel):
     type: Annotated[str, Field(title="Type")]
 
 
+class NestedEMCellMeshRead(BaseModel):
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    type: EntityType | None = None
+    id: Annotated[UUID, Field(title="Id")]
+    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
+    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
+    published_in: Annotated[str | None, Field(title="Published In")] = None
+    release_version: Annotated[int, Field(title="Release Version")]
+    dense_reconstruction_cell_id: Annotated[int, Field(title="Dense Reconstruction Cell Id")]
+    generation_method: EMCellMeshGenerationMethod
+    level_of_detail: Annotated[int, Field(title="Level Of Detail")]
+    generation_parameters: Annotated[
+        dict[str, Any] | None, Field(title="Generation Parameters")
+    ] = None
+    mesh_type: EMCellMeshType
+
+
 class NestedElectricalRecordingStimulusRead(BaseModel):
     type: EntityType | None = None
     id: Annotated[UUID, Field(title="Id")]
@@ -1158,6 +1179,16 @@ class NestedSimulationRead(BaseModel):
     description: Annotated[str, Field(title="Description")]
     simulation_campaign_id: Annotated[UUID, Field(title="Simulation Campaign Id")]
     entity_id: Annotated[UUID, Field(title="Entity Id")]
+    scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
+
+
+class NestedSkeletonizationConfigRead(BaseModel):
+    id: Annotated[UUID, Field(title="Id")]
+    type: EntityType | None = None
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    skeletonization_campaign_id: Annotated[UUID, Field(title="Skeletonization Campaign Id")]
+    em_cell_mesh_id: Annotated[UUID, Field(title="Em Cell Mesh Id")]
     scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
 
 
@@ -1583,16 +1614,66 @@ class SingleNeuronSynaptomeUserUpdate(BaseModel):
     brain_region_id: Annotated[UUID | str | None, Field(title="Brain Region Id")] = "<NOT_SET>"
 
 
-class SkeletonizationConfigCreate(BaseModel):
+class SkeletonizationCampaignCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
 
 
+class SkeletonizationCampaignUserUpdate(BaseModel):
+    name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
+    description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
+    scan_parameters: Annotated[dict[str, Any] | str | None, Field(title="Scan Parameters")] = (
+        "<NOT_SET>"
+    )
+
+
+class SkeletonizationConfigCreate(BaseModel):
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    skeletonization_campaign_id: Annotated[UUID, Field(title="Skeletonization Campaign Id")]
+    em_cell_mesh_id: Annotated[UUID, Field(title="Em Cell Mesh Id")]
+    scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
+
+
+class SkeletonizationConfigGenerationCreate(BaseModel):
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
+    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
+    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
+
+
+class SkeletonizationConfigGenerationRead(BaseModel):
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    id: Annotated[UUID, Field(title="Id")]
+    type: ActivityType | None = None
+    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
+    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    used: Annotated[list[NestedEntityRead], Field(title="Used")]
+    generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
+
+
+class SkeletonizationConfigGenerationUserUpdate(BaseModel):
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
+
+
 class SkeletonizationConfigUserUpdate(BaseModel):
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
+    skeletonization_campaign_id: Annotated[
+        UUID | str | None, Field(title="Skeletonization Campaign Id")
+    ] = "<NOT_SET>"
+    em_cell_mesh_id: Annotated[UUID | str | None, Field(title="Em Cell Mesh Id")] = "<NOT_SET>"
     scan_parameters: Annotated[dict[str, Any] | str | None, Field(title="Scan Parameters")] = (
         "<NOT_SET>"
     )
@@ -2576,6 +2657,12 @@ class ListResponseSimulationGenerationRead(BaseModel):
     facets: Facets | None = None
 
 
+class ListResponseSkeletonizationConfigGenerationRead(BaseModel):
+    data: Annotated[list[SkeletonizationConfigGenerationRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
 class ListResponseSpeciesRead(BaseModel):
     data: Annotated[list[SpeciesRead], Field(title="Data")]
     pagination: PaginationResponse
@@ -2922,6 +3009,28 @@ class SingleNeuronSynaptomeSimulationRead(BaseModel):
     synaptome: NestedSynaptome
 
 
+class SkeletonizationCampaignRead(BaseModel):
+    contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")] = (
+        None
+    )
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    assets: Annotated[list[AssetRead], Field(title="Assets")]
+    id: Annotated[UUID, Field(title="Id")]
+    type: EntityType | None = None
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
+    input_meshes: Annotated[list[NestedEMCellMeshRead], Field(title="Input Meshes")]
+    skeletonization_configs: Annotated[
+        list[NestedSkeletonizationConfigRead], Field(title="Skeletonization Configs")
+    ]
+
+
 class SkeletonizationConfigRead(BaseModel):
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")] = (
         None
@@ -2937,6 +3046,8 @@ class SkeletonizationConfigRead(BaseModel):
     type: EntityType | None = None
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
+    skeletonization_campaign_id: Annotated[UUID, Field(title="Skeletonization Campaign Id")]
+    em_cell_mesh_id: Annotated[UUID, Field(title="Em Cell Mesh Id")]
     scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
 
 
@@ -3902,6 +4013,12 @@ class ListResponseSingleNeuronSynaptomeRead(BaseModel):
 
 class ListResponseSingleNeuronSynaptomeSimulationRead(BaseModel):
     data: Annotated[list[SingleNeuronSynaptomeSimulationRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
+class ListResponseSkeletonizationCampaignRead(BaseModel):
+    data: Annotated[list[SkeletonizationCampaignRead], Field(title="Data")]
     pagination: PaginationResponse
     facets: Facets | None = None
 

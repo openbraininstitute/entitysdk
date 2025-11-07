@@ -5,5 +5,3 @@ from entitysdk.models.activity import Activity
 
 class IonChannelModelingConfigGeneration(Activity):
     """Ion channel modeling config generation activity class."""
-
-    pass
