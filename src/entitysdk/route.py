@@ -54,6 +54,8 @@ _ROUTES = {
     "SimulationExecution": "simulation-execution",
     "SimulationGeneration": "simulation-generation",
     "SimulationResult": "simulation-result",
+    "SkeletonizationConfig": "skeletonization-config",
+    "SkeletonizationExecution": "skeletonization-execution",
     "Role": "role",
     "Species": "species",
     "Strain": "strain",
