@@ -20,10 +20,16 @@ from entitysdk.models.asset import (
 )
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
+from entitysdk.mount import DataMount
 from entitysdk.result import IteratorResult
 from entitysdk.route import get_assets_endpoint, get_entity_derivations_endpoint
 from entitysdk.types import ID, AssetLabel, DerivationType
-from entitysdk.util import make_db_api_request, stream_paginated_request
+from entitysdk.util import (
+    create_intermediate_directories,
+    make_db_api_request,
+    stream_paginated_request,
+    validate_filename_extension_consistency,
+)
 
 L = logging.getLogger(__name__)
 
@@ -354,8 +360,11 @@ def list_directory(
 
 
 def download_asset_file(
-    url: str,
     *,
+    api_url: str,
+    entity_id: ID,
+    entity_type: type[Identifiable],
+    asset_or_id: ID | Asset,
     output_path: Path,
     asset_path: os.PathLike | None = None,
     project_context: ProjectContext | None = None,
@@ -366,49 +375,127 @@ def download_asset_file(
     """Download asset file to a file path.
 
     Args:
-        url: URL of the asset.
+        api_url: The API URL to entitycore service.
+        entity_id: Resource id
+        entity_type: Resource type
+        asset_or_id: Asset id or asset instance
         output_path: Path to save the file to.
         asset_path: for asset directories, the path within the directory to the file
         project_context: Project context.
         token: Authorization access token.
         http_client: HTTP client.
+        data_mount: DataMount object for declaring a mount point.
 
     Returns:
         Output file path.
     """
+    asset_endpoint = get_assets_endpoint(
+        api_url=api_url,
+        entity_type=entity_type,
+        entity_id=entity_id,
+        asset_id=asset_or_id if isinstance(asset_or_id, ID) else asset_or_id.id,
+    )
+
+    if isinstance(asset_or_id, ID):
+        asset = get_entity(
+            asset_endpoint,
+            entity_type=Asset,
+            project_context=project_context,
+            http_client=http_client,
+            token=token,
+        )
+    else:
+        asset = asset_or_id
+
+    target_path: Path = Path(output_path)
+    source_path: Path = Path(asset.full_path)
+    if asset.is_directory:
+        if not asset_path:
+            raise EntitySDKError("Directory from directories require an `asset_path`")
+        source_path /= asset_path
+    else:
+        if asset_path:
+            raise EntitySDKError("Cannot pass `asset_path` to non-directories")
+
+        target_path = (
+            target_path / asset.path
+            if target_path.is_dir()
+            else validate_filename_extension_consistency(target_path, Path(asset.path).suffix)
+        )
+
+    create_intermediate_directories(target_path)
+
+    if data_mount and data_mount.path_exists(source_path):
+        data_mount.link_path(source_path, target_path)
+        return target_path
+
     bytes_content = download_asset_content(
-        url=url,
+        api_url=api_url,
+        asset_id=asset.id,
+        entity_id=entity_id,
+        entity_type=entity_type,
         asset_path=asset_path,
         project_context=project_context,
         token=token,
         http_client=http_client,
     )
-    output_path.write_bytes(bytes_content)
-    return output_path
+    target_path.write_bytes(bytes_content)
+    return target_path
 
 
 def download_asset_content(
-    url: str,
     *,
+    api_url: str,
+    entity_id: ID,
+    entity_type: type[Identifiable],
+    asset_id: ID,
     asset_path: os.PathLike | None = None,
     project_context: ProjectContext | None = None,
     token: str,
     http_client: httpx.Client | None = None,
+    data_mount: DataMount | None = None,
 ) -> bytes:
     """Download asset content.
 
     Args:
-        url: URL of the asset.
+        api_url: The API URL to entitycore service.
+        entity_id: Resource id
+        entity_type: Resource type
+        asset_id: Asset id
         asset_path: for asset directories, the path within the directory to the file
         project_context: Project context.
         token: Authorization access token.
         http_client: HTTP client.
+        data_mount: DataMount object for declaring a mount point.
 
     Returns:
         Asset content in bytes.
     """
+    asset_endpoint = get_assets_endpoint(
+        api_url=api_url,
+        entity_type=entity_type,
+        entity_id=entity_id,
+        asset_id=asset_id,
+    )
+
+    if data_mount:
+        asset = get_entity(
+            asset_endpoint,
+            entity_type=Asset,
+            project_context=project_context,
+            http_client=http_client,
+            token=token,
+        )
+        if data_mount.path_exists(asset.full_path):
+            path = asset.full_path
+            if asset.is_directory:
+                path = f"{path}/{asset_path}"
+            return data_mount.read_bytes(path)
+
+    download_endpoint = f"{asset_endpoint}/download"
+
     response = make_db_api_request(
-        url=url,
+        url=download_endpoint,
         method="GET",
         parameters={"asset_path": str(asset_path)} if asset_path else {},
         project_context=project_context,
