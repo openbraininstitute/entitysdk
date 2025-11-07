@@ -1482,6 +1482,7 @@ class SimulationExecutionStatus(StrEnum):
     running = "running"
     done = "done"
     error = "error"
+    cancelled = "cancelled"
 
 
 class SimulationExecutionUserUpdate(BaseModel):
