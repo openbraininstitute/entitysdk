@@ -237,6 +237,7 @@ class CellMorphologyProtocolDesign(StrEnum):
     fluorophore = "fluorophore"
     topological_synthesis = "topological_synthesis"
 
+
 class CircuitBuildCategory(StrEnum):
     computational_model = "computational_model"
     em_reconstruction = "em_reconstruction"
@@ -567,8 +568,8 @@ class ElectricalRecordingType(StrEnum):
     unknown = "unknown"
 
 
-class EntityCountRead(RootModel[dict[str, int] | None]):
-    root: dict[str, int] | None = None
+class EntityCountRead(RootModel[dict[str, int]]):
+    root: dict[str, int]
 
 
 class EntityRoute(StrEnum):
@@ -706,8 +707,8 @@ class Facet(BaseModel):
     type: Annotated[str | None, Field(title="Type")] = None
 
 
-class Facets(RootModel[dict[str, list[Facet]] | None]):
-    root: dict[str, list[Facet]] | None = None
+class Facets(RootModel[dict[str, list[Facet]]]):
+    root: dict[str, list[Facet]]
 
 
 class HierarchyNode(BaseModel):
