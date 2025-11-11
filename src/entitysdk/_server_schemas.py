@@ -235,7 +235,7 @@ class CellMorphologyProtocolDesign(StrEnum):
     electron_microscopy = "electron_microscopy"
     cell_patch = "cell_patch"
     fluorophore = "fluorophore"
-
+    topological_synthesis = "topological_synthesis"
 
 class CircuitBuildCategory(StrEnum):
     computational_model = "computational_model"
