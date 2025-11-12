@@ -384,7 +384,7 @@ def download_asset_file(
         project_context: Project context.
         token: Authorization access token.
         http_client: HTTP client.
-        local_store: LocalAssetStore object for declaring a mount point.
+        local_store: LocalAssetStore for using a local store.
 
     Returns:
         Output file path.
@@ -466,7 +466,7 @@ def download_asset_content(
         project_context: Project context.
         token: Authorization access token.
         http_client: HTTP client.
-        local_store: LocalAssetStore object for declaring a mount point.
+        local_store: LocalAssetStore for using a local store.
 
     Returns:
         Asset content in bytes.

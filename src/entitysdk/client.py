@@ -62,7 +62,7 @@ class Client:
             http_client: Optional HTTP client to use.
             token_manager: Token manager or token to be used for authentication.
             environment: Deployment environent.
-            local_store: LocalAssetStore object for declaring a mount point.
+            local_store: LocalAssetStore object for using a local store.
         """
         try:
             environment = DeploymentEnvironment(environment) if environment else None
