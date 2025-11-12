@@ -19,9 +19,9 @@ from entitysdk.models.asset import (
 )
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
-from entitysdk.mount import DataMount
 from entitysdk.result import IteratorResult
 from entitysdk.schemas.asset import DownloadedAssetFile
+from entitysdk.store import LocalAssetStore
 from entitysdk.token_manager import TokenFromValue, TokenManager
 from entitysdk.types import (
     ID,
@@ -52,7 +52,7 @@ class Client:
         http_client: httpx.Client | None = None,
         token_manager: TokenManager | Token,
         environment: DeploymentEnvironment | str | None = None,
-        data_mount: DataMount | None = None,
+        local_store: LocalAssetStore | None = None,
     ) -> None:
         """Initialize client.
 
@@ -62,7 +62,7 @@ class Client:
             http_client: Optional HTTP client to use.
             token_manager: Token manager or token to be used for authentication.
             environment: Deployment environent.
-            data_mount: DataMount object for declaring a mount point.
+            local_store: LocalAssetStore object for declaring a mount point.
         """
         try:
             environment = DeploymentEnvironment(environment) if environment else None
@@ -81,7 +81,7 @@ class Client:
         self._token_manager = (
             TokenFromValue(token_manager) if isinstance(token_manager, Token) else token_manager
         )
-        self._data_mount = data_mount
+        self._local_store = local_store
 
     @staticmethod
     def _handle_api_url(api_url: str | None, environment: DeploymentEnvironment | None) -> str:
@@ -537,7 +537,7 @@ class Client:
             project_context=context,
             http_client=self._http_client,
             token=self._token_manager.get_token(),
-            data_mount=self._data_mount,
+            local_store=self._local_store,
         )
 
     def download_file(
@@ -574,7 +574,7 @@ class Client:
             output_path=Path(output_path),
             http_client=self._http_client,
             token=self._token_manager.get_token(),
-            data_mount=self._data_mount,
+            local_store=self._local_store,
         )
 
     @staticmethod

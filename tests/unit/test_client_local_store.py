@@ -5,8 +5,8 @@ import pytest
 
 from entitysdk import Client, ProjectContext
 from entitysdk.models import Asset, CellMorphology
-from entitysdk.mount import DataMount
 from entitysdk.route import get_assets_endpoint
+from entitysdk.store import LocalAssetStore
 
 MOCK_DATE = "2025-11-07 13:59:27.938208+00:00"
 
@@ -195,7 +195,7 @@ def entity(entity_id, public_asset_file_metadata, public_asset_directory_metadat
 
 
 @pytest.fixture(scope="module")
-def data_mount(tmp_path_factory, public_asset_file_metadata, public_asset_directory_metadata):
+def local_store(tmp_path_factory, public_asset_file_metadata, public_asset_directory_metadata):
     prefix = tmp_path_factory.mktemp("data")
 
     public_file = prefix / public_asset_file_metadata["full_path"]
@@ -207,15 +207,15 @@ def data_mount(tmp_path_factory, public_asset_file_metadata, public_asset_direct
     Path(public_directory, "dir_cell.swc").write_bytes(b"public_directory_file")
     Path(public_directory, "dir_cell.h5").write_bytes(b"public_directory_file")
 
-    return DataMount(prefix=prefix)
+    return LocalAssetStore(prefix=prefix)
 
 
 @pytest.fixture(scope="module")
-def client_with_mount(api_url, data_mount, project_context):
+def client_with_mount(api_url, local_store, project_context):
     return Client(
         api_url=api_url,
         token_manager="bar",
-        data_mount=data_mount,
+        local_store=local_store,
         project_context=project_context,
     )
 
@@ -223,11 +223,11 @@ def client_with_mount(api_url, data_mount, project_context):
 @pytest.fixture(scope="module")
 def client_with_mount__no_files(api_url, tmp_path_factory):
     prefix = tmp_path_factory.mktemp("data")
-    data_mount = DataMount(prefix=prefix)
-    return Client(api_url=api_url, token_manager="bar", data_mount=data_mount)
+    local_store = LocalAssetStore(prefix=prefix)
+    return Client(api_url=api_url, token_manager="bar", local_store=local_store)
 
 
-def test_client__download_content__data_mount__file(
+def test_client__download_content__local_store__file(
     client_with_mount,
     entity_id,
     entity_type,
@@ -244,7 +244,7 @@ def test_client__download_content__data_mount__file(
     assert res == b"public"
 
 
-def test_client__download_content__data_mount__no_file(
+def test_client__download_content__local_store__no_file(
     client_with_mount__no_files,
     entity_id,
     entity_type,
@@ -260,7 +260,7 @@ def test_client__download_content__data_mount__no_file(
     assert res == b"public"
 
 
-def test_client__download_content__data_mount__directory(
+def test_client__download_content__local_store__directory(
     client_with_mount,
     entity_id,
     entity_type,
@@ -277,7 +277,7 @@ def test_client__download_content__data_mount__directory(
     assert res == b"public_directory_file"
 
 
-def test_client__download_file__data_mount(
+def test_client__download_file__local_store(
     client_with_mount,
     entity_id,
     entity_type,
@@ -300,7 +300,7 @@ def test_client__download_file__data_mount(
     assert res.read_bytes() == b"public"
 
 
-def test_client__download_file__data_mount__directory(
+def test_client__download_file__local_store__directory(
     client_with_mount,
     entity_id,
     entity_type,
@@ -324,7 +324,7 @@ def test_client__download_file__data_mount__directory(
     assert res.read_bytes() == b"public_directory_file"
 
 
-def test_client__download_directory__data_mount(
+def test_client__download_directory__local_store(
     client_with_mount,
     entity_id,
     entity_type,
@@ -351,7 +351,7 @@ def test_client__download_directory__data_mount(
     assert data["dir_cell.h5"].resolve().name == "dir_cell.h5"
 
 
-def test_client__download_directory__data_mount__concurrent(
+def test_client__download_directory__local_store__concurrent(
     client_with_mount,
     entity_id,
     entity_type,
@@ -376,7 +376,7 @@ def test_client__download_directory__data_mount__concurrent(
     assert res[1].is_symlink()
 
 
-def test_client__download_assets__data_mount(
+def test_client__download_assets__local_store(
     client_with_mount,
     entity_id,
     entity_type,

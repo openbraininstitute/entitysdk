@@ -20,9 +20,9 @@ from entitysdk.models.asset import (
 )
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
-from entitysdk.mount import DataMount
 from entitysdk.result import IteratorResult
 from entitysdk.route import get_assets_endpoint, get_entity_derivations_endpoint
+from entitysdk.store import LocalAssetStore
 from entitysdk.types import ID, AssetLabel, DerivationType
 from entitysdk.util import (
     create_intermediate_directories,
@@ -370,7 +370,7 @@ def download_asset_file(
     project_context: ProjectContext | None = None,
     token: str,
     http_client: httpx.Client | None = None,
-    data_mount: DataMount | None = None,
+    local_store: LocalAssetStore | None = None,
 ) -> Path:
     """Download asset file to a file path.
 
@@ -384,7 +384,7 @@ def download_asset_file(
         project_context: Project context.
         token: Authorization access token.
         http_client: HTTP client.
-        data_mount: DataMount object for declaring a mount point.
+        local_store: LocalAssetStore object for declaring a mount point.
 
     Returns:
         Output file path.
@@ -425,8 +425,8 @@ def download_asset_file(
 
     create_intermediate_directories(target_path)
 
-    if data_mount and data_mount.path_exists(source_path):
-        data_mount.link_path(source_path, target_path)
+    if local_store and local_store.path_exists(source_path):
+        local_store.link_path(source_path, target_path)
         return target_path
 
     bytes_content = download_asset_content(
@@ -453,7 +453,7 @@ def download_asset_content(
     project_context: ProjectContext | None = None,
     token: str,
     http_client: httpx.Client | None = None,
-    data_mount: DataMount | None = None,
+    local_store: LocalAssetStore | None = None,
 ) -> bytes:
     """Download asset content.
 
@@ -466,7 +466,7 @@ def download_asset_content(
         project_context: Project context.
         token: Authorization access token.
         http_client: HTTP client.
-        data_mount: DataMount object for declaring a mount point.
+        local_store: LocalAssetStore object for declaring a mount point.
 
     Returns:
         Asset content in bytes.
@@ -478,7 +478,7 @@ def download_asset_content(
         asset_id=asset_id,
     )
 
-    if data_mount:
+    if local_store:
         asset = get_entity(
             asset_endpoint,
             entity_type=Asset,
@@ -486,11 +486,11 @@ def download_asset_content(
             http_client=http_client,
             token=token,
         )
-        if data_mount.path_exists(asset.full_path):
+        if local_store.path_exists(asset.full_path):
             path = asset.full_path
             if asset.is_directory:
                 path = f"{path}/{asset_path}"
-            return data_mount.read_bytes(path)
+            return local_store.read_bytes(path)
 
     download_endpoint = f"{asset_endpoint}/download"
 

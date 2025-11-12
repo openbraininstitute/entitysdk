@@ -7,8 +7,8 @@ from entitysdk.exception import EntitySDKError
 
 
 @dataclass
-class DataMount:
-    """Class for declaring a mount location prefix."""
+class LocalAssetStore:
+    """Class for locally stored asset data."""
 
     prefix: Path
 
