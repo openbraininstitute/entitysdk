@@ -83,7 +83,7 @@ def test_download_memodel(
         method="GET",
         url=f"{api_url}/cell-morphology/{morph_id}/assets/{morph_asset_id}",
         match_headers=request_headers,
-        json=_mock_morph_asset_response(morph_id) | {"path": "foo.asc"},
+        json=_mock_morph_asset_response(morph_asset_id) | {"path": "foo.asc"},
     )
     httpx_mock.add_response(
         method="GET",

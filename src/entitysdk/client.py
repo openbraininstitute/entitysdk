@@ -21,6 +21,7 @@ from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.result import IteratorResult
 from entitysdk.schemas.asset import DownloadedAssetFile
+from entitysdk.store import LocalAssetStore
 from entitysdk.token_manager import TokenFromValue, TokenManager
 from entitysdk.types import (
     ID,
@@ -33,8 +34,6 @@ from entitysdk.types import (
 )
 from entitysdk.util import (
     build_api_url,
-    create_intermediate_directories,
-    validate_filename_extension_consistency,
 )
 from entitysdk.utils.asset import filter_assets
 
@@ -53,6 +52,7 @@ class Client:
         http_client: httpx.Client | None = None,
         token_manager: TokenManager | Token,
         environment: DeploymentEnvironment | str | None = None,
+        local_store: LocalAssetStore | None = None,
     ) -> None:
         """Initialize client.
 
@@ -62,6 +62,7 @@ class Client:
             http_client: Optional HTTP client to use.
             token_manager: Token manager or token to be used for authentication.
             environment: Deployment environent.
+            local_store: LocalAssetStore object for using a local store.
         """
         try:
             environment = DeploymentEnvironment(environment) if environment else None
@@ -80,6 +81,7 @@ class Client:
         self._token_manager = (
             TokenFromValue(token_manager) if isinstance(token_manager, Token) else token_manager
         )
+        self._local_store = local_store
 
     @staticmethod
     def _handle_api_url(api_url: str | None, environment: DeploymentEnvironment | None) -> str:
@@ -525,22 +527,17 @@ class Client:
         Returns:
             Asset content in bytes.
         """
-        url = (
-            route.get_assets_endpoint(
-                api_url=self.api_url,
-                entity_type=entity_type,
-                entity_id=entity_id,
-                asset_id=asset_id,
-            )
-            + "/download"
-        )
         context = self._optional_user_context(override_context=project_context)
         return core.download_asset_content(
-            url=url,
-            project_context=context,
+            api_url=self.api_url,
+            asset_id=asset_id,
+            entity_id=entity_id,
+            entity_type=entity_type,
             asset_path=asset_path,
+            project_context=context,
             http_client=self._http_client,
             token=self._token_manager.get_token(),
+            local_store=self._local_store,
         )
 
     def download_file(
@@ -567,46 +564,17 @@ class Client:
             Output file path.
         """
         context = self._optional_user_context(override_context=project_context)
-
-        asset_endpoint = route.get_assets_endpoint(
-            api_url=self.api_url,
-            entity_type=entity_type,
-            entity_id=entity_id,
-            asset_id=asset_id if isinstance(asset_id, ID) else asset_id.id,
-        )
-
-        if isinstance(asset_id, ID):
-            asset = core.get_entity(
-                asset_endpoint,
-                entity_type=Asset,
-                project_context=context,
-                http_client=self._http_client,
-                token=self._token_manager.get_token(),
-            )
-        else:
-            asset = asset_id
-
-        path: Path = Path(output_path)
-        if asset.is_directory:
-            if not asset_path:
-                raise EntitySDKError("Directory from directories require an `asset_path`")
-        else:
-            if asset_path:
-                raise EntitySDKError("Cannot pass `asset_path` to non-directories")
-
-            path = (
-                path / asset.path
-                if path.is_dir()
-                else validate_filename_extension_consistency(path, Path(asset.path).suffix)
-            )
-        create_intermediate_directories(path)
         return core.download_asset_file(
-            url=f"{asset_endpoint}/download",
+            api_url=self.api_url,
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_or_id=asset_id,
             project_context=context,
             asset_path=asset_path,
-            output_path=path,
+            output_path=Path(output_path),
             http_client=self._http_client,
             token=self._token_manager.get_token(),
+            local_store=self._local_store,
         )
 
     @staticmethod
