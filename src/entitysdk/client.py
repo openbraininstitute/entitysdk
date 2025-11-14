@@ -207,7 +207,7 @@ class Client:
             Registered entity with id.
         """
         url = route.get_entities_endpoint(api_url=self.api_url, entity_type=type(entity))
-        context = self._required_user_context(override_context=project_context)
+        context = self._optional_user_context(override_context=project_context)
         return core.register_entity(
             url=url,
             entity=entity,
