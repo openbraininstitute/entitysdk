@@ -163,7 +163,7 @@ def register_entity(
     url: str,
     *,
     entity: TIdentifiable,
-    project_context: ProjectContext,
+    project_context: ProjectContext | None,
     token: str,
     http_client: httpx.Client | None = None,
 ) -> TIdentifiable:
