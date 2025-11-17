@@ -3,14 +3,14 @@ name: Feature request
 about: For requests for new features
 title: ''
 labels: enhancement
-assignees: GianlucaFicarelli
+assignees: eleftherioszisis
 
 ---
 
 ## Description
 Clear and concise description of what you would like to happen
 
-## Assets 
+## Assets
 E.g. Figma, design or other assets
 
 ## Technical implementation & specs

@@ -3,7 +3,7 @@ name: Bug
 about: For identifying & tracking bugs
 title: ''
 labels: ''
-assignees: GianlucaFicarelli
+assignees: eleftherioszisis
 
 ---
 
@@ -27,7 +27,7 @@ Steps to reproduce the behavior:
 4. See error
 
 ## Expected behavior
-Clear and concise description 
+Clear and concise description
 
 ## Screenshots
 If applicable, add screenshots to help explain your problem

@@ -3,12 +3,12 @@ name: General
 about: For general OBI tickets (not bugs or feature requests)
 title: ''
 labels: ''
-assignees: GianlucaFicarelli
+assignees: eleftherioszisis
 
 ---
 
 ## Description
-Clear & concise 
+Clear & concise
 
 ## Acceptance criteria
 - [ ] Include a checkbox list
