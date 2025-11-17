@@ -1,6 +1,6 @@
 """Configuration for this library."""
 
-from typing import Annotated
+from typing import Annotated, Literal
 
 from pydantic import Field
 from pydantic_settings import BaseSettings
@@ -32,6 +32,14 @@ class Settings(BaseSettings):
             description="Default production entitycore API url.",
         ),
     ] = "https://www.openbraininstitute.org/api/entitycore"
+
+    deserialize_model_extra: Annotated[
+        Literal["ignore", "forbid"],
+        Field(
+            alias="ENTITYSDK_DESERIALIZE_MODEL_EXTRA",
+            description="How to handle extra fields during the deserialization of models.",
+        ),
+    ] = "ignore"
 
 
 settings = Settings()

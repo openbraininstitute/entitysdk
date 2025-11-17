@@ -17,7 +17,7 @@ class BaseModel(PydanticBaseModel):
     model_config = ConfigDict(
         frozen=True,
         from_attributes=True,
-        extra="ignore",
+        extra="forbid",
         serialize_by_alias=True,
     )
 
