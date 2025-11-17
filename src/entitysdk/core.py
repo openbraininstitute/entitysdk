@@ -11,6 +11,7 @@ import httpx
 
 from entitysdk import serdes
 from entitysdk.common import ProjectContext
+from entitysdk.config import settings
 from entitysdk.exception import EntitySDKError
 from entitysdk.models.asset import (
     Asset,
@@ -216,7 +217,7 @@ def delete_entity(
     entity_type: type[Identifiable],
     token: str,
     http_client: httpx.Client | None = None,
-):
+) -> None:
     """Delete entity."""
     make_db_api_request(
         url=url,
@@ -310,16 +311,22 @@ def upload_asset_directory(
     js = response.json()
 
     def upload(to_upload):
+        upload_client = http_client or httpx.Client()
         failed = {}
         for path, url in to_upload.items():
             with open(paths[Path(path)], "rb") as fd:
                 try:
-                    response = http_client.request(
+                    response = upload_client.request(
                         method="PUT",
                         url=url,
                         content=fd,
                         follow_redirects=True,
-                        timeout=20,
+                        timeout=httpx.Timeout(
+                            connect=settings.connect_timeout,
+                            read=settings.read_timeout,
+                            write=settings.write_timeout,
+                            pool=settings.pool_timeout,
+                        ),
                     )
                 except httpx.HTTPError:
                     L.exception("Upload failed, will retry again")
