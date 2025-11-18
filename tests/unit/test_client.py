@@ -84,9 +84,10 @@ def test_client_search(client, httpx_mock):
 
 
 @patch("entitysdk.route.get_route_name")
-def test_client_nupdate(mocked_route, client, httpx_mock):
+def test_client_update(mocked_route, client, httpx_mock):
     class Foo(Identifiable):
         name: str
+        description: str = "empty"
 
     id1 = uuid.uuid4()
 
@@ -117,12 +118,15 @@ def test_client_nupdate(mocked_route, client, httpx_mock):
     assert res.name == new_name
 
 
-def _mock_entity_response(entity_id, assets=None):
+def _mock_entity_response(entity_id, assets=None, named=True):
     data = {
         "id": str(entity_id),
-        "name": "my-entity",
-        "description": "my-entity",
     }
+    if named:
+        data = data | {
+            "name": "my-entity",
+            "description": "my-entity",
+        }
     if assets:
         data["assets"] = assets
 
@@ -775,7 +779,10 @@ def test_client_download_assets__non_entity(
         method="GET",
         url=f"{api_url}/mtype/{entity_id}",
         match_headers=request_headers,
-        json=_mock_entity_response(entity_id) | {"pref_label": "foo", "definition": "bar"},
+        json=(
+            _mock_entity_response(entity_id, named=False)
+            | {"pref_label": "foo", "definition": "bar"}
+        ),
     )
 
     with pytest.raises(EntitySDKError, match="has no assets"):
@@ -1242,11 +1249,8 @@ def test_client_get_entity_derivations(mock_route, client, httpx_mock, api_url, 
     mock_route.return_value = "circuit"
     entity_id = uuid.uuid4()
 
-    derivation_1 = uuid.uuid4()
-    derivation_2 = uuid.uuid4()
-
-    used_id = uuid.uuid4()
-    generated_id = uuid.uuid4()
+    used_id_1 = uuid.uuid4()
+    used_id_2 = uuid.uuid4()
 
     def add_response(derivation_type: DerivationType):
         httpx_mock.add_response(
@@ -1255,18 +1259,8 @@ def test_client_get_entity_derivations(mock_route, client, httpx_mock, api_url, 
             match_headers=request_headers,
             json={
                 "data": [
-                    {
-                        "id": str(derivation_1),
-                        "used_id": str(used_id),
-                        "generated_id": str(generated_id),
-                        "derivation_type": derivation_type,
-                    },
-                    {
-                        "id": str(derivation_2),
-                        "used_id": str(used_id),
-                        "generated_id": str(generated_id),
-                        "derivation_type": derivation_type,
-                    },
+                    {"type": "circuit", "id": str(used_id_1)},
+                    {"type": "circuit", "id": str(used_id_2)},
                 ]
             },
         )
@@ -1276,24 +1270,24 @@ def test_client_get_entity_derivations(mock_route, client, httpx_mock, api_url, 
         entity_id=entity_id, entity_type=Circuit, derivation_type=DerivationType.circuit_extraction
     ).all()
     assert len(res) == 2
-    assert res[0].id == derivation_1
-    assert res[1].id == derivation_2
+    assert res[0].id == used_id_1
+    assert res[1].id == used_id_2
 
     add_response(DerivationType.circuit_rewiring)
     res = client.get_entity_derivations(
         entity_id=entity_id, entity_type=Circuit, derivation_type=DerivationType.circuit_rewiring
     ).all()
     assert len(res) == 2
-    assert res[0].id == derivation_1
-    assert res[1].id == derivation_2
+    assert res[0].id == used_id_1
+    assert res[1].id == used_id_2
 
     add_response(DerivationType.unspecified)
     res = client.get_entity_derivations(
         entity_id=entity_id, entity_type=Circuit, derivation_type=DerivationType.unspecified
     ).all()
     assert len(res) == 2
-    assert res[0].id == derivation_1
-    assert res[1].id == derivation_2
+    assert res[0].id == used_id_1
+    assert res[1].id == used_id_2
 
 
 def _mock_list_response(list_data):

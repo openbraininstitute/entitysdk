@@ -1,8 +1,8 @@
 import uuid
 
+from entitysdk import models, types
 from entitysdk.downloaders.ion_channel_model import download_ion_channel_mechanism
 from entitysdk.models.ion_channel_model import IonChannelModel, NeuronBlock
-from entitysdk.types import AssetLabel, ContentType
 
 
 def _mock_asset_response(asset_id):
@@ -11,8 +11,8 @@ def _mock_asset_response(asset_id):
         "path": "foo.mod",
         "full_path": "foo.mod",
         "is_directory": False,
-        "content_type": ContentType.application_mod,
-        "label": AssetLabel.neuron_mechanisms,
+        "content_type": types.ContentType.application_mod,
+        "label": types.AssetLabel.neuron_mechanisms,
         "size": 100,
         "status": "created",
         "meta": {},
@@ -51,7 +51,10 @@ def test_download_ion_channel_model(
         name="foo",
         nmodl_suffix="Ca_HVA",
         description="foo description",
-        species={"name": "foo", "taxonomy_id": "bar"},
+        subject=models.Subject(
+            sex=types.Sex.male,
+            species={"name": "foo", "taxonomy_id": "bar"},
+        ),
         brain_region={
             "name": "foo",
             "annotation_value": 997,

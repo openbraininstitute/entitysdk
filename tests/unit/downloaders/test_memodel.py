@@ -141,7 +141,10 @@ def test_download_memodel(
                     "name": "foo",
                     "nmodl_suffix": "Ca_HVA",
                     "description": "foo description",
-                    "species": {"name": "foo", "taxonomy_id": "bar"},
+                    "subject": {
+                        "sex": "male",
+                        "species": {"name": "foo", "taxonomy_id": "bar"},
+                    },
                     "brain_region": {
                         "name": "foo",
                         "annotation_value": 997,

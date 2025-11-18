@@ -5,12 +5,19 @@ import pytest
 
 from entitysdk.client import Client
 from entitysdk.common import ProjectContext
+from entitysdk.config import settings
 from tests.unit.util import PROJECT_ID, VIRTUAL_LAB_ID
 
 
 class Clients(NamedTuple):
     with_context: Client
     wout_context: Client
+
+
+@pytest.fixture(autouse=True)
+def _deserialize_model_extra_forbid(monkeypatch):
+    # be more restrictive during tests to ensure that all the models are up to date
+    monkeypatch.setattr(settings, "deserialize_model_extra", "forbid")
 
 
 @pytest.fixture(scope="session")

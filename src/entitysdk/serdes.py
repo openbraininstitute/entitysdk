@@ -4,6 +4,7 @@ from typing import TypeVar
 
 from pydantic import TypeAdapter
 
+from entitysdk.config import settings
 from entitysdk.models.activity import Activity
 from entitysdk.models.base import BaseModel
 
@@ -18,8 +19,12 @@ TBaseModel = TypeVar("TBaseModel", bound=BaseModel)
 
 
 def deserialize_model(json_data: dict, entity_type: type[TBaseModel]) -> TBaseModel:
-    """Deserialize json into entity."""
-    return entity_type.model_validate(json_data)
+    """Deserialize json into entity.
+
+    The presence of extra fields can be tolerated only during the deserialization
+    and not in the model itself, accordingly to settings.deserialize_model_extra.
+    """
+    return entity_type.model_validate(json_data, extra=settings.deserialize_model_extra)
 
 
 def serialize_model(model: BaseModel) -> dict:
