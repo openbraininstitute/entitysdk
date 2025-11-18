@@ -46,6 +46,12 @@ def make_db_api_request(
             data=data,
             params=parameters,
             follow_redirects=True,
+            timeout=httpx.Timeout(
+                connect=settings.connect_timeout,
+                read=settings.read_timeout,
+                write=settings.write_timeout,
+                pool=settings.pool_timeout,
+            ),
         )
     except httpx.RequestError as e:
         raise EntitySDKError(f"Request error: {e}") from e
