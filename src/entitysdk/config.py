@@ -33,6 +33,35 @@ class Settings(BaseSettings):
         ),
     ] = "https://www.openbraininstitute.org/api/entitycore"
 
+    connect_timeout: Annotated[
+        float,
+        Field(
+            alias="ENTITYSDK_CONNECT_TIMEOUT",
+            description="Maximum time to wait until a connection is established, in seconds.",
+        ),
+    ] = 5
+    read_timeout: Annotated[
+        float,
+        Field(
+            alias="ENTITYSDK_READ_TIMEOUT",
+            description="Maximum time to wait for a chunk of data to be received, in seconds.",
+        ),
+    ] = 30
+    write_timeout: Annotated[
+        float,
+        Field(
+            alias="ENTITYSDK_WRITE_TIMEOUT",
+            description="Maximum time to wait for a chunk of data to be sent, in seconds.",
+        ),
+    ] = 30
+    pool_timeout: Annotated[
+        float,
+        Field(
+            alias="ENTITYSDK_POOL_TIMEOUT",
+            description="Maximum time to acquire a connection from the pool, in seconds.",
+        ),
+    ] = 5
+
     deserialize_model_extra: Annotated[
         Literal["ignore", "forbid"],
         Field(
