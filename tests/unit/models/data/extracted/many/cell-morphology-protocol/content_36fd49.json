@@ -1,0 +1,71 @@
+{
+  "data": [
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "7fc903b1-936e-4ce3-b8e5-590f5d5f7bac",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:32.843285Z",
+      "generation_type": "modified_reconstruction",
+      "id": "69f25dbb-ecac-408e-b791-2046877eaffb",
+      "method_type": "cloned",
+      "protocol_design": "fluorophore",
+      "protocol_document": null,
+      "type": "cell_morphology_protocol",
+      "update_date": "2025-11-20T15:13:32.843285Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "7fc903b1-936e-4ce3-b8e5-590f5d5f7bac",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    },
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "corrected_for_shrinkage": null,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "7fc903b1-936e-4ce3-b8e5-590f5d5f7bac",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:32.838004Z",
+      "generation_type": "digital_reconstruction",
+      "id": "7056b58c-ff64-405c-b24f-e1474c5db00f",
+      "magnification": null,
+      "protocol_design": "cell_patch",
+      "protocol_document": "https://example.com/",
+      "slicing_direction": "horizontal",
+      "slicing_thickness": 200.0,
+      "staining_type": null,
+      "tissue_shrinkage": null,
+      "type": "cell_morphology_protocol",
+      "update_date": "2025-11-20T15:13:32.838004Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "7fc903b1-936e-4ce3-b8e5-590f5d5f7bac",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 2
+  }
+}

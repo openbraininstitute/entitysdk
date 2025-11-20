@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "alt_label": "alt_label_5",
+      "creation_date": "2025-11-20T15:14:09.422706Z",
+      "definition": "definition_5",
+      "id": "f645609a-9f62-4b4b-ad69-03bdf8ffcef9",
+      "pref_label": "pref_label_5",
+      "update_date": "2025-11-20T15:14:09.422706Z"
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

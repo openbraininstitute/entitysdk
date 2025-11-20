@@ -1,0 +1,76 @@
+{
+  "assets": [],
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "brain_region": {
+    "acronym": "acronym64",
+    "annotation_value": 64,
+    "color_hex_triplet": "FF0000",
+    "creation_date": "2025-11-20T15:13:00.092635Z",
+    "hierarchy_id": "b6efcd88-daee-4add-8b53-d3443041e6d8",
+    "id": "1e8df182-fd09-4c62-8507-938fbf6ee3f6",
+    "name": "RedRegion",
+    "parent_structure_id": null,
+    "update_date": "2025-11-20T15:13:00.092635Z"
+  },
+  "cell_morphology_protocol": null,
+  "contact_email": null,
+  "contributions": [],
+  "created_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "ceba98a3-baeb-4828-a58b-0fa4ef2799ca",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:13:00.099703Z",
+  "description": "Test Morphology Description",
+  "experiment_date": null,
+  "id": "a7851317-fa58-41fb-84f2-def5cd58af54",
+  "legacy_id": [
+    "Test Legacy ID"
+  ],
+  "license": null,
+  "location": {
+    "x": 10.0,
+    "y": 20.0,
+    "z": 30.0
+  },
+  "mtypes": [],
+  "name": "Test Morphology Name",
+  "notice_text": null,
+  "published_in": null,
+  "subject": {
+    "age_max": null,
+    "age_min": null,
+    "age_period": "postnatal",
+    "age_value": 1209600.0,
+    "description": "my-description",
+    "id": "b1d67c92-a3a6-4a86-ad25-737d16216fe3",
+    "name": "my-subject",
+    "sex": "female",
+    "species": {
+      "id": "017412fd-dc16-42d6-b143-3467da7aa0ee",
+      "name": "Test Species",
+      "taxonomy_id": "12345"
+    },
+    "strain": {
+      "id": "fade7036-a1e2-4e00-962e-14ae2a861fb4",
+      "name": "Test Strain",
+      "species_id": "017412fd-dc16-42d6-b143-3467da7aa0ee",
+      "taxonomy_id": "Taxonomy ID"
+    },
+    "weight": 1.5
+  },
+  "type": "cell_morphology",
+  "update_date": "2025-11-20T15:13:00.099703Z",
+  "updated_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "ceba98a3-baeb-4828-a58b-0fa4ef2799ca",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  }
+}

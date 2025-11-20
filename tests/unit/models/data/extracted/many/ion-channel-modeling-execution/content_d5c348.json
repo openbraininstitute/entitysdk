@@ -1,0 +1,96 @@
+{
+  "data": [
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "8f96916c-7aa9-4fed-8a86-1ebb5e415892",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:48.889746Z",
+      "end_time": "2025-11-20T15:14:48.824937Z",
+      "generated": [
+        {
+          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_public": false,
+          "id": "639d9005-293e-4e2d-a2db-3afdcc369158",
+          "type": "ion_channel_model"
+        }
+      ],
+      "id": "aada9638-2bf5-4596-b65a-9086b95a4fd8",
+      "start_time": "2025-11-20T15:14:48.824929Z",
+      "status": "done",
+      "type": "ion_channel_modeling_execution",
+      "update_date": "2025-11-20T15:14:48.889746Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "8f96916c-7aa9-4fed-8a86-1ebb5e415892",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "used": [
+        {
+          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_public": false,
+          "id": "32a6e2c3-4215-40e7-b88f-e2c35f872303",
+          "type": "ion_channel_modeling_config"
+        }
+      ]
+    },
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "8f96916c-7aa9-4fed-8a86-1ebb5e415892",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:48.878868Z",
+      "end_time": "2025-11-20T15:14:48.824937Z",
+      "generated": [
+        {
+          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_public": false,
+          "id": "639d9005-293e-4e2d-a2db-3afdcc369158",
+          "type": "ion_channel_model"
+        }
+      ],
+      "id": "fb339061-b10a-4d9e-b19a-2a939e4cdccd",
+      "start_time": "2025-11-20T15:14:48.824929Z",
+      "status": "done",
+      "type": "ion_channel_modeling_execution",
+      "update_date": "2025-11-20T15:14:48.878868Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "8f96916c-7aa9-4fed-8a86-1ebb5e415892",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "used": [
+        {
+          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_public": false,
+          "id": "32a6e2c3-4215-40e7-b88f-e2c35f872303",
+          "type": "ion_channel_modeling_config"
+        }
+      ]
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 2,
+    "total_items": 3
+  }
+}

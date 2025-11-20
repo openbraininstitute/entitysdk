@@ -1,0 +1,74 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "contributions": [],
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "4d2fc9c6-cbd2-47a2-929f-f8ef042650a5",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:44.784174Z",
+      "description": "my-ion-channel-modeling-config",
+      "id": "860823c5-3e15-42aa-a585-76ee573e63da",
+      "ion_channel_modeling_campaign_id": "b671d79c-b1b6-4ab6-a5dc-c0c676e59694",
+      "name": "Private u1/1",
+      "scan_parameters": {
+        "foo": "bar"
+      },
+      "type": "ion_channel_modeling_config",
+      "update_date": "2025-11-20T15:14:44.784174Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "4d2fc9c6-cbd2-47a2-929f-f8ef042650a5",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "contributions": [],
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "4d2fc9c6-cbd2-47a2-929f-f8ef042650a5",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:44.773453Z",
+      "description": "my-ion-channel-modeling-config",
+      "id": "3dc38797-d20b-48df-866a-17880b8f2270",
+      "ion_channel_modeling_campaign_id": "b671d79c-b1b6-4ab6-a5dc-c0c676e59694",
+      "name": "Private u1/0",
+      "scan_parameters": {
+        "foo": "bar"
+      },
+      "type": "ion_channel_modeling_config",
+      "update_date": "2025-11-20T15:14:44.773453Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "4d2fc9c6-cbd2-47a2-929f-f8ef042650a5",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 2
+  }
+}

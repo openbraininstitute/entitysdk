@@ -1,0 +1,77 @@
+{
+  "assets": [],
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "brain_region": {
+    "acronym": "acronym64",
+    "annotation_value": 64,
+    "color_hex_triplet": "FF0000",
+    "creation_date": "2025-11-20T15:14:35.944912Z",
+    "hierarchy_id": "fa3712cb-9fb2-4211-8e47-5f5693847d99",
+    "id": "a4885600-e698-423a-b1a7-c909a4ff4e6a",
+    "name": "RedRegion",
+    "parent_structure_id": null,
+    "update_date": "2025-11-20T15:14:35.944912Z"
+  },
+  "contact_email": null,
+  "contributions": [],
+  "created_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "16c48cd1-1fd3-49ca-b981-da6c6cdf53ad",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:14:35.965101Z",
+  "description": "Test ICM Description",
+  "experiment_date": null,
+  "id": "b014ca49-0b50-487e-923f-08023b8467c8",
+  "is_ljp_corrected": false,
+  "is_stochastic": false,
+  "is_temperature_dependent": false,
+  "license": null,
+  "name": "test_icm",
+  "neuron_block": {
+    "global": [],
+    "nonspecific": [],
+    "range": [],
+    "useion": []
+  },
+  "nmodl_suffix": "test_icm",
+  "notice_text": null,
+  "published_in": null,
+  "subject": {
+    "age_max": null,
+    "age_min": null,
+    "age_period": "postnatal",
+    "age_value": 1209600.0,
+    "description": "my-description",
+    "id": "f8319058-6825-4c7e-9493-3c12545f0468",
+    "name": "my-subject",
+    "sex": "female",
+    "species": {
+      "id": "ef59dee1-4457-47b2-9a5a-f59cf0b22f74",
+      "name": "Test Species",
+      "taxonomy_id": "12345"
+    },
+    "strain": {
+      "id": "3587ed66-25c1-4bba-b30b-79c54d255915",
+      "name": "Test Strain",
+      "species_id": "ef59dee1-4457-47b2-9a5a-f59cf0b22f74",
+      "taxonomy_id": "Taxonomy ID"
+    },
+    "weight": 1.5
+  },
+  "temperature_celsius": 0,
+  "type": "ion_channel_model",
+  "update_date": "2025-11-20T15:14:35.965101Z",
+  "updated_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "16c48cd1-1fd3-49ca-b981-da6c6cdf53ad",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  }
+}

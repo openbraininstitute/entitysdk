@@ -1,0 +1,32 @@
+{
+  "data": [
+    {
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "a06f2609-f117-4409-8cd4-a4e0a66da734",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:23.161219Z",
+      "id": "6796adbf-1241-4152-9579-5f1b582d1c7c",
+      "name": "AIBS",
+      "update_date": "2025-11-20T15:13:23.161219Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "a06f2609-f117-4409-8cd4-a4e0a66da734",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

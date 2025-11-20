@@ -154,6 +154,7 @@ class AssetLabel(StrEnum):
     cell_surface_mesh = "cell_surface_mesh"
     jupyter_notebook = "jupyter_notebook"
     requirements = "requirements"
+    notebook_required_files = "notebook_required_files"
     ion_channel_model_figure = "ion_channel_model_figure"
     ion_channel_model_figure_summary_json = "ion_channel_model_figure_summary_json"
     ion_channel_model_thumbnail = "ion_channel_model_thumbnail"
@@ -310,6 +311,7 @@ class CircuitUserUpdate(BaseModel):
     )
     contact_email: Annotated[str | None, Field(title="Contact Email")] = "<NOT_SET>"
     published_in: Annotated[str | None, Field(title="Published In")] = "<NOT_SET>"
+    notice_text: Annotated[str | None, Field(title="Notice Text")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
     has_morphologies: Annotated[bool | str | None, Field(title="Has Morphologies")] = "<NOT_SET>"
@@ -372,6 +374,7 @@ class ContentType(StrEnum):
     application_gzip = "application/gzip"
     image_webp = "image/webp"
     application_x_ipynb_json = "application/x-ipynb+json"
+    application_zip = "application/zip"
 
 
 class ContributionCreate(BaseModel):
@@ -467,6 +470,7 @@ class EMCellMeshUserUpdate(BaseModel):
     )
     contact_email: Annotated[str | None, Field(title="Contact Email")] = "<NOT_SET>"
     published_in: Annotated[str | None, Field(title="Published In")] = "<NOT_SET>"
+    notice_text: Annotated[str | None, Field(title="Notice Text")] = "<NOT_SET>"
     release_version: Annotated[int | str | None, Field(title="Release Version")] = "<NOT_SET>"
     dense_reconstruction_cell_id: Annotated[
         int | str | None, Field(title="Dense Reconstruction Cell Id")
@@ -798,9 +802,34 @@ class IonChannelRecordingCreate(BaseModel):
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
     brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
     subject_id: Annotated[UUID, Field(title="Subject Id")]
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
-    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
-    published_in: Annotated[str | None, Field(title="Published In")] = None
+    experiment_date: Annotated[
+        AwareDatetime | None,
+        Field(
+            description="Date of the experiment associated with the artifact.",
+            title="Experiment Date",
+        ),
+    ] = None
+    contact_email: Annotated[
+        str | None,
+        Field(
+            description="Optional string of a contact person's e-mail address.",
+            title="Contact Email",
+        ),
+    ] = None
+    published_in: Annotated[
+        str | None,
+        Field(
+            description="Optional string with short version of the source publication(s).",
+            title="Published In",
+        ),
+    ] = None
+    notice_text: Annotated[
+        str | None,
+        Field(
+            description="Text provided by the data creators to inform users about data caveats, limitations, or required attribution practices.",
+            title="Notice Text",
+        ),
+    ] = None
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     ljp: Annotated[
@@ -865,6 +894,7 @@ class IonChannelRecordingUserUpdate(BaseModel):
     )
     contact_email: Annotated[str | None, Field(title="Contact Email")] = "<NOT_SET>"
     published_in: Annotated[str | None, Field(title="Published In")] = "<NOT_SET>"
+    notice_text: Annotated[str | None, Field(title="Notice Text")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
     ljp: Annotated[float | str | None, Field(title="Ljp")] = "<NOT_SET>"
@@ -1000,9 +1030,34 @@ class NestedEMCellMeshRead(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: EntityType | None = None
     id: Annotated[UUID, Field(title="Id")]
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
-    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
-    published_in: Annotated[str | None, Field(title="Published In")] = None
+    experiment_date: Annotated[
+        AwareDatetime | None,
+        Field(
+            description="Date of the experiment associated with the artifact.",
+            title="Experiment Date",
+        ),
+    ] = None
+    contact_email: Annotated[
+        str | None,
+        Field(
+            description="Optional string of a contact person's e-mail address.",
+            title="Contact Email",
+        ),
+    ] = None
+    published_in: Annotated[
+        str | None,
+        Field(
+            description="Optional string with short version of the source publication(s).",
+            title="Published In",
+        ),
+    ] = None
+    notice_text: Annotated[
+        str | None,
+        Field(
+            description="Text provided by the data creators to inform users about data caveats, limitations, or required attribution practices.",
+            title="Notice Text",
+        ),
+    ] = None
     release_version: Annotated[int, Field(title="Release Version")]
     dense_reconstruction_cell_id: Annotated[int, Field(title="Dense Reconstruction Cell Id")]
     generation_method: EMCellMeshGenerationMethod
@@ -1067,9 +1122,34 @@ class NestedIonChannelRecordingRead(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: EntityType | None = None
     id: Annotated[UUID, Field(title="Id")]
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
-    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
-    published_in: Annotated[str | None, Field(title="Published In")] = None
+    experiment_date: Annotated[
+        AwareDatetime | None,
+        Field(
+            description="Date of the experiment associated with the artifact.",
+            title="Experiment Date",
+        ),
+    ] = None
+    contact_email: Annotated[
+        str | None,
+        Field(
+            description="Optional string of a contact person's e-mail address.",
+            title="Contact Email",
+        ),
+    ] = None
+    published_in: Annotated[
+        str | None,
+        Field(
+            description="Optional string with short version of the source publication(s).",
+            title="Published In",
+        ),
+    ] = None
+    notice_text: Annotated[
+        str | None,
+        Field(
+            description="Text provided by the data creators to inform users about data caveats, limitations, or required attribution practices.",
+            title="Notice Text",
+        ),
+    ] = None
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     ljp: Annotated[
@@ -1168,9 +1248,34 @@ class NestedScientificArtifactRead(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: EntityType | None = None
     id: Annotated[UUID, Field(title="Id")]
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
-    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
-    published_in: Annotated[str | None, Field(title="Published In")] = None
+    experiment_date: Annotated[
+        AwareDatetime | None,
+        Field(
+            description="Date of the experiment associated with the artifact.",
+            title="Experiment Date",
+        ),
+    ] = None
+    contact_email: Annotated[
+        str | None,
+        Field(
+            description="Optional string of a contact person's e-mail address.",
+            title="Contact Email",
+        ),
+    ] = None
+    published_in: Annotated[
+        str | None,
+        Field(
+            description="Optional string with short version of the source publication(s).",
+            title="Published In",
+        ),
+    ] = None
+    notice_text: Annotated[
+        str | None,
+        Field(
+            description="Text provided by the data creators to inform users about data caveats, limitations, or required attribution practices.",
+            title="Notice Text",
+        ),
+    ] = None
 
 
 class NestedSimulationRead(BaseModel):
@@ -2032,9 +2137,34 @@ class CellMorphologyCreate(BaseModel):
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
     brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
     subject_id: Annotated[UUID, Field(title="Subject Id")]
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
-    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
-    published_in: Annotated[str | None, Field(title="Published In")] = None
+    experiment_date: Annotated[
+        AwareDatetime | None,
+        Field(
+            description="Date of the experiment associated with the artifact.",
+            title="Experiment Date",
+        ),
+    ] = None
+    contact_email: Annotated[
+        str | None,
+        Field(
+            description="Optional string of a contact person's e-mail address.",
+            title="Contact Email",
+        ),
+    ] = None
+    published_in: Annotated[
+        str | None,
+        Field(
+            description="Optional string with short version of the source publication(s).",
+            title="Published In",
+        ),
+    ] = None
+    notice_text: Annotated[
+        str | None,
+        Field(
+            description="Text provided by the data creators to inform users about data caveats, limitations, or required attribution practices.",
+            title="Notice Text",
+        ),
+    ] = None
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     location: PointLocationBase | None = None
@@ -2053,6 +2183,7 @@ class CellMorphologyUserUpdate(BaseModel):
     )
     contact_email: Annotated[str | None, Field(title="Contact Email")] = "<NOT_SET>"
     published_in: Annotated[str | None, Field(title="Published In")] = "<NOT_SET>"
+    notice_text: Annotated[str | None, Field(title="Notice Text")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
     location: Annotated[PointLocationBase | str | None, Field(title="Location")] = "<NOT_SET>"
@@ -2067,9 +2198,34 @@ class CircuitCreate(BaseModel):
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
     brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
     subject_id: Annotated[UUID, Field(title="Subject Id")]
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
-    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
-    published_in: Annotated[str | None, Field(title="Published In")] = None
+    experiment_date: Annotated[
+        AwareDatetime | None,
+        Field(
+            description="Date of the experiment associated with the artifact.",
+            title="Experiment Date",
+        ),
+    ] = None
+    contact_email: Annotated[
+        str | None,
+        Field(
+            description="Optional string of a contact person's e-mail address.",
+            title="Contact Email",
+        ),
+    ] = None
+    published_in: Annotated[
+        str | None,
+        Field(
+            description="Optional string with short version of the source publication(s).",
+            title="Published In",
+        ),
+    ] = None
+    notice_text: Annotated[
+        str | None,
+        Field(
+            description="Text provided by the data creators to inform users about data caveats, limitations, or required attribution practices.",
+            title="Notice Text",
+        ),
+    ] = None
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     has_morphologies: Annotated[bool | None, Field(title="Has Morphologies")] = False
@@ -2236,9 +2392,34 @@ class EMCellMeshCreate(BaseModel):
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
     brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
     subject_id: Annotated[UUID, Field(title="Subject Id")]
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
-    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
-    published_in: Annotated[str | None, Field(title="Published In")] = None
+    experiment_date: Annotated[
+        AwareDatetime | None,
+        Field(
+            description="Date of the experiment associated with the artifact.",
+            title="Experiment Date",
+        ),
+    ] = None
+    contact_email: Annotated[
+        str | None,
+        Field(
+            description="Optional string of a contact person's e-mail address.",
+            title="Contact Email",
+        ),
+    ] = None
+    published_in: Annotated[
+        str | None,
+        Field(
+            description="Optional string with short version of the source publication(s).",
+            title="Published In",
+        ),
+    ] = None
+    notice_text: Annotated[
+        str | None,
+        Field(
+            description="Text provided by the data creators to inform users about data caveats, limitations, or required attribution practices.",
+            title="Notice Text",
+        ),
+    ] = None
     release_version: Annotated[int, Field(title="Release Version")]
     dense_reconstruction_cell_id: Annotated[int, Field(title="Dense Reconstruction Cell Id")]
     generation_method: EMCellMeshGenerationMethod
@@ -2257,9 +2438,34 @@ class EMDenseReconstructionDatasetCreate(BaseModel):
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
     brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
     subject_id: Annotated[UUID, Field(title="Subject Id")]
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
-    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
-    published_in: Annotated[str | None, Field(title="Published In")] = None
+    experiment_date: Annotated[
+        AwareDatetime | None,
+        Field(
+            description="Date of the experiment associated with the artifact.",
+            title="Experiment Date",
+        ),
+    ] = None
+    contact_email: Annotated[
+        str | None,
+        Field(
+            description="Optional string of a contact person's e-mail address.",
+            title="Contact Email",
+        ),
+    ] = None
+    published_in: Annotated[
+        str | None,
+        Field(
+            description="Optional string with short version of the source publication(s).",
+            title="Published In",
+        ),
+    ] = None
+    notice_text: Annotated[
+        str | None,
+        Field(
+            description="Text provided by the data creators to inform users about data caveats, limitations, or required attribution practices.",
+            title="Notice Text",
+        ),
+    ] = None
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     protocol_document: Annotated[ProtocolDocument | None, Field(title="Protocol Document")] = None
@@ -2302,9 +2508,34 @@ class ElectricalCellRecordingCreate(BaseModel):
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
     brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
     subject_id: Annotated[UUID, Field(title="Subject Id")]
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
-    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
-    published_in: Annotated[str | None, Field(title="Published In")] = None
+    experiment_date: Annotated[
+        AwareDatetime | None,
+        Field(
+            description="Date of the experiment associated with the artifact.",
+            title="Experiment Date",
+        ),
+    ] = None
+    contact_email: Annotated[
+        str | None,
+        Field(
+            description="Optional string of a contact person's e-mail address.",
+            title="Contact Email",
+        ),
+    ] = None
+    published_in: Annotated[
+        str | None,
+        Field(
+            description="Optional string with short version of the source publication(s).",
+            title="Published In",
+        ),
+    ] = None
+    notice_text: Annotated[
+        str | None,
+        Field(
+            description="Text provided by the data creators to inform users about data caveats, limitations, or required attribution practices.",
+            title="Notice Text",
+        ),
+    ] = None
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     ljp: Annotated[
@@ -2357,6 +2588,7 @@ class ElectricalCellRecordingUserUpdate(BaseModel):
     )
     contact_email: Annotated[str | None, Field(title="Contact Email")] = "<NOT_SET>"
     published_in: Annotated[str | None, Field(title="Published In")] = "<NOT_SET>"
+    notice_text: Annotated[str | None, Field(title="Notice Text")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
     ljp: Annotated[float | str | None, Field(title="Ljp")] = "<NOT_SET>"
@@ -3145,6 +3377,9 @@ class AnalysisNotebookTemplateCreate(BaseModel):
 
 
 class AnalysisNotebookTemplateRead(BaseModel):
+    contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")] = (
+        None
+    )
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
@@ -3267,9 +3502,34 @@ class CircuitRead(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: EntityType | None = None
     id: Annotated[UUID, Field(title="Id")]
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
-    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
-    published_in: Annotated[str | None, Field(title="Published In")] = None
+    experiment_date: Annotated[
+        AwareDatetime | None,
+        Field(
+            description="Date of the experiment associated with the artifact.",
+            title="Experiment Date",
+        ),
+    ] = None
+    contact_email: Annotated[
+        str | None,
+        Field(
+            description="Optional string of a contact person's e-mail address.",
+            title="Contact Email",
+        ),
+    ] = None
+    published_in: Annotated[
+        str | None,
+        Field(
+            description="Optional string with short version of the source publication(s).",
+            title="Published In",
+        ),
+    ] = None
+    notice_text: Annotated[
+        str | None,
+        Field(
+            description="Text provided by the data creators to inform users about data caveats, limitations, or required attribution practices.",
+            title="Notice Text",
+        ),
+    ] = None
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     has_morphologies: Annotated[bool | None, Field(title="Has Morphologies")] = False
@@ -3303,9 +3563,34 @@ class EMCellMeshRead(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: EntityType | None = None
     id: Annotated[UUID, Field(title="Id")]
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
-    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
-    published_in: Annotated[str | None, Field(title="Published In")] = None
+    experiment_date: Annotated[
+        AwareDatetime | None,
+        Field(
+            description="Date of the experiment associated with the artifact.",
+            title="Experiment Date",
+        ),
+    ] = None
+    contact_email: Annotated[
+        str | None,
+        Field(
+            description="Optional string of a contact person's e-mail address.",
+            title="Contact Email",
+        ),
+    ] = None
+    published_in: Annotated[
+        str | None,
+        Field(
+            description="Optional string with short version of the source publication(s).",
+            title="Published In",
+        ),
+    ] = None
+    notice_text: Annotated[
+        str | None,
+        Field(
+            description="Text provided by the data creators to inform users about data caveats, limitations, or required attribution practices.",
+            title="Notice Text",
+        ),
+    ] = None
     release_version: Annotated[int, Field(title="Release Version")]
     dense_reconstruction_cell_id: Annotated[int, Field(title="Dense Reconstruction Cell Id")]
     generation_method: EMCellMeshGenerationMethod
@@ -3333,9 +3618,34 @@ class EMDenseReconstructionDatasetRead(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: EntityType | None = None
     id: Annotated[UUID, Field(title="Id")]
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
-    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
-    published_in: Annotated[str | None, Field(title="Published In")] = None
+    experiment_date: Annotated[
+        AwareDatetime | None,
+        Field(
+            description="Date of the experiment associated with the artifact.",
+            title="Experiment Date",
+        ),
+    ] = None
+    contact_email: Annotated[
+        str | None,
+        Field(
+            description="Optional string of a contact person's e-mail address.",
+            title="Contact Email",
+        ),
+    ] = None
+    published_in: Annotated[
+        str | None,
+        Field(
+            description="Optional string with short version of the source publication(s).",
+            title="Published In",
+        ),
+    ] = None
+    notice_text: Annotated[
+        str | None,
+        Field(
+            description="Text provided by the data creators to inform users about data caveats, limitations, or required attribution practices.",
+            title="Notice Text",
+        ),
+    ] = None
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     protocol_document: Annotated[ProtocolDocument | None, Field(title="Protocol Document")] = None
@@ -3403,9 +3713,34 @@ class ElectricalCellRecordingRead(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: EntityType | None = None
     id: Annotated[UUID, Field(title="Id")]
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
-    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
-    published_in: Annotated[str | None, Field(title="Published In")] = None
+    experiment_date: Annotated[
+        AwareDatetime | None,
+        Field(
+            description="Date of the experiment associated with the artifact.",
+            title="Experiment Date",
+        ),
+    ] = None
+    contact_email: Annotated[
+        str | None,
+        Field(
+            description="Optional string of a contact person's e-mail address.",
+            title="Contact Email",
+        ),
+    ] = None
+    published_in: Annotated[
+        str | None,
+        Field(
+            description="Optional string with short version of the source publication(s).",
+            title="Published In",
+        ),
+    ] = None
+    notice_text: Annotated[
+        str | None,
+        Field(
+            description="Text provided by the data creators to inform users about data caveats, limitations, or required attribution practices.",
+            title="Notice Text",
+        ),
+    ] = None
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     ljp: Annotated[
@@ -3609,9 +3944,34 @@ class IonChannelModelCreate(BaseModel):
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
     brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
     subject_id: Annotated[UUID, Field(title="Subject Id")]
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
-    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
-    published_in: Annotated[str | None, Field(title="Published In")] = None
+    experiment_date: Annotated[
+        AwareDatetime | None,
+        Field(
+            description="Date of the experiment associated with the artifact.",
+            title="Experiment Date",
+        ),
+    ] = None
+    contact_email: Annotated[
+        str | None,
+        Field(
+            description="Optional string of a contact person's e-mail address.",
+            title="Contact Email",
+        ),
+    ] = None
+    published_in: Annotated[
+        str | None,
+        Field(
+            description="Optional string with short version of the source publication(s).",
+            title="Published In",
+        ),
+    ] = None
+    notice_text: Annotated[
+        str | None,
+        Field(
+            description="Text provided by the data creators to inform users about data caveats, limitations, or required attribution practices.",
+            title="Notice Text",
+        ),
+    ] = None
     description: Annotated[str, Field(title="Description")]
     name: Annotated[str, Field(title="Name")]
     nmodl_suffix: Annotated[str, Field(title="Nmodl Suffix")]
@@ -3619,7 +3979,7 @@ class IonChannelModelCreate(BaseModel):
     is_temperature_dependent: Annotated[bool | None, Field(title="Is Temperature Dependent")] = (
         False
     )
-    temperature_celsius: Annotated[int, Field(title="Temperature Celsius")]
+    temperature_celsius: Annotated[int | None, Field(title="Temperature Celsius")] = None
     is_stochastic: Annotated[bool | None, Field(title="Is Stochastic")] = False
     neuron_block: NeuronBlock
 
@@ -3640,9 +4000,34 @@ class IonChannelModelExpanded(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: EntityType | None = None
     id: Annotated[UUID, Field(title="Id")]
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
-    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
-    published_in: Annotated[str | None, Field(title="Published In")] = None
+    experiment_date: Annotated[
+        AwareDatetime | None,
+        Field(
+            description="Date of the experiment associated with the artifact.",
+            title="Experiment Date",
+        ),
+    ] = None
+    contact_email: Annotated[
+        str | None,
+        Field(
+            description="Optional string of a contact person's e-mail address.",
+            title="Contact Email",
+        ),
+    ] = None
+    published_in: Annotated[
+        str | None,
+        Field(
+            description="Optional string with short version of the source publication(s).",
+            title="Published In",
+        ),
+    ] = None
+    notice_text: Annotated[
+        str | None,
+        Field(
+            description="Text provided by the data creators to inform users about data caveats, limitations, or required attribution practices.",
+            title="Notice Text",
+        ),
+    ] = None
     description: Annotated[str, Field(title="Description")]
     name: Annotated[str, Field(title="Name")]
     nmodl_suffix: Annotated[str, Field(title="Nmodl Suffix")]
@@ -3650,7 +4035,7 @@ class IonChannelModelExpanded(BaseModel):
     is_temperature_dependent: Annotated[bool | None, Field(title="Is Temperature Dependent")] = (
         False
     )
-    temperature_celsius: Annotated[int, Field(title="Temperature Celsius")]
+    temperature_celsius: Annotated[int | None, Field(title="Temperature Celsius")] = None
     is_stochastic: Annotated[bool | None, Field(title="Is Stochastic")] = False
     neuron_block: NeuronBlock
 
@@ -3664,9 +4049,34 @@ class IonChannelModelRead(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: EntityType | None = None
     id: Annotated[UUID, Field(title="Id")]
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
-    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
-    published_in: Annotated[str | None, Field(title="Published In")] = None
+    experiment_date: Annotated[
+        AwareDatetime | None,
+        Field(
+            description="Date of the experiment associated with the artifact.",
+            title="Experiment Date",
+        ),
+    ] = None
+    contact_email: Annotated[
+        str | None,
+        Field(
+            description="Optional string of a contact person's e-mail address.",
+            title="Contact Email",
+        ),
+    ] = None
+    published_in: Annotated[
+        str | None,
+        Field(
+            description="Optional string with short version of the source publication(s).",
+            title="Published In",
+        ),
+    ] = None
+    notice_text: Annotated[
+        str | None,
+        Field(
+            description="Text provided by the data creators to inform users about data caveats, limitations, or required attribution practices.",
+            title="Notice Text",
+        ),
+    ] = None
     description: Annotated[str, Field(title="Description")]
     name: Annotated[str, Field(title="Name")]
     nmodl_suffix: Annotated[str, Field(title="Nmodl Suffix")]
@@ -3674,7 +4084,7 @@ class IonChannelModelRead(BaseModel):
     is_temperature_dependent: Annotated[bool | None, Field(title="Is Temperature Dependent")] = (
         False
     )
-    temperature_celsius: Annotated[int, Field(title="Temperature Celsius")]
+    temperature_celsius: Annotated[int | None, Field(title="Temperature Celsius")] = None
     is_stochastic: Annotated[bool | None, Field(title="Is Stochastic")] = False
     neuron_block: NeuronBlock
 
@@ -3688,6 +4098,7 @@ class IonChannelModelUserUpdate(BaseModel):
     )
     contact_email: Annotated[str | None, Field(title="Contact Email")] = "<NOT_SET>"
     published_in: Annotated[str | None, Field(title="Published In")] = "<NOT_SET>"
+    notice_text: Annotated[str | None, Field(title="Notice Text")] = "<NOT_SET>"
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     nmodl_suffix: Annotated[str | None, Field(title="Nmodl Suffix")] = "<NOT_SET>"
@@ -3712,9 +4123,34 @@ class IonChannelModelWAssets(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: EntityType | None = None
     id: Annotated[UUID, Field(title="Id")]
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
-    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
-    published_in: Annotated[str | None, Field(title="Published In")] = None
+    experiment_date: Annotated[
+        AwareDatetime | None,
+        Field(
+            description="Date of the experiment associated with the artifact.",
+            title="Experiment Date",
+        ),
+    ] = None
+    contact_email: Annotated[
+        str | None,
+        Field(
+            description="Optional string of a contact person's e-mail address.",
+            title="Contact Email",
+        ),
+    ] = None
+    published_in: Annotated[
+        str | None,
+        Field(
+            description="Optional string with short version of the source publication(s).",
+            title="Published In",
+        ),
+    ] = None
+    notice_text: Annotated[
+        str | None,
+        Field(
+            description="Text provided by the data creators to inform users about data caveats, limitations, or required attribution practices.",
+            title="Notice Text",
+        ),
+    ] = None
     description: Annotated[str, Field(title="Description")]
     name: Annotated[str, Field(title="Name")]
     nmodl_suffix: Annotated[str, Field(title="Nmodl Suffix")]
@@ -3722,7 +4158,7 @@ class IonChannelModelWAssets(BaseModel):
     is_temperature_dependent: Annotated[bool | None, Field(title="Is Temperature Dependent")] = (
         False
     )
-    temperature_celsius: Annotated[int, Field(title="Temperature Celsius")]
+    temperature_celsius: Annotated[int | None, Field(title="Temperature Celsius")] = None
     is_stochastic: Annotated[bool | None, Field(title="Is Stochastic")] = False
     neuron_block: NeuronBlock
 
@@ -3788,9 +4224,34 @@ class IonChannelRecordingRead(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: EntityType | None = None
     id: Annotated[UUID, Field(title="Id")]
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
-    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
-    published_in: Annotated[str | None, Field(title="Published In")] = None
+    experiment_date: Annotated[
+        AwareDatetime | None,
+        Field(
+            description="Date of the experiment associated with the artifact.",
+            title="Experiment Date",
+        ),
+    ] = None
+    contact_email: Annotated[
+        str | None,
+        Field(
+            description="Optional string of a contact person's e-mail address.",
+            title="Contact Email",
+        ),
+    ] = None
+    published_in: Annotated[
+        str | None,
+        Field(
+            description="Optional string with short version of the source publication(s).",
+            title="Published In",
+        ),
+    ] = None
+    notice_text: Annotated[
+        str | None,
+        Field(
+            description="Text provided by the data creators to inform users about data caveats, limitations, or required attribution practices.",
+            title="Notice Text",
+        ),
+    ] = None
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     ljp: Annotated[
@@ -4099,9 +4560,34 @@ class CellMorphologyAnnotationExpandedRead(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: EntityType | None = None
     id: Annotated[UUID, Field(title="Id")]
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
-    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
-    published_in: Annotated[str | None, Field(title="Published In")] = None
+    experiment_date: Annotated[
+        AwareDatetime | None,
+        Field(
+            description="Date of the experiment associated with the artifact.",
+            title="Experiment Date",
+        ),
+    ] = None
+    contact_email: Annotated[
+        str | None,
+        Field(
+            description="Optional string of a contact person's e-mail address.",
+            title="Contact Email",
+        ),
+    ] = None
+    published_in: Annotated[
+        str | None,
+        Field(
+            description="Optional string with short version of the source publication(s).",
+            title="Published In",
+        ),
+    ] = None
+    notice_text: Annotated[
+        str | None,
+        Field(
+            description="Text provided by the data creators to inform users about data caveats, limitations, or required attribution practices.",
+            title="Notice Text",
+        ),
+    ] = None
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     location: PointLocationBase | None = None
@@ -4127,9 +4613,34 @@ class CellMorphologyRead(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: EntityType | None = None
     id: Annotated[UUID, Field(title="Id")]
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
-    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
-    published_in: Annotated[str | None, Field(title="Published In")] = None
+    experiment_date: Annotated[
+        AwareDatetime | None,
+        Field(
+            description="Date of the experiment associated with the artifact.",
+            title="Experiment Date",
+        ),
+    ] = None
+    contact_email: Annotated[
+        str | None,
+        Field(
+            description="Optional string of a contact person's e-mail address.",
+            title="Contact Email",
+        ),
+    ] = None
+    published_in: Annotated[
+        str | None,
+        Field(
+            description="Optional string with short version of the source publication(s).",
+            title="Published In",
+        ),
+    ] = None
+    notice_text: Annotated[
+        str | None,
+        Field(
+            description="Text provided by the data creators to inform users about data caveats, limitations, or required attribution practices.",
+            title="Notice Text",
+        ),
+    ] = None
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     location: PointLocationBase | None = None

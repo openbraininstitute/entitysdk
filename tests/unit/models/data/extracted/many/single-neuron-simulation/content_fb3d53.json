@@ -1,0 +1,100 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym0",
+        "annotation_value": 0,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:15:42.952625Z",
+        "hierarchy_id": "df8f7b4b-0830-4998-9f50-29765d9a5a4c",
+        "id": "3df0e50d-dfa6-48ff-8784-54b02f66334d",
+        "name": "region-0",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:15:42.952625Z"
+      },
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "b35bb4c7-07c3-448f-8b16-1ffb819ae1c8",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:42.964186Z",
+      "description": "description",
+      "id": "5492752d-6d4c-4baa-8e66-f2b5347dc1cf",
+      "injection_location": [
+        "soma[0]"
+      ],
+      "me_model": {
+        "creation_date": "2025-11-20T15:15:42.959985Z",
+        "description": "description",
+        "etypes": [],
+        "id": "09b4d8b1-bc09-4c94-9020-f5c62c92d179",
+        "mtypes": [],
+        "name": "me-model",
+        "update_date": "2025-11-20T15:15:42.959985Z",
+        "validation_status": "created"
+      },
+      "name": "name-0",
+      "recording_location": [
+        "soma[0]_0.5"
+      ],
+      "seed": 1,
+      "status": "success",
+      "type": "single_neuron_simulation",
+      "update_date": "2025-11-20T15:15:42.964186Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "b35bb4c7-07c3-448f-8b16-1ffb819ae1c8",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": {
+    "brain_region": [
+      {
+        "count": 1,
+        "id": "3df0e50d-dfa6-48ff-8784-54b02f66334d",
+        "label": "region-0",
+        "type": "brain_region"
+      }
+    ],
+    "contribution": [],
+    "created_by": [
+      {
+        "count": 1,
+        "id": "b35bb4c7-07c3-448f-8b16-1ffb819ae1c8",
+        "label": "jd courcol",
+        "type": "person"
+      }
+    ],
+    "me_model": [
+      {
+        "count": 1,
+        "id": "09b4d8b1-bc09-4c94-9020-f5c62c92d179",
+        "label": "me-model",
+        "type": "me_model"
+      }
+    ],
+    "updated_by": [
+      {
+        "count": 1,
+        "id": "b35bb4c7-07c3-448f-8b16-1ffb819ae1c8",
+        "label": "jd courcol",
+        "type": "person"
+      }
+    ]
+  },
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

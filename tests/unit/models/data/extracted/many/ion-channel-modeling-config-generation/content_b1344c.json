@@ -1,0 +1,106 @@
+{
+  "data": [
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "87debb81-dd03-4e26-bf80-d4b83908f9da",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:46.710590Z",
+      "end_time": "2025-11-20T15:14:46.635606Z",
+      "generated": [
+        {
+          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_public": false,
+          "id": "6a90eea8-553a-440f-b129-c48be045607b",
+          "type": "ion_channel_modeling_config"
+        },
+        {
+          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_public": false,
+          "id": "3c0bc068-37e9-4443-82d3-854a0f1b1b82",
+          "type": "ion_channel_modeling_campaign"
+        }
+      ],
+      "id": "0916e049-9752-4f81-97bd-8a69ba1992ab",
+      "start_time": "2025-11-20T15:14:46.635600Z",
+      "type": "ion_channel_modeling_config_generation",
+      "update_date": "2025-11-20T15:14:46.710590Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "87debb81-dd03-4e26-bf80-d4b83908f9da",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "used": [
+        {
+          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_public": false,
+          "id": "3c0bc068-37e9-4443-82d3-854a0f1b1b82",
+          "type": "ion_channel_modeling_campaign"
+        },
+        {
+          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_public": false,
+          "id": "6a90eea8-553a-440f-b129-c48be045607b",
+          "type": "ion_channel_modeling_config"
+        }
+      ]
+    },
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "87debb81-dd03-4e26-bf80-d4b83908f9da",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:46.688543Z",
+      "end_time": "2025-11-20T15:14:46.635606Z",
+      "generated": [
+        {
+          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_public": false,
+          "id": "3c0bc068-37e9-4443-82d3-854a0f1b1b82",
+          "type": "ion_channel_modeling_campaign"
+        }
+      ],
+      "id": "e2cb40ec-2029-410e-b94e-f240f0871b5b",
+      "start_time": "2025-11-20T15:14:46.635600Z",
+      "type": "ion_channel_modeling_config_generation",
+      "update_date": "2025-11-20T15:14:46.688543Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "87debb81-dd03-4e26-bf80-d4b83908f9da",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "used": [
+        {
+          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_public": false,
+          "id": "3c0bc068-37e9-4443-82d3-854a0f1b1b82",
+          "type": "ion_channel_modeling_campaign"
+        }
+      ]
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 2
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "alternative_name": "test consortium alternative name",
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "9343285c-8f80-46ea-8b46-086e73bf7fd0",
+        "pref_label": "Admin User",
+        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:45.722715Z",
+      "id": "9d6fdd1a-760f-4202-8564-5f9af9bd2052",
+      "pref_label": "test consortium label",
+      "type": "consortium",
+      "update_date": "2025-11-20T15:13:45.722715Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "9343285c-8f80-46ea-8b46-086e73bf7fd0",
+        "pref_label": "Admin User",
+        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

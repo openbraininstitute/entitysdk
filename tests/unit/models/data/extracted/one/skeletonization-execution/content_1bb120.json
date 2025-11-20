@@ -1,0 +1,43 @@
+{
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": true,
+  "created_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "b6503892-0534-4548-85ce-c9730ff64350",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:16:06.757485Z",
+  "end_time": "2025-11-20T15:16:06.611810Z",
+  "generated": [
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "id": "7854921d-1fea-4cef-8e76-e3cde6603278",
+      "type": "cell_morphology"
+    }
+  ],
+  "id": "272a72f3-347f-4409-9911-ed0de1c7e759",
+  "start_time": "2025-11-20T15:16:06.611803Z",
+  "status": "done",
+  "type": "skeletonization_execution",
+  "update_date": "2025-11-20T15:16:06.757485Z",
+  "updated_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "b6503892-0534-4548-85ce-c9730ff64350",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "used": [
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "id": "b2152221-5d1d-466f-b9cb-e8c4c11be0d1",
+      "type": "skeletonization_config"
+    }
+  ]
+}

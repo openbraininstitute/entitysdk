@@ -1,0 +1,111 @@
+{
+  "assets": [],
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "brain_region": {
+    "acronym": "acronym64",
+    "annotation_value": 64,
+    "color_hex_triplet": "FF0000",
+    "creation_date": "2025-11-20T15:13:46.234911Z",
+    "hierarchy_id": "078bbadd-5bbe-48b5-96f9-b3428d0f9fcb",
+    "id": "91f72f6b-8fa1-45f5-ad9c-dafcb1c36ef4",
+    "name": "RedRegion",
+    "parent_structure_id": null,
+    "update_date": "2025-11-20T15:13:46.234911Z"
+  },
+  "cell_morphology_protocol": null,
+  "contact_email": null,
+  "contributions": [
+    {
+      "agent": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "7834d753-8afc-49f3-b1c7-7c8c72b082f8",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "id": "4027dcdf-c071-46bd-9984-05f66ca7db03",
+      "role": {
+        "creation_date": "2025-11-20T15:13:46.202895Z",
+        "id": "4032e9fb-6e9c-4dcd-978d-cfb35a0119f0",
+        "name": "important role",
+        "role_id": "important role id",
+        "update_date": "2025-11-20T15:13:46.202895Z"
+      }
+    },
+    {
+      "agent": {
+        "alternative_name": "A Company Making Everything",
+        "id": "5f6e6a08-10b6-443d-bf18-83b996c7fdaa",
+        "pref_label": "ACME",
+        "type": "organization"
+      },
+      "id": "aaa8de95-73f2-41ce-960b-fcdbcdd1580a",
+      "role": {
+        "creation_date": "2025-11-20T15:13:46.202895Z",
+        "id": "4032e9fb-6e9c-4dcd-978d-cfb35a0119f0",
+        "name": "important role",
+        "role_id": "important role id",
+        "update_date": "2025-11-20T15:13:46.202895Z"
+      }
+    }
+  ],
+  "created_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "7834d753-8afc-49f3-b1c7-7c8c72b082f8",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:13:46.242275Z",
+  "description": "Test Morphology Description",
+  "experiment_date": null,
+  "id": "6fe26f69-cf66-4363-90ab-c710ffd8824b",
+  "legacy_id": [
+    "Test Legacy ID"
+  ],
+  "license": null,
+  "location": {
+    "x": 10.0,
+    "y": 20.0,
+    "z": 30.0
+  },
+  "mtypes": [],
+  "name": "Test Morphology Name",
+  "notice_text": null,
+  "published_in": null,
+  "subject": {
+    "age_max": null,
+    "age_min": null,
+    "age_period": "postnatal",
+    "age_value": 1209600.0,
+    "description": "my-description",
+    "id": "ce16e2b3-c876-416b-abab-ad1ecacf9424",
+    "name": "my-subject",
+    "sex": "female",
+    "species": {
+      "id": "485a7207-3383-454b-82f6-4c6cf6b27d42",
+      "name": "Test Species",
+      "taxonomy_id": "12345"
+    },
+    "strain": {
+      "id": "493f0ead-da8a-4a01-9b91-97c3e4ba9b01",
+      "name": "Test Strain",
+      "species_id": "485a7207-3383-454b-82f6-4c6cf6b27d42",
+      "taxonomy_id": "Taxonomy ID"
+    },
+    "weight": 1.5
+  },
+  "type": "cell_morphology",
+  "update_date": "2025-11-20T15:13:46.242275Z",
+  "updated_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "7834d753-8afc-49f3-b1c7-7c8c72b082f8",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  }
+}

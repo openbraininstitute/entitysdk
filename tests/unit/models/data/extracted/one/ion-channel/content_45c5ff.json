@@ -1,0 +1,29 @@
+{
+  "created_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "89bc7bcd-680d-4b62-99a6-4bdebd3a1d28",
+    "pref_label": "Admin User",
+    "sub_id": "00000000-0000-0000-0000-000000000000",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:14:35.037549Z",
+  "description": "",
+  "gene": "Kcnma1",
+  "id": "20e61fdd-d516-4aa0-964d-713c487cb2a3",
+  "label": "K<sub>Ca</sub>1.1",
+  "name": "KCa1.1",
+  "synonyms": [
+    "BK channel",
+    "BK channel alpha subunit"
+  ],
+  "update_date": "2025-11-20T15:14:35.037549Z",
+  "updated_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "89bc7bcd-680d-4b62-99a6-4bdebd3a1d28",
+    "pref_label": "Admin User",
+    "sub_id": "00000000-0000-0000-0000-000000000000",
+    "type": "person"
+  }
+}

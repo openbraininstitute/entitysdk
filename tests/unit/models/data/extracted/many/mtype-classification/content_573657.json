@@ -1,0 +1,35 @@
+{
+  "data": [
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": true,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "f638c3a8-e523-493b-a395-cf16af0e3c07",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:16.124762Z",
+      "entity_id": "6d4409a4-a183-421a-844f-02f76a61917a",
+      "id": "e0f1e00e-bb04-45b1-b457-6f1d639f10e7",
+      "mtype_class_id": "83f6a513-82bd-4eaa-bdb7-3ab84a92a07b",
+      "update_date": "2025-11-20T15:15:16.124762Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "f638c3a8-e523-493b-a395-cf16af0e3c07",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

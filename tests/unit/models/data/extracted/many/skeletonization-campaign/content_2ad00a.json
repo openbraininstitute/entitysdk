@@ -1,0 +1,122 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "f1b91d9b-56ca-45ae-85fe-5b6ef1c312e3",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:59.551076Z",
+      "description": "campaign-description-1",
+      "id": "9ea67fd6-f1d1-4447-b730-b8e201d5b7d3",
+      "input_meshes": [],
+      "name": "campaign-1",
+      "scan_parameters": {
+        "foo": "bar"
+      },
+      "skeletonization_configs": [
+        {
+          "description": "config-1",
+          "em_cell_mesh_id": "bd327210-bd14-4d38-8aba-8e7ecbb5edb5",
+          "id": "1ea2e928-1e3c-4e48-a848-5bf189cd0484",
+          "name": "config-1",
+          "scan_parameters": {
+            "foo": "bar"
+          },
+          "skeletonization_campaign_id": "9ea67fd6-f1d1-4447-b730-b8e201d5b7d3",
+          "type": "skeletonization_config"
+        },
+        {
+          "description": "config-2",
+          "em_cell_mesh_id": "bd327210-bd14-4d38-8aba-8e7ecbb5edb5",
+          "id": "e65750b6-049c-4bb9-b353-bd40e00a6192",
+          "name": "config-2",
+          "scan_parameters": {
+            "foo": "bar"
+          },
+          "skeletonization_campaign_id": "9ea67fd6-f1d1-4447-b730-b8e201d5b7d3",
+          "type": "skeletonization_config"
+        }
+      ],
+      "type": "skeletonization_campaign",
+      "update_date": "2025-11-20T15:15:59.551076Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "f1b91d9b-56ca-45ae-85fe-5b6ef1c312e3",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "f1b91d9b-56ca-45ae-85fe-5b6ef1c312e3",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:59.553591Z",
+      "description": "campaign-description-2",
+      "id": "4b9c51d0-60b7-42b2-974c-0fadb6348c1e",
+      "input_meshes": [],
+      "name": "campaign-2",
+      "scan_parameters": {
+        "foo": "bar"
+      },
+      "skeletonization_configs": [
+        {
+          "description": "config-2",
+          "em_cell_mesh_id": "bd327210-bd14-4d38-8aba-8e7ecbb5edb5",
+          "id": "5d5dcbfb-52b6-45b5-810a-9c13d4e683af",
+          "name": "config-2",
+          "scan_parameters": {
+            "foo": "bar"
+          },
+          "skeletonization_campaign_id": "4b9c51d0-60b7-42b2-974c-0fadb6348c1e",
+          "type": "skeletonization_config"
+        },
+        {
+          "description": "config-3",
+          "em_cell_mesh_id": "bd327210-bd14-4d38-8aba-8e7ecbb5edb5",
+          "id": "3c9923ab-44ae-4b23-b077-340f67b1c1ab",
+          "name": "config-3",
+          "scan_parameters": {
+            "foo": "bar"
+          },
+          "skeletonization_campaign_id": "4b9c51d0-60b7-42b2-974c-0fadb6348c1e",
+          "type": "skeletonization_config"
+        }
+      ],
+      "type": "skeletonization_campaign",
+      "update_date": "2025-11-20T15:15:59.553591Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "f1b91d9b-56ca-45ae-85fe-5b6ef1c312e3",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 2
+  }
+}

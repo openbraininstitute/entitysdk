@@ -1,0 +1,76 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "contributions": [],
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "2b88ee21-f303-489d-a32d-e9143570fc8a",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:58.715518Z",
+      "description": "my-skeletonization-campaign",
+      "id": "2afcd08c-5cad-4297-a20a-f9556f061fe7",
+      "input_meshes": [],
+      "name": "Private u2/0",
+      "scan_parameters": {
+        "foo": "bar"
+      },
+      "skeletonization_configs": [],
+      "type": "skeletonization_campaign",
+      "update_date": "2025-11-20T15:15:58.715518Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "2b88ee21-f303-489d-a32d-e9143570fc8a",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": true,
+      "contributions": [],
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "2b88ee21-f303-489d-a32d-e9143570fc8a",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:58.698225Z",
+      "description": "my-skeletonization-campaign",
+      "id": "850e2d72-a552-4bff-a1fd-94ac9011bff0",
+      "input_meshes": [],
+      "name": "Public u2/0",
+      "scan_parameters": {
+        "foo": "bar"
+      },
+      "skeletonization_configs": [],
+      "type": "skeletonization_campaign",
+      "update_date": "2025-11-20T15:15:58.698225Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "2b88ee21-f303-489d-a32d-e9143570fc8a",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 2
+  }
+}

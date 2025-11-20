@@ -1,0 +1,54 @@
+{
+  "data": [
+    {
+      "acronym": "red",
+      "annotation_value": 64,
+      "color_hex_triplet": "FF0000",
+      "creation_date": "2025-11-20T15:13:22.331143Z",
+      "hierarchy_id": "bd5186ec-af20-45e5-8dee-a473d21edd9e",
+      "id": "16c50803-634b-4efa-941f-fd6a2e0e0ba0",
+      "name": "RedRegion",
+      "parent_structure_id": "3e799fd5-ae19-48c3-94ee-fbdfd058d310",
+      "update_date": "2025-11-20T15:13:22.331143Z"
+    },
+    {
+      "acronym": "grey",
+      "annotation_value": 8,
+      "color_hex_triplet": "BFDAE3",
+      "creation_date": "2025-11-20T15:13:22.334763Z",
+      "hierarchy_id": "bd5186ec-af20-45e5-8dee-a473d21edd9e",
+      "id": "37d63669-9ec9-4afd-a3bd-1348c52c4c40",
+      "name": "Basic cell groups and regions",
+      "parent_structure_id": "63cd16a2-7b03-45fa-829a-c6dbce6de7e0",
+      "update_date": "2025-11-20T15:13:22.334763Z"
+    },
+    {
+      "acronym": "blue",
+      "annotation_value": 42,
+      "color_hex_triplet": "0000FF",
+      "creation_date": "2025-11-20T15:13:22.327880Z",
+      "hierarchy_id": "bd5186ec-af20-45e5-8dee-a473d21edd9e",
+      "id": "3e799fd5-ae19-48c3-94ee-fbdfd058d310",
+      "name": "BlueRegion",
+      "parent_structure_id": "63cd16a2-7b03-45fa-829a-c6dbce6de7e0",
+      "update_date": "2025-11-20T15:13:22.327880Z"
+    },
+    {
+      "acronym": "root",
+      "annotation_value": 997,
+      "color_hex_triplet": "FFFFFF",
+      "creation_date": "2025-11-20T15:13:22.324146Z",
+      "hierarchy_id": "bd5186ec-af20-45e5-8dee-a473d21edd9e",
+      "id": "63cd16a2-7b03-45fa-829a-c6dbce6de7e0",
+      "name": "root",
+      "parent_structure_id": null,
+      "update_date": "2025-11-20T15:13:22.324146Z"
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 4
+  }
+}

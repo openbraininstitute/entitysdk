@@ -1,0 +1,113 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:15:46.989036Z",
+        "hierarchy_id": "9ab115c6-1bea-4e63-8765-fc74feaa9d6a",
+        "id": "44334d49-3929-40f4-a059-88f675a46e75",
+        "name": "RedRegion",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:15:46.989036Z"
+      },
+      "contributions": [
+        {
+          "agent": {
+            "alternative_name": "alt name 1",
+            "id": "b65608aa-7bae-4777-a168-4d9c1ed86bed",
+            "pref_label": "test_organization_1",
+            "type": "organization"
+          },
+          "id": "a24ff752-0957-4cb9-8513-2ebee89fdf66",
+          "role": {
+            "creation_date": "2025-11-20T15:15:47.060396Z",
+            "id": "07f686c6-f327-4723-9502-b5b214745798",
+            "name": "test role",
+            "role_id": "1",
+            "update_date": "2025-11-20T15:15:47.060396Z"
+          }
+        },
+        {
+          "agent": {
+            "family_name": "family name 1",
+            "given_name": "given name 1",
+            "id": "ea721566-0ef6-410d-b189-c51827e791ca",
+            "pref_label": "test_person_1",
+            "sub_id": null,
+            "type": "person"
+          },
+          "id": "0f043887-1f97-4e34-9947-6217ae65afd4",
+          "role": {
+            "creation_date": "2025-11-20T15:15:47.060396Z",
+            "id": "07f686c6-f327-4723-9502-b5b214745798",
+            "name": "test role",
+            "role_id": "1",
+            "update_date": "2025-11-20T15:15:47.060396Z"
+          }
+        }
+      ],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "ad02fdf8-58d4-4e9e-ac89-3c46308f2d8a",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:47.111877Z",
+      "description": "my-description",
+      "id": "8e1bc890-c72e-4f4e-9320-ef65b92fd64f",
+      "me_model": {
+        "creation_date": "2025-11-20T15:15:47.091819Z",
+        "description": "0_description",
+        "etypes": [
+          {
+            "alt_label": "e1-5682c3a3-7988-4db0-9774-a5f92e9cc019",
+            "creation_date": "2025-11-20T15:15:47.086347Z",
+            "definition": "e1d",
+            "id": "d396fe66-0e63-4430-a265-9ede9daafc86",
+            "pref_label": "e1-5682c3a3-7988-4db0-9774-a5f92e9cc019",
+            "update_date": "2025-11-20T15:15:47.086347Z"
+          }
+        ],
+        "id": "2883fc1e-de88-4083-97d3-03de8d69b7e9",
+        "mtypes": [
+          {
+            "alt_label": "m1",
+            "creation_date": "2025-11-20T15:15:47.031410Z",
+            "definition": "m1d",
+            "id": "a3fab993-a73c-4b90-b1fd-b1f21deaeebc",
+            "pref_label": "m1",
+            "update_date": "2025-11-20T15:15:47.031410Z"
+          }
+        ],
+        "name": "0",
+        "update_date": "2025-11-20T15:15:47.091819Z",
+        "validation_status": "created"
+      },
+      "name": "my-synaptome",
+      "seed": 1,
+      "type": "single_neuron_synaptome",
+      "update_date": "2025-11-20T15:15:47.111877Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "ad02fdf8-58d4-4e9e-ac89-3c46308f2d8a",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

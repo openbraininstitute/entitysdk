@@ -1,0 +1,74 @@
+{
+  "data": [
+    {
+      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "1536c829-1a99-47f7-b78a-06a49f3b8605",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:57.450842Z",
+      "description": "my-stimulus-description",
+      "dt": 0.1,
+      "end_time": null,
+      "id": "92d08801-1b20-4224-bdc7-c964188fc715",
+      "injection_type": "current_clamp",
+      "name": "Private u2/0",
+      "recording_id": "fa735589-07df-4ed9-ba38-1503124d5856",
+      "shape": "sinusoidal",
+      "start_time": null,
+      "type": "electrical_recording_stimulus",
+      "update_date": "2025-11-20T15:13:57.450842Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "1536c829-1a99-47f7-b78a-06a49f3b8605",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      }
+    },
+    {
+      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": true,
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "1536c829-1a99-47f7-b78a-06a49f3b8605",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:57.440246Z",
+      "description": "my-stimulus-description",
+      "dt": 0.1,
+      "end_time": null,
+      "id": "6f5fb21f-8231-4c6e-9dc0-6d2102c9a1e7",
+      "injection_type": "current_clamp",
+      "name": "Public u2/0",
+      "recording_id": "fa735589-07df-4ed9-ba38-1503124d5856",
+      "shape": "sinusoidal",
+      "start_time": null,
+      "type": "electrical_recording_stimulus",
+      "update_date": "2025-11-20T15:13:57.440246Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "1536c829-1a99-47f7-b78a-06a49f3b8605",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 2
+  }
+}

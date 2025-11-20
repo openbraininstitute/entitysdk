@@ -1,0 +1,84 @@
+{
+  "data": [
+    {
+      "age_max": null,
+      "age_min": null,
+      "age_period": "postnatal",
+      "age_value": 172800.0,
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "cf66fbca-2376-4e87-9e46-3914c80d151a",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:01Z",
+      "description": "my-description-{i}",
+      "id": "e2be88de-13f1-421a-aa1f-0480d86e01c8",
+      "name": "my-subject-1",
+      "sex": "female",
+      "species": {
+        "id": "9db76cfa-4d46-4f24-a886-8293436abfbd",
+        "name": "Test Species",
+        "taxonomy_id": "12345"
+      },
+      "strain": null,
+      "update_date": "2025-11-20T15:16:10.660566Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "cf66fbca-2376-4e87-9e46-3914c80d151a",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "weight": null
+    },
+    {
+      "age_max": null,
+      "age_min": null,
+      "age_period": "postnatal",
+      "age_value": 259200.0,
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "cf66fbca-2376-4e87-9e46-3914c80d151a",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:02Z",
+      "description": "my-description-{i}",
+      "id": "31b5a13c-6657-47df-93dd-fd1b048fa7b0",
+      "name": "my-subject-2",
+      "sex": "female",
+      "species": {
+        "id": "9db76cfa-4d46-4f24-a886-8293436abfbd",
+        "name": "Test Species",
+        "taxonomy_id": "12345"
+      },
+      "strain": null,
+      "update_date": "2025-11-20T15:16:10.663180Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "cf66fbca-2376-4e87-9e46-3914c80d151a",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "weight": null
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 2
+  }
+}

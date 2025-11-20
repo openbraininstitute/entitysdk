@@ -1,0 +1,43 @@
+{
+  "data": [
+    {
+      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": true,
+      "corrected_for_shrinkage": null,
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "ecdcd051-7f72-4f19-8084-8a25edd434a1",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:32.425771Z",
+      "generation_type": "digital_reconstruction",
+      "id": "0e60442b-608a-44c8-bf77-76c0dae96f41",
+      "magnification": null,
+      "protocol_design": "cell_patch",
+      "protocol_document": "https://example.com/",
+      "slicing_direction": "horizontal",
+      "slicing_thickness": 200.0,
+      "staining_type": null,
+      "tissue_shrinkage": null,
+      "type": "cell_morphology_protocol",
+      "update_date": "2025-11-20T15:13:32.425771Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "ecdcd051-7f72-4f19-8084-8a25edd434a1",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "data": [
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "7de0dbc4-4ec5-40fe-ba49-e3b2c9b1fac1",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:16:02.474706Z",
+      "end_time": "2025-11-20T15:16:02.432198Z",
+      "generated": [],
+      "id": "90773cd2-0fe2-49b3-9a15-edaffc8eb250",
+      "start_time": "2025-11-20T15:16:02.432190Z",
+      "type": "skeletonization_config_generation",
+      "update_date": "2025-11-20T15:16:02.474706Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "7de0dbc4-4ec5-40fe-ba49-e3b2c9b1fac1",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "used": []
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

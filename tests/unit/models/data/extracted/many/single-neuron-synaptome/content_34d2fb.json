@@ -1,0 +1,60 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": true,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:15:48.202902Z",
+        "hierarchy_id": "3a737e4f-81da-4a69-9132-56e0cdb70c51",
+        "id": "c6d4104a-98cf-4f00-a235-a1d0d8b8e86c",
+        "name": "RedRegion",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:15:48.202902Z"
+      },
+      "contributions": [],
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "b62e0db9-d19b-48b9-b7e0-767939ac2557",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:48.329775Z",
+      "description": "my-description",
+      "id": "fc544947-6a47-4dcb-929f-6002218152a2",
+      "me_model": {
+        "creation_date": "2025-11-20T15:15:48.274144Z",
+        "description": "description",
+        "etypes": [],
+        "id": "23c27edf-d5ff-4e43-bf92-4d9de57ccc27",
+        "mtypes": [],
+        "name": "name",
+        "update_date": "2025-11-20T15:15:48.274144Z",
+        "validation_status": "created"
+      },
+      "name": "Public u2/0",
+      "seed": 1,
+      "type": "single_neuron_synaptome",
+      "update_date": "2025-11-20T15:15:48.329775Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "b62e0db9-d19b-48b9-b7e0-767939ac2557",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

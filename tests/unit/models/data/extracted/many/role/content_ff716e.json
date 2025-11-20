@@ -1,0 +1,17 @@
+{
+  "data": [
+    {
+      "creation_date": "2025-11-20T15:15:20.134123Z",
+      "id": "31154792-b4f5-4099-815d-cfaf412e6edf",
+      "name": "r1",
+      "role_id": "role1",
+      "update_date": "2025-11-20T15:15:20.134123Z"
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

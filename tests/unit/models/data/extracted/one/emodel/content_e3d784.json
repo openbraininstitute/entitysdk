@@ -1,0 +1,70 @@
+{
+  "assets": [],
+  "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "brain_region": {
+    "acronym": "acronym64",
+    "annotation_value": 64,
+    "color_hex_triplet": "FF0000",
+    "creation_date": "2025-11-20T15:14:05.350969Z",
+    "hierarchy_id": "1e726dbc-096f-45e2-a2b2-633f1971464f",
+    "id": "af0b4e53-3ee8-4cb7-9520-9b72637f44f4",
+    "name": "RedRegion",
+    "parent_structure_id": null,
+    "update_date": "2025-11-20T15:14:05.350969Z"
+  },
+  "contributions": [],
+  "created_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "a2e8ca2d-014a-4dd3-97a2-04b1de1b20e6",
+    "pref_label": "Regular User With Different Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000002",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:14:05.452659Z",
+  "description": "morph description",
+  "etypes": [],
+  "exemplar_morphology": {
+    "creation_date": "2025-11-20T15:14:05.435530Z",
+    "description": "Test Morphology Description",
+    "id": "d5629a01-28de-4d55-84a9-2b55fefc4216",
+    "legacy_id": [
+      "Test Legacy ID"
+    ],
+    "location": {
+      "x": 10.0,
+      "y": 20.0,
+      "z": 30.0
+    },
+    "name": "Test Morphology Name",
+    "update_date": "2025-11-20T15:14:05.435530Z"
+  },
+  "id": "547e2040-8a6e-44b7-a46d-ed395b268788",
+  "iteration": "0",
+  "mtypes": [],
+  "name": "inaccessible emodel",
+  "score": 0.0,
+  "seed": 0,
+  "species": {
+    "id": "2f8c7d8a-0c6c-4f6e-8d03-010abab39b5c",
+    "name": "Test Species",
+    "taxonomy_id": "12345"
+  },
+  "strain": {
+    "id": "4e09f5d1-c883-4d6d-89b1-3114fd88ce24",
+    "name": "Test Strain",
+    "species_id": "2f8c7d8a-0c6c-4f6e-8d03-010abab39b5c",
+    "taxonomy_id": "Taxonomy ID"
+  },
+  "type": "emodel",
+  "update_date": "2025-11-20T15:14:05.452659Z",
+  "updated_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "a2e8ca2d-014a-4dd3-97a2-04b1de1b20e6",
+    "pref_label": "Regular User With Different Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000002",
+    "type": "person"
+  }
+}

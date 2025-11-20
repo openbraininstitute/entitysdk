@@ -1,0 +1,68 @@
+{
+  "data": [
+    {
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "8abd3aeb-addb-49a6-be9f-148019c9ade7",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:35.454233Z",
+      "description": "",
+      "gene": "Kcnma1",
+      "id": "1fcb08d0-7271-4bf9-acb3-574f125c40d7",
+      "label": "label-0",
+      "name": "name-0",
+      "synonyms": [
+        "BK channel",
+        "BK channel alpha subunit"
+      ],
+      "update_date": "2025-11-20T15:14:35.454233Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "8abd3aeb-addb-49a6-be9f-148019c9ade7",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    },
+    {
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "8abd3aeb-addb-49a6-be9f-148019c9ade7",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:35.458231Z",
+      "description": "",
+      "gene": "Kcnma1",
+      "id": "4b783dfd-110f-46d0-923c-cf541034e73d",
+      "label": "label-1",
+      "name": "name-1",
+      "synonyms": [
+        "BK channel",
+        "BK channel alpha subunit"
+      ],
+      "update_date": "2025-11-20T15:14:35.458231Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "8abd3aeb-addb-49a6-be9f-148019c9ade7",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 2,
+    "total_items": 5
+  }
+}

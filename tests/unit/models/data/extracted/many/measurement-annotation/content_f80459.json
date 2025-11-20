@@ -1,0 +1,51 @@
+{
+  "data": [
+    {
+      "creation_date": "2025-11-20T15:14:56.882806Z",
+      "entity_id": "0eeab8c6-4fda-486e-878a-095fce7cb2cb",
+      "entity_type": "cell_morphology",
+      "id": "2fb33229-3ea1-4506-af54-5cb601a127a6",
+      "measurement_kinds": [
+        {
+          "measurement_items": [
+            {
+              "name": "mean",
+              "unit": "\u03bcm",
+              "value": 54.2
+            },
+            {
+              "name": "median",
+              "unit": "\u03bcm",
+              "value": 44.6
+            }
+          ],
+          "pref_label": "pref_label_0",
+          "structural_domain": "axon"
+        },
+        {
+          "measurement_items": [
+            {
+              "name": "mean",
+              "unit": "\u03bcm\u00b2",
+              "value": 97.6
+            },
+            {
+              "name": "median",
+              "unit": "\u03bcm\u00b2",
+              "value": 73.86
+            }
+          ],
+          "pref_label": "pref_label_1",
+          "structural_domain": "soma"
+        }
+      ],
+      "update_date": "2025-11-20T15:14:56.882806Z"
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

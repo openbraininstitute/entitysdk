@@ -1,0 +1,64 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "8aa1f7bc-4451-4b2b-bbb9-012b3f398d90",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:16:15.613515Z",
+      "id": "77d19a97-87ec-4f81-afc7-726608a5e52b",
+      "name": "e1",
+      "passed": true,
+      "update_date": "2025-11-20T15:16:15.613515Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "8aa1f7bc-4451-4b2b-bbb9-012b3f398d90",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "validated_entity_id": "4fa12afa-3c68-41d8-884a-609a8d72bd68"
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "8aa1f7bc-4451-4b2b-bbb9-012b3f398d90",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:16:15.624174Z",
+      "id": "61dfc22b-b942-43b2-938a-9e7db557dcb2",
+      "name": "e2",
+      "passed": false,
+      "update_date": "2025-11-20T15:16:15.624174Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "8aa1f7bc-4451-4b2b-bbb9-012b3f398d90",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "validated_entity_id": "4fa12afa-3c68-41d8-884a-609a8d72bd68"
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 2
+  }
+}

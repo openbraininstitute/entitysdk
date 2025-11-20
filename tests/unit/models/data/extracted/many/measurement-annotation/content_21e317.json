@@ -1,0 +1,35 @@
+{
+  "data": [
+    {
+      "creation_date": "2025-11-20T15:14:56.478956Z",
+      "entity_id": "f3cf1cc5-126d-455f-bcd8-308305681702",
+      "entity_type": "cell_morphology",
+      "id": "d0dc3e01-3cc9-44c6-8576-41fe2526330c",
+      "measurement_kinds": [
+        {
+          "measurement_items": [
+            {
+              "name": "mean",
+              "unit": "\u03bcm",
+              "value": 154.2
+            },
+            {
+              "name": "median",
+              "unit": "\u03bcm",
+              "value": 144.6
+            }
+          ],
+          "pref_label": "pref_label_0",
+          "structural_domain": "axon"
+        }
+      ],
+      "update_date": "2025-11-20T15:14:56.478956Z"
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

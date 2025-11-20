@@ -1,0 +1,32 @@
+{
+  "assets": [],
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "contributions": [],
+  "created_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "8f96916c-7aa9-4fed-8a86-1ebb5e415892",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:14:48.807204Z",
+  "description": "my-ion-channel-modeling-config",
+  "id": "32a6e2c3-4215-40e7-b88f-e2c35f872303",
+  "ion_channel_modeling_campaign_id": "54461253-485d-4073-9cbb-04b3e52f79e2",
+  "name": "ion-channel-modeling-config",
+  "scan_parameters": {
+    "foo": "bar"
+  },
+  "type": "ion_channel_modeling_config",
+  "update_date": "2025-11-20T15:14:48.807204Z",
+  "updated_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "8f96916c-7aa9-4fed-8a86-1ebb5e415892",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  }
+}

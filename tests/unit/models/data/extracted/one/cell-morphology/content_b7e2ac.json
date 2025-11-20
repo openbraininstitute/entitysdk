@@ -1,0 +1,76 @@
+{
+  "assets": [],
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "brain_region": {
+    "acronym": "acronym64",
+    "annotation_value": 64,
+    "color_hex_triplet": "FF0000",
+    "creation_date": "2025-11-20T15:16:05.950973Z",
+    "hierarchy_id": "da9bfe0d-bd8c-41b5-869a-7d80f9c69de1",
+    "id": "b60ee6ad-0dba-4b07-9708-e473f7fd65d4",
+    "name": "RedRegion",
+    "parent_structure_id": null,
+    "update_date": "2025-11-20T15:16:05.950973Z"
+  },
+  "cell_morphology_protocol": null,
+  "contact_email": null,
+  "contributions": [],
+  "created_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "626bbb73-2412-4081-875e-04307bfdbb56",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:16:05.978834Z",
+  "description": "Test Morphology Description",
+  "experiment_date": null,
+  "id": "c7e922cb-3f32-466f-8c9d-2e3e03ab6ee1",
+  "legacy_id": [
+    "Test Legacy ID"
+  ],
+  "license": null,
+  "location": {
+    "x": 10.0,
+    "y": 20.0,
+    "z": 30.0
+  },
+  "mtypes": [],
+  "name": "Test Morphology Name",
+  "notice_text": null,
+  "published_in": null,
+  "subject": {
+    "age_max": null,
+    "age_min": null,
+    "age_period": "postnatal",
+    "age_value": 1209600.0,
+    "description": "my-description",
+    "id": "659e5929-2659-4aaa-a849-f4e5ed330cd1",
+    "name": "my-subject",
+    "sex": "female",
+    "species": {
+      "id": "1f50db57-b2a2-495c-8458-a542cf21ed88",
+      "name": "Test Species",
+      "taxonomy_id": "12345"
+    },
+    "strain": {
+      "id": "c36c77e3-37c4-435a-bc5b-b3018fc1f8be",
+      "name": "Test Strain",
+      "species_id": "1f50db57-b2a2-495c-8458-a542cf21ed88",
+      "taxonomy_id": "Taxonomy ID"
+    },
+    "weight": 1.5
+  },
+  "type": "cell_morphology",
+  "update_date": "2025-11-20T15:16:05.978834Z",
+  "updated_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "626bbb73-2412-4081-875e-04307bfdbb56",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  }
+}

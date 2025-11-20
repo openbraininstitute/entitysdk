@@ -1,0 +1,33 @@
+{
+  "assets": [],
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "contributions": [],
+  "created_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "e212b408-2636-408b-a2d5-d95de1573e7a",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:16:07.532478Z",
+  "description": "skeletonization-config",
+  "em_cell_mesh_id": "24a2297d-b368-4d09-b9e8-f46aa44e8055",
+  "id": "e14095d9-769e-49bc-8ca3-3ffce2277616",
+  "name": "skeletonization-config",
+  "scan_parameters": {
+    "foo": "bar"
+  },
+  "skeletonization_campaign_id": "0c68b975-43c3-431d-ac45-92bbc592c006",
+  "type": "skeletonization_config",
+  "update_date": "2025-11-20T15:16:07.532478Z",
+  "updated_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "e212b408-2636-408b-a2d5-d95de1573e7a",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  }
+}

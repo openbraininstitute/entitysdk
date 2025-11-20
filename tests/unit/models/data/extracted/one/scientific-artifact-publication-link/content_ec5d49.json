@@ -1,0 +1,47 @@
+{
+  "created_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "bd750f5a-55fc-40eb-9682-4e9cfa9565a4",
+    "pref_label": "Regular User With Different Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000002",
+    "type": "person"
+  },
+  "id": "cd6d23a6-d3dc-4897-bb19-43fd589f5949",
+  "publication": {
+    "DOI": "10.1080/10509585.2015.1092083",
+    "abstract": "my-abstract",
+    "authors": [
+      {
+        "family_name": "Smith",
+        "given_name": "John"
+      },
+      {
+        "family_name": "Smith",
+        "given_name": "Joanne"
+      }
+    ],
+    "id": "39a657cb-3eb3-4b09-979d-a5c44a10e2cc",
+    "publication_year": 2024,
+    "title": "my-title"
+  },
+  "publication_type": "entity_source",
+  "scientific_artifact": {
+    "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+    "authorized_public": false,
+    "contact_email": null,
+    "experiment_date": null,
+    "id": "616a0bed-5bf8-45cd-ad51-f086f8e5dbfb",
+    "notice_text": null,
+    "published_in": null,
+    "type": "circuit"
+  },
+  "updated_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "bd750f5a-55fc-40eb-9682-4e9cfa9565a4",
+    "pref_label": "Regular User With Different Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000002",
+    "type": "person"
+  }
+}

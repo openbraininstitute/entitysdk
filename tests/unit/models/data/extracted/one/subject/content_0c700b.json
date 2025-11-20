@@ -1,0 +1,42 @@
+{
+  "age_max": null,
+  "age_min": null,
+  "age_period": "postnatal",
+  "age_value": 1209600.0,
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "created_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "b39ec965-7934-4b79-b3a1-cf07cb940ccb",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:16:09.217825Z",
+  "description": "my-description",
+  "id": "b2cfd9a6-bc0d-4986-9f5c-5858995e3d52",
+  "name": "my-subject",
+  "sex": "female",
+  "species": {
+    "id": "c15e5122-4b61-4ceb-a104-c282e6bd7e65",
+    "name": "Test Species",
+    "taxonomy_id": "12345"
+  },
+  "strain": {
+    "id": "d8b118e6-16a7-4cc1-9190-834363805709",
+    "name": "Test Strain",
+    "species_id": "c15e5122-4b61-4ceb-a104-c282e6bd7e65",
+    "taxonomy_id": "Taxonomy ID"
+  },
+  "update_date": "2025-11-20T15:16:09.217825Z",
+  "updated_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "b39ec965-7934-4b79-b3a1-cf07cb940ccb",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "weight": 25.5
+}

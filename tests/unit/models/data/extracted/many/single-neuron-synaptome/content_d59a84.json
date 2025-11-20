@@ -1,0 +1,94 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym0",
+        "annotation_value": 0,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:15:49.627336Z",
+        "hierarchy_id": "b1713e2a-bcfb-49fa-8bf7-a96463004b83",
+        "id": "693d9f40-c91b-4058-81b0-3a6469f7e754",
+        "name": "region-0",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:15:49.627336Z"
+      },
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "998e6034-8652-40ca-8056-3595f80bfa25",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:49.639859Z",
+      "description": "my-description",
+      "id": "3eb728a0-45e2-4869-8334-0ae1d9bb652c",
+      "me_model": {
+        "creation_date": "2025-11-20T15:15:49.635409Z",
+        "description": "description",
+        "etypes": [],
+        "id": "6ef991bd-3e9c-4857-9ef3-6cc07189ba41",
+        "mtypes": [],
+        "name": "name-0",
+        "update_date": "2025-11-20T15:15:49.635409Z",
+        "validation_status": "created"
+      },
+      "name": "name-0",
+      "seed": 1,
+      "type": "single_neuron_synaptome",
+      "update_date": "2025-11-20T15:15:49.639859Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "998e6034-8652-40ca-8056-3595f80bfa25",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": {
+    "brain_region": [
+      {
+        "count": 1,
+        "id": "693d9f40-c91b-4058-81b0-3a6469f7e754",
+        "label": "region-0",
+        "type": "brain_region"
+      }
+    ],
+    "contribution": [],
+    "created_by": [
+      {
+        "count": 1,
+        "id": "998e6034-8652-40ca-8056-3595f80bfa25",
+        "label": "jd courcol",
+        "type": "person"
+      }
+    ],
+    "me_model": [
+      {
+        "count": 1,
+        "id": "6ef991bd-3e9c-4857-9ef3-6cc07189ba41",
+        "label": "name-0",
+        "type": "me_model"
+      }
+    ],
+    "updated_by": [
+      {
+        "count": 1,
+        "id": "998e6034-8652-40ca-8056-3595f80bfa25",
+        "label": "jd courcol",
+        "type": "person"
+      }
+    ]
+  },
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

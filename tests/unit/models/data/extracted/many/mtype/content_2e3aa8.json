@@ -1,0 +1,90 @@
+{
+  "data": [
+    {
+      "alt_label": "alt_label_0",
+      "creation_date": "2025-11-20T15:15:14.490599Z",
+      "definition": "definition_0",
+      "id": "c1ab39cf-85c1-4fe7-bce2-0d1138ee4cf7",
+      "pref_label": "pref_label_0",
+      "update_date": "2025-11-20T15:15:14.490599Z"
+    },
+    {
+      "alt_label": "alt_label_1",
+      "creation_date": "2025-11-20T15:15:14.493621Z",
+      "definition": "definition_1",
+      "id": "a5951743-2ea2-4884-9654-37f3988ea9fb",
+      "pref_label": "pref_label_1",
+      "update_date": "2025-11-20T15:15:14.493621Z"
+    },
+    {
+      "alt_label": "alt_label_2",
+      "creation_date": "2025-11-20T15:15:14.494941Z",
+      "definition": "definition_2",
+      "id": "02d789da-3cc5-4712-b17b-ca53634eea05",
+      "pref_label": "pref_label_2",
+      "update_date": "2025-11-20T15:15:14.494941Z"
+    },
+    {
+      "alt_label": "alt_label_3",
+      "creation_date": "2025-11-20T15:15:14.496415Z",
+      "definition": "definition_3",
+      "id": "7782301f-c833-4d0f-9621-8d2bee9713ad",
+      "pref_label": "pref_label_3",
+      "update_date": "2025-11-20T15:15:14.496415Z"
+    },
+    {
+      "alt_label": "alt_label_4",
+      "creation_date": "2025-11-20T15:15:14.497914Z",
+      "definition": "definition_4",
+      "id": "164b5828-fba4-4576-b091-d5689a56d7f0",
+      "pref_label": "pref_label_4",
+      "update_date": "2025-11-20T15:15:14.497914Z"
+    },
+    {
+      "alt_label": "alt_label_5",
+      "creation_date": "2025-11-20T15:15:14.499349Z",
+      "definition": "definition_5",
+      "id": "d91a4088-8d58-4446-ad0a-3d36fb05d70b",
+      "pref_label": "pref_label_5",
+      "update_date": "2025-11-20T15:15:14.499349Z"
+    },
+    {
+      "alt_label": "alt_label_6",
+      "creation_date": "2025-11-20T15:15:14.500778Z",
+      "definition": "definition_6",
+      "id": "49c12b3a-d421-416d-8576-42e213067ec6",
+      "pref_label": "pref_label_6",
+      "update_date": "2025-11-20T15:15:14.500778Z"
+    },
+    {
+      "alt_label": "alt_label_7",
+      "creation_date": "2025-11-20T15:15:14.502167Z",
+      "definition": "definition_7",
+      "id": "bc6488be-8632-4084-b0a1-b9019a458641",
+      "pref_label": "pref_label_7",
+      "update_date": "2025-11-20T15:15:14.502167Z"
+    },
+    {
+      "alt_label": "alt_label_8",
+      "creation_date": "2025-11-20T15:15:14.503519Z",
+      "definition": "definition_8",
+      "id": "81d81ba0-6cb8-4b0c-a9fa-1dd14a4a8a3d",
+      "pref_label": "pref_label_8",
+      "update_date": "2025-11-20T15:15:14.503519Z"
+    },
+    {
+      "alt_label": "alt_label_9",
+      "creation_date": "2025-11-20T15:15:14.504874Z",
+      "definition": "definition_9",
+      "id": "fae22d72-2fa9-4168-9137-d216aa1ff82c",
+      "pref_label": "pref_label_9",
+      "update_date": "2025-11-20T15:15:14.504874Z"
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 10
+  }
+}

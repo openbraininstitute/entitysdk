@@ -1,0 +1,131 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:14:27.045154Z",
+        "hierarchy_id": "a40041f7-85ca-47c9-abdf-7cae2092c99d",
+        "id": "599a37ca-1b2e-4564-8b18-ad9a40d76cb1",
+        "name": "RedRegion",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:14:27.045154Z"
+      },
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "ffb284b0-6e99-4f0d-ae1e-bf134a9e8331",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:27.093531Z",
+      "description": "my-description",
+      "id": "4bfcf6ce-3891-4e3c-898e-faa71747c841",
+      "license": {
+        "creation_date": "2025-11-20T15:14:27.084506Z",
+        "description": "a license description",
+        "id": "32a115c3-813d-49eb-8581-04eaa8f07190",
+        "label": "test label",
+        "name": "Test License",
+        "update_date": "2025-11-20T15:14:27.084506Z"
+      },
+      "measurements": [
+        {
+          "id": 1,
+          "name": "minimum",
+          "unit": "\u03bcm",
+          "value": 1.23
+        },
+        {
+          "id": 2,
+          "name": "maximum",
+          "unit": "\u03bcm",
+          "value": 1.45
+        }
+      ],
+      "name": "my-name",
+      "post_mtype": {
+        "alt_label": "mtype-alt-label",
+        "creation_date": "2025-11-20T15:14:27.081712Z",
+        "definition": "mtype-definition",
+        "id": "6831e89b-9554-49c7-8d1c-cb80c2913221",
+        "pref_label": "mtype-pref-label",
+        "update_date": "2025-11-20T15:14:27.081712Z"
+      },
+      "post_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:14:27.045154Z",
+        "hierarchy_id": "a40041f7-85ca-47c9-abdf-7cae2092c99d",
+        "id": "599a37ca-1b2e-4564-8b18-ad9a40d76cb1",
+        "name": "RedRegion",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:14:27.045154Z"
+      },
+      "pre_mtype": {
+        "alt_label": "mtype-alt-label",
+        "creation_date": "2025-11-20T15:14:27.081712Z",
+        "definition": "mtype-definition",
+        "id": "6831e89b-9554-49c7-8d1c-cb80c2913221",
+        "pref_label": "mtype-pref-label",
+        "update_date": "2025-11-20T15:14:27.081712Z"
+      },
+      "pre_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:14:27.045154Z",
+        "hierarchy_id": "a40041f7-85ca-47c9-abdf-7cae2092c99d",
+        "id": "599a37ca-1b2e-4564-8b18-ad9a40d76cb1",
+        "name": "RedRegion",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:14:27.045154Z"
+      },
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "79be38de-1d52-41f5-aaaa-218ab4915525",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "dee00b68-7ece-441f-a37d-90089ef8f125",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "fdf20179-c7d9-4d47-b955-deceeffbe061",
+          "name": "Test Strain",
+          "species_id": "dee00b68-7ece-441f-a37d-90089ef8f125",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "type": "experimental_synapses_per_connection",
+      "update_date": "2025-11-20T15:14:27.093531Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "ffb284b0-6e99-4f0d-ae1e-bf134a9e8331",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

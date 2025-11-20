@@ -1,0 +1,31 @@
+{
+  "assets": [],
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "contributions": [],
+  "created_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "b6da48df-b113-428a-b445-8dff157f8e7e",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:13:43.650852Z",
+  "description": "Circuit extraction campaign",
+  "id": "bd56dc93-a73f-4d09-ae8c-fca3104c81a2",
+  "name": "Circuit extraction campaign",
+  "scan_parameters": {
+    "foo": "bar"
+  },
+  "type": "circuit_extraction_campaign",
+  "update_date": "2025-11-20T15:13:43.650852Z",
+  "updated_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "b6da48df-b113-428a-b445-8dff157f8e7e",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  }
+}

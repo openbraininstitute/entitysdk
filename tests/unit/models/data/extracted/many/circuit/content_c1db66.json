@@ -1,0 +1,178 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "atlas_id": "7b036d8e-ae6e-488f-8594-a25761996d05",
+      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:13:34.972660Z",
+        "hierarchy_id": "ef09fa37-5d80-4c8b-a114-31ad5ff53754",
+        "id": "8e9cf2fd-0a4c-4a03-a4cd-357bb3e2dfc0",
+        "name": "RedRegion",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:13:34.972660Z"
+      },
+      "build_category": "em_reconstruction",
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "8eb6e1dd-8f1e-409f-ad10-63f61e269d82",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:35.016461Z",
+      "description": "root-circuit-description",
+      "experiment_date": null,
+      "has_electrical_cell_models": true,
+      "has_morphologies": true,
+      "has_point_neurons": true,
+      "has_spines": true,
+      "id": "f15d813a-4742-475a-a42d-48a9305f0739",
+      "license": {
+        "creation_date": "2025-11-20T15:13:34.979072Z",
+        "description": "a license description",
+        "id": "d84cd929-138f-4586-980f-a9744be72942",
+        "label": "test label",
+        "name": "Test License",
+        "update_date": "2025-11-20T15:13:34.979072Z"
+      },
+      "name": "Private u2/0",
+      "notice_text": null,
+      "number_connections": 100000000,
+      "number_neurons": 10000000,
+      "number_synapses": 1000000000,
+      "published_in": null,
+      "root_circuit_id": null,
+      "scale": "whole_brain",
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "6b1276b7-2057-40f9-bba8-4f2621832dc7",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "0916d79c-8f4f-49f7-bcb3-ec1caf05a7b7",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "25e772dc-f855-4c60-bdc3-aee30ee6fb7a",
+          "name": "Test Strain",
+          "species_id": "0916d79c-8f4f-49f7-bcb3-ec1caf05a7b7",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "type": "circuit",
+      "update_date": "2025-11-20T15:13:35.016461Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "8eb6e1dd-8f1e-409f-ad10-63f61e269d82",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "atlas_id": "7b036d8e-ae6e-488f-8594-a25761996d05",
+      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": true,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:13:34.972660Z",
+        "hierarchy_id": "ef09fa37-5d80-4c8b-a114-31ad5ff53754",
+        "id": "8e9cf2fd-0a4c-4a03-a4cd-357bb3e2dfc0",
+        "name": "RedRegion",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:13:34.972660Z"
+      },
+      "build_category": "em_reconstruction",
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "8eb6e1dd-8f1e-409f-ad10-63f61e269d82",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:35.001248Z",
+      "description": "root-circuit-description",
+      "experiment_date": null,
+      "has_electrical_cell_models": true,
+      "has_morphologies": true,
+      "has_point_neurons": true,
+      "has_spines": true,
+      "id": "0c1c7ac5-78b7-4bf0-a59e-55d6aa5e4193",
+      "license": {
+        "creation_date": "2025-11-20T15:13:34.979072Z",
+        "description": "a license description",
+        "id": "d84cd929-138f-4586-980f-a9744be72942",
+        "label": "test label",
+        "name": "Test License",
+        "update_date": "2025-11-20T15:13:34.979072Z"
+      },
+      "name": "Public u2/0",
+      "notice_text": null,
+      "number_connections": 100000000,
+      "number_neurons": 10000000,
+      "number_synapses": 1000000000,
+      "published_in": null,
+      "root_circuit_id": null,
+      "scale": "whole_brain",
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "6b1276b7-2057-40f9-bba8-4f2621832dc7",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "0916d79c-8f4f-49f7-bcb3-ec1caf05a7b7",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "25e772dc-f855-4c60-bdc3-aee30ee6fb7a",
+          "name": "Test Strain",
+          "species_id": "0916d79c-8f4f-49f7-bcb3-ec1caf05a7b7",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "type": "circuit",
+      "update_date": "2025-11-20T15:13:35.001248Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "8eb6e1dd-8f1e-409f-ad10-63f61e269d82",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 2
+  }
+}

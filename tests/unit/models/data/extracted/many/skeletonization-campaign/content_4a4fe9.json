@@ -1,0 +1,43 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "contributions": [],
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "db908510-48ca-499f-bf9d-24cf198595d9",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:57.901539Z",
+      "description": "my-skeletonization-campaign",
+      "id": "d584f745-cacc-45a2-ae1f-160fc015b8aa",
+      "input_meshes": [],
+      "name": "skeletonization-campaign",
+      "scan_parameters": {
+        "foo": "bar"
+      },
+      "skeletonization_configs": [],
+      "type": "skeletonization_campaign",
+      "update_date": "2025-11-20T15:15:57.901539Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "db908510-48ca-499f-bf9d-24cf198595d9",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "data": [
+    {
+      "analysis_notebook_environment": {
+        "id": "64cbee18-65c9-4de0-9f78-abf15c861349",
+        "runtime_info": {
+          "docker": {
+            "docker_version": null,
+            "image_digest": null,
+            "image_repository": "obi-notebook-image",
+            "image_tag": ">=2025.09.24-2"
+          },
+          "os": {
+            "machine": "arm64",
+            "processor": "arm",
+            "release": "24.5.0",
+            "system": "Darwin",
+            "version": "Darwin Kernel Version 24.5.0..."
+          },
+          "python": {
+            "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+            "implementation": "CPython",
+            "version": "3.13.7"
+          },
+          "schema_version": 1
+        },
+        "type": "analysis_notebook_environment"
+      },
+      "analysis_notebook_template": {
+        "description": "analysis-notebook-template-description",
+        "id": "d97a7a1f-1418-4b5b-93cc-3e8ec2eb4b5e",
+        "name": "analysis-notebook-template",
+        "scale": "cellular",
+        "specifications": {
+          "docker": {
+            "docker_version": null,
+            "image_digest": null,
+            "image_repository": "obi-notebook-image",
+            "image_tag": null
+          },
+          "inputs": [
+            {
+              "count_max": 1,
+              "count_min": 1,
+              "entity_type": "simulation_campaign",
+              "is_list": false,
+              "name": "my-simulation-campaign"
+            },
+            {
+              "count_max": 3,
+              "count_min": 1,
+              "entity_type": "circuit",
+              "is_list": true,
+              "name": "my-circuit"
+            }
+          ],
+          "python": {
+            "version": ">=3.10"
+          },
+          "schema_version": 1
+        },
+        "type": "analysis_notebook_template"
+      },
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "1bb75dae-6bf0-4786-ac6b-78c7f713a4b1",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:08.536498Z",
+      "end_time": "2025-11-20T15:13:08.494455Z",
+      "generated": [],
+      "id": "46bf7d4c-006a-4577-b110-c52ed7937135",
+      "start_time": "2025-11-20T15:13:08.494446Z",
+      "type": "analysis_notebook_execution",
+      "update_date": "2025-11-20T15:13:08.536498Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "1bb75dae-6bf0-4786-ac6b-78c7f713a4b1",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "used": []
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

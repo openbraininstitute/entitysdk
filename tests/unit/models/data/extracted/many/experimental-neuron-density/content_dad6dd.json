@@ -1,0 +1,119 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym0",
+        "annotation_value": 0,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:14:20.645043Z",
+        "hierarchy_id": "232df343-9376-4046-a590-d092643e7074",
+        "id": "c20f39a4-07e3-466c-9ab2-723df8b7928f",
+        "name": "region-0",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:14:20.645043Z"
+      },
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "98f3c8d9-e9b1-40e7-930c-9fb9805457f9",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:20.654048Z",
+      "description": "my-description",
+      "etypes": [],
+      "id": "9a9d3abf-3b8d-40b5-9cbc-cbfeaa5b5d28",
+      "license": null,
+      "measurements": [],
+      "mtypes": [],
+      "name": "name-0",
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "e7917d16-4e13-476d-a512-aea890c947c0",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "d385afa6-63e4-46f1-96a8-7983eb0b7bba",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "d053dff2-3573-4190-bba1-de989a582243",
+          "name": "Test Strain",
+          "species_id": "d385afa6-63e4-46f1-96a8-7983eb0b7bba",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "type": "experimental_neuron_density",
+      "update_date": "2025-11-20T15:14:20.654048Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "98f3c8d9-e9b1-40e7-930c-9fb9805457f9",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": {
+    "brain_region": [
+      {
+        "count": 1,
+        "id": "c20f39a4-07e3-466c-9ab2-723df8b7928f",
+        "label": "region-0",
+        "type": "brain_region"
+      }
+    ],
+    "contribution": [],
+    "created_by": [
+      {
+        "count": 1,
+        "id": "98f3c8d9-e9b1-40e7-930c-9fb9805457f9",
+        "label": "jd courcol",
+        "type": "person"
+      }
+    ],
+    "etype": [],
+    "mtype": [],
+    "species": [
+      {
+        "count": 1,
+        "id": "d385afa6-63e4-46f1-96a8-7983eb0b7bba",
+        "label": "Test Species",
+        "type": "subject.species"
+      }
+    ],
+    "strain": [
+      {
+        "count": 1,
+        "id": "d053dff2-3573-4190-bba1-de989a582243",
+        "label": "Test Strain",
+        "type": "subject.strain"
+      }
+    ],
+    "updated_by": [
+      {
+        "count": 1,
+        "id": "98f3c8d9-e9b1-40e7-930c-9fb9805457f9",
+        "label": "jd courcol",
+        "type": "person"
+      }
+    ]
+  },
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

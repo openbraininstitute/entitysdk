@@ -1,0 +1,74 @@
+{
+  "assets": [],
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "brain_region": {
+    "acronym": "acronym64",
+    "annotation_value": 64,
+    "color_hex_triplet": "FF0000",
+    "creation_date": "2025-11-20T15:14:00.167064Z",
+    "hierarchy_id": "560fd95c-9c26-45bd-991d-c48a659f8ead",
+    "id": "50bd8249-dce7-4108-84c6-26b1f8b2cb06",
+    "name": "RedRegion",
+    "parent_structure_id": null,
+    "update_date": "2025-11-20T15:14:00.167064Z"
+  },
+  "contact_email": null,
+  "contributions": [],
+  "created_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "b28d9737-c7c8-4ac5-a838-53a404728c20",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:14:00.181932Z",
+  "dense_reconstruction_cell_id": 9223372036854775807,
+  "em_dense_reconstruction_dataset": {
+    "id": "3e282148-648f-4d7e-a6b7-b7dac81ec995",
+    "type": "em_dense_reconstruction_dataset"
+  },
+  "experiment_date": null,
+  "generation_method": "marching_cubes",
+  "generation_parameters": null,
+  "id": "a0e9252a-70fb-41fe-a71b-c135a324d165",
+  "level_of_detail": 10,
+  "license": null,
+  "mesh_type": "static",
+  "notice_text": null,
+  "published_in": null,
+  "release_version": 1,
+  "subject": {
+    "age_max": null,
+    "age_min": null,
+    "age_period": "postnatal",
+    "age_value": 1209600.0,
+    "description": "my-description",
+    "id": "d52aa6fc-e594-48b1-bd37-f120582036ed",
+    "name": "my-subject",
+    "sex": "female",
+    "species": {
+      "id": "2f65013f-472b-4173-8809-68ef9d83b4f1",
+      "name": "Test Species",
+      "taxonomy_id": "12345"
+    },
+    "strain": {
+      "id": "968476e7-6436-4b64-8f67-406d39a5ae95",
+      "name": "Test Strain",
+      "species_id": "2f65013f-472b-4173-8809-68ef9d83b4f1",
+      "taxonomy_id": "Taxonomy ID"
+    },
+    "weight": 1.5
+  },
+  "type": "em_cell_mesh",
+  "update_date": "2025-11-20T15:14:00.181932Z",
+  "updated_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "b28d9737-c7c8-4ac5-a838-53a404728c20",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "derivation_type": "circuit_extraction",
+  "generated": {
+    "id": "b0437adb-fc1c-4cda-ba2f-0355edb33311",
+    "type": "circuit"
+  },
+  "used": {
+    "id": "1d3c5908-1a12-4181-b22a-f28587c2736b",
+    "type": "circuit"
+  }
+}

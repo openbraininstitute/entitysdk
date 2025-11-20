@@ -1,0 +1,84 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": true,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:13:58.965681Z",
+        "hierarchy_id": "59768761-a9ee-4421-9ece-cc7737a35233",
+        "id": "1b5bf499-0e18-4ef1-9e17-4dad85a9c41b",
+        "name": "RedRegion",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:13:58.965681Z"
+      },
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "57017db2-b67a-49bd-b47f-e58e527ba1ed",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:58.995847Z",
+      "dense_reconstruction_cell_id": 9223372036854775807,
+      "em_dense_reconstruction_dataset": {
+        "id": "0a00490b-b531-4a0e-82ca-0bde44be3801",
+        "type": "em_dense_reconstruction_dataset"
+      },
+      "experiment_date": null,
+      "generation_method": "marching_cubes",
+      "generation_parameters": null,
+      "id": "1ef2f176-6b9f-425d-a173-10eb93f274e9",
+      "level_of_detail": 10,
+      "license": null,
+      "mesh_type": "static",
+      "notice_text": null,
+      "published_in": null,
+      "release_version": 1,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "ea60da20-438b-4b46-a5da-4fe1a302e036",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "da763de7-4a65-4e50-886f-7c62c411592b",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "ffd389e1-aebf-4330-a66a-37aa996e7b00",
+          "name": "Test Strain",
+          "species_id": "da763de7-4a65-4e50-886f-7c62c411592b",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "type": "em_cell_mesh",
+      "update_date": "2025-11-20T15:13:58.995847Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "57017db2-b67a-49bd-b47f-e58e527ba1ed",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

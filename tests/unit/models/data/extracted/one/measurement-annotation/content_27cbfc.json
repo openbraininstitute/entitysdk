@@ -1,0 +1,41 @@
+{
+  "creation_date": "2025-11-20T15:14:56.375843Z",
+  "entity_id": "f3cf1cc5-126d-455f-bcd8-308305681702",
+  "entity_type": "cell_morphology",
+  "id": "597aec1f-5e32-49da-a0e4-7e691216d286",
+  "measurement_kinds": [
+    {
+      "measurement_items": [
+        {
+          "name": "mean",
+          "unit": "\u03bcm",
+          "value": 54.2
+        },
+        {
+          "name": "median",
+          "unit": "\u03bcm",
+          "value": 44.6
+        }
+      ],
+      "pref_label": "pref_label_0",
+      "structural_domain": "axon"
+    },
+    {
+      "measurement_items": [
+        {
+          "name": "mean",
+          "unit": "\u03bcm\u00b2",
+          "value": 97.6
+        },
+        {
+          "name": "median",
+          "unit": "\u03bcm\u00b2",
+          "value": 73.86
+        }
+      ],
+      "pref_label": "pref_label_1",
+      "structural_domain": "soma"
+    }
+  ],
+  "update_date": "2025-11-20T15:14:56.375843Z"
+}

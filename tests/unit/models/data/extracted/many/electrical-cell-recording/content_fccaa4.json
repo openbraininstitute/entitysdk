@@ -1,0 +1,98 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym-2",
+        "annotation_value": 2,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:13:53.819888Z",
+        "hierarchy_id": "c68baabd-0463-4979-b926-bc2828664f48",
+        "id": "c2fa94e6-44dc-46f0-a090-281ddc0ddc4b",
+        "name": "region-2",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:13:53.819888Z"
+      },
+      "comment": "",
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "c5f0db9b-2c3c-46c4-9fee-58dc84db0f98",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:53.854955Z",
+      "description": "my-description",
+      "etypes": [
+        {
+          "alt_label": "e2",
+          "creation_date": "2025-11-20T15:13:53.859982Z",
+          "definition": "d",
+          "id": "ce17a228-4765-4f91-8923-0d5df6ca49ba",
+          "pref_label": "e2",
+          "update_date": "2025-11-20T15:13:53.859982Z"
+        }
+      ],
+      "experiment_date": null,
+      "id": "42fafc55-03e1-4261-bf1a-edf6e0d87c55",
+      "legacy_id": null,
+      "license": {
+        "creation_date": "2025-11-20T15:13:53.780599Z",
+        "description": "a license description",
+        "id": "c5b5f708-3ef0-4390-a315-ab91673d7284",
+        "label": "test label",
+        "name": "Test License",
+        "update_date": "2025-11-20T15:13:53.780599Z"
+      },
+      "ljp": 11.5,
+      "name": "e-1",
+      "notice_text": null,
+      "published_in": null,
+      "recording_location": [
+        "soma[0]_0.5"
+      ],
+      "recording_origin": "in_vivo",
+      "recording_type": "both",
+      "stimuli": [],
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "ef7bbdb6-67d9-4c38-8874-c40e676fb147",
+        "name": "subject-2",
+        "sex": "female",
+        "species": {
+          "id": "9330c4ae-612d-42f1-8450-e104b8c99d28",
+          "name": "species-2",
+          "taxonomy_id": "taxonomy-2"
+        },
+        "strain": null,
+        "weight": 1.5
+      },
+      "temperature": null,
+      "type": "electrical_cell_recording",
+      "update_date": "2025-11-20T15:13:53.854955Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "c5f0db9b-2c3c-46c4-9fee-58dc84db0f98",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

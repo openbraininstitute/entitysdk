@@ -1,0 +1,74 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "circuit_id": "a5e7a6e7-2f62-4a76-92f2-da4b8ba7efc6",
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "b105d513-83cf-40ee-a079-9b1f2b8e5617",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:38.916508Z",
+      "description": "extraction-config",
+      "id": "857f6f4d-9aa8-4a38-8e8d-d44103013b22",
+      "name": "Private u1/1",
+      "scan_parameters": {
+        "foo": "bar"
+      },
+      "type": "circuit_extraction_config",
+      "update_date": "2025-11-20T15:13:38.916508Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "b105d513-83cf-40ee-a079-9b1f2b8e5617",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "circuit_id": "a5e7a6e7-2f62-4a76-92f2-da4b8ba7efc6",
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "b105d513-83cf-40ee-a079-9b1f2b8e5617",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:38.905326Z",
+      "description": "extraction-config",
+      "id": "77a462db-cdb8-4701-ab6d-e0ee4ae4bbfe",
+      "name": "Private u1/0",
+      "scan_parameters": {
+        "foo": "bar"
+      },
+      "type": "circuit_extraction_config",
+      "update_date": "2025-11-20T15:13:38.905326Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "b105d513-83cf-40ee-a079-9b1f2b8e5617",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 2
+  }
+}

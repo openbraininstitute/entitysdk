@@ -1,0 +1,26 @@
+{
+  "data": [
+    {
+      "creation_date": "2025-11-20T15:14:55.919889Z",
+      "description": "a license description",
+      "id": "202a2206-447c-4e04-bc5e-4c1be2b4199f",
+      "label": "l",
+      "name": "n2",
+      "update_date": "2025-11-20T15:14:55.919889Z"
+    },
+    {
+      "creation_date": "2025-11-20T15:14:55.910131Z",
+      "description": "a license description",
+      "id": "a393f933-3ec0-44d8-af8d-9690ee504a9d",
+      "label": "l",
+      "name": "n1",
+      "update_date": "2025-11-20T15:14:55.910131Z"
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 2
+  }
+}

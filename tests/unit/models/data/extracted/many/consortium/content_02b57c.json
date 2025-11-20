@@ -1,0 +1,82 @@
+{
+  "data": [
+    {
+      "alternative_name": "alt-0",
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "8587f65e-54f2-4f60-ab2a-f6184af85e78",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:46.014931Z",
+      "id": "05e0919f-7974-406b-be73-11ef677bacd3",
+      "pref_label": "org-0",
+      "type": "consortium",
+      "update_date": "2025-11-20T15:13:46.014931Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "8587f65e-54f2-4f60-ab2a-f6184af85e78",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    },
+    {
+      "alternative_name": "alt-1",
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "8587f65e-54f2-4f60-ab2a-f6184af85e78",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:46.018796Z",
+      "id": "569afab7-d8eb-4b3c-af84-c170fc6d7efc",
+      "pref_label": "org-1",
+      "type": "consortium",
+      "update_date": "2025-11-20T15:13:46.018796Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "8587f65e-54f2-4f60-ab2a-f6184af85e78",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    },
+    {
+      "alternative_name": "alt-2",
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "8587f65e-54f2-4f60-ab2a-f6184af85e78",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:46.021433Z",
+      "id": "a29db8d6-4250-4e52-8d60-97dd62b0f0c9",
+      "pref_label": "org-2",
+      "type": "consortium",
+      "update_date": "2025-11-20T15:13:46.021433Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "8587f65e-54f2-4f60-ab2a-f6184af85e78",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 3
+  }
+}

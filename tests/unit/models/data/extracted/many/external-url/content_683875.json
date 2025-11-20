@@ -1,0 +1,62 @@
+{
+  "data": [
+    {
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "1c7a4aff-367a-437d-9ace-6ff403c09d25",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:34.238965Z",
+      "description": "description-3",
+      "id": "4790e5c9-03f4-4207-8869-68b5bf311c47",
+      "name": "name-3",
+      "source": "channelpedia",
+      "source_name": "Channelpedia",
+      "update_date": "2025-11-20T15:14:34.238965Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "1c7a4aff-367a-437d-9ace-6ff403c09d25",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "url": "https://channelpedia.epfl.ch//wiki/page-3"
+    },
+    {
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "1c7a4aff-367a-437d-9ace-6ff403c09d25",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:34.231585Z",
+      "description": "description-0",
+      "id": "8c79342f-bb77-4bbf-bdf9-ed6cedef133e",
+      "name": "name-0",
+      "source": "channelpedia",
+      "source_name": "Channelpedia",
+      "update_date": "2025-11-20T15:14:34.231585Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "1c7a4aff-367a-437d-9ace-6ff403c09d25",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "url": "https://channelpedia.epfl.ch//wiki/page-0"
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 2
+  }
+}

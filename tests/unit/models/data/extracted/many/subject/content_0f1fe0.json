@@ -1,0 +1,52 @@
+{
+  "data": [
+    {
+      "age_max": null,
+      "age_min": null,
+      "age_period": "postnatal",
+      "age_value": 1209600.0,
+      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": true,
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "0bc568c5-744e-45f1-a093-3e1802786f48",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:16:10.065225Z",
+      "description": "my-description",
+      "id": "45c61fcc-ac23-4db8-b9f2-668c9c85c0ad",
+      "name": "Public u2/0",
+      "sex": "female",
+      "species": {
+        "id": "8d0f534b-3300-4e9b-bd4c-70e453f206fe",
+        "name": "Test Species",
+        "taxonomy_id": "12345"
+      },
+      "strain": {
+        "id": "e96a38c7-1a93-4283-8787-f90515ea917c",
+        "name": "Test Strain",
+        "species_id": "8d0f534b-3300-4e9b-bd4c-70e453f206fe",
+        "taxonomy_id": "Taxonomy ID"
+      },
+      "update_date": "2025-11-20T15:16:10.065225Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "0bc568c5-744e-45f1-a093-3e1802786f48",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      },
+      "weight": null
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

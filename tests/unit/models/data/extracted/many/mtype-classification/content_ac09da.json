@@ -1,0 +1,60 @@
+{
+  "data": [
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": true,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "1a70ddba-781e-49fd-9819-63414bfb7fe4",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:15.898122Z",
+      "entity_id": "4915931a-ee56-4979-ab9d-1a9a4cbbff5b",
+      "id": "58fea96f-6dae-482f-8083-fcb9ec39a5f8",
+      "mtype_class_id": "3ed3c0b4-d069-4bb9-9832-2053a335a1ab",
+      "update_date": "2025-11-20T15:15:15.898122Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "1a70ddba-781e-49fd-9819-63414bfb7fe4",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    },
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "1a70ddba-781e-49fd-9819-63414bfb7fe4",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:15.890453Z",
+      "entity_id": "4915931a-ee56-4979-ab9d-1a9a4cbbff5b",
+      "id": "43b6e9c8-4d12-4c74-81c5-4d39ddbc6130",
+      "mtype_class_id": "2b08ec0d-dccb-4493-ba1d-1c06d4cda92d",
+      "update_date": "2025-11-20T15:15:15.890453Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "1a70ddba-781e-49fd-9819-63414bfb7fe4",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 2
+  }
+}

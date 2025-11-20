@@ -1,0 +1,26 @@
+{
+  "assets": [],
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": true,
+  "created_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "6bd69e03-cd2f-47d2-84f4-f0993f610580",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:13:06.522195Z",
+  "id": "48aa561d-5157-45d4-99f4-33e4a42ff5ec",
+  "runtime_info": null,
+  "type": "analysis_notebook_environment",
+  "update_date": "2025-11-20T15:13:06.522195Z",
+  "updated_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "6bd69e03-cd2f-47d2-84f4-f0993f610580",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  }
+}

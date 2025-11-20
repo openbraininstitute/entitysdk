@@ -1,0 +1,122 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "0c6c74c7-d723-4c03-acb0-258a9e1544c4",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:38.784941Z",
+      "description": "simulation-result-description",
+      "id": "db62909e-edc8-4ffe-9266-460a686f71ad",
+      "name": "Private u1/1",
+      "simulation_id": "8ddfe155-e912-4959-9c06-805dd058ab3e",
+      "type": "simulation_result",
+      "update_date": "2025-11-20T15:15:38.784941Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "0c6c74c7-d723-4c03-acb0-258a9e1544c4",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "0c6c74c7-d723-4c03-acb0-258a9e1544c4",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:38.774832Z",
+      "description": "simulation-result-description",
+      "id": "3db194c1-4f59-4bd3-9eb5-b1f62658ae0f",
+      "name": "Private u1/0",
+      "simulation_id": "8ddfe155-e912-4959-9c06-805dd058ab3e",
+      "type": "simulation_result",
+      "update_date": "2025-11-20T15:15:38.774832Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "0c6c74c7-d723-4c03-acb0-258a9e1544c4",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": true,
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "1713480e-a280-4d1d-9ce0-d87cae33ba66",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:38.749776Z",
+      "description": "simulation-result-description",
+      "id": "657e119d-a053-43e9-b93a-806685aead58",
+      "name": "Public u2/0",
+      "simulation_id": "8ddfe155-e912-4959-9c06-805dd058ab3e",
+      "type": "simulation_result",
+      "update_date": "2025-11-20T15:15:38.749776Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "1713480e-a280-4d1d-9ce0-d87cae33ba66",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": true,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "0c6c74c7-d723-4c03-acb0-258a9e1544c4",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:38.736329Z",
+      "description": "simulation-result-description",
+      "id": "b1df74ab-cf86-439c-8fc8-1cbe43c81508",
+      "name": "Public u1/0",
+      "simulation_id": "8ddfe155-e912-4959-9c06-805dd058ab3e",
+      "type": "simulation_result",
+      "update_date": "2025-11-20T15:15:38.736329Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "0c6c74c7-d723-4c03-acb0-258a9e1544c4",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 4
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "data": [
+    {
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "9113331a-194c-4ad1-9b87-7d7a6651608f",
+        "pref_label": "Admin User",
+        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:16:08.392995Z",
+      "id": "3b70fc05-d111-4a43-8e74-956e89e28e7d",
+      "name": "Test Strain 0",
+      "species_id": "f9b3e9ee-7672-4cc7-9c76-31ab34110972",
+      "taxonomy_id": "TaxonomyID_0",
+      "update_date": "2025-11-20T15:16:08.392995Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "9113331a-194c-4ad1-9b87-7d7a6651608f",
+        "pref_label": "Admin User",
+        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "type": "person"
+      }
+    },
+    {
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "9113331a-194c-4ad1-9b87-7d7a6651608f",
+        "pref_label": "Admin User",
+        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:16:08.402804Z",
+      "id": "a3726914-a676-49f2-bdcd-e1df63125b8b",
+      "name": "Test Strain 1",
+      "species_id": "f9b3e9ee-7672-4cc7-9c76-31ab34110972",
+      "taxonomy_id": "TaxonomyID_1",
+      "update_date": "2025-11-20T15:16:08.402804Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "9113331a-194c-4ad1-9b87-7d7a6651608f",
+        "pref_label": "Admin User",
+        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 2,
+    "total_items": 3
+  }
+}

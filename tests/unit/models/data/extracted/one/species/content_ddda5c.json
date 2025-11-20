@@ -1,0 +1,23 @@
+{
+  "created_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "831ec192-d8a1-4879-9d16-d694368cbcb8",
+    "pref_label": "Admin User",
+    "sub_id": "00000000-0000-0000-0000-000000000000",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:15:15.638382Z",
+  "id": "8c96a7a9-5056-4ef7-a0c4-53f64765602b",
+  "name": "Test Species",
+  "taxonomy_id": "12345",
+  "update_date": "2025-11-20T15:15:15.638382Z",
+  "updated_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "831ec192-d8a1-4879-9d16-d694368cbcb8",
+    "pref_label": "Admin User",
+    "sub_id": "00000000-0000-0000-0000-000000000000",
+    "type": "person"
+  }
+}

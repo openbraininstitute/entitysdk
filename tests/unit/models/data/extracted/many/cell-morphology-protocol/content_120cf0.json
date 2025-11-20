@@ -1,0 +1,124 @@
+{
+  "data": [
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "a1d354e0-8817-4e0a-9df7-c90eac9238e5",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:33.019959Z",
+      "generation_type": "placeholder",
+      "id": "a5f01cb2-1e2e-45a9-bc38-fbfce5ee8b6e",
+      "type": "cell_morphology_protocol",
+      "update_date": "2025-11-20T15:13:33.019959Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "a1d354e0-8817-4e0a-9df7-c90eac9238e5",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    },
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "a1d354e0-8817-4e0a-9df7-c90eac9238e5",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:33.017543Z",
+      "generation_type": "computationally_synthesized",
+      "id": "aebbb569-54e2-4536-ad9e-5e9a7738b054",
+      "method_type": "free-text",
+      "protocol_design": "electron_microscopy",
+      "protocol_document": null,
+      "type": "cell_morphology_protocol",
+      "update_date": "2025-11-20T15:13:33.017543Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "a1d354e0-8817-4e0a-9df7-c90eac9238e5",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    },
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "a1d354e0-8817-4e0a-9df7-c90eac9238e5",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:33.015012Z",
+      "generation_type": "modified_reconstruction",
+      "id": "a42e5723-18d5-4c2f-99b8-fc6095b8ab78",
+      "method_type": "cloned",
+      "protocol_design": "fluorophore",
+      "protocol_document": null,
+      "type": "cell_morphology_protocol",
+      "update_date": "2025-11-20T15:13:33.015012Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "a1d354e0-8817-4e0a-9df7-c90eac9238e5",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    },
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "corrected_for_shrinkage": null,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "a1d354e0-8817-4e0a-9df7-c90eac9238e5",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:33.010378Z",
+      "generation_type": "digital_reconstruction",
+      "id": "0afbe0f8-8aa9-43c2-ae1b-3b945ff90bcb",
+      "magnification": null,
+      "protocol_design": "cell_patch",
+      "protocol_document": "https://example.com/",
+      "slicing_direction": "horizontal",
+      "slicing_thickness": 200.0,
+      "staining_type": null,
+      "tissue_shrinkage": null,
+      "type": "cell_morphology_protocol",
+      "update_date": "2025-11-20T15:13:33.010378Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "a1d354e0-8817-4e0a-9df7-c90eac9238e5",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 4
+  }
+}

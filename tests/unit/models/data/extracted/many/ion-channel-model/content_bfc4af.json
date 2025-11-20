@@ -1,0 +1,318 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:14:38.269225Z",
+        "hierarchy_id": "e63735b4-ab4a-4471-9e69-6929fb42e6b1",
+        "id": "dc8ebadd-b4e0-4937-b221-1dff86fe2127",
+        "name": "RedRegion",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:14:38.269225Z"
+      },
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "22da9aba-3a9c-43ac-a07b-a4e2ef72824d",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:38.330902Z",
+      "description": "Test description",
+      "experiment_date": null,
+      "id": "ef54bf39-0fc3-450d-86b6-04e0bc0b13f1",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "name": "Private u1/1",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "test",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "f5965dcd-266b-4e6f-8a44-fa7c8cd7e3ae",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "a41e93d6-2323-4cd2-a7f5-ccda23a27207",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "efd74706-ed1c-49af-a730-1f60300a80e3",
+          "name": "Test Strain",
+          "species_id": "a41e93d6-2323-4cd2-a7f5-ccda23a27207",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-11-20T15:14:38.330902Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "22da9aba-3a9c-43ac-a07b-a4e2ef72824d",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:14:38.269225Z",
+        "hierarchy_id": "e63735b4-ab4a-4471-9e69-6929fb42e6b1",
+        "id": "dc8ebadd-b4e0-4937-b221-1dff86fe2127",
+        "name": "RedRegion",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:14:38.269225Z"
+      },
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "22da9aba-3a9c-43ac-a07b-a4e2ef72824d",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:38.319342Z",
+      "description": "Test description",
+      "experiment_date": null,
+      "id": "c93f5c77-17cc-4ffa-80d0-baa5cf24c710",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "name": "Private u1/0",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "test",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "f5965dcd-266b-4e6f-8a44-fa7c8cd7e3ae",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "a41e93d6-2323-4cd2-a7f5-ccda23a27207",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "efd74706-ed1c-49af-a730-1f60300a80e3",
+          "name": "Test Strain",
+          "species_id": "a41e93d6-2323-4cd2-a7f5-ccda23a27207",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-11-20T15:14:38.319342Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "22da9aba-3a9c-43ac-a07b-a4e2ef72824d",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": true,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:14:38.269225Z",
+        "hierarchy_id": "e63735b4-ab4a-4471-9e69-6929fb42e6b1",
+        "id": "dc8ebadd-b4e0-4937-b221-1dff86fe2127",
+        "name": "RedRegion",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:14:38.269225Z"
+      },
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "1f243ea5-9776-4f0b-98e5-4591682472da",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:38.292585Z",
+      "description": "Test description",
+      "experiment_date": null,
+      "id": "125be129-e176-405c-be80-5512dfc1d49c",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "name": "Public u2/0",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "test",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "f5965dcd-266b-4e6f-8a44-fa7c8cd7e3ae",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "a41e93d6-2323-4cd2-a7f5-ccda23a27207",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "efd74706-ed1c-49af-a730-1f60300a80e3",
+          "name": "Test Strain",
+          "species_id": "a41e93d6-2323-4cd2-a7f5-ccda23a27207",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-11-20T15:14:38.292585Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "1f243ea5-9776-4f0b-98e5-4591682472da",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": true,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:14:38.269225Z",
+        "hierarchy_id": "e63735b4-ab4a-4471-9e69-6929fb42e6b1",
+        "id": "dc8ebadd-b4e0-4937-b221-1dff86fe2127",
+        "name": "RedRegion",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:14:38.269225Z"
+      },
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "22da9aba-3a9c-43ac-a07b-a4e2ef72824d",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:38.277709Z",
+      "description": "Test description",
+      "experiment_date": null,
+      "id": "037f5bc1-0181-48ae-bce1-4d437c0f74fe",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "name": "Public u1/0",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "test",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "f5965dcd-266b-4e6f-8a44-fa7c8cd7e3ae",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "a41e93d6-2323-4cd2-a7f5-ccda23a27207",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "efd74706-ed1c-49af-a730-1f60300a80e3",
+          "name": "Test Strain",
+          "species_id": "a41e93d6-2323-4cd2-a7f5-ccda23a27207",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-11-20T15:14:38.277709Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "22da9aba-3a9c-43ac-a07b-a4e2ef72824d",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 4
+  }
+}

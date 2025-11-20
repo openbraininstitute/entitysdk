@@ -1,0 +1,31 @@
+{
+  "assets": [],
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "contributions": [],
+  "created_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "aefd1169-9ba7-45c2-b406-3d880514f70e",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:13:42.482636Z",
+  "description": "circuit-extraction-campaign",
+  "id": "25bf4a34-4f9f-4e51-81a3-6a9a27f628b0",
+  "name": "circuit-extraction-campaign",
+  "scan_parameters": {
+    "foo": "bar"
+  },
+  "type": "circuit_extraction_campaign",
+  "update_date": "2025-11-20T15:13:42.482636Z",
+  "updated_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "aefd1169-9ba7-45c2-b406-3d880514f70e",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  }
+}

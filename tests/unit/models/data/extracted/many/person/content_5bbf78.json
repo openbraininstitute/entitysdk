@@ -1,0 +1,88 @@
+{
+  "data": [
+    {
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "73c48513-79e7-48f6-a71a-e98be4f1fad0",
+        "pref_label": "Admin User",
+        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:17.917228Z",
+      "family_name": "courcol",
+      "given_name": "jd",
+      "id": "72625ce9-6f92-474b-836c-453cf3f2ed6f",
+      "pref_label": "jd courcol",
+      "sub_id": null,
+      "type": "person",
+      "update_date": "2025-11-20T15:15:17.917228Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "73c48513-79e7-48f6-a71a-e98be4f1fad0",
+        "pref_label": "Admin User",
+        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "type": "person"
+      }
+    },
+    {
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "73c48513-79e7-48f6-a71a-e98be4f1fad0",
+        "pref_label": "Admin User",
+        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:17.884534Z",
+      "family_name": "courcol",
+      "given_name": "jd",
+      "id": "0f36a4a2-8f48-4971-984c-f01734158a1f",
+      "pref_label": "jd courcol",
+      "sub_id": null,
+      "type": "person",
+      "update_date": "2025-11-20T15:15:17.884534Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "73c48513-79e7-48f6-a71a-e98be4f1fad0",
+        "pref_label": "Admin User",
+        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "type": "person"
+      }
+    },
+    {
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "73c48513-79e7-48f6-a71a-e98be4f1fad0",
+        "pref_label": "Admin User",
+        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:17.884534Z",
+      "family_name": null,
+      "given_name": null,
+      "id": "73c48513-79e7-48f6-a71a-e98be4f1fad0",
+      "pref_label": "Admin User",
+      "sub_id": "00000000-0000-0000-0000-000000000000",
+      "type": "person",
+      "update_date": "2025-11-20T15:15:17.884534Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "73c48513-79e7-48f6-a71a-e98be4f1fad0",
+        "pref_label": "Admin User",
+        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 3
+  }
+}

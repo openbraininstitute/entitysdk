@@ -1,0 +1,46 @@
+{
+  "assets": [],
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "created_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "f1f92f2f-09b6-4cea-8fa2-051fe22bc246",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:13:06.967708Z",
+  "id": "93a46015-d4f9-4719-a684-b541966bcf3e",
+  "runtime_info": {
+    "docker": {
+      "docker_version": null,
+      "image_digest": null,
+      "image_repository": "obi-notebook-image",
+      "image_tag": ">=2025.09.24-2"
+    },
+    "os": {
+      "machine": "arm64",
+      "processor": "arm",
+      "release": "24.5.0",
+      "system": "Darwin",
+      "version": "Darwin Kernel Version 24.5.0..."
+    },
+    "python": {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "implementation": "CPython",
+      "version": "3.13.7"
+    },
+    "schema_version": 1
+  },
+  "type": "analysis_notebook_environment",
+  "update_date": "2025-11-20T15:13:06.967708Z",
+  "updated_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "f1f92f2f-09b6-4cea-8fa2-051fe22bc246",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  }
+}

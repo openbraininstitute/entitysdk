@@ -1,0 +1,236 @@
+{
+  "data": [
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "f070fede-d0f4-4f60-9a56-c3959dcd228e",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:49.147091Z",
+      "end_time": "2025-11-20T15:14:49.061086Z",
+      "generated": [
+        {
+          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_public": false,
+          "id": "4754304f-14a8-41fa-b4ce-ae68bb78b05d",
+          "type": "ion_channel_model"
+        }
+      ],
+      "id": "f8a083b5-c7f8-4f67-a4c5-e0ab062a3d26",
+      "start_time": "2025-11-20T15:14:49.061080Z",
+      "status": "done",
+      "type": "ion_channel_modeling_execution",
+      "update_date": "2025-11-20T15:14:49.147091Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "f070fede-d0f4-4f60-9a56-c3959dcd228e",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "used": [
+        {
+          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_public": false,
+          "id": "ed6272cc-5c56-4784-a839-a8f7752968b0",
+          "type": "cell_morphology"
+        },
+        {
+          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_public": false,
+          "id": "488876c4-5200-495b-b7b0-0ba21b01dcae",
+          "type": "ion_channel_modeling_config"
+        }
+      ]
+    },
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "f070fede-d0f4-4f60-9a56-c3959dcd228e",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:49.135324Z",
+      "end_time": "2025-11-20T15:14:49.061086Z",
+      "generated": [
+        {
+          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_public": false,
+          "id": "488876c4-5200-495b-b7b0-0ba21b01dcae",
+          "type": "ion_channel_modeling_config"
+        },
+        {
+          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_public": false,
+          "id": "4754304f-14a8-41fa-b4ce-ae68bb78b05d",
+          "type": "ion_channel_model"
+        }
+      ],
+      "id": "9ebceb54-07d0-4e64-9a90-100ada49a1bd",
+      "start_time": "2025-11-20T15:14:49.061080Z",
+      "status": "done",
+      "type": "ion_channel_modeling_execution",
+      "update_date": "2025-11-20T15:14:49.135324Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "f070fede-d0f4-4f60-9a56-c3959dcd228e",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "used": [
+        {
+          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_public": false,
+          "id": "488876c4-5200-495b-b7b0-0ba21b01dcae",
+          "type": "ion_channel_modeling_config"
+        },
+        {
+          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_public": false,
+          "id": "4754304f-14a8-41fa-b4ce-ae68bb78b05d",
+          "type": "ion_channel_model"
+        }
+      ]
+    },
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "f070fede-d0f4-4f60-9a56-c3959dcd228e",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:49.124627Z",
+      "end_time": "2025-11-20T15:14:49.061086Z",
+      "generated": [
+        {
+          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_public": false,
+          "id": "4754304f-14a8-41fa-b4ce-ae68bb78b05d",
+          "type": "ion_channel_model"
+        }
+      ],
+      "id": "099a9992-4948-4856-9300-632033642c3f",
+      "start_time": "2025-11-20T15:14:49.061080Z",
+      "status": "done",
+      "type": "ion_channel_modeling_execution",
+      "update_date": "2025-11-20T15:14:49.124627Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "f070fede-d0f4-4f60-9a56-c3959dcd228e",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "used": [
+        {
+          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_public": false,
+          "id": "488876c4-5200-495b-b7b0-0ba21b01dcae",
+          "type": "ion_channel_modeling_config"
+        }
+      ]
+    },
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "f070fede-d0f4-4f60-9a56-c3959dcd228e",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:49.113461Z",
+      "end_time": "2025-11-20T15:14:49.061086Z",
+      "generated": [
+        {
+          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_public": false,
+          "id": "488876c4-5200-495b-b7b0-0ba21b01dcae",
+          "type": "ion_channel_modeling_config"
+        }
+      ],
+      "id": "7665f12b-fdcc-45b5-887f-9fb761819918",
+      "start_time": "2025-11-20T15:14:49.061080Z",
+      "status": "done",
+      "type": "ion_channel_modeling_execution",
+      "update_date": "2025-11-20T15:14:49.113461Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "f070fede-d0f4-4f60-9a56-c3959dcd228e",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "used": [
+        {
+          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_public": false,
+          "id": "488876c4-5200-495b-b7b0-0ba21b01dcae",
+          "type": "ion_channel_modeling_config"
+        }
+      ]
+    },
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "f070fede-d0f4-4f60-9a56-c3959dcd228e",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:49.102879Z",
+      "end_time": "2025-11-20T15:14:49.061086Z",
+      "generated": [],
+      "id": "297e4876-36bb-4a5b-a326-f0e7ca566f4e",
+      "start_time": "2025-11-20T15:14:49.061080Z",
+      "status": "done",
+      "type": "ion_channel_modeling_execution",
+      "update_date": "2025-11-20T15:14:49.102879Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "f070fede-d0f4-4f60-9a56-c3959dcd228e",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "used": [
+        {
+          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_public": false,
+          "id": "488876c4-5200-495b-b7b0-0ba21b01dcae",
+          "type": "ion_channel_modeling_config"
+        }
+      ]
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 5
+  }
+}

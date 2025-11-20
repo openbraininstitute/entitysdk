@@ -1,0 +1,35 @@
+{
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "created_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "87debb81-dd03-4e26-bf80-d4b83908f9da",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:14:46.677385Z",
+  "end_time": "2025-11-20T15:14:46.635606Z",
+  "generated": [],
+  "id": "755c742b-17c9-4658-bf98-60d3d0719a61",
+  "start_time": "2025-11-20T15:14:46.635600Z",
+  "type": "ion_channel_modeling_config_generation",
+  "update_date": "2025-11-20T15:14:46.677385Z",
+  "updated_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "87debb81-dd03-4e26-bf80-d4b83908f9da",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "used": [
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "id": "3c0bc068-37e9-4443-82d3-854a0f1b1b82",
+      "type": "ion_channel_modeling_campaign"
+    }
+  ]
+}

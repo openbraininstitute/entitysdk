@@ -1,0 +1,32 @@
+{
+  "assets": [],
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "circuit_id": "5df4e7a3-3ec4-4881-bc53-d7f0155dd3b8",
+  "contributions": [],
+  "created_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "08a44b89-19b0-4015-aed1-d679b56800ea",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:13:45.552571Z",
+  "description": "extraction-config",
+  "id": "ea8da296-12b8-404f-979b-07c0bf8f2adf",
+  "name": "extraction-config",
+  "scan_parameters": {
+    "foo": "bar"
+  },
+  "type": "circuit_extraction_config",
+  "update_date": "2025-11-20T15:13:45.552571Z",
+  "updated_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "08a44b89-19b0-4015-aed1-d679b56800ea",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  }
+}

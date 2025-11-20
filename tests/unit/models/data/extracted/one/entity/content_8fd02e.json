@@ -1,0 +1,22 @@
+{
+  "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": true,
+  "created_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "97e1e371-def9-4a4b-98e6-943e783f27a2",
+    "pref_label": "Regular User With Different Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000002",
+    "type": "person"
+  },
+  "id": "ec003376-17cf-4130-af2b-0c3a5a7d039c",
+  "type": "cell_morphology",
+  "updated_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "97e1e371-def9-4a4b-98e6-943e783f27a2",
+    "pref_label": "Regular User With Different Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000002",
+    "type": "person"
+  }
+}

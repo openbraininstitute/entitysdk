@@ -1,0 +1,27 @@
+{
+  "assets": [],
+  "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "created_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "0347c534-9b95-42e0-93f1-10d767a472de",
+    "pref_label": "Regular User With Different Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000002",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:13:12.202716Z",
+  "description": "analysis-notebook-result-description",
+  "id": "96548e38-5d75-460b-88df-657e84db0b76",
+  "name": "Private u2/0",
+  "type": "analysis_notebook_result",
+  "update_date": "2025-11-20T15:13:12.202716Z",
+  "updated_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "0347c534-9b95-42e0-93f1-10d767a472de",
+    "pref_label": "Regular User With Different Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000002",
+    "type": "person"
+  }
+}

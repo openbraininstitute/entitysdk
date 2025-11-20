@@ -1,0 +1,46 @@
+{
+  "assets": [],
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": true,
+  "created_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "cdbf7aa2-11a5-4598-be8c-ba3d2571bd59",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:13:07.455750Z",
+  "id": "d028cc1a-3c36-4a8e-a128-93261c03adfe",
+  "runtime_info": {
+    "docker": {
+      "docker_version": null,
+      "image_digest": null,
+      "image_repository": "obi-notebook-image",
+      "image_tag": ">=2025.09.24-2"
+    },
+    "os": {
+      "machine": "arm64",
+      "processor": "arm",
+      "release": "24.5.0",
+      "system": "Darwin",
+      "version": "Darwin Kernel Version 24.5.0..."
+    },
+    "python": {
+      "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+      "implementation": "CPython",
+      "version": "3.13.7"
+    },
+    "schema_version": 1
+  },
+  "type": "analysis_notebook_environment",
+  "update_date": "2025-11-20T15:13:07.455750Z",
+  "updated_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "cdbf7aa2-11a5-4598-be8c-ba3d2571bd59",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "alternative_name": "test organization alternative name",
+  "created_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "35bf6df1-3699-42c8-bc82-7b76e6a09622",
+    "pref_label": "Admin User",
+    "sub_id": "00000000-0000-0000-0000-000000000000",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:15:17.360708Z",
+  "id": "c32a9429-f890-4bac-a81e-ed238bae4ec2",
+  "pref_label": "test_organization label",
+  "type": "organization",
+  "update_date": "2025-11-20T15:15:17.360708Z",
+  "updated_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "35bf6df1-3699-42c8-bc82-7b76e6a09622",
+    "pref_label": "Admin User",
+    "sub_id": "00000000-0000-0000-0000-000000000000",
+    "type": "person"
+  }
+}

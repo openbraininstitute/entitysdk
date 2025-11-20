@@ -1,0 +1,28 @@
+{
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "created_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "376ecda6-64f8-4fa1-9be9-3858adebaf8c",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:15:33.779299Z",
+  "end_time": "2025-11-20T15:15:33.737109Z",
+  "generated": [],
+  "id": "b33cdc8c-4ac2-4616-b6a9-2c4eeef99326",
+  "start_time": "2025-11-20T15:15:33.737102Z",
+  "type": "simulation_generation",
+  "update_date": "2025-11-20T15:15:33.779299Z",
+  "updated_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "376ecda6-64f8-4fa1-9be9-3858adebaf8c",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "used": []
+}

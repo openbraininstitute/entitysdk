@@ -17,3 +17,4 @@ class ScientificArtifact(Entity):
     brain_region: BrainRegion | None = None
     license: License | None = None
     published_in: str | None = None
+    notice_text: str | None = None

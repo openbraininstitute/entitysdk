@@ -1,0 +1,26 @@
+{
+  "data": [
+    {
+      "alt_label": "alt_label_5",
+      "creation_date": "2025-11-20T15:14:09.422706Z",
+      "definition": "definition_5",
+      "id": "f645609a-9f62-4b4b-ad69-03bdf8ffcef9",
+      "pref_label": "pref_label_5",
+      "update_date": "2025-11-20T15:14:09.422706Z"
+    },
+    {
+      "alt_label": "alt_label_6",
+      "creation_date": "2025-11-20T15:14:09.424014Z",
+      "definition": "definition_6",
+      "id": "f4bbf336-d1f3-4403-8e2a-e0cbc06857a3",
+      "pref_label": "pref_label_6",
+      "update_date": "2025-11-20T15:14:09.424014Z"
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 2
+  }
+}

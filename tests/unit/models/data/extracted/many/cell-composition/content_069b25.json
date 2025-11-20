@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "contributions": [],
+      "creation_date": "2025-11-20T15:13:26.989602Z",
+      "description": "my-composition-1",
+      "id": "e3e1d6cc-d8f2-43bb-8f6b-2737372cece2",
+      "name": "my-composition-1",
+      "type": "cell_composition",
+      "update_date": "2025-11-20T15:13:26.989602Z"
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

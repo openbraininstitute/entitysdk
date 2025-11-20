@@ -1,0 +1,101 @@
+{
+  "assets": [],
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "brain_region": {
+    "acronym": "acronym64",
+    "annotation_value": 64,
+    "color_hex_triplet": "FF0000",
+    "creation_date": "2025-11-20T15:14:56.345473Z",
+    "hierarchy_id": "ddd6f8d4-d844-45b9-b308-18d63c9d0185",
+    "id": "1c582e0b-7883-4de7-9a12-fb3c64fe2b7c",
+    "name": "RedRegion",
+    "parent_structure_id": null,
+    "update_date": "2025-11-20T15:14:56.345473Z"
+  },
+  "cell_morphology_protocol": null,
+  "contact_email": null,
+  "contributions": [],
+  "created_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "b011551d-9dfd-4e17-b8a2-f49cf40cd008",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:14:56.352398Z",
+  "description": "Test Morphology Description",
+  "experiment_date": null,
+  "id": "f3cf1cc5-126d-455f-bcd8-308305681702",
+  "legacy_id": [
+    "Test Legacy ID"
+  ],
+  "license": null,
+  "location": {
+    "x": 10.0,
+    "y": 20.0,
+    "z": 30.0
+  },
+  "measurement_annotation": {
+    "creation_date": "2025-11-20T15:14:56.478956Z",
+    "entity_id": "f3cf1cc5-126d-455f-bcd8-308305681702",
+    "entity_type": "cell_morphology",
+    "id": "d0dc3e01-3cc9-44c6-8576-41fe2526330c",
+    "measurement_kinds": [
+      {
+        "measurement_items": [
+          {
+            "name": "mean",
+            "unit": "\u03bcm",
+            "value": 154.2
+          },
+          {
+            "name": "median",
+            "unit": "\u03bcm",
+            "value": 144.6
+          }
+        ],
+        "pref_label": "pref_label_0",
+        "structural_domain": "axon"
+      }
+    ],
+    "update_date": "2025-11-20T15:14:56.478956Z"
+  },
+  "mtypes": [],
+  "name": "Test Morphology Name",
+  "notice_text": null,
+  "published_in": null,
+  "subject": {
+    "age_max": null,
+    "age_min": null,
+    "age_period": "postnatal",
+    "age_value": 1209600.0,
+    "description": "my-description",
+    "id": "e347e147-2f2d-4ab1-beaf-de50100235ca",
+    "name": "my-subject",
+    "sex": "female",
+    "species": {
+      "id": "6b5aa693-094b-4828-a94d-f245c47e580b",
+      "name": "Test Species",
+      "taxonomy_id": "12345"
+    },
+    "strain": {
+      "id": "37f74e70-1e7a-4cb7-b918-f6c7afc0d0c2",
+      "name": "Test Strain",
+      "species_id": "6b5aa693-094b-4828-a94d-f245c47e580b",
+      "taxonomy_id": "Taxonomy ID"
+    },
+    "weight": 1.5
+  },
+  "type": "cell_morphology",
+  "update_date": "2025-11-20T15:14:56.352398Z",
+  "updated_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "b011551d-9dfd-4e17-b8a2-f49cf40cd008",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": true,
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "0347c534-9b95-42e0-93f1-10d767a472de",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:12.188568Z",
+      "description": "analysis-notebook-result-description",
+      "id": "48dca78c-1dcc-4f4d-a3d2-047fd06a3301",
+      "name": "Public u2/0",
+      "type": "analysis_notebook_result",
+      "update_date": "2025-11-20T15:13:12.188568Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "0347c534-9b95-42e0-93f1-10d767a472de",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

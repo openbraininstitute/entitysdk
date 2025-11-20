@@ -1,0 +1,36 @@
+{
+  "data": [
+    {
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "1c7a4aff-367a-437d-9ace-6ff403c09d25",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:34.234489Z",
+      "description": "description-1",
+      "id": "6e57a9b2-c8b1-48a5-9561-34a3b7d6c62d",
+      "name": "name-1",
+      "source": "icgenealogy",
+      "source_name": "ICGenealogy",
+      "update_date": "2025-11-20T15:14:34.234489Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "1c7a4aff-367a-437d-9ace-6ff403c09d25",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "url": "https://icg.neurotheory.ox.ac.uk//wiki/page-1"
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

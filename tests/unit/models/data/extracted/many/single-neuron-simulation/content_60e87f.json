@@ -1,0 +1,234 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym0",
+        "annotation_value": 0,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:15:43.218225Z",
+        "hierarchy_id": "280b1291-a5b3-4e22-9a5f-c35073261d13",
+        "id": "bf340e69-1571-4f36-ba78-bb79d5f0878a",
+        "name": "region-0",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:15:43.218225Z"
+      },
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "4131c447-a406-4876-9e32-16c218097450",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:43.240368Z",
+      "description": "brain-region-bf340e69-1571-4f36-ba78-bb79d5f0878a me-model-b6a4611b-9107-4add-a8f6-3ef08b604c80",
+      "id": "359fc823-ae6f-446c-9b8a-ef1f04802ebe",
+      "injection_location": [
+        "soma[0]"
+      ],
+      "me_model": {
+        "creation_date": "2025-11-20T15:15:43.228980Z",
+        "description": "description-1",
+        "etypes": [],
+        "id": "b6a4611b-9107-4add-a8f6-3ef08b604c80",
+        "mtypes": [],
+        "name": "me-model-1",
+        "update_date": "2025-11-20T15:15:43.228980Z",
+        "validation_status": "created"
+      },
+      "name": "sim-2",
+      "recording_location": [
+        "soma[0]_0.5"
+      ],
+      "seed": 2,
+      "status": "success",
+      "type": "single_neuron_simulation",
+      "update_date": "2025-11-20T15:15:43.240368Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "4131c447-a406-4876-9e32-16c218097450",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym0",
+        "annotation_value": 0,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:15:43.218225Z",
+        "hierarchy_id": "280b1291-a5b3-4e22-9a5f-c35073261d13",
+        "id": "bf340e69-1571-4f36-ba78-bb79d5f0878a",
+        "name": "region-0",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:15:43.218225Z"
+      },
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "4131c447-a406-4876-9e32-16c218097450",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:43.233088Z",
+      "description": "brain-region-bf340e69-1571-4f36-ba78-bb79d5f0878a me-model-b78632dd-806b-41e5-8e6b-0afb870cca53",
+      "id": "3bd12a87-75a5-4d84-b53c-86383d2bf066",
+      "injection_location": [
+        "soma[0]"
+      ],
+      "me_model": {
+        "creation_date": "2025-11-20T15:15:43.224735Z",
+        "description": "description-0",
+        "etypes": [],
+        "id": "b78632dd-806b-41e5-8e6b-0afb870cca53",
+        "mtypes": [],
+        "name": "me-model-0",
+        "update_date": "2025-11-20T15:15:43.224735Z",
+        "validation_status": "created"
+      },
+      "name": "sim-0",
+      "recording_location": [
+        "soma[0]_0.5"
+      ],
+      "seed": 0,
+      "status": "success",
+      "type": "single_neuron_simulation",
+      "update_date": "2025-11-20T15:15:43.233088Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "4131c447-a406-4876-9e32-16c218097450",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym1",
+        "annotation_value": 1,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:15:43.221554Z",
+        "hierarchy_id": "280b1291-a5b3-4e22-9a5f-c35073261d13",
+        "id": "bb72a2d6-07f4-433a-a9fc-301cab8c9b5f",
+        "name": "region-1",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:15:43.221554Z"
+      },
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "4131c447-a406-4876-9e32-16c218097450",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:43.243596Z",
+      "description": "brain-region-bb72a2d6-07f4-433a-a9fc-301cab8c9b5f me-model-b6a4611b-9107-4add-a8f6-3ef08b604c80",
+      "id": "b63ee809-70aa-46ce-ba9e-51b20cba40c3",
+      "injection_location": [
+        "soma[0]"
+      ],
+      "me_model": {
+        "creation_date": "2025-11-20T15:15:43.228980Z",
+        "description": "description-1",
+        "etypes": [],
+        "id": "b6a4611b-9107-4add-a8f6-3ef08b604c80",
+        "mtypes": [],
+        "name": "me-model-1",
+        "update_date": "2025-11-20T15:15:43.228980Z",
+        "validation_status": "created"
+      },
+      "name": "sim-3",
+      "recording_location": [
+        "soma[0]_0.5"
+      ],
+      "seed": 3,
+      "status": "success",
+      "type": "single_neuron_simulation",
+      "update_date": "2025-11-20T15:15:43.243596Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "4131c447-a406-4876-9e32-16c218097450",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym1",
+        "annotation_value": 1,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:15:43.221554Z",
+        "hierarchy_id": "280b1291-a5b3-4e22-9a5f-c35073261d13",
+        "id": "bb72a2d6-07f4-433a-a9fc-301cab8c9b5f",
+        "name": "region-1",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:15:43.221554Z"
+      },
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "4131c447-a406-4876-9e32-16c218097450",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:43.237091Z",
+      "description": "brain-region-bb72a2d6-07f4-433a-a9fc-301cab8c9b5f me-model-b78632dd-806b-41e5-8e6b-0afb870cca53",
+      "id": "b7fc74e1-9f66-4f09-bb4d-3afce7ca8960",
+      "injection_location": [
+        "soma[0]"
+      ],
+      "me_model": {
+        "creation_date": "2025-11-20T15:15:43.224735Z",
+        "description": "description-0",
+        "etypes": [],
+        "id": "b78632dd-806b-41e5-8e6b-0afb870cca53",
+        "mtypes": [],
+        "name": "me-model-0",
+        "update_date": "2025-11-20T15:15:43.224735Z",
+        "validation_status": "created"
+      },
+      "name": "sim-1",
+      "recording_location": [
+        "soma[0]_0.5"
+      ],
+      "seed": 1,
+      "status": "success",
+      "type": "single_neuron_simulation",
+      "update_date": "2025-11-20T15:15:43.237091Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "4131c447-a406-4876-9e32-16c218097450",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 4
+  }
+}

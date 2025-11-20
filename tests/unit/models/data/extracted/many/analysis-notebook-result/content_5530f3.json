@@ -1,0 +1,64 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "0466d3f0-7123-4366-a833-5db2ec8e88b1",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:12.565202Z",
+      "description": "description-2",
+      "id": "101b9232-185a-4052-a970-e13049b003ef",
+      "name": "name-2",
+      "type": "analysis_notebook_result",
+      "update_date": "2025-11-20T15:13:12.565202Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "0466d3f0-7123-4366-a833-5db2ec8e88b1",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "0466d3f0-7123-4366-a833-5db2ec8e88b1",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:12.554241Z",
+      "description": "description-1",
+      "id": "9d5c08fd-343d-4388-b4e3-d4c6be248249",
+      "name": "name-1",
+      "type": "analysis_notebook_result",
+      "update_date": "2025-11-20T15:13:12.554241Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "0466d3f0-7123-4366-a833-5db2ec8e88b1",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 2,
+    "total_items": 3
+  }
+}

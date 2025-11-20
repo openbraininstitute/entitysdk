@@ -1,0 +1,42 @@
+{
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "created_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "449c6656-1ccc-4dfe-a3dc-eba8cd168e57",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:13:40.296452Z",
+  "end_time": "2025-11-20T15:13:40.254473Z",
+  "generated": [
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "id": "48d0b0ba-1ff0-4335-9f18-28a1fdfe0584",
+      "type": "circuit_extraction_config"
+    }
+  ],
+  "id": "0a931819-4d86-4e91-9be4-652c894113fe",
+  "start_time": "2025-11-20T15:13:40.254463Z",
+  "type": "circuit_extraction_config_generation",
+  "update_date": "2025-11-20T15:13:40.296452Z",
+  "updated_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "449c6656-1ccc-4dfe-a3dc-eba8cd168e57",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "used": [
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "id": "2af5e536-50a2-434a-b35b-34f43c2c83c9",
+      "type": "circuit_extraction_campaign"
+    }
+  ]
+}

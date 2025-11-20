@@ -1,0 +1,186 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym1",
+        "annotation_value": 1,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:15:49.223285Z",
+        "hierarchy_id": "b987db79-6b46-4a27-97e8-c635a82d9f60",
+        "id": "7e6bccc3-1d6a-4e16-9739-34a2f66c345e",
+        "name": "region-1",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:15:49.223285Z"
+      },
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "3a1a483f-2755-4848-9ddf-0879be2faf79",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:49.275654Z",
+      "description": "brain-region-7e6bccc3-1d6a-4e16-9739-34a2f66c345e me-model-0383ce75-077b-43d9-bd8b-67fe8376c131",
+      "id": "34718b1b-22e3-4798-9452-dd427d26435b",
+      "me_model": {
+        "creation_date": "2025-11-20T15:15:49.226252Z",
+        "description": "0_description",
+        "etypes": [
+          {
+            "alt_label": "e1-ce28d48d-5d91-4e78-b876-d68ba98c8baa",
+            "creation_date": "2025-11-20T15:15:49.195679Z",
+            "definition": "e1d",
+            "id": "d2cdb7cf-0985-4d7d-8d8e-cd1786a6cbea",
+            "pref_label": "e1-ce28d48d-5d91-4e78-b876-d68ba98c8baa",
+            "update_date": "2025-11-20T15:15:49.195679Z"
+          }
+        ],
+        "id": "0383ce75-077b-43d9-bd8b-67fe8376c131",
+        "mtypes": [
+          {
+            "alt_label": "m1",
+            "creation_date": "2025-11-20T15:15:49.135168Z",
+            "definition": "m1d",
+            "id": "62be0c8f-5d6d-4841-b336-6f89a3adc3b6",
+            "pref_label": "m1",
+            "update_date": "2025-11-20T15:15:49.135168Z"
+          }
+        ],
+        "name": "0",
+        "update_date": "2025-11-20T15:15:49.226252Z",
+        "validation_status": "created"
+      },
+      "name": "synaptome-1",
+      "seed": 1,
+      "type": "single_neuron_synaptome",
+      "update_date": "2025-11-20T15:15:49.275654Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "3a1a483f-2755-4848-9ddf-0879be2faf79",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym0",
+        "annotation_value": 0,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:15:49.219779Z",
+        "hierarchy_id": "b987db79-6b46-4a27-97e8-c635a82d9f60",
+        "id": "c629d86a-02f8-4cfe-8859-dba3cddd1205",
+        "name": "region-0",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:15:49.219779Z"
+      },
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "3a1a483f-2755-4848-9ddf-0879be2faf79",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:49.260877Z",
+      "description": "brain-region-c629d86a-02f8-4cfe-8859-dba3cddd1205 me-model-0383ce75-077b-43d9-bd8b-67fe8376c131",
+      "id": "486156a8-767b-4f61-85e8-6d3d5c018aa3",
+      "me_model": {
+        "creation_date": "2025-11-20T15:15:49.226252Z",
+        "description": "0_description",
+        "etypes": [
+          {
+            "alt_label": "e1-ce28d48d-5d91-4e78-b876-d68ba98c8baa",
+            "creation_date": "2025-11-20T15:15:49.195679Z",
+            "definition": "e1d",
+            "id": "d2cdb7cf-0985-4d7d-8d8e-cd1786a6cbea",
+            "pref_label": "e1-ce28d48d-5d91-4e78-b876-d68ba98c8baa",
+            "update_date": "2025-11-20T15:15:49.195679Z"
+          }
+        ],
+        "id": "0383ce75-077b-43d9-bd8b-67fe8376c131",
+        "mtypes": [
+          {
+            "alt_label": "m1",
+            "creation_date": "2025-11-20T15:15:49.135168Z",
+            "definition": "m1d",
+            "id": "62be0c8f-5d6d-4841-b336-6f89a3adc3b6",
+            "pref_label": "m1",
+            "update_date": "2025-11-20T15:15:49.135168Z"
+          }
+        ],
+        "name": "0",
+        "update_date": "2025-11-20T15:15:49.226252Z",
+        "validation_status": "created"
+      },
+      "name": "synaptome-0",
+      "seed": 0,
+      "type": "single_neuron_synaptome",
+      "update_date": "2025-11-20T15:15:49.260877Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "3a1a483f-2755-4848-9ddf-0879be2faf79",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": {
+    "brain_region": [
+      {
+        "count": 1,
+        "id": "c629d86a-02f8-4cfe-8859-dba3cddd1205",
+        "label": "region-0",
+        "type": "brain_region"
+      },
+      {
+        "count": 1,
+        "id": "7e6bccc3-1d6a-4e16-9739-34a2f66c345e",
+        "label": "region-1",
+        "type": "brain_region"
+      }
+    ],
+    "contribution": [],
+    "created_by": [
+      {
+        "count": 2,
+        "id": "3a1a483f-2755-4848-9ddf-0879be2faf79",
+        "label": "jd courcol",
+        "type": "person"
+      }
+    ],
+    "me_model": [
+      {
+        "count": 2,
+        "id": "0383ce75-077b-43d9-bd8b-67fe8376c131",
+        "label": "0",
+        "type": "me_model"
+      }
+    ],
+    "updated_by": [
+      {
+        "count": 2,
+        "id": "3a1a483f-2755-4848-9ddf-0879be2faf79",
+        "label": "jd courcol",
+        "type": "person"
+      }
+    ]
+  },
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 2
+  }
+}

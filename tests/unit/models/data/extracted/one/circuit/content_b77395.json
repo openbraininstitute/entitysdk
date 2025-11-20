@@ -1,0 +1,84 @@
+{
+  "assets": [],
+  "atlas_id": "dd85f3f1-0eb6-423f-bd7b-e90fe54347ce",
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": true,
+  "brain_region": {
+    "acronym": "acronym64",
+    "annotation_value": 64,
+    "color_hex_triplet": "FF0000",
+    "creation_date": "2025-11-20T15:13:34.360311Z",
+    "hierarchy_id": "89126552-b9a8-407d-a111-4050a7c5327c",
+    "id": "781e9869-9f99-4945-a1ac-57f3fee38ec7",
+    "name": "RedRegion",
+    "parent_structure_id": null,
+    "update_date": "2025-11-20T15:13:34.360311Z"
+  },
+  "build_category": "em_reconstruction",
+  "contact_email": null,
+  "contributions": [],
+  "created_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "64e0a0de-e0c6-4083-adb6-6c8c8cfcfbfc",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:13:34.493958Z",
+  "description": "root-circuit-description",
+  "experiment_date": null,
+  "has_electrical_cell_models": true,
+  "has_morphologies": true,
+  "has_point_neurons": true,
+  "has_spines": true,
+  "id": "4f3731f4-62e2-49c2-8ab5-9bb5fa108cdc",
+  "license": {
+    "creation_date": "2025-11-20T15:13:34.367192Z",
+    "description": "a license description",
+    "id": "26013d67-2a71-44c8-8f87-6046739a58c2",
+    "label": "test label",
+    "name": "Test License",
+    "update_date": "2025-11-20T15:13:34.367192Z"
+  },
+  "name": "root-circuit",
+  "notice_text": null,
+  "number_connections": 100000000,
+  "number_neurons": 10000000,
+  "number_synapses": 1000000000,
+  "published_in": null,
+  "root_circuit_id": null,
+  "scale": "whole_brain",
+  "subject": {
+    "age_max": null,
+    "age_min": null,
+    "age_period": "postnatal",
+    "age_value": 1209600.0,
+    "description": "my-description",
+    "id": "6b829952-2f0d-4ac4-a825-a73da3f99ed9",
+    "name": "my-subject",
+    "sex": "female",
+    "species": {
+      "id": "85da4dcf-4bba-4b17-82f6-d75e9d3a4989",
+      "name": "Test Species",
+      "taxonomy_id": "12345"
+    },
+    "strain": {
+      "id": "b537b286-4dc0-4f80-9b5d-bbd5819ed653",
+      "name": "Test Strain",
+      "species_id": "85da4dcf-4bba-4b17-82f6-d75e9d3a4989",
+      "taxonomy_id": "Taxonomy ID"
+    },
+    "weight": 1.5
+  },
+  "type": "circuit",
+  "update_date": "2025-11-20T15:13:34.493958Z",
+  "updated_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "64e0a0de-e0c6-4083-adb6-6c8c8cfcfbfc",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  }
+}

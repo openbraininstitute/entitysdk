@@ -1,0 +1,35 @@
+{
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "created_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "626fbe51-0f87-4dd9-8938-22640e5ef300",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:13:25.888680Z",
+  "end_time": "2025-11-20T15:13:25.846309Z",
+  "generated": [],
+  "id": "13b15f80-866c-40d2-be78-836b7ec4383d",
+  "start_time": "2025-11-20T15:13:25.846300Z",
+  "type": "calibration",
+  "update_date": "2025-11-20T15:13:25.888680Z",
+  "updated_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "626fbe51-0f87-4dd9-8938-22640e5ef300",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "used": [
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": true,
+      "id": "14eebf9a-ce70-464c-a793-328c957710e6",
+      "type": "circuit"
+    }
+  ]
+}

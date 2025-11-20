@@ -1,0 +1,55 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "b9dc5448-e5f6-49b3-a8ea-3a1300685931",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:28.249449Z",
+      "description": "Campaign for circuit 0",
+      "entity_id": "c3e99a4b-9555-4124-b64d-85b360e75eca",
+      "id": "cb1788c7-15ad-4405-b7a9-017109805011",
+      "name": "campaign-circuit-0",
+      "scan_parameters": {
+        "foo1": "bar2"
+      },
+      "simulations": [
+        {
+          "description": "simulation-description-0",
+          "entity_id": "c3e99a4b-9555-4124-b64d-85b360e75eca",
+          "id": "e84fe216-460b-4324-b60c-f30729fb9f5d",
+          "name": "simulation-0",
+          "scan_parameters": {
+            "foo1": "bar1",
+            "foo2": "bar2"
+          },
+          "simulation_campaign_id": "cb1788c7-15ad-4405-b7a9-017109805011",
+          "type": "simulation"
+        }
+      ],
+      "type": "simulation_campaign",
+      "update_date": "2025-11-20T15:15:28.249449Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "b9dc5448-e5f6-49b3-a8ea-3a1300685931",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

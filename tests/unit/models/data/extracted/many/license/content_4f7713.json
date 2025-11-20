@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "creation_date": "2025-11-20T15:14:55.277806Z",
+      "description": "a license description",
+      "id": "cd636d92-f2d5-4066-b0a7-09eae885c52d",
+      "label": "a label",
+      "name": "Test License",
+      "update_date": "2025-11-20T15:14:55.277806Z"
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

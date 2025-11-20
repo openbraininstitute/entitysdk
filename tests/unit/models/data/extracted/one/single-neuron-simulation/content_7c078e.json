@@ -1,0 +1,88 @@
+{
+  "assets": [
+    {
+      "content_type": "application/json",
+      "full_path": "private/9c6fba01-2c6f-4eac-893f-f0dc665605c5/ee86d4a0-eaca-48ca-9788-ddc450250b15/assets/single_neuron_simulation/4689f829-3d3d-4156-9b2c-ad554573fd64/c.json",
+      "id": "47fe2326-f4c0-4bd5-abe9-7563870710fa",
+      "is_directory": false,
+      "label": "single_neuron_simulation_data",
+      "meta": {},
+      "path": "c.json",
+      "sha256_digest": "a8124f083a58b9a8ff80cb327dd6895a10d0bc92bb918506da0c9c75906d3f91",
+      "size": 31,
+      "status": "created",
+      "storage_type": "aws_s3_internal"
+    }
+  ],
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "brain_region": {
+    "acronym": "acronym64",
+    "annotation_value": 64,
+    "color_hex_triplet": "FF0000",
+    "creation_date": "2025-11-20T15:15:39.963823Z",
+    "hierarchy_id": "b331687f-4de3-4bbb-aa0e-4b1cfed59a1f",
+    "id": "2ff2d990-5b05-4d71-9287-8cd99f676a54",
+    "name": "RedRegion",
+    "parent_structure_id": null,
+    "update_date": "2025-11-20T15:15:39.963823Z"
+  },
+  "created_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "a2a9bff7-4eed-4632-9ab3-fecb9018cdf1",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:15:40.086945Z",
+  "description": "my-description",
+  "id": "4689f829-3d3d-4156-9b2c-ad554573fd64",
+  "injection_location": [
+    "soma[0]"
+  ],
+  "me_model": {
+    "creation_date": "2025-11-20T15:15:40.065742Z",
+    "description": "0_description",
+    "etypes": [
+      {
+        "alt_label": "e1-b14b0bd3-e787-41d1-8669-568c1dfce2b3",
+        "creation_date": "2025-11-20T15:15:40.059390Z",
+        "definition": "e1d",
+        "id": "17afe663-8247-4f7a-af69-42169d699932",
+        "pref_label": "e1-b14b0bd3-e787-41d1-8669-568c1dfce2b3",
+        "update_date": "2025-11-20T15:15:40.059390Z"
+      }
+    ],
+    "id": "90f2001d-9f62-43f3-bd4a-a033b2e270fc",
+    "mtypes": [
+      {
+        "alt_label": "m1",
+        "creation_date": "2025-11-20T15:15:39.994600Z",
+        "definition": "m1d",
+        "id": "9b0769ba-7e50-4347-b4dc-37405c1560f4",
+        "pref_label": "m1",
+        "update_date": "2025-11-20T15:15:39.994600Z"
+      }
+    ],
+    "name": "0",
+    "update_date": "2025-11-20T15:15:40.065742Z",
+    "validation_status": "created"
+  },
+  "name": "foo",
+  "recording_location": [
+    "soma[0]_0.5"
+  ],
+  "seed": 1,
+  "status": "success",
+  "type": "single_neuron_simulation",
+  "update_date": "2025-11-20T15:15:40.086945Z",
+  "updated_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "a2a9bff7-4eed-4632-9ab3-fecb9018cdf1",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  }
+}

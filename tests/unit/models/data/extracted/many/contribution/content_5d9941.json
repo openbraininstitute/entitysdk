@@ -1,0 +1,52 @@
+{
+  "data": [
+    {
+      "agent": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "95dec109-4e31-43fb-b4c7-275af18b9097",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "bf86f709-3622-4cdd-aaa3-6eb834693baa",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:13:46.962307Z",
+      "entity": {
+        "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+        "authorized_public": true,
+        "id": "307b3930-c15c-4ac4-8167-27f1b1a59e53",
+        "type": "cell_morphology"
+      },
+      "id": "29a6b1f1-64fe-480d-b7ae-97a188e537fa",
+      "role": {
+        "creation_date": "2025-11-20T15:13:46.896545Z",
+        "id": "cd8df256-c88c-4c49-bd15-7d51a87552bb",
+        "name": "important role",
+        "role_id": "important role id",
+        "update_date": "2025-11-20T15:13:46.896545Z"
+      },
+      "update_date": "2025-11-20T15:13:46.962307Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "bf86f709-3622-4cdd-aaa3-6eb834693baa",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

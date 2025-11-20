@@ -1,0 +1,29 @@
+{
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "created_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "1c70ba81-5111-4b74-a0da-baee1c4de9fc",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:13:43.432247Z",
+  "end_time": "2025-11-20T15:13:43.390123Z",
+  "generated": [],
+  "id": "dfb6b02e-5d5e-4fb2-8c07-e15306cf2147",
+  "start_time": "2025-11-20T15:13:43.390117Z",
+  "status": "done",
+  "type": "circuit_extraction_execution",
+  "update_date": "2025-11-20T15:13:43.432247Z",
+  "updated_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "1c70ba81-5111-4b74-a0da-baee1c4de9fc",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "used": []
+}

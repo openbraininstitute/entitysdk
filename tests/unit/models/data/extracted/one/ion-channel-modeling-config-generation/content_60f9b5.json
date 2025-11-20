@@ -1,0 +1,42 @@
+{
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "created_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "d61b187b-4b0e-45f4-87ae-5f60e6241cb8",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:14:46.442614Z",
+  "end_time": "2025-11-20T15:14:46.400562Z",
+  "generated": [
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "id": "bcc54831-db36-4676-896f-81f20f0903c0",
+      "type": "ion_channel_modeling_config"
+    }
+  ],
+  "id": "876e7741-4d2f-421a-af9e-464a7fef724e",
+  "start_time": "2025-11-20T15:14:46.400556Z",
+  "type": "ion_channel_modeling_config_generation",
+  "update_date": "2025-11-20T15:14:46.442614Z",
+  "updated_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "d61b187b-4b0e-45f4-87ae-5f60e6241cb8",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "used": [
+    {
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "id": "7f2c0ae7-40bb-4eaa-aa47-777f3f713eb8",
+      "type": "ion_channel_modeling_campaign"
+    }
+  ]
+}

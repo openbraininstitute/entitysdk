@@ -1,0 +1,33 @@
+{
+  "data": [
+    {
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "4acacef9-2d4f-4c2f-9e28-4a5c70152d0a",
+        "pref_label": "Admin User",
+        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:16:07.672716Z",
+      "id": "64dd58c3-d454-4ae0-99fd-43e12b74df95",
+      "name": "Test Species 1",
+      "taxonomy_id": "12345_1",
+      "update_date": "2025-11-20T15:16:07.672716Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "4acacef9-2d4f-4c2f-9e28-4a5c70152d0a",
+        "pref_label": "Admin User",
+        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

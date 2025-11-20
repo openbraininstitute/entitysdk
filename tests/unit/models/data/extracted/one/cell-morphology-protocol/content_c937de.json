@@ -1,0 +1,28 @@
+{
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "created_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "d5aa4a38-509d-40b8-b4d8-ed6064233cd3",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:13:31.606354Z",
+  "generation_type": "modified_reconstruction",
+  "id": "8341fb5e-562b-443e-8e6c-9782301b7e1f",
+  "method_type": "cloned",
+  "protocol_design": "fluorophore",
+  "protocol_document": null,
+  "type": "cell_morphology_protocol",
+  "update_date": "2025-11-20T15:13:31.606354Z",
+  "updated_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "d5aa4a38-509d-40b8-b4d8-ed6064233cd3",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:15:53.624659Z",
+        "hierarchy_id": "8a93c188-9019-4e1e-8ce1-052fedfd07d7",
+        "id": "4151b529-c877-4bb0-9c2c-7076a2bd3dd1",
+        "name": "RedRegion",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:15:53.624659Z"
+      },
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "77ac5dca-44c9-424b-9835-96480178f5c2",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:53.758593Z",
+      "description": "my-description",
+      "id": "36d6a50c-df37-4d38-b961-35c2306c6014",
+      "injection_location": [
+        "soma[0]"
+      ],
+      "name": "Private u2/0",
+      "recording_location": [
+        "soma[0]_0.5"
+      ],
+      "seed": 1,
+      "status": "success",
+      "synaptome": {
+        "creation_date": "2025-11-20T15:15:53.654454Z",
+        "description": "my-synaptome-description",
+        "id": "1b0f50c8-0f9c-4f6a-bdad-44b3fa8fefb8",
+        "name": "my-synaptome",
+        "seed": 1,
+        "update_date": "2025-11-20T15:15:53.654454Z"
+      },
+      "type": "single_neuron_synaptome_simulation",
+      "update_date": "2025-11-20T15:15:53.758593Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "77ac5dca-44c9-424b-9835-96480178f5c2",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": true,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:15:53.624659Z",
+        "hierarchy_id": "8a93c188-9019-4e1e-8ce1-052fedfd07d7",
+        "id": "4151b529-c877-4bb0-9c2c-7076a2bd3dd1",
+        "name": "RedRegion",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:15:53.624659Z"
+      },
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "77ac5dca-44c9-424b-9835-96480178f5c2",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:53.746124Z",
+      "description": "my-description",
+      "id": "88099e97-dbdb-4cc1-8d95-fc8fae02aa8a",
+      "injection_location": [
+        "soma[0]"
+      ],
+      "name": "Public u2/0",
+      "recording_location": [
+        "soma[0]_0.5"
+      ],
+      "seed": 1,
+      "status": "success",
+      "synaptome": {
+        "creation_date": "2025-11-20T15:15:53.654454Z",
+        "description": "my-synaptome-description",
+        "id": "1b0f50c8-0f9c-4f6a-bdad-44b3fa8fefb8",
+        "name": "my-synaptome",
+        "seed": 1,
+        "update_date": "2025-11-20T15:15:53.654454Z"
+      },
+      "type": "single_neuron_synaptome_simulation",
+      "update_date": "2025-11-20T15:15:53.746124Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "77ac5dca-44c9-424b-9835-96480178f5c2",
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 2
+  }
+}

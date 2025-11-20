@@ -1,0 +1,66 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": true,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-11-20T15:15:41.566860Z",
+        "hierarchy_id": "55f0a56a-92e1-47f2-87e3-c6e7fd8381b1",
+        "id": "0136c5eb-b00d-476d-8b9a-b17db88e22f9",
+        "name": "RedRegion",
+        "parent_structure_id": null,
+        "update_date": "2025-11-20T15:15:41.566860Z"
+      },
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "a34a1f4a-6f9f-4835-bccc-24d6f65dd4d6",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:41.711895Z",
+      "description": "original-description",
+      "id": "64ff982d-b842-42ce-957d-08a319bd1665",
+      "injection_location": [
+        "soma[0]"
+      ],
+      "me_model": {
+        "creation_date": "2025-11-20T15:15:41.664600Z",
+        "description": "description",
+        "etypes": [],
+        "id": "f264f4f7-4dba-411a-b2f4-75cef517b751",
+        "mtypes": [],
+        "name": "name",
+        "update_date": "2025-11-20T15:15:41.664600Z",
+        "validation_status": "created"
+      },
+      "name": "Public u1/0",
+      "recording_location": [
+        "soma[0]_0.5"
+      ],
+      "seed": 1,
+      "status": "success",
+      "type": "single_neuron_simulation",
+      "update_date": "2025-11-20T15:15:41.711895Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "a34a1f4a-6f9f-4835-bccc-24d6f65dd4d6",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

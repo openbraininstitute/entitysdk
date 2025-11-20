@@ -29,6 +29,7 @@ from entitysdk.models.em_dense_reconstruction_dataset import (
     SlicingDirectionType,
 )
 from entitysdk.models.emodel import EModel
+from entitysdk.models.entity import Entity
 from entitysdk.models.etype import ETypeClass
 from entitysdk.models.ion_channel import IonChannel
 from entitysdk.models.ion_channel_model import IonChannelModel, NeuronBlock, UseIon
@@ -59,7 +60,7 @@ from entitysdk.models.skeletonization_config_generation import SkeletonizationCo
 from entitysdk.models.skeletonization_execution import SkeletonizationExecution
 from entitysdk.models.subject import Subject
 from entitysdk.models.synaptome import SingleNeuronSynaptome
-from entitysdk.models.taxonomy import Species, Strain, Taxonomy
+from entitysdk.models.taxonomy import Species, Strain
 from entitysdk.models.validation_result import ValidationResult
 
 __all__ = [
@@ -88,6 +89,7 @@ __all__ = [
     "EMCellMeshType",
     "EMDenseReconstructionDataset",
     "EModel",
+    "Entity",
     "ETypeClass",
     "ETypeClassification",
     "IonChannel",
@@ -125,7 +127,6 @@ __all__ = [
     "Species",
     "Strain",
     "Subject",
-    "Taxonomy",
     "UseIon",
     "ValidationResult",
 ]

@@ -1,0 +1,62 @@
+{
+  "data": [
+    {
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "9ddfd87c-2f9d-451d-ba77-47c2c46fbd25",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:18.256800Z",
+      "family_name": "Cooper",
+      "given_name": "john",
+      "id": "56949be0-d0f2-42ee-b5ee-4bd10b8a2e73",
+      "pref_label": "John Cooper",
+      "sub_id": null,
+      "type": "person",
+      "update_date": "2025-11-20T15:15:18.256800Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "9ddfd87c-2f9d-451d-ba77-47c2c46fbd25",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    },
+    {
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "9ddfd87c-2f9d-451d-ba77-47c2c46fbd25",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:15:18.253894Z",
+      "family_name": "Smith",
+      "given_name": "John",
+      "id": "09a23e9a-8404-45f6-b909-175d2d215fb1",
+      "pref_label": "John Smith",
+      "sub_id": null,
+      "type": "person",
+      "update_date": "2025-11-20T15:15:18.253894Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "9ddfd87c-2f9d-451d-ba77-47c2c46fbd25",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 2
+  }
+}

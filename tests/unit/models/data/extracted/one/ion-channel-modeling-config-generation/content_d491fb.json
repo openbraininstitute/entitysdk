@@ -1,0 +1,28 @@
+{
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "created_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "6758edac-e4b6-467e-8e15-cb0d750c7f46",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:14:45.918628Z",
+  "end_time": "2025-11-20T15:14:45.876532Z",
+  "generated": [],
+  "id": "6c34c005-cd09-46d7-a016-cf1c8e8de08a",
+  "start_time": "2025-11-20T15:14:45.876525Z",
+  "type": "ion_channel_modeling_config_generation",
+  "update_date": "2025-11-20T15:14:45.918628Z",
+  "updated_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "6758edac-e4b6-467e-8e15-cb0d750c7f46",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "used": []
+}

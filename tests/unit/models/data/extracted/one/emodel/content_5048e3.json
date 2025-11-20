@@ -1,0 +1,65 @@
+{
+  "assets": [],
+  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_public": false,
+  "brain_region": {
+    "acronym": "acronym1",
+    "annotation_value": 1,
+    "color_hex_triplet": "FF0000",
+    "creation_date": "2025-11-20T15:14:04.704313Z",
+    "hierarchy_id": "21d41f7a-a4f0-48f5-b6fd-1aa5f408ee0e",
+    "id": "5611ac7e-1450-404a-b88b-5b80088e2613",
+    "name": "region1",
+    "parent_structure_id": null,
+    "update_date": "2025-11-20T15:14:04.704313Z"
+  },
+  "contributions": [],
+  "created_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "a67af42d-9f74-481c-8171-24cd74b7044f",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  },
+  "creation_date": "2025-11-20T15:14:04.864081Z",
+  "description": "species2bb125ff-dde9-444e-a706-b1b696ed819f, brain_region5611ac7e-1450-404a-b88b-5b80088e2613, ex_morphologya51f2759-525f-4d7e-8d81-90ee92e28ffb",
+  "etypes": [],
+  "exemplar_morphology": {
+    "creation_date": "2025-11-20T15:14:04.729564Z",
+    "description": "Test Morphology Description",
+    "id": "a51f2759-525f-4d7e-8d81-90ee92e28ffb",
+    "legacy_id": [
+      "Test Legacy ID"
+    ],
+    "location": {
+      "x": 10.0,
+      "y": 20.0,
+      "z": 30.0
+    },
+    "name": "test exemplar morphology 1",
+    "update_date": "2025-11-20T15:14:04.729564Z"
+  },
+  "id": "cf70aaa8-7cf5-49d6-bda6-ac6665c57f70",
+  "iteration": "test iteration",
+  "mtypes": [],
+  "name": "e-7",
+  "score": 70.0,
+  "seed": -1,
+  "species": {
+    "id": "2bb125ff-dde9-444e-a706-b1b696ed819f",
+    "name": "TestSpecies1",
+    "taxonomy_id": "1"
+  },
+  "strain": null,
+  "type": "emodel",
+  "update_date": "2025-11-20T15:14:04.864081Z",
+  "updated_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "a67af42d-9f74-481c-8171-24cd74b7044f",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "type": "person"
+  }
+}

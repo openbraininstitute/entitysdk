@@ -1,0 +1,21 @@
+{
+  "data": [
+    {
+      "acronym": "root",
+      "annotation_value": 997,
+      "color_hex_triplet": "FFFFFF",
+      "creation_date": "2025-11-20T15:13:22.324146Z",
+      "hierarchy_id": "bd5186ec-af20-45e5-8dee-a473d21edd9e",
+      "id": "63cd16a2-7b03-45fa-829a-c6dbce6de7e0",
+      "name": "root",
+      "parent_structure_id": null,
+      "update_date": "2025-11-20T15:13:22.324146Z"
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

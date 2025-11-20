@@ -1,0 +1,118 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "b91932ce-346f-480b-88d6-7c364af807d5",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:43.618144Z",
+      "description": "campaign-description-2",
+      "id": "6f5b166b-3c89-4709-8178-846adf87ce6c",
+      "input_recordings": [],
+      "ion_channel_modeling_configs": [
+        {
+          "description": "config-2",
+          "id": "aa841802-e9ca-4288-96f6-25765ba6f472",
+          "ion_channel_modeling_campaign_id": "6f5b166b-3c89-4709-8178-846adf87ce6c",
+          "name": "config-2",
+          "scan_parameters": {
+            "foo": "bar"
+          },
+          "type": "ion_channel_modeling_config"
+        },
+        {
+          "description": "config-3",
+          "id": "c9c44eea-312e-444d-aacc-da0bdfa62306",
+          "ion_channel_modeling_campaign_id": "6f5b166b-3c89-4709-8178-846adf87ce6c",
+          "name": "config-3",
+          "scan_parameters": {
+            "foo": "bar"
+          },
+          "type": "ion_channel_modeling_config"
+        }
+      ],
+      "name": "campaign-2",
+      "scan_parameters": {
+        "foo": "bar"
+      },
+      "type": "ion_channel_modeling_campaign",
+      "update_date": "2025-11-20T15:14:43.618144Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "b91932ce-346f-480b-88d6-7c364af807d5",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_public": false,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "b91932ce-346f-480b-88d6-7c364af807d5",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      },
+      "creation_date": "2025-11-20T15:14:43.614151Z",
+      "description": "campaign-description-1",
+      "id": "73741d61-bfc4-4353-8f52-9f27c80a3f42",
+      "input_recordings": [],
+      "ion_channel_modeling_configs": [
+        {
+          "description": "config-1",
+          "id": "edda3c63-55fa-4544-b5c9-0b25e6bdfa68",
+          "ion_channel_modeling_campaign_id": "73741d61-bfc4-4353-8f52-9f27c80a3f42",
+          "name": "config-1",
+          "scan_parameters": {
+            "foo": "bar"
+          },
+          "type": "ion_channel_modeling_config"
+        },
+        {
+          "description": "config-2",
+          "id": "816df1ca-c86a-497a-bfa3-aa0f0df2bf6f",
+          "ion_channel_modeling_campaign_id": "73741d61-bfc4-4353-8f52-9f27c80a3f42",
+          "name": "config-2",
+          "scan_parameters": {
+            "foo": "bar"
+          },
+          "type": "ion_channel_modeling_config"
+        }
+      ],
+      "name": "campaign-1",
+      "scan_parameters": {
+        "foo": "bar"
+      },
+      "type": "ion_channel_modeling_campaign",
+      "update_date": "2025-11-20T15:14:43.614151Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "b91932ce-346f-480b-88d6-7c364af807d5",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 2
+  }
+}
