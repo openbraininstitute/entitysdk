@@ -1994,6 +1994,12 @@ class ValidationUserUpdate(BaseModel):
     generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
 
 
+class WithinBrainRegionDirection(StrEnum):
+    ascendants = "ascendants"
+    descendants = "descendants"
+    ascendants_and_descendants = "ascendants_and_descendants"
+
+
 class AgentRead(RootModel[NestedPersonRead | NestedOrganizationRead | NestedConsortiumRead]):
     root: NestedPersonRead | NestedOrganizationRead | NestedConsortiumRead
 
