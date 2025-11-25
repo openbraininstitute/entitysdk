@@ -1,17 +1,17 @@
 {
   "assets": [],
-  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
-  "authorized_public": true,
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+  "authorized_public": false,
   "brain_region": {
-    "acronym": "acronym64",
-    "annotation_value": 64,
+    "acronym": "acronym0",
+    "annotation_value": 0,
     "color_hex_triplet": "FF0000",
-    "creation_date": "2025-11-20T15:14:50.578527Z",
-    "hierarchy_id": "2c471dcd-56c8-4479-ab43-9c70dd2fdd50",
-    "id": "56d55aa5-f883-4c95-b12d-249a390a352d",
-    "name": "RedRegion",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "name": "region-0",
     "parent_structure_id": null,
-    "update_date": "2025-11-20T15:14:50.578527Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "cell_line": "CHO",
   "comment": "test comment",
@@ -20,19 +20,19 @@
   "created_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "e69daf35-1b92-4b59-9bae-7e8aba4d8667",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:14:50.620202Z",
-  "description": "description",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "description": "brain-region-0",
   "experiment_date": null,
-  "id": "ab2dac48-3703-41b5-853a-06cac1e5b721",
+  "id": "00000000-0000-4000-8000-000001234678",
   "ion_channel": {
     "description": "",
     "gene": "Kcnma1",
-    "id": "1026e655-577a-4767-af17-d774b63cfb0e",
+    "id": "00000000-0000-4000-8000-000001234678",
     "label": "K<sub>Ca</sub>1.1",
     "name": "KCa1.1",
     "synonyms": [
@@ -42,15 +42,15 @@
   },
   "legacy_id": null,
   "license": {
-    "creation_date": "2025-11-20T15:14:50.610857Z",
+    "creation_date": "2025-01-01T00:00:00Z",
     "description": "a license description",
-    "id": "e4b589b8-2537-4941-8b57-7a4fa81f9c23",
+    "id": "00000000-0000-4000-8000-000001234678",
     "label": "test label",
     "name": "Test License",
-    "update_date": "2025-11-20T15:14:50.610857Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "ljp": 11.5,
-  "name": "name",
+  "name": "trace-0",
   "notice_text": null,
   "published_in": null,
   "recording_location": [
@@ -65,31 +65,31 @@
     "age_period": "postnatal",
     "age_value": 1209600.0,
     "description": "my-description",
-    "id": "d1392a1d-ffa8-4d3e-b525-922c299420f7",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "my-subject",
     "sex": "female",
     "species": {
-      "id": "9f9e7a51-94a1-4fb7-9dfc-b4853bd7cf8d",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Test Species",
       "taxonomy_id": "12345"
     },
     "strain": {
-      "id": "95347012-f696-4bfb-98c0-4a16e1246aeb",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Test Strain",
-      "species_id": "9f9e7a51-94a1-4fb7-9dfc-b4853bd7cf8d",
+      "species_id": "00000000-0000-4000-8000-000001234678",
       "taxonomy_id": "Taxonomy ID"
     },
     "weight": 1.5
   },
   "temperature": null,
   "type": "ion_channel_recording",
-  "update_date": "2025-11-20T15:14:50.620202Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "e69daf35-1b92-4b59-9bae-7e8aba4d8667",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }
 }

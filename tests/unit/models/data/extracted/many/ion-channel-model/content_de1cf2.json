@@ -2,33 +2,33 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:14:38.269225Z",
-        "hierarchy_id": "e63735b4-ab4a-4471-9e69-6929fb42e6b1",
-        "id": "dc8ebadd-b4e0-4937-b221-1dff86fe2127",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "RedRegion",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:14:38.269225Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "contact_email": null,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "1f243ea5-9776-4f0b-98e5-4591682472da",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:38.307208Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "Test description",
       "experiment_date": null,
-      "id": "6a728d14-4de3-41b9-b859-3070a4a0b140",
+      "id": "00000000-0000-4000-8000-000001234678",
       "is_ljp_corrected": false,
       "is_stochastic": false,
       "is_temperature_dependent": false,
@@ -49,63 +49,63 @@
         "age_period": "postnatal",
         "age_value": 1209600.0,
         "description": "my-description",
-        "id": "f5965dcd-266b-4e6f-8a44-fa7c8cd7e3ae",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "my-subject",
         "sex": "female",
         "species": {
-          "id": "a41e93d6-2323-4cd2-a7f5-ccda23a27207",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "Test Species",
           "taxonomy_id": "12345"
         },
         "strain": {
-          "id": "efd74706-ed1c-49af-a730-1f60300a80e3",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "Test Strain",
-          "species_id": "a41e93d6-2323-4cd2-a7f5-ccda23a27207",
+          "species_id": "00000000-0000-4000-8000-000001234678",
           "taxonomy_id": "Taxonomy ID"
         },
         "weight": 1.5
       },
       "temperature_celsius": 0,
       "type": "ion_channel_model",
-      "update_date": "2025-11-20T15:14:38.307208Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "1f243ea5-9776-4f0b-98e5-4591682472da",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": true,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:14:38.269225Z",
-        "hierarchy_id": "e63735b4-ab4a-4471-9e69-6929fb42e6b1",
-        "id": "dc8ebadd-b4e0-4937-b221-1dff86fe2127",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "RedRegion",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:14:38.269225Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "contact_email": null,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "1f243ea5-9776-4f0b-98e5-4591682472da",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:38.292585Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "Test description",
       "experiment_date": null,
-      "id": "125be129-e176-405c-be80-5512dfc1d49c",
+      "id": "00000000-0000-4000-8000-000001234678",
       "is_ljp_corrected": false,
       "is_stochastic": false,
       "is_temperature_dependent": false,
@@ -126,31 +126,31 @@
         "age_period": "postnatal",
         "age_value": 1209600.0,
         "description": "my-description",
-        "id": "f5965dcd-266b-4e6f-8a44-fa7c8cd7e3ae",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "my-subject",
         "sex": "female",
         "species": {
-          "id": "a41e93d6-2323-4cd2-a7f5-ccda23a27207",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "Test Species",
           "taxonomy_id": "12345"
         },
         "strain": {
-          "id": "efd74706-ed1c-49af-a730-1f60300a80e3",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "Test Strain",
-          "species_id": "a41e93d6-2323-4cd2-a7f5-ccda23a27207",
+          "species_id": "00000000-0000-4000-8000-000001234678",
           "taxonomy_id": "Taxonomy ID"
         },
         "weight": 1.5
       },
       "temperature_celsius": 0,
       "type": "ion_channel_model",
-      "update_date": "2025-11-20T15:14:38.292585Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "1f243ea5-9776-4f0b-98e5-4591682472da",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

@@ -1,43 +1,43 @@
 {
   "data": [
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "5a83053b-a076-4413-ba94-6098a8dca126",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:16:02.204222Z",
-      "end_time": "2025-11-20T15:16:02.162505Z",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "end_time": "2025-01-01T00:00:00Z",
       "generated": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "960fd8e6-1615-4afe-b5d5-c8418ee7277c",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "skeletonization_config"
         }
       ],
-      "id": "d4c5bad7-2b7b-4d0e-889e-840c4e007f5e",
-      "start_time": "2025-11-20T15:16:02.162496Z",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "start_time": "2025-01-01T00:00:00Z",
       "type": "skeletonization_config_generation",
-      "update_date": "2025-11-20T15:16:02.204222Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "5a83053b-a076-4413-ba94-6098a8dca126",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "used": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "489e965b-69c8-4a27-b751-89d2a3da1fdb",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "skeletonization_campaign"
         }
       ]

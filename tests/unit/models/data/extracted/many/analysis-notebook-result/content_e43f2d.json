@@ -2,82 +2,82 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "b3c10541-9747-4664-9b06-c2ab51851e1e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:12.224971Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "analysis-notebook-result-description",
-      "id": "395446e7-b4f6-4218-965f-46be91802df1",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Private u1/1",
       "type": "analysis_notebook_result",
-      "update_date": "2025-11-20T15:13:12.224971Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "b3c10541-9747-4664-9b06-c2ab51851e1e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "b3c10541-9747-4664-9b06-c2ab51851e1e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:12.214219Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "analysis-notebook-result-description",
-      "id": "c0c77df8-d3c4-4329-bef6-41102674016f",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Private u1/0",
       "type": "analysis_notebook_result",
-      "update_date": "2025-11-20T15:13:12.214219Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "b3c10541-9747-4664-9b06-c2ab51851e1e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": true,
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "b3c10541-9747-4664-9b06-c2ab51851e1e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:12.166257Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "analysis-notebook-result-description",
-      "id": "6ad10eeb-8172-4666-b563-6e2ba7dbfdb8",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Public u1/0",
       "type": "analysis_notebook_result",
-      "update_date": "2025-11-20T15:13:12.166257Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "b3c10541-9747-4664-9b06-c2ab51851e1e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

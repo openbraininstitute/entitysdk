@@ -1,43 +1,43 @@
 {
-  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
-  "authorized_public": true,
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+  "authorized_public": false,
   "created_by": {
     "family_name": null,
     "given_name": null,
-    "id": "b1452398-bbed-4350-a022-8a8cbb756833",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Regular User With Project Id",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:14:49.551046Z",
-  "end_time": "2025-11-20T15:14:49.402910Z",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "end_time": "2025-01-01T00:00:00Z",
   "generated": [
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
-      "id": "9e48ded1-3b0b-41c8-b7b9-eab185a79555",
-      "type": "ion_channel_model"
+      "id": "00000000-0000-4000-8000-000001234678",
+      "type": "ion_channel_modeling_config"
     }
   ],
-  "id": "8a733c95-a9e7-4e79-960c-52ee061de00c",
-  "start_time": "2025-11-20T15:14:49.402901Z",
+  "id": "00000000-0000-4000-8000-000001234678",
+  "start_time": "2025-01-01T00:00:00Z",
   "status": "done",
   "type": "ion_channel_modeling_execution",
-  "update_date": "2025-11-20T15:14:49.551046Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": null,
     "given_name": null,
-    "id": "b1452398-bbed-4350-a022-8a8cbb756833",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Regular User With Project Id",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
   "used": [
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
-      "id": "bd7c5ec0-77a4-41e3-805c-b9166752b6e1",
-      "type": "ion_channel_modeling_config"
+      "id": "00000000-0000-4000-8000-000001234678",
+      "type": "ion_channel_modeling_campaign"
     }
   ]
 }

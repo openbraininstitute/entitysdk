@@ -2,125 +2,125 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "90f9a979-4530-4bde-b992-d9146bb5dd53",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:36.741958Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "circuit-extraction-campaign",
-      "id": "3ed2fe68-1aa0-48d1-90f6-b70daafb1446",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Private u1/1",
       "scan_parameters": {
         "foo": "bar"
       },
       "type": "circuit_extraction_campaign",
-      "update_date": "2025-11-20T15:13:36.741958Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "90f9a979-4530-4bde-b992-d9146bb5dd53",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "90f9a979-4530-4bde-b992-d9146bb5dd53",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:36.730317Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "circuit-extraction-campaign",
-      "id": "2794bce0-e3eb-41d5-a07f-d09633dac405",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Private u1/0",
       "scan_parameters": {
         "foo": "bar"
       },
       "type": "circuit_extraction_campaign",
-      "update_date": "2025-11-20T15:13:36.730317Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "90f9a979-4530-4bde-b992-d9146bb5dd53",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": true,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "8d4dae23-7be9-4222-beee-54721a306380",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:36.706782Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "circuit-extraction-campaign",
-      "id": "d0c72817-3477-4c89-98c7-b761e56e5693",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Public u2/0",
       "scan_parameters": {
         "foo": "bar"
       },
       "type": "circuit_extraction_campaign",
-      "update_date": "2025-11-20T15:13:36.706782Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "8d4dae23-7be9-4222-beee-54721a306380",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": true,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "90f9a979-4530-4bde-b992-d9146bb5dd53",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:36.691890Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "circuit-extraction-campaign",
-      "id": "74c93ce8-02ce-4c90-8d64-bed30bd554d2",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Public u1/0",
       "scan_parameters": {
         "foo": "bar"
       },
       "type": "circuit_extraction_campaign",
-      "update_date": "2025-11-20T15:13:36.691890Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "90f9a979-4530-4bde-b992-d9146bb5dd53",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

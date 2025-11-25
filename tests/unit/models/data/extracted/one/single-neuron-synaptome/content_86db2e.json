@@ -1,68 +1,68 @@
 {
   "assets": [],
-  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "brain_region": {
-    "acronym": "acronym0",
-    "annotation_value": 0,
+    "acronym": "acronym1",
+    "annotation_value": 1,
     "color_hex_triplet": "FF0000",
-    "creation_date": "2025-11-20T15:15:49.219779Z",
-    "hierarchy_id": "b987db79-6b46-4a27-97e8-c635a82d9f60",
-    "id": "c629d86a-02f8-4cfe-8859-dba3cddd1205",
-    "name": "region-0",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "name": "region-1",
     "parent_structure_id": null,
-    "update_date": "2025-11-20T15:15:49.219779Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "contributions": [],
   "created_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "3a1a483f-2755-4848-9ddf-0879be2faf79",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:15:49.288803Z",
-  "description": "brain-region-c629d86a-02f8-4cfe-8859-dba3cddd1205 me-model-1321f831-2670-4567-8c9a-35e6e372fc85",
-  "id": "83ca51a3-758f-4650-9846-33053af5ea4a",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "description": "sim-desc-3",
+  "id": "00000000-0000-4000-8000-000001234678",
   "me_model": {
-    "creation_date": "2025-11-20T15:15:49.241515Z",
+    "creation_date": "2025-01-01T00:00:00Z",
     "description": "1_description",
     "etypes": [
       {
-        "alt_label": "e1-ce28d48d-5d91-4e78-b876-d68ba98c8baa",
-        "creation_date": "2025-11-20T15:15:49.195679Z",
+        "alt_label": "etype-emodel-0",
+        "creation_date": "2025-01-01T00:00:00Z",
         "definition": "e1d",
-        "id": "d2cdb7cf-0985-4d7d-8d8e-cd1786a6cbea",
-        "pref_label": "e1-ce28d48d-5d91-4e78-b876-d68ba98c8baa",
-        "update_date": "2025-11-20T15:15:49.195679Z"
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "etype-emodel-0",
+        "update_date": "2025-01-01T00:00:00Z"
       }
     ],
-    "id": "1321f831-2670-4567-8c9a-35e6e372fc85",
+    "id": "00000000-0000-4000-8000-000001234678",
     "mtypes": [
       {
         "alt_label": "m1",
-        "creation_date": "2025-11-20T15:15:49.135168Z",
+        "creation_date": "2025-01-01T00:00:00Z",
         "definition": "m1d",
-        "id": "62be0c8f-5d6d-4841-b336-6f89a3adc3b6",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "m1",
-        "update_date": "2025-11-20T15:15:49.135168Z"
+        "update_date": "2025-01-01T00:00:00Z"
       }
     ],
     "name": "1",
-    "update_date": "2025-11-20T15:15:49.241515Z",
+    "update_date": "2025-01-01T00:00:00Z",
     "validation_status": "created"
   },
-  "name": "synaptome-2",
-  "seed": 2,
+  "name": "synaptome-3",
+  "seed": 3,
   "type": "single_neuron_synaptome",
-  "update_date": "2025-11-20T15:15:49.288803Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "3a1a483f-2755-4848-9ddf-0879be2faf79",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }
 }

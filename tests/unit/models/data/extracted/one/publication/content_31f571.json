@@ -1,5 +1,5 @@
 {
-  "DOI": "10.1016/B978-0-12-814141-0.00003-4",
+  "DOI": "10.5061/dryad.q447c/1",
   "abstract": "my-abstract",
   "authors": [
     {
@@ -14,22 +14,22 @@
   "created_by": {
     "family_name": null,
     "given_name": null,
-    "id": "97b26c49-0e0d-4e69-87df-57d2bde72d11",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Admin User",
-    "sub_id": "00000000-0000-0000-0000-000000000000",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:15:18.561347Z",
-  "id": "4acf5d2d-0b4b-4c72-99d5-c6554a196171",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "id": "00000000-0000-4000-8000-000001234678",
   "publication_year": 2024,
   "title": "my-title",
-  "update_date": "2025-11-20T15:15:18.561347Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": null,
     "given_name": null,
-    "id": "97b26c49-0e0d-4e69-87df-57d2bde72d11",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Admin User",
-    "sub_id": "00000000-0000-0000-0000-000000000000",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }
 }

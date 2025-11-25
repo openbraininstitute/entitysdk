@@ -1,42 +1,42 @@
 {
-  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "created_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "e212b408-2636-408b-a2d5-d95de1573e7a",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:16:07.544187Z",
-  "end_time": "2025-11-20T15:16:07.502218Z",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "end_time": "2025-01-01T00:00:00Z",
   "generated": [
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
-      "id": "41927bfd-3332-49f3-bbda-7f313a934a0a",
+      "id": "00000000-0000-4000-8000-000001234678",
       "type": "cell_morphology"
     }
   ],
-  "id": "fab8eb61-3670-4a80-8a39-91cf61170aa2",
-  "start_time": "2025-11-20T15:16:07.502209Z",
+  "id": "00000000-0000-4000-8000-000001234678",
+  "start_time": "2025-01-01T00:00:00Z",
   "status": "done",
   "type": "skeletonization_execution",
-  "update_date": "2025-11-20T15:16:07.544187Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "e212b408-2636-408b-a2d5-d95de1573e7a",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
   "used": [
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
-      "id": "e14095d9-769e-49bc-8ca3-3ffce2277616",
+      "id": "00000000-0000-4000-8000-000001234678",
       "type": "skeletonization_config"
     }
   ]

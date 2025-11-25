@@ -2,67 +2,67 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "25ee5717-4959-41dc-9ec5-48079dc458ed",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:25.333606Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "simulation-description",
-      "entity_id": "3b5caa9d-c1ed-4668-bb03-04aa14f8d616",
-      "id": "5176806c-e61e-480d-9ffc-93f75ae1178f",
+      "entity_id": "00000000-0000-4000-8000-000001234678",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Private u2/0",
       "scan_parameters": {
         "foo1": "bar1",
         "foo2": "bar2"
       },
-      "simulation_campaign_id": "e63b9d69-80c7-4b93-aa74-6bb0341fa344",
+      "simulation_campaign_id": "00000000-0000-4000-8000-000001234678",
       "type": "simulation",
-      "update_date": "2025-11-20T15:15:25.333606Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "25ee5717-4959-41dc-9ec5-48079dc458ed",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": true,
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "25ee5717-4959-41dc-9ec5-48079dc458ed",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:25.320380Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "simulation-description",
-      "entity_id": "3b5caa9d-c1ed-4668-bb03-04aa14f8d616",
-      "id": "490bf44c-42a7-4e76-ac5c-56bb55ee12e5",
+      "entity_id": "00000000-0000-4000-8000-000001234678",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Public u2/0",
       "scan_parameters": {
         "foo1": "bar1",
         "foo2": "bar2"
       },
-      "simulation_campaign_id": "e63b9d69-80c7-4b93-aa74-6bb0341fa344",
+      "simulation_campaign_id": "00000000-0000-4000-8000-000001234678",
       "type": "simulation",
-      "update_date": "2025-11-20T15:15:25.320380Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "25ee5717-4959-41dc-9ec5-48079dc458ed",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

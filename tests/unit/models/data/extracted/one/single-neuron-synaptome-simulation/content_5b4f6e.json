@@ -1,54 +1,54 @@
 {
   "assets": [],
-  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "brain_region": {
-    "acronym": "acronym0",
-    "annotation_value": 0,
+    "acronym": "acronym64",
+    "annotation_value": 64,
     "color_hex_triplet": "FF0000",
-    "creation_date": "2025-11-20T15:15:55.213885Z",
-    "hierarchy_id": "f90bde89-e216-4dbc-afdb-9a1a6bb4877e",
-    "id": "477475f9-3676-40c8-89ec-ea5b07f32253",
-    "name": "region-0",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "name": "RedRegion",
     "parent_structure_id": null,
-    "update_date": "2025-11-20T15:15:55.213885Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "created_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "de322181-28b1-46ad-932d-661362b2a97c",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:15:55.255676Z",
-  "description": "brain-region-477475f9-3676-40c8-89ec-ea5b07f32253 synaptome-f1e577c4-b45f-42e2-9fd4-0deea4a025d3",
-  "id": "9eee519c-d5eb-4e70-b8fc-b404f8544338",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "description": "my-description",
+  "id": "00000000-0000-4000-8000-000001234678",
   "injection_location": [
     "soma[0]"
   ],
-  "name": "synaptome-2",
+  "name": "my-sim",
   "recording_location": [
     "soma[0]_0.5"
   ],
-  "seed": 2,
+  "seed": 1,
   "status": "success",
   "synaptome": {
-    "creation_date": "2025-11-20T15:15:55.224333Z",
-    "description": "description-1",
-    "id": "f1e577c4-b45f-42e2-9fd4-0deea4a025d3",
-    "name": "synaptome-1",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "description": "my-synaptome-description",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "name": "my-synaptome",
     "seed": 1,
-    "update_date": "2025-11-20T15:15:55.224333Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "type": "single_neuron_synaptome_simulation",
-  "update_date": "2025-11-20T15:15:55.255676Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "de322181-28b1-46ad-932d-661362b2a97c",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }
 }

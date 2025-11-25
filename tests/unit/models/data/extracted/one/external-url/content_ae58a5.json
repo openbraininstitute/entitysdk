@@ -2,24 +2,24 @@
   "created_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "17d1c9bd-be51-48df-bb23-4081153067dc",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:14:33.812128Z",
+  "creation_date": "2025-01-01T00:00:00Z",
   "description": "Contains description of potassium channels...",
-  "id": "2b1ccb5e-cd4c-41e5-8d89-a4ff4ab4dae3",
+  "id": "00000000-0000-4000-8000-000001234678",
   "name": "Potassium channel page on Channelpedia",
   "source": "channelpedia",
   "source_name": "Channelpedia",
-  "update_date": "2025-11-20T15:14:33.812128Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "17d1c9bd-be51-48df-bb23-4081153067dc",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
   "url": "https://channelpedia.epfl.ch/wikipages/188"

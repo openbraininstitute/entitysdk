@@ -2,18 +2,18 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "3a980a2f-a9a2-44c4-ba85-9c4d075bab93",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:07.728431Z",
-      "id": "41060b94-40f0-42b9-a578-472d752c7fc5",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "id": "00000000-0000-4000-8000-000001234678",
       "runtime_info": {
         "docker": {
           "docker_version": null,
@@ -36,30 +36,30 @@
         "schema_version": 1
       },
       "type": "analysis_notebook_environment",
-      "update_date": "2025-11-20T15:13:07.728431Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "3a980a2f-a9a2-44c4-ba85-9c4d075bab93",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "3a980a2f-a9a2-44c4-ba85-9c4d075bab93",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:07.718241Z",
-      "id": "7b382f1b-763c-4a53-b684-09512bc72042",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "id": "00000000-0000-4000-8000-000001234678",
       "runtime_info": {
         "docker": {
           "docker_version": null,
@@ -82,30 +82,30 @@
         "schema_version": 1
       },
       "type": "analysis_notebook_environment",
-      "update_date": "2025-11-20T15:13:07.718241Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "3a980a2f-a9a2-44c4-ba85-9c4d075bab93",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": true,
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "3a980a2f-a9a2-44c4-ba85-9c4d075bab93",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:07.681823Z",
-      "id": "70f32d1d-a2ba-4511-9e66-d7d5344ab74a",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "id": "00000000-0000-4000-8000-000001234678",
       "runtime_info": {
         "docker": {
           "docker_version": null,
@@ -128,13 +128,13 @@
         "schema_version": 1
       },
       "type": "analysis_notebook_environment",
-      "update_date": "2025-11-20T15:13:07.681823Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "3a980a2f-a9a2-44c4-ba85-9c4d075bab93",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

@@ -2,55 +2,55 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
         "acronym": "acronym-5",
         "annotation_value": 5,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:14:14.013861Z",
-        "hierarchy_id": "91b3ffbf-fa0d-4d7a-8811-b47c885160ed",
-        "id": "77400633-2458-4696-83ac-d044258c6c9a",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "region-5",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:14:14.013861Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "contributions": [
         {
           "agent": {
             "alternative_name": "alt name 1",
-            "id": "706d74b9-bbe8-48a1-822e-e37314c8a582",
+            "id": "00000000-0000-4000-8000-000001234678",
             "pref_label": "test_organization_1",
             "type": "organization"
           },
-          "id": "c9d3f255-f147-43c2-8c48-885d0b63bb28",
+          "id": "00000000-0000-4000-8000-000001234678",
           "role": {
-            "creation_date": "2025-11-20T15:14:13.969059Z",
-            "id": "d05cccc7-8ef0-4a40-9da3-ea981d72ea5c",
+            "creation_date": "2025-01-01T00:00:00Z",
+            "id": "00000000-0000-4000-8000-000001234678",
             "name": "test role",
             "role_id": "1",
-            "update_date": "2025-11-20T15:14:13.969059Z"
+            "update_date": "2025-01-01T00:00:00Z"
           }
         }
       ],
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "63f5f563-617b-4e2d-ad6b-35b503156c2e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:14.090801Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "my-description",
-      "id": "fd822a2a-dde9-4cf8-9578-39a98c52c10b",
+      "id": "00000000-0000-4000-8000-000001234678",
       "license": {
-        "creation_date": "2025-11-20T15:14:13.959233Z",
+        "creation_date": "2025-01-01T00:00:00Z",
         "description": "a license description",
-        "id": "a335eea5-d18b-4a32-9126-0a3bd53c4e20",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "test label",
         "name": "Test License",
-        "update_date": "2025-11-20T15:14:13.959233Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "measurements": [
         {
@@ -69,11 +69,11 @@
       "mtypes": [
         {
           "alt_label": "m5",
-          "creation_date": "2025-11-20T15:14:14.100053Z",
+          "creation_date": "2025-01-01T00:00:00Z",
           "definition": "d",
-          "id": "f362cabc-f421-4120-8809-4b7e734e2ced",
+          "id": "00000000-0000-4000-8000-000001234678",
           "pref_label": "m5",
-          "update_date": "2025-11-20T15:14:14.100053Z"
+          "update_date": "2025-01-01T00:00:00Z"
         }
       ],
       "name": "d-2",
@@ -83,11 +83,11 @@
         "age_period": "postnatal",
         "age_value": 1209600.0,
         "description": "my-description",
-        "id": "bad5214f-5527-48a2-a243-89dc1242f85b",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "subject-5",
         "sex": "female",
         "species": {
-          "id": "974c917a-0ace-4561-af31-f2b9bb1cc3bb",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "species-2",
           "taxonomy_id": "taxonomy-2"
         },
@@ -95,67 +95,67 @@
         "weight": 1.5
       },
       "type": "experimental_bouton_density",
-      "update_date": "2025-11-20T15:14:14.090801Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "63f5f563-617b-4e2d-ad6b-35b503156c2e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
         "acronym": "acronym-3",
         "annotation_value": 3,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:14:14.009439Z",
-        "hierarchy_id": "91b3ffbf-fa0d-4d7a-8811-b47c885160ed",
-        "id": "7e4f4c88-701a-416d-ba18-105dfa1411e6",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "region-3",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:14:14.009439Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "contributions": [
         {
           "agent": {
             "alternative_name": "alt name 1",
-            "id": "706d74b9-bbe8-48a1-822e-e37314c8a582",
+            "id": "00000000-0000-4000-8000-000001234678",
             "pref_label": "test_organization_1",
             "type": "organization"
           },
-          "id": "1949d591-695d-4f1d-a354-2bfed5a18e83",
+          "id": "00000000-0000-4000-8000-000001234678",
           "role": {
-            "creation_date": "2025-11-20T15:14:13.969059Z",
-            "id": "d05cccc7-8ef0-4a40-9da3-ea981d72ea5c",
+            "creation_date": "2025-01-01T00:00:00Z",
+            "id": "00000000-0000-4000-8000-000001234678",
             "name": "test role",
             "role_id": "1",
-            "update_date": "2025-11-20T15:14:13.969059Z"
+            "update_date": "2025-01-01T00:00:00Z"
           }
         }
       ],
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "63f5f563-617b-4e2d-ad6b-35b503156c2e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:14.062530Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "my-description",
-      "id": "07100c50-3a63-4624-8a51-4cf589d1ec46",
+      "id": "00000000-0000-4000-8000-000001234678",
       "license": {
-        "creation_date": "2025-11-20T15:14:13.959233Z",
+        "creation_date": "2025-01-01T00:00:00Z",
         "description": "a license description",
-        "id": "a335eea5-d18b-4a32-9126-0a3bd53c4e20",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "test label",
         "name": "Test License",
-        "update_date": "2025-11-20T15:14:13.959233Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "measurements": [
         {
@@ -174,11 +174,11 @@
       "mtypes": [
         {
           "alt_label": "m3",
-          "creation_date": "2025-11-20T15:14:14.072444Z",
+          "creation_date": "2025-01-01T00:00:00Z",
           "definition": "d",
-          "id": "18b0c13c-b1b7-4741-96f7-3eefda2e8dc7",
+          "id": "00000000-0000-4000-8000-000001234678",
           "pref_label": "m3",
-          "update_date": "2025-11-20T15:14:14.072444Z"
+          "update_date": "2025-01-01T00:00:00Z"
         }
       ],
       "name": "d-1",
@@ -188,11 +188,11 @@
         "age_period": "postnatal",
         "age_value": 1209600.0,
         "description": "my-description",
-        "id": "df437657-b9b3-4633-a745-544b30d12d3f",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "subject-3",
         "sex": "female",
         "species": {
-          "id": "155c0f5e-3b86-4abe-abf2-2c519817d0f1",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "species-0",
           "taxonomy_id": "taxonomy-0"
         },
@@ -200,67 +200,67 @@
         "weight": 1.5
       },
       "type": "experimental_bouton_density",
-      "update_date": "2025-11-20T15:14:14.062530Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "63f5f563-617b-4e2d-ad6b-35b503156c2e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
         "acronym": "acronym-1",
         "annotation_value": 1,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:14:14.004253Z",
-        "hierarchy_id": "91b3ffbf-fa0d-4d7a-8811-b47c885160ed",
-        "id": "c739959c-c54b-4017-b7a9-34fbbf2298ee",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "region-1",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:14:14.004253Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "contributions": [
         {
           "agent": {
             "alternative_name": "alt name 1",
-            "id": "706d74b9-bbe8-48a1-822e-e37314c8a582",
+            "id": "00000000-0000-4000-8000-000001234678",
             "pref_label": "test_organization_1",
             "type": "organization"
           },
-          "id": "df564c05-e7a6-4236-a883-f0884978bc22",
+          "id": "00000000-0000-4000-8000-000001234678",
           "role": {
-            "creation_date": "2025-11-20T15:14:13.969059Z",
-            "id": "d05cccc7-8ef0-4a40-9da3-ea981d72ea5c",
+            "creation_date": "2025-01-01T00:00:00Z",
+            "id": "00000000-0000-4000-8000-000001234678",
             "name": "test role",
             "role_id": "1",
-            "update_date": "2025-11-20T15:14:13.969059Z"
+            "update_date": "2025-01-01T00:00:00Z"
           }
         }
       ],
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "63f5f563-617b-4e2d-ad6b-35b503156c2e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:14.036070Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "my-description",
-      "id": "62a52820-a641-40c6-b31f-7da2b5a81ad3",
+      "id": "00000000-0000-4000-8000-000001234678",
       "license": {
-        "creation_date": "2025-11-20T15:14:13.959233Z",
+        "creation_date": "2025-01-01T00:00:00Z",
         "description": "a license description",
-        "id": "a335eea5-d18b-4a32-9126-0a3bd53c4e20",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "test label",
         "name": "Test License",
-        "update_date": "2025-11-20T15:14:13.959233Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "measurements": [
         {
@@ -279,11 +279,11 @@
       "mtypes": [
         {
           "alt_label": "m1",
-          "creation_date": "2025-11-20T15:14:14.045343Z",
+          "creation_date": "2025-01-01T00:00:00Z",
           "definition": "d",
-          "id": "4c35bcf9-e812-4955-b3b0-a559ed0135ae",
+          "id": "00000000-0000-4000-8000-000001234678",
           "pref_label": "m1",
-          "update_date": "2025-11-20T15:14:14.045343Z"
+          "update_date": "2025-01-01T00:00:00Z"
         }
       ],
       "name": "d-1",
@@ -293,11 +293,11 @@
         "age_period": "postnatal",
         "age_value": 1209600.0,
         "description": "my-description",
-        "id": "55e535be-6312-4f94-b96e-7fd1185b2776",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "subject-1",
         "sex": "female",
         "species": {
-          "id": "eca183f9-4135-4952-82e5-0c3135c8cc32",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "species-1",
           "taxonomy_id": "taxonomy-1"
         },
@@ -305,13 +305,13 @@
         "weight": 1.5
       },
       "type": "experimental_bouton_density",
-      "update_date": "2025-11-20T15:14:14.036070Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "63f5f563-617b-4e2d-ad6b-35b503156c2e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

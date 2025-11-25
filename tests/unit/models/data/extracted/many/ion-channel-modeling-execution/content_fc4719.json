@@ -1,44 +1,44 @@
 {
   "data": [
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "1b1d21c5-b0e6-4c07-9395-4ee88276c834",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:48.073906Z",
-      "end_time": "2025-11-20T15:14:48.032099Z",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "end_time": "2025-01-01T00:00:00Z",
       "generated": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "791a38da-b5f6-4255-8e1f-73b70fc69519",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "ion_channel_model"
         }
       ],
-      "id": "94675f39-e3dc-40be-9239-ac81835a3d00",
-      "start_time": "2025-11-20T15:14:48.032092Z",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "start_time": "2025-01-01T00:00:00Z",
       "status": "done",
       "type": "ion_channel_modeling_execution",
-      "update_date": "2025-11-20T15:14:48.073906Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "1b1d21c5-b0e6-4c07-9395-4ee88276c834",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "used": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "dc2c13e6-083c-47d6-9d53-0a3ed4481383",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "ion_channel_modeling_config"
         }
       ]

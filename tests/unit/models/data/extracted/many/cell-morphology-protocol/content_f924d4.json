@@ -1,20 +1,20 @@
 {
   "data": [
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "corrected_for_shrinkage": null,
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "223af985-8d98-415f-a3c2-f4206b728263",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:32.455206Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "generation_type": "digital_reconstruction",
-      "id": "dbef9064-5d17-4727-b5be-aad1ebeab047",
+      "id": "00000000-0000-4000-8000-000001234678",
       "magnification": null,
       "protocol_design": "cell_patch",
       "protocol_document": "https://example.com/",
@@ -23,31 +23,31 @@
       "staining_type": null,
       "tissue_shrinkage": null,
       "type": "cell_morphology_protocol",
-      "update_date": "2025-11-20T15:13:32.455206Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "223af985-8d98-415f-a3c2-f4206b728263",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "corrected_for_shrinkage": null,
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "223af985-8d98-415f-a3c2-f4206b728263",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:32.445607Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "generation_type": "digital_reconstruction",
-      "id": "ce80c29e-d614-4ea1-a6cc-5d25dafb41b6",
+      "id": "00000000-0000-4000-8000-000001234678",
       "magnification": null,
       "protocol_design": "cell_patch",
       "protocol_document": "https://example.com/",
@@ -56,31 +56,31 @@
       "staining_type": null,
       "tissue_shrinkage": null,
       "type": "cell_morphology_protocol",
-      "update_date": "2025-11-20T15:13:32.445607Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "223af985-8d98-415f-a3c2-f4206b728263",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": true,
       "corrected_for_shrinkage": null,
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "223af985-8d98-415f-a3c2-f4206b728263",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:32.411742Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "generation_type": "digital_reconstruction",
-      "id": "d1552e98-daa7-4cee-a797-eaa1f9042938",
+      "id": "00000000-0000-4000-8000-000001234678",
       "magnification": null,
       "protocol_design": "cell_patch",
       "protocol_document": "https://example.com/",
@@ -89,13 +89,13 @@
       "staining_type": null,
       "tissue_shrinkage": null,
       "type": "cell_morphology_protocol",
-      "update_date": "2025-11-20T15:13:32.411742Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "223af985-8d98-415f-a3c2-f4206b728263",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

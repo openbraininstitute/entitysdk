@@ -1,20 +1,20 @@
 {
   "data": [
     {
-      "alt_label": "alt_label_5",
-      "creation_date": "2025-11-20T15:15:14.499349Z",
-      "definition": "definition_5",
-      "id": "d91a4088-8d58-4446-ad0a-3d36fb05d70b",
-      "pref_label": "pref_label_5",
-      "update_date": "2025-11-20T15:15:14.499349Z"
+      "alt_label": "alt_label_a",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "definition": "definition_a",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "pref_label": "label_a",
+      "update_date": "2025-01-01T00:00:00Z"
     },
     {
-      "alt_label": "alt_label_6",
-      "creation_date": "2025-11-20T15:15:14.500778Z",
-      "definition": "definition_6",
-      "id": "49c12b3a-d421-416d-8576-42e213067ec6",
-      "pref_label": "pref_label_6",
-      "update_date": "2025-11-20T15:15:14.500778Z"
+      "alt_label": "alt_label_ab",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "definition": "definition_ab",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "pref_label": "label_ab",
+      "update_date": "2025-01-01T00:00:00Z"
     }
   ],
   "facets": null,

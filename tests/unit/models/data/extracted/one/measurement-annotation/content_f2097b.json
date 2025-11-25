@@ -1,8 +1,8 @@
 {
-  "creation_date": "2025-11-20T15:14:56.163695Z",
-  "entity_id": "0bb51306-fd39-41be-a2e6-9bd9d4cb704b",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "entity_id": "00000000-0000-4000-8000-000001234678",
   "entity_type": "cell_morphology",
-  "id": "fd9e21aa-d357-41b0-bcc4-dc4f952c3b45",
+  "id": "00000000-0000-4000-8000-000001234678",
   "measurement_kinds": [
     {
       "measurement_items": [
@@ -21,5 +21,5 @@
       "structural_domain": "axon"
     }
   ],
-  "update_date": "2025-11-20T15:14:56.163695Z"
+  "update_date": "2025-01-01T00:00:00Z"
 }

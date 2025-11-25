@@ -1,17 +1,17 @@
 {
   "assets": [],
-  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": true,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
     "color_hex_triplet": "FF0000",
-    "creation_date": "2025-11-20T15:14:00.750000Z",
-    "hierarchy_id": "99961aee-7c10-47ac-9a74-f379fe12cd37",
-    "id": "07c127e2-6bd7-492d-9d0c-08c5b4fa088d",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "RedRegion",
     "parent_structure_id": null,
-    "update_date": "2025-11-20T15:14:00.750000Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "cave_client_url": "https://global.daf-apis.com/",
   "cave_datastack": "minnie65_public",
@@ -21,19 +21,19 @@
   "created_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "9a7bcc6e-d723-4c4b-8e0e-2481dfeacfeb",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:14:00.755260Z",
+  "creation_date": "2025-01-01T00:00:00Z",
   "current": null,
   "description": "",
   "detector": null,
   "dose": null,
   "experiment_date": null,
   "fixation": null,
-  "id": "7dd43d8a-1e30-4f62-9a0b-d8c023f6fc75",
+  "id": "00000000-0000-4000-8000-000001234678",
   "landmarks": null,
   "license": null,
   "microscope_type": null,
@@ -52,18 +52,18 @@
     "age_period": "postnatal",
     "age_value": 1209600.0,
     "description": "my-description",
-    "id": "a1cd6523-061f-444d-9815-0912d7a8a45b",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "my-subject",
     "sex": "female",
     "species": {
-      "id": "fa3517f2-a302-417c-bd91-ca2b5f168ba5",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Test Species",
       "taxonomy_id": "12345"
     },
     "strain": {
-      "id": "990b35aa-16e1-4b2e-a118-af37b1db123e",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Test Strain",
-      "species_id": "fa3517f2-a302-417c-bd91-ca2b5f168ba5",
+      "species_id": "00000000-0000-4000-8000-000001234678",
       "taxonomy_id": "Taxonomy ID"
     },
     "weight": 1.5
@@ -71,13 +71,13 @@
   "temperature": null,
   "tissue_shrinkage": null,
   "type": "em_dense_reconstruction_dataset",
-  "update_date": "2025-11-20T15:14:00.755260Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "9a7bcc6e-d723-4c4b-8e0e-2481dfeacfeb",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
   "voltage": null,

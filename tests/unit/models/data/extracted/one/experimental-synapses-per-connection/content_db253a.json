@@ -1,90 +1,90 @@
 {
   "assets": [],
-  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
-  "authorized_public": false,
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+  "authorized_public": true,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
     "color_hex_triplet": "FF0000",
-    "creation_date": "2025-11-20T15:14:30.566944Z",
-    "hierarchy_id": "0fb107ac-42ef-4afa-86e7-93a69b30e185",
-    "id": "0044ec7a-d87b-437f-a498-8fa50eace5fc",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "RedRegion",
     "parent_structure_id": null,
-    "update_date": "2025-11-20T15:14:30.566944Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "contributions": [],
   "created_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "e9d194d5-d06d-4dfa-accb-665a09e8c085",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:14:30.727905Z",
-  "description": "d5",
-  "id": "47bd749e-92f9-4afe-ab44-983fb91da190",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "description": "my-description",
+  "id": "00000000-0000-4000-8000-000001234678",
   "license": {
-    "creation_date": "2025-11-20T15:14:30.601942Z",
+    "creation_date": "2025-01-01T00:00:00Z",
     "description": "a license description",
-    "id": "c5fa0979-3a02-4176-a853-55b19c631daa",
+    "id": "00000000-0000-4000-8000-000001234678",
     "label": "test label",
     "name": "Test License",
-    "update_date": "2025-11-20T15:14:30.601942Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "measurements": [
     {
-      "id": 11,
+      "id": 9,
       "name": "minimum",
       "unit": "\u03bcm",
       "value": 1.23
     },
     {
-      "id": 12,
+      "id": 10,
       "name": "maximum",
       "unit": "\u03bcm",
       "value": 1.45
     }
   ],
-  "name": "s5",
+  "name": "my-name",
   "post_mtype": {
-    "alt_label": "post-m3",
-    "creation_date": "2025-11-20T15:14:30.628220Z",
-    "definition": "",
-    "id": "00b87c7a-f3df-4f87-b534-0d555654142a",
-    "pref_label": "post-m3",
-    "update_date": "2025-11-20T15:14:30.628220Z"
+    "alt_label": "mtype-alt-label",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "definition": "mtype-definition",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "mtype-pref-label",
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "post_region": {
-    "acronym": "acronym3",
-    "annotation_value": 3,
+    "acronym": "acronym64",
+    "annotation_value": 64,
     "color_hex_triplet": "FF0000",
-    "creation_date": "2025-11-20T15:14:30.618700Z",
-    "hierarchy_id": "0fb107ac-42ef-4afa-86e7-93a69b30e185",
-    "id": "bc7e526d-e117-4d4c-b608-79ffbcb154e5",
-    "name": "post-r3",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "name": "RedRegion",
     "parent_structure_id": null,
-    "update_date": "2025-11-20T15:14:30.618700Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "pre_mtype": {
-    "alt_label": "pre-m0",
-    "creation_date": "2025-11-20T15:14:30.622074Z",
-    "definition": "",
-    "id": "94d71819-b7ff-4171-86b5-76b8b23ce466",
-    "pref_label": "pre-m0",
-    "update_date": "2025-11-20T15:14:30.622074Z"
+    "alt_label": "mtype-alt-label",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "definition": "mtype-definition",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "mtype-pref-label",
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "pre_region": {
-    "acronym": "acronym0",
-    "annotation_value": 0,
+    "acronym": "acronym64",
+    "annotation_value": 64,
     "color_hex_triplet": "FF0000",
-    "creation_date": "2025-11-20T15:14:30.608697Z",
-    "hierarchy_id": "0fb107ac-42ef-4afa-86e7-93a69b30e185",
-    "id": "90a24ff9-05cd-46c5-bce4-c8e1b22876ba",
-    "name": "pre-r0",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "name": "RedRegion",
     "parent_structure_id": null,
-    "update_date": "2025-11-20T15:14:30.608697Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "subject": {
     "age_max": null,
@@ -92,30 +92,30 @@
     "age_period": "postnatal",
     "age_value": 1209600.0,
     "description": "my-description",
-    "id": "a50bfef9-20ed-478d-ba11-1ea737e0c851",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "my-subject",
     "sex": "female",
     "species": {
-      "id": "ca9dc511-5bba-45f0-9c35-1809126bf03d",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Test Species",
       "taxonomy_id": "12345"
     },
     "strain": {
-      "id": "acaec7ed-f331-48a4-a84b-4fbe9f76d160",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Test Strain",
-      "species_id": "ca9dc511-5bba-45f0-9c35-1809126bf03d",
+      "species_id": "00000000-0000-4000-8000-000001234678",
       "taxonomy_id": "Taxonomy ID"
     },
     "weight": 1.5
   },
   "type": "experimental_synapses_per_connection",
-  "update_date": "2025-11-20T15:14:30.727905Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "e9d194d5-d06d-4dfa-accb-665a09e8c085",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }
 }

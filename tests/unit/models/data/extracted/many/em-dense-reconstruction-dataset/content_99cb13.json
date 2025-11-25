@@ -2,18 +2,18 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:14:01.394436Z",
-        "hierarchy_id": "c82c4788-2017-41ce-a646-74cf8ee9fda2",
-        "id": "d71b4970-734e-463a-95ac-4f10ad5ab8ca",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "RedRegion",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:14:01.394436Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "cave_client_url": "https://global.daf-apis.com/",
       "cave_datastack": "minnie65_public",
@@ -23,19 +23,19 @@
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "92618835-0f4c-404c-a70d-296d99521260",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:01.399445Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "current": null,
       "description": "name-0",
       "detector": null,
       "dose": null,
       "experiment_date": null,
       "fixation": null,
-      "id": "8e4ac96f-0fa7-448f-942c-ebc55af0f1d1",
+      "id": "00000000-0000-4000-8000-000001234678",
       "landmarks": null,
       "license": null,
       "microscope_type": null,
@@ -54,18 +54,18 @@
         "age_period": "postnatal",
         "age_value": 1209600.0,
         "description": "my-description",
-        "id": "b3b30b4d-17d1-4c5f-9f63-013f3070cdf2",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "my-subject",
         "sex": "female",
         "species": {
-          "id": "90248afc-3be7-47bb-b21b-e9fdc5664a25",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "Test Species",
           "taxonomy_id": "12345"
         },
         "strain": {
-          "id": "f90ebee4-895e-4db0-aa84-68471d4a325b",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "Test Strain",
-          "species_id": "90248afc-3be7-47bb-b21b-e9fdc5664a25",
+          "species_id": "00000000-0000-4000-8000-000001234678",
           "taxonomy_id": "Taxonomy ID"
         },
         "weight": 1.5
@@ -73,13 +73,13 @@
       "temperature": null,
       "tissue_shrinkage": null,
       "type": "em_dense_reconstruction_dataset",
-      "update_date": "2025-11-20T15:14:01.399445Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "92618835-0f4c-404c-a70d-296d99521260",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "voltage": null,
@@ -92,7 +92,7 @@
     "brain_region": [
       {
         "count": 1,
-        "id": "d71b4970-734e-463a-95ac-4f10ad5ab8ca",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "RedRegion",
         "type": "brain_region"
       }
@@ -100,7 +100,7 @@
     "species": [
       {
         "count": 1,
-        "id": "90248afc-3be7-47bb-b21b-e9fdc5664a25",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "Test Species",
         "type": "subject.species"
       }
@@ -108,7 +108,7 @@
     "strain": [
       {
         "count": 1,
-        "id": "f90ebee4-895e-4db0-aa84-68471d4a325b",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "Test Strain",
         "type": "subject.strain"
       }

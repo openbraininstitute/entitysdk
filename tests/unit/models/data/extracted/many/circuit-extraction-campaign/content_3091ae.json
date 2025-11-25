@@ -2,32 +2,32 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
-      "authorized_public": true,
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "8d4dae23-7be9-4222-beee-54721a306380",
-        "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:36.706782Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "circuit-extraction-campaign",
-      "id": "d0c72817-3477-4c89-98c7-b761e56e5693",
-      "name": "Public u2/0",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "name": "circuit-extraction-campaign",
       "scan_parameters": {
         "foo": "bar"
       },
       "type": "circuit_extraction_campaign",
-      "update_date": "2025-11-20T15:13:36.706782Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "8d4dae23-7be9-4222-beee-54721a306380",
-        "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

@@ -2,20 +2,20 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "f82d86cb-b57d-4688-9575-1813b540f898",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:14.363997Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "analysis-notebook-template-description",
-      "id": "cbc31cc3-2333-44e2-af2d-eefd52a75623",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Private u1/1",
       "scale": "cellular",
       "specifications": {
@@ -47,32 +47,32 @@
         "schema_version": 1
       },
       "type": "analysis_notebook_template",
-      "update_date": "2025-11-20T15:13:14.363997Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "f82d86cb-b57d-4688-9575-1813b540f898",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "f82d86cb-b57d-4688-9575-1813b540f898",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:14.352366Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "analysis-notebook-template-description",
-      "id": "d9bc2fc7-85e5-458e-9acb-732b58e2eef6",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Private u1/0",
       "scale": "cellular",
       "specifications": {
@@ -104,32 +104,32 @@
         "schema_version": 1
       },
       "type": "analysis_notebook_template",
-      "update_date": "2025-11-20T15:13:14.352366Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "f82d86cb-b57d-4688-9575-1813b540f898",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": true,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "f82d86cb-b57d-4688-9575-1813b540f898",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:14.310350Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "analysis-notebook-template-description",
-      "id": "492af846-6cb0-4676-87f9-d106dd667381",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Public u1/0",
       "scale": "cellular",
       "specifications": {
@@ -161,13 +161,13 @@
         "schema_version": 1
       },
       "type": "analysis_notebook_template",
-      "update_date": "2025-11-20T15:13:14.310350Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "f82d86cb-b57d-4688-9575-1813b540f898",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

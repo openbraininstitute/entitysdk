@@ -5,22 +5,22 @@
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "8587f65e-54f2-4f60-ab2a-f6184af85e78",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:46.021433Z",
-      "id": "a29db8d6-4250-4e52-8d60-97dd62b0f0c9",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "id": "00000000-0000-4000-8000-000001234678",
       "pref_label": "org-2",
       "type": "consortium",
-      "update_date": "2025-11-20T15:13:46.021433Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "8587f65e-54f2-4f60-ab2a-f6184af85e78",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
@@ -29,22 +29,22 @@
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "8587f65e-54f2-4f60-ab2a-f6184af85e78",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:46.018796Z",
-      "id": "569afab7-d8eb-4b3c-af84-c170fc6d7efc",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "id": "00000000-0000-4000-8000-000001234678",
       "pref_label": "org-1",
       "type": "consortium",
-      "update_date": "2025-11-20T15:13:46.018796Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "8587f65e-54f2-4f60-ab2a-f6184af85e78",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

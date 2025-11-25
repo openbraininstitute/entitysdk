@@ -1,51 +1,51 @@
 {
   "assets": [],
-  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
     "color_hex_triplet": "FF0000",
-    "creation_date": "2025-11-20T15:14:09.675160Z",
-    "hierarchy_id": "94d350b2-8603-4992-b033-5d03c01a5d7c",
-    "id": "3f717134-c283-489b-9a80-a4aafece7023",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "RedRegion",
     "parent_structure_id": null,
-    "update_date": "2025-11-20T15:14:09.675160Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "contributions": [],
   "created_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "d34e2c93-c3ba-4e20-bec1-0c47c019a3fb",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:14:09.708123Z",
+  "creation_date": "2025-01-01T00:00:00Z",
   "description": "Test description",
   "etypes": [
     {
       "alt_label": "e1",
-      "creation_date": "2025-11-20T15:14:09.713469Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "definition": "e1d",
-      "id": "1ef60e4e-485a-4add-b38d-93bd4d3fab1e",
+      "id": "00000000-0000-4000-8000-000001234678",
       "pref_label": "e1",
-      "update_date": "2025-11-20T15:14:09.713469Z"
+      "update_date": "2025-01-01T00:00:00Z"
     },
     {
       "alt_label": "e2",
-      "creation_date": "2025-11-20T15:14:09.715934Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "definition": "e2d",
-      "id": "c476fbf6-13bb-4e01-86fd-84f827d47719",
+      "id": "00000000-0000-4000-8000-000001234678",
       "pref_label": "e2",
-      "update_date": "2025-11-20T15:14:09.715934Z"
+      "update_date": "2025-01-01T00:00:00Z"
     }
   ],
   "exemplar_morphology": {
-    "creation_date": "2025-11-20T15:14:09.685622Z",
+    "creation_date": "2025-01-01T00:00:00Z",
     "description": "Test Morphology Description",
-    "id": "45e777c7-49cf-4292-9300-52f610771c6c",
+    "id": "00000000-0000-4000-8000-000001234678",
     "legacy_id": [
       "Test Legacy ID"
     ],
@@ -55,9 +55,9 @@
       "z": 30.0
     },
     "name": "Test Morphology Name",
-    "update_date": "2025-11-20T15:14:09.685622Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
-  "id": "f0d24943-9cec-4035-b91a-09708a5d4596",
+  "id": "00000000-0000-4000-8000-000001234678",
   "ion_channel_models": [],
   "iteration": "",
   "mtypes": [],
@@ -65,24 +65,24 @@
   "score": -1.0,
   "seed": -1,
   "species": {
-    "id": "a8e29693-e156-4f7d-803b-8a5e51643ae1",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "Test Species",
     "taxonomy_id": "12345"
   },
   "strain": {
-    "id": "d69471c8-f81a-4fd7-9944-3b473bd870d1",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "Test Strain",
-    "species_id": "a8e29693-e156-4f7d-803b-8a5e51643ae1",
+    "species_id": "00000000-0000-4000-8000-000001234678",
     "taxonomy_id": "Taxonomy ID"
   },
   "type": "emodel",
-  "update_date": "2025-11-20T15:14:09.708123Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "d34e2c93-c3ba-4e20-bec1-0c47c019a3fb",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }
 }

@@ -2,18 +2,18 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:15:14.925731Z",
-        "hierarchy_id": "7f38d5d6-4c55-47f3-a6ef-16daf9bbf067",
-        "id": "4fa0383d-bf81-4f0d-8467-a24d0926dd78",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "RedRegion",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:15:14.925731Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "cell_morphology_protocol": null,
       "contact_email": null,
@@ -21,15 +21,15 @@
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "f0159cb7-feba-4aaa-b728-63c9da068c69",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:14.932267Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "Test Morphology Description",
       "experiment_date": null,
-      "id": "7a0ec184-c1ae-450e-acaa-a0c4084650c7",
+      "id": "00000000-0000-4000-8000-000001234678",
       "legacy_id": [
         "Test Legacy ID"
       ],
@@ -42,19 +42,19 @@
       "mtypes": [
         {
           "alt_label": "m1",
-          "creation_date": "2025-11-20T15:15:14.929326Z",
+          "creation_date": "2025-01-01T00:00:00Z",
           "definition": "m1d",
-          "id": "8ba3bdab-c974-4cf1-a5d3-77e2a345247b",
+          "id": "00000000-0000-4000-8000-000001234678",
           "pref_label": "m1",
-          "update_date": "2025-11-20T15:15:14.929326Z"
+          "update_date": "2025-01-01T00:00:00Z"
         },
         {
           "alt_label": "m2",
-          "creation_date": "2025-11-20T15:15:14.949882Z",
+          "creation_date": "2025-01-01T00:00:00Z",
           "definition": "m2d",
-          "id": "c4abdc18-af03-45bf-9ae4-8b5e46275f76",
+          "id": "00000000-0000-4000-8000-000001234678",
           "pref_label": "m2",
-          "update_date": "2025-11-20T15:15:14.949882Z"
+          "update_date": "2025-01-01T00:00:00Z"
         }
       ],
       "name": "Test Morphology Name",
@@ -66,30 +66,30 @@
         "age_period": "postnatal",
         "age_value": 1209600.0,
         "description": "my-description",
-        "id": "3f85be5b-5f3a-4347-9ec0-47d2dea7bd72",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "my-subject",
         "sex": "female",
         "species": {
-          "id": "ef427908-9255-4008-a285-b2d822a351f9",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "Test Species",
           "taxonomy_id": "12345"
         },
         "strain": {
-          "id": "0ab7fa6a-b5cd-402d-a2b7-a1ac8041cbf1",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "Test Strain",
-          "species_id": "ef427908-9255-4008-a285-b2d822a351f9",
+          "species_id": "00000000-0000-4000-8000-000001234678",
           "taxonomy_id": "Taxonomy ID"
         },
         "weight": 1.5
       },
       "type": "cell_morphology",
-      "update_date": "2025-11-20T15:15:14.932267Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "f0159cb7-feba-4aaa-b728-63c9da068c69",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }
@@ -98,7 +98,7 @@
     "brain_region": [
       {
         "count": 1,
-        "id": "4fa0383d-bf81-4f0d-8467-a24d0926dd78",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "RedRegion",
         "type": "brain_region"
       }
@@ -108,7 +108,7 @@
     "created_by": [
       {
         "count": 1,
-        "id": "f0159cb7-feba-4aaa-b728-63c9da068c69",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "jd courcol",
         "type": "person"
       }
@@ -116,7 +116,7 @@
     "mtype": [
       {
         "count": 1,
-        "id": "8ba3bdab-c974-4cf1-a5d3-77e2a345247b",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "m1",
         "type": "mtype"
       }
@@ -124,7 +124,7 @@
     "species": [
       {
         "count": 1,
-        "id": "ef427908-9255-4008-a285-b2d822a351f9",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "Test Species",
         "type": "subject.species"
       }
@@ -132,7 +132,7 @@
     "strain": [
       {
         "count": 1,
-        "id": "0ab7fa6a-b5cd-402d-a2b7-a1ac8041cbf1",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "Test Strain",
         "type": "subject.strain"
       }
@@ -140,7 +140,7 @@
     "updated_by": [
       {
         "count": 1,
-        "id": "f0159cb7-feba-4aaa-b728-63c9da068c69",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "jd courcol",
         "type": "person"
       }

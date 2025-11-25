@@ -2,29 +2,29 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": true,
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "1713480e-a280-4d1d-9ce0-d87cae33ba66",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:38.749776Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "simulation-result-description",
-      "id": "657e119d-a053-43e9-b93a-806685aead58",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Public u2/0",
-      "simulation_id": "8ddfe155-e912-4959-9c06-805dd058ab3e",
+      "simulation_id": "00000000-0000-4000-8000-000001234678",
       "type": "simulation_result",
-      "update_date": "2025-11-20T15:15:38.749776Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "1713480e-a280-4d1d-9ce0-d87cae33ba66",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

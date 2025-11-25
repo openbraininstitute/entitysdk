@@ -1,154 +1,154 @@
 {
   "data": [
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "100489ea-2ffe-43f3-ab9f-acd144467be4",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:16:03.411009Z",
-      "end_time": "2025-11-20T15:16:03.306081Z",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "end_time": "2025-01-01T00:00:00Z",
       "generated": [],
-      "id": "18e3dcb0-4f8d-4b7e-afcc-37f568f743eb",
-      "start_time": "2025-11-20T15:16:03.306075Z",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "start_time": "2025-01-01T00:00:00Z",
       "type": "skeletonization_config_generation",
-      "update_date": "2025-11-20T15:16:03.411009Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "100489ea-2ffe-43f3-ab9f-acd144467be4",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "used": []
     },
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "100489ea-2ffe-43f3-ab9f-acd144467be4",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:16:03.398835Z",
-      "end_time": "2025-11-20T15:16:03.306081Z",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "end_time": "2025-01-01T00:00:00Z",
       "generated": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "15733c32-769a-4dc0-9d60-2e5f2b13ea70",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "skeletonization_config"
         },
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "f2cc77e7-70ba-4236-b7d5-2966b26bd48c",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "skeletonization_config"
         }
       ],
-      "id": "e8c413f3-7d37-47ac-9683-3c1dc432e1ef",
-      "start_time": "2025-11-20T15:16:03.306075Z",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "start_time": "2025-01-01T00:00:00Z",
       "type": "skeletonization_config_generation",
-      "update_date": "2025-11-20T15:16:03.398835Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "100489ea-2ffe-43f3-ab9f-acd144467be4",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "used": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "53221bae-f5bd-4c7a-b9cd-1820ff4ec7de",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "skeletonization_campaign"
         }
       ]
     },
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "100489ea-2ffe-43f3-ab9f-acd144467be4",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:16:03.387744Z",
-      "end_time": "2025-11-20T15:16:03.306081Z",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "end_time": "2025-01-01T00:00:00Z",
       "generated": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "f2cc77e7-70ba-4236-b7d5-2966b26bd48c",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "skeletonization_config"
         }
       ],
-      "id": "723adddf-3269-4c62-95b0-73e48b740119",
-      "start_time": "2025-11-20T15:16:03.306075Z",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "start_time": "2025-01-01T00:00:00Z",
       "type": "skeletonization_config_generation",
-      "update_date": "2025-11-20T15:16:03.387744Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "100489ea-2ffe-43f3-ab9f-acd144467be4",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "used": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "53221bae-f5bd-4c7a-b9cd-1820ff4ec7de",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "skeletonization_campaign"
         }
       ]
     },
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "100489ea-2ffe-43f3-ab9f-acd144467be4",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:16:03.375337Z",
-      "end_time": "2025-11-20T15:16:03.306081Z",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "end_time": "2025-01-01T00:00:00Z",
       "generated": [],
-      "id": "5b099467-22bc-48d0-9a4d-5f455930c286",
-      "start_time": "2025-11-20T15:16:03.306075Z",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "start_time": "2025-01-01T00:00:00Z",
       "type": "skeletonization_config_generation",
-      "update_date": "2025-11-20T15:16:03.375337Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "100489ea-2ffe-43f3-ab9f-acd144467be4",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "used": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "53221bae-f5bd-4c7a-b9cd-1820ff4ec7de",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "skeletonization_campaign"
         }
       ]

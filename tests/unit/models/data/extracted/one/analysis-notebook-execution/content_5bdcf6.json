@@ -1,6 +1,6 @@
 {
   "analysis_notebook_environment": {
-    "id": "f7159218-8be0-4914-b7fa-4af499bbb456",
+    "id": "00000000-0000-4000-8000-000001234678",
     "runtime_info": {
       "docker": {
         "docker_version": null,
@@ -26,7 +26,7 @@
   },
   "analysis_notebook_template": {
     "description": "analysis-notebook-template-description",
-    "id": "dca5645b-3c2d-48bb-8b84-5e3ab25df324",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "analysis-notebook-template",
     "scale": "cellular",
     "specifications": {
@@ -59,36 +59,36 @@
     },
     "type": "analysis_notebook_template"
   },
-  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "created_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "257a6dc9-e3bb-4a17-b391-1826931d3f57",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:13:09.457766Z",
-  "end_time": "2025-11-20T15:13:09.392190Z",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "end_time": "2025-01-01T00:00:00Z",
   "generated": [
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
-      "id": "f4cf2da6-3b85-4067-b850-c21481898a22",
+      "id": "00000000-0000-4000-8000-000001234678",
       "type": "analysis_notebook_result"
     }
   ],
-  "id": "fec67958-913c-4406-bbd0-2c9c4e8e9add",
-  "start_time": "2025-11-20T15:13:09.392179Z",
+  "id": "00000000-0000-4000-8000-000001234678",
+  "start_time": "2025-01-01T00:00:00Z",
   "type": "analysis_notebook_execution",
-  "update_date": "2025-11-20T15:13:09.457766Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "257a6dc9-e3bb-4a17-b391-1826931d3f57",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
   "used": []

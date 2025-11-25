@@ -1,37 +1,37 @@
 {
   "assets": [],
-  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
     "color_hex_triplet": "FF0000",
-    "creation_date": "2025-11-20T15:14:11.782379Z",
-    "hierarchy_id": "562ed25c-c553-411a-a44e-ae84a89c3a16",
-    "id": "b42c8710-a5b0-4e8a-9970-f9e4db9c6e0c",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "RedRegion",
     "parent_structure_id": null,
-    "update_date": "2025-11-20T15:14:11.782379Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "contributions": [],
   "created_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "e0edcf8d-38c3-4a11-96a5-82d095cfc230",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:14:11.839238Z",
+  "creation_date": "2025-01-01T00:00:00Z",
   "description": "my-description",
-  "id": "28e59231-1f65-4844-8ee5-a6ac1ac4abde",
+  "id": "00000000-0000-4000-8000-000001234678",
   "license": {
-    "creation_date": "2025-11-20T15:14:11.816134Z",
+    "creation_date": "2025-01-01T00:00:00Z",
     "description": "a license description",
-    "id": "4e952484-39f0-4f98-a663-f8bccdd288a3",
+    "id": "00000000-0000-4000-8000-000001234678",
     "label": "test label",
     "name": "Test License",
-    "update_date": "2025-11-20T15:14:11.816134Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "measurements": [
     {
@@ -55,30 +55,30 @@
     "age_period": "postnatal",
     "age_value": 1209600.0,
     "description": "my-description",
-    "id": "a0127a0d-d227-47cd-856d-a8ff08e58bb7",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "my-subject",
     "sex": "female",
     "species": {
-      "id": "7c41e4cc-b86a-433d-950f-4ec06a9bbd7e",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Test Species",
       "taxonomy_id": "12345"
     },
     "strain": {
-      "id": "6ee307bf-d071-4eef-bcf3-0c753bd3a7a6",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Test Strain",
-      "species_id": "7c41e4cc-b86a-433d-950f-4ec06a9bbd7e",
+      "species_id": "00000000-0000-4000-8000-000001234678",
       "taxonomy_id": "Taxonomy ID"
     },
     "weight": 1.5
   },
   "type": "experimental_bouton_density",
-  "update_date": "2025-11-20T15:14:11.839238Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "e0edcf8d-38c3-4a11-96a5-82d095cfc230",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }
 }

@@ -2,65 +2,65 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
-      "circuit_id": "a5e7a6e7-2f62-4a76-92f2-da4b8ba7efc6",
+      "circuit_id": "00000000-0000-4000-8000-000001234678",
       "contributions": [],
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "b105d513-83cf-40ee-a079-9b1f2b8e5617",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:38.916508Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "extraction-config",
-      "id": "857f6f4d-9aa8-4a38-8e8d-d44103013b22",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Private u1/1",
       "scan_parameters": {
         "foo": "bar"
       },
       "type": "circuit_extraction_config",
-      "update_date": "2025-11-20T15:13:38.916508Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "b105d513-83cf-40ee-a079-9b1f2b8e5617",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
-      "circuit_id": "a5e7a6e7-2f62-4a76-92f2-da4b8ba7efc6",
+      "circuit_id": "00000000-0000-4000-8000-000001234678",
       "contributions": [],
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "b105d513-83cf-40ee-a079-9b1f2b8e5617",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:38.905326Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "extraction-config",
-      "id": "77a462db-cdb8-4701-ab6d-e0ee4ae4bbfe",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Private u1/0",
       "scan_parameters": {
         "foo": "bar"
       },
       "type": "circuit_extraction_config",
-      "update_date": "2025-11-20T15:13:38.905326Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "b105d513-83cf-40ee-a079-9b1f2b8e5617",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

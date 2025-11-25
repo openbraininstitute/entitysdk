@@ -3,22 +3,22 @@
   "created_by": {
     "family_name": null,
     "given_name": null,
-    "id": "9343285c-8f80-46ea-8b46-086e73bf7fd0",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Admin User",
-    "sub_id": "00000000-0000-0000-0000-000000000000",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:13:45.722715Z",
-  "id": "9d6fdd1a-760f-4202-8564-5f9af9bd2052",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "id": "00000000-0000-4000-8000-000001234678",
   "pref_label": "test consortium label",
   "type": "consortium",
-  "update_date": "2025-11-20T15:13:45.722715Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": null,
     "given_name": null,
-    "id": "9343285c-8f80-46ea-8b46-086e73bf7fd0",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Admin User",
-    "sub_id": "00000000-0000-0000-0000-000000000000",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }
 }

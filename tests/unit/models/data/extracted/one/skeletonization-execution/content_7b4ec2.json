@@ -1,48 +1,48 @@
 {
-  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "created_by": {
     "family_name": null,
     "given_name": null,
-    "id": "73a54620-ccd5-4547-b9f1-e57498b3926d",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Regular User With Project Id",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:16:06.293672Z",
-  "end_time": "2025-11-20T15:16:06.199813Z",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "end_time": "2025-01-01T00:00:00Z",
   "generated": [
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
-      "id": "a95bc719-b50d-406e-8163-fca3cca0e7da",
+      "id": "00000000-0000-4000-8000-000001234678",
       "type": "cell_morphology"
     },
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
-      "id": "9543b52f-8742-462a-97e7-e9e59a5fabb7",
+      "id": "00000000-0000-4000-8000-000001234678",
       "type": "cell_morphology"
     }
   ],
-  "id": "d6981b67-b0aa-4a40-80e7-0c42420a487d",
-  "start_time": "2025-11-20T15:16:06.199806Z",
+  "id": "00000000-0000-4000-8000-000001234678",
+  "start_time": "2025-01-01T00:00:00Z",
   "status": "done",
   "type": "skeletonization_execution",
-  "update_date": "2025-11-20T15:16:06.293672Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": null,
     "given_name": null,
-    "id": "73a54620-ccd5-4547-b9f1-e57498b3926d",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Regular User With Project Id",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
   "used": [
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
-      "id": "2f89d74f-a0e3-45a3-9145-853694123a54",
+      "id": "00000000-0000-4000-8000-000001234678",
       "type": "skeletonization_config"
     }
   ]

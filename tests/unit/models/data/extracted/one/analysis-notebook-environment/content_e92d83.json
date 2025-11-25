@@ -1,17 +1,17 @@
 {
   "assets": [],
-  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": true,
   "created_by": {
     "family_name": null,
     "given_name": null,
-    "id": "cdbf7aa2-11a5-4598-be8c-ba3d2571bd59",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Regular User With Project Id",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:13:07.455750Z",
-  "id": "d028cc1a-3c36-4a8e-a128-93261c03adfe",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "id": "00000000-0000-4000-8000-000001234678",
   "runtime_info": {
     "docker": {
       "docker_version": null,
@@ -34,13 +34,13 @@
     "schema_version": 1
   },
   "type": "analysis_notebook_environment",
-  "update_date": "2025-11-20T15:13:07.455750Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": null,
     "given_name": null,
-    "id": "cdbf7aa2-11a5-4598-be8c-ba3d2571bd59",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Regular User With Project Id",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }
 }

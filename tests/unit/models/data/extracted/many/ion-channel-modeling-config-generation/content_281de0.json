@@ -1,222 +1,222 @@
 {
   "data": [
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "87debb81-dd03-4e26-bf80-d4b83908f9da",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:46.722360Z",
-      "end_time": "2025-11-20T15:14:46.635606Z",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "end_time": "2025-01-01T00:00:00Z",
       "generated": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "6a90eea8-553a-440f-b129-c48be045607b",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "ion_channel_modeling_config"
         }
       ],
-      "id": "27a4de7c-f822-4c53-a76b-e88fb6ca55d5",
-      "start_time": "2025-11-20T15:14:46.635600Z",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "start_time": "2025-01-01T00:00:00Z",
       "type": "ion_channel_modeling_config_generation",
-      "update_date": "2025-11-20T15:14:46.722360Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "87debb81-dd03-4e26-bf80-d4b83908f9da",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "used": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "c520dc6f-a104-4db0-a273-f741bdc071ff",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "cell_morphology"
         },
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "3c0bc068-37e9-4443-82d3-854a0f1b1b82",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "ion_channel_modeling_campaign"
         }
       ]
     },
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "87debb81-dd03-4e26-bf80-d4b83908f9da",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:46.710590Z",
-      "end_time": "2025-11-20T15:14:46.635606Z",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "end_time": "2025-01-01T00:00:00Z",
       "generated": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "3c0bc068-37e9-4443-82d3-854a0f1b1b82",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "ion_channel_modeling_campaign"
         },
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "6a90eea8-553a-440f-b129-c48be045607b",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "ion_channel_modeling_config"
         }
       ],
-      "id": "0916e049-9752-4f81-97bd-8a69ba1992ab",
-      "start_time": "2025-11-20T15:14:46.635600Z",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "start_time": "2025-01-01T00:00:00Z",
       "type": "ion_channel_modeling_config_generation",
-      "update_date": "2025-11-20T15:14:46.710590Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "87debb81-dd03-4e26-bf80-d4b83908f9da",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "used": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "3c0bc068-37e9-4443-82d3-854a0f1b1b82",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "ion_channel_modeling_campaign"
         },
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "6a90eea8-553a-440f-b129-c48be045607b",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "ion_channel_modeling_config"
         }
       ]
     },
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "87debb81-dd03-4e26-bf80-d4b83908f9da",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:46.699889Z",
-      "end_time": "2025-11-20T15:14:46.635606Z",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "end_time": "2025-01-01T00:00:00Z",
       "generated": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "6a90eea8-553a-440f-b129-c48be045607b",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "ion_channel_modeling_config"
         }
       ],
-      "id": "e0e02a81-e2c2-471a-84ec-ced2893559db",
-      "start_time": "2025-11-20T15:14:46.635600Z",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "start_time": "2025-01-01T00:00:00Z",
       "type": "ion_channel_modeling_config_generation",
-      "update_date": "2025-11-20T15:14:46.699889Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "87debb81-dd03-4e26-bf80-d4b83908f9da",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "used": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "3c0bc068-37e9-4443-82d3-854a0f1b1b82",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "ion_channel_modeling_campaign"
         }
       ]
     },
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "87debb81-dd03-4e26-bf80-d4b83908f9da",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:46.688543Z",
-      "end_time": "2025-11-20T15:14:46.635606Z",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "end_time": "2025-01-01T00:00:00Z",
       "generated": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "3c0bc068-37e9-4443-82d3-854a0f1b1b82",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "ion_channel_modeling_campaign"
         }
       ],
-      "id": "e2cb40ec-2029-410e-b94e-f240f0871b5b",
-      "start_time": "2025-11-20T15:14:46.635600Z",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "start_time": "2025-01-01T00:00:00Z",
       "type": "ion_channel_modeling_config_generation",
-      "update_date": "2025-11-20T15:14:46.688543Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "87debb81-dd03-4e26-bf80-d4b83908f9da",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "used": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "3c0bc068-37e9-4443-82d3-854a0f1b1b82",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "ion_channel_modeling_campaign"
         }
       ]
     },
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "87debb81-dd03-4e26-bf80-d4b83908f9da",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:46.677385Z",
-      "end_time": "2025-11-20T15:14:46.635606Z",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "end_time": "2025-01-01T00:00:00Z",
       "generated": [],
-      "id": "755c742b-17c9-4658-bf98-60d3d0719a61",
-      "start_time": "2025-11-20T15:14:46.635600Z",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "start_time": "2025-01-01T00:00:00Z",
       "type": "ion_channel_modeling_config_generation",
-      "update_date": "2025-11-20T15:14:46.677385Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "87debb81-dd03-4e26-bf80-d4b83908f9da",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "used": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "3c0bc068-37e9-4443-82d3-854a0f1b1b82",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "ion_channel_modeling_campaign"
         }
       ]

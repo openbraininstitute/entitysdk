@@ -4,21 +4,21 @@
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "d5aeab71-195c-4841-8298-d1ebe450bc5d",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Admin User",
-        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:23.470890Z",
-      "id": "64baffe7-76dc-4278-8c92-0058e79319fe",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Test brain-region-hierarchy 0",
-      "update_date": "2025-11-20T15:13:23.470890Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "d5aeab71-195c-4841-8298-d1ebe450bc5d",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Admin User",
-        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
@@ -26,21 +26,21 @@
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "d5aeab71-195c-4841-8298-d1ebe450bc5d",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Admin User",
-        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:23.480374Z",
-      "id": "538d9474-eefa-4d71-b3d8-8459bd83e0e6",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Test brain-region-hierarchy 1",
-      "update_date": "2025-11-20T15:13:23.480374Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "d5aeab71-195c-4841-8298-d1ebe450bc5d",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Admin User",
-        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
@@ -48,21 +48,21 @@
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "d5aeab71-195c-4841-8298-d1ebe450bc5d",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Admin User",
-        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:23.486173Z",
-      "id": "2bc8a982-2258-438d-9867-0b96966ad493",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Test brain-region-hierarchy 2",
-      "update_date": "2025-11-20T15:13:23.486173Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "d5aeab71-195c-4841-8298-d1ebe450bc5d",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Admin User",
-        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

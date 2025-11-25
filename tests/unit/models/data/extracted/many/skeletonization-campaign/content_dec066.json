@@ -2,20 +2,20 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "contributions": [],
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "f1b91d9b-56ca-45ae-85fe-5b6ef1c312e3",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:59.551076Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "campaign-description-1",
-      "id": "9ea67fd6-f1d1-4447-b730-b8e201d5b7d3",
+      "id": "00000000-0000-4000-8000-000001234678",
       "input_meshes": [],
       "name": "campaign-1",
       "scan_parameters": {
@@ -24,35 +24,35 @@
       "skeletonization_configs": [
         {
           "description": "config-1",
-          "em_cell_mesh_id": "bd327210-bd14-4d38-8aba-8e7ecbb5edb5",
-          "id": "1ea2e928-1e3c-4e48-a848-5bf189cd0484",
+          "em_cell_mesh_id": "00000000-0000-4000-8000-000001234678",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "config-1",
           "scan_parameters": {
             "foo": "bar"
           },
-          "skeletonization_campaign_id": "9ea67fd6-f1d1-4447-b730-b8e201d5b7d3",
+          "skeletonization_campaign_id": "00000000-0000-4000-8000-000001234678",
           "type": "skeletonization_config"
         },
         {
           "description": "config-2",
-          "em_cell_mesh_id": "bd327210-bd14-4d38-8aba-8e7ecbb5edb5",
-          "id": "e65750b6-049c-4bb9-b353-bd40e00a6192",
+          "em_cell_mesh_id": "00000000-0000-4000-8000-000001234678",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "config-2",
           "scan_parameters": {
             "foo": "bar"
           },
-          "skeletonization_campaign_id": "9ea67fd6-f1d1-4447-b730-b8e201d5b7d3",
+          "skeletonization_campaign_id": "00000000-0000-4000-8000-000001234678",
           "type": "skeletonization_config"
         }
       ],
       "type": "skeletonization_campaign",
-      "update_date": "2025-11-20T15:15:59.551076Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "f1b91d9b-56ca-45ae-85fe-5b6ef1c312e3",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

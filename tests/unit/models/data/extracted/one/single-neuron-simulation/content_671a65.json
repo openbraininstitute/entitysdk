@@ -1,58 +1,58 @@
 {
   "assets": [],
-  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
     "color_hex_triplet": "FF0000",
-    "creation_date": "2025-11-20T15:15:39.963823Z",
-    "hierarchy_id": "b331687f-4de3-4bbb-aa0e-4b1cfed59a1f",
-    "id": "2ff2d990-5b05-4d71-9287-8cd99f676a54",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "RedRegion",
     "parent_structure_id": null,
-    "update_date": "2025-11-20T15:15:39.963823Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "created_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "a2a9bff7-4eed-4632-9ab3-fecb9018cdf1",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:15:40.131354Z",
+  "creation_date": "2025-01-01T00:00:00Z",
   "description": "my-description",
-  "id": "dbd4d122-c429-44e0-ac05-e6d93fb4a962",
+  "id": "00000000-0000-4000-8000-000001234678",
   "injection_location": [
     "soma[0]"
   ],
   "me_model": {
-    "creation_date": "2025-11-20T15:15:40.065742Z",
+    "creation_date": "2025-01-01T00:00:00Z",
     "description": "0_description",
     "etypes": [
       {
-        "alt_label": "e1-b14b0bd3-e787-41d1-8669-568c1dfce2b3",
-        "creation_date": "2025-11-20T15:15:40.059390Z",
+        "alt_label": "etype-emodel-0",
+        "creation_date": "2025-01-01T00:00:00Z",
         "definition": "e1d",
-        "id": "17afe663-8247-4f7a-af69-42169d699932",
-        "pref_label": "e1-b14b0bd3-e787-41d1-8669-568c1dfce2b3",
-        "update_date": "2025-11-20T15:15:40.059390Z"
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "etype-emodel-0",
+        "update_date": "2025-01-01T00:00:00Z"
       }
     ],
-    "id": "90f2001d-9f62-43f3-bd4a-a033b2e270fc",
+    "id": "00000000-0000-4000-8000-000001234678",
     "mtypes": [
       {
         "alt_label": "m1",
-        "creation_date": "2025-11-20T15:15:39.994600Z",
+        "creation_date": "2025-01-01T00:00:00Z",
         "definition": "m1d",
-        "id": "9b0769ba-7e50-4347-b4dc-37405c1560f4",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "m1",
-        "update_date": "2025-11-20T15:15:39.994600Z"
+        "update_date": "2025-01-01T00:00:00Z"
       }
     ],
     "name": "0",
-    "update_date": "2025-11-20T15:15:40.065742Z",
+    "update_date": "2025-01-01T00:00:00Z",
     "validation_status": "created"
   },
   "name": "foo",
@@ -62,13 +62,13 @@
   "seed": 1,
   "status": "success",
   "type": "single_neuron_simulation",
-  "update_date": "2025-11-20T15:15:40.131354Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "a2a9bff7-4eed-4632-9ab3-fecb9018cdf1",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }
 }

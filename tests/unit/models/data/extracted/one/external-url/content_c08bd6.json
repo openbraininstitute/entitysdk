@@ -2,24 +2,24 @@
   "created_by": {
     "family_name": null,
     "given_name": null,
-    "id": "1b653824-2b7d-41be-993e-4587cbc702d3",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Admin User",
-    "sub_id": "00000000-0000-0000-0000-000000000000",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:14:33.640220Z",
+  "creation_date": "2025-01-01T00:00:00Z",
   "description": "Contains description of potassium channels...",
-  "id": "a2eb7763-74fb-4fe7-bca3-9571d1410dbe",
+  "id": "00000000-0000-4000-8000-000001234678",
   "name": "Potassium channel page on Channelpedia",
   "source": "channelpedia",
   "source_name": "Channelpedia",
-  "update_date": "2025-11-20T15:14:33.640220Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": null,
     "given_name": null,
-    "id": "1b653824-2b7d-41be-993e-4587cbc702d3",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Admin User",
-    "sub_id": "00000000-0000-0000-0000-000000000000",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
   "url": "https://channelpedia.epfl.ch/wikipages/3#section"

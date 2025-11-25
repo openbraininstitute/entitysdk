@@ -2,38 +2,38 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": true,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:14:13.028891Z",
-        "hierarchy_id": "bbb82a66-353e-46a7-8e52-f5f61f8a0283",
-        "id": "95528910-7097-4205-8276-640684df887e",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "RedRegion",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:14:13.028891Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "dc121231-2277-4b82-bc17-6f49e2d718ed",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:13.085602Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "my-description",
-      "id": "4c2c8d9d-2662-42f1-b2cd-9326c4feaa27",
+      "id": "00000000-0000-4000-8000-000001234678",
       "license": {
-        "creation_date": "2025-11-20T15:14:13.062623Z",
+        "creation_date": "2025-01-01T00:00:00Z",
         "description": "a license description",
-        "id": "809b3477-cdc8-4332-b2b2-08a51bf97ad1",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "test label",
         "name": "Test License",
-        "update_date": "2025-11-20T15:14:13.062623Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "measurements": [
         {
@@ -57,30 +57,30 @@
         "age_period": "postnatal",
         "age_value": 1209600.0,
         "description": "my-description",
-        "id": "8dd66d4c-2ef2-48de-bf42-e27f5f9d017e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "my-subject",
         "sex": "female",
         "species": {
-          "id": "2da484fa-b760-452a-af58-df4231d668a5",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "Test Species",
           "taxonomy_id": "12345"
         },
         "strain": {
-          "id": "6bc639e9-f8d7-4979-96e6-5221bf317a5b",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "Test Strain",
-          "species_id": "2da484fa-b760-452a-af58-df4231d668a5",
+          "species_id": "00000000-0000-4000-8000-000001234678",
           "taxonomy_id": "Taxonomy ID"
         },
         "weight": 1.5
       },
       "type": "experimental_bouton_density",
-      "update_date": "2025-11-20T15:14:13.085602Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "dc121231-2277-4b82-bc17-6f49e2d718ed",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

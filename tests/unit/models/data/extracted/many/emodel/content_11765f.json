@@ -2,220 +2,35 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
         "acronym": "acronym1",
         "annotation_value": 1,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:14:06.347604Z",
-        "hierarchy_id": "909cc142-96a3-4e26-a14d-43c4db107400",
-        "id": "14510f91-d6e8-4358-8b03-5813057ff352",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "region1",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:14:06.347604Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "contributions": [],
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "f8bf5fc4-db6d-47da-98b1-ec8c586bcd30",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:06.427798Z",
-      "description": "speciesf8aa37e5-6ac1-4ca7-a7c7-694474eaf9b4, brain_region14510f91-d6e8-4358-8b03-5813057ff352, ex_morphologyc32e22a8-eea4-4b6c-8361-952146feeb61",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "emodel-desc-3",
       "etypes": [],
       "exemplar_morphology": {
-        "creation_date": "2025-11-20T15:14:06.353556Z",
+        "creation_date": "2025-01-01T00:00:00Z",
         "description": "Test Morphology Description",
-        "id": "c32e22a8-eea4-4b6c-8361-952146feeb61",
-        "legacy_id": [
-          "Test Legacy ID"
-        ],
-        "location": {
-          "x": 10.0,
-          "y": 20.0,
-          "z": 30.0
-        },
-        "name": "test exemplar morphology 0",
-        "update_date": "2025-11-20T15:14:06.353556Z"
-      },
-      "id": "0c8b2938-04d1-4456-94a9-c4111bbcc05a",
-      "ion_channel_models": [
-        {
-          "assets": [],
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
-          "authorized_public": false,
-          "brain_region": {
-            "acronym": "acronym64",
-            "annotation_value": 64,
-            "color_hex_triplet": "FF0000",
-            "creation_date": "2025-11-20T15:14:06.272597Z",
-            "hierarchy_id": "2ba82fd4-aa7b-4806-a24a-2ef1a8d0b9cb",
-            "id": "1e0a4d1e-889e-456d-86ac-c5e167574dc1",
-            "name": "RedRegion",
-            "parent_structure_id": null,
-            "update_date": "2025-11-20T15:14:06.272597Z"
-          },
-          "contact_email": null,
-          "creation_date": "2025-11-20T15:14:06.309739Z",
-          "description": "Test ICM Description",
-          "experiment_date": null,
-          "id": "1da98e44-7859-4e92-81ad-b9eba974b5e3",
-          "is_ljp_corrected": false,
-          "is_stochastic": false,
-          "is_temperature_dependent": false,
-          "name": "i-0",
-          "neuron_block": {
-            "global": [],
-            "nonspecific": [],
-            "range": [],
-            "useion": []
-          },
-          "nmodl_suffix": "test_icm",
-          "notice_text": null,
-          "published_in": null,
-          "subject": {
-            "age_max": null,
-            "age_min": null,
-            "age_period": "postnatal",
-            "age_value": 1209600.0,
-            "description": "my-description",
-            "id": "ada4ea41-6cc2-4ebb-ae5f-3d9469a9cbe0",
-            "name": "my-subject",
-            "sex": "female",
-            "species": {
-              "id": "f5f8313e-220d-4ee2-9f0d-af2e0406ad2b",
-              "name": "Test Species",
-              "taxonomy_id": "12345"
-            },
-            "strain": {
-              "id": "4d0aeaaf-2b92-4983-862e-d2867d4d0cb0",
-              "name": "Test Strain",
-              "species_id": "f5f8313e-220d-4ee2-9f0d-af2e0406ad2b",
-              "taxonomy_id": "Taxonomy ID"
-            },
-            "weight": 1.5
-          },
-          "temperature_celsius": 0,
-          "type": "ion_channel_model",
-          "update_date": "2025-11-20T15:14:06.309739Z"
-        },
-        {
-          "assets": [],
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
-          "authorized_public": false,
-          "brain_region": {
-            "acronym": "acronym64",
-            "annotation_value": 64,
-            "color_hex_triplet": "FF0000",
-            "creation_date": "2025-11-20T15:14:06.272597Z",
-            "hierarchy_id": "2ba82fd4-aa7b-4806-a24a-2ef1a8d0b9cb",
-            "id": "1e0a4d1e-889e-456d-86ac-c5e167574dc1",
-            "name": "RedRegion",
-            "parent_structure_id": null,
-            "update_date": "2025-11-20T15:14:06.272597Z"
-          },
-          "contact_email": null,
-          "creation_date": "2025-11-20T15:14:06.315453Z",
-          "description": "Test ICM Description",
-          "experiment_date": null,
-          "id": "448f8e95-6011-4324-9372-4a89d146caa6",
-          "is_ljp_corrected": false,
-          "is_stochastic": false,
-          "is_temperature_dependent": false,
-          "name": "i-1",
-          "neuron_block": {
-            "global": [],
-            "nonspecific": [],
-            "range": [],
-            "useion": []
-          },
-          "nmodl_suffix": "test_icm",
-          "notice_text": null,
-          "published_in": null,
-          "subject": {
-            "age_max": null,
-            "age_min": null,
-            "age_period": "postnatal",
-            "age_value": 1209600.0,
-            "description": "my-description",
-            "id": "ada4ea41-6cc2-4ebb-ae5f-3d9469a9cbe0",
-            "name": "my-subject",
-            "sex": "female",
-            "species": {
-              "id": "f5f8313e-220d-4ee2-9f0d-af2e0406ad2b",
-              "name": "Test Species",
-              "taxonomy_id": "12345"
-            },
-            "strain": {
-              "id": "4d0aeaaf-2b92-4983-862e-d2867d4d0cb0",
-              "name": "Test Strain",
-              "species_id": "f5f8313e-220d-4ee2-9f0d-af2e0406ad2b",
-              "taxonomy_id": "Taxonomy ID"
-            },
-            "weight": 1.5
-          },
-          "temperature_celsius": 0,
-          "type": "ion_channel_model",
-          "update_date": "2025-11-20T15:14:06.315453Z"
-        }
-      ],
-      "iteration": "test iteration",
-      "mtypes": [],
-      "name": "e-2",
-      "score": 20.0,
-      "seed": -1,
-      "species": {
-        "id": "f8aa37e5-6ac1-4ca7-a7c7-694474eaf9b4",
-        "name": "TestSpecies0",
-        "taxonomy_id": "0"
-      },
-      "strain": null,
-      "type": "emodel",
-      "update_date": "2025-11-20T15:14:06.427798Z",
-      "updated_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "f8bf5fc4-db6d-47da-98b1-ec8c586bcd30",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
-        "type": "person"
-      }
-    },
-    {
-      "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
-      "authorized_public": false,
-      "brain_region": {
-        "acronym": "acronym0",
-        "annotation_value": 0,
-        "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:14:06.344507Z",
-        "hierarchy_id": "909cc142-96a3-4e26-a14d-43c4db107400",
-        "id": "197cd36d-c8e8-4610-95b5-f1bd0dc70b79",
-        "name": "region0",
-        "parent_structure_id": null,
-        "update_date": "2025-11-20T15:14:06.344507Z"
-      },
-      "contributions": [],
-      "created_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "f8bf5fc4-db6d-47da-98b1-ec8c586bcd30",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
-        "type": "person"
-      },
-      "creation_date": "2025-11-20T15:14:06.409797Z",
-      "description": "speciesf8aa37e5-6ac1-4ca7-a7c7-694474eaf9b4, brain_region197cd36d-c8e8-4610-95b5-f1bd0dc70b79, ex_morphologyd1aa371d-dde9-4bdc-a93f-1424469142aa",
-      "etypes": [],
-      "exemplar_morphology": {
-        "creation_date": "2025-11-20T15:14:06.369649Z",
-        "description": "Test Morphology Description",
-        "id": "d1aa371d-dde9-4bdc-a93f-1424469142aa",
+        "id": "00000000-0000-4000-8000-000001234678",
         "legacy_id": [
           "Test Legacy ID"
         ],
@@ -225,30 +40,30 @@
           "z": 30.0
         },
         "name": "test exemplar morphology 1",
-        "update_date": "2025-11-20T15:14:06.369649Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
-      "id": "ef030ce3-4c0b-4daf-b8a7-8e719ed543c9",
+      "id": "00000000-0000-4000-8000-000001234678",
       "ion_channel_models": [
         {
           "assets": [],
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
           "brain_region": {
             "acronym": "acronym64",
             "annotation_value": 64,
             "color_hex_triplet": "FF0000",
-            "creation_date": "2025-11-20T15:14:06.272597Z",
-            "hierarchy_id": "2ba82fd4-aa7b-4806-a24a-2ef1a8d0b9cb",
-            "id": "1e0a4d1e-889e-456d-86ac-c5e167574dc1",
+            "creation_date": "2025-01-01T00:00:00Z",
+            "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+            "id": "00000000-0000-4000-8000-000001234678",
             "name": "RedRegion",
             "parent_structure_id": null,
-            "update_date": "2025-11-20T15:14:06.272597Z"
+            "update_date": "2025-01-01T00:00:00Z"
           },
           "contact_email": null,
-          "creation_date": "2025-11-20T15:14:06.309739Z",
+          "creation_date": "2025-01-01T00:00:00Z",
           "description": "Test ICM Description",
           "experiment_date": null,
-          "id": "1da98e44-7859-4e92-81ad-b9eba974b5e3",
+          "id": "00000000-0000-4000-8000-000001234678",
           "is_ljp_corrected": false,
           "is_stochastic": false,
           "is_temperature_dependent": false,
@@ -268,46 +83,46 @@
             "age_period": "postnatal",
             "age_value": 1209600.0,
             "description": "my-description",
-            "id": "ada4ea41-6cc2-4ebb-ae5f-3d9469a9cbe0",
+            "id": "00000000-0000-4000-8000-000001234678",
             "name": "my-subject",
             "sex": "female",
             "species": {
-              "id": "f5f8313e-220d-4ee2-9f0d-af2e0406ad2b",
+              "id": "00000000-0000-4000-8000-000001234678",
               "name": "Test Species",
               "taxonomy_id": "12345"
             },
             "strain": {
-              "id": "4d0aeaaf-2b92-4983-862e-d2867d4d0cb0",
+              "id": "00000000-0000-4000-8000-000001234678",
               "name": "Test Strain",
-              "species_id": "f5f8313e-220d-4ee2-9f0d-af2e0406ad2b",
+              "species_id": "00000000-0000-4000-8000-000001234678",
               "taxonomy_id": "Taxonomy ID"
             },
             "weight": 1.5
           },
           "temperature_celsius": 0,
           "type": "ion_channel_model",
-          "update_date": "2025-11-20T15:14:06.309739Z"
+          "update_date": "2025-01-01T00:00:00Z"
         },
         {
           "assets": [],
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
           "brain_region": {
             "acronym": "acronym64",
             "annotation_value": 64,
             "color_hex_triplet": "FF0000",
-            "creation_date": "2025-11-20T15:14:06.272597Z",
-            "hierarchy_id": "2ba82fd4-aa7b-4806-a24a-2ef1a8d0b9cb",
-            "id": "1e0a4d1e-889e-456d-86ac-c5e167574dc1",
+            "creation_date": "2025-01-01T00:00:00Z",
+            "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+            "id": "00000000-0000-4000-8000-000001234678",
             "name": "RedRegion",
             "parent_structure_id": null,
-            "update_date": "2025-11-20T15:14:06.272597Z"
+            "update_date": "2025-01-01T00:00:00Z"
           },
           "contact_email": null,
-          "creation_date": "2025-11-20T15:14:06.315453Z",
+          "creation_date": "2025-01-01T00:00:00Z",
           "description": "Test ICM Description",
           "experiment_date": null,
-          "id": "448f8e95-6011-4324-9372-4a89d146caa6",
+          "id": "00000000-0000-4000-8000-000001234678",
           "is_ljp_corrected": false,
           "is_stochastic": false,
           "is_temperature_dependent": false,
@@ -327,46 +142,231 @@
             "age_period": "postnatal",
             "age_value": 1209600.0,
             "description": "my-description",
-            "id": "ada4ea41-6cc2-4ebb-ae5f-3d9469a9cbe0",
+            "id": "00000000-0000-4000-8000-000001234678",
             "name": "my-subject",
             "sex": "female",
             "species": {
-              "id": "f5f8313e-220d-4ee2-9f0d-af2e0406ad2b",
+              "id": "00000000-0000-4000-8000-000001234678",
               "name": "Test Species",
               "taxonomy_id": "12345"
             },
             "strain": {
-              "id": "4d0aeaaf-2b92-4983-862e-d2867d4d0cb0",
+              "id": "00000000-0000-4000-8000-000001234678",
               "name": "Test Strain",
-              "species_id": "f5f8313e-220d-4ee2-9f0d-af2e0406ad2b",
+              "species_id": "00000000-0000-4000-8000-000001234678",
               "taxonomy_id": "Taxonomy ID"
             },
             "weight": 1.5
           },
           "temperature_celsius": 0,
           "type": "ion_channel_model",
-          "update_date": "2025-11-20T15:14:06.315453Z"
+          "update_date": "2025-01-01T00:00:00Z"
         }
       ],
       "iteration": "test iteration",
       "mtypes": [],
-      "name": "e-1",
-      "score": 10.0,
+      "name": "e-3",
+      "score": 30.0,
       "seed": -1,
       "species": {
-        "id": "f8aa37e5-6ac1-4ca7-a7c7-694474eaf9b4",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "TestSpecies0",
         "taxonomy_id": "0"
       },
       "strain": null,
       "type": "emodel",
-      "update_date": "2025-11-20T15:14:06.409797Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "f8bf5fc4-db6d-47da-98b1-ec8c586bcd30",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym1",
+        "annotation_value": 1,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "region1",
+        "parent_structure_id": null,
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "emodel-desc-2",
+      "etypes": [],
+      "exemplar_morphology": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "description": "Test Morphology Description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "legacy_id": [
+          "Test Legacy ID"
+        ],
+        "location": {
+          "x": 10.0,
+          "y": 20.0,
+          "z": 30.0
+        },
+        "name": "test exemplar morphology 0",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "id": "00000000-0000-4000-8000-000001234678",
+      "ion_channel_models": [
+        {
+          "assets": [],
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+          "authorized_public": false,
+          "brain_region": {
+            "acronym": "acronym64",
+            "annotation_value": 64,
+            "color_hex_triplet": "FF0000",
+            "creation_date": "2025-01-01T00:00:00Z",
+            "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+            "id": "00000000-0000-4000-8000-000001234678",
+            "name": "RedRegion",
+            "parent_structure_id": null,
+            "update_date": "2025-01-01T00:00:00Z"
+          },
+          "contact_email": null,
+          "creation_date": "2025-01-01T00:00:00Z",
+          "description": "Test ICM Description",
+          "experiment_date": null,
+          "id": "00000000-0000-4000-8000-000001234678",
+          "is_ljp_corrected": false,
+          "is_stochastic": false,
+          "is_temperature_dependent": false,
+          "name": "i-0",
+          "neuron_block": {
+            "global": [],
+            "nonspecific": [],
+            "range": [],
+            "useion": []
+          },
+          "nmodl_suffix": "test_icm",
+          "notice_text": null,
+          "published_in": null,
+          "subject": {
+            "age_max": null,
+            "age_min": null,
+            "age_period": "postnatal",
+            "age_value": 1209600.0,
+            "description": "my-description",
+            "id": "00000000-0000-4000-8000-000001234678",
+            "name": "my-subject",
+            "sex": "female",
+            "species": {
+              "id": "00000000-0000-4000-8000-000001234678",
+              "name": "Test Species",
+              "taxonomy_id": "12345"
+            },
+            "strain": {
+              "id": "00000000-0000-4000-8000-000001234678",
+              "name": "Test Strain",
+              "species_id": "00000000-0000-4000-8000-000001234678",
+              "taxonomy_id": "Taxonomy ID"
+            },
+            "weight": 1.5
+          },
+          "temperature_celsius": 0,
+          "type": "ion_channel_model",
+          "update_date": "2025-01-01T00:00:00Z"
+        },
+        {
+          "assets": [],
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+          "authorized_public": false,
+          "brain_region": {
+            "acronym": "acronym64",
+            "annotation_value": 64,
+            "color_hex_triplet": "FF0000",
+            "creation_date": "2025-01-01T00:00:00Z",
+            "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+            "id": "00000000-0000-4000-8000-000001234678",
+            "name": "RedRegion",
+            "parent_structure_id": null,
+            "update_date": "2025-01-01T00:00:00Z"
+          },
+          "contact_email": null,
+          "creation_date": "2025-01-01T00:00:00Z",
+          "description": "Test ICM Description",
+          "experiment_date": null,
+          "id": "00000000-0000-4000-8000-000001234678",
+          "is_ljp_corrected": false,
+          "is_stochastic": false,
+          "is_temperature_dependent": false,
+          "name": "i-1",
+          "neuron_block": {
+            "global": [],
+            "nonspecific": [],
+            "range": [],
+            "useion": []
+          },
+          "nmodl_suffix": "test_icm",
+          "notice_text": null,
+          "published_in": null,
+          "subject": {
+            "age_max": null,
+            "age_min": null,
+            "age_period": "postnatal",
+            "age_value": 1209600.0,
+            "description": "my-description",
+            "id": "00000000-0000-4000-8000-000001234678",
+            "name": "my-subject",
+            "sex": "female",
+            "species": {
+              "id": "00000000-0000-4000-8000-000001234678",
+              "name": "Test Species",
+              "taxonomy_id": "12345"
+            },
+            "strain": {
+              "id": "00000000-0000-4000-8000-000001234678",
+              "name": "Test Strain",
+              "species_id": "00000000-0000-4000-8000-000001234678",
+              "taxonomy_id": "Taxonomy ID"
+            },
+            "weight": 1.5
+          },
+          "temperature_celsius": 0,
+          "type": "ion_channel_model",
+          "update_date": "2025-01-01T00:00:00Z"
+        }
+      ],
+      "iteration": "test iteration",
+      "mtypes": [],
+      "name": "e-2",
+      "score": 20.0,
+      "seed": -1,
+      "species": {
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "TestSpecies0",
+        "taxonomy_id": "0"
+      },
+      "strain": null,
+      "type": "emodel",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

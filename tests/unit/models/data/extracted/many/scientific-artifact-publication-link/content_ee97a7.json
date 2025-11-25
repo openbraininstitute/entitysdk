@@ -4,12 +4,12 @@
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "66783ea1-4d6e-4cf9-97b7-9c57961f6dc2",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "id": "421b0bd5-aed5-494a-a148-f3a9e707d9f7",
+      "id": "00000000-0000-4000-8000-000001234678",
       "publication": {
         "DOI": "10.1080/10509585.2015.1092083",
         "abstract": "my-abstract",
@@ -23,17 +23,17 @@
             "given_name": "Joanne"
           }
         ],
-        "id": "9edc2a69-f8a3-4bbd-a5f3-4e96611b7e13",
+        "id": "00000000-0000-4000-8000-000001234678",
         "publication_year": 2024,
         "title": "my-title"
       },
       "publication_type": "entity_source",
       "scientific_artifact": {
-        "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+        "authorized_project_id": "00000000-0000-4000-8000-000001234678",
         "authorized_public": true,
         "contact_email": null,
         "experiment_date": null,
-        "id": "a3e9cd95-6cf2-4d69-95d1-d4860c414924",
+        "id": "00000000-0000-4000-8000-000001234678",
         "notice_text": null,
         "published_in": null,
         "type": "circuit"
@@ -41,9 +41,9 @@
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "66783ea1-4d6e-4cf9-97b7-9c57961f6dc2",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

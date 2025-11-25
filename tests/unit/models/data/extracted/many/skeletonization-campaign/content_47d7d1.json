@@ -2,20 +2,20 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "27df6d9c-55fb-41c2-8271-b2a313f736db",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:58.750634Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "my-skeletonization-campaign",
-      "id": "b26090a2-3ff1-4bc4-a348-a7e533b0f1ee",
+      "id": "00000000-0000-4000-8000-000001234678",
       "input_meshes": [],
       "name": "Private u1/1",
       "scan_parameters": {
@@ -23,32 +23,32 @@
       },
       "skeletonization_configs": [],
       "type": "skeletonization_campaign",
-      "update_date": "2025-11-20T15:15:58.750634Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "27df6d9c-55fb-41c2-8271-b2a313f736db",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "27df6d9c-55fb-41c2-8271-b2a313f736db",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:58.732937Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "my-skeletonization-campaign",
-      "id": "4964bfd5-7b6c-4017-919d-48b8d28fea37",
+      "id": "00000000-0000-4000-8000-000001234678",
       "input_meshes": [],
       "name": "Private u1/0",
       "scan_parameters": {
@@ -56,32 +56,32 @@
       },
       "skeletonization_configs": [],
       "type": "skeletonization_campaign",
-      "update_date": "2025-11-20T15:15:58.732937Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "27df6d9c-55fb-41c2-8271-b2a313f736db",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": true,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "2b88ee21-f303-489d-a32d-e9143570fc8a",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:58.698225Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "my-skeletonization-campaign",
-      "id": "850e2d72-a552-4bff-a1fd-94ac9011bff0",
+      "id": "00000000-0000-4000-8000-000001234678",
       "input_meshes": [],
       "name": "Public u2/0",
       "scan_parameters": {
@@ -89,32 +89,32 @@
       },
       "skeletonization_configs": [],
       "type": "skeletonization_campaign",
-      "update_date": "2025-11-20T15:15:58.698225Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "2b88ee21-f303-489d-a32d-e9143570fc8a",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": true,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "27df6d9c-55fb-41c2-8271-b2a313f736db",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:58.678831Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "my-skeletonization-campaign",
-      "id": "ae296ed3-45bf-4a67-a356-6f78d9997fca",
+      "id": "00000000-0000-4000-8000-000001234678",
       "input_meshes": [],
       "name": "Public u1/0",
       "scan_parameters": {
@@ -122,13 +122,13 @@
       },
       "skeletonization_configs": [],
       "type": "skeletonization_campaign",
-      "update_date": "2025-11-20T15:15:58.678831Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "27df6d9c-55fb-41c2-8271-b2a313f736db",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

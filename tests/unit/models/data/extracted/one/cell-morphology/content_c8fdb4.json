@@ -1,17 +1,17 @@
 {
   "assets": [],
-  "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": true,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
     "color_hex_triplet": "FF0000",
-    "creation_date": "2025-11-20T15:14:07.533838Z",
-    "hierarchy_id": "a56a74ce-e2db-4059-9470-98eadb6de684",
-    "id": "d3e23772-87a6-4d59-b8fd-afb13425443d",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "RedRegion",
     "parent_structure_id": null,
-    "update_date": "2025-11-20T15:14:07.533838Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "cell_morphology_protocol": null,
   "contact_email": null,
@@ -19,25 +19,25 @@
   "created_by": {
     "family_name": null,
     "given_name": null,
-    "id": "97e1e371-def9-4a4b-98e6-943e783f27a2",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Regular User With Different Project Id",
-    "sub_id": "00000000-0000-0000-0000-000000000002",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:14:07.576601Z",
+  "creation_date": "2025-01-01T00:00:00Z",
   "description": "Test morph",
   "experiment_date": null,
-  "id": "ec003376-17cf-4130-af2b-0c3a5a7d039c",
+  "id": "00000000-0000-4000-8000-000001234678",
   "legacy_id": [
     "Test Legacy ID"
   ],
   "license": {
-    "creation_date": "2025-11-20T15:14:07.542298Z",
+    "creation_date": "2025-01-01T00:00:00Z",
     "description": "a license description",
-    "id": "ff5a9c92-55be-4b8a-8ece-f354bb2d17bf",
+    "id": "00000000-0000-4000-8000-000001234678",
     "label": "test label",
     "name": "Test License",
-    "update_date": "2025-11-20T15:14:07.542298Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "location": {
     "x": 10.0,
@@ -54,30 +54,30 @@
     "age_period": "postnatal",
     "age_value": 1209600.0,
     "description": "my-description",
-    "id": "efe5f5d0-a152-4325-b800-eb8b91142809",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "my-subject",
     "sex": "female",
     "species": {
-      "id": "e0f8285c-03ef-4576-a1af-b1fd5c50ac76",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Test Species",
       "taxonomy_id": "12345"
     },
     "strain": {
-      "id": "b31ff0b9-5dc0-49bc-9c36-1410ff0570dc",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Test Strain",
-      "species_id": "e0f8285c-03ef-4576-a1af-b1fd5c50ac76",
+      "species_id": "00000000-0000-4000-8000-000001234678",
       "taxonomy_id": "Taxonomy ID"
     },
     "weight": 1.5
   },
   "type": "cell_morphology",
-  "update_date": "2025-11-20T15:14:07.576601Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": null,
     "given_name": null,
-    "id": "97e1e371-def9-4a4b-98e6-943e783f27a2",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Regular User With Different Project Id",
-    "sub_id": "00000000-0000-0000-0000-000000000002",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }
 }

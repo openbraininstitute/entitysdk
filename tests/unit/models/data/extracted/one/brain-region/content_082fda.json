@@ -2,10 +2,10 @@
   "acronym": "grey",
   "annotation_value": 9999,
   "color_hex_triplet": "BFDAE3",
-  "creation_date": "2025-11-20T15:13:21.949640Z",
-  "hierarchy_id": "1860d784-dacd-4d28-bc71-9c9b0902da23",
-  "id": "a9b0a6f1-3e7c-4469-b3bb-454738a5aff8",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+  "id": "00000000-0000-4000-8000-000001234678",
   "name": "my-region",
   "parent_structure_id": null,
-  "update_date": "2025-11-20T15:13:21.949640Z"
+  "update_date": "2025-01-01T00:00:00Z"
 }

@@ -2,31 +2,31 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
         "acronym": "acronym0",
         "annotation_value": 0,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:14:13.759730Z",
-        "hierarchy_id": "583fac1d-f662-425d-9d5d-ea7b72991196",
-        "id": "6b6c18a8-5577-4d2e-853b-b4392e63d393",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "region-0",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:14:13.759730Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "contributions": [],
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "f7bfa303-8ff1-4d06-a4e7-3c1176ca02e1",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:13.769135Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "my-description",
-      "id": "b47f669d-26a7-49c4-9016-5fc727064420",
+      "id": "00000000-0000-4000-8000-000001234678",
       "license": null,
       "measurements": [],
       "mtypes": [],
@@ -37,30 +37,30 @@
         "age_period": "postnatal",
         "age_value": 1209600.0,
         "description": "my-description",
-        "id": "4ebc29b3-cf98-4680-9c41-b2da59f7356d",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "my-subject",
         "sex": "female",
         "species": {
-          "id": "8d106490-41ab-454f-ad57-e7242b90f330",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "Test Species",
           "taxonomy_id": "12345"
         },
         "strain": {
-          "id": "2c401d51-83af-4d6c-87b9-c02a0779f32c",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "Test Strain",
-          "species_id": "8d106490-41ab-454f-ad57-e7242b90f330",
+          "species_id": "00000000-0000-4000-8000-000001234678",
           "taxonomy_id": "Taxonomy ID"
         },
         "weight": 1.5
       },
       "type": "experimental_bouton_density",
-      "update_date": "2025-11-20T15:14:13.769135Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "f7bfa303-8ff1-4d06-a4e7-3c1176ca02e1",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }
@@ -69,7 +69,7 @@
     "brain_region": [
       {
         "count": 1,
-        "id": "6b6c18a8-5577-4d2e-853b-b4392e63d393",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "region-0",
         "type": "brain_region"
       }
@@ -78,7 +78,7 @@
     "created_by": [
       {
         "count": 1,
-        "id": "f7bfa303-8ff1-4d06-a4e7-3c1176ca02e1",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "jd courcol",
         "type": "person"
       }
@@ -87,7 +87,7 @@
     "species": [
       {
         "count": 1,
-        "id": "8d106490-41ab-454f-ad57-e7242b90f330",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "Test Species",
         "type": "subject.species"
       }
@@ -95,7 +95,7 @@
     "strain": [
       {
         "count": 1,
-        "id": "2c401d51-83af-4d6c-87b9-c02a0779f32c",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "Test Strain",
         "type": "subject.strain"
       }
@@ -103,7 +103,7 @@
     "updated_by": [
       {
         "count": 1,
-        "id": "f7bfa303-8ff1-4d06-a4e7-3c1176ca02e1",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "jd courcol",
         "type": "person"
       }

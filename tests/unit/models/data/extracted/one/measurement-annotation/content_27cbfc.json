@@ -1,8 +1,8 @@
 {
-  "creation_date": "2025-11-20T15:14:56.375843Z",
-  "entity_id": "f3cf1cc5-126d-455f-bcd8-308305681702",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "entity_id": "00000000-0000-4000-8000-000001234678",
   "entity_type": "cell_morphology",
-  "id": "597aec1f-5e32-49da-a0e4-7e691216d286",
+  "id": "00000000-0000-4000-8000-000001234678",
   "measurement_kinds": [
     {
       "measurement_items": [
@@ -37,5 +37,5 @@
       "structural_domain": "soma"
     }
   ],
-  "update_date": "2025-11-20T15:14:56.375843Z"
+  "update_date": "2025-01-01T00:00:00Z"
 }

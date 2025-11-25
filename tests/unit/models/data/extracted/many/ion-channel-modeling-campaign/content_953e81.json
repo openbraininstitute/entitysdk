@@ -2,20 +2,20 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "ce3ce7ca-f973-47d8-8c04-0df9281456d6",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:43.063346Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "my-ion-channel-modeling-campaign",
-      "id": "a4bfc558-9f04-4c6b-9678-25499f118350",
+      "id": "00000000-0000-4000-8000-000001234678",
       "input_recordings": [],
       "ion_channel_modeling_configs": [],
       "name": "Private u1/1",
@@ -23,32 +23,32 @@
         "foo": "bar"
       },
       "type": "ion_channel_modeling_campaign",
-      "update_date": "2025-11-20T15:14:43.063346Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "ce3ce7ca-f973-47d8-8c04-0df9281456d6",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "ce3ce7ca-f973-47d8-8c04-0df9281456d6",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:43.046638Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "my-ion-channel-modeling-campaign",
-      "id": "82daad5f-8c15-48fd-a015-f89ee320ac84",
+      "id": "00000000-0000-4000-8000-000001234678",
       "input_recordings": [],
       "ion_channel_modeling_configs": [],
       "name": "Private u1/0",
@@ -56,32 +56,32 @@
         "foo": "bar"
       },
       "type": "ion_channel_modeling_campaign",
-      "update_date": "2025-11-20T15:14:43.046638Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "ce3ce7ca-f973-47d8-8c04-0df9281456d6",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": true,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "bfb3dbd1-654f-437e-b43e-95a788ee85ea",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:43.016035Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "my-ion-channel-modeling-campaign",
-      "id": "17ef657a-2d88-4f88-9657-bb8d802566e3",
+      "id": "00000000-0000-4000-8000-000001234678",
       "input_recordings": [],
       "ion_channel_modeling_configs": [],
       "name": "Public u2/0",
@@ -89,32 +89,32 @@
         "foo": "bar"
       },
       "type": "ion_channel_modeling_campaign",
-      "update_date": "2025-11-20T15:14:43.016035Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "bfb3dbd1-654f-437e-b43e-95a788ee85ea",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": true,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "ce3ce7ca-f973-47d8-8c04-0df9281456d6",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:42.998221Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "my-ion-channel-modeling-campaign",
-      "id": "6171ea98-e6b2-4aa6-85b0-4efc8a3d2259",
+      "id": "00000000-0000-4000-8000-000001234678",
       "input_recordings": [],
       "ion_channel_modeling_configs": [],
       "name": "Public u1/0",
@@ -122,13 +122,13 @@
         "foo": "bar"
       },
       "type": "ion_channel_modeling_campaign",
-      "update_date": "2025-11-20T15:14:42.998221Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "ce3ce7ca-f973-47d8-8c04-0df9281456d6",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

@@ -1,43 +1,43 @@
 {
-  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "created_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "b6da48df-b113-428a-b445-8dff157f8e7e",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:13:43.705919Z",
-  "end_time": "2025-11-20T15:13:43.608901Z",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "end_time": "2025-01-01T00:00:00Z",
   "generated": [
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
-      "authorized_public": false,
-      "id": "bd56dc93-a73f-4d09-ae8c-fca3104c81a2",
-      "type": "circuit_extraction_campaign"
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": true,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "type": "circuit"
     }
   ],
-  "id": "12b11d37-c1e8-4a16-a4d2-469a57d8f425",
-  "start_time": "2025-11-20T15:13:43.608891Z",
+  "id": "00000000-0000-4000-8000-000001234678",
+  "start_time": "2025-01-01T00:00:00Z",
   "status": "done",
   "type": "circuit_extraction_execution",
-  "update_date": "2025-11-20T15:13:43.705919Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "b6da48df-b113-428a-b445-8dff157f8e7e",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
   "used": [
     {
-      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
-      "authorized_public": true,
-      "id": "ba0800ef-4d6b-42c7-a058-ee17a0a7c594",
-      "type": "circuit_extraction_campaign"
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "type": "circuit_extraction_config"
     }
   ]
 }

@@ -1,104 +1,104 @@
 {
-  "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
     "color_hex_triplet": "FF0000",
-    "creation_date": "2025-11-20T15:15:04.687642Z",
-    "hierarchy_id": "142e0b49-23e6-4519-a440-9c409f7b5ecf",
-    "id": "f0d64a10-15b8-4a91-b63a-c4e538e70326",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "RedRegion",
     "parent_structure_id": null,
-    "update_date": "2025-11-20T15:15:04.687642Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "calibration_result": null,
   "contributions": [],
   "created_by": {
     "family_name": null,
     "given_name": null,
-    "id": "cb067883-0c55-4abc-b51c-b66c9d6598ab",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Regular User With Different Project Id",
-    "sub_id": "00000000-0000-0000-0000-000000000002",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:15:04.902216Z",
+  "creation_date": "2025-01-01T00:00:00Z",
   "description": "description",
   "emodel": {
     "assets": [],
-    "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+    "authorized_project_id": "00000000-0000-4000-8000-000001234678",
     "authorized_public": true,
     "brain_region": {
       "acronym": "acronym64",
       "annotation_value": 64,
       "color_hex_triplet": "FF0000",
-      "creation_date": "2025-11-20T15:15:04.687642Z",
-      "hierarchy_id": "142e0b49-23e6-4519-a440-9c409f7b5ecf",
-      "id": "f0d64a10-15b8-4a91-b63a-c4e538e70326",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "RedRegion",
       "parent_structure_id": null,
-      "update_date": "2025-11-20T15:15:04.687642Z"
+      "update_date": "2025-01-01T00:00:00Z"
     },
     "contributions": [],
     "created_by": {
       "family_name": null,
       "given_name": null,
-      "id": "cb067883-0c55-4abc-b51c-b66c9d6598ab",
+      "id": "00000000-0000-4000-8000-000001234678",
       "pref_label": "Regular User With Different Project Id",
-      "sub_id": "00000000-0000-0000-0000-000000000002",
+      "sub_id": "00000000-0000-4000-8000-000001234678",
       "type": "person"
     },
-    "creation_date": "2025-11-20T15:15:04.886018Z",
+    "creation_date": "2025-01-01T00:00:00Z",
     "description": "test",
     "etypes": [],
     "exemplar_morphology": {
-      "creation_date": "2025-11-20T15:15:04.871427Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "test",
-      "id": "a48ee98e-84b4-4786-bc4f-31b6dfaae723",
+      "id": "00000000-0000-4000-8000-000001234678",
       "legacy_id": null,
       "location": null,
       "name": "test",
-      "update_date": "2025-11-20T15:15:04.871427Z"
+      "update_date": "2025-01-01T00:00:00Z"
     },
-    "id": "76214c3a-5582-448c-ace5-6b6b392c1d76",
+    "id": "00000000-0000-4000-8000-000001234678",
     "iteration": "test",
     "mtypes": [],
     "name": "test",
     "score": 0.0,
     "seed": 0,
     "species": {
-      "id": "3df8c4d8-fbc2-46aa-8546-c1d52c27de5d",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Test Species",
       "taxonomy_id": "12345"
     },
     "strain": null,
     "type": "emodel",
-    "update_date": "2025-11-20T15:15:04.886018Z",
+    "update_date": "2025-01-01T00:00:00Z",
     "updated_by": {
       "family_name": null,
       "given_name": null,
-      "id": "cb067883-0c55-4abc-b51c-b66c9d6598ab",
+      "id": "00000000-0000-4000-8000-000001234678",
       "pref_label": "Regular User With Different Project Id",
-      "sub_id": "00000000-0000-0000-0000-000000000002",
+      "sub_id": "00000000-0000-4000-8000-000001234678",
       "type": "person"
     }
   },
   "etypes": [],
-  "id": "44b84f5c-79c9-4d4d-b761-f883721cf8ea",
+  "id": "00000000-0000-4000-8000-000001234678",
   "morphology": {
     "assets": [],
-    "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+    "authorized_project_id": "00000000-0000-4000-8000-000001234678",
     "authorized_public": true,
     "brain_region": {
       "acronym": "acronym64",
       "annotation_value": 64,
       "color_hex_triplet": "FF0000",
-      "creation_date": "2025-11-20T15:15:04.687642Z",
-      "hierarchy_id": "142e0b49-23e6-4519-a440-9c409f7b5ecf",
-      "id": "f0d64a10-15b8-4a91-b63a-c4e538e70326",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "RedRegion",
       "parent_structure_id": null,
-      "update_date": "2025-11-20T15:15:04.687642Z"
+      "update_date": "2025-01-01T00:00:00Z"
     },
     "cell_morphology_protocol": null,
     "contact_email": null,
@@ -106,15 +106,15 @@
     "created_by": {
       "family_name": null,
       "given_name": null,
-      "id": "cb067883-0c55-4abc-b51c-b66c9d6598ab",
+      "id": "00000000-0000-4000-8000-000001234678",
       "pref_label": "Regular User With Different Project Id",
-      "sub_id": "00000000-0000-0000-0000-000000000002",
+      "sub_id": "00000000-0000-4000-8000-000001234678",
       "type": "person"
     },
-    "creation_date": "2025-11-20T15:15:04.871427Z",
+    "creation_date": "2025-01-01T00:00:00Z",
     "description": "test",
     "experiment_date": null,
-    "id": "a48ee98e-84b4-4786-bc4f-31b6dfaae723",
+    "id": "00000000-0000-4000-8000-000001234678",
     "legacy_id": null,
     "license": null,
     "location": null,
@@ -128,54 +128,54 @@
       "age_period": "postnatal",
       "age_value": 1209600.0,
       "description": "my-description",
-      "id": "7a2091cf-5576-4361-ad17-1baa138440d4",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "my-subject",
       "sex": "female",
       "species": {
-        "id": "3df8c4d8-fbc2-46aa-8546-c1d52c27de5d",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "Test Species",
         "taxonomy_id": "12345"
       },
       "strain": {
-        "id": "30772e58-8f18-4fa2-8c43-4a19d2376596",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "Test Strain",
-        "species_id": "3df8c4d8-fbc2-46aa-8546-c1d52c27de5d",
+        "species_id": "00000000-0000-4000-8000-000001234678",
         "taxonomy_id": "Taxonomy ID"
       },
       "weight": 1.5
     },
     "type": "cell_morphology",
-    "update_date": "2025-11-20T15:15:04.871427Z",
+    "update_date": "2025-01-01T00:00:00Z",
     "updated_by": {
       "family_name": null,
       "given_name": null,
-      "id": "cb067883-0c55-4abc-b51c-b66c9d6598ab",
+      "id": "00000000-0000-4000-8000-000001234678",
       "pref_label": "Regular User With Different Project Id",
-      "sub_id": "00000000-0000-0000-0000-000000000002",
+      "sub_id": "00000000-0000-4000-8000-000001234678",
       "type": "person"
     }
   },
   "mtypes": [],
   "name": "Test name",
   "species": {
-    "id": "3df8c4d8-fbc2-46aa-8546-c1d52c27de5d",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "Test Species",
     "taxonomy_id": "12345"
   },
   "strain": {
-    "id": "30772e58-8f18-4fa2-8c43-4a19d2376596",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "Test Strain",
-    "species_id": "3df8c4d8-fbc2-46aa-8546-c1d52c27de5d",
+    "species_id": "00000000-0000-4000-8000-000001234678",
     "taxonomy_id": "Taxonomy ID"
   },
   "type": "memodel",
-  "update_date": "2025-11-20T15:15:04.902216Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": null,
     "given_name": null,
-    "id": "cb067883-0c55-4abc-b51c-b66c9d6598ab",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Regular User With Different Project Id",
-    "sub_id": "00000000-0000-0000-0000-000000000002",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
   "validation_status": "created"

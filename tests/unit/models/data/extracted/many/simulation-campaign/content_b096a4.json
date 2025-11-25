@@ -2,46 +2,46 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "e99240fd-1f51-4d86-8d56-0f2f414aab9f",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:29.302928Z",
-      "description": "Campaign for circuit 1",
-      "entity_id": "bd88204c-6111-403f-80e9-2030ac3b0a45",
-      "id": "5109a60a-c500-4f4c-8e42-324e7dc405e2",
-      "name": "campaign-circuit-1",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Campaign for circuit 0",
+      "entity_id": "00000000-0000-4000-8000-000001234678",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "name": "campaign-circuit-0",
       "scan_parameters": {
         "foo1": "bar2"
       },
       "simulations": [
         {
-          "description": "simulation-description-1",
-          "entity_id": "bd88204c-6111-403f-80e9-2030ac3b0a45",
-          "id": "9d35ecb9-6142-46b2-b853-2b8e43a6816c",
-          "name": "simulation-1",
+          "description": "simulation-description-0",
+          "entity_id": "00000000-0000-4000-8000-000001234678",
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "simulation-0",
           "scan_parameters": {
             "foo1": "bar1",
             "foo2": "bar2"
           },
-          "simulation_campaign_id": "5109a60a-c500-4f4c-8e42-324e7dc405e2",
+          "simulation_campaign_id": "00000000-0000-4000-8000-000001234678",
           "type": "simulation"
         }
       ],
       "type": "simulation_campaign",
-      "update_date": "2025-11-20T15:15:29.302928Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "e99240fd-1f51-4d86-8d56-0f2f414aab9f",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }
@@ -50,8 +50,8 @@
     "circuit": [
       {
         "count": 1,
-        "id": "bd88204c-6111-403f-80e9-2030ac3b0a45",
-        "label": "micro-circuit-2",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "label": "micro-circuit-1",
         "type": "circuit"
       }
     ],
@@ -59,7 +59,7 @@
     "created_by": [
       {
         "count": 1,
-        "id": "e99240fd-1f51-4d86-8d56-0f2f414aab9f",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "jd courcol",
         "type": "person"
       }
@@ -67,15 +67,15 @@
     "simulation": [
       {
         "count": 1,
-        "id": "9d35ecb9-6142-46b2-b853-2b8e43a6816c",
-        "label": "simulation-1",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "label": "simulation-0",
         "type": "simulation"
       }
     ],
     "updated_by": [
       {
         "count": 1,
-        "id": "e99240fd-1f51-4d86-8d56-0f2f414aab9f",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "jd courcol",
         "type": "person"
       }

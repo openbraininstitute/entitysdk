@@ -1,50 +1,50 @@
 {
   "assets": [],
-  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
-  "authorized_public": false,
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+  "authorized_public": true,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
     "color_hex_triplet": "FF0000",
-    "creation_date": "2025-11-20T15:15:47.295829Z",
-    "hierarchy_id": "e54ac3d6-e57c-480b-94d0-93cee017d6de",
-    "id": "c67fa753-0045-4a11-9596-ac515ef47ea4",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "RedRegion",
     "parent_structure_id": null,
-    "update_date": "2025-11-20T15:15:47.295829Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "contributions": [],
   "created_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "aad3c558-e3b9-4610-aa83-2cf0f5ff98e8",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:15:47.465332Z",
+  "creation_date": "2025-01-01T00:00:00Z",
   "description": "my-description",
-  "id": "6bb4503c-b33e-4ecc-be2b-03e3cb49569b",
+  "id": "00000000-0000-4000-8000-000001234678",
   "me_model": {
-    "creation_date": "2025-11-20T15:15:47.367267Z",
+    "creation_date": "2025-01-01T00:00:00Z",
     "description": "description",
     "etypes": [],
-    "id": "08401cde-fcd4-40e2-b662-3a8f4b0d4bcc",
+    "id": "00000000-0000-4000-8000-000001234678",
     "mtypes": [],
     "name": "name",
-    "update_date": "2025-11-20T15:15:47.367267Z",
+    "update_date": "2025-01-01T00:00:00Z",
     "validation_status": "created"
   },
   "name": "my-synaptome",
   "seed": 1,
   "type": "single_neuron_synaptome",
-  "update_date": "2025-11-20T15:15:47.465332Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "aad3c558-e3b9-4610-aa83-2cf0f5ff98e8",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }
 }

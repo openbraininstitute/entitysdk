@@ -2,33 +2,33 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "682d60a1-5bb0-4e2e-8576-b614b7cdf11b",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:29.728347Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "Campaign for circuit 1",
-      "entity_id": "0b2d9049-d8d8-45c6-a257-5738830973aa",
-      "id": "90d63ecf-5b20-4b3b-a193-06f22fde4e7d",
+      "entity_id": "00000000-0000-4000-8000-000001234678",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "campaign-1",
       "scan_parameters": {
         "foo1": "bar2"
       },
       "simulations": [],
       "type": "simulation_campaign",
-      "update_date": "2025-11-20T15:15:29.728347Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "682d60a1-5bb0-4e2e-8576-b614b7cdf11b",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }
@@ -39,7 +39,7 @@
     "created_by": [
       {
         "count": 1,
-        "id": "682d60a1-5bb0-4e2e-8576-b614b7cdf11b",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "jd courcol",
         "type": "person"
       }
@@ -48,7 +48,7 @@
     "updated_by": [
       {
         "count": 1,
-        "id": "682d60a1-5bb0-4e2e-8576-b614b7cdf11b",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "jd courcol",
         "type": "person"
       }

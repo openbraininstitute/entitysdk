@@ -1,90 +1,90 @@
 {
   "assets": [],
-  "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
-  "authorized_public": false,
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+  "authorized_public": true,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
     "color_hex_triplet": "FF0000",
-    "creation_date": "2025-11-20T15:14:27.870429Z",
-    "hierarchy_id": "f11e71f1-2c43-4c74-8389-316474dc86eb",
-    "id": "3b58b001-08d8-4e18-8497-13deef5ce2c1",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "RedRegion",
     "parent_structure_id": null,
-    "update_date": "2025-11-20T15:14:27.870429Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "contributions": [],
   "created_by": {
     "family_name": null,
     "given_name": null,
-    "id": "08dcfdc7-828e-4fec-9a57-e2b17a390c52",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Regular User With Different Project Id",
-    "sub_id": "00000000-0000-0000-0000-000000000002",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:14:28.468096Z",
+  "creation_date": "2025-01-01T00:00:00Z",
   "description": "my-description",
-  "id": "608fe69e-f59d-42a1-921c-a89212a8d873",
+  "id": "00000000-0000-4000-8000-000001234678",
   "license": {
-    "creation_date": "2025-11-20T15:14:28.418349Z",
+    "creation_date": "2025-01-01T00:00:00Z",
     "description": "a license description",
-    "id": "24f52fe3-edfb-4753-8e85-49b995214538",
+    "id": "00000000-0000-4000-8000-000001234678",
     "label": "test label",
     "name": "Test License",
-    "update_date": "2025-11-20T15:14:28.418349Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "measurements": [
     {
-      "id": 5,
+      "id": 3,
       "name": "minimum",
       "unit": "\u03bcm",
       "value": 1.23
     },
     {
-      "id": 6,
+      "id": 4,
       "name": "maximum",
       "unit": "\u03bcm",
       "value": 1.45
     }
   ],
-  "name": "Private u2/0",
+  "name": "Public u2/0",
   "post_mtype": {
     "alt_label": "mtype-alt-label",
-    "creation_date": "2025-11-20T15:14:28.415743Z",
+    "creation_date": "2025-01-01T00:00:00Z",
     "definition": "mtype-definition",
-    "id": "f84d09b3-5815-43e7-8a5f-33e3362359b1",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "mtype-pref-label",
-    "update_date": "2025-11-20T15:14:28.415743Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "post_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
     "color_hex_triplet": "FF0000",
-    "creation_date": "2025-11-20T15:14:27.870429Z",
-    "hierarchy_id": "f11e71f1-2c43-4c74-8389-316474dc86eb",
-    "id": "3b58b001-08d8-4e18-8497-13deef5ce2c1",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "RedRegion",
     "parent_structure_id": null,
-    "update_date": "2025-11-20T15:14:27.870429Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "pre_mtype": {
     "alt_label": "mtype-alt-label",
-    "creation_date": "2025-11-20T15:14:28.415743Z",
+    "creation_date": "2025-01-01T00:00:00Z",
     "definition": "mtype-definition",
-    "id": "f84d09b3-5815-43e7-8a5f-33e3362359b1",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "mtype-pref-label",
-    "update_date": "2025-11-20T15:14:28.415743Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "pre_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
     "color_hex_triplet": "FF0000",
-    "creation_date": "2025-11-20T15:14:27.870429Z",
-    "hierarchy_id": "f11e71f1-2c43-4c74-8389-316474dc86eb",
-    "id": "3b58b001-08d8-4e18-8497-13deef5ce2c1",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "RedRegion",
     "parent_structure_id": null,
-    "update_date": "2025-11-20T15:14:27.870429Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "subject": {
     "age_max": null,
@@ -92,30 +92,30 @@
     "age_period": "postnatal",
     "age_value": 1209600.0,
     "description": "my-description",
-    "id": "efa29017-350e-440b-9143-3abf299e63a0",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "my-subject",
     "sex": "female",
     "species": {
-      "id": "17ca69e4-46c8-4798-98a2-701cf2e4de8d",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Test Species",
       "taxonomy_id": "12345"
     },
     "strain": {
-      "id": "294d83ae-31ba-4c92-b54f-1360a1ea154c",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Test Strain",
-      "species_id": "17ca69e4-46c8-4798-98a2-701cf2e4de8d",
+      "species_id": "00000000-0000-4000-8000-000001234678",
       "taxonomy_id": "Taxonomy ID"
     },
     "weight": 1.5
   },
   "type": "experimental_synapses_per_connection",
-  "update_date": "2025-11-20T15:14:28.468096Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": null,
     "given_name": null,
-    "id": "08dcfdc7-828e-4fec-9a57-e2b17a390c52",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Regular User With Different Project Id",
-    "sub_id": "00000000-0000-0000-0000-000000000002",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }
 }

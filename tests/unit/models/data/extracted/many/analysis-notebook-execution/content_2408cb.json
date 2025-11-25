@@ -2,7 +2,7 @@
   "data": [
     {
       "analysis_notebook_environment": {
-        "id": "7fde32ff-7c72-47c2-b2f9-b35e45973fcd",
+        "id": "00000000-0000-4000-8000-000001234678",
         "runtime_info": {
           "docker": {
             "docker_version": null,
@@ -28,7 +28,7 @@
       },
       "analysis_notebook_template": {
         "description": "analysis-notebook-template-description",
-        "id": "6ca2e9e7-e1eb-4091-af50-0ed619added4",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "analysis-notebook-template",
         "scale": "cellular",
         "specifications": {
@@ -61,50 +61,50 @@
         },
         "type": "analysis_notebook_template"
       },
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "51c1d281-5ebe-4fb3-b2b7-d608a9c9efe9",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:09.212957Z",
-      "end_time": "2025-11-20T15:13:09.145278Z",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "end_time": "2025-01-01T00:00:00Z",
       "generated": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "8c2af378-30a8-41ef-9689-223afc073e33",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "analysis_notebook_result"
         }
       ],
-      "id": "b458afe8-e896-4cbc-a7f4-08b3f61cfc72",
-      "start_time": "2025-11-20T15:13:09.145266Z",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "start_time": "2025-01-01T00:00:00Z",
       "type": "analysis_notebook_execution",
-      "update_date": "2025-11-20T15:13:09.212957Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "51c1d281-5ebe-4fb3-b2b7-d608a9c9efe9",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "used": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "6c77da82-2c8d-4ddb-a596-c73d44c5587f",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "circuit"
         }
       ]
     },
     {
       "analysis_notebook_environment": {
-        "id": "7fde32ff-7c72-47c2-b2f9-b35e45973fcd",
+        "id": "00000000-0000-4000-8000-000001234678",
         "runtime_info": {
           "docker": {
             "docker_version": null,
@@ -130,7 +130,7 @@
       },
       "analysis_notebook_template": {
         "description": "analysis-notebook-template-description",
-        "id": "6ca2e9e7-e1eb-4091-af50-0ed619added4",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "analysis-notebook-template",
         "scale": "cellular",
         "specifications": {
@@ -163,43 +163,43 @@
         },
         "type": "analysis_notebook_template"
       },
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "51c1d281-5ebe-4fb3-b2b7-d608a9c9efe9",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:09.200973Z",
-      "end_time": "2025-11-20T15:13:09.145278Z",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "end_time": "2025-01-01T00:00:00Z",
       "generated": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "8c2af378-30a8-41ef-9689-223afc073e33",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "analysis_notebook_result"
         }
       ],
-      "id": "17c75aee-cf2b-4274-8589-59d861b4b546",
-      "start_time": "2025-11-20T15:13:09.145266Z",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "start_time": "2025-01-01T00:00:00Z",
       "type": "analysis_notebook_execution",
-      "update_date": "2025-11-20T15:13:09.200973Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "51c1d281-5ebe-4fb3-b2b7-d608a9c9efe9",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "used": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "6c77da82-2c8d-4ddb-a596-c73d44c5587f",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "circuit"
         }
       ]

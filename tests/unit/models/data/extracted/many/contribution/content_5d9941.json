@@ -4,41 +4,41 @@
       "agent": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "95dec109-4e31-43fb-b4c7-275af18b9097",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "bf86f709-3622-4cdd-aaa3-6eb834693baa",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:46.962307Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "entity": {
-        "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+        "authorized_project_id": "00000000-0000-4000-8000-000001234678",
         "authorized_public": true,
-        "id": "307b3930-c15c-4ac4-8167-27f1b1a59e53",
+        "id": "00000000-0000-4000-8000-000001234678",
         "type": "cell_morphology"
       },
-      "id": "29a6b1f1-64fe-480d-b7ae-97a188e537fa",
+      "id": "00000000-0000-4000-8000-000001234678",
       "role": {
-        "creation_date": "2025-11-20T15:13:46.896545Z",
-        "id": "cd8df256-c88c-4c49-bd15-7d51a87552bb",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "important role",
         "role_id": "important role id",
-        "update_date": "2025-11-20T15:13:46.896545Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
-      "update_date": "2025-11-20T15:13:46.962307Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "bf86f709-3622-4cdd-aaa3-6eb834693baa",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

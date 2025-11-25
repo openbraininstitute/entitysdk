@@ -4,26 +4,26 @@
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "3f682516-3f8b-4014-8eba-97c1c6076611",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "external_url": {
         "description": "Contains description of potassium channels...",
-        "id": "147dbf4d-a315-4599-a373-ca765cf69e8a",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "Potassium channel page on Channelpedia",
         "source": "channelpedia",
         "source_name": "Channelpedia",
         "url": "https://channelpedia.epfl.ch/wikipages/188"
       },
-      "id": "4459e303-050d-4881-906d-e48ed93b990e",
+      "id": "00000000-0000-4000-8000-000001234678",
       "scientific_artifact": {
-        "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+        "authorized_project_id": "00000000-0000-4000-8000-000001234678",
         "authorized_public": false,
         "contact_email": null,
         "experiment_date": null,
-        "id": "d90ce4c9-f809-4ca0-81de-1e19c3eed030",
+        "id": "00000000-0000-4000-8000-000001234678",
         "notice_text": null,
         "published_in": null,
         "type": "circuit"
@@ -31,9 +31,9 @@
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "3f682516-3f8b-4014-8eba-97c1c6076611",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
@@ -41,26 +41,26 @@
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "3f682516-3f8b-4014-8eba-97c1c6076611",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "external_url": {
         "description": "Contains description of potassium channels...",
-        "id": "147dbf4d-a315-4599-a373-ca765cf69e8a",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "Potassium channel page on Channelpedia",
         "source": "channelpedia",
         "source_name": "Channelpedia",
         "url": "https://channelpedia.epfl.ch/wikipages/188"
       },
-      "id": "8c52e223-c65c-466f-8344-2450d7b770de",
+      "id": "00000000-0000-4000-8000-000001234678",
       "scientific_artifact": {
-        "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+        "authorized_project_id": "00000000-0000-4000-8000-000001234678",
         "authorized_public": true,
         "contact_email": null,
         "experiment_date": null,
-        "id": "a4f4bf60-0091-4226-880b-d6d5100bcc2f",
+        "id": "00000000-0000-4000-8000-000001234678",
         "notice_text": null,
         "published_in": null,
         "type": "circuit"
@@ -68,9 +68,9 @@
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "3f682516-3f8b-4014-8eba-97c1c6076611",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

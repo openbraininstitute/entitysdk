@@ -2,30 +2,30 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:15:53.624659Z",
-        "hierarchy_id": "8a93c188-9019-4e1e-8ce1-052fedfd07d7",
-        "id": "4151b529-c877-4bb0-9c2c-7076a2bd3dd1",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "RedRegion",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:15:53.624659Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "9feb9c56-413a-4a6a-8467-5c010864dee7",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:53.781584Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "my-description",
-      "id": "c4bbb8f6-e8b5-4f88-b6ec-5b5e2394b4f8",
+      "id": "00000000-0000-4000-8000-000001234678",
       "injection_location": [
         "soma[0]"
       ],
@@ -36,50 +36,50 @@
       "seed": 1,
       "status": "success",
       "synaptome": {
-        "creation_date": "2025-11-20T15:15:53.654454Z",
+        "creation_date": "2025-01-01T00:00:00Z",
         "description": "my-synaptome-description",
-        "id": "1b0f50c8-0f9c-4f6a-bdad-44b3fa8fefb8",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "my-synaptome",
         "seed": 1,
-        "update_date": "2025-11-20T15:15:53.654454Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "type": "single_neuron_synaptome_simulation",
-      "update_date": "2025-11-20T15:15:53.781584Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "9feb9c56-413a-4a6a-8467-5c010864dee7",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:15:53.624659Z",
-        "hierarchy_id": "8a93c188-9019-4e1e-8ce1-052fedfd07d7",
-        "id": "4151b529-c877-4bb0-9c2c-7076a2bd3dd1",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "RedRegion",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:15:53.624659Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "9feb9c56-413a-4a6a-8467-5c010864dee7",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:53.770327Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "my-description",
-      "id": "a213dd63-ec30-433f-9d56-b83aa9b5f63d",
+      "id": "00000000-0000-4000-8000-000001234678",
       "injection_location": [
         "soma[0]"
       ],
@@ -90,50 +90,50 @@
       "seed": 1,
       "status": "success",
       "synaptome": {
-        "creation_date": "2025-11-20T15:15:53.654454Z",
+        "creation_date": "2025-01-01T00:00:00Z",
         "description": "my-synaptome-description",
-        "id": "1b0f50c8-0f9c-4f6a-bdad-44b3fa8fefb8",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "my-synaptome",
         "seed": 1,
-        "update_date": "2025-11-20T15:15:53.654454Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "type": "single_neuron_synaptome_simulation",
-      "update_date": "2025-11-20T15:15:53.770327Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "9feb9c56-413a-4a6a-8467-5c010864dee7",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": true,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:15:53.624659Z",
-        "hierarchy_id": "8a93c188-9019-4e1e-8ce1-052fedfd07d7",
-        "id": "4151b529-c877-4bb0-9c2c-7076a2bd3dd1",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "RedRegion",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:15:53.624659Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "77ac5dca-44c9-424b-9835-96480178f5c2",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:53.746124Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "my-description",
-      "id": "88099e97-dbdb-4cc1-8d95-fc8fae02aa8a",
+      "id": "00000000-0000-4000-8000-000001234678",
       "injection_location": [
         "soma[0]"
       ],
@@ -144,50 +144,50 @@
       "seed": 1,
       "status": "success",
       "synaptome": {
-        "creation_date": "2025-11-20T15:15:53.654454Z",
+        "creation_date": "2025-01-01T00:00:00Z",
         "description": "my-synaptome-description",
-        "id": "1b0f50c8-0f9c-4f6a-bdad-44b3fa8fefb8",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "my-synaptome",
         "seed": 1,
-        "update_date": "2025-11-20T15:15:53.654454Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "type": "single_neuron_synaptome_simulation",
-      "update_date": "2025-11-20T15:15:53.746124Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "77ac5dca-44c9-424b-9835-96480178f5c2",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": true,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:15:53.624659Z",
-        "hierarchy_id": "8a93c188-9019-4e1e-8ce1-052fedfd07d7",
-        "id": "4151b529-c877-4bb0-9c2c-7076a2bd3dd1",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "RedRegion",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:15:53.624659Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "9feb9c56-413a-4a6a-8467-5c010864dee7",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:53.733484Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "my-description",
-      "id": "8a7698e1-0a95-41d3-be8d-dd0e97cda34c",
+      "id": "00000000-0000-4000-8000-000001234678",
       "injection_location": [
         "soma[0]"
       ],
@@ -198,21 +198,21 @@
       "seed": 1,
       "status": "success",
       "synaptome": {
-        "creation_date": "2025-11-20T15:15:53.654454Z",
+        "creation_date": "2025-01-01T00:00:00Z",
         "description": "my-synaptome-description",
-        "id": "1b0f50c8-0f9c-4f6a-bdad-44b3fa8fefb8",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "my-synaptome",
         "seed": 1,
-        "update_date": "2025-11-20T15:15:53.654454Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "type": "single_neuron_synaptome_simulation",
-      "update_date": "2025-11-20T15:15:53.733484Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "9feb9c56-413a-4a6a-8467-5c010864dee7",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

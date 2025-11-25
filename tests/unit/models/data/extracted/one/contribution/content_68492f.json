@@ -2,41 +2,41 @@
   "agent": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "7834d753-8afc-49f3-b1c7-7c8c72b082f8",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
   "created_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "7834d753-8afc-49f3-b1c7-7c8c72b082f8",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:13:46.259676Z",
+  "creation_date": "2025-01-01T00:00:00Z",
   "entity": {
-    "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+    "authorized_project_id": "00000000-0000-4000-8000-000001234678",
     "authorized_public": false,
-    "id": "6fe26f69-cf66-4363-90ab-c710ffd8824b",
+    "id": "00000000-0000-4000-8000-000001234678",
     "type": "cell_morphology"
   },
-  "id": "4027dcdf-c071-46bd-9984-05f66ca7db03",
+  "id": "00000000-0000-4000-8000-000001234678",
   "role": {
-    "creation_date": "2025-11-20T15:13:46.202895Z",
-    "id": "4032e9fb-6e9c-4dcd-978d-cfb35a0119f0",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "important role",
     "role_id": "important role id",
-    "update_date": "2025-11-20T15:13:46.202895Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
-  "update_date": "2025-11-20T15:13:46.259676Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "7834d753-8afc-49f3-b1c7-7c8c72b082f8",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }
 }

@@ -1,34 +1,34 @@
 {
   "data": [
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
-      "authorized_public": true,
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "c9d5a67c-9205-4d34-9ae5-a95fd72c4d4a",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:57.430307Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "my-stimulus-description",
       "dt": 0.1,
       "end_time": null,
-      "id": "a869bbd2-226e-4d25-b2e3-19b564bd8c9f",
+      "id": "00000000-0000-4000-8000-000001234678",
       "injection_type": "current_clamp",
-      "name": "Public u1/0",
-      "recording_id": "fa735589-07df-4ed9-ba38-1503124d5856",
+      "name": "my-stimulus",
+      "recording_id": "00000000-0000-4000-8000-000001234678",
       "shape": "sinusoidal",
       "start_time": null,
       "type": "electrical_recording_stimulus",
-      "update_date": "2025-11-20T15:13:57.430307Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "c9d5a67c-9205-4d34-9ae5-a95fd72c4d4a",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

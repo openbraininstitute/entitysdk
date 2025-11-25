@@ -1,87 +1,87 @@
 {
   "data": [
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "8f96916c-7aa9-4fed-8a86-1ebb5e415892",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:48.889746Z",
-      "end_time": "2025-11-20T15:14:48.824937Z",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "end_time": "2025-01-01T00:00:00Z",
       "generated": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "639d9005-293e-4e2d-a2db-3afdcc369158",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "ion_channel_model"
         }
       ],
-      "id": "aada9638-2bf5-4596-b65a-9086b95a4fd8",
-      "start_time": "2025-11-20T15:14:48.824929Z",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "start_time": "2025-01-01T00:00:00Z",
       "status": "done",
       "type": "ion_channel_modeling_execution",
-      "update_date": "2025-11-20T15:14:48.889746Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "8f96916c-7aa9-4fed-8a86-1ebb5e415892",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "used": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "32a6e2c3-4215-40e7-b88f-e2c35f872303",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "ion_channel_modeling_config"
         }
       ]
     },
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "8f96916c-7aa9-4fed-8a86-1ebb5e415892",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:48.878868Z",
-      "end_time": "2025-11-20T15:14:48.824937Z",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "end_time": "2025-01-01T00:00:00Z",
       "generated": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "639d9005-293e-4e2d-a2db-3afdcc369158",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "ion_channel_model"
         }
       ],
-      "id": "fb339061-b10a-4d9e-b19a-2a939e4cdccd",
-      "start_time": "2025-11-20T15:14:48.824929Z",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "start_time": "2025-01-01T00:00:00Z",
       "status": "done",
       "type": "ion_channel_modeling_execution",
-      "update_date": "2025-11-20T15:14:48.878868Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "8f96916c-7aa9-4fed-8a86-1ebb5e415892",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Regular User With Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "used": [
         {
-          "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
-          "id": "32a6e2c3-4215-40e7-b88f-e2c35f872303",
+          "id": "00000000-0000-4000-8000-000001234678",
           "type": "ion_channel_modeling_config"
         }
       ]

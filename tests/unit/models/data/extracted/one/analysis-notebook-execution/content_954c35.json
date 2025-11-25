@@ -1,6 +1,6 @@
 {
   "analysis_notebook_environment": {
-    "id": "3109092c-1478-4ba8-8b25-055e3f2b149e",
+    "id": "00000000-0000-4000-8000-000001234678",
     "runtime_info": {
       "docker": {
         "docker_version": null,
@@ -26,7 +26,7 @@
   },
   "analysis_notebook_template": {
     "description": "analysis-notebook-template-description",
-    "id": "45739eaa-b2b3-49ce-bc8f-d2c5f2bfdec7",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "analysis-notebook-template",
     "scale": "cellular",
     "specifications": {
@@ -59,43 +59,43 @@
     },
     "type": "analysis_notebook_template"
   },
-  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "created_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "f0cab85e-d574-4458-8c8b-10d77fd5d4c2",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:13:08.854894Z",
-  "end_time": "2025-11-20T15:13:08.707286Z",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "end_time": "2025-01-01T00:00:00Z",
   "generated": [
     {
-      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": true,
-      "id": "8363ae17-1e20-45ba-804c-deac48788aee",
+      "id": "00000000-0000-4000-8000-000001234678",
       "type": "circuit"
     }
   ],
-  "id": "989126b1-217f-48ee-8028-648125a93d47",
-  "start_time": "2025-11-20T15:13:08.707279Z",
+  "id": "00000000-0000-4000-8000-000001234678",
+  "start_time": "2025-01-01T00:00:00Z",
   "type": "analysis_notebook_execution",
-  "update_date": "2025-11-20T15:13:08.854894Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "f0cab85e-d574-4458-8c8b-10d77fd5d4c2",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
   "used": [
     {
-      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": true,
-      "id": "8363ae17-1e20-45ba-804c-deac48788aee",
+      "id": "00000000-0000-4000-8000-000001234678",
       "type": "circuit"
     }
   ]

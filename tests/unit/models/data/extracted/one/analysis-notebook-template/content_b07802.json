@@ -1,20 +1,20 @@
 {
   "assets": [],
-  "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
-  "authorized_public": true,
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+  "authorized_public": false,
   "contributions": [],
   "created_by": {
     "family_name": null,
     "given_name": null,
-    "id": "93300b3b-9506-4dbd-a179-a65addf98a02",
-    "pref_label": "Regular User With Different Project Id",
-    "sub_id": "00000000-0000-0000-0000-000000000002",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:13:14.326560Z",
+  "creation_date": "2025-01-01T00:00:00Z",
   "description": "analysis-notebook-template-description",
-  "id": "932723d3-fb83-4e51-b52c-c34142f9525b",
-  "name": "Public u2/0",
+  "id": "00000000-0000-4000-8000-000001234678",
+  "name": "analysis-notebook-template",
   "scale": "cellular",
   "specifications": {
     "docker": {
@@ -45,13 +45,13 @@
     "schema_version": 1
   },
   "type": "analysis_notebook_template",
-  "update_date": "2025-11-20T15:13:14.326560Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": null,
     "given_name": null,
-    "id": "93300b3b-9506-4dbd-a179-a65addf98a02",
-    "pref_label": "Regular User With Different Project Id",
-    "sub_id": "00000000-0000-0000-0000-000000000002",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }
 }

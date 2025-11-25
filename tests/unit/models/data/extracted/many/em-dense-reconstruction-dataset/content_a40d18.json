@@ -2,18 +2,18 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:14:01.104382Z",
-        "hierarchy_id": "9c43f6de-e56b-4f0e-ba24-fc300ee640c3",
-        "id": "11e3f7be-5d17-41f6-91bb-652445e60a06",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "RedRegion",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:14:01.104382Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "cave_client_url": "https://global.daf-apis.com/",
       "cave_datastack": "minnie65_public",
@@ -23,19 +23,19 @@
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "295139d3-0809-4b83-a0d3-e3bf4e8ed6f0",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Admin User",
-        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:01.152624Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "current": null,
       "description": "description-2",
       "detector": null,
       "dose": null,
       "experiment_date": null,
       "fixation": null,
-      "id": "38fa1934-d738-4397-9cd8-c8067f2b9dcd",
+      "id": "00000000-0000-4000-8000-000001234678",
       "landmarks": null,
       "license": null,
       "microscope_type": null,
@@ -54,18 +54,18 @@
         "age_period": "postnatal",
         "age_value": 1209600.0,
         "description": "my-description",
-        "id": "30307df9-31e5-4ed5-8122-e45e71c7ac79",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "my-subject",
         "sex": "female",
         "species": {
-          "id": "c01efa07-2637-4cf6-a877-b90d04fbb56a",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "Test Species",
           "taxonomy_id": "12345"
         },
         "strain": {
-          "id": "9591917a-b0b8-4306-b05f-73c4c245ca7d",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "Test Strain",
-          "species_id": "c01efa07-2637-4cf6-a877-b90d04fbb56a",
+          "species_id": "00000000-0000-4000-8000-000001234678",
           "taxonomy_id": "Taxonomy ID"
         },
         "weight": 1.5
@@ -73,13 +73,13 @@
       "temperature": null,
       "tissue_shrinkage": null,
       "type": "em_dense_reconstruction_dataset",
-      "update_date": "2025-11-20T15:14:01.152624Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "295139d3-0809-4b83-a0d3-e3bf4e8ed6f0",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Admin User",
-        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "voltage": null,
@@ -89,18 +89,18 @@
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:14:01.104382Z",
-        "hierarchy_id": "9c43f6de-e56b-4f0e-ba24-fc300ee640c3",
-        "id": "11e3f7be-5d17-41f6-91bb-652445e60a06",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "RedRegion",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:14:01.104382Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "cave_client_url": "https://global.daf-apis.com/",
       "cave_datastack": "minnie65_public",
@@ -110,19 +110,19 @@
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "295139d3-0809-4b83-a0d3-e3bf4e8ed6f0",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Admin User",
-        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:01.134294Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "current": null,
       "description": "description-1",
       "detector": null,
       "dose": null,
       "experiment_date": null,
       "fixation": null,
-      "id": "82961357-fe47-448d-95fb-3ed7db3de66e",
+      "id": "00000000-0000-4000-8000-000001234678",
       "landmarks": null,
       "license": null,
       "microscope_type": null,
@@ -141,18 +141,18 @@
         "age_period": "postnatal",
         "age_value": 1209600.0,
         "description": "my-description",
-        "id": "30307df9-31e5-4ed5-8122-e45e71c7ac79",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "my-subject",
         "sex": "female",
         "species": {
-          "id": "c01efa07-2637-4cf6-a877-b90d04fbb56a",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "Test Species",
           "taxonomy_id": "12345"
         },
         "strain": {
-          "id": "9591917a-b0b8-4306-b05f-73c4c245ca7d",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "Test Strain",
-          "species_id": "c01efa07-2637-4cf6-a877-b90d04fbb56a",
+          "species_id": "00000000-0000-4000-8000-000001234678",
           "taxonomy_id": "Taxonomy ID"
         },
         "weight": 1.5
@@ -160,13 +160,13 @@
       "temperature": null,
       "tissue_shrinkage": null,
       "type": "em_dense_reconstruction_dataset",
-      "update_date": "2025-11-20T15:14:01.134294Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "295139d3-0809-4b83-a0d3-e3bf4e8ed6f0",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Admin User",
-        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "voltage": null,

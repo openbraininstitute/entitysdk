@@ -1,35 +1,35 @@
 {
-  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "created_by": {
     "family_name": null,
     "given_name": null,
-    "id": "708dc367-77f1-4b54-9a1a-1f99348bd9f2",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Regular User With Project Id",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:13:45.011410Z",
-  "end_time": "2025-11-20T15:13:44.969444Z",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "end_time": "2025-01-01T00:00:00Z",
   "generated": [],
-  "id": "abee8612-2631-4b5c-92ee-5074b4e1a02b",
-  "start_time": "2025-11-20T15:13:44.969438Z",
+  "id": "00000000-0000-4000-8000-000001234678",
+  "start_time": "2025-01-01T00:00:00Z",
   "status": "done",
   "type": "circuit_extraction_execution",
-  "update_date": "2025-11-20T15:13:45.011410Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": null,
     "given_name": null,
-    "id": "708dc367-77f1-4b54-9a1a-1f99348bd9f2",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Regular User With Project Id",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
   "used": [
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
-      "id": "d065bbda-4f9d-4571-b6f1-1b4a22932ae8",
+      "id": "00000000-0000-4000-8000-000001234678",
       "type": "circuit_extraction_campaign"
     }
   ]

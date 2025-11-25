@@ -1,48 +1,48 @@
 {
-  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "created_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "f070fede-d0f4-4f60-9a56-c3959dcd228e",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:14:49.147091Z",
-  "end_time": "2025-11-20T15:14:49.061086Z",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "end_time": "2025-01-01T00:00:00Z",
   "generated": [
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
-      "id": "4754304f-14a8-41fa-b4ce-ae68bb78b05d",
+      "id": "00000000-0000-4000-8000-000001234678",
       "type": "ion_channel_model"
     }
   ],
-  "id": "f8a083b5-c7f8-4f67-a4c5-e0ab062a3d26",
-  "start_time": "2025-11-20T15:14:49.061080Z",
+  "id": "00000000-0000-4000-8000-000001234678",
+  "start_time": "2025-01-01T00:00:00Z",
   "status": "done",
   "type": "ion_channel_modeling_execution",
-  "update_date": "2025-11-20T15:14:49.147091Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "f070fede-d0f4-4f60-9a56-c3959dcd228e",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
   "used": [
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
-      "id": "ed6272cc-5c56-4784-a839-a8f7752968b0",
+      "id": "00000000-0000-4000-8000-000001234678",
       "type": "cell_morphology"
     },
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
-      "id": "488876c4-5200-495b-b7b0-0ba21b01dcae",
+      "id": "00000000-0000-4000-8000-000001234678",
       "type": "ion_channel_modeling_config"
     }
   ]

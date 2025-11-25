@@ -1,10 +1,10 @@
 {
   "data": [
     {
-      "creation_date": "2025-11-20T15:14:56.882806Z",
-      "entity_id": "0eeab8c6-4fda-486e-878a-095fce7cb2cb",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "entity_id": "00000000-0000-4000-8000-000001234678",
       "entity_type": "cell_morphology",
-      "id": "2fb33229-3ea1-4506-af54-5cb601a127a6",
+      "id": "00000000-0000-4000-8000-000001234678",
       "measurement_kinds": [
         {
           "measurement_items": [
@@ -39,7 +39,7 @@
           "structural_domain": "soma"
         }
       ],
-      "update_date": "2025-11-20T15:14:56.882806Z"
+      "update_date": "2025-01-01T00:00:00Z"
     }
   ],
   "facets": null,

@@ -1,17 +1,17 @@
 {
   "assets": [],
-  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
     "color_hex_triplet": "FF0000",
-    "creation_date": "2025-11-20T15:13:30.300062Z",
-    "hierarchy_id": "5cb3720d-3f60-4d87-b0ad-072375fc2105",
-    "id": "7d8bd7d9-29c1-49f3-94c5-f9bb44a138b0",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "RedRegion",
     "parent_structure_id": null,
-    "update_date": "2025-11-20T15:13:30.300062Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "cell_morphology_protocol": null,
   "contact_email": null,
@@ -19,15 +19,15 @@
   "created_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "6526e35f-602c-44ce-af18-4ee0c77af61a",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:13:30.325845Z",
+  "creation_date": "2025-01-01T00:00:00Z",
   "description": "Test Morphology Description",
   "experiment_date": null,
-  "id": "4f75f635-6f03-4a57-907f-3f52b0adab11",
+  "id": "00000000-0000-4000-8000-000001234678",
   "legacy_id": [
     "Test Legacy ID"
   ],
@@ -47,11 +47,11 @@
     "age_period": "postnatal",
     "age_value": 1209600.0,
     "description": "my-description-0",
-    "id": "63efa05e-82a3-443e-a4ed-619ea82d97bd",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "subject-0",
     "sex": "male",
     "species": {
-      "id": "49adc1fc-2fb1-48f1-91b3-11267b12bca6",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "TestSpecies0",
       "taxonomy_id": "0"
     },
@@ -59,13 +59,13 @@
     "weight": 1.5
   },
   "type": "cell_morphology",
-  "update_date": "2025-11-20T15:13:30.325845Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": "courcol",
     "given_name": "jd",
-    "id": "6526e35f-602c-44ce-af18-4ee0c77af61a",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "jd courcol",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }
 }

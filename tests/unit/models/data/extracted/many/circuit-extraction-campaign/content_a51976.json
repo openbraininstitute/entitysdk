@@ -2,32 +2,32 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "contributions": [],
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "006541ed-b920-4463-8292-2382f7fae038",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:37.153908Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "campaign-description-1",
-      "id": "d6bd66de-ede9-4dea-a637-21cfc5d21cea",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "campaign-1",
       "scan_parameters": {
         "foo": "bar"
       },
       "type": "circuit_extraction_campaign",
-      "update_date": "2025-11-20T15:13:37.153908Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "006541ed-b920-4463-8292-2382f7fae038",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

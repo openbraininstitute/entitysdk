@@ -1,7 +1,7 @@
 {
   "data": [
     {
-      "DOI": "doi-0",
+      "DOI": "doi-2",
       "abstract": "my-abstract",
       "authors": [
         {
@@ -16,22 +16,22 @@
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "0e1690b1-e603-4027-8b01-6f4371f58872",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:19.328424Z",
-      "id": "2e19a1cc-41cc-44c7-9a8c-ed6ac69fdaaa",
-      "publication_year": 2020,
-      "title": "t0",
-      "update_date": "2025-11-20T15:15:19.328424Z",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "publication_year": 2022,
+      "title": "t2",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "0e1690b1-e603-4027-8b01-6f4371f58872",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
@@ -51,27 +51,27 @@
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "0e1690b1-e603-4027-8b01-6f4371f58872",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:19.330938Z",
-      "id": "04b3d8c5-0d4c-498a-af48-4a861dbbb6bc",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "id": "00000000-0000-4000-8000-000001234678",
       "publication_year": 2021,
       "title": "t1",
-      "update_date": "2025-11-20T15:15:19.330938Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "0e1690b1-e603-4027-8b01-6f4371f58872",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
-      "DOI": "doi-2",
+      "DOI": "doi-0",
       "abstract": "my-abstract",
       "authors": [
         {
@@ -86,22 +86,22 @@
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "0e1690b1-e603-4027-8b01-6f4371f58872",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:19.333116Z",
-      "id": "0e882091-ae2b-45eb-95d2-e5f822ce8077",
-      "publication_year": 2022,
-      "title": "t2",
-      "update_date": "2025-11-20T15:15:19.333116Z",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "publication_year": 2020,
+      "title": "t0",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "0e1690b1-e603-4027-8b01-6f4371f58872",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

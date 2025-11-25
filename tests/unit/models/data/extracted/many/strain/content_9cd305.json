@@ -4,23 +4,23 @@
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "9113331a-194c-4ad1-9b87-7d7a6651608f",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Admin User",
-        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:16:08.402804Z",
-      "id": "a3726914-a676-49f2-bdcd-e1df63125b8b",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Test Strain 1",
-      "species_id": "f9b3e9ee-7672-4cc7-9c76-31ab34110972",
+      "species_id": "00000000-0000-4000-8000-000001234678",
       "taxonomy_id": "TaxonomyID_1",
-      "update_date": "2025-11-20T15:16:08.402804Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "9113331a-194c-4ad1-9b87-7d7a6651608f",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "Admin User",
-        "sub_id": "00000000-0000-0000-0000-000000000000",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

@@ -2,21 +2,21 @@
   "created_by": {
     "family_name": null,
     "given_name": null,
-    "id": "8659eaed-46c8-4135-bcc7-922e1df48a6a",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Admin User",
-    "sub_id": "00000000-0000-0000-0000-000000000000",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:13:23.716227Z",
-  "id": "83f739e8-8ac5-4536-9981-fb5fa7b07904",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "id": "00000000-0000-4000-8000-000001234678",
   "name": "my-hierarchy",
-  "update_date": "2025-11-20T15:13:23.716227Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": null,
     "given_name": null,
-    "id": "8659eaed-46c8-4135-bcc7-922e1df48a6a",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Admin User",
-    "sub_id": "00000000-0000-0000-0000-000000000000",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }
 }

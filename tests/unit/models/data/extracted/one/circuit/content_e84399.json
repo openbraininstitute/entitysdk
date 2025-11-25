@@ -1,18 +1,18 @@
 {
   "assets": [],
-  "atlas_id": "579e779d-dcbf-41f7-b2de-f05c7aded039",
-  "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+  "atlas_id": "00000000-0000-4000-8000-000001234678",
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
     "color_hex_triplet": "FF0000",
-    "creation_date": "2025-11-20T15:15:23.082867Z",
-    "hierarchy_id": "d104a607-3c7e-41be-ac79-3a2fd219f5f4",
-    "id": "1aed2a78-eccf-4446-9ebf-3dba0ed05aa5",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "RedRegion",
     "parent_structure_id": null,
-    "update_date": "2025-11-20T15:15:23.082867Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "build_category": "em_reconstruction",
   "contact_email": null,
@@ -20,26 +20,26 @@
   "created_by": {
     "family_name": null,
     "given_name": null,
-    "id": "bd750f5a-55fc-40eb-9682-4e9cfa9565a4",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Regular User With Different Project Id",
-    "sub_id": "00000000-0000-0000-0000-000000000002",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:15:23.123974Z",
+  "creation_date": "2025-01-01T00:00:00Z",
   "description": "root-circuit-description",
   "experiment_date": null,
   "has_electrical_cell_models": true,
   "has_morphologies": true,
   "has_point_neurons": true,
   "has_spines": true,
-  "id": "616a0bed-5bf8-45cd-ad51-f086f8e5dbfb",
+  "id": "00000000-0000-4000-8000-000001234678",
   "license": {
-    "creation_date": "2025-11-20T15:15:23.092001Z",
+    "creation_date": "2025-01-01T00:00:00Z",
     "description": "a license description",
-    "id": "50396987-6acc-41fd-95df-5a701ba318a2",
+    "id": "00000000-0000-4000-8000-000001234678",
     "label": "test label",
     "name": "Test License",
-    "update_date": "2025-11-20T15:15:23.092001Z"
+    "update_date": "2025-01-01T00:00:00Z"
   },
   "name": "root-circuit",
   "notice_text": null,
@@ -55,30 +55,30 @@
     "age_period": "postnatal",
     "age_value": 1209600.0,
     "description": "my-description",
-    "id": "09a869a8-6437-428b-a40d-e5bddefded20",
+    "id": "00000000-0000-4000-8000-000001234678",
     "name": "my-subject",
     "sex": "female",
     "species": {
-      "id": "51fc3b98-4ea5-4ba1-885f-8da0e5750f23",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Test Species",
       "taxonomy_id": "12345"
     },
     "strain": {
-      "id": "dac03e40-ae22-46d9-afa5-417dfe5f7de2",
+      "id": "00000000-0000-4000-8000-000001234678",
       "name": "Test Strain",
-      "species_id": "51fc3b98-4ea5-4ba1-885f-8da0e5750f23",
+      "species_id": "00000000-0000-4000-8000-000001234678",
       "taxonomy_id": "Taxonomy ID"
     },
     "weight": 1.5
   },
   "type": "circuit",
-  "update_date": "2025-11-20T15:15:23.123974Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": null,
     "given_name": null,
-    "id": "bd750f5a-55fc-40eb-9682-4e9cfa9565a4",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Regular User With Different Project Id",
-    "sub_id": "00000000-0000-0000-0000-000000000002",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }
 }

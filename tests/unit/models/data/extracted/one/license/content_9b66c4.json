@@ -1,8 +1,8 @@
 {
-  "creation_date": "2025-11-20T15:14:55.427161Z",
+  "creation_date": "2025-01-01T00:00:00Z",
   "description": "a license description",
-  "id": "86e0b8fd-01be-45ef-a686-12c6ed9fb4be",
-  "label": "a label",
+  "id": "00000000-0000-4000-8000-000001234678",
+  "label": "test label",
   "name": "Test License",
-  "update_date": "2025-11-20T15:14:55.427161Z"
+  "update_date": "2025-01-01T00:00:00Z"
 }

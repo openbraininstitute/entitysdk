@@ -2,18 +2,18 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
         "acronym": "acronym-5",
         "annotation_value": 5,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:13:53.826635Z",
-        "hierarchy_id": "c68baabd-0463-4979-b926-bc2828664f48",
-        "id": "cf18b2a4-cb96-467f-ba58-43480ffe314b",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "region-5",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:13:53.826635Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "comment": "",
       "contact_email": null,
@@ -21,33 +21,33 @@
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "c5f0db9b-2c3c-46c4-9fee-58dc84db0f98",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:53.882623Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "my-description",
       "etypes": [
         {
           "alt_label": "e5",
-          "creation_date": "2025-11-20T15:13:53.887447Z",
+          "creation_date": "2025-01-01T00:00:00Z",
           "definition": "d",
-          "id": "94a0bc72-b57f-45d5-954f-19e1a7b726e3",
+          "id": "00000000-0000-4000-8000-000001234678",
           "pref_label": "e5",
-          "update_date": "2025-11-20T15:13:53.887447Z"
+          "update_date": "2025-01-01T00:00:00Z"
         }
       ],
       "experiment_date": null,
-      "id": "c20ee967-f187-4b86-b7d4-eb1540f813ba",
+      "id": "00000000-0000-4000-8000-000001234678",
       "legacy_id": null,
       "license": {
-        "creation_date": "2025-11-20T15:13:53.780599Z",
+        "creation_date": "2025-01-01T00:00:00Z",
         "description": "a license description",
-        "id": "c5b5f708-3ef0-4390-a315-ab91673d7284",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "test label",
         "name": "Test License",
-        "update_date": "2025-11-20T15:13:53.780599Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "ljp": 11.5,
       "name": "e-2",
@@ -65,11 +65,11 @@
         "age_period": "postnatal",
         "age_value": 1209600.0,
         "description": "my-description",
-        "id": "6031e33a-d04b-463f-9c0a-0bf04c4fee64",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "subject-5",
         "sex": "female",
         "species": {
-          "id": "9330c4ae-612d-42f1-8450-e104b8c99d28",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "species-2",
           "taxonomy_id": "taxonomy-2"
         },
@@ -78,30 +78,30 @@
       },
       "temperature": null,
       "type": "electrical_cell_recording",
-      "update_date": "2025-11-20T15:13:53.882623Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "c5f0db9b-2c3c-46c4-9fee-58dc84db0f98",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
         "acronym": "acronym-4",
         "annotation_value": 4,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:13:53.824278Z",
-        "hierarchy_id": "c68baabd-0463-4979-b926-bc2828664f48",
-        "id": "ad9028fb-5595-4c3a-8fbc-e194d764e577",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "region-4",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:13:53.824278Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "comment": "",
       "contact_email": null,
@@ -109,33 +109,33 @@
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "c5f0db9b-2c3c-46c4-9fee-58dc84db0f98",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:53.873649Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "my-description",
       "etypes": [
         {
           "alt_label": "e4",
-          "creation_date": "2025-11-20T15:13:53.878101Z",
+          "creation_date": "2025-01-01T00:00:00Z",
           "definition": "d",
-          "id": "57431fd4-3457-4b27-bbc4-c9d596c207f7",
+          "id": "00000000-0000-4000-8000-000001234678",
           "pref_label": "e4",
-          "update_date": "2025-11-20T15:13:53.878101Z"
+          "update_date": "2025-01-01T00:00:00Z"
         }
       ],
       "experiment_date": null,
-      "id": "885cffb8-7f9f-4ce4-99f0-44eee999e326",
+      "id": "00000000-0000-4000-8000-000001234678",
       "legacy_id": null,
       "license": {
-        "creation_date": "2025-11-20T15:13:53.780599Z",
+        "creation_date": "2025-01-01T00:00:00Z",
         "description": "a license description",
-        "id": "c5b5f708-3ef0-4390-a315-ab91673d7284",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "test label",
         "name": "Test License",
-        "update_date": "2025-11-20T15:13:53.780599Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "ljp": 11.5,
       "name": "e-2",
@@ -153,11 +153,11 @@
         "age_period": "postnatal",
         "age_value": 1209600.0,
         "description": "my-description",
-        "id": "575f218c-c18f-4e83-874b-3d3b1ffc9e02",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "subject-4",
         "sex": "female",
         "species": {
-          "id": "14fef48f-4138-4419-8de4-75e6a62a0ef3",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "species-1",
           "taxonomy_id": "taxonomy-1"
         },
@@ -166,30 +166,30 @@
       },
       "temperature": null,
       "type": "electrical_cell_recording",
-      "update_date": "2025-11-20T15:13:53.873649Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "c5f0db9b-2c3c-46c4-9fee-58dc84db0f98",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym-1",
-        "annotation_value": 1,
+        "acronym": "acronym-2",
+        "annotation_value": 2,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:13:53.816899Z",
-        "hierarchy_id": "c68baabd-0463-4979-b926-bc2828664f48",
-        "id": "3507eea4-bdde-4b8d-be7b-4e34d6646372",
-        "name": "region-1",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "region-2",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:13:53.816899Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "comment": "",
       "contact_email": null,
@@ -197,33 +197,121 @@
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "c5f0db9b-2c3c-46c4-9fee-58dc84db0f98",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:13:53.843639Z",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "my-description",
+      "etypes": [
+        {
+          "alt_label": "e2",
+          "creation_date": "2025-01-01T00:00:00Z",
+          "definition": "d",
+          "id": "00000000-0000-4000-8000-000001234678",
+          "pref_label": "e2",
+          "update_date": "2025-01-01T00:00:00Z"
+        }
+      ],
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "legacy_id": null,
+      "license": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "description": "a license description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "label": "test label",
+        "name": "Test License",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "ljp": 11.5,
+      "name": "e-1",
+      "notice_text": null,
+      "published_in": null,
+      "recording_location": [
+        "soma[0]_0.5"
+      ],
+      "recording_origin": "in_vivo",
+      "recording_type": "both",
+      "stimuli": [],
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "subject-2",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "species-2",
+          "taxonomy_id": "taxonomy-2"
+        },
+        "strain": null,
+        "weight": 1.5
+      },
+      "temperature": null,
+      "type": "electrical_cell_recording",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym-1",
+        "annotation_value": 1,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "region-1",
+        "parent_structure_id": null,
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "comment": "",
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "my-description",
       "etypes": [
         {
           "alt_label": "e1",
-          "creation_date": "2025-11-20T15:13:53.849616Z",
+          "creation_date": "2025-01-01T00:00:00Z",
           "definition": "d",
-          "id": "cb3aa520-843c-498a-a42c-cee93e684b3a",
+          "id": "00000000-0000-4000-8000-000001234678",
           "pref_label": "e1",
-          "update_date": "2025-11-20T15:13:53.849616Z"
+          "update_date": "2025-01-01T00:00:00Z"
         }
       ],
       "experiment_date": null,
-      "id": "7c5b1d32-8b63-42de-9b30-16dce8ab516f",
+      "id": "00000000-0000-4000-8000-000001234678",
       "legacy_id": null,
       "license": {
-        "creation_date": "2025-11-20T15:13:53.780599Z",
+        "creation_date": "2025-01-01T00:00:00Z",
         "description": "a license description",
-        "id": "c5b5f708-3ef0-4390-a315-ab91673d7284",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "test label",
         "name": "Test License",
-        "update_date": "2025-11-20T15:13:53.780599Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "ljp": 11.5,
       "name": "e-1",
@@ -241,11 +329,11 @@
         "age_period": "postnatal",
         "age_value": 1209600.0,
         "description": "my-description",
-        "id": "83f9cb74-c2b9-4e01-8725-35753c663b10",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "subject-1",
         "sex": "female",
         "species": {
-          "id": "14fef48f-4138-4419-8de4-75e6a62a0ef3",
+          "id": "00000000-0000-4000-8000-000001234678",
           "name": "species-1",
           "taxonomy_id": "taxonomy-1"
         },
@@ -254,101 +342,13 @@
       },
       "temperature": null,
       "type": "electrical_cell_recording",
-      "update_date": "2025-11-20T15:13:53.843639Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "c5f0db9b-2c3c-46c4-9fee-58dc84db0f98",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
-        "type": "person"
-      }
-    },
-    {
-      "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
-      "authorized_public": false,
-      "brain_region": {
-        "acronym": "acronym-0",
-        "annotation_value": 0,
-        "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:13:53.809447Z",
-        "hierarchy_id": "c68baabd-0463-4979-b926-bc2828664f48",
-        "id": "a950d430-413a-4cfe-abf4-abaa23df27ff",
-        "name": "region-0",
-        "parent_structure_id": null,
-        "update_date": "2025-11-20T15:13:53.809447Z"
-      },
-      "comment": "",
-      "contact_email": null,
-      "contributions": [],
-      "created_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "c5f0db9b-2c3c-46c4-9fee-58dc84db0f98",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
-        "type": "person"
-      },
-      "creation_date": "2025-11-20T15:13:53.828655Z",
-      "description": "my-description",
-      "etypes": [
-        {
-          "alt_label": "e0",
-          "creation_date": "2025-11-20T15:13:53.837542Z",
-          "definition": "d",
-          "id": "6d409b64-bc67-413f-b88d-bf925099548c",
-          "pref_label": "e0",
-          "update_date": "2025-11-20T15:13:53.837542Z"
-        }
-      ],
-      "experiment_date": null,
-      "id": "ba2f3b82-dc82-4026-bab7-e6fce9212d04",
-      "legacy_id": null,
-      "license": {
-        "creation_date": "2025-11-20T15:13:53.780599Z",
-        "description": "a license description",
-        "id": "c5b5f708-3ef0-4390-a315-ab91673d7284",
-        "label": "test label",
-        "name": "Test License",
-        "update_date": "2025-11-20T15:13:53.780599Z"
-      },
-      "ljp": 11.5,
-      "name": "e-0",
-      "notice_text": null,
-      "published_in": null,
-      "recording_location": [
-        "soma[0]_0.5"
-      ],
-      "recording_origin": "in_silico",
-      "recording_type": "extracellular",
-      "stimuli": [],
-      "subject": {
-        "age_max": null,
-        "age_min": null,
-        "age_period": "postnatal",
-        "age_value": 1209600.0,
-        "description": "my-description",
-        "id": "98b2abf2-dd06-4e32-becf-49bbb266674e",
-        "name": "subject-0",
-        "sex": "female",
-        "species": {
-          "id": "c6ea048e-58ad-46b8-af5c-e3fabed927af",
-          "name": "species-0",
-          "taxonomy_id": "taxonomy-0"
-        },
-        "strain": null,
-        "weight": 1.5
-      },
-      "temperature": null,
-      "type": "electrical_cell_recording",
-      "update_date": "2025-11-20T15:13:53.828655Z",
-      "updated_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "c5f0db9b-2c3c-46c4-9fee-58dc84db0f98",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

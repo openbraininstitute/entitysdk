@@ -2,30 +2,30 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
         "acronym": "acronym1",
         "annotation_value": 1,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:15:54.589044Z",
-        "hierarchy_id": "fda64a31-9b53-41d1-b563-036e35b778b1",
-        "id": "05552b83-e5a9-4567-8e6d-fad21e967ec6",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "region-1",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:15:54.589044Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "5a0f462e-d386-4540-9996-3b7bb2a96e6e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:54.644081Z",
-      "description": "brain-region-05552b83-e5a9-4567-8e6d-fad21e967ec6 synaptome-97d1ce8f-57c5-4eea-898a-39114a5807d4",
-      "id": "954ba87a-f271-46af-96f6-b7b3b78efe2f",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "sim-desc-3",
+      "id": "00000000-0000-4000-8000-000001234678",
       "injection_location": [
         "soma[0]"
       ],
@@ -36,50 +36,50 @@
       "seed": 3,
       "status": "success",
       "synaptome": {
-        "creation_date": "2025-11-20T15:15:54.596486Z",
+        "creation_date": "2025-01-01T00:00:00Z",
         "description": "description-1",
-        "id": "97d1ce8f-57c5-4eea-898a-39114a5807d4",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "synaptome-1",
         "seed": 1,
-        "update_date": "2025-11-20T15:15:54.596486Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "type": "single_neuron_synaptome_simulation",
-      "update_date": "2025-11-20T15:15:54.644081Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "5a0f462e-d386-4540-9996-3b7bb2a96e6e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
         "acronym": "acronym0",
         "annotation_value": 0,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:15:54.585730Z",
-        "hierarchy_id": "fda64a31-9b53-41d1-b563-036e35b778b1",
-        "id": "834b322f-f56c-4223-9f26-cfdfd3b31f32",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "region-0",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:15:54.585730Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "5a0f462e-d386-4540-9996-3b7bb2a96e6e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:54.631865Z",
-      "description": "brain-region-834b322f-f56c-4223-9f26-cfdfd3b31f32 synaptome-97d1ce8f-57c5-4eea-898a-39114a5807d4",
-      "id": "1cb053f4-d09b-419a-bf04-82b7408cd1a5",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "sim-desc-2",
+      "id": "00000000-0000-4000-8000-000001234678",
       "injection_location": [
         "soma[0]"
       ],
@@ -90,50 +90,50 @@
       "seed": 2,
       "status": "success",
       "synaptome": {
-        "creation_date": "2025-11-20T15:15:54.596486Z",
+        "creation_date": "2025-01-01T00:00:00Z",
         "description": "description-1",
-        "id": "97d1ce8f-57c5-4eea-898a-39114a5807d4",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "synaptome-1",
         "seed": 1,
-        "update_date": "2025-11-20T15:15:54.596486Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "type": "single_neuron_synaptome_simulation",
-      "update_date": "2025-11-20T15:15:54.631865Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "5a0f462e-d386-4540-9996-3b7bb2a96e6e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
         "acronym": "acronym1",
         "annotation_value": 1,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:15:54.589044Z",
-        "hierarchy_id": "fda64a31-9b53-41d1-b563-036e35b778b1",
-        "id": "05552b83-e5a9-4567-8e6d-fad21e967ec6",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "region-1",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:15:54.589044Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "5a0f462e-d386-4540-9996-3b7bb2a96e6e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:54.618768Z",
-      "description": "brain-region-05552b83-e5a9-4567-8e6d-fad21e967ec6 synaptome-785a0a47-31e3-4434-8474-1b4780459549",
-      "id": "5751f7e1-2bae-4e4a-8590-87444185f989",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "sim-desc-1",
+      "id": "00000000-0000-4000-8000-000001234678",
       "injection_location": [
         "soma[0]"
       ],
@@ -144,50 +144,50 @@
       "seed": 1,
       "status": "success",
       "synaptome": {
-        "creation_date": "2025-11-20T15:15:54.592115Z",
+        "creation_date": "2025-01-01T00:00:00Z",
         "description": "description-0",
-        "id": "785a0a47-31e3-4434-8474-1b4780459549",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "synaptome-0",
         "seed": 1,
-        "update_date": "2025-11-20T15:15:54.592115Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "type": "single_neuron_synaptome_simulation",
-      "update_date": "2025-11-20T15:15:54.618768Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "5a0f462e-d386-4540-9996-3b7bb2a96e6e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
         "acronym": "acronym0",
         "annotation_value": 0,
         "color_hex_triplet": "FF0000",
-        "creation_date": "2025-11-20T15:15:54.585730Z",
-        "hierarchy_id": "fda64a31-9b53-41d1-b563-036e35b778b1",
-        "id": "834b322f-f56c-4223-9f26-cfdfd3b31f32",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "region-0",
         "parent_structure_id": null,
-        "update_date": "2025-11-20T15:15:54.585730Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "5a0f462e-d386-4540-9996-3b7bb2a96e6e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:54.603495Z",
-      "description": "brain-region-834b322f-f56c-4223-9f26-cfdfd3b31f32 synaptome-785a0a47-31e3-4434-8474-1b4780459549",
-      "id": "68ed3e4f-20d2-4f62-9f1c-136f5cc8907c",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "sim-desc-0",
+      "id": "00000000-0000-4000-8000-000001234678",
       "injection_location": [
         "soma[0]"
       ],
@@ -198,21 +198,21 @@
       "seed": 0,
       "status": "success",
       "synaptome": {
-        "creation_date": "2025-11-20T15:15:54.592115Z",
+        "creation_date": "2025-01-01T00:00:00Z",
         "description": "description-0",
-        "id": "785a0a47-31e3-4434-8474-1b4780459549",
+        "id": "00000000-0000-4000-8000-000001234678",
         "name": "synaptome-0",
         "seed": 1,
-        "update_date": "2025-11-20T15:15:54.592115Z"
+        "update_date": "2025-01-01T00:00:00Z"
       },
       "type": "single_neuron_synaptome_simulation",
-      "update_date": "2025-11-20T15:15:54.603495Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "5a0f462e-d386-4540-9996-3b7bb2a96e6e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }
@@ -221,13 +221,13 @@
     "brain_region": [
       {
         "count": 2,
-        "id": "834b322f-f56c-4223-9f26-cfdfd3b31f32",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "region-0",
         "type": "brain_region"
       },
       {
         "count": 2,
-        "id": "05552b83-e5a9-4567-8e6d-fad21e967ec6",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "region-1",
         "type": "brain_region"
       }
@@ -236,7 +236,7 @@
     "created_by": [
       {
         "count": 4,
-        "id": "5a0f462e-d386-4540-9996-3b7bb2a96e6e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "jd courcol",
         "type": "person"
       }
@@ -244,13 +244,13 @@
     "synaptome": [
       {
         "count": 2,
-        "id": "785a0a47-31e3-4434-8474-1b4780459549",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "synaptome-0",
         "type": "synaptome"
       },
       {
         "count": 2,
-        "id": "97d1ce8f-57c5-4eea-898a-39114a5807d4",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "synaptome-1",
         "type": "synaptome"
       }
@@ -258,7 +258,7 @@
     "updated_by": [
       {
         "count": 4,
-        "id": "5a0f462e-d386-4540-9996-3b7bb2a96e6e",
+        "id": "00000000-0000-4000-8000-000001234678",
         "label": "jd courcol",
         "type": "person"
       }

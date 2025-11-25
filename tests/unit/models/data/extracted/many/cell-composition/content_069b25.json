@@ -2,15 +2,15 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "contributions": [],
-      "creation_date": "2025-11-20T15:13:26.989602Z",
-      "description": "my-composition-1",
-      "id": "e3e1d6cc-d8f2-43bb-8f6b-2737372cece2",
-      "name": "my-composition-1",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "my-composition",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "name": "my-composition",
       "type": "cell_composition",
-      "update_date": "2025-11-20T15:13:26.989602Z"
+      "update_date": "2025-01-01T00:00:00Z"
     }
   ],
   "facets": null,

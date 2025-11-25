@@ -1,33 +1,33 @@
 {
   "assets": [],
-  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": true,
   "contributions": [],
   "created_by": {
     "family_name": null,
     "given_name": null,
-    "id": "71f60bd1-2eb3-4b3e-9fb4-53d8184148a9",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Regular User With Project Id",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:14:42.701529Z",
+  "creation_date": "2025-01-01T00:00:00Z",
   "description": "my-ion-channel-modeling-campaign",
-  "id": "cab3015a-7faa-4b65-a2e8-6aab0fc8e389",
+  "id": "00000000-0000-4000-8000-000001234678",
   "input_recordings": [],
   "ion_channel_modeling_configs": [],
-  "name": "ion-channel-modeling-campaign",
+  "name": "Public u1/0",
   "scan_parameters": {
     "foo": "bar"
   },
   "type": "ion_channel_modeling_campaign",
-  "update_date": "2025-11-20T15:14:42.701529Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": null,
     "given_name": null,
-    "id": "71f60bd1-2eb3-4b3e-9fb4-53d8184148a9",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Regular User With Project Id",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }
 }

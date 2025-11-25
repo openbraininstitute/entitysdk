@@ -1,28 +1,28 @@
 {
   "data": [
     {
-      "creation_date": "2025-11-20T15:14:55.926311Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "a license description",
-      "id": "c8638576-5525-4378-9a2d-c080b58aee14",
+      "id": "00000000-0000-4000-8000-000001234678",
       "label": "l1",
       "name": "n3",
-      "update_date": "2025-11-20T15:14:55.926311Z"
+      "update_date": "2025-01-01T00:00:00Z"
     },
     {
-      "creation_date": "2025-11-20T15:14:55.919889Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "a license description",
-      "id": "202a2206-447c-4e04-bc5e-4c1be2b4199f",
+      "id": "00000000-0000-4000-8000-000001234678",
       "label": "l",
       "name": "n2",
-      "update_date": "2025-11-20T15:14:55.919889Z"
+      "update_date": "2025-01-01T00:00:00Z"
     },
     {
-      "creation_date": "2025-11-20T15:14:55.910131Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "a license description",
-      "id": "a393f933-3ec0-44d8-af8d-9690ee504a9d",
+      "id": "00000000-0000-4000-8000-000001234678",
       "label": "l",
       "name": "n1",
-      "update_date": "2025-11-20T15:14:55.910131Z"
+      "update_date": "2025-01-01T00:00:00Z"
     }
   ],
   "facets": null,

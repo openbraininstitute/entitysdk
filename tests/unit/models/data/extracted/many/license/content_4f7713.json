@@ -1,12 +1,12 @@
 {
   "data": [
     {
-      "creation_date": "2025-11-20T15:14:55.277806Z",
+      "creation_date": "2025-01-01T00:00:00Z",
       "description": "a license description",
-      "id": "cd636d92-f2d5-4066-b0a7-09eae885c52d",
+      "id": "00000000-0000-4000-8000-000001234678",
       "label": "a label",
       "name": "Test License",
-      "update_date": "2025-11-20T15:14:55.277806Z"
+      "update_date": "2025-01-01T00:00:00Z"
     }
   ],
   "facets": null,

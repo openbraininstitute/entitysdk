@@ -5,22 +5,22 @@
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "5915fa7c-6a4c-46b0-8924-690f666b53b8",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:15:17.731943Z",
-      "id": "8a3bd8ff-7e32-4893-a4eb-9ffc90983fdc",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "id": "00000000-0000-4000-8000-000001234678",
       "pref_label": "org-1",
       "type": "organization",
-      "update_date": "2025-11-20T15:15:17.731943Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
         "given_name": "jd",
-        "id": "5915fa7c-6a4c-46b0-8924-690f666b53b8",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-0000-0000-000000000001",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }

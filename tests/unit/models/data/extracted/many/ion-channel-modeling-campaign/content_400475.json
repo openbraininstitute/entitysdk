@@ -2,67 +2,67 @@
   "data": [
     {
       "assets": [],
-      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "bfb3dbd1-654f-437e-b43e-95a788ee85ea",
-        "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:43.031696Z",
-      "description": "my-ion-channel-modeling-campaign",
-      "id": "5b990fbe-9b1c-4f3f-ad18-48b35ed957ff",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "description-2",
+      "id": "00000000-0000-4000-8000-000001234678",
       "input_recordings": [],
       "ion_channel_modeling_configs": [],
-      "name": "Private u2/0",
+      "name": "name-2",
       "scan_parameters": {
         "foo": "bar"
       },
       "type": "ion_channel_modeling_campaign",
-      "update_date": "2025-11-20T15:14:43.031696Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "bfb3dbd1-654f-437e-b43e-95a788ee85ea",
-        "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "assets": [],
-      "authorized_project_id": "66666666-eaca-48ca-9788-ddc450250b15",
-      "authorized_public": true,
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
-        "id": "bfb3dbd1-654f-437e-b43e-95a788ee85ea",
-        "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "creation_date": "2025-11-20T15:14:43.016035Z",
-      "description": "my-ion-channel-modeling-campaign",
-      "id": "17ef657a-2d88-4f88-9657-bb8d802566e3",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "description-1",
+      "id": "00000000-0000-4000-8000-000001234678",
       "input_recordings": [],
       "ion_channel_modeling_configs": [],
-      "name": "Public u2/0",
+      "name": "name-1",
       "scan_parameters": {
         "foo": "bar"
       },
       "type": "ion_channel_modeling_campaign",
-      "update_date": "2025-11-20T15:14:43.016035Z",
+      "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
-        "id": "bfb3dbd1-654f-437e-b43e-95a788ee85ea",
-        "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-0000-0000-000000000002",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     }
@@ -70,7 +70,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 100,
-    "total_items": 2
+    "page_size": 2,
+    "total_items": 3
   }
 }

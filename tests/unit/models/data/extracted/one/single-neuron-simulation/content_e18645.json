@@ -1,0 +1,88 @@
+{
+  "assets": [
+    {
+      "content_type": "application/json",
+      "full_path": "private/00000000-0000-4000-8000-000001234678/00000000-0000-4000-8000-000001234678/assets/single_neuron_simulation/00000000-0000-4000-8000-000001234678/c.json",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_directory": false,
+      "label": "single_neuron_simulation_data",
+      "meta": {},
+      "path": "c.json",
+      "sha256_digest": "a8124f083a58b9a8ff80cb327dd6895a10d0bc92bb918506da0c9c75906d3f91",
+      "size": 31,
+      "status": "created",
+      "storage_type": "aws_s3_internal"
+    }
+  ],
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+  "authorized_public": false,
+  "brain_region": {
+    "acronym": "acronym64",
+    "annotation_value": 64,
+    "color_hex_triplet": "FF0000",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "name": "RedRegion",
+    "parent_structure_id": null,
+    "update_date": "2025-01-01T00:00:00Z"
+  },
+  "created_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
+    "type": "person"
+  },
+  "creation_date": "2025-01-01T00:00:00Z",
+  "description": "my-description",
+  "id": "00000000-0000-4000-8000-000001234678",
+  "injection_location": [
+    "soma[0]"
+  ],
+  "me_model": {
+    "creation_date": "2025-01-01T00:00:00Z",
+    "description": "0_description",
+    "etypes": [
+      {
+        "alt_label": "etype-emodel-0",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "definition": "e1d",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "etype-emodel-0",
+        "update_date": "2025-01-01T00:00:00Z"
+      }
+    ],
+    "id": "00000000-0000-4000-8000-000001234678",
+    "mtypes": [
+      {
+        "alt_label": "m1",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "definition": "m1d",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "m1",
+        "update_date": "2025-01-01T00:00:00Z"
+      }
+    ],
+    "name": "0",
+    "update_date": "2025-01-01T00:00:00Z",
+    "validation_status": "created"
+  },
+  "name": "foo",
+  "recording_location": [
+    "soma[0]_0.5"
+  ],
+  "seed": 1,
+  "status": "success",
+  "type": "single_neuron_simulation",
+  "update_date": "2025-01-01T00:00:00Z",
+  "updated_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
+    "type": "person"
+  }
+}

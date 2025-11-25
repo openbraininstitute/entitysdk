@@ -1,42 +1,42 @@
 {
-  "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "created_by": {
     "family_name": null,
     "given_name": null,
-    "id": "08a44b89-19b0-4015-aed1-d679b56800ea",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Regular User With Project Id",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
-  "creation_date": "2025-11-20T15:13:45.567451Z",
-  "end_time": "2025-11-20T15:13:45.525133Z",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "end_time": "2025-01-01T00:00:00Z",
   "generated": [
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
-      "id": "ea8da296-12b8-404f-979b-07c0bf8f2adf",
+      "id": "00000000-0000-4000-8000-000001234678",
       "type": "circuit_extraction_config"
     }
   ],
-  "id": "bc7ae91c-77e4-4ab7-8768-4316dc1d5ade",
-  "start_time": "2025-11-20T15:13:45.525120Z",
+  "id": "00000000-0000-4000-8000-000001234678",
+  "start_time": "2025-01-01T00:00:00Z",
   "status": "done",
   "type": "circuit_extraction_execution",
-  "update_date": "2025-11-20T15:13:45.567451Z",
+  "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": null,
     "given_name": null,
-    "id": "08a44b89-19b0-4015-aed1-d679b56800ea",
+    "id": "00000000-0000-4000-8000-000001234678",
     "pref_label": "Regular User With Project Id",
-    "sub_id": "00000000-0000-0000-0000-000000000001",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
   "used": [
     {
-      "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
-      "id": "66c22775-ed91-4bb0-acfb-719d772eabfc",
+      "id": "00000000-0000-4000-8000-000001234678",
       "type": "circuit_extraction_campaign"
     }
   ]
