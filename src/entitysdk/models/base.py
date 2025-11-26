@@ -19,6 +19,7 @@ class BaseModel(PydanticBaseModel):
         from_attributes=True,
         extra="forbid",
         serialize_by_alias=True,
+        ser_json_timedelta="float",  # match entitycore behaviour
     )
 
     def evolve(self, **model_attributes) -> Self:

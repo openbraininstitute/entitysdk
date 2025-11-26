@@ -1,0 +1,33 @@
+{
+  "assets": [],
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+  "authorized_public": true,
+  "contributions": [],
+  "created_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
+    "type": "person"
+  },
+  "creation_date": "2025-01-01T00:00:00Z",
+  "description": "my-ion-channel-modeling-campaign",
+  "id": "00000000-0000-4000-8000-000001234678",
+  "input_recordings": [],
+  "ion_channel_modeling_configs": [],
+  "name": "ion-channel-modeling-campaign",
+  "scan_parameters": {
+    "foo": "bar"
+  },
+  "type": "ion_channel_modeling_campaign",
+  "update_date": "2025-01-01T00:00:00Z",
+  "updated_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
+    "type": "person"
+  }
+}

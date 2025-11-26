@@ -5,7 +5,7 @@ from typing import Annotated
 from pydantic import Field
 
 from entitysdk.models.entity import Entity
-from entitysdk.models.synaptome import NestedSynaptome
+from entitysdk.models.synaptome import BrainRegion, NestedSynaptome
 from entitysdk.types import SingleNeuronSimulationStatus
 
 
@@ -16,7 +16,7 @@ class SingleNeuronSynaptomeSimulation(Entity):
         int,
         Field(
             description="Random number generator seed used during the simulation.",
-            examples=42,
+            examples=[42],
         ),
     ]
     injection_location: Annotated[
@@ -24,7 +24,7 @@ class SingleNeuronSynaptomeSimulation(Entity):
         Field(
             description="List of locations where the stimuli were injected, "
             "in hoc-compatible format.",
-            examples="soma[0]",
+            examples=["soma[0]"],
         ),
     ]
     recording_location: Annotated[
@@ -32,20 +32,24 @@ class SingleNeuronSynaptomeSimulation(Entity):
         Field(
             description="List of locations where the stimuli were recorded, "
             "in hoc-compatible format.",
-            examples="soma[0]",
+            examples=["soma[0]"],
         ),
     ]
     status: Annotated[
         SingleNeuronSimulationStatus,
         Field(
             description="Status of the simulation. Can be .started, .failure, .success",
-            examples=SingleNeuronSimulationStatus.success,
+            examples=[SingleNeuronSimulationStatus.success],
         ),
     ]
     synaptome: Annotated[
         NestedSynaptome,
         Field(
             description="The synaptome that was simulated, in nested form.",
-            examples="85663316-a7ff-4107-9eb9-236de8868c5c",
+            examples=["85663316-a7ff-4107-9eb9-236de8868c5c"],
         ),
+    ]
+    brain_region: Annotated[
+        BrainRegion,
+        Field(description="The brain region where the model is used or applies."),
     ]

@@ -5,7 +5,7 @@ from typing import Annotated
 from pydantic import Field
 
 from entitysdk.models.entity import Entity
-from entitysdk.models.memodel import NestedMEModel
+from entitysdk.models.memodel import BrainRegion, NestedMEModel
 from entitysdk.types import SingleNeuronSimulationStatus
 
 
@@ -16,7 +16,7 @@ class SingleNeuronSimulation(Entity):
         int,
         Field(
             description="Random number generator seed used during the simulation.",
-            examples=42,
+            examples=[42],
         ),
     ]
     injection_location: Annotated[
@@ -24,7 +24,7 @@ class SingleNeuronSimulation(Entity):
         Field(
             description="List of locations where the stimuli were injected, "
             "in hoc-compatible format.",
-            examples="soma[0]",
+            examples=["soma[0]"],
         ),
     ]
     recording_location: Annotated[
@@ -32,14 +32,14 @@ class SingleNeuronSimulation(Entity):
         Field(
             description="List of locations where the stimuli were recorded, "
             "in hoc-compatible format.",
-            examples="soma[0]",
+            examples=["soma[0]"],
         ),
     ]
     status: Annotated[
         SingleNeuronSimulationStatus,
         Field(
             description="Status of the simulation. Can be .started, .failure, .success",
-            examples=SingleNeuronSimulationStatus.success,
+            examples=[SingleNeuronSimulationStatus.success],
         ),
     ]
     me_model: Annotated[
@@ -47,4 +47,8 @@ class SingleNeuronSimulation(Entity):
         Field(
             description="The me-model (single cell model) that was simulated, in nested form.",
         ),
+    ]
+    brain_region: Annotated[
+        BrainRegion,
+        Field(description="The brain region where the model is used or applies."),
     ]

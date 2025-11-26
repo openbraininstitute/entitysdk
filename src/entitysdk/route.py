@@ -7,12 +7,10 @@ from entitysdk.types import ID
 
 # Mapping of entity type to api route name.
 _ROUTES = {
-    "Activity": "activity",
     "AnalysisNotebookEnvironment": "analysis-notebook-environment",
     "AnalysisNotebookExecution": "analysis-notebook-execution",
     "AnalysisNotebookResult": "analysis-notebook-result",
     "AnalysisNotebookTemplate": "analysis-notebook-template",
-    "BrainLocation": "brain-location",
     "BrainRegion": "brain-region",
     "BrainRegionHierarchy": "brain-region-hierarchy",
     "CellMorphology": "cell-morphology",
@@ -32,7 +30,6 @@ _ROUTES = {
     "Entity": "entity",
     "ETypeClassification": "etype-classification",
     "ETypeClass": "etype",
-    "Ion": "ion",
     "IonChannel": "ion-channel",
     "IonChannelModel": "ion-channel-model",
     "IonChannelModelingCampaign": "ion-channel-modeling-campaign",
@@ -66,7 +63,6 @@ _ROUTES = {
     "Species": "species",
     "Strain": "strain",
     "Subject": "subject",
-    "Taxonomy": "taxonomy",
     "ValidationResult": "validation-result",
     # CellMorphologyProtocol type for retrieving
     "CellMorphologyProtocol": "cell-morphology-protocol",

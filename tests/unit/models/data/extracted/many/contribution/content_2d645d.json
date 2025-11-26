@@ -1,0 +1,92 @@
+{
+  "data": [
+    {
+      "agent": {
+        "alternative_name": "A Company Making Everything",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "ACME",
+        "type": "organization"
+      },
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "entity": {
+        "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+        "authorized_public": false,
+        "id": "00000000-0000-4000-8000-000001234678",
+        "type": "cell_morphology"
+      },
+      "id": "00000000-0000-4000-8000-000001234678",
+      "role": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "important role",
+        "role_id": "important role id",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "agent": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "entity": {
+        "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+        "authorized_public": false,
+        "id": "00000000-0000-4000-8000-000001234678",
+        "type": "cell_morphology"
+      },
+      "id": "00000000-0000-4000-8000-000001234678",
+      "role": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "important role",
+        "role_id": "important role id",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 2
+  }
+}

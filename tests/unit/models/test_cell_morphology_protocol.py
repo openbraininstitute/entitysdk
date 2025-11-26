@@ -13,22 +13,23 @@ from entitysdk.models.cell_morphology_protocol import (
 )
 
 DATA_DIR = Path(__file__).parent / "data"
+MODELS_DIR = DATA_DIR / "manual" / "one"
 MODELS = [
     {
         "class": DigitalReconstructionCellMorphologyProtocol,
-        "file": DATA_DIR / "cell_morphology_protocol__digital_reconstruction.json",
+        "file": MODELS_DIR / "cell_morphology_protocol__digital_reconstruction.json",
     },
     {
         "class": ModifiedReconstructionCellMorphologyProtocol,
-        "file": DATA_DIR / "cell_morphology_protocol__modified_reconstruction.json",
+        "file": MODELS_DIR / "cell_morphology_protocol__modified_reconstruction.json",
     },
     {
         "class": ComputationallySynthesizedCellMorphologyProtocol,
-        "file": DATA_DIR / "cell_morphology_protocol__computationally_synthesized.json",
+        "file": MODELS_DIR / "cell_morphology_protocol__computationally_synthesized.json",
     },
     {
         "class": PlaceholderCellMorphologyProtocol,
-        "file": DATA_DIR / "cell_morphology_protocol__placeholder.json",
+        "file": MODELS_DIR / "cell_morphology_protocol__placeholder.json",
     },
 ]
 

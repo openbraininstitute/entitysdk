@@ -1,0 +1,22 @@
+{
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+  "authorized_public": true,
+  "created_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "Regular User With Different Project Id",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
+    "type": "person"
+  },
+  "id": "00000000-0000-4000-8000-000001234678",
+  "type": "cell_morphology",
+  "updated_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "Regular User With Different Project Id",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
+    "type": "person"
+  }
+}

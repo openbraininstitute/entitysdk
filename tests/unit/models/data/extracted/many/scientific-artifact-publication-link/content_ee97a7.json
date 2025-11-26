@@ -1,0 +1,57 @@
+{
+  "data": [
+    {
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "id": "00000000-0000-4000-8000-000001234678",
+      "publication": {
+        "DOI": "10.1080/10509585.2015.1092083",
+        "abstract": "my-abstract",
+        "authors": [
+          {
+            "family_name": "Smith",
+            "given_name": "John"
+          },
+          {
+            "family_name": "Smith",
+            "given_name": "Joanne"
+          }
+        ],
+        "id": "00000000-0000-4000-8000-000001234678",
+        "publication_year": 2024,
+        "title": "my-title"
+      },
+      "publication_type": "entity_source",
+      "scientific_artifact": {
+        "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+        "authorized_public": true,
+        "contact_email": null,
+        "experiment_date": null,
+        "id": "00000000-0000-4000-8000-000001234678",
+        "notice_text": null,
+        "published_in": null,
+        "type": "circuit"
+      },
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

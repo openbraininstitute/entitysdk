@@ -172,3 +172,5 @@ cython_debug/
 
 examples/*.md
 examples/*.h5
+
+.DS_Store

@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "contributions": [],
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "my-composition",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "name": "my-composition",
+      "type": "cell_composition",
+      "update_date": "2025-01-01T00:00:00Z"
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "assets": [],
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+  "authorized_public": false,
+  "contributions": [],
+  "created_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
+    "type": "person"
+  },
+  "creation_date": "2025-01-01T00:00:00Z",
+  "description": "my-ion-channel-modeling-config",
+  "id": "00000000-0000-4000-8000-000001234678",
+  "ion_channel_modeling_campaign_id": "00000000-0000-4000-8000-000001234678",
+  "name": "ion-channel-modeling-config",
+  "scan_parameters": {
+    "foo": "bar"
+  },
+  "type": "ion_channel_modeling_config",
+  "update_date": "2025-01-01T00:00:00Z",
+  "updated_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "Regular User With Project Id",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
+    "type": "person"
+  }
+}

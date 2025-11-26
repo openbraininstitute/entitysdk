@@ -1,0 +1,11 @@
+{
+  "derivation_type": "unspecified",
+  "generated": {
+    "id": "00000000-0000-4000-8000-000001234678",
+    "type": "circuit"
+  },
+  "used": {
+    "id": "00000000-0000-4000-8000-000001234678",
+    "type": "circuit"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "DOI": "10.5061/dryad.q447c/1",
+  "abstract": "my-abstract",
+  "authors": [
+    {
+      "family_name": "Smith",
+      "given_name": "John"
+    },
+    {
+      "family_name": "Smith",
+      "given_name": "Joanne"
+    }
+  ],
+  "created_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "Admin User",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
+    "type": "person"
+  },
+  "creation_date": "2025-01-01T00:00:00Z",
+  "id": "00000000-0000-4000-8000-000001234678",
+  "publication_year": 2024,
+  "title": "my-title",
+  "update_date": "2025-01-01T00:00:00Z",
+  "updated_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "Admin User",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
+    "type": "person"
+  }
+}

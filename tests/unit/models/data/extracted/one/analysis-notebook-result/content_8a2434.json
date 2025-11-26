@@ -1,0 +1,27 @@
+{
+  "assets": [],
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+  "authorized_public": false,
+  "created_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
+    "type": "person"
+  },
+  "creation_date": "2025-01-01T00:00:00Z",
+  "description": "analysis-notebook-result-description",
+  "id": "00000000-0000-4000-8000-000001234678",
+  "name": "analysis-notebook-result",
+  "type": "analysis_notebook_result",
+  "update_date": "2025-01-01T00:00:00Z",
+  "updated_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
+    "type": "person"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "data": [
+    {
+      "alt_label": "alt_label_0",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "definition": "definition_0",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "pref_label": "pref_label_0",
+      "update_date": "2025-01-01T00:00:00Z"
+    },
+    {
+      "alt_label": "alt_label_1",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "definition": "definition_1",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "pref_label": "pref_label_1",
+      "update_date": "2025-01-01T00:00:00Z"
+    },
+    {
+      "alt_label": "alt_label_2",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "definition": "definition_2",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "pref_label": "pref_label_2",
+      "update_date": "2025-01-01T00:00:00Z"
+    },
+    {
+      "alt_label": "alt_label_3",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "definition": "definition_3",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "pref_label": "pref_label_3",
+      "update_date": "2025-01-01T00:00:00Z"
+    },
+    {
+      "alt_label": "alt_label_4",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "definition": "definition_4",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "pref_label": "pref_label_4",
+      "update_date": "2025-01-01T00:00:00Z"
+    },
+    {
+      "alt_label": "alt_label_5",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "definition": "definition_5",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "pref_label": "pref_label_5",
+      "update_date": "2025-01-01T00:00:00Z"
+    },
+    {
+      "alt_label": "alt_label_6",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "definition": "definition_6",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "pref_label": "pref_label_6",
+      "update_date": "2025-01-01T00:00:00Z"
+    },
+    {
+      "alt_label": "alt_label_7",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "definition": "definition_7",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "pref_label": "pref_label_7",
+      "update_date": "2025-01-01T00:00:00Z"
+    },
+    {
+      "alt_label": "alt_label_8",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "definition": "definition_8",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "pref_label": "pref_label_8",
+      "update_date": "2025-01-01T00:00:00Z"
+    },
+    {
+      "alt_label": "alt_label_9",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "definition": "definition_9",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "pref_label": "pref_label_9",
+      "update_date": "2025-01-01T00:00:00Z"
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 10
+  }
+}

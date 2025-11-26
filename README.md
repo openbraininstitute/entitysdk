@@ -107,12 +107,19 @@ types, can be updated with the following tox command:
 tox -e generate-server-schemas
 ```
 
-Please note that a manual step is required following the generation of the schemas. Importing
-future annotations requires to be moved at the top of the file:
 
-```python
-from __future__ import annotations
+### Auto-update json payloads
+
+The json payloads in `tests/unit/models/data/extracted` can be automatically updated from entitycore by executing:
+
+```bash
+tox -e update-traces
 ```
+
+The command will checkout a clean copy of entitycore, execute tests, extract the traces, and move them to the expected location in entitysdk.
+
+It's possible to set a different `ENTITYCORE_BRANCH_OR_TAG` and `ENTITYCORE_CHECKOUT_DIR` if desired.
+
 
 ## Contributing
 

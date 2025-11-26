@@ -1,0 +1,88 @@
+{
+  "assets": [],
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+  "authorized_public": false,
+  "brain_region": {
+    "acronym": "acronym64",
+    "annotation_value": 64,
+    "color_hex_triplet": "FF0000",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "name": "RedRegion",
+    "parent_structure_id": null,
+    "update_date": "2025-01-01T00:00:00Z"
+  },
+  "contributions": [],
+  "created_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
+    "type": "person"
+  },
+  "creation_date": "2025-01-01T00:00:00Z",
+  "description": "Test description",
+  "etypes": [
+    {
+      "alt_label": "e1",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "definition": "e1d",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "pref_label": "e1",
+      "update_date": "2025-01-01T00:00:00Z"
+    },
+    {
+      "alt_label": "e2",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "definition": "e2d",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "pref_label": "e2",
+      "update_date": "2025-01-01T00:00:00Z"
+    }
+  ],
+  "exemplar_morphology": {
+    "creation_date": "2025-01-01T00:00:00Z",
+    "description": "Test Morphology Description",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "legacy_id": [
+      "Test Legacy ID"
+    ],
+    "location": {
+      "x": 10.0,
+      "y": 20.0,
+      "z": 30.0
+    },
+    "name": "Test Morphology Name",
+    "update_date": "2025-01-01T00:00:00Z"
+  },
+  "id": "00000000-0000-4000-8000-000001234678",
+  "ion_channel_models": [],
+  "iteration": "",
+  "mtypes": [],
+  "name": "Test name",
+  "score": -1.0,
+  "seed": -1,
+  "species": {
+    "id": "00000000-0000-4000-8000-000001234678",
+    "name": "Test Species",
+    "taxonomy_id": "12345"
+  },
+  "strain": {
+    "id": "00000000-0000-4000-8000-000001234678",
+    "name": "Test Strain",
+    "species_id": "00000000-0000-4000-8000-000001234678",
+    "taxonomy_id": "Taxonomy ID"
+  },
+  "type": "emodel",
+  "update_date": "2025-01-01T00:00:00Z",
+  "updated_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
+    "type": "person"
+  }
+}

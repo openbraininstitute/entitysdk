@@ -1,0 +1,15 @@
+{
+  "data": [],
+  "facets": {
+    "brain_region": [],
+    "created_by": [],
+    "species": [],
+    "strain": [],
+    "updated_by": []
+  },
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 0
+  }
+}

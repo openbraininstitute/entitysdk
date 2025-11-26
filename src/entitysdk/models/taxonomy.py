@@ -1,11 +1,10 @@
-"""License model."""
+"""Taxonomy models."""
 
 from typing import Annotated
 
 from pydantic import Field
 
 from entitysdk.models.core import Identifiable
-from entitysdk.models.entity import Entity
 from entitysdk.types import ID
 
 
@@ -49,24 +48,5 @@ class Strain(Identifiable):
         ID,
         Field(
             description="The species id of the strain.",
-        ),
-    ]
-
-
-class Taxonomy(Entity):
-    """Taxonomy model."""
-
-    name: Annotated[
-        str,
-        Field(
-            examples=["Homo sapiens"],
-            description="The name of the taxonomy.",
-        ),
-    ]
-    pref_label: Annotated[
-        str,
-        Field(
-            examples=["Homo sapiens"],
-            description="The preferred label of the taxonomy.",
         ),
     ]
