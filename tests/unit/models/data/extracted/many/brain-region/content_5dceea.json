@@ -12,17 +12,6 @@
       "update_date": "2025-01-01T00:00:00Z"
     },
     {
-      "acronym": "blue",
-      "annotation_value": 42,
-      "color_hex_triplet": "BFDAE3",
-      "creation_date": "2025-01-01T00:00:00Z",
-      "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-      "id": "00000000-0000-4000-8000-000001234678",
-      "name": "BlueRegion",
-      "parent_structure_id": "00000000-0000-4000-8000-000001234678",
-      "update_date": "2025-01-01T00:00:00Z"
-    },
-    {
       "acronym": "red",
       "annotation_value": 64,
       "color_hex_triplet": "BFDAE3",
@@ -41,6 +30,17 @@
       "hierarchy_id": "00000000-0000-4000-8000-000001234678",
       "id": "00000000-0000-4000-8000-000001234678",
       "name": "Basic cell groups and regions",
+      "parent_structure_id": "00000000-0000-4000-8000-000001234678",
+      "update_date": "2025-01-01T00:00:00Z"
+    },
+    {
+      "acronym": "blue",
+      "annotation_value": 42,
+      "color_hex_triplet": "BFDAE3",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "name": "BlueRegion",
       "parent_structure_id": "00000000-0000-4000-8000-000001234678",
       "update_date": "2025-01-01T00:00:00Z"
     }
