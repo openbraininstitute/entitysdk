@@ -40,13 +40,7 @@ def stage_sonata_from_memodel(
 
         if not memodel.mtypes:
             raise StagingError(f"MEModel {memodel.id} has no mtypes defined.")
-
-        first = memodel.mtypes[0]
-
-        if not hasattr(first, "pref_label") or first.pref_label is None:
-            raise StagingError(f"MEModel {memodel.id} mtype is missing a pref_label.")
-
-        mtype = first.pref_label
+        mtype = memodel.mtypes[0].pref_label
 
         if memodel.calibration_result is None:
             raise StagingError(f"MEModel {memodel.id} has no calibration result.")
