@@ -38,10 +38,15 @@ def stage_sonata_from_memodel(
     with tempfile.TemporaryDirectory() as tmp_dir:
         downloaded_me_model = download_memodel(client, memodel=memodel, output_dir=tmp_dir)
 
-        if memodel.mtypes is None:
+        if not memodel.mtypes:
             raise StagingError(f"MEModel {memodel.id} has no mtypes defined.")
 
-        mtype = memodel.mtypes[0].pref_label
+        first = memodel.mtypes[0]
+
+        if not hasattr(first, "pref_label") or first.pref_label is None:
+            raise StagingError(f"MEModel {memodel.id} mtype is missing a pref_label.")
+
+        mtype = first.pref_label
 
         if memodel.calibration_result is None:
             raise StagingError(f"MEModel {memodel.id} has no calibration result.")
