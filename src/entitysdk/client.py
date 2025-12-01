@@ -115,6 +115,7 @@ class Client:
         *,
         entity_type: type[TIdentifiable],
         project_context: ProjectContext | None = None,
+        options: dict | None = None,
         admin: bool = False,
     ) -> TIdentifiable:
         """Get entity from resource id.
@@ -139,6 +140,7 @@ class Client:
         )
         return core.get_entity(
             url=url,
+            options=options,
             entity_type=entity_type,
             project_context=context,
             http_client=self._http_client,
