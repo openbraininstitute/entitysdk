@@ -126,7 +126,7 @@ def stage_simulation(
 def _stage_single_cell_node_sets_file(
     node_set_name: str,
     output_path: Path,
-) -> Path:
+) -> Path | None:
     write_json(
         {
             node_set_name: {
@@ -155,7 +155,6 @@ def _transform_simulation_config(
         ),
     }
 
-
     if spike_paths and "inputs" not in simulation_config:
         raise StagingError("Simulation has spikes, but no `inputs` defined")
 
@@ -165,7 +164,6 @@ def _transform_simulation_config(
         ret["node_sets_file"] = str(node_sets_path.relative_to(output_dir))
 
     return ret
-
 
 
 def _transform_inputs(inputs: dict, spike_paths: list[Path]) -> dict:
