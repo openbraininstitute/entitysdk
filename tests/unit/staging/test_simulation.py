@@ -126,3 +126,29 @@ def test_stage_simulation__wrong_entity_Type(
             model=simulation,
             output_dir=tmp_path,
         )
+
+
+def test__transform_simulation_config():
+    circuit_config_path = Path("path/to/circuit_config.json")
+
+    res = test_module._transform_simulation_config(
+        simulation_config={},
+        circuit_config_path=circuit_config_path,
+        node_sets_path=None,
+        spike_paths=[],
+        output_dir=Path(),
+        override_results_dir=None,
+    )
+    assert res == {"network": "path/to/circuit_config.json", "output": {}, "inputs": {}}
+
+    with pytest.raises(StagingError, match="Simulation has spikes, but no `inputs` defined"):
+        test_module._transform_simulation_config(
+            simulation_config={},
+            circuit_config_path=circuit_config_path,
+            node_sets_path=None,
+            spike_paths=[
+                Path(),
+            ],
+            output_dir=Path(),
+            override_results_dir=None,
+        )
