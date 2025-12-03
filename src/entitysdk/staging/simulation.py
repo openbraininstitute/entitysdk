@@ -150,7 +150,7 @@ def _transform_simulation_config(
     ret = simulation_config | {
         "network": str(circuit_config_path),
         "output": _transform_output(
-            simulation_config["output"] if "outputs" in simulation_config else {},
+            simulation_config.get("output", {}),
             override_results_dir,
         ),
     }
@@ -159,7 +159,7 @@ def _transform_simulation_config(
     if spike_paths and "inputs" not in simulation_config:
         raise StagingError("Simulation has spikes, but no `inputs` defined")
 
-    ret["inputs"] = _transform_inputs(simulation_config["inputs"], spike_paths)
+    ret["inputs"] = _transform_inputs(simulation_config.get("inputs", {}), spike_paths)
 
     if node_sets_path is not None:
         ret["node_sets_file"] = str(node_sets_path.relative_to(output_dir))
