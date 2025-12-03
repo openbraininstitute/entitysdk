@@ -36,20 +36,6 @@ class AgePeriod(StrEnum):
     unknown = "unknown"
 
 
-class AnalysisNotebookExecutionCreate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
-    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
-    used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
-    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
-    analysis_notebook_template_id: Annotated[
-        UUID | None, Field(title="Analysis Notebook Template Id")
-    ] = None
-    analysis_notebook_environment_id: Annotated[
-        UUID, Field(title="Analysis Notebook Environment Id")
-    ]
-
-
 class AnalysisNotebookResultCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     name: Annotated[str, Field(title="Name")]
@@ -689,6 +675,12 @@ class ErrorResponse(BaseModel):
     error_code: ApiErrorCode
     message: Annotated[str, Field(title="Message")]
     details: Annotated[Any | None, Field(title="Details")] = None
+
+
+class ExecutorType(StrEnum):
+    single_node_job = "single_node_job"
+    distributed_job = "distributed_job"
+    jupyter_notebook = "jupyter_notebook"
 
 
 class ExternalSource(StrEnum):
@@ -1592,6 +1584,8 @@ class SimulationExecutionStatus(StrEnum):
 
 
 class SimulationExecutionUserUpdate(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
     start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
     end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
     generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
@@ -1795,6 +1789,8 @@ class SkeletonizationExecutionStatus(StrEnum):
 
 
 class SkeletonizationExecutionUserUpdate(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
     start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
     end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
     generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
@@ -2013,7 +2009,25 @@ class AnalysisNotebookEnvironmentUpdate(BaseModel):
     runtime_info: Annotated[RuntimeInfo | str | None, Field(title="Runtime Info")] = "<NOT_SET>"
 
 
+class AnalysisNotebookExecutionCreate(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
+    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
+    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
+    analysis_notebook_template_id: Annotated[
+        UUID | None, Field(title="Analysis Notebook Template Id")
+    ] = None
+    analysis_notebook_environment_id: Annotated[
+        UUID, Field(title="Analysis Notebook Environment Id")
+    ]
+
+
 class AnalysisNotebookExecutionUpdate(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
     start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
     end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
     generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
@@ -2175,6 +2189,7 @@ class CellMorphologyCreate(BaseModel):
     description: Annotated[str, Field(title="Description")]
     location: PointLocationBase | None = None
     legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = None
+    has_segmented_spines: Annotated[bool | None, Field(title="Has Segmented Spines")] = False
     cell_morphology_protocol_id: Annotated[
         UUID | None, Field(title="Cell Morphology Protocol Id")
     ] = None
@@ -2194,6 +2209,9 @@ class CellMorphologyUserUpdate(BaseModel):
     description: Annotated[str | None, Field(title="Description")] = "<NOT_SET>"
     location: Annotated[PointLocationBase | str | None, Field(title="Location")] = "<NOT_SET>"
     legacy_id: Annotated[list[str] | str | None, Field(title="Legacy Id")] = "<NOT_SET>"
+    has_segmented_spines: Annotated[bool | str | None, Field(title="Has Segmented Spines")] = (
+        "<NOT_SET>"
+    )
     cell_morphology_protocol_id: Annotated[
         UUID | str | None, Field(title="Cell Morphology Protocol Id")
     ] = "<NOT_SET>"
@@ -2271,6 +2289,8 @@ class CircuitExtractionConfigGenerationUserUpdate(BaseModel):
 
 
 class CircuitExtractionExecutionCreate(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
     end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
@@ -2280,6 +2300,8 @@ class CircuitExtractionExecutionCreate(BaseModel):
 
 
 class CircuitExtractionExecutionRead(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
@@ -2296,6 +2318,8 @@ class CircuitExtractionExecutionRead(BaseModel):
 
 
 class CircuitExtractionExecutionUserUpdate(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
     start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
     end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
     generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
@@ -2658,6 +2682,7 @@ class ExemplarMorphology(BaseModel):
     description: Annotated[str, Field(title="Description")]
     location: PointLocationBase | None = None
     legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = None
+    has_segmented_spines: Annotated[bool | None, Field(title="Has Segmented Spines")] = False
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
 
@@ -2697,6 +2722,8 @@ class IonChannelModelingConfigGenerationUserUpdate(BaseModel):
 
 
 class IonChannelModelingExecutionCreate(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
     end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
@@ -2706,6 +2733,8 @@ class IonChannelModelingExecutionCreate(BaseModel):
 
 
 class IonChannelModelingExecutionRead(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
@@ -2722,6 +2751,8 @@ class IonChannelModelingExecutionRead(BaseModel):
 
 
 class IonChannelModelingExecutionUserUpdate(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
     start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
     end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
     generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
@@ -3121,6 +3152,8 @@ class SimulationCampaignRead(BaseModel):
 
 
 class SimulationExecutionCreate(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
     end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
@@ -3130,6 +3163,8 @@ class SimulationExecutionCreate(BaseModel):
 
 
 class SimulationExecutionRead(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
@@ -3292,6 +3327,8 @@ class SkeletonizationConfigRead(BaseModel):
 
 
 class SkeletonizationExecutionCreate(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
     end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
@@ -3301,6 +3338,8 @@ class SkeletonizationExecutionCreate(BaseModel):
 
 
 class SkeletonizationExecutionRead(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
@@ -3344,6 +3383,8 @@ class AnalysisNotebookEnvironmentRead(BaseModel):
 
 
 class AnalysisNotebookExecutionRead(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
@@ -4598,6 +4639,7 @@ class CellMorphologyAnnotationExpandedRead(BaseModel):
     description: Annotated[str, Field(title="Description")]
     location: PointLocationBase | None = None
     legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = None
+    has_segmented_spines: Annotated[bool | None, Field(title="Has Segmented Spines")] = False
     mtypes: Annotated[list[AnnotationRead] | None, Field(title="Mtypes")] = None
     cell_morphology_protocol: NestedCellMorphologyProtocolRead | None = None
     measurement_annotation: MeasurementAnnotationRead | None = None
@@ -4651,6 +4693,7 @@ class CellMorphologyRead(BaseModel):
     description: Annotated[str, Field(title="Description")]
     location: PointLocationBase | None = None
     legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = None
+    has_segmented_spines: Annotated[bool | None, Field(title="Has Segmented Spines")] = False
     mtypes: Annotated[list[AnnotationRead] | None, Field(title="Mtypes")] = None
     cell_morphology_protocol: NestedCellMorphologyProtocolRead | None = None
 
