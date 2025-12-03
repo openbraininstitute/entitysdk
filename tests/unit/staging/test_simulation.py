@@ -26,7 +26,7 @@ def test_stage_simulation(
         client,
         model=simulation,
         output_dir=tmp_path,
-        override_results_dir="foo/bar",
+        override_results_dir=Path("foo/bar"),
     )
 
     expected_simulation_config_path = tmp_path / "simulation_config.json"
@@ -73,7 +73,7 @@ def test_stage_simulation__external_circuit_config(
         client,
         model=simulation,
         output_dir=tmp_path,
-        circuit_config_path=circuit_config_path,
+        circuit_config_path=Path(circuit_config_path),
     )
 
     expected_simulation_config_path = tmp_path / "simulation_config.json"
@@ -102,7 +102,7 @@ def test_transform_inputs__raises():
     inputs = {"foo": {"input_type": "spikes", "spike_file": "foo.txt"}}
 
     with pytest.raises(StagingError, match="not present in spike asset file names"):
-        test_module._transform_inputs(inputs, {})
+        test_module._transform_inputs(inputs, [])
 
 
 def test_stage_simulation__wrong_entity_Type(
@@ -125,4 +125,30 @@ def test_stage_simulation__wrong_entity_Type(
             client,
             model=simulation,
             output_dir=tmp_path,
+        )
+
+
+def test__transform_simulation_config():
+    circuit_config_path = Path("path/to/circuit_config.json")
+
+    res = test_module._transform_simulation_config(
+        simulation_config={},
+        circuit_config_path=circuit_config_path,
+        node_sets_path=None,
+        spike_paths=[],
+        output_dir=Path(),
+        override_results_dir=None,
+    )
+    assert res == {"network": "path/to/circuit_config.json", "output": {}, "inputs": {}}
+
+    with pytest.raises(StagingError, match="Simulation has spikes, but no `inputs` defined"):
+        test_module._transform_simulation_config(
+            simulation_config={},
+            circuit_config_path=circuit_config_path,
+            node_sets_path=None,
+            spike_paths=[
+                Path(),
+            ],
+            output_dir=Path(),
+            override_results_dir=None,
         )
