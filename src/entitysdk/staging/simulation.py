@@ -142,17 +142,27 @@ def _stage_single_cell_node_sets_file(
 def _transform_simulation_config(
     simulation_config: dict,
     circuit_config_path: Path,
-    node_sets_path: Path,
+    node_sets_path: Path | None,
     spike_paths: list[Path],
     output_dir: Path,
     override_results_dir: Path | None,
 ) -> dict:
-    return simulation_config | {
+    ret = simulation_config | {
         "network": str(circuit_config_path),
-        "node_sets_file": str(node_sets_path.relative_to(output_dir)),
-        "inputs": _transform_inputs(simulation_config["inputs"], spike_paths),
         "output": _transform_output(simulation_config["output"], override_results_dir),
     }
+
+
+    if spike_paths and "inputs" not in simulation_config:
+        raise StagingError("Simulation has spikes, but no `inputs` defined")
+
+    ret["inputs"] = _transform_inputs(simulation_config["inputs"], spike_paths)
+
+    if node_sets_path is not None:
+        ret["node_sets_file"] = str(node_sets_path.relative_to(output_dir))
+
+    return ret
+
 
 
 def _transform_inputs(inputs: dict, spike_paths: list[Path]) -> dict:
@@ -160,18 +170,20 @@ def _transform_inputs(inputs: dict, spike_paths: list[Path]) -> dict:
 
     transformed_inputs = deepcopy(inputs)
     for values in transformed_inputs.values():
-        if values["input_type"] == "spikes":
-            path = Path(values["spike_file"]).name
+        if values["input_type"] != "spikes":
+            continue
 
-            if path not in expected_spike_filenames:
-                raise StagingError(
-                    f"Spike file name in config is not present in spike asset file names.\n"
-                    f"Config file name: {path}\n"
-                    f"Asset file names: {expected_spike_filenames}"
-                )
+        path = Path(values["spike_file"]).name
 
-            values["spike_file"] = str(path)
-            L.debug("Spike file %s -> %s", values["spike_file"], path)
+        if path not in expected_spike_filenames:
+            raise StagingError(
+                f"Spike file name in config is not present in spike asset file names.\n"
+                f"Config file name: {path}\n"
+                f"Asset file names: {expected_spike_filenames}"
+            )
+
+        values["spike_file"] = str(path)
+        L.debug("Spike file %s -> %s", values["spike_file"], path)
 
     return transformed_inputs
 

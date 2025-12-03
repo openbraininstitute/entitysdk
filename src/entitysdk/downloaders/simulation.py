@@ -7,6 +7,7 @@ from typing import cast
 
 from entitysdk.client import Client
 from entitysdk.dependencies.entity import ensure_has_assets, ensure_has_id
+from entitysdk.exception import EntitySDKError
 from entitysdk.models import Simulation
 from entitysdk.types import ID
 
@@ -32,20 +33,24 @@ def download_simulation_config_content(client: Client, *, model: Simulation) -> 
     return json.loads(json_content)
 
 
-def download_node_sets_file(client: Client, *, model: Simulation, output_path: Path) -> Path:
+def download_node_sets_file(client: Client, *, model: Simulation, output_path: Path) -> Path | None:
     """Download the node sets file from simulation's assets."""
     ensure_has_id(model)
-    ensure_has_assets(model)
 
     asset = client.select_assets(
         model,
         selection={"label": "custom_node_sets"},
-    ).one()
+    ).all()
+
+    if len(asset) == 0:
+        return None
+    if len(asset) > 1:
+        raise EntitySDKError(f"Too many node_sets_file for Simulation {model.id}")
 
     path = client.download_file(
         entity_id=cast(ID, model.id),
         entity_type=Simulation,
-        asset_id=asset,
+        asset_id=asset[0],
         output_path=output_path,
     )
 

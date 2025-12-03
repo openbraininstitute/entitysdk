@@ -26,7 +26,7 @@ def test_stage_simulation(
         client,
         model=simulation,
         output_dir=tmp_path,
-        override_results_dir="foo/bar",
+        override_results_dir=Path("foo/bar"),
     )
 
     expected_simulation_config_path = tmp_path / "simulation_config.json"
@@ -73,7 +73,7 @@ def test_stage_simulation__external_circuit_config(
         client,
         model=simulation,
         output_dir=tmp_path,
-        circuit_config_path=circuit_config_path,
+        circuit_config_path=Path(circuit_config_path),
     )
 
     expected_simulation_config_path = tmp_path / "simulation_config.json"
@@ -102,7 +102,7 @@ def test_transform_inputs__raises():
     inputs = {"foo": {"input_type": "spikes", "spike_file": "foo.txt"}}
 
     with pytest.raises(StagingError, match="not present in spike asset file names"):
-        test_module._transform_inputs(inputs, {})
+        test_module._transform_inputs(inputs, [])
 
 
 def test_stage_simulation__wrong_entity_Type(
