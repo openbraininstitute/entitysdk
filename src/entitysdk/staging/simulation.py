@@ -149,7 +149,10 @@ def _transform_simulation_config(
 ) -> dict:
     ret = simulation_config | {
         "network": str(circuit_config_path),
-        "output": _transform_output(simulation_config["output"], override_results_dir),
+        "output": _transform_output(
+            simulation_config["output"] if "outputs" in simulation_config else {},
+            override_results_dir,
+        ),
     }
 
 
@@ -194,7 +197,7 @@ def _transform_output(output: dict, override_results_dir: StrOrPath | None) -> d
 
     path = Path(override_results_dir)
 
-    return {
-        "output_dir": str(path),
-        "spikes_file": str(path / "spikes.h5"),
-    }
+    output["output_dir"] = str(path)
+    output["spikes_file"] = str(path / "spikes.h5")
+
+    return output
