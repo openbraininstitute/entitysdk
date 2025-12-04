@@ -3,13 +3,13 @@
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "brain_region": {
-    "acronym": "acronym64",
-    "annotation_value": 64,
+    "acronym": "acronym1",
+    "annotation_value": 1,
     "color_hex_triplet": "FF0000",
     "creation_date": "2025-01-01T00:00:00Z",
     "hierarchy_id": "00000000-0000-4000-8000-000001234678",
     "id": "00000000-0000-4000-8000-000001234678",
-    "name": "RedRegion",
+    "name": "region-1",
     "parent_structure_id": null,
     "update_date": "2025-01-01T00:00:00Z"
   },
@@ -22,12 +22,12 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "my-description",
+  "description": "sim-desc-1",
   "id": "00000000-0000-4000-8000-000001234678",
   "injection_location": [
     "soma[0]"
   ],
-  "name": "my-sim",
+  "name": "synaptome-1",
   "recording_location": [
     "soma[0]_0.5"
   ],
@@ -35,9 +35,9 @@
   "status": "success",
   "synaptome": {
     "creation_date": "2025-01-01T00:00:00Z",
-    "description": "my-synaptome-description",
+    "description": "description-0",
     "id": "00000000-0000-4000-8000-000001234678",
-    "name": "my-synaptome",
+    "name": "synaptome-0",
     "seed": 1,
     "update_date": "2025-01-01T00:00:00Z"
   },

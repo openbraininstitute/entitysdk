@@ -3,38 +3,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
-      "contributions": [],
-      "created_by": {
-        "family_name": null,
-        "given_name": null,
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "description": "circuit-extraction-campaign",
-      "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Public u2/0",
-      "scan_parameters": {
-        "foo": "bar"
-      },
-      "type": "circuit_extraction_campaign",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "family_name": null,
-        "given_name": null,
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      }
-    },
-    {
-      "assets": [],
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "contributions": [],
       "created_by": {
         "family_name": null,
@@ -45,9 +14,40 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "circuit-extraction-campaign",
+      "description": "description-2",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Public u1/0",
+      "name": "name-2",
+      "scan_parameters": {
+        "foo": "bar"
+      },
+      "type": "circuit_extraction_campaign",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "contributions": [],
+      "created_by": {
+        "family_name": null,
+        "given_name": null,
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "Regular User With Project Id",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "description-1",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "name": "name-1",
       "scan_parameters": {
         "foo": "bar"
       },
@@ -66,7 +66,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 100,
-    "total_items": 2
+    "page_size": 2,
+    "total_items": 3
   }
 }
