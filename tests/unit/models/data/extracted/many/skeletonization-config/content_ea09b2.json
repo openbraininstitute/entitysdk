@@ -3,13 +3,13 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
+        "pref_label": "Regular User With Project Id",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
@@ -17,7 +17,7 @@
       "description": "skeletonization-config",
       "em_cell_mesh_id": "00000000-0000-4000-8000-000001234678",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Public u2/0",
+      "name": "config-0",
       "scan_parameters": {
         "foo": "bar"
       },
@@ -28,7 +28,7 @@
         "family_name": null,
         "given_name": null,
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
+        "pref_label": "Regular User With Project Id",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }

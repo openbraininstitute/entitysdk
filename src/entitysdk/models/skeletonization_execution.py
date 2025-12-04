@@ -1,10 +1,10 @@
 """Skeletonization execution model."""
 
-from entitysdk.models.activity import Activity
+from entitysdk.models.execution import Execution
 from entitysdk.types import SkeletonizationExecutionStatus
 
 
-class SkeletonizationExecution(Activity):
+class SkeletonizationExecution(Execution):
     """Skeletonization execution model."""
 
     status: SkeletonizationExecutionStatus

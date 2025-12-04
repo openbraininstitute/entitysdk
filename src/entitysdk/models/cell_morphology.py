@@ -30,3 +30,6 @@ class CellMorphology(ScientificArtifact):
         MeasurementAnnotation | None,
         Field(description="The optional annotation with the morphometrics."),
     ] = None
+    has_segmented_spines: Annotated[
+        bool, Field(description="Whether the morphology has segmented spines or not.")
+    ] = False

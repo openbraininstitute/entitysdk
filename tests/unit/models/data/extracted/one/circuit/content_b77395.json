@@ -2,7 +2,7 @@
   "assets": [],
   "atlas_id": "00000000-0000-4000-8000-000001234678",
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": true,
+  "authorized_public": false,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
@@ -26,7 +26,7 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "description-0",
+  "description": "root-circuit-description",
   "experiment_date": null,
   "has_electrical_cell_models": true,
   "has_morphologies": true,
@@ -41,7 +41,7 @@
     "name": "Test License",
     "update_date": "2025-01-01T00:00:00Z"
   },
-  "name": "name-0",
+  "name": "root-circuit",
   "notice_text": null,
   "number_connections": 100000000,
   "number_neurons": 10000000,

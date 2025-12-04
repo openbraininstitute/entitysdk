@@ -1,10 +1,10 @@
 """Ion channel modeling execution model."""
 
-from entitysdk.models.activity import Activity
+from entitysdk.models.execution import Execution
 from entitysdk.types import IonChannelModelingExecutionStatus
 
 
-class IonChannelModelingExecution(Activity):
+class IonChannelModelingExecution(Execution):
     """Ion channel modeling execution model."""
 
     status: IonChannelModelingExecutionStatus

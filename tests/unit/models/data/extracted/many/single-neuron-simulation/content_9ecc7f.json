@@ -5,6 +5,62 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
+        "acronym": "acronym0",
+        "annotation_value": 0,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "region-0",
+        "parent_structure_id": null,
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "sim-desc-2",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "injection_location": [
+        "soma[0]"
+      ],
+      "me_model": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "description": "description-1",
+        "etypes": [],
+        "id": "00000000-0000-4000-8000-000001234678",
+        "mtypes": [],
+        "name": "me-model-1",
+        "update_date": "2025-01-01T00:00:00Z",
+        "validation_status": "created"
+      },
+      "name": "sim-2",
+      "recording_location": [
+        "soma[0]_0.5"
+      ],
+      "seed": 2,
+      "status": "success",
+      "type": "single_neuron_simulation",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
         "acronym": "acronym1",
         "annotation_value": 1,
         "color_hex_triplet": "FF0000",
@@ -44,62 +100,6 @@
         "soma[0]_0.5"
       ],
       "seed": 3,
-      "status": "success",
-      "type": "single_neuron_simulation",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      }
-    },
-    {
-      "assets": [],
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
-      "brain_region": {
-        "acronym": "acronym1",
-        "annotation_value": 1,
-        "color_hex_triplet": "FF0000",
-        "creation_date": "2025-01-01T00:00:00Z",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region-1",
-        "parent_structure_id": null,
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "created_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "description": "sim-desc-1",
-      "id": "00000000-0000-4000-8000-000001234678",
-      "injection_location": [
-        "soma[0]"
-      ],
-      "me_model": {
-        "creation_date": "2025-01-01T00:00:00Z",
-        "description": "description-0",
-        "etypes": [],
-        "id": "00000000-0000-4000-8000-000001234678",
-        "mtypes": [],
-        "name": "me-model-0",
-        "update_date": "2025-01-01T00:00:00Z",
-        "validation_status": "created"
-      },
-      "name": "sim-1",
-      "recording_location": [
-        "soma[0]_0.5"
-      ],
-      "seed": 1,
       "status": "success",
       "type": "single_neuron_simulation",
       "update_date": "2025-01-01T00:00:00Z",

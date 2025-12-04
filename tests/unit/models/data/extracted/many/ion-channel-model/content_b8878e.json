@@ -33,14 +33,14 @@
       "is_stochastic": false,
       "is_temperature_dependent": false,
       "license": null,
-      "name": "11",
+      "name": "15",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "11",
+      "nmodl_suffix": "15",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -80,7 +80,7 @@
   ],
   "facets": null,
   "pagination": {
-    "page": 18,
+    "page": 14,
     "page_size": 1,
     "total_items": 29
   }
