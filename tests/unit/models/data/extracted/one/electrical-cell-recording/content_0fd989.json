@@ -1,7 +1,7 @@
 {
   "assets": [],
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": true,
+  "authorized_public": false,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
@@ -39,7 +39,7 @@
     "update_date": "2025-01-01T00:00:00Z"
   },
   "ljp": 11.5,
-  "name": "my-name",
+  "name": "name-5",
   "notice_text": null,
   "published_in": null,
   "recording_location": [

@@ -36,6 +36,7 @@ from entitysdk._server_schemas import ElectricalRecordingType as ElectricalRecor
 from entitysdk._server_schemas import EMCellMeshGenerationMethod as EMCellMeshGenerationMethod
 from entitysdk._server_schemas import EMCellMeshType as EMCellMeshType
 from entitysdk._server_schemas import EntityType as EntityType
+from entitysdk._server_schemas import ExecutorType as ExecutorType
 from entitysdk._server_schemas import (
     IonChannelModelingExecutionStatus as IonChannelModelingExecutionStatus,
 )

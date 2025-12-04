@@ -5,13 +5,13 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym-4",
-        "annotation_value": 4,
+        "acronym": "acronym-5",
+        "annotation_value": 5,
         "color_hex_triplet": "FF0000",
         "creation_date": "2025-01-01T00:00:00Z",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region-4",
+        "name": "region-5",
         "parent_structure_id": null,
         "update_date": "2025-01-01T00:00:00Z"
       },
@@ -30,11 +30,11 @@
       "description": "my-description",
       "etypes": [
         {
-          "alt_label": "e4",
+          "alt_label": "e5",
           "creation_date": "2025-01-01T00:00:00Z",
           "definition": "d",
           "id": "00000000-0000-4000-8000-000001234678",
-          "pref_label": "e4",
+          "pref_label": "e5",
           "update_date": "2025-01-01T00:00:00Z"
         }
       ],
@@ -66,12 +66,12 @@
         "age_value": 1209600.0,
         "description": "my-description",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "subject-4",
+        "name": "subject-5",
         "sex": "female",
         "species": {
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "species-1",
-          "taxonomy_id": "taxonomy-1"
+          "name": "species-2",
+          "taxonomy_id": "taxonomy-2"
         },
         "strain": null,
         "weight": 1.5
@@ -93,13 +93,13 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym-1",
-        "annotation_value": 1,
+        "acronym": "acronym-2",
+        "annotation_value": 2,
         "color_hex_triplet": "FF0000",
         "creation_date": "2025-01-01T00:00:00Z",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region-1",
+        "name": "region-2",
         "parent_structure_id": null,
         "update_date": "2025-01-01T00:00:00Z"
       },
@@ -118,11 +118,11 @@
       "description": "my-description",
       "etypes": [
         {
-          "alt_label": "e1",
+          "alt_label": "e2",
           "creation_date": "2025-01-01T00:00:00Z",
           "definition": "d",
           "id": "00000000-0000-4000-8000-000001234678",
-          "pref_label": "e1",
+          "pref_label": "e2",
           "update_date": "2025-01-01T00:00:00Z"
         }
       ],
@@ -144,8 +144,8 @@
       "recording_location": [
         "soma[0]_0.5"
       ],
-      "recording_origin": "in_vitro",
-      "recording_type": "intracellular",
+      "recording_origin": "in_vivo",
+      "recording_type": "both",
       "stimuli": [],
       "subject": {
         "age_max": null,
@@ -154,12 +154,12 @@
         "age_value": 1209600.0,
         "description": "my-description",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "subject-1",
+        "name": "subject-2",
         "sex": "female",
         "species": {
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "species-1",
-          "taxonomy_id": "taxonomy-1"
+          "name": "species-2",
+          "taxonomy_id": "taxonomy-2"
         },
         "strain": null,
         "weight": 1.5

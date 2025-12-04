@@ -13,19 +13,19 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Campaign for circuit 0",
+      "description": "Campaign for circuit 1",
       "entity_id": "00000000-0000-4000-8000-000001234678",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "campaign-circuit-0",
+      "name": "campaign-circuit-1",
       "scan_parameters": {
         "foo1": "bar2"
       },
       "simulations": [
         {
-          "description": "simulation-description-0",
+          "description": "simulation-description-1",
           "entity_id": "00000000-0000-4000-8000-000001234678",
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "simulation-0",
+          "name": "simulation-1",
           "scan_parameters": {
             "foo1": "bar1",
             "foo2": "bar2"
@@ -51,7 +51,7 @@
       {
         "count": 1,
         "id": "00000000-0000-4000-8000-000001234678",
-        "label": "micro-circuit-1",
+        "label": "micro-circuit-2",
         "type": "circuit"
       }
     ],
@@ -68,7 +68,7 @@
       {
         "count": 1,
         "id": "00000000-0000-4000-8000-000001234678",
-        "label": "simulation-0",
+        "label": "simulation-1",
         "type": "simulation"
       }
     ],

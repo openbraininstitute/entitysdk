@@ -28,7 +28,7 @@
   "publication_type": "entity_source",
   "scientific_artifact": {
     "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-    "authorized_public": false,
+    "authorized_public": true,
     "contact_email": null,
     "experiment_date": null,
     "id": "00000000-0000-4000-8000-000001234678",

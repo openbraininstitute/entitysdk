@@ -24,14 +24,14 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "Test ICM Description",
+  "description": "description",
   "experiment_date": null,
   "id": "00000000-0000-4000-8000-000001234678",
-  "is_ljp_corrected": false,
+  "is_ljp_corrected": true,
   "is_stochastic": false,
   "is_temperature_dependent": false,
   "license": null,
-  "name": "test_icm",
+  "name": "name",
   "neuron_block": {
     "global": [],
     "nonspecific": [],
@@ -63,7 +63,7 @@
     },
     "weight": 1.5
   },
-  "temperature_celsius": 0,
+  "temperature_celsius": 25,
   "type": "ion_channel_model",
   "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {

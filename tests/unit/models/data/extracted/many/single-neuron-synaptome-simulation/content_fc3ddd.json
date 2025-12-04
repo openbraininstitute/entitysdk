@@ -24,12 +24,12 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "my-synaptome-simulation-description",
+      "description": "my-description",
       "id": "00000000-0000-4000-8000-000001234678",
       "injection_location": [
         "soma[0]"
       ],
-      "name": "sim-6",
+      "name": "Private u1/1",
       "recording_location": [
         "soma[0]_0.5"
       ],
@@ -39,7 +39,7 @@
         "creation_date": "2025-01-01T00:00:00Z",
         "description": "my-synaptome-description",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "syn-1",
+        "name": "my-synaptome",
         "seed": 1,
         "update_date": "2025-01-01T00:00:00Z"
       },
@@ -78,12 +78,12 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "my-synaptome-simulation-description",
+      "description": "my-description",
       "id": "00000000-0000-4000-8000-000001234678",
       "injection_location": [
         "soma[0]"
       ],
-      "name": "sim-5",
+      "name": "Private u1/0",
       "recording_location": [
         "soma[0]_0.5"
       ],
@@ -93,7 +93,7 @@
         "creation_date": "2025-01-01T00:00:00Z",
         "description": "my-synaptome-description",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "syn-2",
+        "name": "my-synaptome",
         "seed": 1,
         "update_date": "2025-01-01T00:00:00Z"
       },
@@ -111,7 +111,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -132,12 +132,12 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "my-synaptome-simulation-description",
+      "description": "my-description",
       "id": "00000000-0000-4000-8000-000001234678",
       "injection_location": [
         "soma[0]"
       ],
-      "name": "sim-4",
+      "name": "Public u1/0",
       "recording_location": [
         "soma[0]_0.5"
       ],
@@ -147,7 +147,7 @@
         "creation_date": "2025-01-01T00:00:00Z",
         "description": "my-synaptome-description",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "syn-1",
+        "name": "my-synaptome",
         "seed": 1,
         "update_date": "2025-01-01T00:00:00Z"
       },
@@ -166,7 +166,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 3,
-    "total_items": 7
+    "page_size": 100,
+    "total_items": 3
   }
 }

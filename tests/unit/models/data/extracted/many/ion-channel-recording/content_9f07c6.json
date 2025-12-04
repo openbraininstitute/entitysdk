@@ -5,17 +5,17 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym-1",
-        "annotation_value": 1,
+        "acronym": "acronym-2",
+        "annotation_value": 2,
         "color_hex_triplet": "FF0000",
         "creation_date": "2025-01-01T00:00:00Z",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region-1",
+        "name": "region-2",
         "parent_structure_id": null,
         "update_date": "2025-01-01T00:00:00Z"
       },
-      "cell_line": "CHO_FT",
+      "cell_line": "HEK",
       "comment": "test comment",
       "contact_email": null,
       "contributions": [],
@@ -35,8 +35,8 @@
         "description": "",
         "gene": "Kcnma1",
         "id": "00000000-0000-4000-8000-000001234678",
-        "label": "label-1",
-        "name": "name-1",
+        "label": "label-2",
+        "name": "name-2",
         "synonyms": [
           "BK channel",
           "BK channel alpha subunit"
@@ -58,8 +58,8 @@
       "recording_location": [
         "soma[0]_0.5"
       ],
-      "recording_origin": "in_vitro",
-      "recording_type": "intracellular",
+      "recording_origin": "in_vivo",
+      "recording_type": "both",
       "stimuli": [],
       "subject": {
         "age_max": null,
@@ -68,17 +68,17 @@
         "age_value": 1209600.0,
         "description": "my-description",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "subject-1",
+        "name": "subject-2",
         "sex": "female",
         "species": {
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "species-1",
-          "taxonomy_id": "taxonomy-1"
+          "name": "species-2",
+          "taxonomy_id": "taxonomy-2"
         },
         "strain": null,
         "weight": 1.5
       },
-      "temperature": 35.0,
+      "temperature": 15.0,
       "type": "ion_channel_recording",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {

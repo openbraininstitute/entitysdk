@@ -1,6 +1,6 @@
 {
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": true,
+  "authorized_public": false,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
@@ -20,14 +20,14 @@
   "is_ljp_corrected": false,
   "is_stochastic": false,
   "is_temperature_dependent": false,
-  "name": "test_icm",
+  "name": "27",
   "neuron_block": {
     "global": [],
     "nonspecific": [],
     "range": [],
     "useion": []
   },
-  "nmodl_suffix": "test_icm",
+  "nmodl_suffix": "27",
   "notice_text": null,
   "published_in": null,
   "subject": {

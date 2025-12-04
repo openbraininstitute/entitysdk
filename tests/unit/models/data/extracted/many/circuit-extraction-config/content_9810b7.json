@@ -3,7 +3,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "circuit_id": "00000000-0000-4000-8000-000001234678",
       "contributions": [],
       "created_by": {
@@ -17,7 +17,7 @@
       "creation_date": "2025-01-01T00:00:00Z",
       "description": "extraction-config",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "extraction-config",
+      "name": "Public u1/0",
       "scan_parameters": {
         "foo": "bar"
       },

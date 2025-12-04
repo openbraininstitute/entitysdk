@@ -5,13 +5,13 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym-2",
-        "annotation_value": 2,
+        "acronym": "acronym-4",
+        "annotation_value": 4,
         "color_hex_triplet": "FF0000",
         "creation_date": "2025-01-01T00:00:00Z",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region-2",
+        "name": "region-4",
         "parent_structure_id": null,
         "update_date": "2025-01-01T00:00:00Z"
       },
@@ -56,13 +56,13 @@
       },
       "measurements": [
         {
-          "id": 5,
+          "id": 9,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 6,
+          "id": 10,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 2.45
@@ -70,15 +70,15 @@
       ],
       "mtypes": [
         {
-          "alt_label": "m2",
+          "alt_label": "m4",
           "creation_date": "2025-01-01T00:00:00Z",
           "definition": "d",
           "id": "00000000-0000-4000-8000-000001234678",
-          "pref_label": "m2",
+          "pref_label": "m4",
           "update_date": "2025-01-01T00:00:00Z"
         }
       ],
-      "name": "d-1",
+      "name": "d-2",
       "subject": {
         "age_max": null,
         "age_min": null,
@@ -86,12 +86,12 @@
         "age_value": 1209600.0,
         "description": "my-description",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "subject-2",
+        "name": "subject-4",
         "sex": "female",
         "species": {
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "species-2",
-          "taxonomy_id": "taxonomy-2"
+          "name": "species-1",
+          "taxonomy_id": "taxonomy-1"
         },
         "strain": null,
         "weight": 1.5

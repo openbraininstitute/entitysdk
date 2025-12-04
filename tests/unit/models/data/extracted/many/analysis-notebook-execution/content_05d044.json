@@ -1,0 +1,218 @@
+{
+  "data": [
+    {
+      "analysis_notebook_environment": {
+        "id": "00000000-0000-4000-8000-000001234678",
+        "runtime_info": {
+          "docker": {
+            "docker_version": null,
+            "image_digest": null,
+            "image_repository": "obi-notebook-image",
+            "image_tag": ">=2025.09.24-2"
+          },
+          "os": {
+            "machine": "arm64",
+            "processor": "arm",
+            "release": "24.5.0",
+            "system": "Darwin",
+            "version": "Darwin Kernel Version 24.5.0..."
+          },
+          "python": {
+            "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+            "implementation": "CPython",
+            "version": "3.13.7"
+          },
+          "schema_version": 1
+        },
+        "type": "analysis_notebook_environment"
+      },
+      "analysis_notebook_template": {
+        "description": "analysis-notebook-template-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "analysis-notebook-template",
+        "scale": "cellular",
+        "specifications": {
+          "docker": {
+            "docker_version": null,
+            "image_digest": null,
+            "image_repository": "obi-notebook-image",
+            "image_tag": null
+          },
+          "inputs": [
+            {
+              "count_max": 1,
+              "count_min": 1,
+              "entity_type": "simulation_campaign",
+              "is_list": false,
+              "name": "my-simulation-campaign"
+            },
+            {
+              "count_max": 3,
+              "count_min": 1,
+              "entity_type": "circuit",
+              "is_list": true,
+              "name": "my-circuit"
+            }
+          ],
+          "python": {
+            "version": ">=3.10"
+          },
+          "schema_version": 1
+        },
+        "type": "analysis_notebook_template"
+      },
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "end_time": "2025-01-01T00:00:00Z",
+      "execution_id": "00000000-0000-4000-8000-000001234678",
+      "executor": "jupyter_notebook",
+      "generated": [
+        {
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+          "authorized_public": false,
+          "id": "00000000-0000-4000-8000-000001234678",
+          "type": "analysis_notebook_result"
+        }
+      ],
+      "id": "00000000-0000-4000-8000-000001234678",
+      "start_time": "2025-01-01T00:00:00Z",
+      "type": "analysis_notebook_execution",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "used": [
+        {
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+          "authorized_public": false,
+          "id": "00000000-0000-4000-8000-000001234678",
+          "type": "circuit"
+        }
+      ]
+    },
+    {
+      "analysis_notebook_environment": {
+        "id": "00000000-0000-4000-8000-000001234678",
+        "runtime_info": {
+          "docker": {
+            "docker_version": null,
+            "image_digest": null,
+            "image_repository": "obi-notebook-image",
+            "image_tag": ">=2025.09.24-2"
+          },
+          "os": {
+            "machine": "arm64",
+            "processor": "arm",
+            "release": "24.5.0",
+            "system": "Darwin",
+            "version": "Darwin Kernel Version 24.5.0..."
+          },
+          "python": {
+            "executable": "/opt/homebrew/opt/python@3.13/bin/python3.13",
+            "implementation": "CPython",
+            "version": "3.13.7"
+          },
+          "schema_version": 1
+        },
+        "type": "analysis_notebook_environment"
+      },
+      "analysis_notebook_template": {
+        "description": "analysis-notebook-template-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "analysis-notebook-template",
+        "scale": "cellular",
+        "specifications": {
+          "docker": {
+            "docker_version": null,
+            "image_digest": null,
+            "image_repository": "obi-notebook-image",
+            "image_tag": null
+          },
+          "inputs": [
+            {
+              "count_max": 1,
+              "count_min": 1,
+              "entity_type": "simulation_campaign",
+              "is_list": false,
+              "name": "my-simulation-campaign"
+            },
+            {
+              "count_max": 3,
+              "count_min": 1,
+              "entity_type": "circuit",
+              "is_list": true,
+              "name": "my-circuit"
+            }
+          ],
+          "python": {
+            "version": ">=3.10"
+          },
+          "schema_version": 1
+        },
+        "type": "analysis_notebook_template"
+      },
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "end_time": "2025-01-01T00:00:00Z",
+      "execution_id": "00000000-0000-4000-8000-000001234678",
+      "executor": "jupyter_notebook",
+      "generated": [
+        {
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+          "authorized_public": false,
+          "id": "00000000-0000-4000-8000-000001234678",
+          "type": "analysis_notebook_result"
+        }
+      ],
+      "id": "00000000-0000-4000-8000-000001234678",
+      "start_time": "2025-01-01T00:00:00Z",
+      "type": "analysis_notebook_execution",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "used": [
+        {
+          "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+          "authorized_public": false,
+          "id": "00000000-0000-4000-8000-000001234678",
+          "type": "circuit"
+        }
+      ]
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 2,
+    "total_items": 3
+  }
+}
