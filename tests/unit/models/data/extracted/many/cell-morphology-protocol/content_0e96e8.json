@@ -12,62 +12,11 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "generation_type": "placeholder",
-      "id": "00000000-0000-4000-8000-000001234678",
-      "type": "cell_morphology_protocol",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      }
-    },
-    {
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
-      "created_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "generation_type": "computationally_synthesized",
-      "id": "00000000-0000-4000-8000-000001234678",
-      "method_type": "free-text",
-      "protocol_design": "electron_microscopy",
-      "protocol_document": null,
-      "type": "cell_morphology_protocol",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      }
-    },
-    {
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
-      "created_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Description Test",
       "generation_type": "modified_reconstruction",
       "id": "00000000-0000-4000-8000-000001234678",
       "method_type": "cloned",
+      "name": "Modified Reconstruction Protocol Test",
       "protocol_design": "fluorophore",
       "protocol_document": null,
       "type": "cell_morphology_protocol",
@@ -94,9 +43,11 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Description Test",
       "generation_type": "digital_reconstruction",
       "id": "00000000-0000-4000-8000-000001234678",
       "magnification": null,
+      "name": "Digital Reconstruction Protocol Test",
       "protocol_design": "cell_patch",
       "protocol_document": "https://example.com/",
       "slicing_direction": "horizontal",
@@ -119,6 +70,6 @@
   "pagination": {
     "page": 1,
     "page_size": 100,
-    "total_items": 4
+    "total_items": 2
   }
 }
