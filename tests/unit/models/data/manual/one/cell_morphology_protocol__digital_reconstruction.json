@@ -1,4 +1,6 @@
 {
+  "name": "Digital Reconstruction Protocol Test",
+  "description": "Description Test",
   "protocol_document": "https://example.com/",
   "protocol_design": "cell_patch",
   "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",

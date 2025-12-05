@@ -10,8 +10,10 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
+  "description": "Description Test",
   "generation_type": "placeholder",
   "id": "00000000-0000-4000-8000-000001234678",
+  "name": "Placeholder Test",
   "type": "cell_morphology_protocol",
   "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {

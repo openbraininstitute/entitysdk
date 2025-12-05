@@ -10,9 +10,11 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
+  "description": "Description Test",
   "generation_type": "computationally_synthesized",
   "id": "00000000-0000-4000-8000-000001234678",
   "method_type": "free-text",
+  "name": "Computationally Synthesized Protocol Test",
   "protocol_design": "electron_microscopy",
   "protocol_document": null,
   "type": "cell_morphology_protocol",

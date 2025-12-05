@@ -135,6 +135,8 @@
   "cell_morphology_protocol": {
     "id": "77a4e533-823f-46cd-bc86-1a5290dca27b",
     "type": "cell_morphology_protocol",
+    "name": "Computationally Synthesized Protocol Test",
+    "description": "Description Test",
     "generation_type": "computationally_synthesized",
     "protocol_design": "electron_microscopy",
     "method_type": "free-text"

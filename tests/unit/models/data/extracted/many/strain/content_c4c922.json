@@ -11,9 +11,9 @@
       },
       "creation_date": "2025-01-01T00:00:00Z",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Test Strain 2",
+      "name": "Test Strain 0",
       "species_id": "00000000-0000-4000-8000-000001234678",
-      "taxonomy_id": "TaxonomyID_2",
+      "taxonomy_id": "TaxonomyID_0",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
@@ -59,9 +59,9 @@
       },
       "creation_date": "2025-01-01T00:00:00Z",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Test Strain 0",
+      "name": "Test Strain 2",
       "species_id": "00000000-0000-4000-8000-000001234678",
-      "taxonomy_id": "TaxonomyID_0",
+      "taxonomy_id": "TaxonomyID_2",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,

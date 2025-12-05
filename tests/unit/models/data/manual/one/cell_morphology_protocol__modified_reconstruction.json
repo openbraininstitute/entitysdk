@@ -1,4 +1,6 @@
 {
+  "name": "Modified Reconstruction Protocol Test",
+  "description": "Description Test",
   "protocol_document": null,
   "protocol_design": "fluorophore",
   "authorized_project_id": "ee86d4a0-eaca-48ca-9788-ddc450250b15",
