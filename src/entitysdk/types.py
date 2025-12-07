@@ -22,6 +22,7 @@ from entitysdk._server_schemas import CircuitBuildCategory as CircuitBuildCatego
 from entitysdk._server_schemas import (
     CircuitExtractionExecutionStatus as CircuitExtractionExecutionStatus,
 )
+from entitysdk._server_schemas import RepairPipelineState
 from entitysdk._server_schemas import CircuitScale as CircuitScale
 from entitysdk._server_schemas import ContentType as ContentType
 from entitysdk._server_schemas import DerivationType as DerivationType
