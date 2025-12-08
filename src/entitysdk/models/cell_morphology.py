@@ -9,7 +9,8 @@ from entitysdk.models.cell_morphology_protocol import CellMorphologyProtocolUnio
 from entitysdk.models.measurement_annotation import MeasurementAnnotation
 from entitysdk.models.mtype import MTypeClass
 from entitysdk.models.scientific_artifact import ScientificArtifact
-from entitysdk.types import RepairPipelineState
+from entitysdk.types import RepairPipelineType
+
 
 class CellMorphology(ScientificArtifact):
     """Cell Morphology model."""
@@ -34,6 +35,6 @@ class CellMorphology(ScientificArtifact):
         bool, Field(description="Whether the morphology has segmented spines or not.")
     ] = False
     repair_pipeline_state: Annotated[
-        RepairPipelineState | None,
+        RepairPipelineType | None,
         Field(description="The state of the repair pipeline."),
     ] = None
