@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+
+
 import sys
 
 if sys.version_info < (3, 11):  # pragma: no cover
@@ -7,8 +9,7 @@ if sys.version_info < (3, 11):  # pragma: no cover
 else:
     from enum import StrEnum
 
-
-from enum import Enum
+from enum import StrEnum
 from typing import Annotated, Any, Literal
 from pydantic import AnyUrl, AwareDatetime, BaseModel, Field, RootModel, UUID4
 from uuid import UUID
@@ -1503,6 +1504,13 @@ class PythonRuntimeInfo(BaseModel):
     ]
 
 
+class RepairPipelineType(StrEnum):
+    raw = "raw"
+    curated = "curated"
+    unraveled = "unraveled"
+    repaired = "repaired"
+
+
 class RoleAdminUpdate(BaseModel):
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
     role_id: Annotated[str | None, Field(title="Role Id")] = "<NOT_SET>"
@@ -2204,6 +2212,7 @@ class CellMorphologyCreate(BaseModel):
     location: PointLocationBase | None = None
     legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = None
     has_segmented_spines: Annotated[bool | None, Field(title="Has Segmented Spines")] = False
+    repair_pipeline_state: RepairPipelineType | None = None
     cell_morphology_protocol_id: Annotated[
         UUID | None, Field(title="Cell Morphology Protocol Id")
     ] = None
@@ -2226,6 +2235,9 @@ class CellMorphologyUserUpdate(BaseModel):
     has_segmented_spines: Annotated[bool | str | None, Field(title="Has Segmented Spines")] = (
         "<NOT_SET>"
     )
+    repair_pipeline_state: Annotated[
+        RepairPipelineType | str | None, Field(title="Repair Pipeline State")
+    ] = "<NOT_SET>"
     cell_morphology_protocol_id: Annotated[
         UUID | str | None, Field(title="Cell Morphology Protocol Id")
     ] = "<NOT_SET>"
@@ -2703,6 +2715,7 @@ class ExemplarMorphology(BaseModel):
     location: PointLocationBase | None = None
     legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = None
     has_segmented_spines: Annotated[bool | None, Field(title="Has Segmented Spines")] = False
+    repair_pipeline_state: RepairPipelineType | None = None
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
 
@@ -4664,6 +4677,7 @@ class CellMorphologyAnnotationExpandedRead(BaseModel):
     location: PointLocationBase | None = None
     legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = None
     has_segmented_spines: Annotated[bool | None, Field(title="Has Segmented Spines")] = False
+    repair_pipeline_state: RepairPipelineType | None = None
     mtypes: Annotated[list[AnnotationRead] | None, Field(title="Mtypes")] = None
     cell_morphology_protocol: NestedCellMorphologyProtocolRead | None = None
     measurement_annotation: MeasurementAnnotationRead | None = None
@@ -4718,6 +4732,7 @@ class CellMorphologyRead(BaseModel):
     location: PointLocationBase | None = None
     legacy_id: Annotated[list[str] | None, Field(title="Legacy Id")] = None
     has_segmented_spines: Annotated[bool | None, Field(title="Has Segmented Spines")] = False
+    repair_pipeline_state: RepairPipelineType | None = None
     mtypes: Annotated[list[AnnotationRead] | None, Field(title="Mtypes")] = None
     cell_morphology_protocol: NestedCellMorphologyProtocolRead | None = None
 
