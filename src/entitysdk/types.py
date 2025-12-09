@@ -45,6 +45,7 @@ from entitysdk._server_schemas import MeasurementStatistic as MeasurementStatist
 from entitysdk._server_schemas import MeasurementUnit as MeasurementUnit
 from entitysdk._server_schemas import ModifiedMorphologyMethodType as ModifiedMorphologyMethodType
 from entitysdk._server_schemas import PublicationType as PublicationType
+from entitysdk._server_schemas import RepairPipelineType as RepairPipelineType
 from entitysdk._server_schemas import Sex as Sex
 from entitysdk._server_schemas import SimulationExecutionStatus as SimulationExecutionStatus
 from entitysdk._server_schemas import SingleNeuronSimulationStatus as SingleNeuronSimulationStatus
