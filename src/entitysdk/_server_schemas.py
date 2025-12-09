@@ -1608,9 +1608,15 @@ class SimulationExecutionStatus(StrEnum):
 class SimulationExecutionUserUpdate(BaseModel):
     executor: ExecutorType | None = None
     execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
-    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
-    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
-    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = NotSet(
+        "<NOT_SET>"
+    )
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = NotSet(
+        "<NOT_SET>"
+    )
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = NotSet(
+        "<NOT_SET>"
+    )
     status: SimulationExecutionStatus | None = None
 
 
@@ -1638,9 +1644,15 @@ class SimulationGenerationRead(BaseModel):
 
 
 class SimulationGenerationUserUpdate(BaseModel):
-    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
-    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
-    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = NotSet(
+        "<NOT_SET>"
+    )
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = NotSet(
+        "<NOT_SET>"
+    )
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = NotSet(
+        "<NOT_SET>"
+    )
 
 
 class SimulationResultCreate(BaseModel):
@@ -1785,9 +1797,15 @@ class SkeletonizationConfigGenerationRead(BaseModel):
 
 
 class SkeletonizationConfigGenerationUserUpdate(BaseModel):
-    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
-    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
-    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = NotSet(
+        "<NOT_SET>"
+    )
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = NotSet(
+        "<NOT_SET>"
+    )
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = NotSet(
+        "<NOT_SET>"
+    )
 
 
 class SkeletonizationConfigUserUpdate(BaseModel):
@@ -1813,9 +1831,15 @@ class SkeletonizationExecutionStatus(StrEnum):
 class SkeletonizationExecutionUserUpdate(BaseModel):
     executor: ExecutorType | None = None
     execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
-    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
-    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
-    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = NotSet(
+        "<NOT_SET>"
+    )
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = NotSet(
+        "<NOT_SET>"
+    )
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = NotSet(
+        "<NOT_SET>"
+    )
     status: SkeletonizationExecutionStatus | None = None
 
 
@@ -2007,9 +2031,15 @@ class ValidationStatus(StrEnum):
 
 
 class ValidationUserUpdate(BaseModel):
-    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
-    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
-    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = NotSet(
+        "<NOT_SET>"
+    )
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = NotSet(
+        "<NOT_SET>"
+    )
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = NotSet(
+        "<NOT_SET>"
+    )
 
 
 class WithinBrainRegionDirection(StrEnum):
@@ -2050,9 +2080,15 @@ class AnalysisNotebookExecutionCreate(BaseModel):
 class AnalysisNotebookExecutionUpdate(BaseModel):
     executor: ExecutorType | None = None
     execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
-    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
-    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
-    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = NotSet(
+        "<NOT_SET>"
+    )
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = NotSet(
+        "<NOT_SET>"
+    )
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = NotSet(
+        "<NOT_SET>"
+    )
     analysis_notebook_template_id: Annotated[
         UUID | None, Field(title="Analysis Notebook Template Id")
     ] = None
@@ -2066,7 +2102,7 @@ class AnalysisNotebookTemplateInputType(BaseModel):
     entity_type: EntityType
     is_list: Annotated[bool | None, Field(title="Is List")] = False
     count_min: Annotated[int | None, Field(ge=0, title="Count Min")] = 1
-    count_max: Annotated[CountMax | None, Field(title="Count Max")] = 1
+    count_max: Annotated[CountMax | None, Field(title="Count Max")] = CountMax(1)
 
 
 class AnalysisNotebookTemplateSpecificationsInput(BaseModel):
@@ -2169,9 +2205,15 @@ class CalibrationRead(BaseModel):
 
 
 class CalibrationUserUpdate(BaseModel):
-    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
-    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
-    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = NotSet(
+        "<NOT_SET>"
+    )
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = NotSet(
+        "<NOT_SET>"
+    )
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = NotSet(
+        "<NOT_SET>"
+    )
 
 
 class CellMorphologyCreate(BaseModel):
@@ -2309,9 +2351,15 @@ class CircuitExtractionConfigGenerationRead(BaseModel):
 
 
 class CircuitExtractionConfigGenerationUserUpdate(BaseModel):
-    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
-    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
-    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = NotSet(
+        "<NOT_SET>"
+    )
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = NotSet(
+        "<NOT_SET>"
+    )
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = NotSet(
+        "<NOT_SET>"
+    )
 
 
 class CircuitExtractionExecutionCreate(BaseModel):
@@ -2346,9 +2394,15 @@ class CircuitExtractionExecutionRead(BaseModel):
 class CircuitExtractionExecutionUserUpdate(BaseModel):
     executor: ExecutorType | None = None
     execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
-    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
-    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
-    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = NotSet(
+        "<NOT_SET>"
+    )
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = NotSet(
+        "<NOT_SET>"
+    )
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = NotSet(
+        "<NOT_SET>"
+    )
     status: CircuitExtractionExecutionStatus | None = None
 
 
@@ -2749,9 +2803,15 @@ class IonChannelModelingConfigGenerationRead(BaseModel):
 
 
 class IonChannelModelingConfigGenerationUserUpdate(BaseModel):
-    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
-    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
-    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = NotSet(
+        "<NOT_SET>"
+    )
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = NotSet(
+        "<NOT_SET>"
+    )
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = NotSet(
+        "<NOT_SET>"
+    )
 
 
 class IonChannelModelingExecutionCreate(BaseModel):
@@ -2786,9 +2846,15 @@ class IonChannelModelingExecutionRead(BaseModel):
 class IonChannelModelingExecutionUserUpdate(BaseModel):
     executor: ExecutorType | None = None
     execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
-    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
-    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
-    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = NotSet(
+        "<NOT_SET>"
+    )
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = NotSet(
+        "<NOT_SET>"
+    )
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = NotSet(
+        "<NOT_SET>"
+    )
     status: IonChannelModelingExecutionStatus | None = None
 
 
