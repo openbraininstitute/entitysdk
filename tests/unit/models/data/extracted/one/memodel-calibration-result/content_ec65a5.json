@@ -1,6 +1,6 @@
 {
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": true,
+  "authorized_public": false,
   "calibrated_entity_id": "00000000-0000-4000-8000-000001234678",
   "created_by": {
     "family_name": "courcol",
@@ -11,10 +11,10 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "holding_current": 0.5,
+  "holding_current": 0.2,
   "id": "00000000-0000-4000-8000-000001234678",
   "rin": 100.0,
-  "threshold_current": 1.2,
+  "threshold_current": 0.8,
   "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": "courcol",

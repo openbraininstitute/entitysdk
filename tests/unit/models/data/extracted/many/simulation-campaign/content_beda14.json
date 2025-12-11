@@ -13,10 +13,10 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "description-2",
+      "description": "simulation-campaign-description",
       "entity_id": "00000000-0000-4000-8000-000001234678",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "name-2",
+      "name": "Private u1/1",
       "scan_parameters": {
         "foo1": "bar2"
       },
@@ -45,10 +45,10 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "description-1",
+      "description": "simulation-campaign-description",
       "entity_id": "00000000-0000-4000-8000-000001234678",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "name-1",
+      "name": "Private u1/0",
       "scan_parameters": {
         "foo1": "bar2"
       },
@@ -68,7 +68,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 2,
-    "total_items": 3
+    "page_size": 100,
+    "total_items": 2
   }
 }

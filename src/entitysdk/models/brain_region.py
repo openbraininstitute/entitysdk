@@ -5,10 +5,11 @@ from typing import Annotated
 from pydantic import Field
 
 from entitysdk.models.core import Identifiable
+from entitysdk.models.taxonomy import Species, Strain
 from entitysdk.types import ID
 
 
-class BrainRegion(Identifiable):
+class NestedBrainRegion(Identifiable):
     """BrainRegion model."""
 
     name: Annotated[
@@ -35,3 +36,17 @@ class BrainRegion(Identifiable):
         ID, Field(examples=[], description="The brain hierarchy that includes this brain region.")
     ]
     color_hex_triplet: Annotated[str, Field(description="Region's color hex triplet.")]
+
+
+class BrainRegion(NestedBrainRegion):
+    """BrainRegion model."""
+
+    species: Annotated[
+        Species,
+        Field(description="The species for which the emodel applies."),
+    ]
+
+    strain: Annotated[
+        Strain | None,
+        Field(description="The specific strain of the species, if applicable."),
+    ] = None

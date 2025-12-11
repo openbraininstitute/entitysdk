@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-
 import sys
 
 if sys.version_info < (3, 11):  # pragma: no cover
     from backports.strenum import StrEnum
 else:
     from enum import StrEnum
+
 
 from enum import Enum
 from typing import Annotated, Any, Literal
@@ -185,22 +185,14 @@ class BrainRegionCreate(BaseModel):
 
 class BrainRegionHierarchyAdminUpdate(BaseModel):
     name: Annotated[str | None, Field(title="Name")] = "<NOT_SET>"
+    species_id: Annotated[UUID | str | None, Field(title="Species Id")] = "<NOT_SET>"
+    strain_id: Annotated[UUID | str | None, Field(title="Strain Id")] = "<NOT_SET>"
 
 
 class BrainRegionHierarchyCreate(BaseModel):
     name: Annotated[str, Field(title="Name")]
-
-
-class BrainRegionRead(BaseModel):
-    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
-    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
-    id: Annotated[UUID, Field(title="Id")]
-    annotation_value: Annotated[int, Field(title="Annotation Value")]
-    name: Annotated[str, Field(title="Name")]
-    acronym: Annotated[str, Field(title="Acronym")]
-    color_hex_triplet: Annotated[str, Field(title="Color Hex Triplet")]
-    parent_structure_id: Annotated[UUID | None, Field(title="Parent Structure Id")] = None
-    hierarchy_id: Annotated[UUID, Field(title="Hierarchy Id")]
+    species_id: Annotated[UUID, Field(title="Species Id")]
+    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
 
 
 class CalibrationCreate(BaseModel):
@@ -1001,6 +993,16 @@ class ModifiedReconstructionCellMorphologyProtocolCreate(BaseModel):
     method_type: ModifiedMorphologyMethodType
 
 
+class NestedBrainRegionRead(BaseModel):
+    id: Annotated[UUID, Field(title="Id")]
+    annotation_value: Annotated[int, Field(title="Annotation Value")]
+    name: Annotated[str, Field(title="Name")]
+    acronym: Annotated[str, Field(title="Acronym")]
+    color_hex_triplet: Annotated[str, Field(title="Color Hex Triplet")]
+    parent_structure_id: Annotated[UUID | None, Field(title="Parent Structure Id")] = None
+    hierarchy_id: Annotated[UUID, Field(title="Hierarchy Id")]
+
+
 class NestedComputationallySynthesizedCellMorphologyProtocolRead(BaseModel):
     protocol_document: Annotated[ProtocolDocument | None, Field(title="Protocol Document")] = None
     protocol_design: CellMorphologyProtocolDesign
@@ -1607,15 +1609,9 @@ class SimulationExecutionStatus(StrEnum):
 class SimulationExecutionUserUpdate(BaseModel):
     executor: ExecutorType | None = None
     execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
-    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = NotSet(
-        "<NOT_SET>"
-    )
-    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = NotSet(
-        "<NOT_SET>"
-    )
-    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = NotSet(
-        "<NOT_SET>"
-    )
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
     status: SimulationExecutionStatus | None = None
 
 
@@ -1643,15 +1639,9 @@ class SimulationGenerationRead(BaseModel):
 
 
 class SimulationGenerationUserUpdate(BaseModel):
-    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = NotSet(
-        "<NOT_SET>"
-    )
-    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = NotSet(
-        "<NOT_SET>"
-    )
-    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = NotSet(
-        "<NOT_SET>"
-    )
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
 
 
 class SimulationResultCreate(BaseModel):
@@ -1796,15 +1786,9 @@ class SkeletonizationConfigGenerationRead(BaseModel):
 
 
 class SkeletonizationConfigGenerationUserUpdate(BaseModel):
-    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = NotSet(
-        "<NOT_SET>"
-    )
-    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = NotSet(
-        "<NOT_SET>"
-    )
-    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = NotSet(
-        "<NOT_SET>"
-    )
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
 
 
 class SkeletonizationConfigUserUpdate(BaseModel):
@@ -1830,15 +1814,9 @@ class SkeletonizationExecutionStatus(StrEnum):
 class SkeletonizationExecutionUserUpdate(BaseModel):
     executor: ExecutorType | None = None
     execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
-    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = NotSet(
-        "<NOT_SET>"
-    )
-    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = NotSet(
-        "<NOT_SET>"
-    )
-    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = NotSet(
-        "<NOT_SET>"
-    )
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
     status: SkeletonizationExecutionStatus | None = None
 
 
@@ -2030,15 +2008,9 @@ class ValidationStatus(StrEnum):
 
 
 class ValidationUserUpdate(BaseModel):
-    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = NotSet(
-        "<NOT_SET>"
-    )
-    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = NotSet(
-        "<NOT_SET>"
-    )
-    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = NotSet(
-        "<NOT_SET>"
-    )
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
 
 
 class WithinBrainRegionDirection(StrEnum):
@@ -2079,15 +2051,9 @@ class AnalysisNotebookExecutionCreate(BaseModel):
 class AnalysisNotebookExecutionUpdate(BaseModel):
     executor: ExecutorType | None = None
     execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
-    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = NotSet(
-        "<NOT_SET>"
-    )
-    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = NotSet(
-        "<NOT_SET>"
-    )
-    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = NotSet(
-        "<NOT_SET>"
-    )
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
     analysis_notebook_template_id: Annotated[
         UUID | None, Field(title="Analysis Notebook Template Id")
     ] = None
@@ -2101,7 +2067,7 @@ class AnalysisNotebookTemplateInputType(BaseModel):
     entity_type: EntityType
     is_list: Annotated[bool | None, Field(title="Is List")] = False
     count_min: Annotated[int | None, Field(ge=0, title="Count Min")] = 1
-    count_max: Annotated[CountMax | None, Field(title="Count Max")] = CountMax(1)
+    count_max: Annotated[CountMax | None, Field(title="Count Max")] = 1
 
 
 class AnalysisNotebookTemplateSpecificationsInput(BaseModel):
@@ -2186,6 +2152,22 @@ class BrainRegionHierarchyRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     name: Annotated[str, Field(title="Name")]
+    species: NestedSpeciesRead
+    strain: NestedStrainRead | None = None
+
+
+class BrainRegionRead(BaseModel):
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    id: Annotated[UUID, Field(title="Id")]
+    annotation_value: Annotated[int, Field(title="Annotation Value")]
+    name: Annotated[str, Field(title="Name")]
+    acronym: Annotated[str, Field(title="Acronym")]
+    color_hex_triplet: Annotated[str, Field(title="Color Hex Triplet")]
+    parent_structure_id: Annotated[UUID | None, Field(title="Parent Structure Id")] = None
+    hierarchy_id: Annotated[UUID, Field(title="Hierarchy Id")]
+    species: NestedSpeciesRead
+    strain: NestedStrainRead | None = None
 
 
 class CalibrationRead(BaseModel):
@@ -2204,15 +2186,9 @@ class CalibrationRead(BaseModel):
 
 
 class CalibrationUserUpdate(BaseModel):
-    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = NotSet(
-        "<NOT_SET>"
-    )
-    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = NotSet(
-        "<NOT_SET>"
-    )
-    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = NotSet(
-        "<NOT_SET>"
-    )
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
 
 
 class CellMorphologyCreate(BaseModel):
@@ -2350,15 +2326,9 @@ class CircuitExtractionConfigGenerationRead(BaseModel):
 
 
 class CircuitExtractionConfigGenerationUserUpdate(BaseModel):
-    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = NotSet(
-        "<NOT_SET>"
-    )
-    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = NotSet(
-        "<NOT_SET>"
-    )
-    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = NotSet(
-        "<NOT_SET>"
-    )
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
 
 
 class CircuitExtractionExecutionCreate(BaseModel):
@@ -2393,15 +2363,9 @@ class CircuitExtractionExecutionRead(BaseModel):
 class CircuitExtractionExecutionUserUpdate(BaseModel):
     executor: ExecutorType | None = None
     execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
-    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = NotSet(
-        "<NOT_SET>"
-    )
-    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = NotSet(
-        "<NOT_SET>"
-    )
-    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = NotSet(
-        "<NOT_SET>"
-    )
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
     status: CircuitExtractionExecutionStatus | None = None
 
 
@@ -2802,15 +2766,9 @@ class IonChannelModelingConfigGenerationRead(BaseModel):
 
 
 class IonChannelModelingConfigGenerationUserUpdate(BaseModel):
-    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = NotSet(
-        "<NOT_SET>"
-    )
-    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = NotSet(
-        "<NOT_SET>"
-    )
-    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = NotSet(
-        "<NOT_SET>"
-    )
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
 
 
 class IonChannelModelingExecutionCreate(BaseModel):
@@ -2845,15 +2803,9 @@ class IonChannelModelingExecutionRead(BaseModel):
 class IonChannelModelingExecutionUserUpdate(BaseModel):
     executor: ExecutorType | None = None
     execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
-    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = NotSet(
-        "<NOT_SET>"
-    )
-    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = NotSet(
-        "<NOT_SET>"
-    )
-    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = NotSet(
-        "<NOT_SET>"
-    )
+    start_time: Annotated[AwareDatetime | NotSet | None, Field(title="Start Time")] = "<NOT_SET>"
+    end_time: Annotated[AwareDatetime | NotSet | None, Field(title="End Time")] = "<NOT_SET>"
+    generated_ids: Annotated[list[UUID] | NotSet | None, Field(title="Generated Ids")] = "<NOT_SET>"
     status: IonChannelModelingExecutionStatus | None = None
 
 
@@ -3338,7 +3290,7 @@ class SingleNeuronSimulationRead(BaseModel):
     id: Annotated[UUID, Field(title="Id")]
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    brain_region: BrainRegionRead
+    brain_region: NestedBrainRegionRead
     seed: Annotated[int, Field(title="Seed")]
     status: SingleNeuronSimulationStatus
     injection_location: Annotated[list[str], Field(title="Injection Location")]
@@ -3349,6 +3301,7 @@ class SingleNeuronSimulationRead(BaseModel):
 class SingleNeuronSynaptomeRead(BaseModel):
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
+    brain_region: NestedBrainRegionRead
     created_by: NestedPersonRead
     updated_by: NestedPersonRead
     assets: Annotated[list[AssetRead], Field(title="Assets")]
@@ -3363,7 +3316,6 @@ class SingleNeuronSynaptomeRead(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     seed: Annotated[int, Field(title="Seed")]
     me_model: NestedMEModel
-    brain_region: BrainRegionRead
 
 
 class SingleNeuronSynaptomeSimulationRead(BaseModel):
@@ -3378,7 +3330,7 @@ class SingleNeuronSynaptomeSimulationRead(BaseModel):
     id: Annotated[UUID, Field(title="Id")]
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    brain_region: BrainRegionRead
+    brain_region: NestedBrainRegionRead
     seed: Annotated[int, Field(title="Seed")]
     status: SingleNeuronSimulationStatus
     injection_location: Annotated[list[str], Field(title="Injection Location")]
@@ -3647,7 +3599,7 @@ class CircuitRead(BaseModel):
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     created_by: NestedPersonRead
     updated_by: NestedPersonRead
-    brain_region: BrainRegionRead
+    brain_region: NestedBrainRegionRead
     subject: NestedSubjectRead
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
@@ -3706,7 +3658,7 @@ class EMCellMeshRead(BaseModel):
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     created_by: NestedPersonRead
     updated_by: NestedPersonRead
-    brain_region: BrainRegionRead
+    brain_region: NestedBrainRegionRead
     subject: NestedSubjectRead
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
@@ -3763,7 +3715,7 @@ class EMDenseReconstructionDatasetRead(BaseModel):
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     created_by: NestedPersonRead
     updated_by: NestedPersonRead
-    brain_region: BrainRegionRead
+    brain_region: NestedBrainRegionRead
     subject: NestedSubjectRead
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
@@ -3823,6 +3775,7 @@ class EMDenseReconstructionDatasetRead(BaseModel):
 class EModelRead(BaseModel):
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
+    brain_region: NestedBrainRegionRead
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")] = (
         None
     )
@@ -3840,7 +3793,6 @@ class EModelRead(BaseModel):
     id: Annotated[UUID, Field(title="Id")]
     species: NestedSpeciesRead
     strain: NestedStrainRead | None = None
-    brain_region: BrainRegionRead
     mtypes: Annotated[list[AnnotationRead] | None, Field(title="Mtypes")] = None
     etypes: Annotated[list[AnnotationRead] | None, Field(title="Etypes")] = None
     exemplar_morphology: ExemplarMorphology
@@ -3858,7 +3810,7 @@ class ElectricalCellRecordingRead(BaseModel):
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     created_by: NestedPersonRead
     updated_by: NestedPersonRead
-    brain_region: BrainRegionRead
+    brain_region: NestedBrainRegionRead
     subject: NestedSubjectRead
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
@@ -3953,9 +3905,10 @@ class ExperimentalBoutonDensityCreate(BaseModel):
 
 
 class ExperimentalBoutonDensityRead(BaseModel):
-    subject: NestedSubjectRead
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
+    brain_region: NestedBrainRegionRead
+    subject: NestedSubjectRead
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")] = (
         None
     )
@@ -3970,7 +3923,6 @@ class ExperimentalBoutonDensityRead(BaseModel):
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     measurements: Annotated[list[MeasurementRecordRead], Field(title="Measurements")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
-    brain_region: BrainRegionRead
     mtypes: Annotated[list[AnnotationRead] | None, Field(title="Mtypes")] = None
 
 
@@ -3998,9 +3950,10 @@ class ExperimentalNeuronDensityCreate(BaseModel):
 
 
 class ExperimentalNeuronDensityRead(BaseModel):
-    subject: NestedSubjectRead
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
+    brain_region: NestedBrainRegionRead
+    subject: NestedSubjectRead
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")] = (
         None
     )
@@ -4015,7 +3968,6 @@ class ExperimentalNeuronDensityRead(BaseModel):
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     measurements: Annotated[list[MeasurementRecordRead], Field(title="Measurements")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
-    brain_region: BrainRegionRead
     mtypes: Annotated[list[AnnotationRead] | None, Field(title="Mtypes")] = None
     etypes: Annotated[list[AnnotationRead] | None, Field(title="Etypes")] = None
 
@@ -4048,9 +4000,10 @@ class ExperimentalSynapsesPerConnectionCreate(BaseModel):
 
 
 class ExperimentalSynapsesPerConnectionRead(BaseModel):
-    subject: NestedSubjectRead
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
+    brain_region: NestedBrainRegionRead
+    subject: NestedSubjectRead
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")] = (
         None
     )
@@ -4065,11 +4018,10 @@ class ExperimentalSynapsesPerConnectionRead(BaseModel):
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     measurements: Annotated[list[MeasurementRecordRead], Field(title="Measurements")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
-    brain_region: BrainRegionRead
     pre_mtype: AnnotationRead
     post_mtype: AnnotationRead
-    pre_region: BrainRegionRead
-    post_region: BrainRegionRead
+    pre_region: NestedBrainRegionRead
+    post_region: NestedBrainRegionRead
 
 
 class ExperimentalSynapsesPerConnectionUserUpdate(BaseModel):
@@ -4145,7 +4097,7 @@ class IonChannelModelExpanded(BaseModel):
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     created_by: NestedPersonRead
     updated_by: NestedPersonRead
-    brain_region: BrainRegionRead
+    brain_region: NestedBrainRegionRead
     subject: NestedSubjectRead
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
@@ -4194,7 +4146,7 @@ class IonChannelModelRead(BaseModel):
     description: Annotated[str, Field(title="Description")]
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
-    brain_region: BrainRegionRead
+    brain_region: NestedBrainRegionRead
     subject: NestedSubjectRead
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
@@ -4268,7 +4220,7 @@ class IonChannelModelWAssets(BaseModel):
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
-    brain_region: BrainRegionRead
+    brain_region: NestedBrainRegionRead
     subject: NestedSubjectRead
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
@@ -4369,7 +4321,7 @@ class IonChannelRecordingRead(BaseModel):
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     created_by: NestedPersonRead
     updated_by: NestedPersonRead
-    brain_region: BrainRegionRead
+    brain_region: NestedBrainRegionRead
     subject: NestedSubjectRead
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
@@ -4705,7 +4657,7 @@ class CellMorphologyAnnotationExpandedRead(BaseModel):
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     created_by: NestedPersonRead
     updated_by: NestedPersonRead
-    brain_region: BrainRegionRead
+    brain_region: NestedBrainRegionRead
     subject: NestedSubjectRead
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
@@ -4760,7 +4712,7 @@ class CellMorphologyRead(BaseModel):
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     created_by: NestedPersonRead
     updated_by: NestedPersonRead
-    brain_region: BrainRegionRead
+    brain_region: NestedBrainRegionRead
     subject: NestedSubjectRead
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
@@ -4805,6 +4757,7 @@ class CellMorphologyRead(BaseModel):
 class EModelReadExpanded(BaseModel):
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
+    brain_region: NestedBrainRegionRead
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")] = (
         None
     )
@@ -4822,7 +4775,6 @@ class EModelReadExpanded(BaseModel):
     id: Annotated[UUID, Field(title="Id")]
     species: NestedSpeciesRead
     strain: NestedStrainRead | None = None
-    brain_region: BrainRegionRead
     mtypes: Annotated[list[AnnotationRead] | None, Field(title="Mtypes")] = None
     etypes: Annotated[list[AnnotationRead] | None, Field(title="Etypes")] = None
     exemplar_morphology: ExemplarMorphology
@@ -4850,6 +4802,7 @@ class ListResponseMeasurementAnnotationRead(BaseModel):
 class MEModelRead(BaseModel):
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
+    brain_region: NestedBrainRegionRead
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")] = (
         None
     )
@@ -4864,7 +4817,6 @@ class MEModelRead(BaseModel):
     id: Annotated[UUID, Field(title="Id")]
     species: NestedSpeciesRead
     strain: NestedStrainRead | None = None
-    brain_region: BrainRegionRead
     mtypes: Annotated[list[AnnotationRead] | None, Field(title="Mtypes")] = None
     etypes: Annotated[list[AnnotationRead] | None, Field(title="Etypes")] = None
     morphology: CellMorphologyRead

@@ -15,7 +15,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "extraction-config",
+      "description": "extraction-config-description",
       "id": "00000000-0000-4000-8000-000001234678",
       "name": "Private u2/0",
       "scan_parameters": {
@@ -47,7 +47,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "extraction-config",
+      "description": "extraction-config-description",
       "id": "00000000-0000-4000-8000-000001234678",
       "name": "Public u2/0",
       "scan_parameters": {

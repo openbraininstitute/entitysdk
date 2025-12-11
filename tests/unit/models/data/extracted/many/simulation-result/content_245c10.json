@@ -3,7 +3,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
@@ -15,7 +15,7 @@
       "creation_date": "2025-01-01T00:00:00Z",
       "description": "simulation-result-description",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Public u1/0",
+      "name": "simulation-result",
       "simulation_id": "00000000-0000-4000-8000-000001234678",
       "type": "simulation_result",
       "update_date": "2025-01-01T00:00:00Z",

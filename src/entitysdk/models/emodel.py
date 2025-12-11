@@ -4,7 +4,7 @@ from typing import Annotated
 
 from pydantic import Field
 
-from entitysdk.models.brain_region import BrainRegion
+from entitysdk.models.brain_region import NestedBrainRegion
 from entitysdk.models.cell_morphology import CellMorphology
 from entitysdk.models.contribution import Contribution
 from entitysdk.models.entity import Entity
@@ -27,7 +27,7 @@ class EModel(Entity):
         Field(description="The specific strain of the species, if applicable."),
     ] = None
     brain_region: Annotated[
-        BrainRegion,
+        NestedBrainRegion,
         Field(description="The brain region where the emodel is used or applies."),
     ]
     license: Annotated[
