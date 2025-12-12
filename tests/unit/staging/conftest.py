@@ -4,9 +4,9 @@ from pathlib import Path
 
 import pytest
 
+from entitysdk import types
 from entitysdk.models import (
     Asset,
-    BrainRegion,
     CellMorphology,
     Circuit,
     EModel,
@@ -19,7 +19,7 @@ from entitysdk.models import (
     Species,
     Subject,
 )
-from entitysdk.types import StorageType
+from entitysdk.models.brain_region import BrainRegion
 
 DATA_DIR = Path(__file__).parent / "data"
 
@@ -39,7 +39,7 @@ def species():
 @pytest.fixture
 def subject(species):
     return Subject(
-        sex="male",
+        sex=types.Sex.male,
         species=species,
     )
 
@@ -89,7 +89,7 @@ def circuit(subject, brain_region):
                 path="circuit",
                 full_path="/circuit",
                 is_directory=True,
-                storage_type=StorageType.aws_s3_internal,
+                storage_type=types.StorageType.aws_s3_internal,
             )
         ],
     )
@@ -168,7 +168,7 @@ def simulation(circuit):
                 full_path="/foo.json",
                 size=0,
                 is_directory=False,
-                storage_type=StorageType.aws_s3_internal,
+                storage_type=types.StorageType.aws_s3_internal,
             ),
             Asset(
                 id=uuid.uuid4(),
@@ -178,7 +178,7 @@ def simulation(circuit):
                 full_path="/bar.json",
                 size=0,
                 is_directory=False,
-                storage_type=StorageType.aws_s3_internal,
+                storage_type=types.StorageType.aws_s3_internal,
             ),
             Asset(
                 id=uuid.uuid4(),
@@ -188,7 +188,7 @@ def simulation(circuit):
                 full_path="/PoissonInputStimulus_spikes_1.h5",
                 size=0,
                 is_directory=False,
-                storage_type=StorageType.aws_s3_internal,
+                storage_type=types.StorageType.aws_s3_internal,
             ),
             Asset(
                 id=uuid.uuid4(),
@@ -198,7 +198,7 @@ def simulation(circuit):
                 full_path="/PoissonInputStimulus_spikes_2.h5",
                 size=0,
                 is_directory=False,
-                storage_type=StorageType.aws_s3_internal,
+                storage_type=types.StorageType.aws_s3_internal,
             ),
         ],
     )
@@ -262,7 +262,7 @@ def simulation_result(simulation):
                 full_path="/soma_voltage1.h5",
                 size=0,
                 is_directory=False,
-                storage_type=StorageType.aws_s3_internal,
+                storage_type=types.StorageType.aws_s3_internal,
             ),
             Asset(
                 id=uuid.uuid4(),
@@ -272,7 +272,7 @@ def simulation_result(simulation):
                 full_path="/soma_voltage2.h5",
                 size=0,
                 is_directory=False,
-                storage_type=StorageType.aws_s3_internal,
+                storage_type=types.StorageType.aws_s3_internal,
             ),
             Asset(
                 id=uuid.uuid4(),
@@ -282,7 +282,7 @@ def simulation_result(simulation):
                 full_path="/out.h5",
                 size=0,
                 is_directory=False,
-                storage_type=StorageType.aws_s3_internal,
+                storage_type=types.StorageType.aws_s3_internal,
             ),
         ],
     )
@@ -331,7 +331,7 @@ def cell_morphology(brain_region, subject, mtype):
                 full_path="/morph.swc",
                 size=0,
                 is_directory=False,
-                storage_type=StorageType.aws_s3_internal,
+                storage_type=types.StorageType.aws_s3_internal,
             ),
             Asset(
                 id=uuid.uuid4(),
@@ -341,7 +341,7 @@ def cell_morphology(brain_region, subject, mtype):
                 full_path="/morph.asc",
                 size=0,
                 is_directory=False,
-                storage_type=StorageType.aws_s3_internal,
+                storage_type=types.StorageType.aws_s3_internal,
             ),
             Asset(
                 id=uuid.uuid4(),
@@ -351,7 +351,7 @@ def cell_morphology(brain_region, subject, mtype):
                 full_path="/morph.h5",
                 size=0,
                 is_directory=False,
-                storage_type=StorageType.aws_s3_internal,
+                storage_type=types.StorageType.aws_s3_internal,
             ),
         ],
     )
@@ -405,7 +405,7 @@ def emodel(brain_region, etype, species):
                 path="emodel_optimization_output.json",
                 full_path="/emodel_optimization_output.json",
                 is_directory=False,
-                storage_type=StorageType.aws_s3_internal,
+                storage_type=types.StorageType.aws_s3_internal,
             ),
             Asset(
                 id=uuid.uuid4(),
@@ -415,7 +415,7 @@ def emodel(brain_region, etype, species):
                 path="neuron_hoc.hoc",
                 full_path="/neuron_hoc.hoc",
                 is_directory=False,
-                storage_type=StorageType.aws_s3_internal,
+                storage_type=types.StorageType.aws_s3_internal,
             ),
         ],
     )

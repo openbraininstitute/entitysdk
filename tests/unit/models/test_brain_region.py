@@ -17,6 +17,16 @@ def json_data():
         "color_hex_triplet": "188064",
         "created_by": None,
         "updated_by": None,
+        "species": {
+            "id": "00000000-7d71-4591-bfee-2fc72e2dffdf",
+            "name": "test_name",
+            "taxonomy_id": "test_taxonomy_id",
+            "created_by": None,
+            "creation_date": "2025-05-09T13:32:18.034672Z",
+            "update_date": "2025-05-09T13:32:18.034672Z",
+            "updated_by": None,
+        },
+        "strain": None,
     }
 
 

@@ -4,8 +4,9 @@ from typing import Annotated
 
 from pydantic import Field
 
+from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.entity import Entity
-from entitysdk.models.memodel import BrainRegion, NestedMEModel
+from entitysdk.models.memodel import NestedMEModel
 from entitysdk.types import SingleNeuronSimulationStatus
 
 

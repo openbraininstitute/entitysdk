@@ -18,7 +18,7 @@
       "creation_date": "2025-01-01T00:00:04Z",
       "description": "my-description-{i}",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "my-subject-4",
+      "name": "boo-boo",
       "sex": "female",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
@@ -55,7 +55,7 @@
       "creation_date": "2025-01-01T00:00:03Z",
       "description": "my-description-{i}",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "my-subject-3",
+      "name": "foo-foo",
       "sex": "female",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
@@ -92,7 +92,7 @@
       "creation_date": "2025-01-01T00:00:02Z",
       "description": "my-description-{i}",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "my-subject-2",
+      "name": "foo_boo",
       "sex": "female",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
@@ -129,7 +129,7 @@
       "creation_date": "2025-01-01T00:00:01Z",
       "description": "my-description-{i}",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "my-subject-1",
+      "name": "boo",
       "sex": "female",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
@@ -166,7 +166,7 @@
       "creation_date": "2025-01-01T00:00:00Z",
       "description": "my-description-{i}",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "my-subject-0",
+      "name": "foo",
       "sex": "female",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",

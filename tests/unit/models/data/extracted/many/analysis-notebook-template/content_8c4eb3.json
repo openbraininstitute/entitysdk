@@ -3,20 +3,20 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
+        "pref_label": "Regular User With Project Id",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
       "description": "analysis-notebook-template-description",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Public u2/0",
+      "name": "Private u1/1",
       "scale": "cellular",
       "specifications": {
         "docker": {
@@ -52,7 +52,7 @@
         "family_name": null,
         "given_name": null,
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
+        "pref_label": "Regular User With Project Id",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
@@ -60,7 +60,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "contributions": [],
       "created_by": {
         "family_name": null,
@@ -73,7 +73,7 @@
       "creation_date": "2025-01-01T00:00:00Z",
       "description": "analysis-notebook-template-description",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Public u1/0",
+      "name": "Private u1/0",
       "scale": "cellular",
       "specifications": {
         "docker": {
