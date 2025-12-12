@@ -19,7 +19,7 @@ from entitysdk.models import (
     Species,
     Subject,
 )
-from entitysdk.models.brain_region import NestedBrainRegion
+from entitysdk.models.brain_region import BrainRegion
 
 DATA_DIR = Path(__file__).parent / "data"
 
@@ -46,7 +46,7 @@ def subject(species):
 
 @pytest.fixture
 def brain_region():
-    return NestedBrainRegion(
+    return BrainRegion(
         name="my-region",
         annotation_value=1,
         acronym="region",

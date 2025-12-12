@@ -2,7 +2,7 @@
 
 from datetime import datetime
 
-from entitysdk.models.brain_region import NestedBrainRegion
+from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.entity import Entity
 from entitysdk.models.license import License
 from entitysdk.models.subject import Subject
@@ -14,7 +14,7 @@ class ScientificArtifact(Entity):
     experiment_date: datetime | None = None
     contact_email: str | None = None
     subject: Subject | None = None
-    brain_region: NestedBrainRegion | None = None
+    brain_region: BrainRegion | None = None
     license: License | None = None
     published_in: str | None = None
     notice_text: str | None = None

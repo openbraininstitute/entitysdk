@@ -4,7 +4,7 @@ from typing import Annotated
 
 from pydantic import Field
 
-from entitysdk.models.brain_region import NestedBrainRegion
+from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.entity import Entity
 from entitysdk.models.memodel import NestedMEModel
 from entitysdk.types import SingleNeuronSimulationStatus
@@ -50,6 +50,6 @@ class SingleNeuronSimulation(Entity):
         ),
     ]
     brain_region: Annotated[
-        NestedBrainRegion,
+        BrainRegion,
         Field(description="The brain region where the model is used or applies."),
     ]

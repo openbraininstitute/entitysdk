@@ -5,7 +5,7 @@ from typing import Annotated
 from pydantic import Field
 
 from entitysdk.models.base import BaseModel
-from entitysdk.models.brain_region import NestedBrainRegion
+from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.contribution import Contribution
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
@@ -48,7 +48,7 @@ class SingleNeuronSynaptome(SingleNeuronSynaptomeBase, Entity):
     """Single neuron synaptome."""
 
     brain_region: Annotated[
-        NestedBrainRegion,
+        BrainRegion,
         Field(description="The brain region where the memodel is used or applies."),
     ]
     contributions: Annotated[

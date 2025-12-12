@@ -9,7 +9,7 @@ from entitysdk.models.taxonomy import Species, Strain
 from entitysdk.types import ID
 
 
-class NestedBrainRegion(Identifiable):
+class BrainRegion(Identifiable):
     """BrainRegion model."""
 
     name: Annotated[
@@ -37,14 +37,10 @@ class NestedBrainRegion(Identifiable):
     ]
     color_hex_triplet: Annotated[str, Field(description="Region's color hex triplet.")]
 
-
-class BrainRegion(NestedBrainRegion):
-    """BrainRegion model."""
-
     species: Annotated[
-        Species,
+        Species | None,
         Field(description="The species for which the emodel applies."),
-    ]
+    ] = None
 
     strain: Annotated[
         Strain | None,
