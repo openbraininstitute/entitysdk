@@ -1,0 +1,115 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym0",
+        "annotation_value": 0,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "region-0",
+        "parent_structure_id": null
+      },
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "my-description",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "license": null,
+      "measurements": [],
+      "mtypes": [],
+      "name": "name-0",
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "type": "experimental_bouton_density",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": {
+    "brain_region": [
+      {
+        "count": 1,
+        "id": "00000000-0000-4000-8000-000001234678",
+        "label": "region-0",
+        "type": "brain_region"
+      }
+    ],
+    "contribution": [],
+    "created_by": [
+      {
+        "count": 1,
+        "id": "00000000-0000-4000-8000-000001234678",
+        "label": "jd courcol",
+        "type": "person"
+      }
+    ],
+    "mtype": [],
+    "species": [
+      {
+        "count": 1,
+        "id": "00000000-0000-4000-8000-000001234678",
+        "label": "Test Species",
+        "type": "subject.species"
+      }
+    ],
+    "strain": [
+      {
+        "count": 1,
+        "id": "00000000-0000-4000-8000-000001234678",
+        "label": "Test Strain",
+        "type": "subject.strain"
+      }
+    ],
+    "updated_by": [
+      {
+        "count": 1,
+        "id": "00000000-0000-4000-8000-000001234678",
+        "label": "jd courcol",
+        "type": "person"
+      }
+    ]
+  },
+  "pagination": {
+    "page": 1,
+    "page_size": 100,
+    "total_items": 1
+  }
+}

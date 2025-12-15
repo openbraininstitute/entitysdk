@@ -10,7 +10,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "",
+      "description": "ion-channel-description",
       "gene": "Kcnma1",
       "id": "00000000-0000-4000-8000-000001234678",
       "label": "label-4",
@@ -39,7 +39,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "",
+      "description": "ion-channel-description",
       "gene": "Kcnma1",
       "id": "00000000-0000-4000-8000-000001234678",
       "label": "label-3",
@@ -68,7 +68,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "",
+      "description": "ion-channel-description",
       "gene": "Kcnma1",
       "id": "00000000-0000-4000-8000-000001234678",
       "label": "label-2",
@@ -97,7 +97,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "",
+      "description": "ion-channel-description",
       "gene": "Kcnma1",
       "id": "00000000-0000-4000-8000-000001234678",
       "label": "label-1",
@@ -126,7 +126,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "",
+      "description": "ion-channel-description",
       "gene": "Kcnma1",
       "id": "00000000-0000-4000-8000-000001234678",
       "label": "label-0",

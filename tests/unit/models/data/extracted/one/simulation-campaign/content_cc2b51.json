@@ -1,7 +1,7 @@
 {
   "assets": [],
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": true,
+  "authorized_public": false,
   "created_by": {
     "family_name": "courcol",
     "given_name": "jd",
@@ -11,10 +11,10 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "simulation-campaign-description",
+  "description": "description-0",
   "entity_id": "00000000-0000-4000-8000-000001234678",
   "id": "00000000-0000-4000-8000-000001234678",
-  "name": "simulation-campaign",
+  "name": "name-0",
   "scan_parameters": {
     "foo1": "bar2"
   },

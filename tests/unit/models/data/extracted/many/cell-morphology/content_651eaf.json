@@ -1,0 +1,86 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "cell_morphology_protocol": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test Morphology Description",
+      "experiment_date": null,
+      "has_segmented_spines": false,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "legacy_id": [
+        "Test Legacy ID"
+      ],
+      "license": null,
+      "location": {
+        "x": 10.0,
+        "y": 20.0,
+        "z": 30.0
+      },
+      "mtypes": [],
+      "name": "TestMorphologyName2",
+      "notice_text": null,
+      "published_in": null,
+      "repair_pipeline_state": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description-2",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "subject-2",
+        "sex": "male",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "TestSpecies1",
+          "taxonomy_id": "1"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Strain1",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "strain1"
+        },
+        "weight": 1.5
+      },
+      "type": "cell_morphology",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 1,
+    "total_items": 3
+  }
+}

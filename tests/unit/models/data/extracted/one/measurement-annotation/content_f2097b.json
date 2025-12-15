@@ -9,12 +9,12 @@
         {
           "name": "mean",
           "unit": "\u03bcm",
-          "value": 54.2
+          "value": 154.2
         },
         {
           "name": "median",
           "unit": "\u03bcm",
-          "value": 44.6
+          "value": 144.6
         }
       ],
       "pref_label": "pref_label_0",

@@ -8,7 +8,7 @@
         "family_name": null,
         "given_name": null,
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
+        "pref_label": "Regular User With Project Id",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
@@ -17,7 +17,7 @@
       "generation_type": "digital_reconstruction",
       "id": "00000000-0000-4000-8000-000001234678",
       "magnification": null,
-      "name": "Public u2/0",
+      "name": "Public u1/0",
       "protocol_design": "cell_patch",
       "protocol_document": "https://example.com/",
       "slicing_direction": "horizontal",
@@ -30,7 +30,7 @@
         "family_name": null,
         "given_name": null,
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
+        "pref_label": "Regular User With Project Id",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
