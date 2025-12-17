@@ -145,6 +145,7 @@ class AssetLabel(StrEnum):
     ion_channel_model_figure_summary_json = "ion_channel_model_figure_summary_json"
     ion_channel_model_thumbnail = "ion_channel_model_thumbnail"
     circuit_extraction_config = "circuit_extraction_config"
+    skeletonization_config = "skeletonization_config"
 
 
 class AssetStatus(StrEnum):
