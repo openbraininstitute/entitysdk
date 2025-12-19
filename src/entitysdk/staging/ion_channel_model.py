@@ -1,5 +1,4 @@
 """Staging functions for Single-Cell."""
-# See run_sonata_single_cell.py for running the output.
 
 import logging
 from pathlib import Path
@@ -7,9 +6,12 @@ from pathlib import Path
 from entitysdk import Client
 from entitysdk.downloaders.ion_channel_model import download_ion_channel_mechanism
 from entitysdk.models.ion_channel_model import IonChannelModel
+from entitysdk.staging.memodel import (
+    create_circuit_config,
+    create_node_sets_file,
+    create_nodes_file,
+)
 from entitysdk.utils.filesystem import create_dir
-from entitysdk.staging.memodel import create_nodes_file, create_circuit_config, create_node_sets_file
-
 
 L = logging.getLogger(__name__)
 
@@ -83,7 +85,8 @@ proc init(/* args: morphology_dir, morphology_name */) {{
 
 /*!
  * Assign section indices to the section voltage value.  This will be useful later for serializing
- * the sections into an array.  Note, that once the simulation begins, the voltage values will revert to actual data again.
+ * the sections into an array.  Note, that once the simulation begins,
+ * the voltage values will revert to actual data again.
  *
  * @param $o1 Import3d_GUI object
  */
@@ -93,7 +96,7 @@ proc indexSections() {{ local index
     }}
 }}
 
-proc load_morphology(/* morphology_dir, morphology_name */) {{localobj morph, import, sf, extension, commands, pyobj
+proc load_morphology(/* morphology_dir, morphology_name */) {{localobj morph, import, sf, extension
   strdef morph_path
   sprint(morph_path, "%s/%s", $s1, $s2)
   sf = new StringFunctions()
@@ -137,6 +140,7 @@ proc re_init_rng() {{localobj sf
 endtemplate single_comp_cell
 """
 
+
 # -- staging / creating sonata file functions -- #
 def create_simple_soma_morphology(output_file: Path, radius: float = 10.0):
     """Create a simple soma morphology file in ASC format.
@@ -145,15 +149,14 @@ def create_simple_soma_morphology(output_file: Path, radius: float = 10.0):
         output_file (Path): Path to the output morphology file.
         radius (float): Radius of the soma in microns.
     """
-
     lines = [
-        "(\"CellBody\"\n",
+        '("CellBody"\n',
         "  (Color Red)\n",
         "  (CellBody)\n",
         f"  ( {-radius} {-radius} 0 {radius} )\n",
-        f"  ( { radius} {-radius} 0 {radius} )\n",
-        f"  ( { radius} { radius} 0 {radius} )\n",
-        f"  ( {-radius} { radius} 0 {radius} )\n",
+        f"  ( {radius} {-radius} 0 {radius} )\n",
+        f"  ( {radius} {radius} 0 {radius} )\n",
+        f"  ( {-radius} {radius} 0 {radius} )\n",
         ")\n",
     ]
 
@@ -163,12 +166,12 @@ def create_simple_soma_morphology(output_file: Path, radius: float = 10.0):
 
 def find_conductance_name(entity):
     """Find the conductance parameter name in an IonChannelModel entity.
-    
+
     Args:
         entity (IonChannelModel): The ion channel model entity.
     """
     conductance_keywords = ("bar", "gmax", "_max", "max", "gKur")
-    
+
     for param in entity.neuron_block.range:
         for key in param:
             if any(keyword in key for keyword in conductance_keywords):
@@ -178,7 +181,7 @@ def find_conductance_name(entity):
 
 def create_hoc_file(client, ion_channel_model_data, subdir_mech, subdir_hoc) -> Path:
     """Create a hoc file for a single compartment cell with specified ion channel models.
-    
+
     Args:
         client (Client): Entity SDK client.
         ion_channel_model_data (dict): Dictionary with ion channel model IDs
@@ -202,15 +205,14 @@ def create_hoc_file(client, ion_channel_model_data, subdir_mech, subdir_hoc) -> 
     # write hoc file
     hoc_dst = subdir_hoc / "cell.hoc"
     with open(hoc_dst, "w") as hoc_file:
-        hoc_file.write(HOC_TEMPLATE.format(
-            insert_channel="\n    ".join([f"insert {mech}" for mech in bpo_mechs]),
-            biophys="\n    ".join(
-                [
-                    f"{param} = {value}"
-                    for param, value in bpo_parameters.items()
-                ]
-            ),
-        ))
+        hoc_file.write(
+            HOC_TEMPLATE.format(
+                insert_channel="\n    ".join([f"insert {mech}" for mech in bpo_mechs]),
+                biophys="\n    ".join(
+                    [f"{param} = {value}" for param, value in bpo_parameters.items()]
+                ),
+            )
+        )
 
     return hoc_dst
 
