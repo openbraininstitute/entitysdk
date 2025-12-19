@@ -1,23 +1,143 @@
-"""Staging functions for Ion Channel Models."""
+"""Staging functions for Single-Cell."""
+# See run_sonata_single_cell.py for running the output.
 
 import logging
 from pathlib import Path
 
-from bluepyemodel.export_emodel.export_emodel import _write_hoc_file
-import bluepyopt.ephys as ephys
-
 from entitysdk import Client
 from entitysdk.downloaders.ion_channel_model import download_ion_channel_mechanism
 from entitysdk.models.ion_channel_model import IonChannelModel
-from entitysdk.staging.memodel import create_nodes_file, create_circuit_config, create_node_sets_file
 from entitysdk.utils.filesystem import create_dir
+from entitysdk.staging.memodel import create_nodes_file, create_circuit_config, create_node_sets_file
 
 
 L = logging.getLogger(__name__)
 
 DEFAULT_CIRCUIT_CONFIG_FILENAME = "circuit_config.json"
 
+HOC_TEMPLATE = """
+{{load_file("stdrun.hoc")}}
+{{load_file("import3d.hoc")}}
 
+begintemplate single_comp_cell
+  public init, morphology, getCell, getCCell, setCCell, gid
+  public channel_seed, channel_seed_set
+  public clear
+  public soma
+  create soma[1]
+  public CellRef
+  objref this, CellRef
+
+  public all, somatic
+  objref all, somatic
+
+
+obfunc getCell(){{
+        return this
+}}
+
+obfunc getCCell(){{
+	return CellRef
+}}
+proc setCCell(){{
+       CellRef = $o1
+}}
+
+//-----------------------------------------------------------------------------------------------
+
+/*!
+ * When clearing the model, the circular reference between Cells and CCells must be broken so the
+ * entity watching reference counts can work.
+ */
+proc clear() {{ localobj nil
+    CellRef = nil
+}}
+
+
+proc init(/* args: morphology_dir, morphology_name */) {{
+  all = new SectionList()
+  somatic = new SectionList()
+
+  //For compatibility with BBP CCells
+  CellRef = this
+
+  forall delete_section()
+
+  gid = $1
+
+  if(numarg() >= 3) {{
+    load_morphology($s2, $s3)
+  }} else {{
+    load_morphology($s2, "soma.asc")
+  }}
+
+  indexSections()
+  insertChannel()
+  biophys()
+
+  // Initialize channel_seed_set to avoid accidents
+  channel_seed_set = 0
+  // Initialize random number generators
+  re_init_rng()
+}}
+
+/*!
+ * Assign section indices to the section voltage value.  This will be useful later for serializing
+ * the sections into an array.  Note, that once the simulation begins, the voltage values will revert to actual data again.
+ *
+ * @param $o1 Import3d_GUI object
+ */
+proc indexSections() {{ local index
+    access soma {{
+        v(0.0001) = 0
+    }}
+}}
+
+proc load_morphology(/* morphology_dir, morphology_name */) {{localobj morph, import, sf, extension, commands, pyobj
+  strdef morph_path
+  sprint(morph_path, "%s/%s", $s1, $s2)
+  sf = new StringFunctions()
+  extension = new String()
+  sscanf(morph_path, "%s", extension.s)
+
+  morph = new Import3d_Neurolucida3()
+  morph.quiet = 1
+  morph.input(morph_path)
+
+  import = new Import3d_GUI(morph, 0)
+  import.instantiate(this)
+}}
+
+proc insertChannel() {{
+  forsec this.somatic {{
+    {insert_channel}
+  }}
+}}
+
+proc biophys() {{
+  forsec CellRef.somatic {{
+    {biophys}
+  }}
+}}
+
+proc re_init_rng() {{localobj sf
+    strdef full_str, name
+
+    sf = new StringFunctions()
+
+    if(numarg() == 1) {{
+        // We received a third seed
+        channel_seed = $1
+        channel_seed_set = 1
+    }} else {{
+        channel_seed_set = 0
+    }}
+}}
+
+endtemplate single_comp_cell
+"""
+
+# -- staging / creating sonata file functions -- #
 def create_simple_soma_morphology(output_file: Path, radius: float = 10.0):
     """Create a simple soma morphology file in ASC format.
 
@@ -56,69 +176,41 @@ def find_conductance_name(entity):
     return None
 
 
-def create_hoc_file(client, ion_channel_model_data, morph_dst, subdir_mech, subdir_hoc) -> Path:
+def create_hoc_file(client, ion_channel_model_data, subdir_mech, subdir_hoc) -> Path:
     """Create a hoc file for a single compartment cell with specified ion channel models.
     
     Args:
         client (Client): Entity SDK client.
         ion_channel_model_data (dict): Dictionary with ion channel model IDs
             and conductance values.
-        morph_dst (Path): Path to the morphology file.
         subdir_mech (Path): Path to the mechanisms directory.
         subdir_hoc (Path): Path to the hoc directory.
     """
-    morph = ephys.morphologies.NrnFileMorphology(morph_dst)
-    somatic_loc = ephys.locations.NrnSeclistLocation('somatic', seclist_name='somatic')
-
-    # Copy mechanisms
-    icm_paths = []
     bpo_mechs = []
-    bpo_parameters = []
+    bpo_parameters = {}
     for icm_dict in ion_channel_model_data.values():
         # download mod files
         icm_entity = client.get_entity(entity_type=IonChannelModel, entity_id=icm_dict["id"])
-        mod_path = download_ion_channel_mechanism(client, icm_entity, subdir_mech)
-        icm_paths.append(mod_path)
+        download_ion_channel_mechanism(client, icm_entity, subdir_mech)
 
-        # create bpo mechanisms
-        bpo_mech = ephys.mechanisms.NrnMODMechanism(
-            name=icm_entity.name,
-            mod_path=mod_path,
-            suffix=icm_entity.nmodl_suffix,
-            locations=[somatic_loc],
-        )
-        bpo_mechs.append(bpo_mech)
-
+        # get data for hoc file
+        bpo_mechs.append(icm_entity.nmodl_suffix)
         if "conductance" in icm_dict:
             conductance_name = find_conductance_name(icm_entity)
-            # create parameters with conductance set
-            param = ephys.parameters.NrnSectionParameter(
-                name=conductance_name,
-                param_name=conductance_name,
-                value=icm_dict["conductance"],
-                locations=[somatic_loc],
-                frozen=True,
-            )
-            bpo_parameters.append(param)
+            bpo_parameters[conductance_name] = icm_dict["conductance"]
 
-    # Create hoc file
-    # create bpo cell model, then use bpem's _write_hoc_file.
-    class EmptyEModel:
-        parameters={}
-
-    empty_emodel = EmptyEModel()
-    cell = ephys.models.CellModel(
-        name='single_comp_cell',
-        morph=morph,
-        mechs=bpo_mechs,
-        params=bpo_parameters,
-    )
+    # write hoc file
     hoc_dst = subdir_hoc / "cell.hoc"
-    _write_hoc_file(
-        cell,
-        empty_emodel,
-        hoc_dst,
-    )
+    with open(hoc_dst, "w") as hoc_file:
+        hoc_file.write(HOC_TEMPLATE.format(
+            insert_channel="\n    ".join([f"insert {mech}" for mech in bpo_mechs]),
+            biophys="\n    ".join(
+                [
+                    f"{param} = {value}"
+                    for param, value in bpo_parameters.items()
+                ]
+            ),
+        ))
 
     return hoc_dst
 
@@ -161,7 +253,6 @@ def stage_sonata_from_config(
     hoc_dst = create_hoc_file(
         client,
         ion_channel_model_data,
-        morph_dst,
         subdirs["mechanisms"],
         subdirs["hocs"],
     )
