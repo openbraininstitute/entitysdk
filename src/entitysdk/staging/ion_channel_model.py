@@ -87,7 +87,8 @@ proc init(/* args: morphology_dir, morphology_name */) {{
 
 /*!
  * Assign section indices to the section voltage value.  This will be useful later for serializing
- * the sections into an array.  Note, that once the simulation begins, the voltage values will revert to actual data again.
+ * the sections into an array.  Note, that once the simulation begins, 
+ * the voltage values will revert to actual data again.
  *
  * @param $o1 Import3d_GUI object
  */
@@ -97,7 +98,7 @@ proc indexSections() {{ local index
     }}
 }}
 
-proc load_morphology(/* morphology_dir, morphology_name */) {{localobj morph, import, sf, extension, commands, pyobj
+proc load_morphology(/* morphology_dir, morphology_name */) {{localobj morph, import, sf, extension
   strdef morph_path
   sprint(morph_path, "%s/%s", $s1, $s2)
   sf = new StringFunctions()
