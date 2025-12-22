@@ -22,13 +22,14 @@ HOC_TEMPLATE = """
 {{load_file("import3d.hoc")}}
 
 begintemplate single_comp_cell
-  public init, morphology, getCell, getCCell, setCCell, gid
+  public init, morphology, geom_nseg_fixed, geom_nsec, getCell, getCCell, setCCell, gid
   public channel_seed, channel_seed_set
   public clear
-  public soma
-  create soma[1]
+  public soma, dend, apic, axon
+  create soma[1], dend[1], apic[1], axon[1]
+  public nSecAll, nSecSoma, nSecAxonalOrig
   public CellRef
-  objref this, CellRef
+  objref this, CellRef, segCounts
 
   public all, somatic
   objref all, somatic
@@ -73,6 +74,7 @@ proc init(/* args: morphology_dir, morphology_name */) {{
     load_morphology($s2, "soma.asc")
   }}
 
+  geom_nseg()
   indexSections()
   insertChannel()
   biophys()
@@ -85,8 +87,7 @@ proc init(/* args: morphology_dir, morphology_name */) {{
 
 /*!
  * Assign section indices to the section voltage value.  This will be useful later for serializing
- * the sections into an array.  Note, that once the simulation begins,
- * the voltage values will revert to actual data again.
+ * the sections into an array.  Note, that once the simulation begins, the voltage values will revert to actual data again.
  *
  * @param $o1 Import3d_GUI object
  */
@@ -96,7 +97,7 @@ proc indexSections() {{ local index
     }}
 }}
 
-proc load_morphology(/* morphology_dir, morphology_name */) {{localobj morph, import, sf, extension
+proc load_morphology(/* morphology_dir, morphology_name */) {{localobj morph, import, sf, extension, commands, pyobj
   strdef morph_path
   sprint(morph_path, "%s/%s", $s1, $s2)
   sf = new StringFunctions()
@@ -135,6 +136,46 @@ proc re_init_rng() {{localobj sf
     }} else {{
         channel_seed_set = 0
     }}
+}}
+
+/*
+ * Iterate over the section and compute how many segments should be allocate to
+ * each.
+ */
+proc geom_nseg_fixed(/* chunkSize */) {{ local secIndex, chunkSize
+  chunkSize = $1
+  soma area(.5) // make sure diam reflects 3d points
+  secIndex = 0
+  forsec all {{
+    nseg = 1 + 2*int(L/chunkSize)
+    segCounts.x[secIndex] = nseg
+    secIndex += 1
+  }}
+}}
+
+proc geom_nseg() {{
+  this.geom_nsec() //To count all sections
+  //TODO: geom_nseg_fixed depends on segCounts which is calculated by
+  //  geom_nsec.  Can this be collapsed?
+  this.geom_nseg_fixed(40)
+  this.geom_nsec() //To count all sections
+}}
+
+/*
+ * Count up the number of sections
+ */
+proc geom_nsec() {{ local nSec
+  nSecAll = 1
+  nSecSoma = 1
+  nSecAxonalOrig = 0
+
+  segCounts = new Vector()
+  segCounts.resize(nSecAll)
+  nSec = 0
+  forsec all {{
+    segCounts.x[nSec] = nseg
+    nSec += 1
+  }}
 }}
 
 endtemplate single_comp_cell
