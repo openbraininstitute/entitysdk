@@ -1,10 +1,9 @@
-
 import uuid
 
-from entitysdk import models, types
 import entitysdk.staging.ion_channel_model as icm
-from entitysdk.types import AssetLabel, ContentType, ValidationStatus
+from entitysdk import models, types
 from entitysdk.models.ion_channel_model import IonChannelModel, NeuronBlock
+from entitysdk.types import AssetLabel, ContentType
 
 
 class DummyNeuronBlock:
@@ -127,42 +126,21 @@ def test_find_conductance_name():
     entity2 = DummyIonChannelModelEntity([{"decay": "ms"}, {"gamma": None}])
     assert icm.find_conductance_name(entity2) is None
 
-    entity3 = DummyIonChannelModelEntity([{
-            "e": None
-        },
-        {
-            "gmax": "S/cm2"
-        },
-        {
-            "gion": None
-        },
-        {
-            "il": None
-        }])
+    entity3 = DummyIonChannelModelEntity(
+        [{"e": None}, {"gmax": "S/cm2"}, {"gion": None}, {"il": None}]
+    )
     assert icm.find_conductance_name(entity3) == "gmax"
 
-    entity4 = DummyIonChannelModelEntity([
-       {
-            "gKur": "S/cm2"
-        },
-        {
-            "ik": "mA/cm2"
-        },
-        {
-            "ino": None
-        },])
+    entity4 = DummyIonChannelModelEntity(
+        [
+            {"gKur": "S/cm2"},
+            {"ik": "mA/cm2"},
+            {"ino": None},
+        ]
+    )
     assert icm.find_conductance_name(entity4) == "gKur"
 
-    entity5 = DummyIonChannelModelEntity([
-       {
-            "gh_max": "S/cm2"
-        },
-        {
-            "g_h": None
-        },
-        {
-            "i_rec": None
-        }])
+    entity5 = DummyIonChannelModelEntity([{"gh_max": "S/cm2"}, {"g_h": None}, {"i_rec": None}])
     assert icm.find_conductance_name(entity5) == "gh_max"
 
 
@@ -173,7 +151,9 @@ def test_create_hoc_file(client, tmp_path, httpx_mock, api_url, request_headers)
             "conductance": 0.011,
         },
     }
-    create_http_ic_mock(ion_channel_model_data["Ca_LVAst"]["id"], "Ca_LVAst", httpx_mock, api_url, request_headers)
+    create_http_ic_mock(
+        ion_channel_model_data["Ca_LVAst"]["id"], "Ca_LVAst", httpx_mock, api_url, request_headers
+    )
 
     (tmp_path / "hocs").mkdir(parents=True, exist_ok=True)
     (tmp_path / "mechanisms").mkdir(parents=True, exist_ok=True)
@@ -198,7 +178,9 @@ def test_stage_sonata_from_config(client, tmp_path, httpx_mock, api_url, request
             "conductance": 0.011,
         },
     }
-    create_http_ic_mock(ion_channel_model_data["Ca_LVAst"]["id"], "Ca_LVAst", httpx_mock, api_url, request_headers)
+    create_http_ic_mock(
+        ion_channel_model_data["Ca_LVAst"]["id"], "Ca_LVAst", httpx_mock, api_url, request_headers
+    )
 
     config_path = icm.stage_sonata_from_config(
         client=client,
