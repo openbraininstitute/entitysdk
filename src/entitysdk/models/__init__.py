@@ -42,6 +42,7 @@ from entitysdk.models.ion_channel_modeling_execution import IonChannelModelingEx
 from entitysdk.models.ion_channel_recording import IonChannelRecording
 from entitysdk.models.license import License
 from entitysdk.models.measurement_annotation import MeasurementAnnotation
+from entitysdk.models.measurement_label import MeasurementLabel
 from entitysdk.models.memodel import MEModel
 from entitysdk.models.memodelcalibrationresult import MEModelCalibrationResult
 from entitysdk.models.mtype import MTypeClass
@@ -101,6 +102,7 @@ __all__ = [
     "IonChannelRecording",
     "License",
     "MeasurementAnnotation",
+    "MeasurementLabel",
     "MEModel",
     "MEModelCalibrationResult",
     "MTypeClass",
