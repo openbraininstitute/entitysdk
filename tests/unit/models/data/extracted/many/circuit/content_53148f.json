@@ -26,7 +26,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "circuit-description-2",
+      "description": "circuit-description-0",
       "experiment_date": null,
       "has_electrical_cell_models": true,
       "has_morphologies": true,
@@ -41,14 +41,14 @@
         "name": "Test License",
         "update_date": "2025-01-01T00:00:00Z"
       },
-      "name": "circuit-2",
+      "name": "circuit-0",
       "notice_text": null,
-      "number_connections": 201,
-      "number_neurons": 21,
-      "number_synapses": 2001,
+      "number_connections": 1,
+      "number_neurons": 1,
+      "number_synapses": 1,
       "published_in": null,
       "root_circuit_id": "00000000-0000-4000-8000-000001234678",
-      "scale": "whole_brain",
+      "scale": "single",
       "subject": {
         "age_max": null,
         "age_min": null,

@@ -31,14 +31,14 @@
       "is_stochastic": false,
       "is_temperature_dependent": false,
       "license": null,
-      "name": "6",
+      "name": "2",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "6",
+      "nmodl_suffix": "2",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -78,7 +78,7 @@
   ],
   "facets": null,
   "pagination": {
-    "page": 23,
+    "page": 27,
     "page_size": 1,
     "total_items": 29
   }

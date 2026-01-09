@@ -7,7 +7,7 @@
     "family_name": null,
     "given_name": null,
     "id": "00000000-0000-4000-8000-000001234678",
-    "pref_label": "Regular User With Different Project Id",
+    "pref_label": "Regular User With Project Id",
     "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
@@ -15,7 +15,7 @@
   "description": "my-ion-channel-modeling-config",
   "id": "00000000-0000-4000-8000-000001234678",
   "ion_channel_modeling_campaign_id": "00000000-0000-4000-8000-000001234678",
-  "name": "Private u2/0",
+  "name": "ion-channel-modeling-config",
   "scan_parameters": {
     "foo": "bar"
   },
@@ -25,7 +25,7 @@
     "family_name": null,
     "given_name": null,
     "id": "00000000-0000-4000-8000-000001234678",
-    "pref_label": "Regular User With Different Project Id",
+    "pref_label": "Regular User With Project Id",
     "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }

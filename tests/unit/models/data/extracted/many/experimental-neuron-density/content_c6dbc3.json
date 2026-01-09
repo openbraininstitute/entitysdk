@@ -23,7 +23,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "description-2",
+      "description": "my-description",
       "etypes": [],
       "id": "00000000-0000-4000-8000-000001234678",
       "license": {
@@ -36,20 +36,20 @@
       },
       "measurements": [
         {
-          "id": 5,
+          "id": 9,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 6,
+          "id": 10,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
         }
       ],
       "mtypes": [],
-      "name": "name-2",
+      "name": "Private u1/1",
       "subject": {
         "age_max": null,
         "age_min": null,
@@ -106,7 +106,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "description-1",
+      "description": "my-description",
       "etypes": [],
       "id": "00000000-0000-4000-8000-000001234678",
       "license": {
@@ -119,20 +119,20 @@
       },
       "measurements": [
         {
-          "id": 3,
+          "id": 7,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 4,
+          "id": 8,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
         }
       ],
       "mtypes": [],
-      "name": "name-1",
+      "name": "Private u1/0",
       "subject": {
         "age_max": null,
         "age_min": null,
@@ -170,7 +170,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 2,
-    "total_items": 3
+    "page_size": 100,
+    "total_items": 2
   }
 }

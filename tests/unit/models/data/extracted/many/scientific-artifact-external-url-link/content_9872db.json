@@ -78,7 +78,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 100,
+    "page_size": 2,
     "total_items": 2
   }
 }

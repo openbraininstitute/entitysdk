@@ -24,21 +24,21 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Test ICM Description",
+      "description": "Test description",
       "experiment_date": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "is_ljp_corrected": false,
       "is_stochastic": false,
       "is_temperature_dependent": false,
       "license": null,
-      "name": "28",
+      "name": "Private u1/1",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "28",
+      "nmodl_suffix": "test",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -99,21 +99,21 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Test ICM Description",
+      "description": "Test description",
       "experiment_date": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "is_ljp_corrected": false,
       "is_stochastic": false,
       "is_temperature_dependent": false,
       "license": null,
-      "name": "27",
+      "name": "Private u1/0",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "27",
+      "nmodl_suffix": "test",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -154,7 +154,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 2,
-    "total_items": 29
+    "page_size": 100,
+    "total_items": 2
   }
 }

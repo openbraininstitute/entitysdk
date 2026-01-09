@@ -27,15 +27,15 @@
       "id": "00000000-0000-4000-8000-000001234678",
       "me_model": {
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "description",
+        "description": "my-description-1",
         "etypes": [],
         "id": "00000000-0000-4000-8000-000001234678",
         "mtypes": [],
-        "name": "name",
+        "name": "me-model-1",
         "update_date": "2025-01-01T00:00:00Z",
         "validation_status": "created"
       },
-      "name": "Private u1/1",
+      "name": "synaptome-6",
       "seed": 1,
       "type": "single_neuron_synaptome",
       "update_date": "2025-01-01T00:00:00Z",
@@ -75,15 +75,15 @@
       "id": "00000000-0000-4000-8000-000001234678",
       "me_model": {
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "description",
+        "description": "my-description",
         "etypes": [],
         "id": "00000000-0000-4000-8000-000001234678",
         "mtypes": [],
-        "name": "name",
+        "name": "my-me-model",
         "update_date": "2025-01-01T00:00:00Z",
         "validation_status": "created"
       },
-      "name": "Private u1/0",
+      "name": "synaptome-5",
       "seed": 1,
       "type": "single_neuron_synaptome",
       "update_date": "2025-01-01T00:00:00Z",
@@ -99,7 +99,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -123,15 +123,15 @@
       "id": "00000000-0000-4000-8000-000001234678",
       "me_model": {
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "description",
+        "description": "my-description-1",
         "etypes": [],
         "id": "00000000-0000-4000-8000-000001234678",
         "mtypes": [],
-        "name": "name",
+        "name": "me-model-1",
         "update_date": "2025-01-01T00:00:00Z",
         "validation_status": "created"
       },
-      "name": "Public u1/0",
+      "name": "synaptome-4",
       "seed": 1,
       "type": "single_neuron_synaptome",
       "update_date": "2025-01-01T00:00:00Z",
@@ -148,7 +148,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 100,
-    "total_items": 3
+    "page_size": 3,
+    "total_items": 7
   }
 }

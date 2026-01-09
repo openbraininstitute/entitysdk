@@ -1,7 +1,7 @@
 {
   "data": [
     {
-      "DOI": "doi-0",
+      "DOI": "doi-2",
       "abstract": "my-abstract",
       "authors": [
         {
@@ -23,8 +23,8 @@
       },
       "creation_date": "2025-01-01T00:00:00Z",
       "id": "00000000-0000-4000-8000-000001234678",
-      "publication_year": 2020,
-      "title": "t0",
+      "publication_year": 2022,
+      "title": "t2",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
@@ -71,7 +71,7 @@
       }
     },
     {
-      "DOI": "doi-2",
+      "DOI": "doi-0",
       "abstract": "my-abstract",
       "authors": [
         {
@@ -93,8 +93,8 @@
       },
       "creation_date": "2025-01-01T00:00:00Z",
       "id": "00000000-0000-4000-8000-000001234678",
-      "publication_year": 2022,
-      "title": "t2",
+      "publication_year": 2020,
+      "title": "t0",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",

@@ -1,0 +1,48 @@
+{
+  "assets": [],
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+  "authorized_public": false,
+  "brain_region": {
+    "acronym": "acronym64",
+    "annotation_value": 64,
+    "color_hex_triplet": "FF0000",
+    "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "name": "RedRegion",
+    "parent_structure_id": null
+  },
+  "contributions": [],
+  "created_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "Regular User With Different Project Id",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
+    "type": "person"
+  },
+  "creation_date": "2025-01-01T00:00:00Z",
+  "description": "my-description",
+  "id": "00000000-0000-4000-8000-000001234678",
+  "me_model": {
+    "creation_date": "2025-01-01T00:00:00Z",
+    "description": "description",
+    "etypes": [],
+    "id": "00000000-0000-4000-8000-000001234678",
+    "mtypes": [],
+    "name": "name",
+    "update_date": "2025-01-01T00:00:00Z",
+    "validation_status": "created"
+  },
+  "name": "my-synaptome",
+  "seed": 1,
+  "type": "single_neuron_synaptome",
+  "update_date": "2025-01-01T00:00:00Z",
+  "updated_by": {
+    "family_name": null,
+    "given_name": null,
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "Regular User With Different Project Id",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
+    "type": "person"
+  }
+}

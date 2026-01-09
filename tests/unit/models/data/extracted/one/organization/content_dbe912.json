@@ -1,5 +1,5 @@
 {
-  "alternative_name": "bar",
+  "alternative_name": "test organization alternative name",
   "created_by": {
     "family_name": null,
     "given_name": null,
@@ -10,7 +10,7 @@
   },
   "creation_date": "2025-01-01T00:00:00Z",
   "id": "00000000-0000-4000-8000-000001234678",
-  "pref_label": "foo",
+  "pref_label": "test_organization label",
   "type": "organization",
   "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
