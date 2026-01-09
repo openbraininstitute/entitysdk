@@ -10,4 +10,4 @@ class Simulation(Entity):
     simulation_campaign_id: ID
     entity_id: ID
     scan_parameters: dict
-    number_neurons: int | None = None
+    number_neurons: int | None = None # Make non optional after 2026.1.3 prod deployment
