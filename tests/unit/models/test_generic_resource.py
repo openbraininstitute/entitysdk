@@ -24,6 +24,7 @@ MISSING_ROUTES = {
     "external-url",
     "scientific-artifact-external-url-link",
     "validation",
+    "measurement-label",
 }
 
 # resources that don't provide an update endpoint
