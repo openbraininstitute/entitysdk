@@ -55,7 +55,8 @@
       "entity_id": "de90ac58-bca9-4bb8-8cd4-9c3efce6ba64",
       "scan_parameters": {
         "foo": "bar"
-      }
+      },
+      "number_neurons": 1
     },
     {
       "assets": [],
@@ -75,7 +76,8 @@
       "entity_id": "de90ac58-bca9-4bb8-8cd4-9c3efce6ba64",
       "scan_parameters": {
         "foo": "bar"
-      }
+      },
+      "number_neurons": 1
     },
     {
       "assets": [],
@@ -95,7 +97,8 @@
       "entity_id": "de90ac58-bca9-4bb8-8cd4-9c3efce6ba64",
       "scan_parameters": {
         "foo": "bar"
-      }
+      },
+      "number_neurons": 1
     },
     {
       "assets": [],
@@ -115,7 +118,8 @@
       "entity_id": "de90ac58-bca9-4bb8-8cd4-9c3efce6ba64",
       "scan_parameters": {
         "foo": "bar"
-      }
+      },
+      "number_neurons": 1
     },
     {
       "assets": [],
@@ -135,7 +139,8 @@
       "entity_id": "de90ac58-bca9-4bb8-8cd4-9c3efce6ba64",
       "scan_parameters": {
         "foo": "bar"
-      }
+      },
+      "number_neurons": 1
     }
   ]
 }
