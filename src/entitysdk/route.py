@@ -39,6 +39,7 @@ _ROUTES = {
     "IonChannelRecording": "ion-channel-recording",
     "License": "license",
     "MeasurementAnnotation": "measurement-annotation",
+    "MeasurementLabel": "measurement-label",
     "MEModel": "memodel",
     "MEModelCalibrationResult": "memodel-calibration-result",
     "MTypeClassification": "mtype-classification",
