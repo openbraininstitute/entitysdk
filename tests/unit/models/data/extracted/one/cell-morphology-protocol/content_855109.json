@@ -11,11 +11,11 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "Description Test",
+  "description": "description-0",
   "generation_type": "digital_reconstruction",
   "id": "00000000-0000-4000-8000-000001234678",
   "magnification": null,
-  "name": "Private u1/1",
+  "name": "name-0",
   "protocol_design": "cell_patch",
   "protocol_document": "https://example.com/",
   "slicing_direction": "horizontal",

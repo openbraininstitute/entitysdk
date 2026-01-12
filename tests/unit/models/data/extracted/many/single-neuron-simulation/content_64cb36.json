@@ -22,22 +22,22 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "my-description",
+      "description": "original-description",
       "id": "00000000-0000-4000-8000-000001234678",
       "injection_location": [
         "soma[0]"
       ],
       "me_model": {
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "my-description-1",
+        "description": "description",
         "etypes": [],
         "id": "00000000-0000-4000-8000-000001234678",
         "mtypes": [],
-        "name": "me-model-1",
+        "name": "name",
         "update_date": "2025-01-01T00:00:00Z",
         "validation_status": "created"
       },
-      "name": "sim-6",
+      "name": "Private u1/1",
       "recording_location": [
         "soma[0]_0.5"
       ],
@@ -76,22 +76,22 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "my-description",
+      "description": "original-description",
       "id": "00000000-0000-4000-8000-000001234678",
       "injection_location": [
         "soma[0]"
       ],
       "me_model": {
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "my-description",
+        "description": "description",
         "etypes": [],
         "id": "00000000-0000-4000-8000-000001234678",
         "mtypes": [],
-        "name": "my-me-model",
+        "name": "name",
         "update_date": "2025-01-01T00:00:00Z",
         "validation_status": "created"
       },
-      "name": "sim-5",
+      "name": "Private u1/0",
       "recording_location": [
         "soma[0]_0.5"
       ],
@@ -111,7 +111,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -130,22 +130,22 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "my-description",
+      "description": "original-description",
       "id": "00000000-0000-4000-8000-000001234678",
       "injection_location": [
         "soma[0]"
       ],
       "me_model": {
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "my-description-1",
+        "description": "description",
         "etypes": [],
         "id": "00000000-0000-4000-8000-000001234678",
         "mtypes": [],
-        "name": "me-model-1",
+        "name": "name",
         "update_date": "2025-01-01T00:00:00Z",
         "validation_status": "created"
       },
-      "name": "sim-4",
+      "name": "Public u1/0",
       "recording_location": [
         "soma[0]_0.5"
       ],
@@ -166,7 +166,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 3,
-    "total_items": 7
+    "page_size": 100,
+    "total_items": 3
   }
 }

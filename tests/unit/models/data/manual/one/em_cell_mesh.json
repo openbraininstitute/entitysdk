@@ -72,5 +72,35 @@
     "type": "em_dense_reconstruction_dataset",
     "assets": [],
     "authorized_public": false
+  },
+  "mtypes": [
+    {
+      "alt_label": "m0",
+      "creation_date": "2025-01-01T00:00:00Z",
+      "definition": "d",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "pref_label": "m0",
+      "update_date": "2025-01-01T00:00:00Z"
+    }
+  ],
+  "measurement_annotation": {
+    "creation_date": "2025-01-01T00:00:00Z",
+    "entity_id": "00000000-0000-4000-8000-000001234678",
+    "entity_type": "em_cell_mesh",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "measurement_kinds": [
+      {
+        "measurement_items": [
+          {
+            "name": "raw",
+            "unit": "\u03bcm",
+            "value": 154.2
+          }
+        ],
+        "pref_label": "average_edge_length",
+        "structural_domain": "not_applicable"
+      }
+    ],
+    "update_date": "2025-01-01T00:00:00Z"
   }
 }

@@ -159,6 +159,7 @@ def simulation(circuit):
         entity_id=circuit.id,
         simulation_campaign_id=uuid.uuid4(),
         scan_parameters={},
+        number_neurons=1,
         assets=[
             Asset(
                 id=uuid.uuid4(),

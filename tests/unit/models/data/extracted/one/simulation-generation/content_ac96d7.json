@@ -14,9 +14,9 @@
   "generated": [
     {
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "id": "00000000-0000-4000-8000-000001234678",
-      "type": "emodel"
+      "type": "cell_morphology"
     }
   ],
   "id": "00000000-0000-4000-8000-000001234678",
@@ -34,7 +34,7 @@
   "used": [
     {
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "id": "00000000-0000-4000-8000-000001234678",
       "type": "cell_morphology"
     }

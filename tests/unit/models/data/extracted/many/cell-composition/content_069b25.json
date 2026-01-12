@@ -6,9 +6,9 @@
       "authorized_public": false,
       "contributions": [],
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "my-description-1",
+      "description": "my-composition",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "my-composition-1",
+      "name": "my-composition",
       "type": "cell_composition",
       "update_date": "2025-01-01T00:00:00Z"
     }

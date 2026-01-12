@@ -1436,6 +1436,7 @@ class NestedSimulationRead(BaseModel):
     simulation_campaign_id: Annotated[UUID, Field(title="Simulation Campaign Id")]
     entity_id: Annotated[UUID, Field(title="Entity Id")]
     scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
+    number_neurons: Annotated[int, Field(title="Number Neurons")]
 
 
 class NestedSkeletonizationConfigRead(BaseModel):
@@ -1747,6 +1748,7 @@ class SimulationCreate(BaseModel):
     simulation_campaign_id: Annotated[UUID, Field(title="Simulation Campaign Id")]
     entity_id: Annotated[UUID, Field(title="Entity Id")]
     scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
+    number_neurons: Annotated[int, Field(title="Number Neurons")]
 
 
 class SimulationExecutionStatus(StrEnum):
@@ -1843,6 +1845,9 @@ class SimulationUserUpdate(BaseModel):
     scan_parameters: Annotated[
         dict[str, Any] | Literal["<NOT_SET>"] | None, Field(title="Scan Parameters")
     ] = "<NOT_SET>"
+    number_neurons: Annotated[int | Literal["<NOT_SET>"] | None, Field(title="Number Neurons")] = (
+        "<NOT_SET>"
+    )
 
 
 class SingleNeuronSimulationStatus(StrEnum):
@@ -2116,6 +2121,7 @@ class StructuralDomain(StrEnum):
     axon = "axon"
     soma = "soma"
     neuron_morphology = "neuron_morphology"
+    not_applicable = "not_applicable"
 
 
 class SubjectCreate(BaseModel):
@@ -3617,6 +3623,7 @@ class SimulationRead(BaseModel):
     simulation_campaign_id: Annotated[UUID, Field(title="Simulation Campaign Id")]
     entity_id: Annotated[UUID, Field(title="Entity Id")]
     scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
+    number_neurons: Annotated[int, Field(title="Number Neurons")]
 
 
 class SimulationResultRead(BaseModel):

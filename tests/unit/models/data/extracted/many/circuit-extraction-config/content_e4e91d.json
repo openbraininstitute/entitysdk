@@ -15,9 +15,9 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "description-2",
+      "description": "extraction-config-description",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "name-2",
+      "name": "config-2",
       "scan_parameters": {
         "foo": "bar"
       },
@@ -47,9 +47,9 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "description-1",
+      "description": "extraction-config-description",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "name-1",
+      "name": "config-1",
       "scan_parameters": {
         "foo": "bar"
       },
@@ -68,7 +68,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 2,
-    "total_items": 3
+    "page_size": 100,
+    "total_items": 2
   }
 }
