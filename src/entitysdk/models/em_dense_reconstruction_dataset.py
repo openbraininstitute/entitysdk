@@ -108,32 +108,32 @@ class EMDenseReconstructionDataset(ScientificArtifact):
         ),
     ]
     release_url: Annotated[
-        str,
+        str | None,
         Field(
             description="URL to the dataset release.",
         ),
-    ]
+    ] = None
     cave_client_url: Annotated[
-        str,
+        str | None,
         Field(
             description="URL to the CAVE client for visualization.",
         ),
-    ]
+    ] = None
     cave_datastack: Annotated[
-        str,
+        str | None,
         Field(
             description="CAVE datastack identifier.",
         ),
-    ]
+    ] = None
     precomputed_mesh_url: Annotated[
-        str,
+        str | None,
         Field(
             description="URL to precomputed meshes.",
         ),
-    ]
+    ] = None
     cell_identifying_property: Annotated[
-        str,
+        str | None,
         Field(
             description="Property used to identify cells in the dataset.",
         ),
-    ]
+    ] = None
