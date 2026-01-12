@@ -541,6 +541,18 @@ class EMCellMeshUserUpdate(BaseModel):
     ] = "<NOT_SET>"
 
 
+class ReleaseUrl(RootModel[AnyUrl]):
+    root: Annotated[AnyUrl, Field(title="Release Url")]
+
+
+class CaveClientUrl(RootModel[AnyUrl]):
+    root: Annotated[AnyUrl, Field(title="Cave Client Url")]
+
+
+class PrecomputedMeshUrl(RootModel[AnyUrl]):
+    root: Annotated[AnyUrl, Field(title="Precomputed Mesh Url")]
+
+
 class EModelCreate(BaseModel):
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -2881,11 +2893,15 @@ class EMDenseReconstructionDatasetCreate(BaseModel):
     volume_resolution_x_nm: Annotated[float, Field(title="Volume Resolution X Nm")]
     volume_resolution_y_nm: Annotated[float, Field(title="Volume Resolution Y Nm")]
     volume_resolution_z_nm: Annotated[float, Field(title="Volume Resolution Z Nm")]
-    release_url: Annotated[AnyUrl, Field(title="Release Url")]
-    cave_client_url: Annotated[AnyUrl, Field(title="Cave Client Url")]
-    cave_datastack: Annotated[str, Field(title="Cave Datastack")]
-    precomputed_mesh_url: Annotated[AnyUrl, Field(title="Precomputed Mesh Url")]
-    cell_identifying_property: Annotated[str, Field(title="Cell Identifying Property")]
+    release_url: Annotated[ReleaseUrl | None, Field(title="Release Url")] = None
+    cave_client_url: Annotated[CaveClientUrl | None, Field(title="Cave Client Url")] = None
+    cave_datastack: Annotated[str | None, Field(title="Cave Datastack")] = None
+    precomputed_mesh_url: Annotated[
+        PrecomputedMeshUrl | None, Field(title="Precomputed Mesh Url")
+    ] = None
+    cell_identifying_property: Annotated[str | None, Field(title="Cell Identifying Property")] = (
+        None
+    )
 
 
 class ETypeClassificationRead(BaseModel):
@@ -4121,11 +4137,15 @@ class EMDenseReconstructionDatasetRead(BaseModel):
     volume_resolution_x_nm: Annotated[float, Field(title="Volume Resolution X Nm")]
     volume_resolution_y_nm: Annotated[float, Field(title="Volume Resolution Y Nm")]
     volume_resolution_z_nm: Annotated[float, Field(title="Volume Resolution Z Nm")]
-    release_url: Annotated[AnyUrl, Field(title="Release Url")]
-    cave_client_url: Annotated[AnyUrl, Field(title="Cave Client Url")]
-    cave_datastack: Annotated[str, Field(title="Cave Datastack")]
-    precomputed_mesh_url: Annotated[AnyUrl, Field(title="Precomputed Mesh Url")]
-    cell_identifying_property: Annotated[str, Field(title="Cell Identifying Property")]
+    release_url: Annotated[ReleaseUrl | None, Field(title="Release Url")] = None
+    cave_client_url: Annotated[CaveClientUrl | None, Field(title="Cave Client Url")] = None
+    cave_datastack: Annotated[str | None, Field(title="Cave Datastack")] = None
+    precomputed_mesh_url: Annotated[
+        PrecomputedMeshUrl | None, Field(title="Precomputed Mesh Url")
+    ] = None
+    cell_identifying_property: Annotated[str | None, Field(title="Cell Identifying Property")] = (
+        None
+    )
 
 
 class EModelRead(BaseModel):
