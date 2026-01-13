@@ -237,7 +237,6 @@ def upload_asset_file(
     http_client: httpx.Client | None = None,
 ) -> Asset:
     """Upload asset to an existing entity's endpoint from a file path."""
-
     with open(asset_path, "rb") as file_content:
         return upload_asset_content(
             url=url,
