@@ -31,7 +31,7 @@ class Settings(BaseSettings):
             alias="ENTITYSDK_PRODUCTION_API_URL",
             description="Default production entitycore API url.",
         ),
-    ] = "https://www.cell-a.openbraininstitute.org/api/entitycore"
+    ] = "https://cell-a.openbraininstitute.org/api/entitycore"
 
     connect_timeout: Annotated[
         float,
