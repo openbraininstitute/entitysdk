@@ -238,8 +238,6 @@ def upload_asset_file(
 ) -> Asset:
     """Upload asset to an existing entity's endpoint from a file path."""
 
-    filesize = asset_path.stat().st_size
-
     with open(asset_path, "rb") as file_content:
         return upload_asset_content(
             url=url,
