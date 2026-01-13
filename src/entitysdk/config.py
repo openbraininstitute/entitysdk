@@ -23,7 +23,7 @@ class Settings(BaseSettings):
             alias="ENTITYSDK_STAGING_API_URL",
             description="Default staging entitycore API url.",
         ),
-    ] = "https://staging.openbraininstitute.org/api/entitycore"
+    ] = "https://staging.cell-a.openbraininstitute.org/api/entitycore"
 
     production_api_url: Annotated[
         str,
@@ -31,7 +31,7 @@ class Settings(BaseSettings):
             alias="ENTITYSDK_PRODUCTION_API_URL",
             description="Default production entitycore API url.",
         ),
-    ] = "https://www.openbraininstitute.org/api/entitycore"
+    ] = "https://www.cell-a.openbraininstitute.org/api/entitycore"
 
     connect_timeout: Annotated[
         float,
