@@ -3,7 +3,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -23,7 +23,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "d10",
+      "description": "my-description",
       "id": "00000000-0000-4000-8000-000001234678",
       "license": {
         "creation_date": "2025-01-01T00:00:00Z",
@@ -35,51 +35,51 @@
       },
       "measurements": [
         {
-          "id": 21,
+          "id": 1,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 22,
+          "id": 2,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
         }
       ],
-      "name": "s10",
+      "name": "Public u1/0",
       "post_mtype": {
-        "alt_label": "post-m2",
+        "alt_label": "mtype-alt-label",
         "creation_date": "2025-01-01T00:00:00Z",
-        "definition": "",
+        "definition": "mtype-definition",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "post-m2",
+        "pref_label": "mtype-pref-label",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "post_region": {
-        "acronym": "acronym2",
-        "annotation_value": 2,
+        "acronym": "acronym64",
+        "annotation_value": 64,
         "color_hex_triplet": "FF0000",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "post-r2",
+        "name": "RedRegion",
         "parent_structure_id": null
       },
       "pre_mtype": {
-        "alt_label": "pre-m1",
+        "alt_label": "mtype-alt-label",
         "creation_date": "2025-01-01T00:00:00Z",
-        "definition": "",
+        "definition": "mtype-definition",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "pre-m1",
+        "pref_label": "mtype-pref-label",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "pre_region": {
-        "acronym": "acronym1",
-        "annotation_value": 1,
+        "acronym": "acronym64",
+        "annotation_value": 64,
         "color_hex_triplet": "FF0000",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "pre-r1",
+        "name": "RedRegion",
         "parent_structure_id": null
       },
       "subject": {

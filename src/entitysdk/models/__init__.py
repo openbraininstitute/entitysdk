@@ -5,6 +5,8 @@ from entitysdk.models.analysis_notebook_execution import AnalysisNotebookExecuti
 from entitysdk.models.analysis_notebook_result import AnalysisNotebookResult
 from entitysdk.models.analysis_notebook_template import AnalysisNotebookTemplate
 from entitysdk.models.asset import Asset
+from entitysdk.models.brain_atlas import BrainAtlas
+from entitysdk.models.brain_atlas_region import BrainAtlasRegion
 from entitysdk.models.brain_location import BrainLocation
 from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.brain_region_hierarchy import BrainRegionHierarchy
@@ -70,6 +72,8 @@ __all__ = [
     "AnalysisNotebookResult",
     "AnalysisNotebookTemplate",
     "Asset",
+    "BrainAtlas",
+    "BrainAtlasRegion",
     "BrainLocation",
     "BrainRegion",
     "BrainRegionHierarchy",

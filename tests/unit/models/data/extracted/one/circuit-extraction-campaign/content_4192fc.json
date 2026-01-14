@@ -12,9 +12,9 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "Circuit extraction campaign",
+  "description": "circuit-extraction-campaign",
   "id": "00000000-0000-4000-8000-000001234678",
-  "name": "Circuit extraction campaign",
+  "name": "circuit-extraction-campaign",
   "scan_parameters": {
     "foo": "bar"
   },

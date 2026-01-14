@@ -1,82 +1,88 @@
 {
   "data": [
     {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_atlas_id": "00000000-0000-4000-8000-000001234678",
+      "brain_region_id": "00000000-0000-4000-8000-000001234678",
       "created_by": {
-        "family_name": null,
-        "given_name": null,
+        "family_name": "courcol",
+        "given_name": "jd",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Admin User",
+        "pref_label": "jd courcol",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "family_name": "courcol",
-      "given_name": "jd",
       "id": "00000000-0000-4000-8000-000001234678",
-      "pref_label": "jd courcol",
-      "sub_id": null,
-      "type": "person",
+      "is_leaf_region": false,
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
-        "family_name": null,
-        "given_name": null,
+        "family_name": "courcol",
+        "given_name": "jd",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Admin User",
+        "pref_label": "jd courcol",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
-      }
+      },
+      "volume": 10.0
     },
     {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_atlas_id": "00000000-0000-4000-8000-000001234678",
+      "brain_region_id": "00000000-0000-4000-8000-000001234678",
       "created_by": {
-        "family_name": null,
-        "given_name": null,
+        "family_name": "courcol",
+        "given_name": "jd",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Admin User",
+        "pref_label": "jd courcol",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "family_name": null,
-      "given_name": null,
       "id": "00000000-0000-4000-8000-000001234678",
-      "pref_label": "Admin User",
-      "sub_id": "00000000-0000-4000-8000-000001234678",
-      "type": "person",
+      "is_leaf_region": false,
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
-        "family_name": null,
-        "given_name": null,
+        "family_name": "courcol",
+        "given_name": "jd",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Admin User",
+        "pref_label": "jd courcol",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
-      }
+      },
+      "volume": 10.0
     },
     {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": true,
+      "brain_atlas_id": "00000000-0000-4000-8000-000001234678",
+      "brain_region_id": "00000000-0000-4000-8000-000001234678",
       "created_by": {
-        "family_name": null,
-        "given_name": null,
+        "family_name": "courcol",
+        "given_name": "jd",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Admin User",
+        "pref_label": "jd courcol",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "family_name": "courcol",
-      "given_name": "jd",
       "id": "00000000-0000-4000-8000-000001234678",
-      "pref_label": "jd courcol",
-      "sub_id": null,
-      "type": "person",
+      "is_leaf_region": false,
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
-        "family_name": null,
-        "given_name": null,
+        "family_name": "courcol",
+        "given_name": "jd",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Admin User",
+        "pref_label": "jd courcol",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
-      }
+      },
+      "volume": 10.0
     }
   ],
   "facets": null,

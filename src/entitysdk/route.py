@@ -11,6 +11,8 @@ _ROUTES = {
     "AnalysisNotebookExecution": "analysis-notebook-execution",
     "AnalysisNotebookResult": "analysis-notebook-result",
     "AnalysisNotebookTemplate": "analysis-notebook-template",
+    "BrainAtlas": "brain-atlas",
+    "BrainAtlasRegion": "brain-atlas-region",
     "BrainRegion": "brain-region",
     "BrainRegionHierarchy": "brain-region-hierarchy",
     "CellMorphology": "cell-morphology",

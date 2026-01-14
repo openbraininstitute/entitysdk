@@ -15,7 +15,6 @@ DATA_DIR = Path(__file__).parent / "data"
 
 # routes not implemented yet in entitysdk
 MISSING_ROUTES = {
-    "brain-atlas",
     "calibration",
     "cell-composition",
     "experimental-bouton-density",
@@ -28,7 +27,6 @@ MISSING_ROUTES = {
 
 # resources that don't provide an update endpoint
 NO_UPDATE_RESOURCES = {
-    "BrainAtlas",
     "CellComposition",
     "Consortium",
     "Contribution",

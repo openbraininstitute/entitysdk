@@ -56,7 +56,7 @@ class AnalysisNotebookResultUpdate(BaseModel):
 
 
 class CountMax(RootModel[int]):
-    root: Annotated[int, Field(ge=0, title="Count Max")]
+    root: Annotated[int, Field(ge=0, title="Count Max")] = 1
 
 
 class AnalysisScale(StrEnum):
@@ -174,6 +174,50 @@ class BodyUploadEntityAssetEntityRouteEntityIdAssetsPost(BaseModel):
     file: Annotated[bytes, Field(title="File")]
     label: AssetLabel
     meta: Annotated[dict[str, Any] | None, Field(title="Meta")] = None
+
+
+class BrainAtlasCreate(BaseModel):
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    hierarchy_id: Annotated[UUID, Field(title="Hierarchy Id")]
+    species_id: Annotated[UUID, Field(title="Species Id")]
+    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
+
+
+class BrainAtlasRegionCreate(BaseModel):
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
+    volume: Annotated[float | None, Field(title="Volume")]
+    is_leaf_region: Annotated[bool, Field(title="Is Leaf Region")]
+    brain_atlas_id: Annotated[UUID, Field(title="Brain Atlas Id")]
+
+
+class BrainAtlasRegionUpdate(BaseModel):
+    brain_region_id: Annotated[
+        UUID | Literal["<NOT_SET>"] | None, Field(title="Brain Region Id")
+    ] = "<NOT_SET>"
+    volume: Annotated[float | Literal["<NOT_SET>"] | None, Field(title="Volume")] = "<NOT_SET>"
+    is_leaf_region: Annotated[bool | Literal["<NOT_SET>"] | None, Field(title="Is Leaf Region")] = (
+        "<NOT_SET>"
+    )
+    brain_atlas_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Brain Atlas Id")] = (
+        "<NOT_SET>"
+    )
+
+
+class BrainAtlasUpdate(BaseModel):
+    name: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Name")] = "<NOT_SET>"
+    description: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Description")] = (
+        "<NOT_SET>"
+    )
+    hierarchy_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Hierarchy Id")] = (
+        "<NOT_SET>"
+    )
+    species_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Species Id")] = (
+        "<NOT_SET>"
+    )
+    strain_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Strain Id")] = "<NOT_SET>"
 
 
 class BrainRegionAdminUpdate(BaseModel):
@@ -2408,22 +2452,29 @@ class BasicEntityRead(BaseModel):
 
 
 class BrainAtlasRead(BaseModel):
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     id: Annotated[UUID, Field(title="Id")]
     created_by: NestedPersonRead
     updated_by: NestedPersonRead
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
-    name: Annotated[str, Field(title="Name")]
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     hierarchy_id: Annotated[UUID, Field(title="Hierarchy Id")]
     species: NestedSpeciesRead
 
 
 class BrainAtlasRegionRead(BaseModel):
-    assets: Annotated[list[AssetRead], Field(title="Assets")]
     id: Annotated[UUID, Field(title="Id")]
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    assets: Annotated[list[AssetRead], Field(title="Assets")]
     volume: Annotated[float | None, Field(title="Volume")]
     is_leaf_region: Annotated[bool, Field(title="Is Leaf Region")]
     brain_atlas_id: Annotated[UUID, Field(title="Brain Atlas Id")]

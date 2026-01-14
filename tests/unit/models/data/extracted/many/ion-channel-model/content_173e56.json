@@ -31,14 +31,14 @@
       "is_stochastic": false,
       "is_temperature_dependent": false,
       "license": null,
-      "name": "Test name",
+      "name": "28",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "Test name",
+      "nmodl_suffix": "28",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -106,14 +106,14 @@
       "is_stochastic": false,
       "is_temperature_dependent": false,
       "license": null,
-      "name": "Test name",
+      "name": "27",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "Test name",
+      "nmodl_suffix": "27",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -181,14 +181,14 @@
       "is_stochastic": false,
       "is_temperature_dependent": false,
       "license": null,
-      "name": "Test name",
+      "name": "26",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "Test name",
+      "nmodl_suffix": "26",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -256,14 +256,14 @@
       "is_stochastic": false,
       "is_temperature_dependent": false,
       "license": null,
-      "name": "Test name",
+      "name": "25",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "Test name",
+      "nmodl_suffix": "25",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -331,14 +331,14 @@
       "is_stochastic": false,
       "is_temperature_dependent": false,
       "license": null,
-      "name": "Test name",
+      "name": "24",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "Test name",
+      "nmodl_suffix": "24",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -406,14 +406,14 @@
       "is_stochastic": false,
       "is_temperature_dependent": false,
       "license": null,
-      "name": "Test name",
+      "name": "23",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "Test name",
+      "nmodl_suffix": "23",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -481,14 +481,14 @@
       "is_stochastic": false,
       "is_temperature_dependent": false,
       "license": null,
-      "name": "Test name",
+      "name": "22",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "Test name",
+      "nmodl_suffix": "22",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -556,14 +556,14 @@
       "is_stochastic": false,
       "is_temperature_dependent": false,
       "license": null,
-      "name": "Test name",
+      "name": "21",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "Test name",
+      "nmodl_suffix": "21",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -631,14 +631,14 @@
       "is_stochastic": false,
       "is_temperature_dependent": false,
       "license": null,
-      "name": "Test name",
+      "name": "20",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "Test name",
+      "nmodl_suffix": "20",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -706,14 +706,14 @@
       "is_stochastic": false,
       "is_temperature_dependent": false,
       "license": null,
-      "name": "Test name",
+      "name": "19",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "Test name",
+      "nmodl_suffix": "19",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -781,14 +781,14 @@
       "is_stochastic": false,
       "is_temperature_dependent": false,
       "license": null,
-      "name": "Test name",
+      "name": "18",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "Test name",
+      "nmodl_suffix": "18",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -829,7 +829,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 100,
-    "total_items": 11
+    "page_size": 11,
+    "total_items": 29
   }
 }
