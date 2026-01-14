@@ -27,7 +27,6 @@ MISSING_ROUTES = {
 
 # resources that don't provide an update endpoint
 NO_UPDATE_RESOURCES = {
-    "BrainAtlas",
     "CellComposition",
     "Consortium",
     "Contribution",

@@ -253,696 +253,6 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "d10",
-      "id": "00000000-0000-4000-8000-000001234678",
-      "license": {
-        "creation_date": "2025-01-01T00:00:00Z",
-        "description": "a license description",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "label": "test label",
-        "name": "Test License",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "measurements": [
-        {
-          "id": 21,
-          "name": "minimum",
-          "unit": "\u03bcm",
-          "value": 1.23
-        },
-        {
-          "id": 22,
-          "name": "maximum",
-          "unit": "\u03bcm",
-          "value": 1.45
-        }
-      ],
-      "name": "s10",
-      "post_mtype": {
-        "alt_label": "post-m2",
-        "creation_date": "2025-01-01T00:00:00Z",
-        "definition": "",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "post-m2",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "post_region": {
-        "acronym": "acronym2",
-        "annotation_value": 2,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "post-r2",
-        "parent_structure_id": null
-      },
-      "pre_mtype": {
-        "alt_label": "pre-m1",
-        "creation_date": "2025-01-01T00:00:00Z",
-        "definition": "",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "pre-m1",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "pre_region": {
-        "acronym": "acronym1",
-        "annotation_value": 1,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "pre-r1",
-        "parent_structure_id": null
-      },
-      "subject": {
-        "age_max": null,
-        "age_min": null,
-        "age_period": "postnatal",
-        "age_value": 1209600.0,
-        "description": "my-description",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "my-subject",
-        "sex": "female",
-        "species": {
-          "id": "00000000-0000-4000-8000-000001234678",
-          "name": "Test Species",
-          "taxonomy_id": "12345"
-        },
-        "strain": {
-          "id": "00000000-0000-4000-8000-000001234678",
-          "name": "Test Strain",
-          "species_id": "00000000-0000-4000-8000-000001234678",
-          "taxonomy_id": "Taxonomy ID"
-        },
-        "weight": 1.5
-      },
-      "type": "experimental_synapses_per_connection",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      }
-    },
-    {
-      "assets": [],
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
-      "brain_region": {
-        "acronym": "acronym64",
-        "annotation_value": 64,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "RedRegion",
-        "parent_structure_id": null
-      },
-      "contributions": [],
-      "created_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "description": "d11",
-      "id": "00000000-0000-4000-8000-000001234678",
-      "license": {
-        "creation_date": "2025-01-01T00:00:00Z",
-        "description": "a license description",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "label": "test label",
-        "name": "Test License",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "measurements": [
-        {
-          "id": 23,
-          "name": "minimum",
-          "unit": "\u03bcm",
-          "value": 1.23
-        },
-        {
-          "id": 24,
-          "name": "maximum",
-          "unit": "\u03bcm",
-          "value": 1.45
-        }
-      ],
-      "name": "s11",
-      "post_mtype": {
-        "alt_label": "post-m3",
-        "creation_date": "2025-01-01T00:00:00Z",
-        "definition": "",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "post-m3",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "post_region": {
-        "acronym": "acronym2",
-        "annotation_value": 2,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "post-r2",
-        "parent_structure_id": null
-      },
-      "pre_mtype": {
-        "alt_label": "pre-m1",
-        "creation_date": "2025-01-01T00:00:00Z",
-        "definition": "",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "pre-m1",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "pre_region": {
-        "acronym": "acronym1",
-        "annotation_value": 1,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "pre-r1",
-        "parent_structure_id": null
-      },
-      "subject": {
-        "age_max": null,
-        "age_min": null,
-        "age_period": "postnatal",
-        "age_value": 1209600.0,
-        "description": "my-description",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "my-subject",
-        "sex": "female",
-        "species": {
-          "id": "00000000-0000-4000-8000-000001234678",
-          "name": "Test Species",
-          "taxonomy_id": "12345"
-        },
-        "strain": {
-          "id": "00000000-0000-4000-8000-000001234678",
-          "name": "Test Strain",
-          "species_id": "00000000-0000-4000-8000-000001234678",
-          "taxonomy_id": "Taxonomy ID"
-        },
-        "weight": 1.5
-      },
-      "type": "experimental_synapses_per_connection",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      }
-    },
-    {
-      "assets": [],
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
-      "brain_region": {
-        "acronym": "acronym64",
-        "annotation_value": 64,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "RedRegion",
-        "parent_structure_id": null
-      },
-      "contributions": [],
-      "created_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "description": "d12",
-      "id": "00000000-0000-4000-8000-000001234678",
-      "license": {
-        "creation_date": "2025-01-01T00:00:00Z",
-        "description": "a license description",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "label": "test label",
-        "name": "Test License",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "measurements": [
-        {
-          "id": 25,
-          "name": "minimum",
-          "unit": "\u03bcm",
-          "value": 1.23
-        },
-        {
-          "id": 26,
-          "name": "maximum",
-          "unit": "\u03bcm",
-          "value": 1.45
-        }
-      ],
-      "name": "s12",
-      "post_mtype": {
-        "alt_label": "post-m2",
-        "creation_date": "2025-01-01T00:00:00Z",
-        "definition": "",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "post-m2",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "post_region": {
-        "acronym": "acronym3",
-        "annotation_value": 3,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "post-r3",
-        "parent_structure_id": null
-      },
-      "pre_mtype": {
-        "alt_label": "pre-m0",
-        "creation_date": "2025-01-01T00:00:00Z",
-        "definition": "",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "pre-m0",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "pre_region": {
-        "acronym": "acronym1",
-        "annotation_value": 1,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "pre-r1",
-        "parent_structure_id": null
-      },
-      "subject": {
-        "age_max": null,
-        "age_min": null,
-        "age_period": "postnatal",
-        "age_value": 1209600.0,
-        "description": "my-description",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "my-subject",
-        "sex": "female",
-        "species": {
-          "id": "00000000-0000-4000-8000-000001234678",
-          "name": "Test Species",
-          "taxonomy_id": "12345"
-        },
-        "strain": {
-          "id": "00000000-0000-4000-8000-000001234678",
-          "name": "Test Strain",
-          "species_id": "00000000-0000-4000-8000-000001234678",
-          "taxonomy_id": "Taxonomy ID"
-        },
-        "weight": 1.5
-      },
-      "type": "experimental_synapses_per_connection",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      }
-    },
-    {
-      "assets": [],
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
-      "brain_region": {
-        "acronym": "acronym64",
-        "annotation_value": 64,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "RedRegion",
-        "parent_structure_id": null
-      },
-      "contributions": [],
-      "created_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "description": "d13",
-      "id": "00000000-0000-4000-8000-000001234678",
-      "license": {
-        "creation_date": "2025-01-01T00:00:00Z",
-        "description": "a license description",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "label": "test label",
-        "name": "Test License",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "measurements": [
-        {
-          "id": 27,
-          "name": "minimum",
-          "unit": "\u03bcm",
-          "value": 1.23
-        },
-        {
-          "id": 28,
-          "name": "maximum",
-          "unit": "\u03bcm",
-          "value": 1.45
-        }
-      ],
-      "name": "s13",
-      "post_mtype": {
-        "alt_label": "post-m3",
-        "creation_date": "2025-01-01T00:00:00Z",
-        "definition": "",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "post-m3",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "post_region": {
-        "acronym": "acronym3",
-        "annotation_value": 3,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "post-r3",
-        "parent_structure_id": null
-      },
-      "pre_mtype": {
-        "alt_label": "pre-m0",
-        "creation_date": "2025-01-01T00:00:00Z",
-        "definition": "",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "pre-m0",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "pre_region": {
-        "acronym": "acronym1",
-        "annotation_value": 1,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "pre-r1",
-        "parent_structure_id": null
-      },
-      "subject": {
-        "age_max": null,
-        "age_min": null,
-        "age_period": "postnatal",
-        "age_value": 1209600.0,
-        "description": "my-description",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "my-subject",
-        "sex": "female",
-        "species": {
-          "id": "00000000-0000-4000-8000-000001234678",
-          "name": "Test Species",
-          "taxonomy_id": "12345"
-        },
-        "strain": {
-          "id": "00000000-0000-4000-8000-000001234678",
-          "name": "Test Strain",
-          "species_id": "00000000-0000-4000-8000-000001234678",
-          "taxonomy_id": "Taxonomy ID"
-        },
-        "weight": 1.5
-      },
-      "type": "experimental_synapses_per_connection",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      }
-    },
-    {
-      "assets": [],
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
-      "brain_region": {
-        "acronym": "acronym64",
-        "annotation_value": 64,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "RedRegion",
-        "parent_structure_id": null
-      },
-      "contributions": [],
-      "created_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "description": "d14",
-      "id": "00000000-0000-4000-8000-000001234678",
-      "license": {
-        "creation_date": "2025-01-01T00:00:00Z",
-        "description": "a license description",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "label": "test label",
-        "name": "Test License",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "measurements": [
-        {
-          "id": 29,
-          "name": "minimum",
-          "unit": "\u03bcm",
-          "value": 1.23
-        },
-        {
-          "id": 30,
-          "name": "maximum",
-          "unit": "\u03bcm",
-          "value": 1.45
-        }
-      ],
-      "name": "s14",
-      "post_mtype": {
-        "alt_label": "post-m2",
-        "creation_date": "2025-01-01T00:00:00Z",
-        "definition": "",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "post-m2",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "post_region": {
-        "acronym": "acronym3",
-        "annotation_value": 3,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "post-r3",
-        "parent_structure_id": null
-      },
-      "pre_mtype": {
-        "alt_label": "pre-m1",
-        "creation_date": "2025-01-01T00:00:00Z",
-        "definition": "",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "pre-m1",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "pre_region": {
-        "acronym": "acronym1",
-        "annotation_value": 1,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "pre-r1",
-        "parent_structure_id": null
-      },
-      "subject": {
-        "age_max": null,
-        "age_min": null,
-        "age_period": "postnatal",
-        "age_value": 1209600.0,
-        "description": "my-description",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "my-subject",
-        "sex": "female",
-        "species": {
-          "id": "00000000-0000-4000-8000-000001234678",
-          "name": "Test Species",
-          "taxonomy_id": "12345"
-        },
-        "strain": {
-          "id": "00000000-0000-4000-8000-000001234678",
-          "name": "Test Strain",
-          "species_id": "00000000-0000-4000-8000-000001234678",
-          "taxonomy_id": "Taxonomy ID"
-        },
-        "weight": 1.5
-      },
-      "type": "experimental_synapses_per_connection",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      }
-    },
-    {
-      "assets": [],
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
-      "brain_region": {
-        "acronym": "acronym64",
-        "annotation_value": 64,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "RedRegion",
-        "parent_structure_id": null
-      },
-      "contributions": [],
-      "created_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "description": "d15",
-      "id": "00000000-0000-4000-8000-000001234678",
-      "license": {
-        "creation_date": "2025-01-01T00:00:00Z",
-        "description": "a license description",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "label": "test label",
-        "name": "Test License",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "measurements": [
-        {
-          "id": 31,
-          "name": "minimum",
-          "unit": "\u03bcm",
-          "value": 1.23
-        },
-        {
-          "id": 32,
-          "name": "maximum",
-          "unit": "\u03bcm",
-          "value": 1.45
-        }
-      ],
-      "name": "s15",
-      "post_mtype": {
-        "alt_label": "post-m3",
-        "creation_date": "2025-01-01T00:00:00Z",
-        "definition": "",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "post-m3",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "post_region": {
-        "acronym": "acronym3",
-        "annotation_value": 3,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "post-r3",
-        "parent_structure_id": null
-      },
-      "pre_mtype": {
-        "alt_label": "pre-m1",
-        "creation_date": "2025-01-01T00:00:00Z",
-        "definition": "",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "pre-m1",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "pre_region": {
-        "acronym": "acronym1",
-        "annotation_value": 1,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "pre-r1",
-        "parent_structure_id": null
-      },
-      "subject": {
-        "age_max": null,
-        "age_min": null,
-        "age_period": "postnatal",
-        "age_value": 1209600.0,
-        "description": "my-description",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "my-subject",
-        "sex": "female",
-        "species": {
-          "id": "00000000-0000-4000-8000-000001234678",
-          "name": "Test Species",
-          "taxonomy_id": "12345"
-        },
-        "strain": {
-          "id": "00000000-0000-4000-8000-000001234678",
-          "name": "Test Strain",
-          "species_id": "00000000-0000-4000-8000-000001234678",
-          "taxonomy_id": "Taxonomy ID"
-        },
-        "weight": 1.5
-      },
-      "type": "experimental_synapses_per_connection",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      }
-    },
-    {
-      "assets": [],
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
-      "brain_region": {
-        "acronym": "acronym64",
-        "annotation_value": 64,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "RedRegion",
-        "parent_structure_id": null
-      },
-      "contributions": [],
-      "created_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
       "description": "d2",
       "id": "00000000-0000-4000-8000-000001234678",
       "license": {
@@ -1796,6 +1106,696 @@
         "definition": "",
         "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "pre-m0",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "pre_region": {
+        "acronym": "acronym1",
+        "annotation_value": 1,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "pre-r1",
+        "parent_structure_id": null
+      },
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "type": "experimental_synapses_per_connection",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "d10",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "license": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "description": "a license description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "label": "test label",
+        "name": "Test License",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "measurements": [
+        {
+          "id": 21,
+          "name": "minimum",
+          "unit": "\u03bcm",
+          "value": 1.23
+        },
+        {
+          "id": 22,
+          "name": "maximum",
+          "unit": "\u03bcm",
+          "value": 1.45
+        }
+      ],
+      "name": "s10",
+      "post_mtype": {
+        "alt_label": "post-m2",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "definition": "",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "post-m2",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "post_region": {
+        "acronym": "acronym2",
+        "annotation_value": 2,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "post-r2",
+        "parent_structure_id": null
+      },
+      "pre_mtype": {
+        "alt_label": "pre-m1",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "definition": "",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "pre-m1",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "pre_region": {
+        "acronym": "acronym1",
+        "annotation_value": 1,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "pre-r1",
+        "parent_structure_id": null
+      },
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "type": "experimental_synapses_per_connection",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "d11",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "license": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "description": "a license description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "label": "test label",
+        "name": "Test License",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "measurements": [
+        {
+          "id": 23,
+          "name": "minimum",
+          "unit": "\u03bcm",
+          "value": 1.23
+        },
+        {
+          "id": 24,
+          "name": "maximum",
+          "unit": "\u03bcm",
+          "value": 1.45
+        }
+      ],
+      "name": "s11",
+      "post_mtype": {
+        "alt_label": "post-m3",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "definition": "",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "post-m3",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "post_region": {
+        "acronym": "acronym2",
+        "annotation_value": 2,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "post-r2",
+        "parent_structure_id": null
+      },
+      "pre_mtype": {
+        "alt_label": "pre-m1",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "definition": "",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "pre-m1",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "pre_region": {
+        "acronym": "acronym1",
+        "annotation_value": 1,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "pre-r1",
+        "parent_structure_id": null
+      },
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "type": "experimental_synapses_per_connection",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "d12",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "license": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "description": "a license description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "label": "test label",
+        "name": "Test License",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "measurements": [
+        {
+          "id": 25,
+          "name": "minimum",
+          "unit": "\u03bcm",
+          "value": 1.23
+        },
+        {
+          "id": 26,
+          "name": "maximum",
+          "unit": "\u03bcm",
+          "value": 1.45
+        }
+      ],
+      "name": "s12",
+      "post_mtype": {
+        "alt_label": "post-m2",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "definition": "",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "post-m2",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "post_region": {
+        "acronym": "acronym3",
+        "annotation_value": 3,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "post-r3",
+        "parent_structure_id": null
+      },
+      "pre_mtype": {
+        "alt_label": "pre-m0",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "definition": "",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "pre-m0",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "pre_region": {
+        "acronym": "acronym1",
+        "annotation_value": 1,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "pre-r1",
+        "parent_structure_id": null
+      },
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "type": "experimental_synapses_per_connection",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "d13",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "license": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "description": "a license description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "label": "test label",
+        "name": "Test License",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "measurements": [
+        {
+          "id": 27,
+          "name": "minimum",
+          "unit": "\u03bcm",
+          "value": 1.23
+        },
+        {
+          "id": 28,
+          "name": "maximum",
+          "unit": "\u03bcm",
+          "value": 1.45
+        }
+      ],
+      "name": "s13",
+      "post_mtype": {
+        "alt_label": "post-m3",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "definition": "",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "post-m3",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "post_region": {
+        "acronym": "acronym3",
+        "annotation_value": 3,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "post-r3",
+        "parent_structure_id": null
+      },
+      "pre_mtype": {
+        "alt_label": "pre-m0",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "definition": "",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "pre-m0",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "pre_region": {
+        "acronym": "acronym1",
+        "annotation_value": 1,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "pre-r1",
+        "parent_structure_id": null
+      },
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "type": "experimental_synapses_per_connection",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "d14",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "license": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "description": "a license description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "label": "test label",
+        "name": "Test License",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "measurements": [
+        {
+          "id": 29,
+          "name": "minimum",
+          "unit": "\u03bcm",
+          "value": 1.23
+        },
+        {
+          "id": 30,
+          "name": "maximum",
+          "unit": "\u03bcm",
+          "value": 1.45
+        }
+      ],
+      "name": "s14",
+      "post_mtype": {
+        "alt_label": "post-m2",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "definition": "",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "post-m2",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "post_region": {
+        "acronym": "acronym3",
+        "annotation_value": 3,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "post-r3",
+        "parent_structure_id": null
+      },
+      "pre_mtype": {
+        "alt_label": "pre-m1",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "definition": "",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "pre-m1",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "pre_region": {
+        "acronym": "acronym1",
+        "annotation_value": 1,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "pre-r1",
+        "parent_structure_id": null
+      },
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "type": "experimental_synapses_per_connection",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "d15",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "license": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "description": "a license description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "label": "test label",
+        "name": "Test License",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "measurements": [
+        {
+          "id": 31,
+          "name": "minimum",
+          "unit": "\u03bcm",
+          "value": 1.23
+        },
+        {
+          "id": 32,
+          "name": "maximum",
+          "unit": "\u03bcm",
+          "value": 1.45
+        }
+      ],
+      "name": "s15",
+      "post_mtype": {
+        "alt_label": "post-m3",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "definition": "",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "post-m3",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "post_region": {
+        "acronym": "acronym3",
+        "annotation_value": 3,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "post-r3",
+        "parent_structure_id": null
+      },
+      "pre_mtype": {
+        "alt_label": "pre-m1",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "definition": "",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "pre-m1",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "pre_region": {

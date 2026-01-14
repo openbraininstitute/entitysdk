@@ -46,7 +46,7 @@
       "number_connections": 1,
       "number_neurons": 1,
       "number_synapses": 1,
-      "published_in": null,
+      "published_in": "journal-0",
       "root_circuit_id": "00000000-0000-4000-8000-000001234678",
       "scale": "single",
       "subject": {

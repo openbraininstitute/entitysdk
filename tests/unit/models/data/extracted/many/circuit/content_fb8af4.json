@@ -46,7 +46,7 @@
       "number_connections": 501,
       "number_neurons": 51,
       "number_synapses": 5001,
-      "published_in": null,
+      "published_in": "journal-5",
       "root_circuit_id": "00000000-0000-4000-8000-000001234678",
       "scale": "whole_brain",
       "subject": {
@@ -128,7 +128,7 @@
       "number_connections": 401,
       "number_neurons": 41,
       "number_synapses": 4001,
-      "published_in": null,
+      "published_in": "journal-4",
       "root_circuit_id": "00000000-0000-4000-8000-000001234678",
       "scale": "microcircuit",
       "subject": {
@@ -210,7 +210,7 @@
       "number_connections": 301,
       "number_neurons": 31,
       "number_synapses": 3001,
-      "published_in": null,
+      "published_in": "journal-3",
       "root_circuit_id": "00000000-0000-4000-8000-000001234678",
       "scale": "single",
       "subject": {
@@ -292,7 +292,7 @@
       "number_connections": 201,
       "number_neurons": 21,
       "number_synapses": 2001,
-      "published_in": null,
+      "published_in": "journal-2",
       "root_circuit_id": "00000000-0000-4000-8000-000001234678",
       "scale": "whole_brain",
       "subject": {
@@ -374,7 +374,7 @@
       "number_connections": 101,
       "number_neurons": 11,
       "number_synapses": 1001,
-      "published_in": null,
+      "published_in": "journal-1",
       "root_circuit_id": "00000000-0000-4000-8000-000001234678",
       "scale": "microcircuit",
       "subject": {
@@ -456,7 +456,7 @@
       "number_connections": 1,
       "number_neurons": 1,
       "number_synapses": 1,
-      "published_in": null,
+      "published_in": "journal-0",
       "root_circuit_id": "00000000-0000-4000-8000-000001234678",
       "scale": "single",
       "subject": {

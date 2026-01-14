@@ -3,12 +3,12 @@
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "brain_region": {
-    "acronym": "RegionA-2",
-    "annotation_value": 98,
+    "acronym": "RegionA",
+    "annotation_value": 7,
     "color_hex_triplet": "BFDAE3",
     "hierarchy_id": "00000000-0000-4000-8000-000001234678",
     "id": "00000000-0000-4000-8000-000001234678",
-    "name": "RegionA-2",
+    "name": "RegionA",
     "parent_structure_id": "00000000-0000-4000-8000-000001234678"
   },
   "cell_morphology_protocol": null,
@@ -23,7 +23,7 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "Description RegionA-2-hier1",
+  "description": "extra-RegionA",
   "experiment_date": null,
   "has_segmented_spines": false,
   "id": "00000000-0000-4000-8000-000001234678",
@@ -37,7 +37,7 @@
     "z": 30.0
   },
   "mtypes": [],
-  "name": "RegionA-2-hier1",
+  "name": "extra-RegionA",
   "notice_text": null,
   "published_in": null,
   "repair_pipeline_state": null,

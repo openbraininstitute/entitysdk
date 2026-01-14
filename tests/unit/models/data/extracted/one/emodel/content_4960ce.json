@@ -21,7 +21,7 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "description",
+  "description": "Test EModel Description",
   "etypes": [],
   "exemplar_morphology": {
     "creation_date": "2025-01-01T00:00:00Z",
@@ -44,7 +44,7 @@
   "ion_channel_models": [],
   "iteration": "test iteration",
   "mtypes": [],
-  "name": "name",
+  "name": "Test EModel Name",
   "score": -1.0,
   "seed": -1,
   "species": {

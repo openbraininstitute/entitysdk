@@ -13,9 +13,9 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "simulation-result-description",
+      "description": "description-2",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Private u1/1",
+      "name": "name-2",
       "simulation_id": "00000000-0000-4000-8000-000001234678",
       "type": "simulation_result",
       "update_date": "2025-01-01T00:00:00Z",
@@ -41,9 +41,9 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "simulation-result-description",
+      "description": "description-1",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Private u1/0",
+      "name": "name-1",
       "simulation_id": "00000000-0000-4000-8000-000001234678",
       "type": "simulation_result",
       "update_date": "2025-01-01T00:00:00Z",
@@ -60,7 +60,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 100,
-    "total_items": 2
+    "page_size": 2,
+    "total_items": 3
   }
 }

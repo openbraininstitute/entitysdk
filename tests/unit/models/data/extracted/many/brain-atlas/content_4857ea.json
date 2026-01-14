@@ -1,21 +1,9 @@
 {
   "data": [
     {
-      "assets": [
-        {
-          "content_type": "application/nrrd",
-          "full_path": "public/00000000-0000-4000-8000-000001234678/00000000-0000-4000-8000-000001234678/assets/brain_atlas/00000000-0000-4000-8000-000001234678/annotation.nrrd",
-          "id": "00000000-0000-4000-8000-000001234678",
-          "is_directory": false,
-          "label": "brain_atlas_annotation",
-          "meta": {},
-          "path": "annotation.nrrd",
-          "sha256_digest": "a8124f083a58b9a8ff80cb327dd6895a10d0bc92bb918506da0c9c75906d3f91",
-          "size": 31,
-          "status": "created",
-          "storage_type": "aws_s3_internal"
-        }
-      ],
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
@@ -25,9 +13,10 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
+      "description": "a magnificent description",
       "hierarchy_id": "00000000-0000-4000-8000-000001234678",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "test brain atlas",
+      "name": "Private u1/0",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
         "name": "Test Species",
@@ -45,6 +34,8 @@
     },
     {
       "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
@@ -54,9 +45,42 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
+      "description": "a magnificent description",
       "hierarchy_id": "00000000-0000-4000-8000-000001234678",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "test brain atlas 1",
+      "name": "Private u1/1",
+      "species": {
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "Test Species",
+        "taxonomy_id": "12345"
+      },
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": true,
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "a magnificent description",
+      "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "name": "Public u1/0",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
         "name": "Test Species",
@@ -77,6 +101,6 @@
   "pagination": {
     "page": 1,
     "page_size": 100,
-    "total_items": 2
+    "total_items": 3
   }
 }

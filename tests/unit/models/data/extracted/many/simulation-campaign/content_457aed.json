@@ -13,19 +13,19 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Campaign for circuit 2",
+      "description": "Campaign for circuit 1",
       "entity_id": "00000000-0000-4000-8000-000001234678",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "campaign-circuit-2",
+      "name": "campaign-circuit-1",
       "scan_parameters": {
         "foo1": "bar2"
       },
       "simulations": [
         {
-          "description": "simulation-description-2",
+          "description": "simulation-description-1",
           "entity_id": "00000000-0000-4000-8000-000001234678",
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "simulation-2",
+          "name": "simulation-1",
           "number_neurons": 42,
           "scan_parameters": {
             "foo1": "bar1",
