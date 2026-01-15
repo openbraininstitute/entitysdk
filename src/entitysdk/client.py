@@ -306,29 +306,41 @@ class Client:
         file_metadata: dict | None = None,
         asset_label: AssetLabel,
         project_context: ProjectContext | None = None,
+        multipart: bool = False,
     ) -> Asset:
         """Upload asset to an existing entity's endpoint from a file path."""
-        path = Path(file_path)
-        url = route.get_assets_endpoint(
-            api_url=self.api_url,
-            entity_type=entity_type,
-            entity_id=entity_id,
-            asset_id=None,
-        )
         context = self._required_user_context(override_context=project_context)
+
+        asset_path = Path(file_path)
+
         asset_metadata = LocalAssetMetadata(
-            file_name=file_name or path.name,
+            file_name=file_name or asset_path.name,
             content_type=file_content_type,
             metadata=file_metadata,
             label=asset_label,
         )
+
+        if multipart:
+            return core.multipart_upload_asset_file(
+                api_url=self.api_url,
+                entity_id=entity_id,
+                entity_type=entity_type,
+                asset_path=asset_path,
+                asset_metadata=asset_metadata,
+                token=self._token_manager.get_token(),
+                http_client=self._http_client,
+                project_context=context,
+            )
+
         return core.upload_asset_file(
-            url=url,
-            asset_path=path,
-            project_context=context,
+            api_url=self.api_url,
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_path=asset_path,
             asset_metadata=asset_metadata,
-            http_client=self._http_client,
             token=self._token_manager.get_token(),
+            http_client=self._http_client,
+            project_context=context,
         )
 
     def upload_content(
