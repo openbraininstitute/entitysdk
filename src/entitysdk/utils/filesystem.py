@@ -10,3 +10,8 @@ def create_dir(path: StrOrPath) -> Path:
     path = Path(path)
     path.mkdir(parents=True, exist_ok=True)
     return path
+
+
+def get_filesize(path: StrOrPath) -> int:
+    """Return filesize."""
+    return Path(path).stat().st_size

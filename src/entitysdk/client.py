@@ -20,7 +20,7 @@ from entitysdk.models.asset import (
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.result import IteratorResult
-from entitysdk.schemas.asset import DownloadedAssetFile
+from entitysdk.schemas.asset import DownloadedAssetFile, MultipartUploadTransferConfig
 from entitysdk.store import LocalAssetStore
 from entitysdk.token_manager import TokenFromValue, TokenManager
 from entitysdk.types import (
@@ -302,36 +302,36 @@ class Client:
         self,
         *,
         entity_id: ID,
-        entity_type: type[Identifiable],
+        entity_type: type[Entity],
         file_path: os.PathLike,
         file_content_type: ContentType,
         file_name: str | None = None,
         file_metadata: dict | None = None,
         asset_label: AssetLabel,
         project_context: ProjectContext | None = None,
+        transfer_config: MultipartUploadTransferConfig | None = None,
     ) -> Asset:
         """Upload asset to an existing entity's endpoint from a file path."""
-        path = Path(file_path)
-        url = route.get_assets_endpoint(
-            api_url=self.api_url,
-            entity_type=entity_type,
-            entity_id=entity_id,
-            asset_id=None,
-        )
         context = self._required_user_context(override_context=project_context)
+
+        asset_path = Path(file_path)
+
         asset_metadata = LocalAssetMetadata(
-            file_name=file_name or path.name,
+            file_name=file_name or asset_path.name,
             content_type=file_content_type,
             metadata=file_metadata,
             label=asset_label,
         )
         return core.upload_asset_file(
-            url=url,
-            asset_path=path,
-            project_context=context,
+            api_url=self.api_url,
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_path=asset_path,
             asset_metadata=asset_metadata,
             http_client=self._http_client,
-            token=self._token_manager.get_token(),
+            project_context=context,
+            token_manager=self._token_manager,
+            transfer_config=transfer_config,
         )
 
     def upload_content(
@@ -666,7 +666,7 @@ class Client:
         self,
         *,
         entity_id: ID,
-        entity_type: type[Identifiable],
+        entity_type: type[Entity],
         asset_id: ID,
         file_path: os.PathLike,
         file_content_type: ContentType,
