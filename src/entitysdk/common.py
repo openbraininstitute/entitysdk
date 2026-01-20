@@ -28,7 +28,9 @@ class ProjectContext(BaseModel):
     """Project context."""
 
     project_id: UUID
-    virtual_lab_id: UUID
+    # entitycore can deduce the vlab id from the project id
+    # therefore it is not mandatory
+    virtual_lab_id: UUID | None = None
     environment: DeploymentEnvironment | None = None
 
     @classmethod
