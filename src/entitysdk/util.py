@@ -34,7 +34,11 @@ def make_db_api_request(
 
     if project_context:
         headers["project-id"] = str(project_context.project_id)
-        headers["virtual-lab-id"] = str(project_context.virtual_lab_id)
+
+        # entitycore can deduce the vlab id from the project id
+        # therefore it is not mandatory
+        if vlab_id := project_context.virtual_lab_id:
+            headers["virtual-lab-id"] = str(vlab_id)
 
     try:
         response = http_client.request(
