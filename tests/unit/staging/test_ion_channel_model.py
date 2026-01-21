@@ -33,7 +33,7 @@ def _mock_ic_asset_response(asset_id, name):
     }
 
 
-def create_http_ic_mock(ic_id, name, httpx_mock, api_url, request_headers):
+def create_http_ic_mock(ic_id, name, httpx_mock, api_url, request_headers, with_conductance=True):
     calvast_asset_id = uuid.uuid4()
     hierarchy_id = uuid.uuid4()
 
@@ -56,7 +56,9 @@ def create_http_ic_mock(ic_id, name, httpx_mock, api_url, request_headers):
         },
         is_temperature_dependent=False,
         temperature_celsius=34,
-        neuron_block=NeuronBlock(range=[{f"g{name}bar": "S/cm2"}]),
+        neuron_block=NeuronBlock(range=[{f"g{name}bar": "S/cm2"}])
+        if with_conductance
+        else NeuronBlock(),
         assets=[_mock_ic_asset_response(calvast_asset_id, name)],
     )
 
@@ -150,9 +152,21 @@ def test_create_hoc_file(client, tmp_path, httpx_mock, api_url, request_headers)
             "id": uuid.uuid4(),
             "conductance": 0.011,
         },
+        # ion channel with no conductance case
+        "CaDynamics_DC0": {
+            "id": uuid.uuid4(),
+        },
     }
     create_http_ic_mock(
         ion_channel_model_data["Ca_LVAst"]["id"], "Ca_LVAst", httpx_mock, api_url, request_headers
+    )
+    create_http_ic_mock(
+        ion_channel_model_data["CaDynamics_DC0"]["id"],
+        "CaDynamics_DC0",
+        httpx_mock,
+        api_url,
+        request_headers,
+        with_conductance=False,
     )
 
     (tmp_path / "hocs").mkdir(parents=True, exist_ok=True)
@@ -169,6 +183,8 @@ def test_create_hoc_file(client, tmp_path, httpx_mock, api_url, request_headers)
     with open(tmp_path / "hocs" / "cell.hoc") as f:
         hoc_content = f.read()
         assert "gCa_LVAstbar = 0.011" in hoc_content
+        assert "insert Ca_LVAst" in hoc_content
+        assert "insert CaDynamics_DC0" in hoc_content
 
 
 def test_stage_sonata_from_config(client, tmp_path, httpx_mock, api_url, request_headers):
