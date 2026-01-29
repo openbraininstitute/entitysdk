@@ -518,7 +518,6 @@ def delete_asset(
     project_context: ProjectContext | None,
     token: str,
     http_client: httpx.Client | None = None,
-    hard: bool = False,
 ) -> Asset:
     """Delete asset."""
     response = make_db_api_request(
@@ -527,7 +526,6 @@ def delete_asset(
         project_context=project_context,
         token=token,
         http_client=http_client,
-        parameters={"hard": True} if hard else None,
     )
     return serdes.deserialize_model(response.json(), Asset)
 
