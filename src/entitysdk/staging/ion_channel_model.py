@@ -214,6 +214,9 @@ def find_conductance_name(entity):
     """
     conductance_keywords = ("bar", "gmax", "_max", "max", "gKur")
 
+    if entity.neuron_block.range is None:
+        return None
+
     for param in entity.neuron_block.range:
         for key in param:
             if any(keyword in key for keyword in conductance_keywords):
