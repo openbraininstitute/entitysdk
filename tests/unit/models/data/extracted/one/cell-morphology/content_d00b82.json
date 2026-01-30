@@ -1,7 +1,7 @@
 {
   "assets": [],
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": false,
+  "authorized_public": true,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
@@ -23,7 +23,7 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "morph description",
+  "description": "Test morph",
   "experiment_date": null,
   "has_segmented_spines": false,
   "id": "00000000-0000-4000-8000-000001234678",
@@ -44,7 +44,7 @@
     "z": 30.0
   },
   "mtypes": [],
-  "name": "Private u2/0",
+  "name": "Test morph",
   "notice_text": null,
   "published_in": null,
   "repair_pipeline_state": null,

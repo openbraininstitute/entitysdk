@@ -4,12 +4,12 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym0",
-        "annotation_value": 0,
+        "acronym": "acronym1",
+        "annotation_value": 1,
         "color_hex_triplet": "FF0000",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region0",
+        "name": "region1",
         "parent_structure_id": null
       },
       "calibration_result": null,
@@ -82,7 +82,7 @@
           "type": "person"
         },
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "",
+        "description": "description-0",
         "etypes": [],
         "exemplar_morphology": {
           "creation_date": "2025-01-01T00:00:00Z",
@@ -203,7 +203,7 @@
         }
       },
       "mtypes": [],
-      "name": "m-0",
+      "name": "m-4",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
         "name": "TestSpecies0",
@@ -226,12 +226,12 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym0",
-        "annotation_value": 0,
+        "acronym": "acronym1",
+        "annotation_value": 1,
         "color_hex_triplet": "FF0000",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region0",
+        "name": "region1",
         "parent_structure_id": null
       },
       "calibration_result": null,
@@ -304,7 +304,7 @@
           "type": "person"
         },
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "",
+        "description": "description-1",
         "etypes": [],
         "exemplar_morphology": {
           "creation_date": "2025-01-01T00:00:00Z",
@@ -425,7 +425,7 @@
         }
       },
       "mtypes": [],
-      "name": "m-1",
+      "name": "m-5",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
         "name": "TestSpecies0",
@@ -448,12 +448,12 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym0",
-        "annotation_value": 0,
+        "acronym": "acronym1",
+        "annotation_value": 1,
         "color_hex_triplet": "FF0000",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region0",
+        "name": "region1",
         "parent_structure_id": null
       },
       "calibration_result": null,
@@ -526,7 +526,7 @@
           "type": "person"
         },
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "",
+        "description": "description-0",
         "etypes": [],
         "exemplar_morphology": {
           "creation_date": "2025-01-01T00:00:00Z",
@@ -647,7 +647,7 @@
         }
       },
       "mtypes": [],
-      "name": "m-2",
+      "name": "m-6",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
         "name": "TestSpecies0",
@@ -670,12 +670,12 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym0",
-        "annotation_value": 0,
+        "acronym": "acronym1",
+        "annotation_value": 1,
         "color_hex_triplet": "FF0000",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region0",
+        "name": "region1",
         "parent_structure_id": null
       },
       "calibration_result": null,
@@ -748,7 +748,7 @@
           "type": "person"
         },
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "",
+        "description": "description-1",
         "etypes": [],
         "exemplar_morphology": {
           "creation_date": "2025-01-01T00:00:00Z",
@@ -869,7 +869,7 @@
         }
       },
       "mtypes": [],
-      "name": "m-3",
+      "name": "m-7",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
         "name": "TestSpecies0",
@@ -892,12 +892,12 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym0",
-        "annotation_value": 0,
+        "acronym": "acronym1",
+        "annotation_value": 1,
         "color_hex_triplet": "FF0000",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region0",
+        "name": "region1",
         "parent_structure_id": null
       },
       "calibration_result": null,
@@ -970,7 +970,7 @@
           "type": "person"
         },
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "",
+        "description": "description-0",
         "etypes": [],
         "exemplar_morphology": {
           "creation_date": "2025-01-01T00:00:00Z",
@@ -1091,7 +1091,7 @@
         }
       },
       "mtypes": [],
-      "name": "m-8",
+      "name": "m-12",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
         "name": "TestSpecies1",
@@ -1114,12 +1114,12 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym0",
-        "annotation_value": 0,
+        "acronym": "acronym1",
+        "annotation_value": 1,
         "color_hex_triplet": "FF0000",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region0",
+        "name": "region1",
         "parent_structure_id": null
       },
       "calibration_result": null,
@@ -1192,7 +1192,7 @@
           "type": "person"
         },
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "",
+        "description": "description-1",
         "etypes": [],
         "exemplar_morphology": {
           "creation_date": "2025-01-01T00:00:00Z",
@@ -1313,7 +1313,7 @@
         }
       },
       "mtypes": [],
-      "name": "m-9",
+      "name": "m-13",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
         "name": "TestSpecies1",
@@ -1336,12 +1336,12 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym0",
-        "annotation_value": 0,
+        "acronym": "acronym1",
+        "annotation_value": 1,
         "color_hex_triplet": "FF0000",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region0",
+        "name": "region1",
         "parent_structure_id": null
       },
       "calibration_result": null,
@@ -1414,7 +1414,7 @@
           "type": "person"
         },
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "",
+        "description": "description-0",
         "etypes": [],
         "exemplar_morphology": {
           "creation_date": "2025-01-01T00:00:00Z",
@@ -1535,7 +1535,7 @@
         }
       },
       "mtypes": [],
-      "name": "m-10",
+      "name": "m-14",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
         "name": "TestSpecies1",
@@ -1558,12 +1558,12 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym0",
-        "annotation_value": 0,
+        "acronym": "acronym1",
+        "annotation_value": 1,
         "color_hex_triplet": "FF0000",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region0",
+        "name": "region1",
         "parent_structure_id": null
       },
       "calibration_result": null,
@@ -1636,7 +1636,7 @@
           "type": "person"
         },
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "",
+        "description": "description-1",
         "etypes": [],
         "exemplar_morphology": {
           "creation_date": "2025-01-01T00:00:00Z",
@@ -1757,7 +1757,7 @@
         }
       },
       "mtypes": [],
-      "name": "m-11",
+      "name": "m-15",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
         "name": "TestSpecies1",

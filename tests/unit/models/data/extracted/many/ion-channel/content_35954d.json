@@ -13,66 +13,8 @@
       "description": "ion-channel-description",
       "gene": "Kcnma1",
       "id": "00000000-0000-4000-8000-000001234678",
-      "label": "label-0",
-      "name": "name-0",
-      "synonyms": [
-        "BK channel",
-        "BK channel alpha subunit"
-      ],
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      }
-    },
-    {
-      "created_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "description": "ion-channel-description",
-      "gene": "Kcnma1",
-      "id": "00000000-0000-4000-8000-000001234678",
-      "label": "label-1",
-      "name": "name-1",
-      "synonyms": [
-        "BK channel",
-        "BK channel alpha subunit"
-      ],
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      }
-    },
-    {
-      "created_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "description": "ion-channel-description",
-      "gene": "Kcnma1",
-      "id": "00000000-0000-4000-8000-000001234678",
-      "label": "label-2",
-      "name": "name-2",
+      "label": "label-4",
+      "name": "name-4",
       "synonyms": [
         "BK channel",
         "BK channel alpha subunit"
@@ -129,8 +71,66 @@
       "description": "ion-channel-description",
       "gene": "Kcnma1",
       "id": "00000000-0000-4000-8000-000001234678",
-      "label": "label-4",
-      "name": "name-4",
+      "label": "label-2",
+      "name": "name-2",
+      "synonyms": [
+        "BK channel",
+        "BK channel alpha subunit"
+      ],
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "ion-channel-description",
+      "gene": "Kcnma1",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "label": "label-1",
+      "name": "name-1",
+      "synonyms": [
+        "BK channel",
+        "BK channel alpha subunit"
+      ],
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "ion-channel-description",
+      "gene": "Kcnma1",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "label": "label-0",
+      "name": "name-0",
       "synonyms": [
         "BK channel",
         "BK channel alpha subunit"

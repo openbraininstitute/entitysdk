@@ -17,7 +17,7 @@
       "creation_date": "2025-01-01T00:00:00Z",
       "description": "extraction-config-description",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Private u1/1",
+      "name": "config-2",
       "scan_parameters": {
         "foo": "bar"
       },
@@ -49,7 +49,7 @@
       "creation_date": "2025-01-01T00:00:00Z",
       "description": "extraction-config-description",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Private u1/0",
+      "name": "config-1",
       "scan_parameters": {
         "foo": "bar"
       },

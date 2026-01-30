@@ -46,11 +46,11 @@
       "update_date": "2025-01-01T00:00:00Z"
     },
     {
-      "alt_label": "my-custom-mtype",
+      "alt_label": "m2",
       "creation_date": "2025-01-01T00:00:00Z",
-      "definition": "My custom mtype",
+      "definition": "m2d",
       "id": "00000000-0000-4000-8000-000001234678",
-      "pref_label": "my-custom-mtype",
+      "pref_label": "m2",
       "update_date": "2025-01-01T00:00:00Z"
     }
   ],

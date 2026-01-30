@@ -36,7 +36,7 @@
       }
     },
     {
-      "DOI": "doi-1",
+      "DOI": "doi-3",
       "abstract": "my-abstract",
       "authors": [
         {
@@ -58,8 +58,8 @@
       },
       "creation_date": "2025-01-01T00:00:00Z",
       "id": "00000000-0000-4000-8000-000001234678",
-      "publication_year": 2021,
-      "title": "t1",
+      "publication_year": 2023,
+      "title": "t3",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
@@ -74,7 +74,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 100,
-    "total_items": 2
+    "page_size": 2,
+    "total_items": 5
   }
 }

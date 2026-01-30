@@ -1,6 +1,6 @@
 {
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": true,
+  "authorized_public": false,
   "created_by": {
     "family_name": null,
     "given_name": null,
@@ -15,7 +15,7 @@
   "end_time": null,
   "id": "00000000-0000-4000-8000-000001234678",
   "injection_type": "current_clamp",
-  "name": "Public u2/0",
+  "name": "my-stimulus",
   "recording_id": "00000000-0000-4000-8000-000001234678",
   "shape": "sinusoidal",
   "start_time": null,

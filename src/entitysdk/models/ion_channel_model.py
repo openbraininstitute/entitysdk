@@ -93,6 +93,12 @@ class IonChannelModel(ScientificArtifact):
             examples=["Ca_HVA"],
         ),
     ]
+    conductance_name: Annotated[
+        str | None,
+        Field(
+            description="Name of conductance.",
+        ),
+    ] = None
     nmodl_suffix: Annotated[
         str,
         Field(
