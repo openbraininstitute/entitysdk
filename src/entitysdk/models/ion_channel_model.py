@@ -144,7 +144,7 @@ class IonChannelModel(ScientificArtifact):
         NeuronBlock,
         Field(description="Variables declared in the NEURON block of the mod file."),
     ]
-    conductance_name:Annotated[
+    conductance_name: Annotated[
         str | None,
         Field(description="The name of the conductance of the ion channel if present, else None."),
     ]
