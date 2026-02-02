@@ -71,6 +71,7 @@
   "is_temperature_dependent": false,
   "temperature_celsius": 34,
   "is_stochastic": false,
+  "conductance_name": "gCa_HVAbar",
   "neuron_block": {
     "global": [{"celsius": "degree C"}],
     "range": [
