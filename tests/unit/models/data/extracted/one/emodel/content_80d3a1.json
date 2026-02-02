@@ -21,7 +21,7 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "emodel-desc-4",
+  "description": "emodel-desc-0",
   "etypes": [],
   "exemplar_morphology": {
     "creation_date": "2025-01-01T00:00:00Z",
@@ -43,13 +43,13 @@
   "id": "00000000-0000-4000-8000-000001234678",
   "iteration": "test iteration",
   "mtypes": [],
-  "name": "e-4",
-  "score": 40.0,
+  "name": "e-0",
+  "score": 0.0,
   "seed": -1,
   "species": {
     "id": "00000000-0000-4000-8000-000001234678",
-    "name": "TestSpecies1",
-    "taxonomy_id": "1"
+    "name": "TestSpecies0",
+    "taxonomy_id": "0"
   },
   "strain": null,
   "type": "emodel",

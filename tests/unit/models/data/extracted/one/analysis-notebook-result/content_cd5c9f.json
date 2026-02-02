@@ -1,7 +1,7 @@
 {
   "assets": [],
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": false,
+  "authorized_public": true,
   "created_by": {
     "family_name": null,
     "given_name": null,
@@ -11,9 +11,9 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "description-1",
+  "description": "analysis-notebook-result-description",
   "id": "00000000-0000-4000-8000-000001234678",
-  "name": "name-1",
+  "name": "analysis-notebook-result",
   "type": "analysis_notebook_result",
   "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {

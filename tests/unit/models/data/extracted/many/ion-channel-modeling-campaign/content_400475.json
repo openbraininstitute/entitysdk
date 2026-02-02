@@ -3,13 +3,13 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Project Id",
+        "pref_label": "Regular User With Different Project Id",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
@@ -18,7 +18,7 @@
       "id": "00000000-0000-4000-8000-000001234678",
       "input_recordings": [],
       "ion_channel_modeling_configs": [],
-      "name": "Private u1/1",
+      "name": "Public u2/0",
       "scan_parameters": {
         "foo": "bar"
       },
@@ -28,7 +28,7 @@
         "family_name": null,
         "given_name": null,
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Project Id",
+        "pref_label": "Regular User With Different Project Id",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
@@ -36,7 +36,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "contributions": [],
       "created_by": {
         "family_name": null,
@@ -51,7 +51,7 @@
       "id": "00000000-0000-4000-8000-000001234678",
       "input_recordings": [],
       "ion_channel_modeling_configs": [],
-      "name": "Private u1/0",
+      "name": "Public u1/0",
       "scan_parameters": {
         "foo": "bar"
       },

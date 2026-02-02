@@ -16,6 +16,15 @@ from pathlib import Path
 from datetime import timedelta
 
 
+class ActivityStatus(StrEnum):
+    created = "created"
+    pending = "pending"
+    running = "running"
+    done = "done"
+    error = "error"
+    cancelled = "cancelled"
+
+
 class ActivityType(StrEnum):
     simulation_execution = "simulation_execution"
     simulation_generation = "simulation_generation"
@@ -264,6 +273,7 @@ class CalibrationCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
     end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
     used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
     generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
 
@@ -316,6 +326,7 @@ class CircuitExtractionConfigGenerationCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
     end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
     used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
     generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
 
@@ -331,14 +342,6 @@ class CircuitExtractionConfigUserUpdate(BaseModel):
     scan_parameters: Annotated[
         dict[str, Any] | Literal["<NOT_SET>"] | None, Field(title="Scan Parameters")
     ] = "<NOT_SET>"
-
-
-class CircuitExtractionExecutionStatus(StrEnum):
-    created = "created"
-    pending = "pending"
-    running = "running"
-    done = "done"
-    error = "error"
 
 
 class CircuitScale(StrEnum):
@@ -541,6 +544,10 @@ class EMCellMeshType(StrEnum):
 
 
 class EMCellMeshUserUpdate(BaseModel):
+    name: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Name")] = "<NOT_SET>"
+    description: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Description")] = (
+        "<NOT_SET>"
+    )
     license_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="License Id")] = (
         "<NOT_SET>"
     )
@@ -915,6 +922,7 @@ class IonChannelModelingConfigGenerationCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
     end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
     used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
     generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
 
@@ -932,12 +940,15 @@ class IonChannelModelingConfigUserUpdate(BaseModel):
     ] = "<NOT_SET>"
 
 
-class IonChannelModelingExecutionStatus(StrEnum):
-    created = "created"
-    pending = "pending"
-    running = "running"
-    done = "done"
-    error = "error"
+class IonChannelModelingExecutionCreate(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
+    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
+    used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
+    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
 
 
 class IonChannelRecordingCreate(BaseModel):
@@ -1228,6 +1239,8 @@ class NestedConsortiumRead(BaseModel):
 
 
 class NestedEMCellMeshRead(BaseModel):
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: EntityType | None = None
@@ -1807,13 +1820,33 @@ class SimulationCreate(BaseModel):
     number_neurons: Annotated[int, Field(title="Number Neurons")]
 
 
-class SimulationExecutionStatus(StrEnum):
-    created = "created"
-    pending = "pending"
-    running = "running"
-    done = "done"
-    error = "error"
-    cancelled = "cancelled"
+class SimulationExecutionCreate(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
+    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
+    used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
+    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
+
+
+class SimulationExecutionRead(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    id: Annotated[UUID, Field(title="Id")]
+    type: ActivityType | None = None
+    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
+    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
+    used: Annotated[list[NestedEntityRead], Field(title="Used")]
+    generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
 
 
 class SimulationExecutionUserUpdate(BaseModel):
@@ -1831,13 +1864,17 @@ class SimulationExecutionUserUpdate(BaseModel):
         list[UUID] | NotSet | None,
         Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
     ]
-    status: SimulationExecutionStatus | None = None
+    status: Annotated[
+        ActivityStatus | NotSet | None,
+        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
+    ]
 
 
 class SimulationGenerationCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
     end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
     used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
     generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
 
@@ -1853,6 +1890,7 @@ class SimulationGenerationRead(BaseModel):
     type: ActivityType | None = None
     start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
     end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
     used: Annotated[list[NestedEntityRead], Field(title="Used")]
     generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
 
@@ -1869,6 +1907,10 @@ class SimulationGenerationUserUpdate(BaseModel):
     generated_ids: Annotated[
         list[UUID] | NotSet | None,
         Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
+    ]
+    status: Annotated[
+        ActivityStatus | NotSet | None,
+        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
     ]
 
 
@@ -1906,10 +1948,15 @@ class SimulationUserUpdate(BaseModel):
     )
 
 
-class SingleNeuronSimulationStatus(StrEnum):
-    started = "started"
-    failure = "failure"
-    success = "success"
+class SingleNeuronSimulationCreate(BaseModel):
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    seed: Annotated[int, Field(title="Seed")]
+    injection_location: Annotated[list[str], Field(title="Injection Location")]
+    recording_location: Annotated[list[str], Field(title="Recording Location")]
+    me_model_id: Annotated[UUID, Field(title="Me Model Id")]
 
 
 class SingleNeuronSimulationUserUpdate(BaseModel):
@@ -1921,9 +1968,6 @@ class SingleNeuronSimulationUserUpdate(BaseModel):
         UUID | Literal["<NOT_SET>"] | None, Field(title="Brain Region Id")
     ] = "<NOT_SET>"
     seed: Annotated[int | Literal["<NOT_SET>"] | None, Field(title="Seed")] = "<NOT_SET>"
-    status: Annotated[
-        SingleNeuronSimulationStatus | Literal["<NOT_SET>"] | None, Field(title="Status")
-    ] = "<NOT_SET>"
     injection_location: Annotated[
         list[str] | Literal["<NOT_SET>"] | None, Field(title="Injection Location")
     ] = "<NOT_SET>"
@@ -1950,7 +1994,6 @@ class SingleNeuronSynaptomeSimulationCreate(BaseModel):
     brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     seed: Annotated[int, Field(title="Seed")]
-    status: SingleNeuronSimulationStatus
     injection_location: Annotated[list[str], Field(title="Injection Location")]
     recording_location: Annotated[list[str], Field(title="Recording Location")]
     synaptome_id: Annotated[UUID, Field(title="Synaptome Id")]
@@ -1965,9 +2008,6 @@ class SingleNeuronSynaptomeSimulationUserUpdate(BaseModel):
         UUID | Literal["<NOT_SET>"] | None, Field(title="Brain Region Id")
     ] = "<NOT_SET>"
     seed: Annotated[int | Literal["<NOT_SET>"] | None, Field(title="Seed")] = "<NOT_SET>"
-    status: Annotated[
-        SingleNeuronSimulationStatus | Literal["<NOT_SET>"] | None, Field(title="Status")
-    ] = "<NOT_SET>"
     injection_location: Annotated[
         list[str] | Literal["<NOT_SET>"] | None, Field(title="Injection Location")
     ] = "<NOT_SET>"
@@ -2023,6 +2063,7 @@ class SkeletonizationConfigGenerationCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
     end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
     used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
     generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
 
@@ -2038,6 +2079,7 @@ class SkeletonizationConfigGenerationRead(BaseModel):
     type: ActivityType | None = None
     start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
     end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
     used: Annotated[list[NestedEntityRead], Field(title="Used")]
     generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
 
@@ -2054,6 +2096,10 @@ class SkeletonizationConfigGenerationUserUpdate(BaseModel):
     generated_ids: Annotated[
         list[UUID] | NotSet | None,
         Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
+    ]
+    status: Annotated[
+        ActivityStatus | NotSet | None,
+        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
     ]
 
 
@@ -2073,12 +2119,33 @@ class SkeletonizationConfigUserUpdate(BaseModel):
     ] = "<NOT_SET>"
 
 
-class SkeletonizationExecutionStatus(StrEnum):
-    created = "created"
-    pending = "pending"
-    running = "running"
-    done = "done"
-    error = "error"
+class SkeletonizationExecutionCreate(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
+    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
+    used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
+    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
+
+
+class SkeletonizationExecutionRead(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    id: Annotated[UUID, Field(title="Id")]
+    type: ActivityType | None = None
+    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
+    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
+    used: Annotated[list[NestedEntityRead], Field(title="Used")]
+    generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
 
 
 class SkeletonizationExecutionUserUpdate(BaseModel):
@@ -2096,7 +2163,10 @@ class SkeletonizationExecutionUserUpdate(BaseModel):
         list[UUID] | NotSet | None,
         Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
     ]
-    status: SkeletonizationExecutionStatus | None = None
+    status: Annotated[
+        ActivityStatus | NotSet | None,
+        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
+    ]
 
 
 class SlicingDirectionType(StrEnum):
@@ -2263,6 +2333,7 @@ class ValidationCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
     end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
     used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
     generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
 
@@ -2278,6 +2349,7 @@ class ValidationRead(BaseModel):
     type: ActivityType | None = None
     start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
     end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
     used: Annotated[list[NestedEntityRead], Field(title="Used")]
     generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
 
@@ -2318,6 +2390,10 @@ class ValidationUserUpdate(BaseModel):
         list[UUID] | NotSet | None,
         Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
     ]
+    status: Annotated[
+        ActivityStatus | NotSet | None,
+        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
+    ]
 
 
 class WithinBrainRegionDirection(StrEnum):
@@ -2347,6 +2423,7 @@ class AnalysisNotebookExecutionCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
     end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
     used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
     generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
     analysis_notebook_template_id: Annotated[
@@ -2371,6 +2448,10 @@ class AnalysisNotebookExecutionUpdate(BaseModel):
     generated_ids: Annotated[
         list[UUID] | NotSet | None,
         Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
+    ]
+    status: Annotated[
+        ActivityStatus | NotSet | None,
+        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
     ]
     analysis_notebook_template_id: Annotated[
         UUID | None, Field(title="Analysis Notebook Template Id")
@@ -2517,6 +2598,7 @@ class CalibrationRead(BaseModel):
     type: ActivityType | None = None
     start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
     end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
     used: Annotated[list[NestedEntityRead], Field(title="Used")]
     generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
 
@@ -2533,6 +2615,10 @@ class CalibrationUserUpdate(BaseModel):
     generated_ids: Annotated[
         list[UUID] | NotSet | None,
         Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
+    ]
+    status: Annotated[
+        ActivityStatus | NotSet | None,
+        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
     ]
 
 
@@ -2684,6 +2770,7 @@ class CircuitExtractionConfigGenerationRead(BaseModel):
     type: ActivityType | None = None
     start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
     end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
     used: Annotated[list[NestedEntityRead], Field(title="Used")]
     generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
 
@@ -2701,6 +2788,10 @@ class CircuitExtractionConfigGenerationUserUpdate(BaseModel):
         list[UUID] | NotSet | None,
         Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
     ]
+    status: Annotated[
+        ActivityStatus | NotSet | None,
+        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
+    ]
 
 
 class CircuitExtractionExecutionCreate(BaseModel):
@@ -2709,9 +2800,9 @@ class CircuitExtractionExecutionCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
     end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
     used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
     generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
-    status: CircuitExtractionExecutionStatus
 
 
 class CircuitExtractionExecutionRead(BaseModel):
@@ -2727,9 +2818,9 @@ class CircuitExtractionExecutionRead(BaseModel):
     type: ActivityType | None = None
     start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
     end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
     used: Annotated[list[NestedEntityRead], Field(title="Used")]
     generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
-    status: CircuitExtractionExecutionStatus
 
 
 class CircuitExtractionExecutionUserUpdate(BaseModel):
@@ -2747,7 +2838,10 @@ class CircuitExtractionExecutionUserUpdate(BaseModel):
         list[UUID] | NotSet | None,
         Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
     ]
-    status: CircuitExtractionExecutionStatus | None = None
+    status: Annotated[
+        ActivityStatus | NotSet | None,
+        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
+    ]
 
 
 class ComputationallySynthesizedCellMorphologyProtocolRead(BaseModel):
@@ -2848,6 +2942,8 @@ class DigitalReconstructionCellMorphologyProtocolRead(BaseModel):
 
 
 class EMCellMeshCreate(BaseModel):
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
     brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
@@ -3164,6 +3260,7 @@ class IonChannelModelingConfigGenerationRead(BaseModel):
     type: ActivityType | None = None
     start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
     end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
     used: Annotated[list[NestedEntityRead], Field(title="Used")]
     generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
 
@@ -3181,17 +3278,10 @@ class IonChannelModelingConfigGenerationUserUpdate(BaseModel):
         list[UUID] | NotSet | None,
         Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
     ]
-
-
-class IonChannelModelingExecutionCreate(BaseModel):
-    executor: ExecutorType | None = None
-    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
-    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
-    used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
-    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
-    status: IonChannelModelingExecutionStatus
+    status: Annotated[
+        ActivityStatus | NotSet | None,
+        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
+    ]
 
 
 class IonChannelModelingExecutionRead(BaseModel):
@@ -3207,9 +3297,9 @@ class IonChannelModelingExecutionRead(BaseModel):
     type: ActivityType | None = None
     start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
     end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
     used: Annotated[list[NestedEntityRead], Field(title="Used")]
     generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
-    status: IonChannelModelingExecutionStatus
 
 
 class IonChannelModelingExecutionUserUpdate(BaseModel):
@@ -3227,7 +3317,10 @@ class IonChannelModelingExecutionUserUpdate(BaseModel):
         list[UUID] | NotSet | None,
         Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
     ]
-    status: IonChannelModelingExecutionStatus | None = None
+    status: Annotated[
+        ActivityStatus | NotSet | None,
+        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
+    ]
 
 
 class IonChannelRead(BaseModel):
@@ -3393,6 +3486,12 @@ class ListResponseScientificArtifactPublicationLinkRead(BaseModel):
     facets: Facets | None = None
 
 
+class ListResponseSimulationExecutionRead(BaseModel):
+    data: Annotated[list[SimulationExecutionRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
 class ListResponseSimulationGenerationRead(BaseModel):
     data: Annotated[list[SimulationGenerationRead], Field(title="Data")]
     pagination: PaginationResponse
@@ -3401,6 +3500,12 @@ class ListResponseSimulationGenerationRead(BaseModel):
 
 class ListResponseSkeletonizationConfigGenerationRead(BaseModel):
     data: Annotated[list[SkeletonizationConfigGenerationRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
+class ListResponseSkeletonizationExecutionRead(BaseModel):
+    data: Annotated[list[SkeletonizationExecutionRead], Field(title="Data")]
     pagination: PaginationResponse
     facets: Facets | None = None
 
@@ -3646,35 +3751,6 @@ class SimulationCampaignRead(BaseModel):
     simulations: Annotated[list[NestedSimulationRead], Field(title="Simulations")]
 
 
-class SimulationExecutionCreate(BaseModel):
-    executor: ExecutorType | None = None
-    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
-    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
-    used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
-    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
-    status: SimulationExecutionStatus
-
-
-class SimulationExecutionRead(BaseModel):
-    executor: ExecutorType | None = None
-    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
-    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
-    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
-    id: Annotated[UUID, Field(title="Id")]
-    type: ActivityType | None = None
-    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
-    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
-    used: Annotated[list[NestedEntityRead], Field(title="Used")]
-    generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
-    status: SimulationExecutionStatus
-
-
 class SimulationRead(BaseModel):
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -3708,18 +3784,6 @@ class SimulationResultRead(BaseModel):
     simulation_id: Annotated[UUID, Field(title="Simulation Id")]
 
 
-class SingleNeuronSimulationCreate(BaseModel):
-    name: Annotated[str, Field(title="Name")]
-    description: Annotated[str, Field(title="Description")]
-    brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    seed: Annotated[int, Field(title="Seed")]
-    status: SingleNeuronSimulationStatus
-    injection_location: Annotated[list[str], Field(title="Injection Location")]
-    recording_location: Annotated[list[str], Field(title="Recording Location")]
-    me_model_id: Annotated[UUID, Field(title="Me Model Id")]
-
-
 class SingleNeuronSimulationRead(BaseModel):
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -3734,7 +3798,6 @@ class SingleNeuronSimulationRead(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     brain_region: NestedBrainRegionRead
     seed: Annotated[int, Field(title="Seed")]
-    status: SingleNeuronSimulationStatus
     injection_location: Annotated[list[str], Field(title="Injection Location")]
     recording_location: Annotated[list[str], Field(title="Recording Location")]
     me_model: NestedMEModel
@@ -3772,7 +3835,6 @@ class SingleNeuronSynaptomeSimulationRead(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     brain_region: NestedBrainRegionRead
     seed: Annotated[int, Field(title="Seed")]
-    status: SingleNeuronSimulationStatus
     injection_location: Annotated[list[str], Field(title="Injection Location")]
     recording_location: Annotated[list[str], Field(title="Recording Location")]
     synaptome: NestedSynaptome
@@ -3816,35 +3878,6 @@ class SkeletonizationConfigRead(BaseModel):
     scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
 
 
-class SkeletonizationExecutionCreate(BaseModel):
-    executor: ExecutorType | None = None
-    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
-    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
-    used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
-    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
-    status: SkeletonizationExecutionStatus
-
-
-class SkeletonizationExecutionRead(BaseModel):
-    executor: ExecutorType | None = None
-    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
-    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
-    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
-    id: Annotated[UUID, Field(title="Id")]
-    type: ActivityType | None = None
-    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
-    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
-    used: Annotated[list[NestedEntityRead], Field(title="Used")]
-    generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
-    status: SkeletonizationExecutionStatus
-
-
 class ValidationResultRead(BaseModel):
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
@@ -3885,6 +3918,7 @@ class AnalysisNotebookExecutionRead(BaseModel):
     type: ActivityType | None = None
     start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
     end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
     used: Annotated[list[NestedEntityRead], Field(title="Used")]
     generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
     analysis_notebook_template: NestedAnalysisNotebookTemplateRead | None
@@ -4075,6 +4109,8 @@ class CircuitRead(BaseModel):
 
 
 class EMCellMeshRead(BaseModel):
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     license: LicenseRead | None = None
@@ -5014,12 +5050,6 @@ class ListResponseSimulationCampaignRead(BaseModel):
     facets: Facets | None = None
 
 
-class ListResponseSimulationExecutionRead(BaseModel):
-    data: Annotated[list[SimulationExecutionRead], Field(title="Data")]
-    pagination: PaginationResponse
-    facets: Facets | None = None
-
-
 class ListResponseSimulationRead(BaseModel):
     data: Annotated[list[SimulationRead], Field(title="Data")]
     pagination: PaginationResponse
@@ -5058,12 +5088,6 @@ class ListResponseSkeletonizationCampaignRead(BaseModel):
 
 class ListResponseSkeletonizationConfigRead(BaseModel):
     data: Annotated[list[SkeletonizationConfigRead], Field(title="Data")]
-    pagination: PaginationResponse
-    facets: Facets | None = None
-
-
-class ListResponseSkeletonizationExecutionRead(BaseModel):
-    data: Annotated[list[SkeletonizationExecutionRead], Field(title="Data")]
     pagination: PaginationResponse
     facets: Facets | None = None
 
@@ -5222,6 +5246,8 @@ class CellMorphologyRead(BaseModel):
 
 
 class EMCellMeshAnnotationExpandedRead(BaseModel):
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     license: LicenseRead | None = None

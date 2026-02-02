@@ -14,10 +14,20 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "campaign-description-2",
+      "description": "campaign-description-1",
       "id": "00000000-0000-4000-8000-000001234678",
       "input_recordings": [],
       "ion_channel_modeling_configs": [
+        {
+          "description": "config-1",
+          "id": "00000000-0000-4000-8000-000001234678",
+          "ion_channel_modeling_campaign_id": "00000000-0000-4000-8000-000001234678",
+          "name": "config-1",
+          "scan_parameters": {
+            "foo": "bar"
+          },
+          "type": "ion_channel_modeling_config"
+        },
         {
           "description": "config-2",
           "id": "00000000-0000-4000-8000-000001234678",
@@ -27,19 +37,9 @@
             "foo": "bar"
           },
           "type": "ion_channel_modeling_config"
-        },
-        {
-          "description": "config-3",
-          "id": "00000000-0000-4000-8000-000001234678",
-          "ion_channel_modeling_campaign_id": "00000000-0000-4000-8000-000001234678",
-          "name": "config-3",
-          "scan_parameters": {
-            "foo": "bar"
-          },
-          "type": "ion_channel_modeling_config"
         }
       ],
-      "name": "campaign-2",
+      "name": "campaign-1",
       "scan_parameters": {
         "foo": "bar"
       },

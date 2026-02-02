@@ -21,7 +21,7 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "d7",
+  "description": "my-description",
   "id": "00000000-0000-4000-8000-000001234678",
   "license": {
     "creation_date": "2025-01-01T00:00:00Z",
@@ -33,51 +33,51 @@
   },
   "measurements": [
     {
-      "id": 15,
+      "id": 1,
       "name": "minimum",
       "unit": "\u03bcm",
       "value": 1.23
     },
     {
-      "id": 16,
+      "id": 2,
       "name": "maximum",
       "unit": "\u03bcm",
       "value": 1.45
     }
   ],
-  "name": "s7",
+  "name": "my-name",
   "post_mtype": {
-    "alt_label": "post-m3",
+    "alt_label": "mtype-alt-label",
     "creation_date": "2025-01-01T00:00:00Z",
-    "definition": "",
+    "definition": "mtype-definition",
     "id": "00000000-0000-4000-8000-000001234678",
-    "pref_label": "post-m3",
+    "pref_label": "mtype-pref-label",
     "update_date": "2025-01-01T00:00:00Z"
   },
   "post_region": {
-    "acronym": "acronym3",
-    "annotation_value": 3,
+    "acronym": "acronym64",
+    "annotation_value": 64,
     "color_hex_triplet": "FF0000",
     "hierarchy_id": "00000000-0000-4000-8000-000001234678",
     "id": "00000000-0000-4000-8000-000001234678",
-    "name": "post-r3",
+    "name": "RedRegion",
     "parent_structure_id": null
   },
   "pre_mtype": {
-    "alt_label": "pre-m1",
+    "alt_label": "mtype-alt-label",
     "creation_date": "2025-01-01T00:00:00Z",
-    "definition": "",
+    "definition": "mtype-definition",
     "id": "00000000-0000-4000-8000-000001234678",
-    "pref_label": "pre-m1",
+    "pref_label": "mtype-pref-label",
     "update_date": "2025-01-01T00:00:00Z"
   },
   "pre_region": {
-    "acronym": "acronym0",
-    "annotation_value": 0,
+    "acronym": "acronym64",
+    "annotation_value": 64,
     "color_hex_triplet": "FF0000",
     "hierarchy_id": "00000000-0000-4000-8000-000001234678",
     "id": "00000000-0000-4000-8000-000001234678",
-    "name": "pre-r0",
+    "name": "RedRegion",
     "parent_structure_id": null
   },
   "subject": {
