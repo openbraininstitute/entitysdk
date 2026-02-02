@@ -96,7 +96,13 @@ class IonChannelModel(ScientificArtifact):
     conductance_name: Annotated[
         str | None,
         Field(
-            description="Name of conductance.",
+            description="Name of conductance if present.",
+        ),
+    ] = None
+    max_permeability_name: Annotated[
+        str | None,
+        Field(
+            description="Name of maximum permeability if present.",
         ),
     ] = None
     nmodl_suffix: Annotated[
