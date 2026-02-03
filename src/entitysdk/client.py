@@ -124,6 +124,7 @@ class Client:
             entity_id: Resource id of the entity.
             entity_type: Type of the entity.
             project_context: Optional project context.
+            options: Optional dict with options to be passed.
             admin: Whether to use the admin endpoint or not.
 
         Returns:
