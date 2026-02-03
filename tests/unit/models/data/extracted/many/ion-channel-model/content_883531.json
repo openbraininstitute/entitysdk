@@ -1,0 +1,2243 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "28",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "28",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "27",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "27",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "26",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "26",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "25",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "25",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "24",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "24",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "23",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "23",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "22",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "22",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "21",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "21",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "20",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "20",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "19",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "19",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "18",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "18",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "17",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "17",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "16",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "16",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "15",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "15",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "14",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "14",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "13",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "13",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "12",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "12",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "11",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "11",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "10",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "10",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "9",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "9",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "8",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "8",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "7",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "7",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "6",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "6",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "5",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "5",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "4",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "4",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "3",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "3",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "2",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "2",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "1",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "1",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "conductance_name": null,
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test ICM Description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_ljp_corrected": false,
+      "is_stochastic": false,
+      "is_temperature_dependent": false,
+      "license": null,
+      "max_permeability_name": null,
+      "name": "0",
+      "neuron_block": {
+        "global": [],
+        "nonspecific": [],
+        "range": [],
+        "useion": []
+      },
+      "nmodl_suffix": "0",
+      "notice_text": null,
+      "published_in": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "temperature_celsius": 0,
+      "type": "ion_channel_model",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 30,
+    "total_items": 29
+  }
+}

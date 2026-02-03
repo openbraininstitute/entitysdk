@@ -1,7 +1,7 @@
 {
   "assets": [],
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": true,
+  "authorized_public": false,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
@@ -21,7 +21,7 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "description",
+  "description": "0_description",
   "etypes": [],
   "exemplar_morphology": {
     "creation_date": "2025-01-01T00:00:00Z",
@@ -43,8 +43,8 @@
   "id": "00000000-0000-4000-8000-000001234678",
   "iteration": "test iteration",
   "mtypes": [],
-  "name": "name",
-  "score": 10.0,
+  "name": "0",
+  "score": 0.0,
   "seed": -1,
   "species": {
     "id": "00000000-0000-4000-8000-000001234678",

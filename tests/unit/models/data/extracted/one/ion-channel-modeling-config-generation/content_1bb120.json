@@ -14,9 +14,9 @@
   "generated": [
     {
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "id": "00000000-0000-4000-8000-000001234678",
-      "type": "ion_channel_modeling_config"
+      "type": "ion_channel_modeling_campaign"
     }
   ],
   "id": "00000000-0000-4000-8000-000001234678",
@@ -35,7 +35,7 @@
   "used": [
     {
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "id": "00000000-0000-4000-8000-000001234678",
       "type": "ion_channel_modeling_campaign"
     }
