@@ -22,6 +22,11 @@ from entitysdk.models.circuit_extraction import (
 from entitysdk.models.classification import ETypeClassification, MTypeClassification
 from entitysdk.models.contribution import Contribution, Role
 from entitysdk.models.core import Consortium, Organization, Person
+from entitysdk.models.density import (
+    ExperimentalBoutonDensity,
+    ExperimentalNeuronDensity,
+    ExperimentalSynapsesPerConnection,
+)
 from entitysdk.models.derivation import Derivation
 from entitysdk.models.electrical_cell_recording import ElectricalCellRecording
 from entitysdk.models.electrical_recording import ElectricalRecordingStimulus
@@ -97,6 +102,9 @@ __all__ = [
     "Entity",
     "ETypeClass",
     "ETypeClassification",
+    "ExperimentalBoutonDensity",
+    "ExperimentalNeuronDensity",
+    "ExperimentalSynapsesPerConnection",
     "IonChannel",
     "IonChannelModel",
     "IonChannelModelingCampaign",
