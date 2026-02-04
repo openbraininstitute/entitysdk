@@ -94,7 +94,6 @@ def get_entity(
         token=token,
         http_client=http_client,
     )
-
     return serdes.deserialize_model(response.json(), entity_type)
 
 

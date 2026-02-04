@@ -499,6 +499,29 @@ def test_client_get(
     assert res.assets[0].id == asset_id1
     assert res.assets[1].id == asset_id2
 
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}?foo=bar",
+        match_headers=request_headers,
+        json=_mock_entity_response(
+            entity_id=str(entity_id),
+            assets=[
+                _mock_asset_response(asset_id=asset_id1),
+                _mock_asset_response(asset_id=asset_id2),
+            ],
+        ),
+    )
+
+    res = client.get_entity(
+        entity_id=str(entity_id),
+        entity_type=Entity,
+        options={"foo": "bar"},
+    )
+    assert res.id == entity_id
+    assert len(res.assets) == 2
+    assert res.assets[0].id == asset_id1
+    assert res.assets[1].id == asset_id2
+
 
 @patch("entitysdk.route.get_route_name")
 def test_client_admin_get(
