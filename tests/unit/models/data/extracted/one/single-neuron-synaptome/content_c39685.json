@@ -3,12 +3,12 @@
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "brain_region": {
-    "acronym": "acronym64",
-    "annotation_value": 64,
+    "acronym": "acronym0",
+    "annotation_value": 0,
     "color_hex_triplet": "FF0000",
     "hierarchy_id": "00000000-0000-4000-8000-000001234678",
     "id": "00000000-0000-4000-8000-000001234678",
-    "name": "RedRegion",
+    "name": "region-0",
     "parent_structure_id": null
   },
   "contributions": [],
@@ -21,11 +21,11 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "my-description",
+  "description": "sim-desc-2",
   "id": "00000000-0000-4000-8000-000001234678",
   "me_model": {
     "creation_date": "2025-01-01T00:00:00Z",
-    "description": "0_description",
+    "description": "1_description",
     "etypes": [
       {
         "alt_label": "etype-emodel-0",
@@ -47,12 +47,12 @@
         "update_date": "2025-01-01T00:00:00Z"
       }
     ],
-    "name": "0",
+    "name": "1",
     "update_date": "2025-01-01T00:00:00Z",
     "validation_status": "created"
   },
-  "name": "my-synaptome",
-  "seed": 1,
+  "name": "synaptome-2",
+  "seed": 2,
   "type": "single_neuron_synaptome",
   "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {

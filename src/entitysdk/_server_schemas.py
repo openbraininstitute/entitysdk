@@ -4568,6 +4568,8 @@ class IonChannelModelCreate(BaseModel):
     temperature_celsius: Annotated[int | None, Field(title="Temperature Celsius")]
     is_stochastic: Annotated[bool | None, Field(title="Is Stochastic")] = False
     neuron_block: NeuronBlock
+    conductance_name: Annotated[str | None, Field(title="Conductance Name")] = None
+    max_permeability_name: Annotated[str | None, Field(title="Max Permeability Name")] = None
 
 
 class IonChannelModelExpanded(BaseModel):
@@ -4622,6 +4624,8 @@ class IonChannelModelExpanded(BaseModel):
     temperature_celsius: Annotated[int | None, Field(title="Temperature Celsius")]
     is_stochastic: Annotated[bool | None, Field(title="Is Stochastic")] = False
     neuron_block: NeuronBlock
+    conductance_name: Annotated[str | None, Field(title="Conductance Name")] = None
+    max_permeability_name: Annotated[str | None, Field(title="Max Permeability Name")] = None
 
 
 class IonChannelModelRead(BaseModel):
@@ -4671,6 +4675,8 @@ class IonChannelModelRead(BaseModel):
     temperature_celsius: Annotated[int | None, Field(title="Temperature Celsius")]
     is_stochastic: Annotated[bool | None, Field(title="Is Stochastic")] = False
     neuron_block: NeuronBlock
+    conductance_name: Annotated[str | None, Field(title="Conductance Name")] = None
+    max_permeability_name: Annotated[str | None, Field(title="Max Permeability Name")] = None
 
 
 class IonChannelModelUserUpdate(BaseModel):
@@ -4716,6 +4722,12 @@ class IonChannelModelUserUpdate(BaseModel):
     )
     neuron_block: Annotated[
         NeuronBlock | Literal["<NOT_SET>"] | None, Field(title="Neuron Block")
+    ] = "<NOT_SET>"
+    conductance_name: Annotated[
+        str | Literal["<NOT_SET>"] | None, Field(title="Conductance Name")
+    ] = "<NOT_SET>"
+    max_permeability_name: Annotated[
+        str | Literal["<NOT_SET>"] | None, Field(title="Max Permeability Name")
     ] = "<NOT_SET>"
 
 
@@ -4767,6 +4779,8 @@ class IonChannelModelWAssets(BaseModel):
     temperature_celsius: Annotated[int | None, Field(title="Temperature Celsius")]
     is_stochastic: Annotated[bool | None, Field(title="Is Stochastic")] = False
     neuron_block: NeuronBlock
+    conductance_name: Annotated[str | None, Field(title="Conductance Name")] = None
+    max_permeability_name: Annotated[str | None, Field(title="Max Permeability Name")] = None
 
 
 class IonChannelModelingCampaignRead(BaseModel):

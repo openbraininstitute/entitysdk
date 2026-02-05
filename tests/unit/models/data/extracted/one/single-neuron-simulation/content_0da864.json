@@ -1,7 +1,7 @@
 {
   "assets": [],
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": false,
+  "authorized_public": true,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
@@ -20,10 +20,10 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "original-description",
+  "description": "description",
   "id": "00000000-0000-4000-8000-000001234678",
   "injection_location": [
-    "soma[0]"
+    "dendrite[0]"
   ],
   "me_model": {
     "creation_date": "2025-01-01T00:00:00Z",
@@ -35,11 +35,11 @@
     "update_date": "2025-01-01T00:00:00Z",
     "validation_status": "created"
   },
-  "name": "original-sim",
+  "name": "name",
   "recording_location": [
-    "soma[0]_0.5"
+    "dendrite[0]_0.5"
   ],
-  "seed": 1,
+  "seed": 42,
   "type": "single_neuron_simulation",
   "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
