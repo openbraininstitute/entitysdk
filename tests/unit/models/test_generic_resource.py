@@ -17,8 +17,6 @@ DATA_DIR = Path(__file__).parent / "data"
 MISSING_ROUTES = {
     "calibration",
     "cell-composition",
-    "external-url",
-    "scientific-artifact-external-url-link",
     "validation",
 }
 

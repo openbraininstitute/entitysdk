@@ -35,6 +35,7 @@ from entitysdk._server_schemas import EMCellMeshGenerationMethod as EMCellMeshGe
 from entitysdk._server_schemas import EMCellMeshType as EMCellMeshType
 from entitysdk._server_schemas import EntityType as EntityType
 from entitysdk._server_schemas import ExecutorType as ExecutorType
+from entitysdk._server_schemas import ExternalSource as ExternalSource
 from entitysdk._server_schemas import MeasurableEntity as MeasurableEntity
 from entitysdk._server_schemas import MeasurementStatistic as MeasurementStatistic
 from entitysdk._server_schemas import MeasurementUnit as MeasurementUnit

@@ -38,6 +38,7 @@ from entitysdk.models.em_dense_reconstruction_dataset import (
 from entitysdk.models.emodel import EModel
 from entitysdk.models.entity import Entity
 from entitysdk.models.etype import ETypeClass
+from entitysdk.models.external_url import ExternalUrl
 from entitysdk.models.ion_channel import IonChannel
 from entitysdk.models.ion_channel_model import IonChannelModel, NeuronBlock, UseIon
 from entitysdk.models.ion_channel_modeling_campaign import IonChannelModelingCampaign
@@ -54,6 +55,7 @@ from entitysdk.models.memodel import MEModel
 from entitysdk.models.memodelcalibrationresult import MEModelCalibrationResult
 from entitysdk.models.mtype import MTypeClass
 from entitysdk.models.publication import Publication
+from entitysdk.models.scientific_artifact_external_url_link import ScientificArtifactExternalUrlLink
 from entitysdk.models.scientific_artifact_publication_link import ScientificArtifactPublicationLink
 from entitysdk.models.simulation import Simulation
 from entitysdk.models.simulation_campaign import SimulationCampaign
@@ -105,6 +107,7 @@ __all__ = [
     "ExperimentalBoutonDensity",
     "ExperimentalNeuronDensity",
     "ExperimentalSynapsesPerConnection",
+    "ExternalUrl",
     "IonChannel",
     "IonChannelModel",
     "IonChannelModelingCampaign",
@@ -124,6 +127,7 @@ __all__ = [
     "Person",
     "Publication",
     "Role",
+    "ScientificArtifactExternalUrlLink",
     "ScientificArtifactPublicationLink",
     "Simulation",
     "SimulationCampaign",
