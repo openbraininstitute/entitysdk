@@ -10,6 +10,8 @@ from entitysdk.models.brain_atlas_region import BrainAtlasRegion
 from entitysdk.models.brain_location import BrainLocation
 from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.brain_region_hierarchy import BrainRegionHierarchy
+from entitysdk.models.calibration import Calibration
+from entitysdk.models.cell_composition import CellComposition
 from entitysdk.models.cell_morphology import CellMorphology
 from entitysdk.models.cell_morphology_protocol import CellMorphologyProtocol
 from entitysdk.models.circuit import Circuit
@@ -71,6 +73,7 @@ from entitysdk.models.skeletonization_execution import SkeletonizationExecution
 from entitysdk.models.subject import Subject
 from entitysdk.models.synaptome import SingleNeuronSynaptome
 from entitysdk.models.taxonomy import Species, Strain
+from entitysdk.models.validation import Validation
 from entitysdk.models.validation_result import ValidationResult
 
 __all__ = [
@@ -84,6 +87,8 @@ __all__ = [
     "BrainLocation",
     "BrainRegion",
     "BrainRegionHierarchy",
+    "Calibration",
+    "CellComposition",
     "CellMorphology",
     "CellMorphologyProtocol",
     "Circuit",
@@ -146,5 +151,6 @@ __all__ = [
     "Strain",
     "Subject",
     "UseIon",
+    "Validation",
     "ValidationResult",
 ]

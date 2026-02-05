@@ -15,6 +15,8 @@ _ROUTES = {
     "BrainAtlasRegion": "brain-atlas-region",
     "BrainRegion": "brain-region",
     "BrainRegionHierarchy": "brain-region-hierarchy",
+    "Calibration": "calibration",
+    "CellComposition": "cell-composition",
     "CellMorphology": "cell-morphology",
     "Circuit": "circuit",
     "CircuitExtractionCampaign": "circuit-extraction-campaign",
@@ -71,6 +73,7 @@ _ROUTES = {
     "Species": "species",
     "Strain": "strain",
     "Subject": "subject",
+    "Validation": "validation",
     "ValidationResult": "validation-result",
     # CellMorphologyProtocol type for retrieving
     "CellMorphologyProtocol": "cell-morphology-protocol",
