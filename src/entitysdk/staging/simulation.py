@@ -61,7 +61,8 @@ def stage_simulation(
     if circuit_config_path is None:
         L.info(
             "Circuit config path was not provided. Circuit is going to be staged from metadata. "
-            "Circuit id to be staged: %s"
+            "Circuit id to be staged: %s",
+            model.entity_id,
         )
         base_entity = client.get_entity(entity_id=model.entity_id, entity_type=Entity)
         match base_entity.type:
