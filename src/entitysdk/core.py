@@ -5,6 +5,7 @@ import logging
 import os
 from collections.abc import Iterator
 from pathlib import Path
+from time import time
 from typing import TypeVar
 
 import httpx
@@ -22,7 +23,12 @@ from entitysdk.models.asset import (
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.result import IteratorResult
-from entitysdk.route import get_assets_endpoint, get_entity_derivations_endpoint
+from entitysdk.route import (
+    get_assets_endpoint,
+    get_entity_derivations_endpoint,
+    multipart_upload_complete_endpoint,
+    multipart_upload_initiate_endpoint,
+)
 from entitysdk.store import LocalAssetStore
 from entitysdk.types import ID, AssetLabel, DerivationType
 from entitysdk.util import (
@@ -31,6 +37,7 @@ from entitysdk.util import (
     stream_paginated_request,
     validate_filename_extension_consistency,
 )
+from entitysdk.utils.io import calculate_sha256_digest
 
 L = logging.getLogger(__name__)
 
@@ -226,9 +233,120 @@ def delete_entity(
     )
 
 
-def upload_asset_file(
-    url: str,
+def multipart_upload_asset_file(
     *,
+    api_url: str,
+    entity_id: ID,
+    entity_type: type[Entity],
+    asset_path: Path,
+    asset_metadata: LocalAssetMetadata,
+    project_context: ProjectContext,
+    token: str,
+    http_client: httpx.Client | None = None,
+):
+    """Upload file using multipart delegation to s3."""
+    url_initiate = multipart_upload_initiate_endpoint(
+        api_url=api_url,
+        entity_id=entity_id,
+        entity_type=entity_type,
+    )
+
+    filesize = asset_path.stat().st_size
+
+    initiate_response = make_db_api_request(
+        url=url_initiate,
+        method="POST",
+        json={
+            "filename": asset_metadata.file_name,
+            "filesize": filesize,
+            "sha256_digest": calculate_sha256_digest(asset_path),
+            "content_type": asset_metadata.content_type,
+            "label": asset_metadata.label,
+        },
+        project_context=project_context,
+        token=token,
+        http_client=http_client,
+    )
+
+    asset_data = initiate_response.json()
+    upload_meta = asset_data["upload_meta"]
+
+    part_size = upload_meta["part_size"]
+
+    for part in upload_meta["parts"]:
+        part_number = part["part_number"]
+        offset = (part_number - 1) * part_size
+        size = min(part_size, filesize - offset)
+        _upload_part(
+            file_path=asset_path,
+            offset=offset,
+            size=part_size,
+            presigned_url=part["url"],
+            part_number=part_number,
+            http_client=http_client,
+        )
+
+    url_complete = multipart_upload_complete_endpoint(
+        api_url=api_url,
+        entity_id=entity_id,
+        entity_type=entity_type,
+        asset_id=asset_data["id"],
+    )
+
+    complete_response = make_db_api_request(
+        url=url_complete,
+        method="POST",
+        token=token,
+        http_client=http_client,
+        project_context=project_context,
+    )
+
+    return serdes.deserialize_model(complete_response.json(), Asset)
+
+
+MAX_RETRIES = 3
+BACKOFF_BASE = 0.25
+TIMEOUT = (5, 60)
+
+
+def _upload_part(
+    file_path: str,
+    offset: int,
+    size: int,
+    presigned_url: str,
+    part_number: int,
+    http_client,
+):
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            with open(file_path, "rb") as f:
+                f.seek(offset)
+                data = f.read(size)
+
+            http_client.put(
+                presigned_url,
+                data=data,
+                timeout=TIMEOUT,
+                headers={},
+            ).raise_for_status()
+
+            return  # success
+
+        except Exception as exc:
+            if attempt >= MAX_RETRIES:
+                raise RuntimeError(
+                    f"Part {part_number} failed after {MAX_RETRIES} attempts"
+                ) from exc
+
+            sleep_time = BACKOFF_BASE * (2 ** (attempt - 1))
+            time.sleep(sleep_time)
+
+
+def upload_asset_file(
+    *,
+    api_url: str,
+    entity_id: ID,
+    entity_type: type[Entity],
     asset_path: Path,
     asset_metadata: LocalAssetMetadata,
     project_context: ProjectContext,
@@ -236,6 +354,12 @@ def upload_asset_file(
     http_client: httpx.Client | None = None,
 ) -> Asset:
     """Upload asset to an existing entity's endpoint from a file path."""
+    url = get_assets_endpoint(
+        api_url=api_url,
+        entity_type=entity_type,
+        entity_id=entity_id,
+        asset_id=None,
+    )
     with open(asset_path, "rb") as file_content:
         return upload_asset_content(
             url=url,
