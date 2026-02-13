@@ -9,6 +9,7 @@ from typing import Any, TypeVar, cast
 import httpx
 
 from entitysdk import core, route
+from entitysdk import multipart_upload
 from entitysdk.common import ProjectContext
 from entitysdk.exception import EntitySDKError
 from entitysdk.models.asset import (
@@ -321,7 +322,7 @@ class Client:
         )
 
         if multipart:
-            return core.multipart_upload_asset_file(
+            return multipart_upload.multipart_upload_asset_file(
                 api_url=self.api_url,
                 entity_id=entity_id,
                 entity_type=entity_type,
