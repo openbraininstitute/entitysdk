@@ -25,3 +25,19 @@ def calculate_sha256_digest(path: Path) -> str:
         for chunk in iter(lambda: f.read(io.DEFAULT_BUFFER_SIZE), b""):
             h.update(chunk)
     return h.hexdigest()
+
+
+def load_bytes_chunk(path: Path, offset: int, size: int) -> bytes:
+    """Read a specific chunk of bytes from a file.
+
+    Args:
+        path (Path): Path to the file.
+        offset (int): Byte offset to start reading from.
+        size (int): Number of bytes to read.
+
+    Returns:
+        bytes: The requested file chunk.
+    """
+    with open(path, "rb") as f:
+        f.seek(offset)
+        return f.read(size)
