@@ -9,6 +9,7 @@ import httpx
 
 from entitysdk import serdes
 from entitysdk.common import ProjectContext
+from entitysdk.exception import EntitySDKError
 from entitysdk.models.asset import Asset, LocalAssetMetadata
 from entitysdk.models.entity import Entity
 from entitysdk.route import (
@@ -27,7 +28,7 @@ L = logging.getLogger(__name__)
 
 MAX_RETRIES = 3
 BACKOFF_BASE = 0.25
-TIMEOUT = (5, 60)
+TIMEOUT = httpx.Timeout(connect=5.0, read=60.0)
 DEFAULT_THREAD_COUNT = 10
 
 
@@ -63,6 +64,9 @@ def multipart_upload_asset_file(
     Returns:
         Asset: The asset object as returned by the backend after completion.
     """
+    if http_client is None:
+        http_client = httpx.Client()
+
     asset_id, parts = _initiate_upload(
         api_url=api_url,
         entity_id=entity_id,
@@ -72,10 +76,11 @@ def multipart_upload_asset_file(
         project_context=project_context,
         token=token_manager.get_token(),
         http_client=http_client,
-        preferred_part_count=transfer_config.part_count,
+        preferred_part_count=transfer_config.preferred_part_count,
     )
 
     if transfer_config.use_threads:
+        L.info("Parts are concurrently uploaded using threads.")
         _upload_parts_threaded(
             parts=parts,
             file_path=asset_path,
@@ -83,6 +88,7 @@ def multipart_upload_asset_file(
             max_concurrency=transfer_config.max_concurrency,
         )
     else:
+        L.info("Parts are sequentially uploaded.")
         _upload_parts_sequential(
             parts=parts,
             file_path=asset_path,
@@ -155,7 +161,7 @@ def _complete_upload(
     api_url: str,
     entity_id: ID,
     entity_type: type[Entity],
-    asset_id: str,
+    asset_id: ID,
     project_context: ProjectContext,
     token: str,
     http_client: httpx.Client | None,
@@ -180,19 +186,19 @@ def _upload_parts_sequential(
     *,
     file_path: Path,
     parts: list[PartUpload],
-    http_client: httpx.Client | None,
+    http_client: httpx.Client,
 ) -> None:
     for part in parts:
-        _upload_part(file_path, part, http_client)
+        _upload_part(file_path=file_path, part=part, http_client=http_client)
 
 
 def _upload_parts_threaded(
     file_path: Path,
     parts: list[PartUpload],
-    http_client: httpx.Client | None,
-    max_workers: int,
+    http_client: httpx.Client,
+    max_concurrency: int,
 ) -> None:
-    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+    with ThreadPoolExecutor(max_workers=max_concurrency) as executor:
         futures = {
             executor.submit(_upload_part, file_path, part, http_client): part for part in parts
         }
@@ -207,30 +213,22 @@ def _upload_parts_threaded(
                 ) from exc
 
 
-def _upload_part(
-    file_path: Path,
-    part: PartUpload,
-    http_client: httpx.Client | None,
-) -> None:
+def _upload_part(file_path: Path, part: PartUpload, http_client: httpx.Client) -> None:
+    data = load_bytes_chunk(file_path, part.offset, part.size)
     for attempt in range(1, MAX_RETRIES + 1):
-        try:
-            data = load_bytes_chunk(file_path, part.offset, part.size)
-            _send_part(data=data, url=part.url, http_client=http_client)
+        if _send_part(data=data, url=part.url, http_client=http_client):
             return
 
-        except Exception as exc:
-            if attempt >= MAX_RETRIES:
-                raise RuntimeError(
-                    f"Part {part.part_number} failed after {MAX_RETRIES} attempts"
-                ) from exc
+        sleep(BACKOFF_BASE * (2 ** (attempt - 1)))
 
-            sleep(BACKOFF_BASE * (2 ** (attempt - 1)))
+    raise EntitySDKError(f"Part {part.part_number} failed after {MAX_RETRIES} attempts")
 
 
-def _send_part(data: bytes, url: str, http_client: httpx.Client | None) -> None:
-    http_client.put(
-        url,
-        data=data,
+def _send_part(data: bytes, url: str, http_client: httpx.Client) -> bool:
+    response = http_client.put(
+        url=url,
+        content=data,
         timeout=TIMEOUT,
         headers={},
-    ).raise_for_status()
+    )
+    return response.is_success

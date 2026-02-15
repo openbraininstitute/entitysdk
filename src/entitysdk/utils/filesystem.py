@@ -14,4 +14,4 @@ def create_dir(path: StrOrPath) -> Path:
 
 def get_filesize(path: StrOrPath) -> int:
     """Return filesize."""
-    return Path().stat().st_size
+    return Path(path).stat().st_size

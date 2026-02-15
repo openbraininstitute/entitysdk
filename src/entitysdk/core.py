@@ -247,12 +247,18 @@ def upload_asset_file(
     transfer_config: MultipartUploadTransferConfig | None = None,
 ) -> Asset:
     """Upload asset to an existing entity's endpoint from a file path."""
-    if transfer_config and get_filesize(asset_path) > transfer_config.multipart_threshold:
+    if transfer_config and get_filesize(asset_path) > transfer_config.threshold:
+        L.info("File is being uploaded using multipart upload")
         return multipart_upload_asset_file(
             api_url=api_url,
             entity_id=entity_id,
             entity_type=entity_type,
             asset_path=asset_path,
+            asset_metadata=asset_metadata,
+            project_context=project_context,
+            token_manager=token_manager,
+            transfer_config=transfer_config,
+            http_client=http_client,
         )
 
     url = get_assets_endpoint(
