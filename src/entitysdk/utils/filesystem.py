@@ -14,4 +14,12 @@ def create_dir(path: StrOrPath) -> Path:
 
 def get_filesize(path: StrOrPath) -> int:
     """Return filesize."""
-    return Path(path).stat().st_size
+    path = Path(path)
+
+    if not path.exists():
+        raise FileNotFoundError(f"Path {path} does not exist.")
+
+    if not path.is_file():
+        raise IsADirectoryError(f"Path {path} is not a file.")
+
+    return path.stat().st_size

@@ -3,13 +3,11 @@
 import logging
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
-from time import sleep
 
 import httpx
 
 from entitysdk import serdes
 from entitysdk.common import ProjectContext
-from entitysdk.exception import EntitySDKError
 from entitysdk.models.asset import Asset, LocalAssetMetadata
 from entitysdk.models.entity import Entity
 from entitysdk.route import (
@@ -20,6 +18,7 @@ from entitysdk.schemas.asset import MultipartUploadTransferConfig, PartUpload
 from entitysdk.token_manager import TokenManager
 from entitysdk.types import ID
 from entitysdk.util import make_db_api_request
+from entitysdk.utils.execution import execute_with_retry
 from entitysdk.utils.filesystem import get_filesize
 from entitysdk.utils.io import calculate_sha256_digest, load_bytes_chunk
 
@@ -193,6 +192,7 @@ def _upload_parts_sequential(
 
 
 def _upload_parts_threaded(
+    *,
     file_path: Path,
     parts: list[PartUpload],
     http_client: httpx.Client,
@@ -215,20 +215,27 @@ def _upload_parts_threaded(
 
 def _upload_part(file_path: Path, part: PartUpload, http_client: httpx.Client) -> None:
     data = load_bytes_chunk(file_path, part.offset, part.size)
-    for attempt in range(1, MAX_RETRIES + 1):
-        if _send_part(data=data, url=part.url, http_client=http_client):
-            return
-
-        sleep(BACKOFF_BASE * (2 ** (attempt - 1)))
-
-    raise EntitySDKError(f"Part {part.part_number} failed after {MAX_RETRIES} attempts")
-
-
-def _send_part(data: bytes, url: str, http_client: httpx.Client) -> bool:
-    response = http_client.put(
-        url=url,
-        content=data,
-        timeout=TIMEOUT,
-        headers={},
+    execute_with_retry(
+        fn=lambda: _send_part(data=data, url=part.url, http_client=http_client),
     )
-    return response.is_success
+
+
+def _upload_part(file_path: Path, part: PartUpload, http_client: httpx.Client) -> None:
+    data = load_bytes_chunk(file_path, part.offset, part.size)
+    execute_with_retry(
+        lambda: _send_part(data=data, url=part.url, http_client=http_client),
+        max_retries=MAX_RETRIES,
+        backoff_base=BACKOFF_BASE,
+    )
+    L.debug("Uploaded part %d (offset=%d, size=%d)", part.part_number, part.offset, part.size)
+
+
+def _send_part(data: bytes, url: str, http_client: httpx.Client) -> None:
+    """Upload a single part to the presigned URL.
+
+    Raises:
+        httpx.HTTPStatusError: If the PUT request fails.
+        httpx.RequestError: For network-related errors.
+    """
+    response = http_client.put(url, content=data, timeout=TIMEOUT, headers={})
+    response.raise_for_status()
