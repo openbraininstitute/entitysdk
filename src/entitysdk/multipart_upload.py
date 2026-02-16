@@ -83,23 +83,12 @@ def multipart_upload_asset_file(
         http_client=http_client,
         preferred_part_count=transfer_config.preferred_part_count,
     )
-
-    if transfer_config.use_threads:
-        L.info("Parts are concurrently uploaded using threads.")
-        _upload_parts_threaded(
-            parts=parts,
-            file_path=asset_path,
-            http_client=http_client,
-            max_concurrency=transfer_config.max_concurrency,
-        )
-    else:
-        L.info("Parts are sequentially uploaded.")
-        _upload_parts_sequential(
-            parts=parts,
-            file_path=asset_path,
-            http_client=http_client,
-        )
-
+    _upload_parts(
+        parts=parts,
+        file_path=asset_path,
+        http_client=http_client,
+        transfer_config=transfer_config,
+    )
     return _complete_upload(
         api_url=api_url,
         entity_id=entity_id,
@@ -123,6 +112,22 @@ def _initiate_upload(
     token: str,
     http_client: httpx.Client | None,
 ) -> tuple[ID, list[PartUpload]]:
+    """Initiate a multipart upload with the backend and prepare part metadata.
+
+    Sends a request to obtain presigned upload URLs and part configuration
+    for the given file. Computes the file size and SHA-256 digest locally
+    and includes them in the initiation request.
+
+    Returns:
+        tuple[ID, list[PartUpload]]:
+            - The created asset ID.
+            - A list of PartUpload objects describing each part’s
+              number, byte offset, size, and presigned URL.
+
+    Raises:
+        Exception: Propagates any exception raised during the API request
+        or local file inspection.
+    """
     url = multipart_upload_initiate_endpoint(
         api_url=api_url,
         entity_id=entity_id,
@@ -161,30 +166,32 @@ def _initiate_upload(
     return ID(data["id"]), parts
 
 
-def _complete_upload(
-    *,
-    api_url: str,
-    entity_id: ID,
-    entity_type: type[Entity],
-    asset_id: ID,
-    project_context: ProjectContext,
-    token: str,
-    http_client: httpx.Client | None,
-) -> Asset:
-    url = multipart_upload_complete_endpoint(
-        api_url=api_url,
-        entity_id=entity_id,
-        entity_type=entity_type,
-        asset_id=asset_id,
-    )
-    data = make_db_api_request(
-        url=url,
-        method="POST",
-        token=token,
-        http_client=http_client,
-        project_context=project_context,
-    ).json()
-    return serdes.deserialize_model(data, Asset)
+def _upload_parts(
+    parts: list[PartUpload],
+    file_path: Path,
+    http_client: httpx.Client,
+    transfer_config: MultipartUploadTransferConfig,
+) -> None:
+    """Upload file parts either sequentially or concurrently.
+
+    Blocks until all parts have been uploaded. Exceptions from individual
+    part uploads propagate to the caller.
+    """
+    if transfer_config.use_threads:
+        L.info("Parts are concurrently uploaded using threads.")
+        _upload_parts_threaded(
+            parts=parts,
+            file_path=file_path,
+            http_client=http_client,
+            max_concurrency=transfer_config.max_concurrency,
+        )
+    else:
+        L.info("Parts are sequentially uploaded.")
+        _upload_parts_sequential(
+            parts=parts,
+            file_path=file_path,
+            http_client=http_client,
+        )
 
 
 def _upload_parts_sequential(
@@ -193,6 +200,19 @@ def _upload_parts_sequential(
     parts: list[PartUpload],
     http_client: httpx.Client,
 ) -> None:
+    """Upload multiple file parts sequentially.
+
+    Each part is uploaded one after another by calling `_upload_part`.
+    The function blocks until all parts have been uploaded.
+
+    Args:
+        file_path: Path to the source file being uploaded.
+        parts: A list of PartUpload objects describing the parts to upload.
+        http_client: An initialized httpx.Client used to perform HTTP requests.
+
+    Raises:
+        Exception: Propagates any exception raised by `_upload_part`.
+    """
     for part in parts:
         _upload_part(file_path=file_path, part=part, http_client=http_client)
 
@@ -215,6 +235,9 @@ def _upload_parts_threaded(
         parts: A list of PartUpload objects describing the parts to upload.
         http_client: An initialized httpx.Client used to perform HTTP requests.
         max_concurrency: Maximum number of concurrent upload threads.
+
+    Raises:
+        Exception: Propagates any exception raised by `_upload_part`.
     """
 
     def _task(part: PartUpload) -> None:
@@ -225,6 +248,12 @@ def _upload_parts_threaded(
 
 
 def _upload_part(file_path: Path, part: PartUpload, http_client: httpx.Client) -> None:
+    """Upload a single file part to its presigned URL.
+
+    Reads the corresponding byte range from the file and sends it using
+    the provided HTTP client. Retries transient failures according to the
+    configured retry policy. Raises an exception if all retry attempts fail.
+    """
     data = load_bytes_chunk(file_path, part.offset, part.size)
     execute_with_retry(
         lambda: _send_part(data=data, url=part.url, http_client=http_client),
@@ -244,3 +273,41 @@ def _send_part(data: bytes, url: str, http_client: httpx.Client) -> None:
     """
     response = http_client.put(url, content=data, timeout=TIMEOUT, headers={})
     response.raise_for_status()
+
+
+def _complete_upload(
+    *,
+    api_url: str,
+    entity_id: ID,
+    entity_type: type[Entity],
+    asset_id: ID,
+    project_context: ProjectContext,
+    token: str,
+    http_client: httpx.Client | None,
+) -> Asset:
+    """Finalize a multipart upload with the backend and return the created asset.
+
+    Sends a completion request to the API for the given asset ID after all
+    parts have been successfully uploaded. The backend assembles the parts
+    and returns the resulting Asset representation.
+
+    Raises:
+        Exception: Propagates any exception raised during the API request.
+
+    Returns:
+        Asset: The finalized asset as returned by the backend.
+    """
+    url = multipart_upload_complete_endpoint(
+        api_url=api_url,
+        entity_id=entity_id,
+        entity_type=entity_type,
+        asset_id=asset_id,
+    )
+    data = make_db_api_request(
+        url=url,
+        method="POST",
+        token=token,
+        http_client=http_client,
+        project_context=project_context,
+    ).json()
+    return serdes.deserialize_model(data, Asset)
