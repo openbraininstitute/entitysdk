@@ -12,6 +12,7 @@ def execute_with_retry(
     *,
     max_retries: int = 3,
     backoff_base: float = 0.5,
+    retry_on: tuple[type[BaseException], ...] = (Exception,),
 ) -> T:
     """Execute a callable with retries and exponential backoff.
 
@@ -19,6 +20,7 @@ def execute_with_retry(
         fn: Callable with no arguments returning any type T.
         max_retries: Maximum number of attempts (>=1).
         backoff_base: Base delay in seconds.
+        retry_on: Exceptions to retry.
 
     Returns:
         The result of `fn()` if successful.

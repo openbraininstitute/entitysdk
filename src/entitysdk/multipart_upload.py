@@ -27,8 +27,14 @@ L = logging.getLogger(__name__)
 
 MAX_RETRIES = 3
 BACKOFF_BASE = 0.25
-TIMEOUT = httpx.Timeout(connect=5.0, read=60.0, write=60.0, pool=5.0)
+TIMEOUT = httpx.Timeout(connect=5.0, read=120.0, write=120.0, pool=10.0)
 DEFAULT_THREAD_COUNT = 10
+RETRIABLE_EXCEPTIONS = (
+    httpx.ConnectError,  # network down, DNS failure, etc.
+    httpx.ReadTimeout,  # server took too long to respond
+    httpx.WriteTimeout,  # slow upload
+    httpx.RemoteProtocolError,  # low-level network glitch
+)
 
 
 def multipart_upload_asset_file(
@@ -216,16 +222,10 @@ def _upload_parts_threaded(
 def _upload_part(file_path: Path, part: PartUpload, http_client: httpx.Client) -> None:
     data = load_bytes_chunk(file_path, part.offset, part.size)
     execute_with_retry(
-        fn=lambda: _send_part(data=data, url=part.url, http_client=http_client),
-    )
-
-
-def _upload_part(file_path: Path, part: PartUpload, http_client: httpx.Client) -> None:
-    data = load_bytes_chunk(file_path, part.offset, part.size)
-    execute_with_retry(
         lambda: _send_part(data=data, url=part.url, http_client=http_client),
         max_retries=MAX_RETRIES,
         backoff_base=BACKOFF_BASE,
+        retry_on=RETRIABLE_EXCEPTIONS,
     )
     L.debug("Uploaded part %d (offset=%d, size=%d)", part.part_number, part.offset, part.size)
 

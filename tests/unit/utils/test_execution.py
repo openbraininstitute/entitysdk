@@ -53,8 +53,7 @@ def test_backoff_values_exact():
     with patch("entitysdk.utils.execution.time.sleep") as sleep_mock:
         test_module.execute_with_retry(fn, max_retries=3, backoff_base=0.5)
 
-    # Expected delays: 0.5, 1.0
-    expected_calls = [((0.5,),), ((1.0,),)]
+    expected_calls = [(0.5,), (1.0,)]
     actual_calls = sleep_mock.call_args_list[:2]
 
-    assert [call.args for call in sleep_mock.call_args_list[:2]] == [(0.5,), (1.0,)]
+    assert [call.args for call in actual_calls] == expected_calls
