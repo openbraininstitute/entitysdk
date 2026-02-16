@@ -1,7 +1,7 @@
 """Multipart upload functionality for large assets."""
 
 import logging
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import httpx
@@ -204,19 +204,24 @@ def _upload_parts_threaded(
     http_client: httpx.Client,
     max_concurrency: int,
 ) -> None:
-    with ThreadPoolExecutor(max_workers=max_concurrency) as executor:
-        futures = {
-            executor.submit(_upload_part, file_path, part, http_client): part for part in parts
-        }
+    """Upload multiple file parts concurrently using a thread pool.
 
-        for future in as_completed(futures):
-            part = futures[future]
-            try:
-                future.result()
-            except Exception as exc:
-                raise RuntimeError(
-                    f"Part {part.part_number} failed during threaded upload"
-                ) from exc
+    Each part is uploaded by submitting `_upload_part` tasks to a
+    ThreadPoolExecutor with the specified maximum concurrency. The
+    function blocks until all parts have completed uploading.
+
+    Args:
+        file_path: Path to the source file being uploaded.
+        parts: A list of PartUpload objects describing the parts to upload.
+        http_client: An initialized httpx.Client used to perform HTTP requests.
+        max_concurrency: Maximum number of concurrent upload threads.
+    """
+
+    def _task(part: PartUpload) -> None:
+        _upload_part(file_path, part, http_client)
+
+    with ThreadPoolExecutor(max_workers=max_concurrency) as pool:
+        list(pool.map(_task, parts))
 
 
 def _upload_part(file_path: Path, part: PartUpload, http_client: httpx.Client) -> None:
