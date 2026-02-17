@@ -18,8 +18,8 @@ def execute_with_retry(
 
     Args:
         fn: Callable with no arguments returning any type T.
-        max_retries: Maximum number of attempts (>=1).
-        backoff_base: Base delay in seconds.
+        max_retries: Maximum number of attempts (>=0).
+        backoff_base: Base delay in seconds for exponential backoff.
         retry_on: Types of exceptions to retry.
 
     Returns:
@@ -28,8 +28,8 @@ def execute_with_retry(
     Raises:
         The last exception if all retries fail.
     """
-    if max_retries < 1:
-        raise ValueError("max_retries must be >= 1")
+    if not (max_retries >= 0):
+        raise ValueError("max_retries must be >= 0")
     last_exception: BaseException | None = None
 
     for attempt in range(1, max_retries + 1):

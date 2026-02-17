@@ -43,8 +43,8 @@ def test_execute_all_retries_fail():
 def test_invalid_max_retries():
     fn = Mock()
 
-    with pytest.raises(ValueError, match="max_retries must be >= 1"):
-        test_module.execute_with_retry(fn, max_retries=0)
+    with pytest.raises(ValueError, match="max_retries must be >= 0"):
+        test_module.execute_with_retry(fn, max_retries=-1)
 
 
 def test_backoff_values_exact():
