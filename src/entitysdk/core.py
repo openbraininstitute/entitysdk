@@ -432,6 +432,7 @@ def download_asset_file(
     create_intermediate_directories(target_path)
 
     if local_store and local_store.path_exists(source_path):
+        L.info("Path %s found on local store and is symlinked.", source_path)
         local_store.link_path(source_path, target_path)
         return target_path
 
