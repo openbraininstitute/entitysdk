@@ -3,6 +3,7 @@
 import hashlib
 import io
 import json
+from collections.abc import Iterator
 from pathlib import Path
 
 from entitysdk.types import StrOrPath
@@ -27,17 +28,27 @@ def calculate_sha256_digest(path: Path) -> str:
     return h.hexdigest()
 
 
-def load_bytes_chunk(path: Path, offset: int, size: int) -> bytes:
-    """Read a specific chunk of bytes from a file.
+def iter_bytes_chunk(path: Path, offset: int, size: int, buffer_size: int) -> Iterator[bytes]:
+    """Yield a specific chunk of bytes from a file in smaller pieces.
 
     Args:
         path (Path): Path to the file.
         offset (int): Byte offset to start reading from.
-        size (int): Number of bytes to read.
+        size (int): Total number of bytes to read.
+        buffer_size (int): Maximum number of bytes to read per iteration.
 
-    Returns:
-        bytes: The requested file chunk.
+    Yields:
+        bytes: Pieces of the requested file chunk.
     """
     with open(path, "rb") as f:
         f.seek(offset)
-        return f.read(size)
+
+        remaining = size
+        while size > 0:
+            read_size = min(buffer_size, remaining)
+
+            if not (data := f.read(read_size)):
+                break
+
+            yield data
+            remaining -= read_size

@@ -258,13 +258,19 @@ def test_upload_parts():
         p_thread.assert_called_once()
 
 
-def test_send_part(httpx_mock):
+def test_upload_part(httpx_mock, asset_file):
     httpx_mock.add_response(
         method="PUT",
         url="http://my-url",
     )
     client = httpx.Client()
-    test_module._send_part(data=b"my_data", url="http://my-url", http_client=client)
+    test_module._upload_part(
+        file_path=asset_file,
+        offset=0,
+        size=10,
+        url="http://my-url",
+        http_client=client,
+    )
 
 
 def test_complete_upload(httpx_mock, project_context, asset_payload):
@@ -294,7 +300,7 @@ def test_complete_upload(httpx_mock, project_context, asset_payload):
 
 def test_upload_parts_sequential_calls_upload_part_in_order(parts, asset_file):
     http_client = httpx.Client()
-    with patch("entitysdk.multipart_upload._upload_part") as mock_upload_part:
+    with patch("entitysdk.multipart_upload._upload_part_with_retry") as mock_upload_part:
         test_module._upload_parts_sequential(
             parts=parts,
             file_path=asset_file,
@@ -311,7 +317,7 @@ def test_upload_parts_sequential_calls_upload_part_in_order(parts, asset_file):
 
 def test_upload_parts_threaded_executes_all_parts(parts, asset_file, httpx_mock):
     http_client = httpx.Client()
-    with patch("entitysdk.multipart_upload._upload_part") as mock_upload_part:
+    with patch("entitysdk.multipart_upload._upload_part_with_retry") as mock_upload_part:
         test_module._upload_parts_threaded(
             file_path=asset_file,
             parts=parts,
@@ -325,7 +331,9 @@ def test_upload_parts_threaded_executes_all_parts(parts, asset_file, httpx_mock)
             mock_upload_part.assert_any_call(asset_file, part, http_client)
 
 
-@patch("entitysdk.multipart_upload._send_part")
-def test_upload_part(asset_file, parts):
+@patch("entitysdk.multipart_upload._upload_part")
+def test_upload_part_with_retry(asset_file, parts):
     http_client = httpx.Client()
-    test_module._upload_part(file_path=asset_file, part=parts[0], http_client=http_client)
+    test_module._upload_part_with_retry(
+        file_path=asset_file, part=parts[0], http_client=http_client
+    )

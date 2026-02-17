@@ -20,7 +20,7 @@ from entitysdk.types import ID
 from entitysdk.util import make_db_api_request
 from entitysdk.utils.execution import execute_with_retry
 from entitysdk.utils.filesystem import get_filesize
-from entitysdk.utils.io import calculate_sha256_digest, load_bytes_chunk
+from entitysdk.utils.io import calculate_sha256_digest, iter_bytes_chunk
 
 L = logging.getLogger(__name__)
 
@@ -35,6 +35,7 @@ RETRIABLE_EXCEPTIONS = (
     httpx.WriteTimeout,  # slow upload
     httpx.RemoteProtocolError,  # low-level network glitch
 )
+STREAM_DATA_BUFFER_SIZE = 64 * 1024
 
 
 def multipart_upload_asset_file(
@@ -214,7 +215,7 @@ def _upload_parts_sequential(
         Exception: Propagates any exception raised by `_upload_part`.
     """
     for part in parts:
-        _upload_part(file_path=file_path, part=part, http_client=http_client)
+        _upload_part_with_retry(file_path=file_path, part=part, http_client=http_client)
 
 
 def _upload_parts_threaded(
@@ -241,22 +242,27 @@ def _upload_parts_threaded(
     """
 
     def _task(part: PartUpload) -> None:
-        _upload_part(file_path, part, http_client)
+        _upload_part_with_retry(file_path, part, http_client)
 
     with ThreadPoolExecutor(max_workers=max_concurrency) as pool:
         list(pool.map(_task, parts))
 
 
-def _upload_part(file_path: Path, part: PartUpload, http_client: httpx.Client) -> None:
+def _upload_part_with_retry(file_path: Path, part: PartUpload, http_client: httpx.Client) -> None:
     """Upload a single file part to its presigned URL.
 
     Reads the corresponding byte range from the file and sends it using
     the provided HTTP client. Retries transient failures according to the
     configured retry policy. Raises an exception if all retry attempts fail.
     """
-    data = load_bytes_chunk(file_path, part.offset, part.size)
     execute_with_retry(
-        lambda: _send_part(data=data, url=part.url, http_client=http_client),
+        lambda: _upload_part(
+            file_path=file_path,
+            offset=part.offset,
+            size=part.size,
+            url=part.url,
+            http_client=http_client,
+        ),
         max_retries=MAX_RETRIES,
         backoff_base=BACKOFF_BASE,
         retry_on=RETRIABLE_EXCEPTIONS,
@@ -264,14 +270,24 @@ def _upload_part(file_path: Path, part: PartUpload, http_client: httpx.Client) -
     L.debug("Uploaded part %d (offset=%d, size=%d)", part.part_number, part.offset, part.size)
 
 
-def _send_part(data: bytes, url: str, http_client: httpx.Client) -> None:
+def _upload_part(
+    file_path: Path, offset: int, size: int, url: str, http_client: httpx.Client
+) -> None:
     """Upload a single part to the presigned URL.
 
     Raises:
         httpx.HTTPStatusError: If the PUT request fails.
         httpx.RequestError: For network-related errors.
     """
-    response = http_client.put(url, content=data, timeout=TIMEOUT, headers={})
+    data_iterator = iter_bytes_chunk(
+        path=file_path,
+        offset=offset,
+        size=size,
+        buffer_size=STREAM_DATA_BUFFER_SIZE,
+    )
+    response = http_client.put(
+        url=url, content=data_iterator, timeout=TIMEOUT, headers={"Content-Length": str(size)}
+    )
     response.raise_for_status()
 
 
