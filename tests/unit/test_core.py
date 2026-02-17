@@ -62,8 +62,8 @@ def test_upload_asset_file(asset_file, token_manager):
         patched_content.assert_called_once()
 
     with (
-        patch("entitysdk.core.get_filesize", return_value=99, autospec=True),
-        patch("entitysdk.core.upload_asset_file", autospec=True) as patched_file,
+        patch("entitysdk.core.get_filesize", return_value=101, autospec=True),
+        patch("entitysdk.core.multipart_upload_asset_file", autospec=True) as patched_file,
     ):
         test_module.upload_asset_file(
             api_url="my-url",
