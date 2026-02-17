@@ -26,6 +26,7 @@ from entitysdk.token_manager import TokenFromValue, TokenManager
 from entitysdk.types import (
     ID,
     AssetLabel,
+    AssetStatus,
     ContentType,
     DeploymentEnvironment,
     DerivationType,
@@ -633,6 +634,11 @@ class Client:
             raise EntitySDKError(f"Entity {entity.id} ({entity.name}) has no assets.")
 
         assets = filter_assets(entity.assets, selection) if selection else entity.assets
+
+        if not all(asset.status == AssetStatus.created for asset in assets):
+            raise EntitySDKError(
+                f"Entity {entity.id} has assets that are uploading and cannot be downloaded."
+            )
         return IteratorResult(map(_download_entity_asset, assets))
 
     def delete_asset(
