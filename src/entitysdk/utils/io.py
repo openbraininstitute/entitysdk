@@ -44,7 +44,7 @@ def iter_bytes_chunk(path: Path, offset: int, size: int, buffer_size: int) -> It
         f.seek(offset)
 
         remaining = size
-        while size > 0:
+        while remaining > 0:
             read_size = min(buffer_size, remaining)
 
             if not (data := f.read(read_size)):
