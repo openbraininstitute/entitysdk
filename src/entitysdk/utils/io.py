@@ -39,7 +39,7 @@ def iter_bytes_chunk(path: Path, offset: int, size: int, buffer_size: int) -> It
     Yields:
         bytes: Pieces of the requested file chunk.
     """
-    with open(path, "rb") as f:
+    with path.open("rb") as f:
         f.seek(offset)
 
         remaining = size
