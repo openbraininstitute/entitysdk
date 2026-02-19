@@ -6,22 +6,18 @@ from entitysdk.models.ion_channel_model import IonChannelModel, NeuronBlock
 from entitysdk.types import AssetLabel, ContentType
 
 
-class DummyNeuronBlock:
-    def __init__(self, range_params):
-        self.range = range_params
-
-
 class DummyIonChannelModelEntity:
-    def __init__(self, range_params):
-        self.neuron_block = DummyNeuronBlock(range_params)
+    def __init__(self, conductance_name, max_permeability_name):
+        self.conductance_name = conductance_name
+        self.max_permeability_name = max_permeability_name
 
 
 def _mock_ic_asset_response(asset_id, name):
     """Mock response for ion channel model asset."""
     return {
         "id": str(asset_id),
-        "path": "{name}.mod",
-        "full_path": "{name}.mod",
+        "path": f"{name}.mod",
+        "full_path": f"{name}.mod",
         "is_directory": False,
         "label": AssetLabel.neuron_mechanisms,
         "content_type": ContentType.application_mod,
@@ -59,6 +55,8 @@ def create_http_ic_mock(ic_id, name, httpx_mock, api_url, request_headers, with_
         neuron_block=NeuronBlock(range=[{f"g{name}bar": "S/cm2"}])
         if with_conductance
         else NeuronBlock(),
+        conductance_name=f"g{name}bar" if with_conductance else None,
+        max_permeability_name=None,
         assets=[_mock_ic_asset_response(calvast_asset_id, name)],
     )
 
@@ -114,36 +112,15 @@ def test_create_simple_soma_morphology(tmp_path):
     assert diameter == 2 * radius
 
 
-def test_find_conductance_name():
-    entity1 = DummyIonChannelModelEntity(
-        [
-            {"gIhbar": "S/cm2"},
-            {"gIh": "S/cm2"},
-            {"ihcn": "mA/cm2"},
-            {"BBiD": None},
-        ]
-    )
-    assert icm.find_conductance_name(entity1) == "gIhbar"
+def test_find_conductance_or_max_permeability_name():
+    entity1 = DummyIonChannelModelEntity(conductance_name="gIhbar", max_permeability_name=None)
+    assert icm.find_conductance_or_max_permeability_name(entity1) == "gIhbar"
 
-    entity2 = DummyIonChannelModelEntity([{"decay": "ms"}, {"gamma": None}])
-    assert icm.find_conductance_name(entity2) is None
+    entity2 = DummyIonChannelModelEntity(conductance_name=None, max_permeability_name="pbar")
+    assert icm.find_conductance_or_max_permeability_name(entity2) == "pbar"
 
-    entity3 = DummyIonChannelModelEntity(
-        [{"e": None}, {"gmax": "S/cm2"}, {"gion": None}, {"il": None}]
-    )
-    assert icm.find_conductance_name(entity3) == "gmax"
-
-    entity4 = DummyIonChannelModelEntity(
-        [
-            {"gKur": "S/cm2"},
-            {"ik": "mA/cm2"},
-            {"ino": None},
-        ]
-    )
-    assert icm.find_conductance_name(entity4) == "gKur"
-
-    entity5 = DummyIonChannelModelEntity([{"gh_max": "S/cm2"}, {"g_h": None}, {"i_rec": None}])
-    assert icm.find_conductance_name(entity5) == "gh_max"
+    entity3 = DummyIonChannelModelEntity(conductance_name=None, max_permeability_name=None)
+    assert icm.find_conductance_or_max_permeability_name(entity3) is None
 
 
 def test_create_hoc_file(client, tmp_path, httpx_mock, api_url, request_headers):

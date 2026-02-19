@@ -206,22 +206,17 @@ def create_simple_soma_morphology(output_file: Path, radius: float = 10.0):
         f.writelines(lines)
 
 
-def find_conductance_name(entity):
-    """Find the conductance parameter name in an IonChannelModel entity.
+def find_conductance_or_max_permeability_name(entity) -> str | None:
+    """Find the conductance or the maximum permeability parameter name in an IonChannelModel.
 
     Args:
         entity (IonChannelModel): The ion channel model entity.
     """
-    conductance_keywords = ("bar", "gmax", "_max", "max", "gKur")
-
-    if entity.neuron_block.range is None:
-        return None
-
-    for param in entity.neuron_block.range:
-        for key in param:
-            if any(keyword in key for keyword in conductance_keywords):
-                return key
-    return None
+    return (
+        entity.conductance_name
+        if entity.conductance_name is not None
+        else entity.max_permeability_name
+    )
 
 
 def create_hoc_file(client, ion_channel_model_data, subdir_mech, subdir_hoc) -> Path:
@@ -244,8 +239,14 @@ def create_hoc_file(client, ion_channel_model_data, subdir_mech, subdir_hoc) -> 
         # get data for hoc file
         bpo_mechs.append(icm_entity.nmodl_suffix)
         if "conductance" in icm_dict:
-            conductance_name = find_conductance_name(icm_entity)
-            bpo_parameters[conductance_name] = icm_dict["conductance"]
+            conductance_name = find_conductance_or_max_permeability_name(icm_entity)
+            if conductance_name is not None:
+                bpo_parameters[conductance_name] = icm_dict["conductance"]
+            else:
+                L.warning(
+                    "Could not find conductance parameter name for ion channel model "
+                    f"{icm_entity.name} (ID: {icm_entity.id}). Skipping conductance value."
+                )
 
     # write hoc file
     hoc_dst = subdir_hoc / "cell.hoc"
@@ -276,7 +277,7 @@ def stage_sonata_from_config(
     Args:
         client (Client): Entity SDK client.
         ion_channel_model_data (dict): Dictionary with ion channel model IDs
-            and conductance values.
+            and conductance (or max permeability) values.
         output_dir (str or Path): Path to the output 'sonata' folder.
         radius (float): Radius of the soma in microns.
         mtype (str): Cell mtype.
