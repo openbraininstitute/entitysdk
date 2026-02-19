@@ -5,6 +5,8 @@ from typing import Annotated
 from pydantic import Field
 
 from entitysdk.models.entity import Entity
+from entitysdk.models.measurement_annotation import MeasurementAnnotation
+from entitysdk.models.mtype import MTypeClass
 from entitysdk.models.scientific_artifact import ScientificArtifact
 from entitysdk.types import EMCellMeshGenerationMethod, EMCellMeshType
 
@@ -53,4 +55,12 @@ class EMCellMesh(ScientificArtifact):
         Field(
             description="The dense reconstruction dataset this mesh belongs to.",
         ),
+    ] = None
+    mtypes: Annotated[
+        list[MTypeClass] | None,
+        Field(description="The mtype classes of the mesh."),
+    ] = None
+    measurement_annotation: Annotated[
+        MeasurementAnnotation | None,
+        Field(description="The optional annotation with the mesh measurements."),
     ] = None

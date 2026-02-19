@@ -1,0 +1,17 @@
+{
+  "acronym": "grey",
+  "annotation_value": 9999,
+  "color_hex_triplet": "BFDAE3",
+  "creation_date": "2025-01-01T00:00:00Z",
+  "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+  "id": "00000000-0000-4000-8000-000001234678",
+  "name": "my-region",
+  "parent_structure_id": null,
+  "species": {
+    "id": "00000000-0000-4000-8000-000001234678",
+    "name": "Test Species",
+    "taxonomy_id": "12345"
+  },
+  "strain": null,
+  "update_date": "2025-01-01T00:00:00Z"
+}

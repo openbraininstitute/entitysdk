@@ -7,7 +7,7 @@ from pydantic import Field
 
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
-from entitysdk.types import ID, ActivityType
+from entitysdk.types import ID, ActivityStatus, ActivityType
 
 
 class Activity(Identifiable):
@@ -31,6 +31,10 @@ class Activity(Identifiable):
         ),
     ] = None
 
+    status: Annotated[
+        ActivityStatus,
+        Field(description="The status of the activity."),
+    ] = ActivityStatus.done
     start_time: Annotated[
         datetime,
         Field(description="The time at which the activity started."),

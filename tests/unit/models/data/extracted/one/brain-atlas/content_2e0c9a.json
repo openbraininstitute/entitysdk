@@ -1,0 +1,46 @@
+{
+  "assets": [
+    {
+      "content_type": "application/nrrd",
+      "full_path": "public/00000000-0000-4000-8000-000001234678/00000000-0000-4000-8000-000001234678/assets/brain_atlas/00000000-0000-4000-8000-000001234678/annotation.nrrd",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "is_directory": false,
+      "label": "brain_atlas_annotation",
+      "meta": {},
+      "path": "annotation.nrrd",
+      "sha256_digest": "a8124f083a58b9a8ff80cb327dd6895a10d0bc92bb918506da0c9c75906d3f91",
+      "size": 31,
+      "status": "created",
+      "storage_type": "aws_s3_internal"
+    }
+  ],
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+  "authorized_public": true,
+  "created_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
+    "type": "person"
+  },
+  "creation_date": "2025-01-01T00:00:00Z",
+  "description": "test brain atlas description",
+  "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+  "id": "00000000-0000-4000-8000-000001234678",
+  "name": "test brain atlas",
+  "species": {
+    "id": "00000000-0000-4000-8000-000001234678",
+    "name": "Test Species",
+    "taxonomy_id": "12345"
+  },
+  "update_date": "2025-01-01T00:00:00Z",
+  "updated_by": {
+    "family_name": "courcol",
+    "given_name": "jd",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "jd courcol",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
+    "type": "person"
+  }
+}

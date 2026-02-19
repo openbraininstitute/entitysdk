@@ -1,6 +1,6 @@
 {
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": false,
+  "authorized_public": true,
   "created_by": {
     "family_name": "courcol",
     "given_name": "jd",
@@ -10,12 +10,12 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "description-1",
+  "description": "my-stimulus-description",
   "dt": 0.1,
   "end_time": null,
   "id": "00000000-0000-4000-8000-000001234678",
   "injection_type": "current_clamp",
-  "name": "name-1",
+  "name": "my-stimulus",
   "recording_id": "00000000-0000-4000-8000-000001234678",
   "shape": "sinusoidal",
   "start_time": null,

@@ -31,6 +31,7 @@ def _mock_simulation(simulation_id, assets):
         simulation_campaign_id=uuid.uuid4(),
         entity_id=uuid.uuid4(),
         scan_parameters={},
+        number_neurons=1,
         assets=assets,
     )
 

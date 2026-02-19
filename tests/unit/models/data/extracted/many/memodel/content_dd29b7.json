@@ -4,12 +4,12 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym1",
-        "annotation_value": 1,
+        "acronym": "acronym0",
+        "annotation_value": 0,
         "color_hex_triplet": "FF0000",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region1",
+        "name": "region0",
         "parent_structure_id": null
       },
       "calibration_result": null,
@@ -58,7 +58,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "bar",
+      "description": "foo",
       "emodel": {
         "assets": [],
         "authorized_project_id": "00000000-0000-4000-8000-000001234678",
@@ -82,7 +82,7 @@
           "type": "person"
         },
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "",
+        "description": "description-0",
         "etypes": [],
         "exemplar_morphology": {
           "creation_date": "2025-01-01T00:00:00Z",
@@ -203,11 +203,11 @@
         }
       },
       "mtypes": [],
-      "name": "m-12",
+      "name": "m-0",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "TestSpecies1",
-        "taxonomy_id": "1"
+        "name": "TestSpecies0",
+        "taxonomy_id": "0"
       },
       "strain": null,
       "type": "memodel",
@@ -226,12 +226,12 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym1",
-        "annotation_value": 1,
+        "acronym": "acronym0",
+        "annotation_value": 0,
         "color_hex_triplet": "FF0000",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region1",
+        "name": "region0",
         "parent_structure_id": null
       },
       "calibration_result": null,
@@ -280,7 +280,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "bar",
+      "description": "foo",
       "emodel": {
         "assets": [],
         "authorized_project_id": "00000000-0000-4000-8000-000001234678",
@@ -304,7 +304,7 @@
           "type": "person"
         },
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "",
+        "description": "description-1",
         "etypes": [],
         "exemplar_morphology": {
           "creation_date": "2025-01-01T00:00:00Z",
@@ -425,11 +425,11 @@
         }
       },
       "mtypes": [],
-      "name": "m-13",
+      "name": "m-1",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "TestSpecies1",
-        "taxonomy_id": "1"
+        "name": "TestSpecies0",
+        "taxonomy_id": "0"
       },
       "strain": null,
       "type": "memodel",
@@ -448,12 +448,12 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym1",
-        "annotation_value": 1,
+        "acronym": "acronym0",
+        "annotation_value": 0,
         "color_hex_triplet": "FF0000",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region1",
+        "name": "region0",
         "parent_structure_id": null
       },
       "calibration_result": null,
@@ -502,7 +502,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "bar",
+      "description": "foo",
       "emodel": {
         "assets": [],
         "authorized_project_id": "00000000-0000-4000-8000-000001234678",
@@ -526,7 +526,7 @@
           "type": "person"
         },
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "",
+        "description": "description-0",
         "etypes": [],
         "exemplar_morphology": {
           "creation_date": "2025-01-01T00:00:00Z",
@@ -647,11 +647,11 @@
         }
       },
       "mtypes": [],
-      "name": "m-14",
+      "name": "m-2",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "TestSpecies1",
-        "taxonomy_id": "1"
+        "name": "TestSpecies0",
+        "taxonomy_id": "0"
       },
       "strain": null,
       "type": "memodel",
@@ -670,12 +670,12 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym1",
-        "annotation_value": 1,
+        "acronym": "acronym0",
+        "annotation_value": 0,
         "color_hex_triplet": "FF0000",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region1",
+        "name": "region0",
         "parent_structure_id": null
       },
       "calibration_result": null,
@@ -724,7 +724,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "bar",
+      "description": "foo",
       "emodel": {
         "assets": [],
         "authorized_project_id": "00000000-0000-4000-8000-000001234678",
@@ -748,7 +748,7 @@
           "type": "person"
         },
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "",
+        "description": "description-1",
         "etypes": [],
         "exemplar_morphology": {
           "creation_date": "2025-01-01T00:00:00Z",
@@ -869,11 +869,11 @@
         }
       },
       "mtypes": [],
-      "name": "m-15",
+      "name": "m-3",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "TestSpecies1",
-        "taxonomy_id": "1"
+        "name": "TestSpecies0",
+        "taxonomy_id": "0"
       },
       "strain": null,
       "type": "memodel",
@@ -892,12 +892,12 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym1",
-        "annotation_value": 1,
+        "acronym": "acronym0",
+        "annotation_value": 0,
         "color_hex_triplet": "FF0000",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region1",
+        "name": "region0",
         "parent_structure_id": null
       },
       "calibration_result": null,
@@ -946,7 +946,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "foo",
+      "description": "bar",
       "emodel": {
         "assets": [],
         "authorized_project_id": "00000000-0000-4000-8000-000001234678",
@@ -970,7 +970,7 @@
           "type": "person"
         },
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "",
+        "description": "description-0",
         "etypes": [],
         "exemplar_morphology": {
           "creation_date": "2025-01-01T00:00:00Z",
@@ -1091,11 +1091,11 @@
         }
       },
       "mtypes": [],
-      "name": "m-4",
+      "name": "m-8",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "TestSpecies0",
-        "taxonomy_id": "0"
+        "name": "TestSpecies1",
+        "taxonomy_id": "1"
       },
       "strain": null,
       "type": "memodel",
@@ -1114,12 +1114,12 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym1",
-        "annotation_value": 1,
+        "acronym": "acronym0",
+        "annotation_value": 0,
         "color_hex_triplet": "FF0000",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region1",
+        "name": "region0",
         "parent_structure_id": null
       },
       "calibration_result": null,
@@ -1168,7 +1168,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "foo",
+      "description": "bar",
       "emodel": {
         "assets": [],
         "authorized_project_id": "00000000-0000-4000-8000-000001234678",
@@ -1192,7 +1192,7 @@
           "type": "person"
         },
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "",
+        "description": "description-1",
         "etypes": [],
         "exemplar_morphology": {
           "creation_date": "2025-01-01T00:00:00Z",
@@ -1313,11 +1313,11 @@
         }
       },
       "mtypes": [],
-      "name": "m-5",
+      "name": "m-9",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "TestSpecies0",
-        "taxonomy_id": "0"
+        "name": "TestSpecies1",
+        "taxonomy_id": "1"
       },
       "strain": null,
       "type": "memodel",
@@ -1336,12 +1336,12 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym1",
-        "annotation_value": 1,
+        "acronym": "acronym0",
+        "annotation_value": 0,
         "color_hex_triplet": "FF0000",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region1",
+        "name": "region0",
         "parent_structure_id": null
       },
       "calibration_result": null,
@@ -1390,7 +1390,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "foo",
+      "description": "bar",
       "emodel": {
         "assets": [],
         "authorized_project_id": "00000000-0000-4000-8000-000001234678",
@@ -1414,7 +1414,7 @@
           "type": "person"
         },
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "",
+        "description": "description-0",
         "etypes": [],
         "exemplar_morphology": {
           "creation_date": "2025-01-01T00:00:00Z",
@@ -1535,11 +1535,11 @@
         }
       },
       "mtypes": [],
-      "name": "m-6",
+      "name": "m-10",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "TestSpecies0",
-        "taxonomy_id": "0"
+        "name": "TestSpecies1",
+        "taxonomy_id": "1"
       },
       "strain": null,
       "type": "memodel",
@@ -1558,12 +1558,12 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym1",
-        "annotation_value": 1,
+        "acronym": "acronym0",
+        "annotation_value": 0,
         "color_hex_triplet": "FF0000",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region1",
+        "name": "region0",
         "parent_structure_id": null
       },
       "calibration_result": null,
@@ -1612,7 +1612,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "foo",
+      "description": "bar",
       "emodel": {
         "assets": [],
         "authorized_project_id": "00000000-0000-4000-8000-000001234678",
@@ -1636,7 +1636,7 @@
           "type": "person"
         },
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "",
+        "description": "description-1",
         "etypes": [],
         "exemplar_morphology": {
           "creation_date": "2025-01-01T00:00:00Z",
@@ -1757,11 +1757,11 @@
         }
       },
       "mtypes": [],
-      "name": "m-7",
+      "name": "m-11",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "TestSpecies0",
-        "taxonomy_id": "0"
+        "name": "TestSpecies1",
+        "taxonomy_id": "1"
       },
       "strain": null,
       "type": "memodel",

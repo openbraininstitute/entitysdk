@@ -13,22 +13,11 @@ from ..util import MOCK_UUID
 
 DATA_DIR = Path(__file__).parent / "data"
 
-# routes not implemented yet in entitysdk
-MISSING_ROUTES = {
-    "brain-atlas",
-    "calibration",
-    "cell-composition",
-    "experimental-bouton-density",
-    "experimental-neuron-density",
-    "experimental-synapses-per-connection",
-    "external-url",
-    "scientific-artifact-external-url-link",
-    "validation",
-}
+# routes not implemented yet in entitysdk, e.g. cell-composition
+MISSING_ROUTES = set()
 
 # resources that don't provide an update endpoint
 NO_UPDATE_RESOURCES = {
-    "BrainAtlas",
     "CellComposition",
     "Consortium",
     "Contribution",

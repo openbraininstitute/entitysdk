@@ -3,7 +3,7 @@
 from entitysdk.models.activity import Activity
 from entitysdk.models.entity import Entity
 from entitysdk.models.execution import Execution
-from entitysdk.types import ID, CircuitExtractionExecutionStatus
+from entitysdk.types import ID
 
 
 class CircuitExtractionCampaign(Entity):
@@ -22,10 +22,6 @@ class CircuitExtractionConfig(Entity):
 class CircuitExtractionConfigGeneration(Activity):
     """Circuit extraction config generation activity."""
 
-    pass
-
 
 class CircuitExtractionExecution(Execution):
     """Circuit extraction execution activity."""
-
-    status: CircuitExtractionExecutionStatus

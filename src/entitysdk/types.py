@@ -9,6 +9,7 @@ if sys.version_info < (3, 11):  # pragma: no cover
 else:
     from enum import StrEnum
 
+from entitysdk._server_schemas import ActivityStatus as ActivityStatus
 from entitysdk._server_schemas import ActivityType as ActivityType
 from entitysdk._server_schemas import AgePeriod as AgePeriod
 from entitysdk._server_schemas import AnalysisScale as AnalysisScale
@@ -19,9 +20,6 @@ from entitysdk._server_schemas import AssetStatus as AssetStatus
 from entitysdk._server_schemas import CellMorphologyGenerationType as CellMorphologyGenerationType
 from entitysdk._server_schemas import CellMorphologyProtocolDesign as CellMorphologyProtocolDesign
 from entitysdk._server_schemas import CircuitBuildCategory as CircuitBuildCategory
-from entitysdk._server_schemas import (
-    CircuitExtractionExecutionStatus as CircuitExtractionExecutionStatus,
-)
 from entitysdk._server_schemas import CircuitScale as CircuitScale
 from entitysdk._server_schemas import ContentType as ContentType
 from entitysdk._server_schemas import DerivationType as DerivationType
@@ -37,9 +35,7 @@ from entitysdk._server_schemas import EMCellMeshGenerationMethod as EMCellMeshGe
 from entitysdk._server_schemas import EMCellMeshType as EMCellMeshType
 from entitysdk._server_schemas import EntityType as EntityType
 from entitysdk._server_schemas import ExecutorType as ExecutorType
-from entitysdk._server_schemas import (
-    IonChannelModelingExecutionStatus as IonChannelModelingExecutionStatus,
-)
+from entitysdk._server_schemas import ExternalSource as ExternalSource
 from entitysdk._server_schemas import MeasurableEntity as MeasurableEntity
 from entitysdk._server_schemas import MeasurementStatistic as MeasurementStatistic
 from entitysdk._server_schemas import MeasurementUnit as MeasurementUnit
@@ -47,11 +43,6 @@ from entitysdk._server_schemas import ModifiedMorphologyMethodType as ModifiedMo
 from entitysdk._server_schemas import PublicationType as PublicationType
 from entitysdk._server_schemas import RepairPipelineType as RepairPipelineType
 from entitysdk._server_schemas import Sex as Sex
-from entitysdk._server_schemas import SimulationExecutionStatus as SimulationExecutionStatus
-from entitysdk._server_schemas import SingleNeuronSimulationStatus as SingleNeuronSimulationStatus
-from entitysdk._server_schemas import (
-    SkeletonizationExecutionStatus as SkeletonizationExecutionStatus,
-)
 from entitysdk._server_schemas import SlicingDirectionType as SlicingDirectionType
 from entitysdk._server_schemas import StainingType as StainingType
 from entitysdk._server_schemas import StorageType as StorageType

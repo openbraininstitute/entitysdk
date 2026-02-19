@@ -79,6 +79,7 @@ def test_serialize_activity():
         end_time=datetime.now(UTC),
         used=[e1],
         generated=[e2],
+        status="running",
     )
 
     data = test_module.serialize_model(activity)
@@ -91,6 +92,7 @@ def test_serialize_activity():
     activity = Activity(
         start_time=datetime.now(UTC),
         end_time=datetime.now(UTC),
+        status="running",
     )
 
     data = test_module.serialize_model(activity)

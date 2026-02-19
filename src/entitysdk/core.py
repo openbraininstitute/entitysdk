@@ -94,7 +94,6 @@ def get_entity(
         token=token,
         http_client=http_client,
     )
-
     return serdes.deserialize_model(response.json(), entity_type)
 
 
@@ -433,6 +432,7 @@ def download_asset_file(
     create_intermediate_directories(target_path)
 
     if local_store and local_store.path_exists(source_path):
+        L.info("Path %s found on local store and is symlinked.", source_path)
         local_store.link_path(source_path, target_path)
         return target_path
 
@@ -518,7 +518,6 @@ def delete_asset(
     project_context: ProjectContext | None,
     token: str,
     http_client: httpx.Client | None = None,
-    hard: bool = False,
 ) -> Asset:
     """Delete asset."""
     response = make_db_api_request(
@@ -527,7 +526,6 @@ def delete_asset(
         project_context=project_context,
         token=token,
         http_client=http_client,
-        parameters={"hard": True} if hard else None,
     )
     return serdes.deserialize_model(response.json(), Asset)
 

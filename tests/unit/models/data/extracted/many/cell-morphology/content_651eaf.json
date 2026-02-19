@@ -39,7 +39,7 @@
         "z": 30.0
       },
       "mtypes": [],
-      "name": "TestMorphologyName2",
+      "name": "Test Morphology Name",
       "notice_text": null,
       "published_in": null,
       "repair_pipeline_state": null,
@@ -48,20 +48,20 @@
         "age_min": null,
         "age_period": "postnatal",
         "age_value": 1209600.0,
-        "description": "my-description-2",
+        "description": "my-description",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "subject-2",
-        "sex": "male",
+        "name": "my-subject",
+        "sex": "female",
         "species": {
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "TestSpecies1",
-          "taxonomy_id": "1"
+          "name": "Test Species",
+          "taxonomy_id": "12345"
         },
         "strain": {
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "Strain1",
+          "name": "Test Strain",
           "species_id": "00000000-0000-4000-8000-000001234678",
-          "taxonomy_id": "strain1"
+          "taxonomy_id": "Taxonomy ID"
         },
         "weight": 1.5
       },
@@ -80,7 +80,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 1,
-    "total_items": 3
+    "page_size": 100,
+    "total_items": 1
   }
 }

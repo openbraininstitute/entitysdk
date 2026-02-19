@@ -115,6 +115,7 @@ class Client:
         *,
         entity_type: type[TIdentifiable],
         project_context: ProjectContext | None = None,
+        options: dict | None = None,
         admin: bool = False,
     ) -> TIdentifiable:
         """Get entity from resource id.
@@ -123,6 +124,7 @@ class Client:
             entity_id: Resource id of the entity.
             entity_type: Type of the entity.
             project_context: Optional project context.
+            options: Optional dict with options to be passed.
             admin: Whether to use the admin endpoint or not.
 
         Returns:
@@ -139,6 +141,7 @@ class Client:
         )
         return core.get_entity(
             url=url,
+            options=options,
             entity_type=entity_type,
             project_context=context,
             http_client=self._http_client,
@@ -639,7 +642,6 @@ class Client:
         entity_type: type[Identifiable],
         asset_id: ID,
         project_context: ProjectContext | None = None,
-        hard: bool = False,
         admin: bool = False,
     ) -> Asset:
         """Delete an entity's asset."""
@@ -658,7 +660,6 @@ class Client:
             project_context=context,
             http_client=self._http_client,
             token=self._token_manager.get_token(),
-            hard=hard if not admin else False,
         )
 
     def update_asset_file(

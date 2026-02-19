@@ -5,9 +5,13 @@ from entitysdk.models.analysis_notebook_execution import AnalysisNotebookExecuti
 from entitysdk.models.analysis_notebook_result import AnalysisNotebookResult
 from entitysdk.models.analysis_notebook_template import AnalysisNotebookTemplate
 from entitysdk.models.asset import Asset
+from entitysdk.models.brain_atlas import BrainAtlas
+from entitysdk.models.brain_atlas_region import BrainAtlasRegion
 from entitysdk.models.brain_location import BrainLocation
 from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.brain_region_hierarchy import BrainRegionHierarchy
+from entitysdk.models.calibration import Calibration
+from entitysdk.models.cell_composition import CellComposition
 from entitysdk.models.cell_morphology import CellMorphology
 from entitysdk.models.cell_morphology_protocol import CellMorphologyProtocol
 from entitysdk.models.circuit import Circuit
@@ -20,6 +24,11 @@ from entitysdk.models.circuit_extraction import (
 from entitysdk.models.classification import ETypeClassification, MTypeClassification
 from entitysdk.models.contribution import Contribution, Role
 from entitysdk.models.core import Consortium, Organization, Person
+from entitysdk.models.density import (
+    ExperimentalBoutonDensity,
+    ExperimentalNeuronDensity,
+    ExperimentalSynapsesPerConnection,
+)
 from entitysdk.models.derivation import Derivation
 from entitysdk.models.electrical_cell_recording import ElectricalCellRecording
 from entitysdk.models.electrical_recording import ElectricalRecordingStimulus
@@ -31,6 +40,7 @@ from entitysdk.models.em_dense_reconstruction_dataset import (
 from entitysdk.models.emodel import EModel
 from entitysdk.models.entity import Entity
 from entitysdk.models.etype import ETypeClass
+from entitysdk.models.external_url import ExternalUrl
 from entitysdk.models.ion_channel import IonChannel
 from entitysdk.models.ion_channel_model import IonChannelModel, NeuronBlock, UseIon
 from entitysdk.models.ion_channel_modeling_campaign import IonChannelModelingCampaign
@@ -42,10 +52,12 @@ from entitysdk.models.ion_channel_modeling_execution import IonChannelModelingEx
 from entitysdk.models.ion_channel_recording import IonChannelRecording
 from entitysdk.models.license import License
 from entitysdk.models.measurement_annotation import MeasurementAnnotation
+from entitysdk.models.measurement_label import MeasurementLabel
 from entitysdk.models.memodel import MEModel
 from entitysdk.models.memodelcalibrationresult import MEModelCalibrationResult
 from entitysdk.models.mtype import MTypeClass
 from entitysdk.models.publication import Publication
+from entitysdk.models.scientific_artifact_external_url_link import ScientificArtifactExternalUrlLink
 from entitysdk.models.scientific_artifact_publication_link import ScientificArtifactPublicationLink
 from entitysdk.models.simulation import Simulation
 from entitysdk.models.simulation_campaign import SimulationCampaign
@@ -61,6 +73,7 @@ from entitysdk.models.skeletonization_execution import SkeletonizationExecution
 from entitysdk.models.subject import Subject
 from entitysdk.models.synaptome import SingleNeuronSynaptome
 from entitysdk.models.taxonomy import Species, Strain
+from entitysdk.models.validation import Validation
 from entitysdk.models.validation_result import ValidationResult
 
 __all__ = [
@@ -69,9 +82,13 @@ __all__ = [
     "AnalysisNotebookResult",
     "AnalysisNotebookTemplate",
     "Asset",
+    "BrainAtlas",
+    "BrainAtlasRegion",
     "BrainLocation",
     "BrainRegion",
     "BrainRegionHierarchy",
+    "Calibration",
+    "CellComposition",
     "CellMorphology",
     "CellMorphologyProtocol",
     "Circuit",
@@ -92,6 +109,10 @@ __all__ = [
     "Entity",
     "ETypeClass",
     "ETypeClassification",
+    "ExperimentalBoutonDensity",
+    "ExperimentalNeuronDensity",
+    "ExperimentalSynapsesPerConnection",
+    "ExternalUrl",
     "IonChannel",
     "IonChannelModel",
     "IonChannelModelingCampaign",
@@ -101,6 +122,7 @@ __all__ = [
     "IonChannelRecording",
     "License",
     "MeasurementAnnotation",
+    "MeasurementLabel",
     "MEModel",
     "MEModelCalibrationResult",
     "MTypeClass",
@@ -110,6 +132,7 @@ __all__ = [
     "Person",
     "Publication",
     "Role",
+    "ScientificArtifactExternalUrlLink",
     "ScientificArtifactPublicationLink",
     "Simulation",
     "SimulationCampaign",
@@ -128,5 +151,6 @@ __all__ = [
     "Strain",
     "Subject",
     "UseIon",
+    "Validation",
     "ValidationResult",
 ]

@@ -7,7 +7,6 @@ from pydantic import Field
 from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.entity import Entity
 from entitysdk.models.memodel import NestedMEModel
-from entitysdk.types import SingleNeuronSimulationStatus
 
 
 class SingleNeuronSimulation(Entity):
@@ -34,13 +33,6 @@ class SingleNeuronSimulation(Entity):
             description="List of locations where the stimuli were recorded, "
             "in hoc-compatible format.",
             examples=["soma[0]"],
-        ),
-    ]
-    status: Annotated[
-        SingleNeuronSimulationStatus,
-        Field(
-            description="Status of the simulation. Can be .started, .failure, .success",
-            examples=[SingleNeuronSimulationStatus.success],
         ),
     ]
     me_model: Annotated[
