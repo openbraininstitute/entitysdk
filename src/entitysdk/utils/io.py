@@ -1,7 +1,6 @@
 """IO utilities."""
 
 import hashlib
-import io
 import json
 from collections.abc import Iterator
 from pathlib import Path
@@ -23,7 +22,7 @@ def calculate_sha256_digest(path: Path) -> str:
     """Calculate the sha256 digest of a file."""
     h = hashlib.sha256()
     with path.open("rb") as f:
-        for chunk in iter(lambda: f.read(io.DEFAULT_BUFFER_SIZE), b""):
+        while chunk := f.read(4096):
             h.update(chunk)
     return h.hexdigest()
 
