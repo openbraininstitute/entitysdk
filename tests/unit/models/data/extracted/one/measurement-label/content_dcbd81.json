@@ -9,10 +9,10 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "definition": "",
+  "definition": "Test definition 0",
   "entity_type": "cell_morphology",
   "id": "00000000-0000-4000-8000-000001234678",
-  "pref_label": "pref_label_1",
+  "pref_label": "test_pref_label_0",
   "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
     "family_name": null,

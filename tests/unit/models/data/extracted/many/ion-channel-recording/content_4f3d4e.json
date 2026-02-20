@@ -5,15 +5,15 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym-5",
-        "annotation_value": 5,
+        "acronym": "acronym-4",
+        "annotation_value": 4,
         "color_hex_triplet": "FF0000",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region-5",
+        "name": "region-4",
         "parent_structure_id": null
       },
-      "cell_line": "CHO",
+      "cell_line": "CHO_FT",
       "comment": "test comment",
       "contact_email": null,
       "contributions": [],
@@ -33,8 +33,8 @@
         "description": "ion-channel-description",
         "gene": "Kcnma1",
         "id": "00000000-0000-4000-8000-000001234678",
-        "label": "label-5",
-        "name": "name-5",
+        "label": "label-4",
+        "name": "name-4",
         "synonyms": [
           "BK channel",
           "BK channel alpha subunit"
@@ -66,17 +66,17 @@
         "age_value": 1209600.0,
         "description": "my-description",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "subject-5",
+        "name": "subject-4",
         "sex": "female",
         "species": {
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "species-2",
-          "taxonomy_id": "taxonomy-2"
+          "name": "species-1",
+          "taxonomy_id": "taxonomy-1"
         },
         "strain": null,
         "weight": 1.5
       },
-      "temperature": 15.0,
+      "temperature": 35.0,
       "type": "ion_channel_recording",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -93,15 +93,15 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym-2",
-        "annotation_value": 2,
+        "acronym": "acronym-1",
+        "annotation_value": 1,
         "color_hex_triplet": "FF0000",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region-2",
+        "name": "region-1",
         "parent_structure_id": null
       },
-      "cell_line": "HEK",
+      "cell_line": "CHO_FT",
       "comment": "test comment",
       "contact_email": null,
       "contributions": [],
@@ -121,8 +121,8 @@
         "description": "ion-channel-description",
         "gene": "Kcnma1",
         "id": "00000000-0000-4000-8000-000001234678",
-        "label": "label-2",
-        "name": "name-2",
+        "label": "label-1",
+        "name": "name-1",
         "synonyms": [
           "BK channel",
           "BK channel alpha subunit"
@@ -144,8 +144,8 @@
       "recording_location": [
         "soma[0]_0.5"
       ],
-      "recording_origin": "in_vivo",
-      "recording_type": "both",
+      "recording_origin": "in_vitro",
+      "recording_type": "intracellular",
       "stimuli": [],
       "subject": {
         "age_max": null,
@@ -154,17 +154,17 @@
         "age_value": 1209600.0,
         "description": "my-description",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "subject-2",
+        "name": "subject-1",
         "sex": "female",
         "species": {
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "species-2",
-          "taxonomy_id": "taxonomy-2"
+          "name": "species-1",
+          "taxonomy_id": "taxonomy-1"
         },
         "strain": null,
         "weight": 1.5
       },
-      "temperature": 15.0,
+      "temperature": 35.0,
       "type": "ion_channel_recording",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {

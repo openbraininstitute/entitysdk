@@ -25,7 +25,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Filter Test Description 2",
+      "description": "Filter Test Description 0",
       "experiment_date": null,
       "has_segmented_spines": false,
       "id": "00000000-0000-4000-8000-000001234678",
@@ -40,15 +40,15 @@
       },
       "mtypes": [
         {
-          "alt_label": "m2",
+          "alt_label": "m0",
           "creation_date": "2025-01-01T00:00:00Z",
           "definition": "d",
           "id": "00000000-0000-4000-8000-000001234678",
-          "pref_label": "m2",
+          "pref_label": "m0",
           "update_date": "2025-01-01T00:00:00Z"
         }
       ],
-      "name": "Filter Test Morphology 2",
+      "name": "Filter Test Morphology 0",
       "notice_text": null,
       "published_in": null,
       "repair_pipeline_state": null,

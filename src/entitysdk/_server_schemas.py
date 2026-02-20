@@ -116,6 +116,9 @@ class ApiErrorCode(StrEnum):
     ASSET_NOT_A_DIRECTORY = "ASSET_NOT_A_DIRECTORY"
     ASSET_INVALID_SCHEMA = "ASSET_INVALID_SCHEMA"
     ASSET_INVALID_CONTENT_TYPE = "ASSET_INVALID_CONTENT_TYPE"
+    ASSET_UPLOAD_INCOMPLETE = "ASSET_UPLOAD_INCOMPLETE"
+    ASSET_UPLOAD_INCONSISTENT_SIZE = "ASSET_UPLOAD_INCONSISTENT_SIZE"
+    ASSET_NOT_UPLOADING = "ASSET_NOT_UPLOADING"
     ION_NAME_NOT_FOUND = "ION_NAME_NOT_FOUND"
     S3_CANNOT_CREATE_PRESIGNED_URL = "S3_CANNOT_CREATE_PRESIGNED_URL"
     OPENAI_API_KEY_MISSING = "OPENAI_API_KEY_MISSING"
@@ -171,6 +174,7 @@ class AssetLabel(StrEnum):
 
 class AssetStatus(StrEnum):
     created = "created"
+    uploading = "uploading"
     deleted = "deleted"
 
 
@@ -869,6 +873,25 @@ class HierarchyNode(BaseModel):
 class HierarchyTree(BaseModel):
     derivation_type: DerivationType
     data: Annotated[list[HierarchyNode], Field(title="Data")]
+
+
+class InitiateUploadRequest(BaseModel):
+    filename: Annotated[str, Field(description="File name to be uploaded.", title="Filename")]
+    filesize: Annotated[
+        int, Field(description="File size to be uploaded in bytes.", gt=0, title="Filesize")
+    ]
+    sha256_digest: Annotated[str, Field(title="Sha256 Digest")]
+    content_type: Annotated[
+        str | None,
+        Field(
+            description="Content type of file. If not provided it will be deduced from the file's extension.",
+            title="Content Type",
+        ),
+    ] = None
+    label: AssetLabel
+    preferred_part_count: Annotated[
+        int | None, Field(description="Hint of desired part count.", title="Preferred Part Count")
+    ] = 100
 
 
 class IonChannelAdminUpdate(BaseModel):
@@ -2321,6 +2344,18 @@ class SubjectUserUpdate(BaseModel):
     strain_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Strain Id")] = "<NOT_SET>"
 
 
+class ToUploadPart(BaseModel):
+    part_number: Annotated[
+        int, Field(description="Index of this part in the multipart upload.", title="Part Number")
+    ]
+    url: Annotated[str, Field(description="Presigned url to upload file part.", title="Url")]
+
+
+class UploadMetaRead(BaseModel):
+    parts: Annotated[list[ToUploadPart], Field(title="Parts")]
+    part_size: Annotated[int, Field(description="Size in bytes for each part.", title="Part Size")]
+
+
 class UseIon(BaseModel):
     ion_name: Annotated[str, Field(title="Ion Name")]
     read: Annotated[list[str] | None, Field(title="Read")] = []
@@ -2515,6 +2550,21 @@ class AssetRead(BaseModel):
     storage_type: StorageType
     id: Annotated[UUID, Field(title="Id")]
     status: AssetStatus
+
+
+class AssetReadWithUploadMeta(BaseModel):
+    size: Annotated[int, Field(title="Size")]
+    sha256_digest: Annotated[str | None, Field(title="Sha256 Digest")]
+    path: Annotated[str, Field(title="Path")]
+    full_path: Annotated[str, Field(title="Full Path")]
+    is_directory: Annotated[bool, Field(title="Is Directory")]
+    content_type: ContentType
+    meta: Annotated[dict[str, Any] | None, Field(title="Meta")] = {}
+    label: AssetLabel
+    storage_type: StorageType
+    id: Annotated[UUID, Field(title="Id")]
+    status: AssetStatus
+    upload_meta: UploadMetaRead | None = None
 
 
 class AssetRegister(BaseModel):

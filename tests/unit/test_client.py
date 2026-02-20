@@ -709,6 +709,44 @@ def test_client_download_assets(
     assert res.path.read_bytes() == b"bar"
 
 
+def test_client_download_assets__uploading(
+    tmp_path, api_url, client, project_context, request_headers, httpx_mock
+):
+    entity_id = uuid.uuid4()
+    asset1_id = uuid.uuid4()
+    asset2_id = uuid.uuid4()
+
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}",
+        match_headers=request_headers,
+        json=_mock_entity_response(
+            entity_id=entity_id,
+            assets=[
+                _mock_asset_response(
+                    asset_id=asset1_id,
+                    path="foo/bar/bar.h5",
+                    content_type="application/x-hdf5",
+                ),
+                _mock_asset_response(
+                    asset_id=asset2_id,
+                    path="foo/bar/bar.swc",
+                    content_type="application/swc",
+                    status="deleted",
+                ),
+            ],
+        ),
+    )
+
+    with pytest.raises(EntitySDKError, match="uploading and cannot be downloaded"):
+        client.download_assets(
+            (entity_id, Entity),
+            selection={"content_type": "application/swc"},
+            output_path=tmp_path,
+            project_context=project_context,
+        ).one()
+
+
 def test_client_download_assets__no_assets_raise(
     tmp_path, api_url, client, project_context, request_headers, httpx_mock
 ):
@@ -798,6 +836,7 @@ def test_client_download_assets__entity(
                 content_type="application/json",
                 label="cell_composition_summary",
                 size=1,
+                status="created",
             ),
         ],
     )

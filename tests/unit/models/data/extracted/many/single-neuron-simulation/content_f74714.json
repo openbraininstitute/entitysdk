@@ -3,14 +3,14 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "brain_region": {
-        "acronym": "acronym1",
-        "annotation_value": 1,
+        "acronym": "acronym64",
+        "annotation_value": 64,
         "color_hex_triplet": "FF0000",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region-1",
+        "name": "RedRegion",
         "parent_structure_id": null
       },
       "created_by": {
@@ -22,22 +22,22 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "sim-desc-1",
+      "description": "original-description",
       "id": "00000000-0000-4000-8000-000001234678",
       "injection_location": [
         "soma[0]"
       ],
       "me_model": {
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "description-0",
+        "description": "description",
         "etypes": [],
         "id": "00000000-0000-4000-8000-000001234678",
         "mtypes": [],
-        "name": "me-model-0",
+        "name": "name",
         "update_date": "2025-01-01T00:00:00Z",
         "validation_status": "created"
       },
-      "name": "sim-1",
+      "name": "Public u1/0",
       "recording_location": [
         "soma[0]_0.5"
       ],

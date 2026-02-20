@@ -151,3 +151,36 @@ def get_assets_endpoint(
     )
     asset_path = "assets" if asset_id is None else f"assets/{asset_id}"
     return f"{base_url}/{asset_path}"
+
+
+def multipart_upload_initiate_endpoint(
+    *,
+    api_url: str,
+    entity_id: str | ID,
+    entity_type: type[Entity],
+):
+    """Return multipart upload initiate upload."""
+    base_url = get_entities_endpoint(
+        api_url=api_url,
+        entity_type=entity_type,
+        entity_id=entity_id,
+        admin=False,
+    )
+    return f"{base_url}/assets/multipart-upload/initiate"
+
+
+def multipart_upload_complete_endpoint(
+    *,
+    api_url: str,
+    entity_id: str | ID,
+    entity_type: type[Entity],
+    asset_id: str | ID,
+):
+    """Return multipart upload complete endpoint."""
+    base_url = get_entities_endpoint(
+        api_url=api_url,
+        entity_type=entity_type,
+        entity_id=entity_id,
+        admin=False,
+    )
+    return f"{base_url}/assets/{asset_id}/multipart-upload/complete"

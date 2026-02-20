@@ -24,7 +24,7 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "description-2",
+  "description": "description-0",
   "experiment_date": null,
   "has_electrical_cell_models": true,
   "has_morphologies": true,
@@ -39,7 +39,7 @@
     "name": "Test License",
     "update_date": "2025-01-01T00:00:00Z"
   },
-  "name": "name-2",
+  "name": "name-0",
   "notice_text": null,
   "number_connections": 100000000,
   "number_neurons": 10000000,

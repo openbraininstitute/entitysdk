@@ -20,10 +20,10 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "description",
+  "description": "original-description",
   "id": "00000000-0000-4000-8000-000001234678",
   "injection_location": [
-    "dendrite[0]"
+    "soma[0]"
   ],
   "me_model": {
     "creation_date": "2025-01-01T00:00:00Z",
@@ -35,11 +35,11 @@
     "update_date": "2025-01-01T00:00:00Z",
     "validation_status": "created"
   },
-  "name": "name",
+  "name": "original-sim",
   "recording_location": [
-    "dendrite[0]_0.5"
+    "soma[0]_0.5"
   ],
-  "seed": 42,
+  "seed": 1,
   "type": "single_neuron_simulation",
   "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {

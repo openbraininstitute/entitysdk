@@ -33,19 +33,19 @@
   },
   "measurements": [
     {
-      "id": 13,
+      "id": 5,
       "name": "minimum",
       "unit": "\u03bcm",
       "value": 1.23
     },
     {
-      "id": 14,
+      "id": 6,
       "name": "maximum",
       "unit": "\u03bcm",
       "value": 1.45
     }
   ],
-  "name": "my-name",
+  "name": "Private u2/0",
   "post_mtype": {
     "alt_label": "mtype-alt-label",
     "creation_date": "2025-01-01T00:00:00Z",

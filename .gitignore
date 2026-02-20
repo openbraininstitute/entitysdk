@@ -174,3 +174,4 @@ examples/*.md
 examples/*.h5
 
 .DS_Store
+.vscode/
