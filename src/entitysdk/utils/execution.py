@@ -28,7 +28,7 @@ def execute_with_retry(
     Raises:
         The last exception if all retries fail.
     """
-    if not (max_retries >= 0):
+    if max_retries < 0:
         raise ValueError("max_retries must be >= 0")
     last_exception: BaseException | None = None
 
