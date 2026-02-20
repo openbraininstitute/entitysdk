@@ -25,7 +25,7 @@
   "injection_location": [
     "soma[0]"
   ],
-  "name": "Public u2/0",
+  "name": "my-sim",
   "recording_location": [
     "soma[0]_0.5"
   ],

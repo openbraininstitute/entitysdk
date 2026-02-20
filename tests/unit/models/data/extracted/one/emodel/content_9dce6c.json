@@ -1,7 +1,7 @@
 {
   "assets": [],
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": true,
+  "authorized_public": false,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
@@ -21,7 +21,7 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "morph description",
+  "description": "Test EModel Description",
   "etypes": [],
   "exemplar_morphology": {
     "creation_date": "2025-01-01T00:00:00Z",
@@ -41,11 +41,11 @@
     "update_date": "2025-01-01T00:00:00Z"
   },
   "id": "00000000-0000-4000-8000-000001234678",
-  "iteration": "0",
+  "iteration": "test iteration",
   "mtypes": [],
-  "name": "Test Morphology Name",
-  "score": 0.0,
-  "seed": 0,
+  "name": "Test EModel Name",
+  "score": -1.0,
+  "seed": -1,
   "species": {
     "id": "00000000-0000-4000-8000-000001234678",
     "name": "Test Species",

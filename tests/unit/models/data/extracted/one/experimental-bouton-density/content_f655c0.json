@@ -33,13 +33,13 @@
   },
   "measurements": [
     {
-      "id": 9,
+      "id": 1,
       "name": "minimum",
       "unit": "\u03bcm",
       "value": 1.23
     },
     {
-      "id": 10,
+      "id": 2,
       "name": "maximum",
       "unit": "\u03bcm",
       "value": 1.45

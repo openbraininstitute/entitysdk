@@ -4,7 +4,7 @@
   "age_period": "postnatal",
   "age_value": 1209600.0,
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": false,
+  "authorized_public": true,
   "created_by": {
     "family_name": "courcol",
     "given_name": "jd",
@@ -14,9 +14,9 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "description-1",
+  "description": "my-description",
   "id": "00000000-0000-4000-8000-000001234678",
-  "name": "name-1",
+  "name": "Public u1/0",
   "sex": "female",
   "species": {
     "id": "00000000-0000-4000-8000-000001234678",

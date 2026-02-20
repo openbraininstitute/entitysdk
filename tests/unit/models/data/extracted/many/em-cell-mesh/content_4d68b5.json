@@ -25,7 +25,7 @@
       },
       "creation_date": "2025-01-01T00:00:00Z",
       "dense_reconstruction_cell_id": 9223372036854775807,
-      "description": "description-2",
+      "description": "mesh-description",
       "em_dense_reconstruction_dataset": {
         "id": "00000000-0000-4000-8000-000001234678",
         "type": "em_dense_reconstruction_dataset"
@@ -38,7 +38,7 @@
       "license": null,
       "mesh_type": "static",
       "mtypes": [],
-      "name": "name-2",
+      "name": "Private u1/1",
       "notice_text": null,
       "published_in": null,
       "release_version": 1,
@@ -100,7 +100,7 @@
       },
       "creation_date": "2025-01-01T00:00:00Z",
       "dense_reconstruction_cell_id": 9223372036854775807,
-      "description": "description-1",
+      "description": "mesh-description",
       "em_dense_reconstruction_dataset": {
         "id": "00000000-0000-4000-8000-000001234678",
         "type": "em_dense_reconstruction_dataset"
@@ -113,7 +113,7 @@
       "license": null,
       "mesh_type": "static",
       "mtypes": [],
-      "name": "name-1",
+      "name": "Private u1/0",
       "notice_text": null,
       "published_in": null,
       "release_version": 1,
@@ -154,7 +154,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 2,
-    "total_items": 3
+    "page_size": 100,
+    "total_items": 2
   }
 }

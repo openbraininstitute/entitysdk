@@ -21,7 +21,7 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "my-description",
+  "description": "d14",
   "id": "00000000-0000-4000-8000-000001234678",
   "license": {
     "creation_date": "2025-01-01T00:00:00Z",
@@ -33,51 +33,51 @@
   },
   "measurements": [
     {
-      "id": 1,
+      "id": 29,
       "name": "minimum",
       "unit": "\u03bcm",
       "value": 1.23
     },
     {
-      "id": 2,
+      "id": 30,
       "name": "maximum",
       "unit": "\u03bcm",
       "value": 1.45
     }
   ],
-  "name": "my-name",
+  "name": "s14",
   "post_mtype": {
-    "alt_label": "mtype-alt-label",
+    "alt_label": "post-m2",
     "creation_date": "2025-01-01T00:00:00Z",
-    "definition": "mtype-definition",
+    "definition": "",
     "id": "00000000-0000-4000-8000-000001234678",
-    "pref_label": "mtype-pref-label",
+    "pref_label": "post-m2",
     "update_date": "2025-01-01T00:00:00Z"
   },
   "post_region": {
-    "acronym": "acronym64",
-    "annotation_value": 64,
+    "acronym": "acronym3",
+    "annotation_value": 3,
     "color_hex_triplet": "FF0000",
     "hierarchy_id": "00000000-0000-4000-8000-000001234678",
     "id": "00000000-0000-4000-8000-000001234678",
-    "name": "RedRegion",
+    "name": "post-r3",
     "parent_structure_id": null
   },
   "pre_mtype": {
-    "alt_label": "mtype-alt-label",
+    "alt_label": "pre-m1",
     "creation_date": "2025-01-01T00:00:00Z",
-    "definition": "mtype-definition",
+    "definition": "",
     "id": "00000000-0000-4000-8000-000001234678",
-    "pref_label": "mtype-pref-label",
+    "pref_label": "pre-m1",
     "update_date": "2025-01-01T00:00:00Z"
   },
   "pre_region": {
-    "acronym": "acronym64",
-    "annotation_value": 64,
+    "acronym": "acronym1",
+    "annotation_value": 1,
     "color_hex_triplet": "FF0000",
     "hierarchy_id": "00000000-0000-4000-8000-000001234678",
     "id": "00000000-0000-4000-8000-000001234678",
-    "name": "RedRegion",
+    "name": "pre-r1",
     "parent_structure_id": null
   },
   "subject": {

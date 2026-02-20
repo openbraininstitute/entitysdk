@@ -25,7 +25,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Test description",
+      "description": "Test ICM Description",
       "experiment_date": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "is_ljp_corrected": false,
@@ -33,14 +33,14 @@
       "is_temperature_dependent": false,
       "license": null,
       "max_permeability_name": null,
-      "name": "Private u1/1",
+      "name": "Test name",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "test",
+      "nmodl_suffix": "Test name",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -102,7 +102,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Test description",
+      "description": "Test ICM Description",
       "experiment_date": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "is_ljp_corrected": false,
@@ -110,14 +110,14 @@
       "is_temperature_dependent": false,
       "license": null,
       "max_permeability_name": null,
-      "name": "Private u1/0",
+      "name": "Test name",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "test",
+      "nmodl_suffix": "Test name",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -157,7 +157,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -179,7 +179,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Test description",
+      "description": "Test ICM Description",
       "experiment_date": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "is_ljp_corrected": false,
@@ -187,14 +187,14 @@
       "is_temperature_dependent": false,
       "license": null,
       "max_permeability_name": null,
-      "name": "Public u1/0",
+      "name": "Test name",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "test",
+      "nmodl_suffix": "Test name",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -235,7 +235,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 100,
-    "total_items": 3
+    "page_size": 3,
+    "total_items": 11
   }
 }

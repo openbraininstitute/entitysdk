@@ -2,7 +2,7 @@
   "data": [
     {
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
@@ -17,7 +17,7 @@
       "end_time": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "injection_type": "current_clamp",
-      "name": "r-2",
+      "name": "Public u1/0",
       "recording_id": "00000000-0000-4000-8000-000001234678",
       "shape": "sinusoidal",
       "start_time": null,

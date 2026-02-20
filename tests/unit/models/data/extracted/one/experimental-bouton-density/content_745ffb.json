@@ -33,20 +33,20 @@
   },
   "measurements": [
     {
-      "id": 13,
+      "id": 5,
       "name": "minimum",
       "unit": "\u03bcm",
       "value": 1.23
     },
     {
-      "id": 14,
+      "id": 6,
       "name": "maximum",
       "unit": "\u03bcm",
       "value": 1.45
     }
   ],
   "mtypes": [],
-  "name": "my-name",
+  "name": "Private u2/0",
   "subject": {
     "age_max": null,
     "age_min": null,

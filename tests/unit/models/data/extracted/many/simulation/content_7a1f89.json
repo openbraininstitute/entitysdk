@@ -3,7 +3,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "created_by": {
         "family_name": "courcol",
         "given_name": "jd",
@@ -16,7 +16,7 @@
       "description": "simulation-description",
       "entity_id": "00000000-0000-4000-8000-000001234678",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "simulation",
+      "name": "Public u1/0",
       "number_neurons": 10,
       "scan_parameters": {
         "foo1": "bar1",

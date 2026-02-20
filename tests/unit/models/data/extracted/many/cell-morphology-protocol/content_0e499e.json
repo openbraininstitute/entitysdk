@@ -2,13 +2,13 @@
   "data": [
     {
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "corrected_for_shrinkage": null,
       "created_by": {
         "family_name": null,
         "given_name": null,
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Project Id",
+        "pref_label": "Regular User With Different Project Id",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
@@ -17,7 +17,7 @@
       "generation_type": "digital_reconstruction",
       "id": "00000000-0000-4000-8000-000001234678",
       "magnification": null,
-      "name": "Private u1/1",
+      "name": "Public u2/0",
       "protocol_design": "cell_patch",
       "protocol_document": "https://example.com/",
       "slicing_direction": "horizontal",
@@ -30,14 +30,14 @@
         "family_name": null,
         "given_name": null,
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Project Id",
+        "pref_label": "Regular User With Different Project Id",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "corrected_for_shrinkage": null,
       "created_by": {
         "family_name": null,
@@ -52,7 +52,7 @@
       "generation_type": "digital_reconstruction",
       "id": "00000000-0000-4000-8000-000001234678",
       "magnification": null,
-      "name": "Private u1/0",
+      "name": "Public u1/0",
       "protocol_design": "cell_patch",
       "protocol_document": "https://example.com/",
       "slicing_direction": "horizontal",

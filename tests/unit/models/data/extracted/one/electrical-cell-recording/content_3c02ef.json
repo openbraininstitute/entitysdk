@@ -1,14 +1,14 @@
 {
   "assets": [],
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": true,
+  "authorized_public": false,
   "brain_region": {
-    "acronym": "acronym64",
-    "annotation_value": 64,
+    "acronym": "acronym1",
+    "annotation_value": 1,
     "color_hex_triplet": "FF0000",
     "hierarchy_id": "00000000-0000-4000-8000-000001234678",
     "id": "00000000-0000-4000-8000-000001234678",
-    "name": "RedRegion",
+    "name": "region-1",
     "parent_structure_id": null
   },
   "comment": "",
@@ -23,7 +23,7 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "my-description",
+  "description": "brain-region-1",
   "etypes": [],
   "experiment_date": null,
   "id": "00000000-0000-4000-8000-000001234678",
@@ -37,7 +37,7 @@
     "update_date": "2025-01-01T00:00:00Z"
   },
   "ljp": 11.5,
-  "name": "my-name",
+  "name": "trace-1",
   "notice_text": null,
   "published_in": null,
   "recording_location": [
