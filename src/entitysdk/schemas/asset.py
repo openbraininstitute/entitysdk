@@ -29,9 +29,6 @@ class MultipartUploadTransferConfig(Schema):
     threshold: Annotated[
         int, Field(description="Minimum size (in bytes) for multipart upload.")
     ] = 20 * 1024**2
-    use_threads: Annotated[
-        bool, Field(description="Whether to use threads for concurrent uploads.")
-    ] = True
     max_concurrency: Annotated[
         int, Field(description="Maximum number of threads for uploading parts.")
     ] = 10

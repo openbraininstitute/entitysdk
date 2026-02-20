@@ -98,16 +98,12 @@ def parts(asset_file):
 
 @pytest.fixture
 def transfer_config_sequential():
-    return MultipartUploadTransferConfig(
-        preferred_part_count=2, use_threads=False, max_concurrency=2
-    )
+    return MultipartUploadTransferConfig(preferred_part_count=2, max_concurrency=2)
 
 
 @pytest.fixture
 def transfer_config_threaded():
-    return MultipartUploadTransferConfig(
-        preferred_part_count=2, use_threads=True, max_concurrency=2
-    )
+    return MultipartUploadTransferConfig(preferred_part_count=2, max_concurrency=1)
 
 
 def test_multipart_upload_asset_file(
@@ -245,13 +241,13 @@ def test_upload_parts():
         patch("entitysdk.multipart_upload._upload_parts_threaded", autospec=True) as p_thread,
         patch("entitysdk.multipart_upload._upload_parts_sequential", autospec=True) as p_seq,
     ):
-        transfer_config = MultipartUploadTransferConfig(use_threads=False)
+        transfer_config = MultipartUploadTransferConfig(max_concurrency=1)
         test_module._upload_parts(
             parts=[], file_path="foo.txt", http_client=None, transfer_config=transfer_config
         )
         p_seq.assert_called_once()
 
-        transfer_config = MultipartUploadTransferConfig(use_threads=True)
+        transfer_config = MultipartUploadTransferConfig(max_concurrency=2)
         test_module._upload_parts(
             parts=[], file_path="foo.txt", http_client=None, transfer_config=transfer_config
         )

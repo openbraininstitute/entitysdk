@@ -178,7 +178,7 @@ def _upload_parts(
     Blocks until all parts have been uploaded. Exceptions from individual
     part uploads propagate to the caller.
     """
-    if transfer_config.use_threads:
+    if transfer_config.max_concurrency > 1:
         L.info("Parts are concurrently uploaded using threads.")
         _upload_parts_threaded(
             parts=parts,
