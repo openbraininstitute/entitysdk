@@ -198,11 +198,19 @@ def entity(entity_id, public_asset_file_metadata, public_asset_directory_metadat
 def local_store(tmp_path_factory, public_asset_file_metadata, public_asset_directory_metadata):
     prefix = tmp_path_factory.mktemp("data")
 
-    public_file = prefix / public_asset_file_metadata["full_path"]
+    public_file = (
+        prefix
+        / public_asset_file_metadata["storage_type"]
+        / public_asset_file_metadata["full_path"]
+    )
     public_file.parent.mkdir(parents=True, exist_ok=True)
     public_file.write_bytes(b"public")
 
-    public_directory = prefix / public_asset_directory_metadata["full_path"]
+    public_directory = (
+        prefix
+        / public_asset_file_metadata["storage_type"]
+        / public_asset_directory_metadata["full_path"]
+    )
     public_directory.mkdir(parents=True, exist_ok=True)
     Path(public_directory, "dir_cell.swc").write_bytes(b"public_directory_file")
     Path(public_directory, "dir_cell.h5").write_bytes(b"public_directory_file")

@@ -444,8 +444,8 @@ def download_asset_file(
     else:
         asset = asset_or_id
 
-    target_path: Path = Path(output_path)
-    source_path: Path = Path(asset.full_path)
+    target_path = Path(output_path)
+    source_path = Path(str(asset.storage_type)) / asset.full_path
     if asset.is_directory:
         if not asset_path:
             raise EntitySDKError("Directory from directories require an `asset_path`")
@@ -524,11 +524,12 @@ def download_asset_content(
             http_client=http_client,
             token=token,
         )
-        if local_store.path_exists(asset.full_path):
-            path = asset.full_path
-            if asset.is_directory:
-                path = f"{path}/{asset_path}"
-            return local_store.read_bytes(path)
+        source_path: Path = Path(str(asset.storage_type)) / asset.full_path
+        if asset.is_directory:
+            assert asset_path
+            source_path /= asset_path
+        if local_store.path_exists(source_path):
+            return local_store.read_bytes(source_path)
 
     download_endpoint = f"{asset_endpoint}/download"
 
