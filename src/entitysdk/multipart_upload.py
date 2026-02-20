@@ -35,7 +35,7 @@ RETRIABLE_EXCEPTIONS = (
     httpx.WriteTimeout,  # slow upload
     httpx.RemoteProtocolError,  # low-level network glitch
 )
-STREAM_DATA_BUFFER_SIZE = 64 * 1024
+STREAM_DATA_BUFFER_SIZE = 256 * 1024
 
 
 def multipart_upload_asset_file(
