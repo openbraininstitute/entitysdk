@@ -7,6 +7,8 @@ from pathlib import Path
 
 from entitysdk.types import StrOrPath
 
+READ_FILE_CHUNK = 64 * 1024
+
 
 def write_json(data: dict, path: StrOrPath, **json_kwargs) -> None:
     """Write dictionary to file as JSON."""
@@ -22,7 +24,7 @@ def calculate_sha256_digest(path: Path) -> str:
     """Calculate the sha256 digest of a file."""
     h = hashlib.sha256()
     with path.open("rb") as f:
-        while chunk := f.read(4096):
+        while chunk := f.read(READ_FILE_CHUNK):
             h.update(chunk)
     return h.hexdigest()
 
