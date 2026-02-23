@@ -212,11 +212,7 @@ def find_conductance_or_max_permeability_name(entity) -> str | None:
     Args:
         entity (IonChannelModel): The ion channel model entity.
     """
-    return (
-        entity.conductance_name
-        if entity.conductance_name is not None
-        else entity.max_permeability_name
-    )
+    return entity.conductance_name or entity.max_permeability_name
 
 
 def create_hoc_file(client, ion_channel_model_data, subdir_mech, subdir_hoc) -> Path:
