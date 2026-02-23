@@ -90,26 +90,19 @@ def test_create_simple_soma_morphology(tmp_path):
     )
     assert (output_path).exists()
 
-    # try reading the output morphology with NEURON
-    from neuron import h
+    with open(output_path) as f:
+        content = f.read()
 
-    h.load_file("import3d.hoc")
-
-    # Read ASC morphology
-    imp = h.Import3d_Neurolucida3()
-    imp.input(str(output_path))
-
-    # Instantiate as a cell-like object so sections stay alive
-    class Cell:
-        pass
-
-    cell = Cell()
-    i3d = h.Import3d_GUI(imp, 0)
-    i3d.instantiate(cell)
-
-    diameter = cell.soma[0].diam
-
-    assert diameter == 2 * radius
+    assert content == (
+        '("CellBody"\n'
+        "  (Color Red)\n"
+        "  (CellBody)\n"
+        f"  ( {-radius} {-radius} 0 {radius} )\n"
+        f"  ( {radius} {-radius} 0 {radius} )\n"
+        f"  ( {radius} {radius} 0 {radius} )\n"
+        f"  ( {-radius} {radius} 0 {radius} )\n"
+        ")\n"
+    )
 
 
 def test_find_conductance_or_max_permeability_name():

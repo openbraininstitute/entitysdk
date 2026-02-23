@@ -202,8 +202,7 @@ def create_simple_soma_morphology(output_file: Path, radius: float = 10.0):
         ")\n",
     ]
 
-    with open(output_file, "w") as f:
-        f.writelines(lines)
+    output_file.write_text("".join(lines), encoding="utf-8")
 
 
 def find_conductance_or_max_permeability_name(entity) -> str | None:
@@ -229,19 +228,19 @@ def create_hoc_file(client, ion_channel_model_data, subdir_mech, subdir_hoc) -> 
         subdir_mech (Path): Path to the mechanisms directory.
         subdir_hoc (Path): Path to the hoc directory.
     """
-    bpo_mechs = []
-    bpo_parameters = {}
+    mechanisms = []
+    parameters = {}
     for icm_dict in ion_channel_model_data.values():
         # download mod files
         icm_entity = client.get_entity(entity_type=IonChannelModel, entity_id=icm_dict["id"])
         download_ion_channel_mechanism(client, icm_entity, subdir_mech)
 
         # get data for hoc file
-        bpo_mechs.append(icm_entity.nmodl_suffix)
+        mechanisms.append(icm_entity.nmodl_suffix)
         if "conductance" in icm_dict:
             conductance_name = find_conductance_or_max_permeability_name(icm_entity)
             if conductance_name is not None:
-                bpo_parameters[conductance_name] = icm_dict["conductance"]
+                parameters[conductance_name] = icm_dict["conductance"]
             else:
                 L.warning(
                     "Could not find conductance parameter name for ion channel model "
@@ -250,15 +249,12 @@ def create_hoc_file(client, ion_channel_model_data, subdir_mech, subdir_hoc) -> 
 
     # write hoc file
     hoc_dst = subdir_hoc / "cell.hoc"
-    with open(hoc_dst, "w") as hoc_file:
-        hoc_file.write(
-            HOC_TEMPLATE.format(
-                insert_channel="\n    ".join([f"insert {mech}" for mech in bpo_mechs]),
-                biophys="\n    ".join(
-                    [f"{param} = {value}" for param, value in bpo_parameters.items()]
-                ),
-            )
+    hoc_dst.write_text(
+        HOC_TEMPLATE.format(
+            insert_channel="\n    ".join([f"insert {mech}" for mech in mechanisms]),
+            biophys="\n    ".join([f"{param} = {value}" for param, value in parameters.items()]),
         )
+    )
 
     return hoc_dst
 
