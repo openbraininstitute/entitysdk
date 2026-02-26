@@ -302,6 +302,7 @@ def test_client__download_file__local_store(
         entity_type=entity_type,
         asset_id=public_asset_file_id,
         output_path=output_path,
+        link_from_store=True,
     )
     assert res.is_symlink()
     assert res.resolve().name == "cell.swc"
@@ -326,6 +327,7 @@ def test_client__download_file__local_store__directory(
         asset_id=public_asset_directory_id,
         output_path=output_path,
         asset_path="dir_cell.swc",
+        link_from_store=True,
     )
     assert res.is_symlink()
     assert res.resolve().name == "dir_cell.swc"
@@ -350,6 +352,7 @@ def test_client__download_directory__local_store(
         entity_type=entity_type,
         asset_id=public_asset_directory_id,
         output_path=output_dir,
+        link_from_store=True,
     )
     data = {r.name: r for r in res}
     assert len(res) == 2
@@ -378,6 +381,7 @@ def test_client__download_directory__local_store__concurrent(
         asset_id=public_asset_directory_id,
         output_path=output_dir,
         max_concurrent=2,
+        link_from_store=True,
     )
     assert len(res) == 2
     assert res[0].is_symlink()
@@ -398,6 +402,7 @@ def test_client__download_assets__local_store(
         entity_or_id=entity,
         selection={"label": "morphology", "content_type": "application/swc"},
         output_path=output_file,
+        link_from_store=True,
     ).one()
 
     assert res.path.is_symlink()

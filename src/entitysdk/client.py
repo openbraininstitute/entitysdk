@@ -442,6 +442,7 @@ class Client:
         project_context: ProjectContext | None = None,
         ignore_directory_name: bool = False,
         max_concurrent: int = 1,
+        link_from_store: bool = False,
     ) -> list[Path]:
         """Download directory of assets."""
         output_path = Path(output_path)
@@ -488,6 +489,7 @@ class Client:
                     output_path=output_path / path,
                     asset_path=path,
                     project_context=context,
+                    link_from_store=link_from_store,
                 )
                 for path in contents.files
             ]
@@ -502,6 +504,7 @@ class Client:
                         output_path=output_path / path,
                         asset_path=path,
                         project_context=context,
+                        link_from_store=link_from_store,
                     )
                     for path in contents.files
                 ]
@@ -553,6 +556,7 @@ class Client:
         output_path: os.PathLike,
         asset_path: os.PathLike | None = None,
         project_context: ProjectContext | None = None,
+        link_from_store: bool = False,
     ) -> Path:
         """Download asset file to a file path.
 
@@ -563,6 +567,7 @@ class Client:
             output_path: Either be a file path to write the file to or an output directory.
             asset_path: for asset directories, the path within the directory to the file.
             project_context: Optional project context.
+            link_from_store: Whether to create links instead of download the file.
 
         Returns:
             Output file path.
@@ -579,6 +584,7 @@ class Client:
             http_client=self._http_client,
             token=self._token_manager.get_token(),
             local_store=self._local_store,
+            link_from_store=link_from_store,
         )
 
     @staticmethod
@@ -593,6 +599,7 @@ class Client:
         selection: dict[str, Any] | None = None,
         output_path: Path,
         project_context: ProjectContext | None = None,
+        link_from_store: bool = False,
     ) -> IteratorResult:
         """Download assets."""
 
@@ -606,6 +613,7 @@ class Client:
                     asset_id=asset.id,
                     output_path=output_path,
                     project_context=context,
+                    link_from_store=link_from_store,
                 )
 
             return DownloadedAssetFile(

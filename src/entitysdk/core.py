@@ -408,6 +408,7 @@ def download_asset_file(
     token: str,
     http_client: httpx.Client | None = None,
     local_store: LocalAssetStore | None = None,
+    link_from_store: bool = False,
 ) -> Path:
     """Download asset file to a file path.
 
@@ -422,6 +423,7 @@ def download_asset_file(
         token: Authorization access token.
         http_client: HTTP client.
         local_store: LocalAssetStore for using a local store.
+        link_from_store: Whether to link from store.
 
     Returns:
         Output file path.
@@ -462,7 +464,7 @@ def download_asset_file(
 
     create_intermediate_directories(target_path)
 
-    if local_store and local_store.path_exists(source_path):
+    if link_from_store and local_store and local_store.path_exists(source_path):
         L.info("Path %s found on local store and is symlinked.", source_path)
         local_store.link_path(source_path, target_path)
         return target_path
