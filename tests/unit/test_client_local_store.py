@@ -357,7 +357,7 @@ def test_client__download_file__local_store__disabled(
     public_asset_file_download_httpx_mock,
     public_asset_file_metadata_httpx_mock,
 ):
-    """If a data mount is available Client.download_file will symlink the file from there."""
+    """If a data mount is available and link_from_store is False Client.download_file won't link."""
 
     output_path = tmp_path / "my_cell.swc"
 
@@ -407,7 +407,7 @@ def test_client__download_file__local_store__directory__disabled(
     public_asset_directory_httpx_mock,
     public_asset_directory_file1_download_httpx_mock,
 ):
-    """If a data mount is available Client.download_file will symlink the file from there."""
+    """If a data mount is available and link_from_store is False Client.download_file won't link."""
 
     output_path = tmp_path / "my_cell.swc"
 
