@@ -47,6 +47,8 @@ from entitysdk._server_schemas import SlicingDirectionType as SlicingDirectionTy
 from entitysdk._server_schemas import StainingType as StainingType
 from entitysdk._server_schemas import StorageType as StorageType
 from entitysdk._server_schemas import StructuralDomain as StructuralDomain
+from entitysdk._server_schemas import TaskActivityType as TaskActivityType
+from entitysdk._server_schemas import TaskConfigType as TaskConfigType
 from entitysdk._server_schemas import ValidationStatus as ValidationStatus
 
 ID = uuid.UUID

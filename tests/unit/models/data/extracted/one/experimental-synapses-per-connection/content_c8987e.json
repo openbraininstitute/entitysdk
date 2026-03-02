@@ -1,7 +1,7 @@
 {
   "assets": [],
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": false,
+  "authorized_public": true,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
@@ -33,19 +33,19 @@
   },
   "measurements": [
     {
-      "id": 5,
+      "id": 15,
       "name": "minimum",
       "unit": "\u03bcm",
       "value": 1.23
     },
     {
-      "id": 6,
+      "id": 16,
       "name": "maximum",
       "unit": "\u03bcm",
       "value": 1.45
     }
   ],
-  "name": "Private u2/0",
+  "name": "my-name",
   "post_mtype": {
     "alt_label": "mtype-alt-label",
     "creation_date": "2025-01-01T00:00:00Z",

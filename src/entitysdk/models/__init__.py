@@ -72,6 +72,8 @@ from entitysdk.models.skeletonization_config_generation import SkeletonizationCo
 from entitysdk.models.skeletonization_execution import SkeletonizationExecution
 from entitysdk.models.subject import Subject
 from entitysdk.models.synaptome import SingleNeuronSynaptome
+from entitysdk.models.task_activity import TaskActivity
+from entitysdk.models.task_config import TaskConfig
 from entitysdk.models.taxonomy import Species, Strain
 from entitysdk.models.validation import Validation
 from entitysdk.models.validation_result import ValidationResult
@@ -151,6 +153,8 @@ __all__ = [
     "Strain",
     "Subject",
     "UseIon",
+    "TaskActivity",
+    "TaskConfig",
     "Validation",
     "ValidationResult",
 ]
