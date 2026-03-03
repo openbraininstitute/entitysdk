@@ -7,6 +7,7 @@ from entitysdk import serdes as test_module
 from entitysdk.models.activity import Activity
 from entitysdk.models.core import Identifiable, Struct
 from entitysdk.models.entity import Entity
+from entitysdk.types import SerializeWhen
 
 from .util import MOCK_UUID
 
@@ -55,7 +56,11 @@ class E3(Identifiable):
     ],
 )
 def test_serialize_model(entity, expected):
-    result = test_module.serialize_model(entity)
+    result = test_module.serialize_model(entity, when=SerializeWhen.read)
+    assert result == expected
+    result = test_module.serialize_model(entity, when=SerializeWhen.create)
+    assert result == expected
+    result = test_module.serialize_model(entity, when=SerializeWhen.update)
     assert result == expected
 
 
@@ -82,7 +87,7 @@ def test_serialize_activity():
         status="running",
     )
 
-    data = test_module.serialize_model(activity)
+    data = test_module.serialize_model(activity, when=SerializeWhen.read)
 
     assert data["used_ids"] == [str(e1.id)]
     assert data["generated_ids"] == [str(e2.id)]
@@ -95,7 +100,7 @@ def test_serialize_activity():
         status="running",
     )
 
-    data = test_module.serialize_model(activity)
+    data = test_module.serialize_model(activity, when=SerializeWhen.read)
 
     assert "used_ids" not in data
     assert "generated_ids" not in data

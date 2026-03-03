@@ -2,10 +2,10 @@
 
 from typing import Annotated
 
-from pydantic import Field, field_serializer
+from pydantic import Field, SerializationInfo, field_serializer
 
 from entitysdk.models.entity import Entity
-from entitysdk.types import ID, TaskConfigType
+from entitysdk.types import ID, SerializeWhen, TaskConfigType
 
 
 class TaskConfig(Entity):
@@ -19,11 +19,17 @@ class TaskConfig(Entity):
         Field(description="List input entities."),
     ] = None
 
-    @field_serializer("inputs")
-    def serialize_inputs(self, value: list[Entity] | None) -> list[dict] | None:
+    @field_serializer("inputs", when_used="unless-none")
+    def serialize_inputs(
+        self, value: list[Entity], info: SerializationInfo
+    ) -> list[dict] | list[Entity]:
         """Serialize to IDs for API requests."""
-        if value is None:
-            return None
         if any(model.id is None for model in value):
             raise ValueError("All input instances must have an ID for serialization")
-        return [{"id": model.id} for model in value]
+        if info.context and info.context.get("when") in {
+            SerializeWhen.create,
+            SerializeWhen.update,
+        }:
+            return [{"id": model.id} for model in value]
+        # use the default serialization by default
+        return value

@@ -30,7 +30,7 @@ from entitysdk.route import (
 from entitysdk.schemas.asset import MultipartUploadTransferConfig
 from entitysdk.store import LocalAssetStore
 from entitysdk.token_manager import TokenManager
-from entitysdk.types import ID, AssetLabel, DerivationType
+from entitysdk.types import ID, AssetLabel, DerivationType, SerializeWhen
 from entitysdk.util import (
     create_intermediate_directories,
     make_db_api_request,
@@ -175,7 +175,7 @@ def register_entity(
     http_client: httpx.Client | None = None,
 ) -> TIdentifiable:
     """Register entity."""
-    json_data = serdes.serialize_model(entity)
+    json_data = serdes.serialize_model(entity, when=SerializeWhen.create)
 
     response = make_db_api_request(
         url=url,
@@ -199,9 +199,9 @@ def update_entity(
 ) -> TIdentifiable:
     """Update entity."""
     if isinstance(attrs_or_entity, dict):
-        json_data = serdes.serialize_dict(attrs_or_entity)
+        json_data = serdes.serialize_dict(attrs_or_entity, when=SerializeWhen.update)
     else:
-        json_data = serdes.serialize_model(attrs_or_entity)
+        json_data = serdes.serialize_model(attrs_or_entity, when=SerializeWhen.update)
 
     response = make_db_api_request(
         url=url,
