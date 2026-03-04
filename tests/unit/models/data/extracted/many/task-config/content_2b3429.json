@@ -17,11 +17,11 @@
       "description": "task-config-description",
       "id": "00000000-0000-4000-8000-000001234678",
       "inputs": [],
-      "name": "Private u1/1",
-      "scan_parameters": {
+      "meta": {
         "foo": "bar"
       },
-      "task_config_generator_id": null,
+      "name": "config-2",
+      "task_config_generator_id": "00000000-0000-4000-8000-000001234678",
       "task_config_type": "skeletonization__config",
       "type": "task_config",
       "update_date": "2025-01-01T00:00:00Z",
@@ -51,11 +51,11 @@
       "description": "task-config-description",
       "id": "00000000-0000-4000-8000-000001234678",
       "inputs": [],
-      "name": "Private u1/0",
-      "scan_parameters": {
+      "meta": {
         "foo": "bar"
       },
-      "task_config_generator_id": null,
+      "name": "config-1",
+      "task_config_generator_id": "00000000-0000-4000-8000-000001234678",
       "task_config_type": "skeletonization__config",
       "type": "task_config",
       "update_date": "2025-01-01T00:00:00Z",
@@ -71,41 +71,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
-      "contributions": [],
-      "created_by": {
-        "family_name": null,
-        "given_name": null,
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "description": "task-config-description",
-      "id": "00000000-0000-4000-8000-000001234678",
-      "inputs": [],
-      "name": "Public u2/0",
-      "scan_parameters": {
-        "foo": "bar"
-      },
-      "task_config_generator_id": null,
-      "task_config_type": "skeletonization__config",
-      "type": "task_config",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "family_name": null,
-        "given_name": null,
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      }
-    },
-    {
-      "assets": [],
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "contributions": [],
       "created_by": {
         "family_name": null,
@@ -119,11 +85,11 @@
       "description": "task-config-description",
       "id": "00000000-0000-4000-8000-000001234678",
       "inputs": [],
-      "name": "Public u1/0",
-      "scan_parameters": {
+      "meta": {
         "foo": "bar"
       },
-      "task_config_generator_id": null,
+      "name": "config-0",
+      "task_config_generator_id": "00000000-0000-4000-8000-000001234678",
       "task_config_type": "skeletonization__config",
       "type": "task_config",
       "update_date": "2025-01-01T00:00:00Z",
@@ -141,6 +107,6 @@
   "pagination": {
     "page": 1,
     "page_size": 100,
-    "total_items": 4
+    "total_items": 3
   }
 }

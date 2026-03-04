@@ -15,10 +15,10 @@
   "description": "description-0",
   "id": "00000000-0000-4000-8000-000001234678",
   "inputs": [],
-  "name": "name-0",
-  "scan_parameters": {
+  "meta": {
     "foo": "bar"
   },
+  "name": "name-0",
   "task_config_generator_id": "00000000-0000-4000-8000-000001234678",
   "task_config_type": "skeletonization__config",
   "type": "task_config",

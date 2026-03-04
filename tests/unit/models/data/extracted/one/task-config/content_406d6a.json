@@ -4,37 +4,30 @@
   "authorized_public": false,
   "contributions": [],
   "created_by": {
-    "family_name": "courcol",
-    "given_name": "jd",
+    "family_name": null,
+    "given_name": null,
     "id": "00000000-0000-4000-8000-000001234678",
-    "pref_label": "jd courcol",
+    "pref_label": "Regular User With Different Project Id",
     "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
   "description": "task-config-description",
   "id": "00000000-0000-4000-8000-000001234678",
-  "inputs": [
-    {
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
-      "id": "00000000-0000-4000-8000-000001234678",
-      "type": "em_cell_mesh"
-    }
-  ],
-  "name": "task-config",
-  "scan_parameters": {
+  "inputs": [],
+  "meta": {
     "foo": "bar"
   },
+  "name": "Private u2/0",
   "task_config_generator_id": null,
   "task_config_type": "skeletonization__config",
   "type": "task_config",
   "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
-    "family_name": "courcol",
-    "given_name": "jd",
+    "family_name": null,
+    "given_name": null,
     "id": "00000000-0000-4000-8000-000001234678",
-    "pref_label": "jd courcol",
+    "pref_label": "Regular User With Different Project Id",
     "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }

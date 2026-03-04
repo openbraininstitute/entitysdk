@@ -1,6 +1,6 @@
 """Generic task config model."""
 
-from typing import Annotated
+from typing import Annotated, Any
 
 from pydantic import Field, SerializationInfo, field_serializer
 
@@ -13,7 +13,7 @@ class TaskConfig(Entity):
 
     task_config_type: TaskConfigType
     task_config_generator_id: ID | None = None
-    scan_parameters: dict
+    meta: dict[str, Any]
     inputs: Annotated[
         list[Entity] | None,
         Field(description="List input entities."),

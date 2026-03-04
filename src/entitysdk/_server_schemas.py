@@ -1322,6 +1322,10 @@ class NestedElectricalRecordingStimulusRead(BaseModel):
     recording_id: Annotated[UUID, Field(title="Recording Id")]
 
 
+class NestedEntityCreate(BaseModel):
+    id: Annotated[UUID, Field(title="Id")]
+
+
 class NestedEntityRead(BaseModel):
     id: Annotated[UUID, Field(title="Id")]
     type: Annotated[str, Field(title="Type")]
@@ -2407,15 +2411,13 @@ class TaskConfigUserUpdate(BaseModel):
     task_config_type: Annotated[
         TaskConfigType | Literal["<NOT_SET>"] | None, Field(title="Task Config Type")
     ] = "<NOT_SET>"
-    scan_parameters: Annotated[
-        dict[str, Any] | Literal["<NOT_SET>"] | None, Field(title="Scan Parameters")
-    ] = "<NOT_SET>"
+    meta: Annotated[dict[str, Any] | Literal["<NOT_SET>"] | None, Field(title="Meta")] = "<NOT_SET>"
     task_config_generator_id: Annotated[
         UUID | Literal["<NOT_SET>"] | None, Field(title="Task Config Generator Id")
     ] = "<NOT_SET>"
-    input_ids: Annotated[list[UUID] | Literal["<NOT_SET>"] | None, Field(title="Input Ids")] = (
-        "<NOT_SET>"
-    )
+    inputs: Annotated[
+        list[NestedEntityCreate] | Literal["<NOT_SET>"] | None, Field(title="Inputs")
+    ] = "<NOT_SET>"
 
 
 class ToUploadPart(BaseModel):
@@ -4038,9 +4040,14 @@ class TaskConfigCreate(BaseModel):
     description: Annotated[str, Field(title="Description")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     task_config_type: TaskConfigType
-    scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
+    meta: Annotated[dict[str, Any], Field(title="Meta")]
     task_config_generator_id: Annotated[UUID | None, Field(title="Task Config Generator Id")] = None
-    input_ids: Annotated[list[UUID] | None, Field(title="Input Ids")] = []
+    inputs: Annotated[
+        list[NestedEntityCreate] | None,
+        Field(
+            default_factory=list, description="List of input entities (only ids).", title="Inputs"
+        ),
+    ]
 
 
 class TaskConfigRead(BaseModel):
@@ -4057,9 +4064,12 @@ class TaskConfigRead(BaseModel):
     id: Annotated[UUID, Field(title="Id")]
     type: EntityType | None = None
     task_config_type: TaskConfigType
-    scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
+    meta: Annotated[dict[str, Any], Field(title="Meta")]
     task_config_generator_id: Annotated[UUID | None, Field(title="Task Config Generator Id")] = None
-    inputs: Annotated[list[NestedEntityRead], Field(title="Inputs")]
+    inputs: Annotated[
+        list[NestedEntityRead] | None,
+        Field(default_factory=list, description="List of input entities.", title="Inputs"),
+    ]
 
 
 class ValidationResultRead(BaseModel):
