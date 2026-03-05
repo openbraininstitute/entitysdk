@@ -171,6 +171,7 @@ class AssetLabel(StrEnum):
     ion_channel_model_thumbnail = "ion_channel_model_thumbnail"
     circuit_extraction_config = "circuit_extraction_config"
     skeletonization_config = "skeletonization_config"
+    task_config = "task_config"
 
 
 class AssetStatus(StrEnum):

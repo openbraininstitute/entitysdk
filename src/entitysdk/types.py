@@ -56,14 +56,6 @@ Token = str
 StrOrPath = str | os.PathLike[str]
 
 
-class SerializeWhen(StrEnum):
-    """Enum for when to apply custom serialization."""
-
-    create = "create"
-    update = "update"
-    read = "read"
-
-
 class DeploymentEnvironment(StrEnum):
     """Deployment environment."""
 

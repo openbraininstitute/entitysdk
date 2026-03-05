@@ -7,7 +7,6 @@ from pydantic import TypeAdapter
 from entitysdk.config import settings
 from entitysdk.models.activity import Activity
 from entitysdk.models.base import BaseModel
-from entitysdk.types import SerializeWhen
 
 SERIALIZATION_EXCLUDE_KEYS = {
     "assets",
@@ -28,28 +27,26 @@ def deserialize_model(json_data: dict, entity_type: type[TBaseModel]) -> TBaseMo
     return entity_type.model_validate(json_data, extra=settings.deserialize_model_extra)
 
 
-def serialize_model(model: BaseModel, when: SerializeWhen) -> dict:
+def serialize_model(model: BaseModel) -> dict:
     """Serialize entity into json."""
     if isinstance(model, Activity):
-        return _serialize_activity(model, when=when)
+        return _serialize_activity(model)
 
     data = model.model_dump(
         mode="json",
         exclude=SERIALIZATION_EXCLUDE_KEYS,
         exclude_none=False,
-        context={"when": when},
     )
     processed = _convert_identifiables_to_ids(data)
     return processed
 
 
-def serialize_dict(data: dict, when: SerializeWhen) -> dict:
+def serialize_dict(data: dict) -> dict:
     """Serialize a model dictionary into json."""
     processed = _convert_identifiables_to_ids(data)
     json_data = TypeAdapter(dict).dump_python(
         processed,
         mode="json",
-        context={"when": when},
     )
     return json_data
 
@@ -65,18 +62,22 @@ def _convert_identifiables_to_ids(data: dict) -> dict:
             else:
                 result[key] = _convert_identifiables_to_ids(value)
 
+        elif isinstance(value, list) and all(
+            isinstance(item, dict) and "id" in item for item in value
+        ):
+            result[key] = [{"id": item["id"]} for item in value]
+
         else:
             result[key] = value
 
     return result
 
 
-def _serialize_activity(model: Activity, when: SerializeWhen) -> dict:
+def _serialize_activity(model: Activity) -> dict:
     data = model.model_dump(
         mode="json",
         exclude=SERIALIZATION_EXCLUDE_KEYS,
         exclude_none=False,
-        context={"when": when},
     )
 
     if used := data.pop("used"):
