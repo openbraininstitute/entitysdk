@@ -44,7 +44,10 @@ def serialize_model(model: BaseModel) -> dict:
 def serialize_dict(data: dict) -> dict:
     """Serialize a model dictionary into json."""
     processed = _convert_identifiables_to_ids(data)
-    json_data = TypeAdapter(dict).dump_python(processed, mode="json")
+    json_data = TypeAdapter(dict).dump_python(
+        processed,
+        mode="json",
+    )
     return json_data
 
 
@@ -58,6 +61,11 @@ def _convert_identifiables_to_ids(data: dict) -> dict:
                 result[new_key] = value["id"]
             else:
                 result[key] = _convert_identifiables_to_ids(value)
+
+        elif isinstance(value, list) and all(
+            isinstance(item, dict) and "id" in item for item in value
+        ):
+            result[key] = [{"id": item["id"]} for item in value]
 
         else:
             result[key] = value

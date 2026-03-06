@@ -37,6 +37,7 @@ class ActivityType(StrEnum):
     circuit_extraction_execution = "circuit_extraction_execution"
     skeletonization_execution = "skeletonization_execution"
     skeletonization_config_generation = "skeletonization_config_generation"
+    task_activity = "task_activity"
 
 
 class AgePeriod(StrEnum):
@@ -170,6 +171,7 @@ class AssetLabel(StrEnum):
     ion_channel_model_thumbnail = "ion_channel_model_thumbnail"
     circuit_extraction_config = "circuit_extraction_config"
     skeletonization_config = "skeletonization_config"
+    task_config = "task_config"
 
 
 class AssetStatus(StrEnum):
@@ -749,6 +751,7 @@ class EntityRoute(StrEnum):
     analysis_notebook_result = "analysis-notebook-result"
     skeletonization_config = "skeletonization-config"
     skeletonization_campaign = "skeletonization-campaign"
+    task_config = "task-config"
 
 
 class EntityType(StrEnum):
@@ -792,6 +795,7 @@ class EntityType(StrEnum):
     analysis_notebook_result = "analysis_notebook_result"
     skeletonization_config = "skeletonization_config"
     skeletonization_campaign = "skeletonization_campaign"
+    task_config = "task_config"
 
 
 class EntityTypeWithBrainRegion(StrEnum):
@@ -1317,6 +1321,10 @@ class NestedElectricalRecordingStimulusRead(BaseModel):
     start_time: Annotated[float | None, Field(title="Start Time")] = None
     end_time: Annotated[float | None, Field(title="End Time")] = None
     recording_id: Annotated[UUID, Field(title="Recording Id")]
+
+
+class NestedEntityCreate(BaseModel):
+    id: Annotated[UUID, Field(title="Id")]
 
 
 class NestedEntityRead(BaseModel):
@@ -2342,6 +2350,75 @@ class SubjectUserUpdate(BaseModel):
         "<NOT_SET>"
     )
     strain_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Strain Id")] = "<NOT_SET>"
+
+
+class TaskActivityType(StrEnum):
+    circuit_simulation__config_generation = "circuit_simulation__config_generation"
+    circuit_simulation__execution = "circuit_simulation__execution"
+    circuit_extraction__config_generation = "circuit_extraction__config_generation"
+    circuit_extraction__execution = "circuit_extraction__execution"
+    ion_channel_modeling__config_generation = "ion_channel_modeling__config_generation"
+    ion_channel_modeling__execution = "ion_channel_modeling__execution"
+    skeletonization__config_generation = "skeletonization__config_generation"
+    skeletonization__execution = "skeletonization__execution"
+    ion_channel_simulation__config_generation = "ion_channel_simulation__config_generation"
+    ion_channel_simulation__execution = "ion_channel_simulation__execution"
+    em_synapse_mapping__config_generation = "em_synapse_mapping__config_generation"
+    em_synapse_mapping__execution = "em_synapse_mapping__execution"
+
+
+class TaskActivityUserUpdate(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
+    task_activity_type: TaskActivityType | None = None
+    start_time: Annotated[
+        AwareDatetime | NotSet | None,
+        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Start Time"),
+    ]
+    end_time: Annotated[
+        AwareDatetime | NotSet | None,
+        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="End Time"),
+    ]
+    generated_ids: Annotated[
+        list[UUID] | NotSet | None,
+        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
+    ]
+    status: Annotated[
+        ActivityStatus | NotSet | None,
+        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
+    ]
+
+
+class TaskConfigType(StrEnum):
+    circuit_simulation__campaign = "circuit_simulation__campaign"
+    circuit_simulation__config = "circuit_simulation__config"
+    circuit_extraction__campaign = "circuit_extraction__campaign"
+    circuit_extraction__config = "circuit_extraction__config"
+    ion_channel_modeling__campaign = "ion_channel_modeling__campaign"
+    ion_channel_modeling__config = "ion_channel_modeling__config"
+    skeletonization__campaign = "skeletonization__campaign"
+    skeletonization__config = "skeletonization__config"
+    ion_channel_simulation__campaign = "ion_channel_simulation__campaign"
+    ion_channel_simulation__config = "ion_channel_simulation__config"
+    em_synapse_mapping__campaign = "em_synapse_mapping__campaign"
+    em_synapse_mapping__config = "em_synapse_mapping__config"
+
+
+class TaskConfigUserUpdate(BaseModel):
+    name: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Name")] = "<NOT_SET>"
+    description: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Description")] = (
+        "<NOT_SET>"
+    )
+    task_config_type: Annotated[
+        TaskConfigType | Literal["<NOT_SET>"] | None, Field(title="Task Config Type")
+    ] = "<NOT_SET>"
+    meta: Annotated[dict[str, Any] | Literal["<NOT_SET>"] | None, Field(title="Meta")] = "<NOT_SET>"
+    task_config_generator_id: Annotated[
+        UUID | Literal["<NOT_SET>"] | None, Field(title="Task Config Generator Id")
+    ] = "<NOT_SET>"
+    inputs: Annotated[
+        list[NestedEntityCreate] | Literal["<NOT_SET>"] | None, Field(title="Inputs")
+    ] = "<NOT_SET>"
 
 
 class ToUploadPart(BaseModel):
@@ -3928,6 +4005,74 @@ class SkeletonizationConfigRead(BaseModel):
     scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
 
 
+class TaskActivityCreate(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
+    task_activity_type: TaskActivityType | None = None
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
+    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
+    used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
+    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
+
+
+class TaskActivityRead(BaseModel):
+    executor: ExecutorType | None = None
+    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
+    task_activity_type: TaskActivityType | None = None
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    id: Annotated[UUID, Field(title="Id")]
+    type: ActivityType | None = None
+    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
+    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
+    status: ActivityStatus | None = "done"
+    used: Annotated[list[NestedEntityRead], Field(title="Used")]
+    generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
+
+
+class TaskConfigCreate(BaseModel):
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    task_config_type: TaskConfigType
+    meta: Annotated[dict[str, Any], Field(title="Meta")]
+    task_config_generator_id: Annotated[UUID | None, Field(title="Task Config Generator Id")] = None
+    inputs: Annotated[
+        list[NestedEntityCreate] | None,
+        Field(
+            default_factory=list, description="List of input entities (only ids).", title="Inputs"
+        ),
+    ]
+
+
+class TaskConfigRead(BaseModel):
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    assets: Annotated[list[AssetRead], Field(title="Assets")]
+    id: Annotated[UUID, Field(title="Id")]
+    type: EntityType | None = None
+    task_config_type: TaskConfigType
+    meta: Annotated[dict[str, Any], Field(title="Meta")]
+    task_config_generator_id: Annotated[UUID | None, Field(title="Task Config Generator Id")] = None
+    inputs: Annotated[
+        list[NestedEntityRead] | None,
+        Field(default_factory=list, description="List of input entities.", title="Inputs"),
+    ]
+
+
 class ValidationResultRead(BaseModel):
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
@@ -5152,6 +5297,18 @@ class ListResponseSkeletonizationCampaignRead(BaseModel):
 
 class ListResponseSkeletonizationConfigRead(BaseModel):
     data: Annotated[list[SkeletonizationConfigRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
+class ListResponseTaskActivityRead(BaseModel):
+    data: Annotated[list[TaskActivityRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
+class ListResponseTaskConfigRead(BaseModel):
+    data: Annotated[list[TaskConfigRead], Field(title="Data")]
     pagination: PaginationResponse
     facets: Facets | None = None
 

@@ -148,6 +148,10 @@ def many_json_data(many_info) -> dict:
     return json.loads(many_info.file.read_bytes())
 
 
+def _read_model_dump(entity):
+    return entity.model_dump(mode="json", exclude_unset=True)
+
+
 def test_models():
     models = ALL_MODELS
     assert len(models) > 0
@@ -164,17 +168,17 @@ def test_read_one(client, httpx_mock, model_info, json_data):
         entity_id=MOCK_UUID,
         entity_type=model_info.cls,
     )
-    assert entity.model_dump(mode="json", exclude_unset=True) == json_data
+    assert _read_model_dump(entity) == json_data
 
 
 def test_create_one(client, httpx_mock, model, json_data):
     httpx_mock.add_response(
         method="POST",
-        json=model.model_dump(mode="json", exclude_unset=True) | {"id": str(MOCK_UUID)},
+        json=_read_model_dump(model) | {"id": str(MOCK_UUID)},
     )
     registered = client.register_entity(entity=model)
     expected_json = json_data | {"id": str(MOCK_UUID)}
-    assert registered.model_dump(mode="json", exclude_unset=True) == expected_json
+    assert _read_model_dump(registered) == expected_json
 
 
 def test_update_one(client, httpx_mock, model, json_data, model_info):
@@ -183,7 +187,7 @@ def test_update_one(client, httpx_mock, model, json_data, model_info):
     update_data = _get_update_data(model_info.cls)
     httpx_mock.add_response(
         method="PATCH",
-        json=model.model_dump(mode="json", exclude_unset=True) | update_data,
+        json=_read_model_dump(model) | update_data,
     )
     updated = client.update_entity(
         entity_id=model.id,
@@ -192,7 +196,7 @@ def test_update_one(client, httpx_mock, model, json_data, model_info):
     )
 
     expected_json = json_data | update_data
-    assert updated.model_dump(mode="json", exclude_unset=True) == expected_json
+    assert _read_model_dump(updated) == expected_json
 
 
 def test_read_many(client, httpx_mock, many_info, many_json_data):
@@ -204,4 +208,4 @@ def test_read_many(client, httpx_mock, many_info, many_json_data):
 
     entity_list = list(client.search_entity(entity_type=many_info.cls))
     for entity, expected_json in zip(entity_list, many_json_data["data"], strict=True):
-        assert entity.model_dump(mode="json", exclude_unset=True) == expected_json
+        assert _read_model_dump(entity) == expected_json

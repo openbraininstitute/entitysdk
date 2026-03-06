@@ -73,6 +73,8 @@ _ROUTES = {
     "Species": "species",
     "Strain": "strain",
     "Subject": "subject",
+    "TaskActivity": "task-activity",
+    "TaskConfig": "task-config",
     "Validation": "validation",
     "ValidationResult": "validation-result",
     # CellMorphologyProtocol type for retrieving

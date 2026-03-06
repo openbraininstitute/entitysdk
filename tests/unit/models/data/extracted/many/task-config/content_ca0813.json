@@ -1,53 +1,69 @@
 {
   "data": [
     {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Admin User",
+        "pref_label": "Regular User With Project Id",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "family_name": "courcol",
-      "given_name": "jd",
+      "description": "description-2",
       "id": "00000000-0000-4000-8000-000001234678",
-      "pref_label": "jd courcol",
-      "sub_id": null,
-      "type": "person",
+      "inputs": [],
+      "meta": {
+        "foo": "bar"
+      },
+      "name": "name-2",
+      "task_config_generator_id": "00000000-0000-4000-8000-000001234678",
+      "task_config_type": "skeletonization__config",
+      "type": "task_config",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Admin User",
+        "pref_label": "Regular User With Project Id",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
     },
     {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "contributions": [],
       "created_by": {
         "family_name": null,
         "given_name": null,
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Admin User",
+        "pref_label": "Regular User With Project Id",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "family_name": null,
-      "given_name": null,
+      "description": "description-1",
       "id": "00000000-0000-4000-8000-000001234678",
-      "pref_label": "Admin User",
-      "sub_id": "00000000-0000-4000-8000-000001234678",
-      "type": "person",
+      "inputs": [],
+      "meta": {
+        "foo": "bar"
+      },
+      "name": "name-1",
+      "task_config_generator_id": "00000000-0000-4000-8000-000001234678",
+      "task_config_type": "skeletonization__config",
+      "type": "task_config",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
         "given_name": null,
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Admin User",
+        "pref_label": "Regular User With Project Id",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }
@@ -56,7 +72,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 100,
-    "total_items": 2
+    "page_size": 2,
+    "total_items": 4
   }
 }

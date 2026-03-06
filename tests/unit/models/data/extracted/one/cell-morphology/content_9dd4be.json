@@ -23,7 +23,7 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "Test morph",
+  "description": "morph description",
   "experiment_date": null,
   "has_segmented_spines": false,
   "id": "00000000-0000-4000-8000-000001234678",
@@ -44,7 +44,7 @@
     "z": 30.0
   },
   "mtypes": [],
-  "name": "Test morph",
+  "name": "Private u1/0",
   "notice_text": null,
   "published_in": null,
   "repair_pipeline_state": null,
