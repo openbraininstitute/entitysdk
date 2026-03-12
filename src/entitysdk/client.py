@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any, TypeVar, cast
 
 import httpx
+from pydantic import validate_call
 
 from entitysdk import core, route
 from entitysdk.common import ProjectContext
@@ -30,7 +31,9 @@ from entitysdk.types import (
     ContentType,
     DeploymentEnvironment,
     DerivationType,
+    OutputStrategy,
     StorageType,
+    StrOrPath,
     Token,
 )
 from entitysdk.util import (
@@ -432,7 +435,7 @@ class Client:
             token=self._token_manager.get_token(),
         )
 
-    def download_directory(
+    def fetch_directory(
         self,
         *,
         entity_id: ID,
@@ -442,9 +445,9 @@ class Client:
         project_context: ProjectContext | None = None,
         ignore_directory_name: bool = False,
         max_concurrent: int = 1,
-        link_from_store: bool = False,
-    ) -> list[Path]:
-        """Download directory of assets."""
+        output_strategy: OutputStrategy = OutputStrategy.link_or_download,
+    ):
+        """Fetch directory."""
         output_path = Path(output_path)
 
         if output_path.exists() and output_path.is_file():
@@ -482,14 +485,14 @@ class Client:
 
         if max_concurrent == 1:
             paths = [
-                self.download_file(
+                self.fetch_file(
                     entity_id=entity_id,
                     entity_type=entity_type,
                     asset_id=asset if asset else asset_id,
                     output_path=output_path / path,
                     asset_path=path,
                     project_context=context,
-                    link_from_store=link_from_store,
+                    output_strategy=output_strategy,
                 )
                 for path in contents.files
             ]
@@ -497,14 +500,14 @@ class Client:
             with concurrent.futures.ThreadPoolExecutor(max_workers=max_concurrent) as executor:
                 futures = [
                     executor.submit(
-                        self.download_file,
+                        self.fetch_file,
                         entity_id=entity_id,
                         entity_type=entity_type,
                         asset_id=asset if asset else asset_id,
                         output_path=output_path / path,
                         asset_path=path,
                         project_context=context,
-                        link_from_store=link_from_store,
+                        output_strategy=output_strategy,
                     )
                     for path in contents.files
                 ]
@@ -513,13 +516,75 @@ class Client:
 
         return paths
 
+    def download_directory(
+        self,
+        *,
+        entity_id: ID,
+        entity_type: type[Identifiable],
+        asset_id: ID,
+        output_path: os.PathLike,
+        project_context: ProjectContext | None = None,
+        ignore_directory_name: bool = False,
+        max_concurrent: int = 1,
+    ) -> list[Path]:
+        """Download directory of assets."""
+        return self.fetch_directory(
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=asset_id,
+            output_path=output_path,
+            project_context=project_context,
+            ignore_directory_name=ignore_directory_name,
+            max_concurrent=max_concurrent,
+            output_strategy=OutputStrategy.download,
+        )
+
+    def fetch_content(
+        self,
+        *,
+        entity_id: ID,
+        entity_type: type[Identifiable],
+        asset_id: ID,
+        asset_path: StrOrPath | None = None,
+        project_context: ProjectContext | None = None,
+        output_strategy: OutputStrategy = OutputStrategy.copy_or_download,
+    ) -> bytes:
+        """Retrieve the binary content of an asset associated with an entity.
+
+        Args:
+            entity_id: Identifier of the entity that owns the asset.
+            entity_type: The entity class/type implementing ``Identifiable``.
+            asset_id: Identifier of the asset to retrieve.
+            asset_path: For asset directories, the path within the directory for the file.
+            project_context: Optional project context
+            output_strategy: Strategy controlling how the asset file content is materialized
+                (for example copying from a local store or downloading from the
+                remote service).
+
+        Returns:
+            The asset content as raw bytes.
+        """
+        context = self._optional_user_context(override_context=project_context)
+        return core.fetch_asset_content(
+            api_url=self.api_url,
+            asset_id=asset_id,
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_path=asset_path,
+            project_context=context,
+            http_client=self._http_client,
+            token=self._token_manager.get_token(),
+            local_store=self._local_store,
+            output_strategy=output_strategy,
+        )
+
     def download_content(
         self,
         *,
         entity_id: ID,
         entity_type: type[Identifiable],
         asset_id: ID,
-        asset_path: os.PathLike | None = None,
+        asset_path: StrOrPath | None = None,
         project_context: ProjectContext | None = None,
     ) -> bytes:
         """Download asset content.
@@ -534,17 +599,41 @@ class Client:
         Returns:
             Asset content in bytes.
         """
-        context = self._optional_user_context(override_context=project_context)
-        return core.download_asset_content(
-            api_url=self.api_url,
-            asset_id=asset_id,
+        return self.fetch_content(
             entity_id=entity_id,
             entity_type=entity_type,
+            asset_id=asset_id,
             asset_path=asset_path,
+            project_context=project_context,
+            output_strategy=OutputStrategy.download,
+        )
+
+    @validate_call
+    def fetch_file(
+        self,
+        *,
+        entity_id: ID,
+        entity_type: type[Identifiable],
+        asset_id: ID | Asset,
+        output_path: Path | None = None,
+        asset_path: Path | None = None,
+        project_context: ProjectContext | None = None,
+        output_strategy: OutputStrategy = OutputStrategy.link_or_download,
+    ) -> Path:
+        """Fetch file."""
+        context = self._optional_user_context(override_context=project_context)
+        return core.fetch_asset_file(
+            api_url=self.api_url,
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_or_id=asset_id,
             project_context=context,
+            asset_path=asset_path,
+            output_path=output_path,
             http_client=self._http_client,
             token=self._token_manager.get_token(),
             local_store=self._local_store,
+            output_strategy=output_strategy,
         )
 
     def download_file(
@@ -556,7 +645,6 @@ class Client:
         output_path: os.PathLike,
         asset_path: os.PathLike | None = None,
         project_context: ProjectContext | None = None,
-        link_from_store: bool = False,
     ) -> Path:
         """Download asset file to a file path.
 
@@ -567,24 +655,18 @@ class Client:
             output_path: Either be a file path to write the file to or an output directory.
             asset_path: for asset directories, the path within the directory to the file.
             project_context: Optional project context.
-            link_from_store: Whether to create links instead of download the file.
 
         Returns:
             Output file path.
         """
-        context = self._optional_user_context(override_context=project_context)
-        return core.download_asset_file(
-            api_url=self.api_url,
+        return self.fetch_file(
             entity_id=entity_id,
             entity_type=entity_type,
-            asset_or_id=asset_id,
-            project_context=context,
+            asset_id=asset_id,
+            output_path=output_path,
+            project_context=project_context,
             asset_path=asset_path,
-            output_path=Path(output_path),
-            http_client=self._http_client,
-            token=self._token_manager.get_token(),
-            local_store=self._local_store,
-            link_from_store=link_from_store,
+            output_strategy=OutputStrategy.download,
         )
 
     @staticmethod
@@ -592,28 +674,28 @@ class Client:
         """Select assets from entity based on selection."""
         return IteratorResult(filter_assets(entity.assets, selection))
 
-    def download_assets(
+    def fetch_assets(
         self,
         entity_or_id: Entity | tuple[ID, type[Entity]],
         *,
         selection: dict[str, Any] | None = None,
         output_path: Path,
         project_context: ProjectContext | None = None,
-        link_from_store: bool = False,
-    ) -> IteratorResult:
-        """Download assets."""
+        output_strategy: OutputStrategy = OutputStrategy.link_or_download,
+    ):
+        """Fetch assets."""
 
-        def _download_entity_asset(asset):
+        def _fetch_entity_asset(asset):
             if asset.is_directory:
                 raise NotImplementedError("Downloading asset directories is not supported yet.")
             else:
-                path = self.download_file(
+                path = self.fetch_file(
                     entity_id=entity.id,
                     entity_type=type(entity),
                     asset_id=asset.id,
                     output_path=output_path,
                     project_context=context,
-                    link_from_store=link_from_store,
+                    output_strategy=output_strategy,
                 )
 
             return DownloadedAssetFile(
@@ -647,7 +729,24 @@ class Client:
             raise EntitySDKError(
                 f"Entity {entity.id} has assets that are uploading and cannot be downloaded."
             )
-        return IteratorResult(map(_download_entity_asset, assets))
+        return IteratorResult(map(_fetch_entity_asset, assets))
+
+    def download_assets(
+        self,
+        entity_or_id: Entity | tuple[id, type[Entity]],
+        *,
+        selection: dict[str, Any] | None = None,
+        output_path: Path,
+        project_context: ProjectContext | None = None,
+    ) -> IteratorResult:
+        """Download assets."""
+        return self.fetch_assets(
+            entity_or_id=entity_or_id,
+            selection=selection,
+            output_path=output_path,
+            project_context=project_context,
+            output_strategy=OutputStrategy.download,
+        )
 
     def delete_asset(
         self,

@@ -4,9 +4,11 @@ from uuid import UUID
 import pytest
 
 from entitysdk import Client, ProjectContext
+from entitysdk.exception import EntitySDKError
 from entitysdk.models import Asset, CellMorphology
 from entitysdk.route import get_assets_endpoint
 from entitysdk.store import LocalAssetStore
+from entitysdk.types import OutputStrategy
 
 MOCK_DATE = "2025-11-07 13:59:27.938208+00:00"
 
@@ -279,9 +281,9 @@ def test_client__download_content__local_store__file(
     entity_id,
     entity_type,
     public_asset_file_id,
-    public_asset_file_metadata_httpx_mock,
+    public_asset_file_download_httpx_mock,
 ):
-    """If a data mount is available Client.download_content will fetch the bytes from there."""
+    """If a data mount download content will still download."""
 
     res = client_with_mount.download_content(
         entity_id=entity_id,
@@ -291,7 +293,33 @@ def test_client__download_content__local_store__file(
     assert res == b"public"
 
 
-def test_client__download_content__local_store__no_file(
+def test_client__fetch_content__no_store__copy__raises(
+    client, entity_id, entity_type, public_asset_file_id
+):
+
+    with pytest.raises(EntitySDKError, match="copy strategy failed"):
+        client.fetch_content(
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=public_asset_file_id,
+            output_strategy=OutputStrategy.copy,
+        )
+
+
+def test_client__fetch_content__no_store__link__raises(
+    client, entity_id, entity_type, public_asset_file_id
+):
+
+    with pytest.raises(EntitySDKError, match="link strategy failed."):
+        client.fetch_content(
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=public_asset_file_id,
+            output_strategy=OutputStrategy.link,
+        )
+
+
+def test_client__fetch_content__local_store__no_file(
     client_with_mount__no_files,
     entity_id,
     entity_type,
@@ -299,10 +327,11 @@ def test_client__download_content__local_store__no_file(
     public_asset_file_metadata_httpx_mock,
     public_asset_file_download_httpx_mock,
 ):
-    res = client_with_mount__no_files.download_content(
+    res = client_with_mount__no_files.fetch_content(
         entity_id=entity_id,
         entity_type=entity_type,
         asset_id=public_asset_file_id,
+        output_strategy=OutputStrategy.copy_or_download,
     )
     assert res == b"public"
 
@@ -312,7 +341,8 @@ def test_client__download_content__local_store__directory(
     entity_id,
     entity_type,
     public_asset_directory_id,
-    public_asset_directory_httpx_mock,
+    httpx_mock,
+    public_asset_directory_file1_download_httpx_mock,
 ):
     """If the asset is a directory, the asset_path is used to specify the mounted path."""
     res = client_with_mount.download_content(
@@ -324,7 +354,7 @@ def test_client__download_content__local_store__directory(
     assert res == b"public_directory_file"
 
 
-def test_client__download_file__local_store(
+def test_client__fetch_file__local_store__link(
     client_with_mount,
     entity_id,
     entity_type,
@@ -336,19 +366,19 @@ def test_client__download_file__local_store(
 
     output_path = tmp_path / "my_cell.swc"
 
-    res = client_with_mount.download_file(
+    res = client_with_mount.fetch_file(
         entity_id=entity_id,
         entity_type=entity_type,
         asset_id=public_asset_file_id,
         output_path=output_path,
-        link_from_store=True,
+        output_strategy=OutputStrategy.link,
     )
     assert res.is_symlink()
     assert res.resolve().name == "cell.swc"
     assert res.read_bytes() == b"public"
 
 
-def test_client__download_file__local_store__disabled(
+def test_client__download_file__local_store(
     client_with_mount,
     entity_id,
     entity_type,
@@ -366,14 +396,13 @@ def test_client__download_file__local_store__disabled(
         entity_type=entity_type,
         asset_id=public_asset_file_id,
         output_path=output_path,
-        link_from_store=False,
     )
     assert not res.is_symlink()
     assert res.resolve().name == "my_cell.swc"
     assert res.read_bytes() == b"public"
 
 
-def test_client__download_file__local_store__directory(
+def test_client__fetch_file__local_store__directory(
     client_with_mount,
     entity_id,
     entity_type,
@@ -385,20 +414,20 @@ def test_client__download_file__local_store__directory(
 
     output_path = tmp_path / "my_cell.swc"
 
-    res = client_with_mount.download_file(
+    res = client_with_mount.fetch_file(
         entity_id=entity_id,
         entity_type=entity_type,
         asset_id=public_asset_directory_id,
         output_path=output_path,
         asset_path="dir_cell.swc",
-        link_from_store=True,
+        output_strategy=OutputStrategy.link,
     )
     assert res.is_symlink()
     assert res.resolve().name == "dir_cell.swc"
     assert res.read_bytes() == b"public_directory_file"
 
 
-def test_client__download_file__local_store__directory__disabled(
+def test_client__download_file__local_store__directory(
     client_with_mount,
     entity_id,
     entity_type,
@@ -410,18 +439,44 @@ def test_client__download_file__local_store__directory__disabled(
     """If a data mount is available and link_from_store is False Client.download_file won't link."""
 
     output_path = tmp_path / "my_cell.swc"
-
     res = client_with_mount.download_file(
         entity_id=entity_id,
         entity_type=entity_type,
         asset_id=public_asset_directory_id,
         output_path=output_path,
         asset_path="dir_cell.swc",
-        link_from_store=False,
     )
     assert not res.is_symlink()
     assert res.resolve().name == "my_cell.swc"
     assert res.read_bytes() == b"public_directory_file"
+
+
+def test_client__fetch_directory__local_store(
+    client_with_mount,
+    entity_id,
+    entity_type,
+    public_asset_directory_id,
+    tmp_path,
+    public_asset_directory_httpx_mock,
+    public_asset_directory_list_httpx_mock,
+    httpx_mock,
+):
+    output_dir = tmp_path / "directory"
+    output_dir.mkdir()
+
+    res = client_with_mount.fetch_directory(
+        entity_id=entity_id,
+        entity_type=entity_type,
+        asset_id=public_asset_directory_id,
+        output_path=output_dir,
+        output_strategy=OutputStrategy.link,
+    )
+    data = {r.name: r for r in res}
+    assert len(res) == 2
+    assert data["dir_cell.swc"].is_symlink()
+    assert data["dir_cell.h5"].is_symlink()
+    assert data["dir_cell.swc"].resolve().name == "dir_cell.swc"
+    assert data["dir_cell.h5"].resolve().name == "dir_cell.h5"
 
 
 def test_client__download_directory__local_store(
@@ -432,34 +487,6 @@ def test_client__download_directory__local_store(
     tmp_path,
     public_asset_directory_httpx_mock,
     public_asset_directory_list_httpx_mock,
-    httpx_mock,
-):
-    output_dir = tmp_path / "directory"
-    output_dir.mkdir()
-
-    res = client_with_mount.download_directory(
-        entity_id=entity_id,
-        entity_type=entity_type,
-        asset_id=public_asset_directory_id,
-        output_path=output_dir,
-        link_from_store=True,
-    )
-    data = {r.name: r for r in res}
-    assert len(res) == 2
-    assert data["dir_cell.swc"].is_symlink()
-    assert data["dir_cell.h5"].is_symlink()
-    assert data["dir_cell.swc"].resolve().name == "dir_cell.swc"
-    assert data["dir_cell.h5"].resolve().name == "dir_cell.h5"
-
-
-def test_client__download_directory__local_store__disabled(
-    client_with_mount,
-    entity_id,
-    entity_type,
-    public_asset_directory_id,
-    tmp_path,
-    public_asset_directory_httpx_mock,
-    public_asset_directory_list_httpx_mock,
     public_asset_directory_file1_download_httpx_mock,
     public_asset_directory_file2_download_httpx_mock,
     httpx_mock,
@@ -472,7 +499,6 @@ def test_client__download_directory__local_store__disabled(
         entity_type=entity_type,
         asset_id=public_asset_directory_id,
         output_path=output_dir,
-        link_from_store=False,
     )
     data = {r.name: r for r in res}
     assert len(res) == 2
@@ -480,6 +506,32 @@ def test_client__download_directory__local_store__disabled(
     assert not data["dir_cell.h5"].is_symlink()
     assert data["dir_cell.swc"].resolve().name == "dir_cell.swc"
     assert data["dir_cell.h5"].resolve().name == "dir_cell.h5"
+
+
+def test_client__fetch_directory__local_store__concurrent(
+    client_with_mount,
+    entity_id,
+    entity_type,
+    public_asset_directory_id,
+    tmp_path,
+    public_asset_directory_httpx_mock,
+    public_asset_directory_list_httpx_mock,
+    httpx_mock,
+):
+    output_dir = tmp_path / "directory"
+    output_dir.mkdir()
+
+    res = client_with_mount.fetch_directory(
+        entity_id=entity_id,
+        entity_type=entity_type,
+        asset_id=public_asset_directory_id,
+        output_path=output_dir,
+        max_concurrent=2,
+        output_strategy=OutputStrategy.link,
+    )
+    assert len(res) == 2
+    assert res[0].is_symlink()
+    assert res[1].is_symlink()
 
 
 def test_client__download_directory__local_store__concurrent(
@@ -490,32 +542,6 @@ def test_client__download_directory__local_store__concurrent(
     tmp_path,
     public_asset_directory_httpx_mock,
     public_asset_directory_list_httpx_mock,
-    httpx_mock,
-):
-    output_dir = tmp_path / "directory"
-    output_dir.mkdir()
-
-    res = client_with_mount.download_directory(
-        entity_id=entity_id,
-        entity_type=entity_type,
-        asset_id=public_asset_directory_id,
-        output_path=output_dir,
-        max_concurrent=2,
-        link_from_store=True,
-    )
-    assert len(res) == 2
-    assert res[0].is_symlink()
-    assert res[1].is_symlink()
-
-
-def test_client__download_directory__local_store__concurrent__disabled(
-    client_with_mount,
-    entity_id,
-    entity_type,
-    public_asset_directory_id,
-    tmp_path,
-    public_asset_directory_httpx_mock,
-    public_asset_directory_list_httpx_mock,
     public_asset_directory_file1_download_httpx_mock,
     public_asset_directory_file2_download_httpx_mock,
     httpx_mock,
@@ -529,14 +555,13 @@ def test_client__download_directory__local_store__concurrent__disabled(
         asset_id=public_asset_directory_id,
         output_path=output_dir,
         max_concurrent=2,
-        link_from_store=False,
     )
     assert len(res) == 2
     assert not res[0].is_symlink()
     assert not res[1].is_symlink()
 
 
-def test_client__download_assets__local_store(
+def test_client__fetch_assets__local_store(
     client_with_mount,
     entity_id,
     entity_type,
@@ -546,11 +571,11 @@ def test_client__download_assets__local_store(
 ):
     output_file = tmp_path / "my_cell.swc"
 
-    res = client_with_mount.download_assets(
+    res = client_with_mount.fetch_assets(
         entity_or_id=entity,
         selection={"label": "morphology", "content_type": "application/swc"},
         output_path=output_file,
-        link_from_store=True,
+        output_strategy=OutputStrategy.link,
     ).one()
 
     assert res.path.is_symlink()
@@ -558,7 +583,7 @@ def test_client__download_assets__local_store(
     assert res.path.read_bytes() == b"public"
 
 
-def test_client__download_assets__local_store__disabled(
+def test_client__download_assets__local_store(
     client_with_mount,
     entity_id,
     entity_type,
@@ -573,7 +598,6 @@ def test_client__download_assets__local_store__disabled(
         entity_or_id=entity,
         selection={"label": "morphology", "content_type": "application/swc"},
         output_path=output_file,
-        link_from_store=False,
     ).one()
 
     assert not res.path.is_symlink()

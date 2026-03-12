@@ -61,3 +61,13 @@ class DeploymentEnvironment(StrEnum):
 
     staging = "staging"
     production = "production"
+
+
+class OutputStrategy(StrEnum):
+    """Local store output strategy."""
+
+    link = "link"
+    link_or_download = "link_or_download"
+    copy = "copy"
+    copy_or_download = "copy_or_download"
+    download = "download"

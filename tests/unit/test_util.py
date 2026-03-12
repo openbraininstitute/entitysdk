@@ -435,14 +435,3 @@ def test_stream_paginated_request_with_unexpected_page_size(
 def test_validate_filename_extension_consistency(tmp_path):
     assert test_module.validate_filename_extension_consistency(tmp_path / "foo.txt", ".txt")
     assert test_module.validate_filename_extension_consistency(tmp_path / "foo.txt", ".TXT")
-
-
-def test_create_intermediate_directories(tmp_path):
-    path = tmp_path / "foo" / "bar" / "foo.txt"
-
-    assert not path.parent.is_dir()
-
-    test_module.create_intermediate_directories(path)
-
-    assert path.parent.is_dir()
-    assert path.parent.parent.is_dir()
