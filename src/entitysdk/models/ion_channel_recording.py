@@ -12,11 +12,11 @@ class IonChannelRecording(ElectricalRecording):
     """Ion channel recording model."""
 
     ion_channel: Annotated[
-        IonChannel,
+        IonChannel | None,
         Field(
             title="Ion channel",
         ),
-    ]
+    ] = None
     cell_line: Annotated[
         str,
         Field(
