@@ -6,6 +6,7 @@ from unittest.mock import patch
 
 import httpx
 import pytest
+from pydantic import ValidationError
 
 from entitysdk.client import Client
 from entitysdk.config import settings
@@ -773,17 +774,7 @@ def test_client_download_assets__non_entity(
 ):
     entity_id = uuid.uuid4()
 
-    httpx_mock.add_response(
-        method="GET",
-        url=f"{api_url}/mtype/{entity_id}",
-        match_headers=request_headers,
-        json=(
-            _mock_entity_response(entity_id, named=False)
-            | {"pref_label": "foo", "definition": "bar"}
-        ),
-    )
-
-    with pytest.raises(EntitySDKError, match="has no assets"):
+    with pytest.raises(ValidationError):
         client.download_assets(
             (entity_id, MTypeClass),
             selection={"content_type": "application/swc"},

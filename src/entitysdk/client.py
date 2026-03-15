@@ -435,18 +435,19 @@ class Client:
             token=self._token_manager.get_token(),
         )
 
+    @validate_call
     def fetch_directory(
         self,
         *,
         entity_id: ID,
         entity_type: type[Identifiable],
-        asset_id: ID,
-        output_path: os.PathLike,
+        asset_id: ID | Asset,
+        output_path: Path,
         project_context: ProjectContext | None = None,
         ignore_directory_name: bool = False,
         max_concurrent: int = 1,
         output_strategy: OutputStrategy = OutputStrategy.link_or_download,
-    ):
+    ) -> list[Path]:
         """Fetch directory."""
         output_path = Path(output_path)
 
@@ -464,7 +465,7 @@ class Client:
                     api_url=self.api_url,
                     entity_type=entity_type,
                     entity_id=cast(ID, entity_id),
-                    asset_id=asset_id,
+                    asset_id=cast(ID, asset_id),
                 )
                 asset = core.get_entity(
                     asset_endpoint,
@@ -479,7 +480,7 @@ class Client:
         contents = self.list_directory(
             entity_id=entity_id,
             entity_type=entity_type,
-            asset_id=asset_id if isinstance(asset_id, ID) else asset.id,
+            asset_id=asset_id if isinstance(asset_id, ID) else cast(Asset, asset).id,
             project_context=project_context,
         )
 
@@ -521,7 +522,7 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Identifiable],
-        asset_id: ID,
+        asset_id: ID | Asset,
         output_path: os.PathLike,
         project_context: ProjectContext | None = None,
         ignore_directory_name: bool = False,
@@ -532,20 +533,21 @@ class Client:
             entity_id=entity_id,
             entity_type=entity_type,
             asset_id=asset_id,
-            output_path=output_path,
+            output_path=Path(output_path),
             project_context=project_context,
             ignore_directory_name=ignore_directory_name,
             max_concurrent=max_concurrent,
             output_strategy=OutputStrategy.download,
         )
 
+    @validate_call
     def fetch_content(
         self,
         *,
         entity_id: ID,
         entity_type: type[Identifiable],
         asset_id: ID,
-        asset_path: StrOrPath | None = None,
+        asset_path: Path | None = None,
         project_context: ProjectContext | None = None,
         output_strategy: OutputStrategy = OutputStrategy.copy_or_download,
     ) -> bytes:
@@ -570,7 +572,7 @@ class Client:
             asset_id=asset_id,
             entity_id=entity_id,
             entity_type=entity_type,
-            asset_path=asset_path,
+            asset_path=Path(asset_path) if asset_path else None,
             project_context=context,
             http_client=self._http_client,
             token=self._token_manager.get_token(),
@@ -603,7 +605,7 @@ class Client:
             entity_id=entity_id,
             entity_type=entity_type,
             asset_id=asset_id,
-            asset_path=asset_path,
+            asset_path=Path(asset_path) if asset_path else None,
             project_context=project_context,
             output_strategy=OutputStrategy.download,
         )
@@ -615,7 +617,7 @@ class Client:
         entity_id: ID,
         entity_type: type[Identifiable],
         asset_id: ID | Asset,
-        output_path: Path | None = None,
+        output_path: Path,
         asset_path: Path | None = None,
         project_context: ProjectContext | None = None,
         output_strategy: OutputStrategy = OutputStrategy.link_or_download,
@@ -663,9 +665,9 @@ class Client:
             entity_id=entity_id,
             entity_type=entity_type,
             asset_id=asset_id,
-            output_path=output_path,
+            output_path=Path(output_path),
             project_context=project_context,
-            asset_path=asset_path,
+            asset_path=Path(asset_path) if asset_path else None,
             output_strategy=OutputStrategy.download,
         )
 
@@ -674,6 +676,7 @@ class Client:
         """Select assets from entity based on selection."""
         return IteratorResult(filter_assets(entity.assets, selection))
 
+    @validate_call
     def fetch_assets(
         self,
         entity_or_id: Entity | tuple[ID, type[Entity]],
@@ -733,7 +736,7 @@ class Client:
 
     def download_assets(
         self,
-        entity_or_id: Entity | tuple[id, type[Entity]],
+        entity_or_id: Entity | tuple[ID, type[Entity]],
         *,
         selection: dict[str, Any] | None = None,
         output_path: Path,

@@ -402,7 +402,7 @@ def fetch_asset_file(
     entity_type: type[Identifiable],
     asset_or_id: ID | Asset,
     output_path: Path,
-    asset_path: os.PathLike | None = None,
+    asset_path: Path | None = None,
     project_context: ProjectContext | None = None,
     token: str,
     http_client: httpx.Client | None = None,
@@ -481,23 +481,26 @@ def fetch_asset_file(
         target_path.write_bytes(bytes_content)
         return target_path
 
-    match output_strategy:
-        case OutputStrategy.copy:
-            return _copy()
-        case OutputStrategy.copy_or_download:
-            try:
+    try:
+        match output_strategy:
+            case OutputStrategy.copy:
                 return _copy()
-            except FileNotFoundError:
-                return _download()
-        case OutputStrategy.link:
-            return _link()
-        case OutputStrategy.link_or_download:
-            try:
+            case OutputStrategy.copy_or_download:
+                try:
+                    return _copy()
+                except FileNotFoundError:
+                    return _download()
+            case OutputStrategy.link:
                 return _link()
-            except FileNotFoundError:
+            case OutputStrategy.link_or_download:
+                try:
+                    return _link()
+                except FileNotFoundError:
+                    return _download()
+            case OutputStrategy.download:
                 return _download()
-        case OutputStrategy.download:
-            return _download()
+    except Exception as e:
+        raise EntitySDKError(f"{output_strategy} strategy failed.") from e
 
 
 def fetch_asset_content(
@@ -549,7 +552,7 @@ def fetch_asset_content(
             http_client=http_client,
             token=token,
         )
-        source_path: Path = Path(str(asset.storage_type)) / asset.full_path
+        source_path: Path = Path(asset.storage_type, asset.full_path)
 
         if asset.is_directory:
             assert asset_path
@@ -565,10 +568,8 @@ def fetch_asset_content(
         )
 
     def _download():
-        download_endpoint = f"{asset_endpoint}/download"
-
         response = make_db_api_request(
-            url=download_endpoint,
+            url=f"{asset_endpoint}/download",
             method="GET",
             parameters={"asset_path": str(asset_path)} if asset_path else {},
             project_context=project_context,
