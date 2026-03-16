@@ -432,7 +432,7 @@ def fetch_asset_file(
     file_path = Path(str(asset.storage_type)) / asset.full_path
     if asset.is_directory:
         if not asset_path:
-            raise EntitySDKError("Directory from directories require an `asset_path`")
+            raise EntitySDKError("Fetching a directory file requires an `asset_path`")
         file_path /= asset_path
     else:
         if asset_path:
@@ -557,8 +557,8 @@ def fetch_asset_content(
         if asset.is_directory:
             assert asset_path
             source_path /= asset_path
-
-        assert not asset_path
+        else:
+            assert not asset_path
 
         if local_store.path_exists(source_path):
             return local_store.read_bytes(source_path)

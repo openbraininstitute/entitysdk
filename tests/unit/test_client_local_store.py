@@ -631,6 +631,24 @@ def test_fetch_content__with_mount__no_files__download(
     assert res == b"public"
 
 
+def test_fetch_content__with_mount__no_files__copy(
+    client_with_mount__no_files,
+    entity_id,
+    entity_type,
+    public_asset_file_id,
+    public_asset_file_metadata_httpx_mock,  # needed for fetching full_path for copy
+):
+    """Test fallback to download when copy fails."""
+
+    with pytest.raises(EntitySDKError, match="copy strategy failed"):
+        client_with_mount__no_files.fetch_content(
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=public_asset_file_id,
+            output_strategy=OutputStrategy.copy,
+        )
+
+
 def test_fetch_content__with_mount__no_files__copy_or_download(
     client_with_mount__no_files,
     entity_id,
@@ -647,6 +665,24 @@ def test_fetch_content__with_mount__no_files__copy_or_download(
         output_strategy=OutputStrategy.copy_or_download,
     )
     assert res == b"public"
+
+
+def test_fetch_content__with_mount__copy__directory(
+    client_with_mount,
+    entity_id,
+    entity_type,
+    public_asset_directory_id,
+    public_asset_directory_httpx_mock,
+):
+    """If the asset is a directory, the asset_path is used to specify the mounted path."""
+    res = client_with_mount.fetch_content(
+        entity_id=entity_id,
+        entity_type=entity_type,
+        asset_id=public_asset_directory_id,
+        asset_path="dir_cell.swc",
+        output_strategy=OutputStrategy.copy,
+    )
+    assert res == b"public_directory_file"
 
 
 def test_fetch_content__with_mount__link__directory(
@@ -703,7 +739,7 @@ def test_fetch_content__with_mount__link_or_download__file(
         )
 
 
-def test_fetch_content__with_mount__directory(
+def test_fetch_content__with_mount__download__directory(
     client_with_mount,
     entity_id,
     entity_type,
@@ -720,6 +756,25 @@ def test_fetch_content__with_mount__directory(
         output_strategy=OutputStrategy.download,
     )
     assert res == b"public_directory_file"
+
+
+def test_fetch_content__with_mount__copy__directory__no_asset_path(
+    client_with_mount,
+    entity_id,
+    entity_type,
+    public_asset_directory_id,
+    tmp_path,
+    public_asset_directory_httpx_mock,
+):
+    """If a data mount is available Client.download_file will symlink the file from there."""
+
+    with pytest.raises(EntitySDKError, match="copy strategy failed"):
+        client_with_mount.fetch_content(
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=public_asset_directory_id,
+            output_strategy=OutputStrategy.copy,
+        )
 
 
 def test_fetch_file__with_mount__copy__directory(
@@ -745,6 +800,28 @@ def test_fetch_file__with_mount__copy__directory(
     assert not res.is_symlink()
     assert res.resolve().name == "my_cell.swc"
     assert res.read_bytes() == b"public_directory_file"
+
+
+def test_fetch_file__with_mount__copy__directory__no_asset_path(
+    client_with_mount,
+    entity_id,
+    entity_type,
+    public_asset_directory_id,
+    tmp_path,
+    public_asset_directory_httpx_mock,
+):
+    """If a data mount is available Client.download_file will symlink the file from there."""
+
+    output_path = tmp_path / "my_cell.swc"
+
+    with pytest.raises(EntitySDKError, match="requires an `asset_path`"):
+        client_with_mount.fetch_file(
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=public_asset_directory_id,
+            output_path=output_path,
+            output_strategy=OutputStrategy.copy,
+        )
 
 
 def test_fetch_file__with_mount__copy__file(
@@ -843,6 +920,28 @@ def test_fetch_file__with_mount__download__directory(
     assert not res.is_symlink()
     assert res.resolve().name == "my_cell.swc"
     assert res.read_bytes() == b"public_directory_file"
+
+
+def test_fetch_file__with_mount__download__directory__no_asset_path(
+    client_with_mount,
+    entity_id,
+    entity_type,
+    public_asset_directory_id,
+    tmp_path,
+    public_asset_directory_httpx_mock,
+):
+    """If a data mount is available and link_from_store is False Client.download_file won't link."""
+
+    output_path = tmp_path / "my_cell.swc"
+
+    with pytest.raises(EntitySDKError, match="requires an `asset_path`"):
+        client_with_mount.fetch_file(
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=public_asset_directory_id,
+            output_path=output_path,
+            output_strategy=OutputStrategy.download,
+        )
 
 
 def test_fetch_file__with_mount__download__file(
@@ -1089,6 +1188,31 @@ def test_fetch_file__wout_mount__download_directory(
     assert res.read_bytes() == b"public_directory_file"
 
 
+def test_fetch_file__wout_mount__download__file(
+    client_wout_mount,
+    entity_id,
+    entity_type,
+    public_asset_file_id,
+    tmp_path,
+    public_asset_file_metadata_httpx_mock,
+    public_asset_file_download_httpx_mock,
+):
+    """If a data mount is available Client.download_file will symlink the file from there."""
+
+    output_path = tmp_path / "my_cell.swc"
+
+    res = client_wout_mount.fetch_file(
+        entity_id=entity_id,
+        entity_type=entity_type,
+        asset_id=public_asset_file_id,
+        output_path=output_path,
+        output_strategy=OutputStrategy.download,
+    )
+    assert not res.is_symlink()
+    assert res.resolve().name == "my_cell.swc"
+    assert res.read_bytes() == b"public"
+
+
 def test_fetch_file__wout_mount__link__directory(
     client_wout_mount,
     entity_id,
@@ -1184,6 +1308,48 @@ def test_fetch_file__wout_mount__link_or_download__file(
     assert not res.is_symlink()
     assert res.resolve().name == "my_cell.swc"
     assert res.read_bytes() == b"public"
+
+
+def test_fetch_file__with_mount__no_files__copy(
+    client_with_mount__no_files,
+    entity_id,
+    entity_type,
+    public_asset_file_id,
+    tmp_path,
+    public_asset_file_metadata_httpx_mock,  # needed for fetching full_path for copy
+):
+    """Test fallback to download when copy fails."""
+    output_path = tmp_path / "my_cell.swc"
+
+    with pytest.raises(EntitySDKError, match="copy strategy failed"):
+        client_with_mount__no_files.fetch_file(
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=public_asset_file_id,
+            output_path=output_path,
+            output_strategy=OutputStrategy.copy,
+        )
+
+
+def test_fetch_file__with_mount__no_files__link(
+    client_with_mount__no_files,
+    entity_id,
+    entity_type,
+    public_asset_file_id,
+    tmp_path,
+    public_asset_file_metadata_httpx_mock,  # needed for fetching full_path for copy
+):
+    """Test fallback to download when copy fails."""
+    output_path = tmp_path / "my_cell.swc"
+
+    with pytest.raises(EntitySDKError, match="link strategy failed"):
+        client_with_mount__no_files.fetch_file(
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=public_asset_file_id,
+            output_path=output_path,
+            output_strategy=OutputStrategy.link,
+        )
 
 
 def test_fetch_directory__with_mount__copy(

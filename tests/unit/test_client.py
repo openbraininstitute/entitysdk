@@ -382,7 +382,7 @@ def test_client_download_file__asset_path(
         json=_mock_asset_response(asset_id=asset_id) | {"is_directory": True},
     )
 
-    with pytest.raises(EntitySDKError, match="require an `asset_path`"):
+    with pytest.raises(EntitySDKError, match="requires an `asset_path`"):
         client.download_file(
             entity_id=entity_id,
             entity_type=Entity,
