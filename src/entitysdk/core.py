@@ -499,6 +499,8 @@ def fetch_asset_file(
                     return _download()
             case OutputStrategy.download:
                 return _download()
+            case _:
+                raise ValueError(f"Unsupported {output_strategy} strategy.")
     except Exception as e:
         raise EntitySDKError(f"{output_strategy} strategy failed.") from e
 

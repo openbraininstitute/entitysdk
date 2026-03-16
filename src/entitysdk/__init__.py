@@ -4,7 +4,7 @@ from entitysdk.client import Client
 from entitysdk.common import ProjectContext
 from entitysdk.exception import EntitySDKError
 from entitysdk.schemas.asset import MultipartUploadTransferConfig
-from entitysdk.store import LocalAssetStore
+from entitysdk.utils.store import LocalAssetStore
 
 __all__ = [
     "Client",
