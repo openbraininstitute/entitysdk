@@ -7,8 +7,8 @@ from entitysdk import Client, ProjectContext
 from entitysdk.exception import EntitySDKError
 from entitysdk.models import Asset, CellMorphology
 from entitysdk.route import get_assets_endpoint
-from entitysdk.store import LocalAssetStore
 from entitysdk.types import OutputStrategy
+from entitysdk.utils.store import LocalAssetStore
 
 MOCK_DATE = "2025-11-07 13:59:27.938208+00:00"
 

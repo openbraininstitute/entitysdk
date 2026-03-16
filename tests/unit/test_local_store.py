@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
-from entitysdk import store as test_module
+from entitysdk.utils import store as test_module
 
 
 def test_prefix_raises():

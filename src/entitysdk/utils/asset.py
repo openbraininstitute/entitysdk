@@ -1,5 +1,6 @@
 """Asset related utitilies."""
 
+from pathlib import Path
 from typing import Any
 
 from entitysdk.exception import EntitySDKError
@@ -29,3 +30,18 @@ def filter_assets(assets: list[Asset], selection: dict[str, Any]) -> list[Asset]
         return True
 
     return [asset for asset in assets if _selection_predicate(asset)]
+
+
+def resolve_asset_path(asset: Asset, directory_file: Path | None = None) -> Path:
+    """Resolve asset path."""
+    file_path = Path(asset.storage_type, asset.full_path)
+
+    if asset.is_directory:
+        if directory_file is None:
+            raise EntitySDKError("Fetching a directory file requires an `asset_path`")
+        return file_path / directory_file
+
+    if directory_file is not None:
+        raise EntitySDKError("Cannot pass `asset_path` to non-directories")
+
+    return file_path

@@ -22,7 +22,6 @@ from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.result import IteratorResult
 from entitysdk.schemas.asset import DownloadedAssetFile, MultipartUploadTransferConfig
-from entitysdk.store import LocalAssetStore
 from entitysdk.token_manager import TokenFromValue, TokenManager
 from entitysdk.types import (
     ID,
@@ -40,6 +39,7 @@ from entitysdk.util import (
     build_api_url,
 )
 from entitysdk.utils.asset import filter_assets
+from entitysdk.utils.store import LocalAssetStore
 
 TEntity = TypeVar("TEntity", bound=Entity)
 TIdentifiable = TypeVar("TIdentifiable", bound=Identifiable)

@@ -28,7 +28,6 @@ from entitysdk.route import (
     get_entity_derivations_endpoint,
 )
 from entitysdk.schemas.asset import MultipartUploadTransferConfig
-from entitysdk.store import LocalAssetStore
 from entitysdk.token_manager import TokenManager
 from entitysdk.types import ID, AssetLabel, DerivationType, OutputStrategy
 from entitysdk.util import (
@@ -36,7 +35,9 @@ from entitysdk.util import (
     stream_paginated_request,
     validate_filename_extension_consistency,
 )
+from entitysdk.utils.asset import resolve_asset_path
 from entitysdk.utils.filesystem import create_dir, get_filesize
+from entitysdk.utils.store import LocalAssetStore
 
 L = logging.getLogger(__name__)
 
@@ -429,15 +430,9 @@ def fetch_asset_file(
         asset = asset_or_id
 
     target_path = Path(output_path)
-    file_path = Path(str(asset.storage_type)) / asset.full_path
-    if asset.is_directory:
-        if not asset_path:
-            raise EntitySDKError("Fetching a directory file requires an `asset_path`")
-        file_path /= asset_path
-    else:
-        if asset_path:
-            raise EntitySDKError("Cannot pass `asset_path` to non-directories")
+    file_path = resolve_asset_path(asset, directory_file=asset_path)
 
+    if not asset.is_directory:
         target_path = (
             target_path / asset.path
             if target_path.is_dir()
@@ -554,13 +549,8 @@ def fetch_asset_content(
             http_client=http_client,
             token=token,
         )
-        source_path: Path = Path(asset.storage_type, asset.full_path)
 
-        if asset.is_directory:
-            assert asset_path
-            source_path /= asset_path
-        else:
-            assert not asset_path
+        source_path: Path = resolve_asset_path(asset, directory_file=asset_path)
 
         if local_store.path_exists(source_path):
             return local_store.read_bytes(source_path)
