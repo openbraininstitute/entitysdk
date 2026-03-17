@@ -452,7 +452,7 @@ def fetch_asset_file(
     def download_file():
         bytes_content = fetch_asset_content(
             api_url=api_url,
-            asset_or_id=asset.id,
+            asset_or_id=asset,
             entity_id=entity_id,
             entity_type=entity_type,
             asset_path=asset_path,
