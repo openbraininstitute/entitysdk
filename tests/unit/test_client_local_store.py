@@ -408,7 +408,7 @@ def test_download_content__wout_mount__link__directory(
         client_wout_mount.fetch_content(
             entity_id=entity_id,
             entity_type=entity_type,
-            asset_id=public_asset_directory_id,
+            asset_or_id=public_asset_directory_id,
             asset_path="dir_cell.swc",
             output_strategy=OutputStrategy.link,
         )
@@ -474,7 +474,7 @@ def test_fetch_content__wout_mount__copy_or_download__directory(
     res = client_wout_mount.fetch_content(
         entity_id=entity_id,
         entity_type=entity_type,
-        asset_id=public_asset_directory_id,
+        asset_or_id=public_asset_directory_id,
         asset_path="dir_cell.swc",
         output_strategy=OutputStrategy.copy_or_download,
     )
@@ -492,7 +492,7 @@ def test_fetch_content__wout_mount__copy_or_download__file(
     res = client_wout_mount.fetch_content(
         entity_id=entity_id,
         entity_type=entity_type,
-        asset_id=public_asset_file_id,
+        asset_or_id=public_asset_file_id,
         output_strategy=OutputStrategy.copy_or_download,
     )
     assert res == b"public"
@@ -509,7 +509,7 @@ def test_fetch_content__wout_mount__download__directory(
     res = client_wout_mount.fetch_content(
         entity_id=entity_id,
         entity_type=entity_type,
-        asset_id=public_asset_directory_id,
+        asset_or_id=public_asset_directory_id,
         asset_path="dir_cell.swc",
         output_strategy=OutputStrategy.download,
     )
@@ -527,7 +527,7 @@ def test_fetch_content__wout_mount__download__file(
     res = client_wout_mount.fetch_content(
         entity_id=entity_id,
         entity_type=entity_type,
-        asset_id=public_asset_file_id,
+        asset_or_id=public_asset_file_id,
         output_strategy=OutputStrategy.download,
     )
     assert res == b"public"
@@ -541,7 +541,7 @@ def test_fetch_content__wout_mount__link__directory(
         client_wout_mount.fetch_content(
             entity_id=entity_id,
             entity_type=entity_type,
-            asset_id=public_asset_file_id,
+            asset_or_id=public_asset_file_id,
             asset_path="dir_cell.swc",
             output_strategy=OutputStrategy.link,
         )
@@ -555,7 +555,7 @@ def test_fetch_content__wout_mount__link__file(
         client_wout_mount.fetch_content(
             entity_id=entity_id,
             entity_type=entity_type,
-            asset_id=public_asset_file_id,
+            asset_or_id=public_asset_file_id,
             output_strategy=OutputStrategy.link,
         )
 
@@ -568,7 +568,7 @@ def test_fetch_content__wout_mount__link_or_download__directory(
         client_wout_mount.fetch_content(
             entity_id=entity_id,
             entity_type=entity_type,
-            asset_id=public_asset_file_id,
+            asset_or_id=public_asset_file_id,
             asset_path="dir_cell.swc",
             output_strategy=OutputStrategy.link_or_download,
         )
@@ -582,7 +582,7 @@ def test_fetch_content__wout_mount__link_or_download__file(
         client_wout_mount.fetch_content(
             entity_id=entity_id,
             entity_type=entity_type,
-            asset_id=public_asset_file_id,
+            asset_or_id=public_asset_file_id,
             output_strategy=OutputStrategy.link_or_download,
         )
 
@@ -595,7 +595,7 @@ def test_fetch_content__wout_mount__copy__directory(
         client_wout_mount.fetch_content(
             entity_id=entity_id,
             entity_type=entity_type,
-            asset_id=public_asset_file_id,
+            asset_or_id=public_asset_file_id,
             asset_path="dir_cell.swc",
             output_strategy=OutputStrategy.copy,
         )
@@ -609,7 +609,7 @@ def test_fetch_content__wout_mount__copy__file(
         client_wout_mount.fetch_content(
             entity_id=entity_id,
             entity_type=entity_type,
-            asset_id=public_asset_file_id,
+            asset_or_id=public_asset_file_id,
             output_strategy=OutputStrategy.copy,
         )
 
@@ -625,7 +625,7 @@ def test_fetch_content__with_mount__no_files__download(
     res = client_with_mount__no_files.fetch_content(
         entity_id=entity_id,
         entity_type=entity_type,
-        asset_id=public_asset_file_id,
+        asset_or_id=public_asset_file_id,
         output_strategy=OutputStrategy.download,
     )
     assert res == b"public"
@@ -644,7 +644,7 @@ def test_fetch_content__with_mount__no_files__copy(
         client_with_mount__no_files.fetch_content(
             entity_id=entity_id,
             entity_type=entity_type,
-            asset_id=public_asset_file_id,
+            asset_or_id=public_asset_file_id,
             output_strategy=OutputStrategy.copy,
         )
 
@@ -661,7 +661,7 @@ def test_fetch_content__with_mount__no_files__copy_or_download(
     res = client_with_mount__no_files.fetch_content(
         entity_id=entity_id,
         entity_type=entity_type,
-        asset_id=public_asset_file_id,
+        asset_or_id=public_asset_file_id,
         output_strategy=OutputStrategy.copy_or_download,
     )
     assert res == b"public"
@@ -678,7 +678,7 @@ def test_fetch_content__with_mount__copy__directory(
     res = client_with_mount.fetch_content(
         entity_id=entity_id,
         entity_type=entity_type,
-        asset_id=public_asset_directory_id,
+        asset_or_id=public_asset_directory_id,
         asset_path="dir_cell.swc",
         output_strategy=OutputStrategy.copy,
     )
@@ -693,7 +693,7 @@ def test_fetch_content__with_mount__link__directory(
         client_wout_mount.fetch_content(
             entity_id=entity_id,
             entity_type=entity_type,
-            asset_id=public_asset_file_id,
+            asset_or_id=public_asset_file_id,
             output_strategy=OutputStrategy.link,
             asset_path="dir_cell.swc",
         )
@@ -707,7 +707,7 @@ def test_fetch_content__with_mount__link__file(
         client_wout_mount.fetch_content(
             entity_id=entity_id,
             entity_type=entity_type,
-            asset_id=public_asset_file_id,
+            asset_or_id=public_asset_file_id,
             output_strategy=OutputStrategy.link,
         )
 
@@ -720,7 +720,7 @@ def test_fetch_content__with_mount__link_or_download__directory(
         client_wout_mount.fetch_content(
             entity_id=entity_id,
             entity_type=entity_type,
-            asset_id=public_asset_file_id,
+            asset_or_id=public_asset_file_id,
             output_strategy=OutputStrategy.link_or_download,
             asset_path="dir_cell.swc",
         )
@@ -734,7 +734,7 @@ def test_fetch_content__with_mount__link_or_download__file(
         client_wout_mount.fetch_content(
             entity_id=entity_id,
             entity_type=entity_type,
-            asset_id=public_asset_file_id,
+            asset_or_id=public_asset_file_id,
             output_strategy=OutputStrategy.link_or_download,
         )
 
@@ -751,7 +751,7 @@ def test_fetch_content__with_mount__download__directory(
     res = client_with_mount.fetch_content(
         entity_id=entity_id,
         entity_type=entity_type,
-        asset_id=public_asset_directory_id,
+        asset_or_id=public_asset_directory_id,
         asset_path="dir_cell.swc",
         output_strategy=OutputStrategy.download,
     )
@@ -772,7 +772,7 @@ def test_fetch_content__with_mount__copy__directory__no_asset_path(
         client_with_mount.fetch_content(
             entity_id=entity_id,
             entity_type=entity_type,
-            asset_id=public_asset_directory_id,
+            asset_or_id=public_asset_directory_id,
             output_strategy=OutputStrategy.copy,
         )
 

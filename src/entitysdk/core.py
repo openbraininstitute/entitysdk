@@ -452,7 +452,7 @@ def fetch_asset_file(
     def download_file():
         bytes_content = fetch_asset_content(
             api_url=api_url,
-            asset_id=asset.id,
+            asset_or_id=asset.id,
             entity_id=entity_id,
             entity_type=entity_type,
             asset_path=asset_path,
@@ -496,7 +496,7 @@ def fetch_asset_content(
     api_url: str,
     entity_id: ID,
     entity_type: type[Identifiable],
-    asset_id: ID,
+    asset_or_id: ID | Asset,
     asset_path: Path | None = None,
     project_context: ProjectContext | None = None,
     token: str,
@@ -510,7 +510,7 @@ def fetch_asset_content(
         api_url: The API URL to entitycore service.
         entity_id: Resource id
         entity_type: Resource type
-        asset_id: Asset id
+        asset_or_id: Asset id
         asset_path: for asset directories, the path within the directory to the file
         project_context: Project context.
         token: Authorization access token.
@@ -521,6 +521,8 @@ def fetch_asset_content(
     Returns:
         Asset content in bytes.
     """
+    asset_id = asset_or_id.id if isinstance(asset_or_id, Asset) else asset_or_id
+
     asset_endpoint = get_assets_endpoint(
         api_url=api_url,
         entity_type=entity_type,
@@ -532,13 +534,16 @@ def fetch_asset_content(
         if local_store is None:
             return None
 
-        asset = get_entity(
-            asset_endpoint,
-            entity_type=Asset,
-            project_context=project_context,
-            http_client=http_client,
-            token=token,
-        )
+        if isinstance(asset_or_id, ID):
+            asset = get_entity(
+                asset_endpoint,
+                entity_type=Asset,
+                project_context=project_context,
+                http_client=http_client,
+                token=token,
+            )
+        else:
+            asset = asset_or_id
 
         source_path: Path = resolve_asset_path(asset, directory_file=asset_path)
 
@@ -548,15 +553,14 @@ def fetch_asset_content(
         return None
 
     def download_content():
-        response = make_db_api_request(
+        return make_db_api_request(
             url=f"{asset_endpoint}/download",
             method="GET",
             parameters={"asset_path": str(asset_path)} if asset_path else {},
             project_context=project_context,
             token=token,
             http_client=http_client,
-        )
-        return response.content
+        ).content
 
     match output_strategy:
         case OutputStrategy.copy:

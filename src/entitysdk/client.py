@@ -546,7 +546,7 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Identifiable],
-        asset_id: ID,
+        asset_or_id: ID | Asset,
         asset_path: Path | None = None,
         project_context: ProjectContext | None = None,
         output_strategy: OutputStrategy = OutputStrategy.copy_or_download,
@@ -556,7 +556,7 @@ class Client:
         Args:
             entity_id: Identifier of the entity that owns the asset.
             entity_type: The entity class/type implementing ``Identifiable``.
-            asset_id: Identifier of the asset to retrieve.
+            asset_or_id: Identifier of the asset to retrieve.
             asset_path: For asset directories, the path within the directory for the file.
             project_context: Optional project context
             output_strategy: Strategy controlling how the asset file content is materialized
@@ -569,9 +569,9 @@ class Client:
         context = self._optional_user_context(override_context=project_context)
         return core.fetch_asset_content(
             api_url=self.api_url,
-            asset_id=asset_id,
             entity_id=entity_id,
             entity_type=entity_type,
+            asset_or_id=asset_or_id,
             asset_path=Path(asset_path) if asset_path else None,
             project_context=context,
             http_client=self._http_client,
@@ -604,7 +604,7 @@ class Client:
         return self.fetch_content(
             entity_id=entity_id,
             entity_type=entity_type,
-            asset_id=asset_id,
+            asset_or_id=asset_id,
             asset_path=Path(asset_path) if asset_path else None,
             project_context=project_context,
             output_strategy=OutputStrategy.download,
