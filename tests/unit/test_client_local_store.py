@@ -768,7 +768,7 @@ def test_fetch_content__with_mount__copy__directory__no_asset_path(
 ):
     """If a data mount is available Client.download_file will symlink the file from there."""
 
-    with pytest.raises(EntitySDKError, match="copy strategy failed"):
+    with pytest.raises(EntitySDKError, match="requires an `asset_path`"):
         client_with_mount.fetch_content(
             entity_id=entity_id,
             entity_type=entity_type,
