@@ -572,7 +572,7 @@ class Client:
             entity_id=entity_id,
             entity_type=entity_type,
             asset_or_id=asset_or_id,
-            asset_path=Path(asset_path) if asset_path else None,
+            asset_path=asset_path,
             project_context=context,
             http_client=self._http_client,
             token=self._token_manager.get_token(),
