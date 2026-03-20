@@ -89,7 +89,7 @@ class Client:
 
     @staticmethod
     def _handle_api_url(api_url: str | None, environment: DeploymentEnvironment | None) -> str:
-        """Return or create api url."""
+        """Return or create an API URL."""
         match (api_url, environment):
             case (str(), None):
                 return api_url
@@ -105,9 +105,11 @@ class Client:
     def _optional_user_context(
         self, override_context: ProjectContext | None
     ) -> ProjectContext | None:
+        """Return an optional project context."""
         return override_context or self.project_context
 
     def _required_user_context(self, override_context: ProjectContext | None) -> ProjectContext:
+        """Return a required project context."""
         context = self._optional_user_context(override_context)
         if context is None:
             raise EntitySDKError("A project context is mandatory for this operation.")
@@ -188,7 +190,17 @@ class Client:
         derivation_type: DerivationType,
         project_context: ProjectContext | None = None,
     ) -> IteratorResult[Entity]:
-        """Get all the derivation for an entity."""
+        """Get all derivations for an entity.
+
+        Args:
+            entity_id: Resource id of the entity.
+            entity_type: Type of the entity.
+            derivation_type: Derivation type to filter by.
+            project_context: Optional project context.
+
+        Returns:
+            An iterator over derivation entities.
+        """
         return core.get_entity_derivations(
             api_url=self.api_url,
             entity_id=entity_id,
@@ -231,7 +243,17 @@ class Client:
         project_context: ProjectContext | None = None,
         admin: bool = False,
     ) -> IteratorResult[Asset]:
-        """Get all assets of an entity."""
+        """Get all assets of an entity.
+
+        Args:
+            entity_id: Resource id of the entity.
+            entity_type: Type of the entity.
+            project_context: Optional project context.
+            admin: Whether to use the admin endpoint or not.
+
+        Returns:
+            An iterator over assets.
+        """
         context = (
             self._optional_user_context(override_context=project_context) if not admin else None
         )
@@ -288,7 +310,13 @@ class Client:
         *,
         admin: bool = False,
     ) -> None:
-        """Delete an entity."""
+        """Delete an entity.
+
+        Args:
+            entity_id: Resource id of the entity to delete.
+            entity_type: Type of the entity.
+            admin: Whether to use the admin endpoint or not.
+        """
         url = route.get_entities_endpoint(
             api_url=self.api_url,
             entity_type=entity_type,
@@ -315,7 +343,22 @@ class Client:
         project_context: ProjectContext | None = None,
         transfer_config: MultipartUploadTransferConfig | None = None,
     ) -> Asset:
-        """Upload asset to an existing entity's endpoint from a file path."""
+        """Upload a file to an entity.
+
+        Args:
+            entity_id: Resource id of the entity.
+            entity_type: Type of the entity.
+            file_path: Path to the local file to upload.
+            file_content_type: MIME content type for the uploaded file.
+            file_name: Optional override for the uploaded filename.
+            file_metadata: Optional extra metadata to attach to the asset.
+            asset_label: Label for the asset.
+            project_context: Optional project context.
+            transfer_config: Optional multipart upload configuration.
+
+        Returns:
+            The created Asset.
+        """
         context = self._required_user_context(override_context=project_context)
 
         asset_path = Path(file_path)
@@ -350,7 +393,21 @@ class Client:
         asset_label: AssetLabel,
         project_context: ProjectContext | None = None,
     ) -> Asset:
-        """Upload asset to an existing entity's endpoint from a file-like object."""
+        """Upload file-like content to an entity.
+
+        Args:
+            entity_id: Resource id of the entity.
+            entity_type: Type of the entity.
+            file_content: File-like object containing binary content.
+            file_name: Filename to report to the backend.
+            file_content_type: MIME content type for the uploaded content.
+            file_metadata: Optional extra metadata to attach to the asset.
+            asset_label: Label for the asset.
+            project_context: Optional project context.
+
+        Returns:
+            The created Asset.
+        """
         url = route.get_assets_endpoint(
             api_url=self.api_url,
             entity_type=entity_type,
@@ -384,7 +441,21 @@ class Client:
         label: AssetLabel,
         project_context: ProjectContext | None = None,
     ) -> Asset:
-        """Attach directory to an entity from with a group of paths."""
+        """Attach a local directory to an entity.
+
+        Args:
+            entity_id: Resource id of the entity.
+            entity_type: Type of the entity.
+            name: Directory name to attach.
+            paths: Mapping of relative paths to local paths (or the other
+                way around, depending on the backend expectations).
+            metadata: Optional extra metadata to attach to the directory asset.
+            label: Label for the asset.
+            project_context: Optional project context.
+
+        Returns:
+            The created directory Asset.
+        """
         url = (
             route.get_assets_endpoint(
                 api_url=self.api_url,
@@ -417,7 +488,17 @@ class Client:
         asset_id: ID,
         project_context: ProjectContext | None = None,
     ) -> DetailedFileList:
-        """List directory existing entity's endpoint from a directory path."""
+        """List files in a directory asset.
+
+        Args:
+            entity_id: Resource id of the entity.
+            entity_type: Type of the entity.
+            asset_id: Directory asset id.
+            project_context: Optional project context.
+
+        Returns:
+            A `DetailedFileList` describing the directory contents.
+        """
         url = (
             route.get_assets_endpoint(
                 api_url=self.api_url,
@@ -448,7 +529,25 @@ class Client:
         max_concurrent: int = 1,
         output_strategy: OutputStrategy = OutputStrategy.link_or_download,
     ) -> list[Path]:
-        """Fetch directory."""
+        """Fetch a directory asset to a local output directory.
+
+        Args:
+            entity_id: Resource id of the entity owning the directory.
+            entity_type: Entity type.
+            asset_id: Directory asset id, or an `Asset` object.
+            output_path: Local output base path to write files to.
+            project_context: Optional project context.
+            ignore_directory_name: If `True`, do not create an extra nested
+                folder for the directory name.
+            max_concurrent: Maximum number of concurrent downloads.
+            output_strategy: Strategy controlling how files are materialized.
+
+        Returns:
+            List of output file paths that were created.
+
+        Raises:
+            EntitySDKError: If `output_path` exists and is a file.
+        """
         if output_path.exists() and output_path.is_file():
             raise EntitySDKError(f"{output_path} exists and is a file")
 
@@ -531,7 +630,21 @@ class Client:
         ignore_directory_name: bool = False,
         max_concurrent: int = 1,
     ) -> list[Path]:
-        """Download directory of assets."""
+        """Download a directory asset to local disk.
+
+        Args:
+            entity_id: Resource id of the entity owning the directory.
+            entity_type: Entity type.
+            asset_id: Directory asset id, or an `Asset` object.
+            output_path: Local output base path to write files to.
+            project_context: Optional project context.
+            ignore_directory_name: If `True`, do not create an extra nested
+                folder for the directory name.
+            max_concurrent: Maximum number of concurrent downloads.
+
+        Returns:
+            List of output file paths that were created.
+        """
         return self.fetch_directory(
             entity_id=entity_id,
             entity_type=entity_type,
@@ -625,7 +738,20 @@ class Client:
         project_context: ProjectContext | None = None,
         output_strategy: OutputStrategy = OutputStrategy.link_or_download,
     ) -> Path:
-        """Fetch file."""
+        """Fetch a file asset to a local output path.
+
+        Args:
+            entity_id: Resource id of the entity owning the asset.
+            entity_type: Entity type.
+            asset_id: File asset id, or an `Asset` object.
+            output_path: Local output path (file or directory) to write to.
+            asset_path: For directory assets, path within the directory to the file.
+            project_context: Optional project context.
+            output_strategy: Strategy controlling how the asset file is materialized.
+
+        Returns:
+            The path of the created local file.
+        """
         context = self._optional_user_context(override_context=project_context)
         return core.fetch_asset_file(
             api_url=self.api_url,
@@ -676,7 +802,15 @@ class Client:
 
     @staticmethod
     def select_assets(entity: Entity, selection: dict) -> IteratorResult:
-        """Select assets from entity based on selection."""
+        """Select assets from an entity based on a selection dict.
+
+        Args:
+            entity: Entity whose assets should be filtered.
+            selection: Selection/filter criteria.
+
+        Returns:
+            An iterator over matching assets.
+        """
         return IteratorResult(filter_assets(entity.assets, selection))
 
     @validate_call
@@ -689,7 +823,19 @@ class Client:
         project_context: ProjectContext | None = None,
         output_strategy: OutputStrategy = OutputStrategy.link_or_download,
     ):
-        """Fetch assets."""
+        """Fetch assets belonging to an entity.
+
+        Args:
+            entity_or_id: Either an `Entity` object or a tuple of
+                (`entity_id`, `entity_type`).
+            selection: Optional selection/filter dict.
+            output_path: Local output directory base path.
+            project_context: Optional project context.
+            output_strategy: Strategy controlling how each file is materialized.
+
+        Returns:
+            An iterator yielding `DownloadedAssetFile` objects.
+        """
 
         def _fetch_entity_asset(asset):
             if asset.is_directory:
@@ -745,7 +891,17 @@ class Client:
         output_path: Path,
         project_context: ProjectContext | None = None,
     ) -> IteratorResult:
-        """Download assets."""
+        """Download assets belonging to an entity.
+
+        Args:
+            entity_or_id: Either an `Entity` object or a tuple of (`entity_id`, `entity_type`).
+            selection: Optional selection/filter dict.
+            output_path: Local output directory base path.
+            project_context: Optional project context.
+
+        Returns:
+            An iterator yielding `DownloadedAssetFile` objects.
+        """
         return self.fetch_assets(
             entity_or_id=entity_or_id,
             selection=selection,
@@ -763,7 +919,18 @@ class Client:
         project_context: ProjectContext | None = None,
         admin: bool = False,
     ) -> Asset:
-        """Delete an entity's asset."""
+        """Delete an entity's asset.
+
+        Args:
+            entity_id: Resource id of the entity owning the asset.
+            entity_type: Entity type.
+            asset_id: Asset id to delete.
+            project_context: Optional project context.
+            admin: Whether to use the admin endpoint or not.
+
+        Returns:
+            The deleted Asset (as returned by the backend).
+        """
         url = route.get_assets_endpoint(
             api_url=self.api_url,
             entity_type=entity_type,
@@ -796,6 +963,19 @@ class Client:
         """Update an entity's asset file.
 
         Note: This operation is not atomic. Deletion can succeed and upload can fail.
+
+        Args:
+            entity_id: Resource id of the entity owning the asset.
+            entity_type: Entity type.
+            asset_id: Asset id to update.
+            file_path: Path to the local file to upload.
+            file_content_type: MIME content type for the uploaded file.
+            file_name: Optional override for the uploaded filename.
+            file_metadata: Optional extra metadata to attach to the asset.
+            project_context: Optional project context.
+
+        Returns:
+            The updated Asset (as created by re-uploading).
         """
         deleted_asset = self.delete_asset(
             entity_id=entity_id,
@@ -827,7 +1007,22 @@ class Client:
         asset_label: AssetLabel,
         project_context: ProjectContext | None = None,
     ) -> Asset:
-        """Register a file or directory already existing."""
+        """Register a file or directory already existing.
+
+        Args:
+            entity_id: Resource id of the entity owning the asset.
+            entity_type: Entity type.
+            name: Asset name/path relative to the entity.
+            storage_path: Full storage path (backend-specific).
+            storage_type: Backend storage type.
+            is_directory: Whether the asset represents a directory.
+            content_type: MIME content type.
+            asset_label: Label for the asset.
+            project_context: Optional project context.
+
+        Returns:
+            The registered Asset.
+        """
         url = (
             route.get_assets_endpoint(
                 api_url=self.api_url,
