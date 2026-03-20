@@ -20,6 +20,7 @@ from entitysdk.types import (
     ContentType,
     DeploymentEnvironment,
     DerivationType,
+    OutputStrategy,
     StorageType,
 )
 
@@ -781,6 +782,24 @@ def test_client_download_assets__non_entity(
             output_path=tmp_path,
             project_context=project_context,
         ).one()
+
+
+def test_client_fetch_assets_raw__non_entity_raises(client, tmp_path):
+    class NotEntity(Identifiable):
+        name: str
+
+    obj = NotEntity(id=uuid.uuid4(), name="not-entity")
+
+    with pytest.raises(EntitySDKError, match="has no assets"):
+        # Use the undecorated function to exercise the internal runtime check.
+        Client.fetch_assets.__wrapped__(
+            client,
+            entity_or_id=obj,
+            selection=None,
+            output_path=tmp_path,
+            project_context=None,
+            output_strategy=OutputStrategy.link_or_download,
+        )
 
 
 def test_client_download_assets__directory_not_supported(
