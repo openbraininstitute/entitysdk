@@ -449,15 +449,18 @@ class Client:
         output_strategy: OutputStrategy = OutputStrategy.link_or_download,
     ) -> list[Path]:
         """Fetch directory."""
-        output_path = Path(output_path)
-
         if output_path.exists() and output_path.is_file():
             raise EntitySDKError(f"{output_path} exists and is a file")
+
         output_path.mkdir(parents=True, exist_ok=True)
 
         context = self._optional_user_context(override_context=project_context)
 
-        asset = asset_id if isinstance(asset_id, Asset) else None
+        if isinstance(asset_id, Asset):
+            asset = asset_id
+            asset_id = asset.id
+        else:
+            asset = None
 
         if not ignore_directory_name:
             if asset is None:
@@ -465,7 +468,7 @@ class Client:
                     api_url=self.api_url,
                     entity_type=entity_type,
                     entity_id=cast(ID, entity_id),
-                    asset_id=cast(ID, asset_id),
+                    asset_id=asset_id,
                 )
                 asset = core.get_entity(
                     asset_endpoint,
@@ -480,7 +483,7 @@ class Client:
         contents = self.list_directory(
             entity_id=entity_id,
             entity_type=entity_type,
-            asset_id=asset_id if isinstance(asset_id, ID) else cast(Asset, asset).id,
+            asset_id=asset_id,
             project_context=project_context,
         )
 
@@ -489,7 +492,7 @@ class Client:
                 self.fetch_file(
                     entity_id=entity_id,
                     entity_type=entity_type,
-                    asset_id=asset if asset else asset_id,
+                    asset_id=asset or asset_id,
                     output_path=output_path / path,
                     asset_path=path,
                     project_context=context,
@@ -504,7 +507,7 @@ class Client:
                         self.fetch_file,
                         entity_id=entity_id,
                         entity_type=entity_type,
-                        asset_id=asset if asset else asset_id,
+                        asset_id=asset or asset_id,
                         output_path=output_path / path,
                         asset_path=path,
                         project_context=context,
