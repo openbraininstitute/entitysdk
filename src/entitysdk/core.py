@@ -4,7 +4,7 @@ import io
 import logging
 from collections.abc import Iterator
 from pathlib import Path
-from typing import TypeVar, cast
+from typing import TypeVar
 
 import httpx
 
@@ -440,12 +440,21 @@ def fetch_asset_file(
 
     create_dir(target_path.parent)
 
-    def find_asset_path_in_store() -> Path | None:
+    def try_copy_path() -> Path | None:
         if local_store is None:
             return None
 
         if local_store.path_exists(source_path):
-            return source_path
+            return local_store.copy_path(path=source_path, target_path=target_path)
+
+        return None
+
+    def try_link_path() -> Path | None:
+        if local_store is None:
+            return None
+
+        if local_store.path_exists(source_path):
+            return local_store.link_path(path=source_path, target_path=target_path)
 
         return None
 
@@ -466,24 +475,20 @@ def fetch_asset_file(
 
     match output_strategy:
         case OutputStrategy.copy:
-            if path := find_asset_path_in_store():
-                store = cast(LocalAssetStore, local_store)
-                return store.copy_path(path=path, target_path=target_path)
+            if path := try_copy_path():
+                return path
             raise EntitySDKError("copy strategy failed: Asset path not found in store")
         case OutputStrategy.copy_or_download:
-            if path := find_asset_path_in_store():
-                store = cast(LocalAssetStore, local_store)
-                return store.copy_path(path=path, target_path=target_path)
+            if path := try_copy_path():
+                return path
             return download_file()
         case OutputStrategy.link:
-            if path := find_asset_path_in_store():
-                store = cast(LocalAssetStore, local_store)
-                return store.link_path(path=path, target_path=target_path)
+            if path := try_link_path():
+                return path
             raise EntitySDKError("link strategy failed: Asset path not found in store")
         case OutputStrategy.link_or_download:
-            if path := find_asset_path_in_store():
-                store = cast(LocalAssetStore, local_store)
-                return store.link_path(path=path, target_path=target_path)
+            if path := try_link_path():
+                return path
             return download_file()
         case OutputStrategy.download:
             return download_file()
@@ -530,7 +535,8 @@ def fetch_asset_content(
         asset_id=asset_id,
     )
 
-    def find_asset_path_in_store() -> Path | None:
+    def try_read_from_store() -> bytes | None:
+
         if local_store is None:
             return None
 
@@ -548,7 +554,7 @@ def fetch_asset_content(
         source_path: Path = resolve_asset_path(asset, directory_file=asset_path)
 
         if local_store.path_exists(source_path):
-            return source_path
+            return local_store.read_bytes(source_path)
 
         return None
 
@@ -564,14 +570,12 @@ def fetch_asset_content(
 
     match output_strategy:
         case OutputStrategy.copy:
-            if path := find_asset_path_in_store():
-                store = cast(LocalAssetStore, local_store)
-                return store.read_bytes(path)
+            if content := try_read_from_store():
+                return content
             raise EntitySDKError("copy strategy failed: No asset path found in store.")
         case OutputStrategy.copy_or_download:
-            if path := find_asset_path_in_store():
-                store = cast(LocalAssetStore, local_store)
-                return store.read_bytes(path)
+            if content := try_read_from_store():
+                return content
             return download_content()
         case OutputStrategy.download:
             return download_content()
