@@ -457,7 +457,7 @@ class Client:
 
         context = self._optional_user_context(override_context=project_context)
 
-        asset = cast(Asset, asset_id) if isinstance(asset_id, Asset) else None
+        asset = asset_id if isinstance(asset_id, Asset) else None
 
         if not ignore_directory_name:
             if asset is None:
