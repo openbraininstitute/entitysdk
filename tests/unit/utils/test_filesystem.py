@@ -9,7 +9,7 @@ def test_create_dir(tmp_path):
 
 
 def test_create_intermediate_directories(tmp_path):
-    path = tmp_path / "foo" / "bar" / "foo.txt"
+    path = tmp_path / "foo" / "bar"
 
     assert not path.parent.is_dir()
 
