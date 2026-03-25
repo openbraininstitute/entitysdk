@@ -7,7 +7,7 @@ from entitysdk import core as test_module
 from entitysdk import models
 from entitysdk.exception import EntitySDKError
 from entitysdk.models import Asset
-from entitysdk.types import OutputStrategy, StorageType
+from entitysdk.types import FetchContentStrategy, StorageType
 
 
 @pytest.fixture
@@ -107,14 +107,14 @@ def test_fetch_asset_content_copy_or_download_reads_from_store_when_asset_is_pro
         asset_or_id=asset,
         token="my-token",
         local_store=store,
-        output_strategy=OutputStrategy.copy_or_download,
+        strategy=FetchContentStrategy.local_or_download,
     )
 
     assert content == b"from-store"
     store.read_bytes.assert_called_once()
 
 
-def test_fetch_asset_file_unsupported_output_strategy_raises(tmp_path):
+def test_fetch_asset_file_unsupported_strategy_raises(tmp_path):
     entity_id = uuid4()
     asset_id = uuid4()
     asset = Asset(
@@ -137,11 +137,11 @@ def test_fetch_asset_file_unsupported_output_strategy_raises(tmp_path):
             asset_or_id=asset,
             output_path=tmp_path / "out.txt",
             token="my-token",
-            output_strategy="unsupported-strategy",
+            strategy="unsupported-strategy",
         )
 
 
-def test_fetch_asset_content_unsupported_output_strategy_raises():
+def test_fetch_asset_content_unsupported_strategy_raises():
     entity_id = uuid4()
     asset_id = uuid4()
     asset = Asset(
@@ -163,5 +163,5 @@ def test_fetch_asset_content_unsupported_output_strategy_raises():
             entity_type=models.Entity,
             asset_or_id=asset,
             token="my-token",
-            output_strategy="unsupported-strategy",
+            strategy="unsupported-strategy",
         )

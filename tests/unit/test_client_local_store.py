@@ -7,7 +7,7 @@ from entitysdk import Client, ProjectContext
 from entitysdk.exception import EntitySDKError
 from entitysdk.models import Asset, CellMorphology
 from entitysdk.route import get_assets_endpoint
-from entitysdk.types import OutputStrategy
+from entitysdk.types import FetchContentStrategy, FetchFileStrategy
 from entitysdk.utils.store import LocalAssetStore
 
 MOCK_DATE = "2025-11-07 13:59:27.938208+00:00"
@@ -396,25 +396,7 @@ def test_download_directory__with_mount(
     assert data["dir_cell.h5"].resolve().name == "dir_cell.h5"
 
 
-def test_download_content__wout_mount__link__directory(
-    client_wout_mount,
-    entity_id,
-    entity_type,
-    public_asset_directory_id,
-    httpx_mock,
-):
-    """If the asset is a directory, the asset_path is used to specify the path."""
-    with pytest.raises(EntitySDKError, match="link strategy failed"):
-        client_wout_mount.fetch_content(
-            entity_id=entity_id,
-            entity_type=entity_type,
-            asset_or_id=public_asset_directory_id,
-            asset_path="dir_cell.swc",
-            output_strategy=OutputStrategy.link,
-        )
-
-
-def test_download_directory__with_mount__link__concurrent(
+def test_download_directory__with_mount__concurrent(
     client_with_mount,
     entity_id,
     entity_type,
@@ -463,7 +445,7 @@ def test_download_assets__with_mount(
     assert res.path.read_bytes() == b"public"
 
 
-def test_fetch_content__wout_mount__copy_or_download__directory(
+def test_fetch_content__wout_mount__local_or_download__directory(
     client_wout_mount,
     entity_id,
     entity_type,
@@ -476,12 +458,12 @@ def test_fetch_content__wout_mount__copy_or_download__directory(
         entity_type=entity_type,
         asset_or_id=public_asset_directory_id,
         asset_path="dir_cell.swc",
-        output_strategy=OutputStrategy.copy_or_download,
+        strategy=FetchContentStrategy.local_or_download,
     )
     assert res == b"public_directory_file"
 
 
-def test_fetch_content__wout_mount__copy_or_download__file(
+def test_fetch_content__wout_mount__local_or_download__file(
     client_wout_mount,
     entity_id,
     entity_type,
@@ -493,12 +475,12 @@ def test_fetch_content__wout_mount__copy_or_download__file(
         entity_id=entity_id,
         entity_type=entity_type,
         asset_or_id=public_asset_file_id,
-        output_strategy=OutputStrategy.copy_or_download,
+        strategy=FetchContentStrategy.local_or_download,
     )
     assert res == b"public"
 
 
-def test_fetch_content__wout_mount__download__directory(
+def test_fetch_content__wout_mount__download_only__directory(
     client_wout_mount,
     entity_id,
     entity_type,
@@ -511,12 +493,12 @@ def test_fetch_content__wout_mount__download__directory(
         entity_type=entity_type,
         asset_or_id=public_asset_directory_id,
         asset_path="dir_cell.swc",
-        output_strategy=OutputStrategy.download,
+        strategy=FetchContentStrategy.download_only,
     )
     assert res == b"public_directory_file"
 
 
-def test_fetch_content__wout_mount__download__file(
+def test_fetch_content__wout_mount__download_only__file(
     client_wout_mount,
     entity_id,
     entity_type,
@@ -528,66 +510,12 @@ def test_fetch_content__wout_mount__download__file(
         entity_id=entity_id,
         entity_type=entity_type,
         asset_or_id=public_asset_file_id,
-        output_strategy=OutputStrategy.download,
+        strategy=FetchContentStrategy.download_only,
     )
     assert res == b"public"
 
 
-def test_fetch_content__wout_mount__link__directory(
-    client_wout_mount, entity_id, entity_type, public_asset_file_id
-):
-    """Test link is not a valid strategy from fetch_content()."""
-    with pytest.raises(EntitySDKError, match="link strategy failed"):
-        client_wout_mount.fetch_content(
-            entity_id=entity_id,
-            entity_type=entity_type,
-            asset_or_id=public_asset_file_id,
-            asset_path="dir_cell.swc",
-            output_strategy=OutputStrategy.link,
-        )
-
-
-def test_fetch_content__wout_mount__link__file(
-    client_wout_mount, entity_id, entity_type, public_asset_file_id
-):
-    """Test link is not a valid strategy from fetch_content()."""
-    with pytest.raises(EntitySDKError, match="link strategy failed"):
-        client_wout_mount.fetch_content(
-            entity_id=entity_id,
-            entity_type=entity_type,
-            asset_or_id=public_asset_file_id,
-            output_strategy=OutputStrategy.link,
-        )
-
-
-def test_fetch_content__wout_mount__link_or_download__directory(
-    client_wout_mount, entity_id, entity_type, public_asset_file_id
-):
-    """Test link is not a valid strategy from fetch_content()."""
-    with pytest.raises(EntitySDKError, match="link_or_download strategy failed"):
-        client_wout_mount.fetch_content(
-            entity_id=entity_id,
-            entity_type=entity_type,
-            asset_or_id=public_asset_file_id,
-            asset_path="dir_cell.swc",
-            output_strategy=OutputStrategy.link_or_download,
-        )
-
-
-def test_fetch_content__wout_mount__link_or_download__file(
-    client_wout_mount, entity_id, entity_type, public_asset_file_id
-):
-    """Test link is not a valid strategy from fetch_content()."""
-    with pytest.raises(EntitySDKError, match="link_or_download strategy failed"):
-        client_wout_mount.fetch_content(
-            entity_id=entity_id,
-            entity_type=entity_type,
-            asset_or_id=public_asset_file_id,
-            output_strategy=OutputStrategy.link_or_download,
-        )
-
-
-def test_fetch_content__wout_mount__copy__directory(
+def test_fetch_content__wout_mount__local_only__directory(
     client_wout_mount, entity_id, entity_type, public_asset_file_id
 ):
     """Test link is not a valid strategy from fetch_content()."""
@@ -597,11 +525,11 @@ def test_fetch_content__wout_mount__copy__directory(
             entity_type=entity_type,
             asset_or_id=public_asset_file_id,
             asset_path="dir_cell.swc",
-            output_strategy=OutputStrategy.copy,
+            strategy=FetchContentStrategy.local_only,
         )
 
 
-def test_fetch_content__wout_mount__copy__file(
+def test_fetch_content__wout_mount__local_only__file(
     client_wout_mount, entity_id, entity_type, public_asset_file_id
 ):
     """Test copy strategy fails if there is no mount to copy from."""
@@ -610,11 +538,11 @@ def test_fetch_content__wout_mount__copy__file(
             entity_id=entity_id,
             entity_type=entity_type,
             asset_or_id=public_asset_file_id,
-            output_strategy=OutputStrategy.copy,
+            strategy=FetchContentStrategy.local_only,
         )
 
 
-def test_fetch_content__with_mount__no_files__download(
+def test_fetch_content__with_mount__no_files__download_only(
     client_with_mount__no_files,
     entity_id,
     entity_type,
@@ -626,12 +554,12 @@ def test_fetch_content__with_mount__no_files__download(
         entity_id=entity_id,
         entity_type=entity_type,
         asset_or_id=public_asset_file_id,
-        output_strategy=OutputStrategy.download,
+        strategy=FetchContentStrategy.download_only,
     )
     assert res == b"public"
 
 
-def test_fetch_content__with_mount__no_files__copy(
+def test_fetch_content__with_mount__no_files__local_only(
     client_with_mount__no_files,
     entity_id,
     entity_type,
@@ -645,11 +573,11 @@ def test_fetch_content__with_mount__no_files__copy(
             entity_id=entity_id,
             entity_type=entity_type,
             asset_or_id=public_asset_file_id,
-            output_strategy=OutputStrategy.copy,
+            strategy=FetchContentStrategy.local_only,
         )
 
 
-def test_fetch_content__with_mount__no_files__copy_or_download(
+def test_fetch_content__with_mount__no_files__local_or_download(
     client_with_mount__no_files,
     entity_id,
     entity_type,
@@ -662,12 +590,12 @@ def test_fetch_content__with_mount__no_files__copy_or_download(
         entity_id=entity_id,
         entity_type=entity_type,
         asset_or_id=public_asset_file_id,
-        output_strategy=OutputStrategy.copy_or_download,
+        strategy=FetchContentStrategy.local_or_download,
     )
     assert res == b"public"
 
 
-def test_fetch_content__with_mount__copy__directory(
+def test_fetch_content__with_mount__local_only__directory(
     client_with_mount,
     entity_id,
     entity_type,
@@ -680,66 +608,12 @@ def test_fetch_content__with_mount__copy__directory(
         entity_type=entity_type,
         asset_or_id=public_asset_directory_id,
         asset_path="dir_cell.swc",
-        output_strategy=OutputStrategy.copy,
+        strategy=FetchContentStrategy.local_only,
     )
     assert res == b"public_directory_file"
 
 
-def test_fetch_content__with_mount__link__directory(
-    client_wout_mount, entity_id, entity_type, public_asset_file_id
-):
-    """Test link_or_download is not a valid strategy from fetch_content()."""
-    with pytest.raises(EntitySDKError, match="link strategy failed"):
-        client_wout_mount.fetch_content(
-            entity_id=entity_id,
-            entity_type=entity_type,
-            asset_or_id=public_asset_file_id,
-            output_strategy=OutputStrategy.link,
-            asset_path="dir_cell.swc",
-        )
-
-
-def test_fetch_content__with_mount__link__file(
-    client_wout_mount, entity_id, entity_type, public_asset_file_id
-):
-    """Test link_or_download is not a valid strategy from fetch_content()."""
-    with pytest.raises(EntitySDKError, match="link strategy failed"):
-        client_wout_mount.fetch_content(
-            entity_id=entity_id,
-            entity_type=entity_type,
-            asset_or_id=public_asset_file_id,
-            output_strategy=OutputStrategy.link,
-        )
-
-
-def test_fetch_content__with_mount__link_or_download__directory(
-    client_wout_mount, entity_id, entity_type, public_asset_file_id
-):
-    """Test link_or_download is not a valid strategy from fetch_content()."""
-    with pytest.raises(EntitySDKError, match="link_or_download strategy failed"):
-        client_wout_mount.fetch_content(
-            entity_id=entity_id,
-            entity_type=entity_type,
-            asset_or_id=public_asset_file_id,
-            output_strategy=OutputStrategy.link_or_download,
-            asset_path="dir_cell.swc",
-        )
-
-
-def test_fetch_content__with_mount__link_or_download__file(
-    client_wout_mount, entity_id, entity_type, public_asset_file_id
-):
-    """Test link_or_download is not a valid strategy from fetch_content()."""
-    with pytest.raises(EntitySDKError, match="link_or_download strategy failed"):
-        client_wout_mount.fetch_content(
-            entity_id=entity_id,
-            entity_type=entity_type,
-            asset_or_id=public_asset_file_id,
-            output_strategy=OutputStrategy.link_or_download,
-        )
-
-
-def test_fetch_content__with_mount__download__directory(
+def test_fetch_content__with_mount__download_only__directory(
     client_with_mount,
     entity_id,
     entity_type,
@@ -753,12 +627,12 @@ def test_fetch_content__with_mount__download__directory(
         entity_type=entity_type,
         asset_or_id=public_asset_directory_id,
         asset_path="dir_cell.swc",
-        output_strategy=OutputStrategy.download,
+        strategy=FetchContentStrategy.download_only,
     )
     assert res == b"public_directory_file"
 
 
-def test_fetch_content__with_mount__copy__directory__no_asset_path(
+def test_fetch_content__with_mount__local_only__directory__no_asset_path(
     client_with_mount,
     entity_id,
     entity_type,
@@ -773,11 +647,11 @@ def test_fetch_content__with_mount__copy__directory__no_asset_path(
             entity_id=entity_id,
             entity_type=entity_type,
             asset_or_id=public_asset_directory_id,
-            output_strategy=OutputStrategy.copy,
+            strategy=FetchContentStrategy.local_only,
         )
 
 
-def test_fetch_file__with_mount__copy__directory(
+def test_fetch_file__with_mount__copy_only__directory(
     client_with_mount,
     entity_id,
     entity_type,
@@ -794,7 +668,7 @@ def test_fetch_file__with_mount__copy__directory(
         entity_type=entity_type,
         asset_id=public_asset_directory_id,
         output_path=output_path,
-        output_strategy=OutputStrategy.copy,
+        strategy=FetchFileStrategy.copy_only,
         asset_path="dir_cell.swc",
     )
     assert not res.is_symlink()
@@ -802,7 +676,7 @@ def test_fetch_file__with_mount__copy__directory(
     assert res.read_bytes() == b"public_directory_file"
 
 
-def test_fetch_file__with_mount__copy__directory__no_asset_path(
+def test_fetch_file__with_mount__copy_only__directory__no_asset_path(
     client_with_mount,
     entity_id,
     entity_type,
@@ -820,11 +694,11 @@ def test_fetch_file__with_mount__copy__directory__no_asset_path(
             entity_type=entity_type,
             asset_id=public_asset_directory_id,
             output_path=output_path,
-            output_strategy=OutputStrategy.copy,
+            strategy=FetchFileStrategy.copy_only,
         )
 
 
-def test_fetch_file__with_mount__copy__file(
+def test_fetch_file__with_mount__copy_only__file(
     client_with_mount,
     entity_id,
     entity_type,
@@ -841,7 +715,7 @@ def test_fetch_file__with_mount__copy__file(
         entity_type=entity_type,
         asset_id=public_asset_file_id,
         output_path=output_path,
-        output_strategy=OutputStrategy.copy,
+        strategy=FetchFileStrategy.copy_only,
     )
     assert not res.is_symlink()
     assert res.resolve().name == "my_cell.swc"
@@ -865,7 +739,7 @@ def test_fetch_file__with_mount__copy_or_download__directory(
         entity_type=entity_type,
         asset_id=public_asset_directory_id,
         output_path=output_path,
-        output_strategy=OutputStrategy.copy_or_download,
+        strategy=FetchFileStrategy.copy_or_download,
         asset_path="dir_cell.swc",
     )
     assert not res.is_symlink()
@@ -890,14 +764,14 @@ def test_fetch_file__with_mount__copy_or_download__file(
         entity_type=entity_type,
         asset_id=public_asset_file_id,
         output_path=output_path,
-        output_strategy=OutputStrategy.copy_or_download,
+        strategy=FetchFileStrategy.copy_or_download,
     )
     assert not res.is_symlink()
     assert res.resolve().name == "my_cell.swc"
     assert res.read_bytes() == b"public"
 
 
-def test_fetch_file__with_mount__download__directory(
+def test_fetch_file__with_mount__download_only__directory(
     client_with_mount,
     entity_id,
     entity_type,
@@ -915,14 +789,14 @@ def test_fetch_file__with_mount__download__directory(
         asset_id=public_asset_directory_id,
         output_path=output_path,
         asset_path="dir_cell.swc",
-        output_strategy=OutputStrategy.download,
+        strategy=FetchFileStrategy.download_only,
     )
     assert not res.is_symlink()
     assert res.resolve().name == "my_cell.swc"
     assert res.read_bytes() == b"public_directory_file"
 
 
-def test_fetch_file__with_mount__download__directory__no_asset_path(
+def test_fetch_file__with_mount__download_only__directory__no_asset_path(
     client_with_mount,
     entity_id,
     entity_type,
@@ -940,11 +814,11 @@ def test_fetch_file__with_mount__download__directory__no_asset_path(
             entity_type=entity_type,
             asset_id=public_asset_directory_id,
             output_path=output_path,
-            output_strategy=OutputStrategy.download,
+            strategy=FetchFileStrategy.download_only,
         )
 
 
-def test_fetch_file__with_mount__download__file(
+def test_fetch_file__with_mount__download_only__file(
     client_with_mount,
     entity_id,
     entity_type,
@@ -961,14 +835,14 @@ def test_fetch_file__with_mount__download__file(
         entity_type=entity_type,
         asset_id=public_asset_file_id,
         output_path=output_path,
-        output_strategy=OutputStrategy.download,
+        strategy=FetchFileStrategy.download_only,
     )
     assert not res.is_symlink()
     assert res.resolve().name == "my_cell.swc"
     assert res.read_bytes() == b"public"
 
 
-def test_fetch_file__with_mount__link__directory(
+def test_fetch_file__with_mount__link_only__directory(
     client_with_mount,
     entity_id,
     entity_type,
@@ -985,7 +859,7 @@ def test_fetch_file__with_mount__link__directory(
         entity_type=entity_type,
         asset_id=public_asset_directory_id,
         output_path=output_path,
-        output_strategy=OutputStrategy.link,
+        strategy=FetchFileStrategy.link_only,
         asset_path="dir_cell.swc",
     )
     assert res.is_symlink()
@@ -993,7 +867,7 @@ def test_fetch_file__with_mount__link__directory(
     assert res.read_bytes() == b"public_directory_file"
 
 
-def test_fetch_file__with_mount__link__file(
+def test_fetch_file__with_mount__link_only__file(
     client_with_mount,
     entity_id,
     entity_type,
@@ -1011,7 +885,7 @@ def test_fetch_file__with_mount__link__file(
         asset_id=public_asset_directory_id,
         output_path=output_path,
         asset_path="dir_cell.swc",
-        output_strategy=OutputStrategy.link,
+        strategy=FetchFileStrategy.link_only,
     )
     assert res.is_symlink()
     assert res.resolve().name == "dir_cell.swc"
@@ -1035,7 +909,7 @@ def test_fetch_file__with_mount__link_or_download__directory(
         entity_type=entity_type,
         asset_id=public_asset_directory_id,
         output_path=output_path,
-        output_strategy=OutputStrategy.link_or_download,
+        strategy=FetchFileStrategy.link_or_download,
         asset_path="dir_cell.swc",
     )
     assert res.is_symlink()
@@ -1060,14 +934,14 @@ def test_fetch_file__with_mount__link_or_download__file(
         entity_type=entity_type,
         asset_id=public_asset_file_id,
         output_path=output_path,
-        output_strategy=OutputStrategy.link_or_download,
+        strategy=FetchFileStrategy.link_or_download,
     )
     assert res.is_symlink()
     assert res.resolve().name == "cell.swc"
     assert res.read_bytes() == b"public"
 
 
-def test_fetch_file__wout_mount__copy__directory(
+def test_fetch_file__wout_mount__copy_only__directory(
     client_wout_mount,
     entity_id,
     entity_type,
@@ -1085,12 +959,12 @@ def test_fetch_file__wout_mount__copy__directory(
             entity_type=entity_type,
             asset_id=public_asset_directory_id,
             output_path=output_path,
-            output_strategy=OutputStrategy.copy,
+            strategy=FetchFileStrategy.copy_only,
             asset_path="dir_cell.swc",
         )
 
 
-def test_fetch_file__wout_mount__copy__file(
+def test_fetch_file__wout_mount__copy_only__file(
     client_wout_mount,
     entity_id,
     entity_type,
@@ -1108,7 +982,7 @@ def test_fetch_file__wout_mount__copy__file(
             entity_type=entity_type,
             asset_id=public_asset_file_id,
             output_path=output_path,
-            output_strategy=OutputStrategy.copy,
+            strategy=FetchFileStrategy.copy_only,
         )
 
 
@@ -1130,7 +1004,7 @@ def test_fetch_file__wout_mount__copy_or_download__directory(
         entity_type=entity_type,
         asset_id=public_asset_directory_id,
         output_path=output_path,
-        output_strategy=OutputStrategy.copy_or_download,
+        strategy=FetchFileStrategy.copy_or_download,
         asset_path="dir_cell.swc",
     )
     assert not res.is_symlink()
@@ -1156,14 +1030,14 @@ def test_fetch_file__wout_mount__copy_or_download__file(
         entity_type=entity_type,
         asset_id=public_asset_file_id,
         output_path=output_path,
-        output_strategy=OutputStrategy.copy_or_download,
+        strategy=FetchFileStrategy.copy_or_download,
     )
     assert not res.is_symlink()
     assert res.resolve().name == "my_cell.swc"
     assert res.read_bytes() == b"public"
 
 
-def test_fetch_file__wout_mount__download_directory(
+def test_fetch_file__wout_mount__download_only__directory(
     client_wout_mount,
     entity_id,
     entity_type,
@@ -1181,14 +1055,14 @@ def test_fetch_file__wout_mount__download_directory(
         asset_id=public_asset_directory_id,
         output_path=output_path,
         asset_path="dir_cell.swc",
-        output_strategy=OutputStrategy.download,
+        strategy=FetchFileStrategy.download_only,
     )
     assert not res.is_symlink()
     assert res.resolve().name == "my_cell.swc"
     assert res.read_bytes() == b"public_directory_file"
 
 
-def test_fetch_file__wout_mount__download__file(
+def test_fetch_file__wout_mount__download_only__file(
     client_wout_mount,
     entity_id,
     entity_type,
@@ -1206,14 +1080,14 @@ def test_fetch_file__wout_mount__download__file(
         entity_type=entity_type,
         asset_id=public_asset_file_id,
         output_path=output_path,
-        output_strategy=OutputStrategy.download,
+        strategy=FetchFileStrategy.download_only,
     )
     assert not res.is_symlink()
     assert res.resolve().name == "my_cell.swc"
     assert res.read_bytes() == b"public"
 
 
-def test_fetch_file__wout_mount__link__directory(
+def test_fetch_file__wout_mount__link_only__directory(
     client_wout_mount,
     entity_id,
     entity_type,
@@ -1231,12 +1105,12 @@ def test_fetch_file__wout_mount__link__directory(
             entity_type=entity_type,
             asset_id=public_asset_directory_id,
             output_path=output_path,
-            output_strategy=OutputStrategy.link,
+            strategy=FetchFileStrategy.link_only,
             asset_path="dir_cell.swc",
         )
 
 
-def test_fetch_file__wout_mount__link__file(
+def test_fetch_file__wout_mount__link_only__file(
     client_wout_mount,
     entity_id,
     entity_type,
@@ -1255,7 +1129,7 @@ def test_fetch_file__wout_mount__link__file(
             asset_id=public_asset_directory_id,
             output_path=output_path,
             asset_path="dir_cell.swc",
-            output_strategy=OutputStrategy.link,
+            strategy=FetchFileStrategy.link_only,
         )
 
 
@@ -1277,7 +1151,7 @@ def test_fetch_file__wout_mount__link_or_download__directory(
         entity_type=entity_type,
         asset_id=public_asset_directory_id,
         output_path=output_path,
-        output_strategy=OutputStrategy.link_or_download,
+        strategy=FetchFileStrategy.link_or_download,
         asset_path="dir_cell.swc",
     )
     assert not res.is_symlink()
@@ -1303,14 +1177,14 @@ def test_fetch_file__wout_mount__link_or_download__file(
         entity_type=entity_type,
         asset_id=public_asset_file_id,
         output_path=output_path,
-        output_strategy=OutputStrategy.link_or_download,
+        strategy=FetchFileStrategy.link_or_download,
     )
     assert not res.is_symlink()
     assert res.resolve().name == "my_cell.swc"
     assert res.read_bytes() == b"public"
 
 
-def test_fetch_file__with_mount__no_files__copy(
+def test_fetch_file__with_mount__no_files__copy_only(
     client_with_mount__no_files,
     entity_id,
     entity_type,
@@ -1327,11 +1201,11 @@ def test_fetch_file__with_mount__no_files__copy(
             entity_type=entity_type,
             asset_id=public_asset_file_id,
             output_path=output_path,
-            output_strategy=OutputStrategy.copy,
+            strategy=FetchFileStrategy.copy_only,
         )
 
 
-def test_fetch_file__with_mount__no_files__link(
+def test_fetch_file__with_mount__no_files__link_only(
     client_with_mount__no_files,
     entity_id,
     entity_type,
@@ -1348,11 +1222,11 @@ def test_fetch_file__with_mount__no_files__link(
             entity_type=entity_type,
             asset_id=public_asset_file_id,
             output_path=output_path,
-            output_strategy=OutputStrategy.link,
+            strategy=FetchFileStrategy.link_only,
         )
 
 
-def test_fetch_directory__with_mount__copy(
+def test_fetch_directory__with_mount__copy_only(
     client_with_mount,
     entity_id,
     entity_type,
@@ -1370,7 +1244,7 @@ def test_fetch_directory__with_mount__copy(
         entity_type=entity_type,
         asset_id=public_asset_directory_id,
         output_path=output_dir,
-        output_strategy=OutputStrategy.copy,
+        strategy=FetchFileStrategy.copy_only,
     )
     data = {r.name: r for r in res}
     assert len(res) == 2
@@ -1398,7 +1272,7 @@ def test_fetch_directory__with_mount__copy_or_download(
         entity_type=entity_type,
         asset_id=public_asset_directory_id,
         output_path=output_dir,
-        output_strategy=OutputStrategy.copy_or_download,
+        strategy=FetchFileStrategy.copy_or_download,
     )
     data = {r.name: r for r in res}
     assert len(res) == 2
@@ -1408,7 +1282,7 @@ def test_fetch_directory__with_mount__copy_or_download(
     assert data["dir_cell.h5"].resolve().name == "dir_cell.h5"
 
 
-def test_fetch_directory__with_mount__link(
+def test_fetch_directory__with_mount__link_only(
     client_with_mount,
     entity_id,
     entity_type,
@@ -1426,7 +1300,7 @@ def test_fetch_directory__with_mount__link(
         entity_type=entity_type,
         asset_id=public_asset_directory_id,
         output_path=output_dir,
-        output_strategy=OutputStrategy.link,
+        strategy=FetchFileStrategy.link_only,
     )
     data = {r.name: r for r in res}
     assert len(res) == 2
@@ -1454,7 +1328,7 @@ def test_fetch_directory__with_mount__link_or_download(
         entity_type=entity_type,
         asset_id=public_asset_directory_id,
         output_path=output_dir,
-        output_strategy=OutputStrategy.link_or_download,
+        strategy=FetchFileStrategy.link_or_download,
     )
     data = {r.name: r for r in res}
     assert len(res) == 2
@@ -1464,7 +1338,7 @@ def test_fetch_directory__with_mount__link_or_download(
     assert data["dir_cell.h5"].resolve().name == "dir_cell.h5"
 
 
-def test_fetch_directory__with_mount__link__concurrent(
+def test_fetch_directory__with_mount__link_only__concurrent(
     client_with_mount,
     entity_id,
     entity_type,
@@ -1483,14 +1357,14 @@ def test_fetch_directory__with_mount__link__concurrent(
         asset_id=public_asset_directory_id,
         output_path=output_dir,
         max_concurrent=2,
-        output_strategy=OutputStrategy.link,
+        strategy=FetchFileStrategy.link_only,
     )
     assert len(res) == 2
     assert res[0].is_symlink()
     assert res[1].is_symlink()
 
 
-def test_fetch_directory__wout_mount__copy(
+def test_fetch_directory__wout_mount__copy_only(
     client_wout_mount,
     entity_id,
     entity_type,
@@ -1508,7 +1382,7 @@ def test_fetch_directory__wout_mount__copy(
             entity_type=entity_type,
             asset_id=public_asset_directory_id,
             output_path=output_dir,
-            output_strategy=OutputStrategy.copy,
+            strategy=FetchFileStrategy.copy_only,
         )
 
 
@@ -1531,7 +1405,7 @@ def test_fetch_directory__wout_mount__copy_or_download(
         entity_type=entity_type,
         asset_id=public_asset_directory_id,
         output_path=output_dir,
-        output_strategy=OutputStrategy.copy_or_download,
+        strategy=FetchFileStrategy.copy_or_download,
     )
     data = {r.name: r for r in res}
     assert len(res) == 2
@@ -1541,7 +1415,7 @@ def test_fetch_directory__wout_mount__copy_or_download(
     assert data["dir_cell.h5"].resolve().name == "dir_cell.h5"
 
 
-def test_fetch_directory__wout_mount__link(
+def test_fetch_directory__wout_mount__link_only(
     client_wout_mount,
     entity_id,
     entity_type,
@@ -1560,7 +1434,7 @@ def test_fetch_directory__wout_mount__link(
             entity_type=entity_type,
             asset_id=public_asset_directory_id,
             output_path=output_dir,
-            output_strategy=OutputStrategy.link,
+            strategy=FetchFileStrategy.link_only,
         )
 
 
@@ -1583,7 +1457,7 @@ def test_fetch_directory__wout_mount__link_or_download(
         entity_type=entity_type,
         asset_id=public_asset_directory_id,
         output_path=output_dir,
-        output_strategy=OutputStrategy.link_or_download,
+        strategy=FetchFileStrategy.link_or_download,
     )
     data = {r.name: r for r in res}
     assert len(res) == 2
@@ -1593,7 +1467,7 @@ def test_fetch_directory__wout_mount__link_or_download(
     assert data["dir_cell.h5"].resolve().name == "dir_cell.h5"
 
 
-def test_fetch_directory__wout_mount__link__concurrent(
+def test_fetch_directory__wout_mount__link_only__concurrent(
     client_wout_mount,
     entity_id,
     entity_type,
@@ -1612,11 +1486,11 @@ def test_fetch_directory__wout_mount__link__concurrent(
             asset_id=public_asset_directory_id,
             output_path=output_dir,
             max_concurrent=2,
-            output_strategy=OutputStrategy.link,
+            strategy=FetchFileStrategy.link_only,
         )
 
 
-def test_fetch_assets__with_mount__copy(
+def test_fetch_assets__with_mount__copy_only(
     client_with_mount,
     entity_id,
     entity_type,
@@ -1630,7 +1504,7 @@ def test_fetch_assets__with_mount__copy(
         entity_or_id=entity,
         selection={"label": "morphology", "content_type": "application/swc"},
         output_path=output_file,
-        output_strategy=OutputStrategy.copy,
+        strategy=FetchFileStrategy.copy_only,
     ).one()
 
     assert not res.path.is_symlink()
@@ -1652,7 +1526,7 @@ def test_fetch_assets__with_mount__copy_or_download(
         entity_or_id=entity,
         selection={"label": "morphology", "content_type": "application/swc"},
         output_path=output_file,
-        output_strategy=OutputStrategy.copy_or_download,
+        strategy=FetchFileStrategy.copy_or_download,
     ).one()
 
     assert not res.path.is_symlink()
@@ -1660,7 +1534,7 @@ def test_fetch_assets__with_mount__copy_or_download(
     assert res.path.read_bytes() == b"public"
 
 
-def test_fetch_assets__with_mount__download(
+def test_fetch_assets__with_mount__download_only(
     client_with_mount,
     entity_id,
     entity_type,
@@ -1675,7 +1549,7 @@ def test_fetch_assets__with_mount__download(
         entity_or_id=entity,
         selection={"label": "morphology", "content_type": "application/swc"},
         output_path=output_file,
-        output_strategy=OutputStrategy.download,
+        strategy=FetchFileStrategy.download_only,
     ).one()
 
     assert not res.path.is_symlink()
@@ -1683,7 +1557,7 @@ def test_fetch_assets__with_mount__download(
     assert res.path.read_bytes() == b"public"
 
 
-def test_fetch_assets__with_mount__link(
+def test_fetch_assets__with_mount__link_only(
     client_with_mount,
     entity_id,
     entity_type,
@@ -1697,7 +1571,7 @@ def test_fetch_assets__with_mount__link(
         entity_or_id=entity,
         selection={"label": "morphology", "content_type": "application/swc"},
         output_path=output_file,
-        output_strategy=OutputStrategy.link,
+        strategy=FetchFileStrategy.link_only,
     ).one()
 
     assert res.path.is_symlink()
@@ -1719,7 +1593,7 @@ def test_fetch_assets__with_mount__link_or_download(
         entity_or_id=entity,
         selection={"label": "morphology", "content_type": "application/swc"},
         output_path=output_file,
-        output_strategy=OutputStrategy.link_or_download,
+        strategy=FetchFileStrategy.link_or_download,
     ).one()
 
     assert res.path.is_symlink()
@@ -1727,7 +1601,7 @@ def test_fetch_assets__with_mount__link_or_download(
     assert res.path.read_bytes() == b"public"
 
 
-def test_fetch_assets__wout_mount__copy(
+def test_fetch_assets__wout_mount__copy_only(
     client_wout_mount,
     entity_id,
     entity_type,
@@ -1742,7 +1616,7 @@ def test_fetch_assets__wout_mount__copy(
             entity_or_id=entity,
             selection={"label": "morphology", "content_type": "application/swc"},
             output_path=output_file,
-            output_strategy=OutputStrategy.copy,
+            strategy=FetchFileStrategy.copy_only,
         ).one()
 
 
@@ -1761,7 +1635,7 @@ def test_fetch_assets__wout_mount__copy_or_download(
         entity_or_id=entity,
         selection={"label": "morphology", "content_type": "application/swc"},
         output_path=output_file,
-        output_strategy=OutputStrategy.copy_or_download,
+        strategy=FetchFileStrategy.copy_or_download,
     ).one()
 
     assert not res.path.is_symlink()
@@ -1769,7 +1643,7 @@ def test_fetch_assets__wout_mount__copy_or_download(
     assert res.path.read_bytes() == b"public"
 
 
-def test_fetch_assets__wout_mount__download(
+def test_fetch_assets__wout_mount__download_only(
     client_wout_mount,
     entity_id,
     entity_type,
@@ -1784,7 +1658,7 @@ def test_fetch_assets__wout_mount__download(
         entity_or_id=entity,
         selection={"label": "morphology", "content_type": "application/swc"},
         output_path=output_file,
-        output_strategy=OutputStrategy.download,
+        strategy=FetchFileStrategy.download_only,
     ).one()
 
     assert not res.path.is_symlink()
@@ -1792,7 +1666,7 @@ def test_fetch_assets__wout_mount__download(
     assert res.path.read_bytes() == b"public"
 
 
-def test_fetch_assets__wout_mount__link(
+def test_fetch_assets__wout_mount__link_only(
     client_wout_mount,
     entity_id,
     entity_type,
@@ -1807,7 +1681,7 @@ def test_fetch_assets__wout_mount__link(
             entity_or_id=entity,
             selection={"label": "morphology", "content_type": "application/swc"},
             output_path=output_file,
-            output_strategy=OutputStrategy.link,
+            strategy=FetchFileStrategy.link_only,
         ).one()
 
 
@@ -1826,7 +1700,7 @@ def test_fetch_assets__wout_mount__link_or_download(
         entity_or_id=entity,
         selection={"label": "morphology", "content_type": "application/swc"},
         output_path=output_file,
-        output_strategy=OutputStrategy.link_or_download,
+        strategy=FetchFileStrategy.link_or_download,
     ).one()
 
     assert not res.path.is_symlink()

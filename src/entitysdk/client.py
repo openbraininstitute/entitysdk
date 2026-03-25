@@ -30,7 +30,8 @@ from entitysdk.types import (
     ContentType,
     DeploymentEnvironment,
     DerivationType,
-    OutputStrategy,
+    FetchContentStrategy,
+    FetchFileStrategy,
     StorageType,
     StrOrPath,
     Token,
@@ -527,7 +528,7 @@ class Client:
         project_context: ProjectContext | None = None,
         ignore_directory_name: bool = False,
         max_concurrent: int = 1,
-        output_strategy: OutputStrategy = OutputStrategy.link_or_download,
+        strategy: FetchFileStrategy = FetchFileStrategy.link_or_download,
     ) -> list[Path]:
         """Fetch a directory asset to a local output directory.
 
@@ -540,7 +541,7 @@ class Client:
             ignore_directory_name: If `True`, do not create an extra nested
                 folder for the directory name.
             max_concurrent: Maximum number of concurrent downloads.
-            output_strategy: Strategy controlling how files are materialized.
+            strategy: Strategy controlling how files are materialized.
 
         Returns:
             List of output file paths that were created.
@@ -595,7 +596,7 @@ class Client:
                     output_path=output_path / path,
                     asset_path=path,
                     project_context=context,
-                    output_strategy=output_strategy,
+                    strategy=strategy,
                 )
                 for path in contents.files
             ]
@@ -610,7 +611,7 @@ class Client:
                         output_path=output_path / path,
                         asset_path=path,
                         project_context=context,
-                        output_strategy=output_strategy,
+                        strategy=strategy,
                     )
                     for path in contents.files
                 ]
@@ -653,7 +654,7 @@ class Client:
             project_context=project_context,
             ignore_directory_name=ignore_directory_name,
             max_concurrent=max_concurrent,
-            output_strategy=OutputStrategy.download,
+            strategy=FetchFileStrategy.download_only,
         )
 
     @validate_call
@@ -665,7 +666,7 @@ class Client:
         asset_or_id: ID | Asset,
         asset_path: Path | None = None,
         project_context: ProjectContext | None = None,
-        output_strategy: OutputStrategy = OutputStrategy.copy_or_download,
+        strategy: FetchContentStrategy = FetchContentStrategy.local_or_download,
     ) -> bytes:
         """Retrieve the binary content of an asset associated with an entity.
 
@@ -675,7 +676,7 @@ class Client:
             asset_or_id: Identifier of the asset to retrieve.
             asset_path: For asset directories, the path within the directory for the file.
             project_context: Optional project context
-            output_strategy: Strategy controlling how the asset file content is materialized
+            strategy: Strategy controlling how the asset file content is materialized
                 (for example copying from a local store or downloading from the
                 remote service).
 
@@ -693,7 +694,7 @@ class Client:
             http_client=self._http_client,
             token=self._token_manager.get_token(),
             local_store=self._local_store,
-            output_strategy=output_strategy,
+            strategy=strategy,
         )
 
     def download_content(
@@ -723,7 +724,7 @@ class Client:
             asset_or_id=asset_id,
             asset_path=Path(asset_path) if asset_path else None,
             project_context=project_context,
-            output_strategy=OutputStrategy.download,
+            strategy=FetchContentStrategy.download_only,
         )
 
     @validate_call
@@ -736,7 +737,7 @@ class Client:
         output_path: Path,
         asset_path: Path | None = None,
         project_context: ProjectContext | None = None,
-        output_strategy: OutputStrategy = OutputStrategy.link_or_download,
+        strategy: FetchFileStrategy = FetchFileStrategy.link_or_download,
     ) -> Path:
         """Fetch a file asset to a local output path.
 
@@ -747,7 +748,7 @@ class Client:
             output_path: Local output path (file or directory) to write to.
             asset_path: For directory assets, path within the directory to the file.
             project_context: Optional project context.
-            output_strategy: Strategy controlling how the asset file is materialized.
+            strategy: Strategy controlling how the asset file is materialized.
 
         Returns:
             The path of the created local file.
@@ -764,7 +765,7 @@ class Client:
             http_client=self._http_client,
             token=self._token_manager.get_token(),
             local_store=self._local_store,
-            output_strategy=output_strategy,
+            strategy=strategy,
         )
 
     def download_file(
@@ -797,7 +798,7 @@ class Client:
             output_path=Path(output_path),
             project_context=project_context,
             asset_path=Path(asset_path) if asset_path else None,
-            output_strategy=OutputStrategy.download,
+            strategy=FetchFileStrategy.download_only,
         )
 
     @staticmethod
@@ -821,7 +822,7 @@ class Client:
         selection: dict[str, Any] | None = None,
         output_path: Path,
         project_context: ProjectContext | None = None,
-        output_strategy: OutputStrategy = OutputStrategy.link_or_download,
+        strategy: FetchFileStrategy = FetchFileStrategy.link_or_download,
     ):
         """Fetch assets belonging to an entity.
 
@@ -831,7 +832,7 @@ class Client:
             selection: Optional selection/filter dict.
             output_path: Local output directory base path.
             project_context: Optional project context.
-            output_strategy: Strategy controlling how each file is materialized.
+            strategy: Strategy controlling how each file is materialized.
 
         Returns:
             An iterator yielding `DownloadedAssetFile` objects.
@@ -847,7 +848,7 @@ class Client:
                     asset_id=asset.id,
                     output_path=output_path,
                     project_context=context,
-                    output_strategy=output_strategy,
+                    strategy=strategy,
                 )
 
             return DownloadedAssetFile(
@@ -907,7 +908,7 @@ class Client:
             selection=selection,
             output_path=output_path,
             project_context=project_context,
-            output_strategy=OutputStrategy.download,
+            strategy=FetchFileStrategy.download_only,
         )
 
     def delete_asset(

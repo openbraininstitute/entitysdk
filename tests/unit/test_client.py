@@ -20,7 +20,7 @@ from entitysdk.types import (
     ContentType,
     DeploymentEnvironment,
     DerivationType,
-    OutputStrategy,
+    FetchFileStrategy,
     StorageType,
 )
 
@@ -798,7 +798,7 @@ def test_client_fetch_assets_raw__non_entity_raises(client, tmp_path):
             selection=None,
             output_path=tmp_path,
             project_context=None,
-            output_strategy=OutputStrategy.link_or_download,
+            strategy=FetchFileStrategy.link_or_download,
         )
 
 

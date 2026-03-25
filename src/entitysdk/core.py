@@ -28,7 +28,7 @@ from entitysdk.route import (
 )
 from entitysdk.schemas.asset import MultipartUploadTransferConfig
 from entitysdk.token_manager import TokenManager
-from entitysdk.types import ID, AssetLabel, DerivationType, OutputStrategy
+from entitysdk.types import ID, AssetLabel, DerivationType, FetchContentStrategy, FetchFileStrategy
 from entitysdk.util import (
     make_db_api_request,
     stream_paginated_request,
@@ -407,7 +407,7 @@ def fetch_asset_file(
     token: str,
     http_client: httpx.Client | None = None,
     local_store: LocalAssetStore | None = None,
-    output_strategy: OutputStrategy,
+    strategy: FetchFileStrategy,
 ) -> Path:
     """Fetch asset file."""
     asset_endpoint = get_assets_endpoint(
@@ -468,32 +468,32 @@ def fetch_asset_file(
             project_context=project_context,
             token=token,
             http_client=http_client,
-            output_strategy=OutputStrategy.download,
+            strategy=FetchFileStrategy.download_only,
         )
         target_path.write_bytes(bytes_content)
         return target_path
 
-    match output_strategy:
-        case OutputStrategy.copy:
+    match strategy:
+        case FetchFileStrategy.copy_only:
             if path := try_copy_path():
                 return path
             raise EntitySDKError("copy strategy failed: Asset path not found in store")
-        case OutputStrategy.copy_or_download:
+        case FetchFileStrategy.copy_or_download:
             if path := try_copy_path():
                 return path
             return download_file()
-        case OutputStrategy.link:
+        case FetchFileStrategy.link_only:
             if path := try_link_path():
                 return path
             raise EntitySDKError("link strategy failed: Asset path not found in store")
-        case OutputStrategy.link_or_download:
+        case FetchFileStrategy.link_or_download:
             if path := try_link_path():
                 return path
             return download_file()
-        case OutputStrategy.download:
+        case FetchFileStrategy.download_only:
             return download_file()
         case _:
-            raise EntitySDKError(f"{output_strategy} strategy failed: Unsupported strategy")
+            raise EntitySDKError(f"{strategy} strategy failed: Unsupported strategy")
 
 
 def fetch_asset_content(
@@ -507,7 +507,7 @@ def fetch_asset_content(
     token: str,
     http_client: httpx.Client | None = None,
     local_store: LocalAssetStore | None = None,
-    output_strategy: OutputStrategy = OutputStrategy.copy_or_download,
+    strategy: FetchContentStrategy,
 ) -> bytes:
     """Fetch asset content.
 
@@ -521,7 +521,7 @@ def fetch_asset_content(
         token: Authorization access token.
         http_client: HTTP client.
         local_store: LocalAssetStore for using a local store.
-        output_strategy: Output strategy to fetch the asset content.
+        strategy: Output strategy to fetch the asset content.
 
     Returns:
         Asset content in bytes.
@@ -568,23 +568,19 @@ def fetch_asset_content(
             http_client=http_client,
         ).content
 
-    match output_strategy:
-        case OutputStrategy.copy:
+    match strategy:
+        case FetchContentStrategy.local_only:
             if content := try_read_from_store():
                 return content
             raise EntitySDKError("copy strategy failed: No asset path found in store.")
-        case OutputStrategy.copy_or_download:
+        case FetchContentStrategy.local_or_download:
             if content := try_read_from_store():
                 return content
             return download_content()
-        case OutputStrategy.download:
+        case FetchContentStrategy.download_only:
             return download_content()
-        case OutputStrategy.link | OutputStrategy.link_or_download:
-            raise EntitySDKError(
-                f"{output_strategy} strategy failed: fetch_content() does not support linking."
-            )
         case _:
-            raise EntitySDKError(f"{output_strategy} failed: Unsupported strategy")
+            raise EntitySDKError(f"{strategy} failed: Unsupported strategy")
 
 
 def delete_asset(
