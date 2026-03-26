@@ -29,11 +29,12 @@ from entitysdk.route import (
 from entitysdk.schemas.asset import MultipartUploadTransferConfig
 from entitysdk.token_manager import TokenManager
 from entitysdk.types import ID, AssetLabel, DerivationType, FetchContentStrategy, FetchFileStrategy
-from entitysdk.util import (
+from entitysdk.utils.asset import resolve_asset_path
+from entitysdk.utils.filesystem import (
+    create_dir,
+    get_filesize,
     validate_filename_extension_consistency,
 )
-from entitysdk.utils.asset import resolve_asset_path
-from entitysdk.utils.filesystem import create_dir, get_filesize
 from entitysdk.utils.http import make_db_api_request, stream_paginated_request
 from entitysdk.utils.store import LocalAssetStore
 

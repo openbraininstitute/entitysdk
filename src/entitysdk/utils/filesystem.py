@@ -2,6 +2,7 @@
 
 from pathlib import Path
 
+from entitysdk.exception import EntitySDKError
 from entitysdk.types import StrOrPath
 
 
@@ -23,3 +24,10 @@ def get_filesize(path: StrOrPath) -> int:
         raise IsADirectoryError(f"Path {path} is not a file.")
 
     return path.stat().st_size
+
+
+def validate_filename_extension_consistency(path: Path, expected_extension: str) -> Path:
+    """Validate file path extension against expected extension."""
+    if path.suffix.lower() == expected_extension.lower():
+        return path
+    raise EntitySDKError(f"File path {path} does not have expected extension {expected_extension}.")

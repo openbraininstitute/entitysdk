@@ -36,11 +36,11 @@ from entitysdk.types import (
     StrOrPath,
     Token,
 )
-from entitysdk.util import (
-    build_api_url,
-)
 from entitysdk.utils.asset import filter_assets
 from entitysdk.utils.store import LocalAssetStore
+from entitysdk.utils.url import (
+    build_api_url,
+)
 
 TEntity = TypeVar("TEntity", bound=Entity)
 TIdentifiable = TypeVar("TIdentifiable", bound=Identifiable)

@@ -1,5 +1,6 @@
 import pytest
 
+from entitysdk.utils import filesystem as test_module
 from entitysdk.utils.filesystem import create_dir, get_filesize
 
 
@@ -63,3 +64,8 @@ def test_get_filesize_with_string_path(tmp_path):
 
     size = get_filesize(str(file_path))
     assert size == len(content)
+
+
+def test_validate_filename_extension_consistency(tmp_path):
+    assert test_module.validate_filename_extension_consistency(tmp_path / "foo.txt", ".txt")
+    assert test_module.validate_filename_extension_consistency(tmp_path / "foo.txt", ".TXT")
