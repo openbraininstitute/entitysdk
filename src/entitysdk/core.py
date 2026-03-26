@@ -428,7 +428,7 @@ def fetch_asset_file(
     else:
         asset = asset_or_id
 
-    source_path: Path = resolve_asset_path(asset, directory_file=asset_path)
+    source_path = resolve_asset_path(asset, directory_file=asset_path)
     target_path = Path(output_path)
 
     if not asset.is_directory:
