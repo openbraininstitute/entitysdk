@@ -549,7 +549,7 @@ class Client:
         Raises:
             EntitySDKError: If `output_path` exists and is a file.
         """
-        if output_path.exists() and output_path.is_file():
+        if output_path.is_file():
             raise EntitySDKError(f"{output_path} exists and is a file")
 
         output_path.mkdir(parents=True, exist_ok=True)
@@ -869,9 +869,6 @@ class Client:
 
         if not issubclass(type(entity), Entity):
             raise EntitySDKError(f"Type {type(entity)} has no assets.")
-
-        # make mypy happy as it doesn't get the correct type :(
-        entity = cast(Entity, entity)
 
         if not entity.assets:
             raise EntitySDKError(f"Entity {entity.id} ({entity.name}) has no assets.")
