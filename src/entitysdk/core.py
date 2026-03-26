@@ -468,7 +468,7 @@ def fetch_asset_file(
             project_context=project_context,
             token=token,
             http_client=http_client,
-            strategy=FetchFileStrategy.download_only,
+            strategy=FetchContentStrategy.download_only,
         )
         target_path.write_bytes(bytes_content)
         return target_path
