@@ -2,6 +2,7 @@ import httpx
 import pytest
 
 from entitysdk import util as test_module
+from entitysdk.common import ProjectContext
 from entitysdk.exception import EntitySDKError
 
 
@@ -46,6 +47,34 @@ def test_make_db_api_request__no_context(
             parameters={"foo": "bar"},
             token=auth_token,
             project_context=None,
+            http_client=http_client,
+        )
+        assert res.status_code == 200
+
+
+def test_make_db_api_request__context_without_virtual_lab_id(httpx_mock, api_url, auth_token):
+    project_context = ProjectContext(project_id="f373e771-3a2f-4f45-ab59-0955efd7b1f4")
+    headers = {
+        "project-id": str(project_context.project_id),
+        "Authorization": f"Bearer {auth_token}",
+    }
+
+    url = f"{api_url}/api/v1/entity/person"
+    httpx_mock.add_response(
+        method="POST",
+        url=f"{url}?foo=bar",
+        match_headers=headers,
+        match_json={"name": "John Doe"},
+    )
+
+    with httpx.Client() as http_client:
+        res = test_module.make_db_api_request(
+            url=url,
+            method="POST",
+            json={"name": "John Doe"},
+            parameters={"foo": "bar"},
+            token=auth_token,
+            project_context=project_context,
             http_client=http_client,
         )
         assert res.status_code == 200
@@ -435,14 +464,3 @@ def test_stream_paginated_request_with_unexpected_page_size(
 def test_validate_filename_extension_consistency(tmp_path):
     assert test_module.validate_filename_extension_consistency(tmp_path / "foo.txt", ".txt")
     assert test_module.validate_filename_extension_consistency(tmp_path / "foo.txt", ".TXT")
-
-
-def test_create_intermediate_directories(tmp_path):
-    path = tmp_path / "foo" / "bar" / "foo.txt"
-
-    assert not path.parent.is_dir()
-
-    test_module.create_intermediate_directories(path)
-
-    assert path.parent.is_dir()
-    assert path.parent.parent.is_dir()

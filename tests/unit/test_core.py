@@ -5,6 +5,9 @@ import pytest
 
 from entitysdk import core as test_module
 from entitysdk import models
+from entitysdk.exception import EntitySDKError
+from entitysdk.models import Asset
+from entitysdk.types import FetchContentStrategy, StorageType
 
 
 @pytest.fixture
@@ -76,3 +79,89 @@ def test_upload_asset_file(asset_file, token_manager):
             transfer_config=transfer_config,
         )
         patched_file.assert_called_once()
+
+
+def test_fetch_asset_content_copy_or_download_reads_from_store_when_asset_is_provided():
+    entity_id = uuid4()
+    asset_id = uuid4()
+    asset = Asset(
+        id=asset_id,
+        path="foo.txt",
+        full_path="/foo/foo.txt",
+        storage_type=StorageType.aws_s3_internal,
+        is_directory=False,
+        content_type="text/plain",
+        label="morphology",
+        size=1,
+        status="created",
+    )
+
+    store = Mock()
+    store.path_exists.return_value = True
+    store.read_bytes.return_value = b"from-store"
+
+    content = test_module.fetch_asset_content(
+        api_url="http://mock-host:8000",
+        entity_id=entity_id,
+        entity_type=models.Entity,
+        asset_or_id=asset,
+        token="my-token",
+        local_store=store,
+        strategy=FetchContentStrategy.local_or_download,
+    )
+
+    assert content == b"from-store"
+    store.read_bytes.assert_called_once()
+
+
+def test_fetch_asset_file_unsupported_strategy_raises(tmp_path):
+    entity_id = uuid4()
+    asset_id = uuid4()
+    asset = Asset(
+        id=asset_id,
+        path="foo.txt",
+        full_path="/foo/foo.txt",
+        storage_type=StorageType.aws_s3_internal,
+        is_directory=False,
+        content_type="text/plain",
+        label="morphology",
+        size=1,
+        status="created",
+    )
+
+    with pytest.raises(EntitySDKError, match="Unsupported strategy"):
+        test_module.fetch_asset_file(
+            api_url="http://mock-host:8000",
+            entity_id=entity_id,
+            entity_type=models.Entity,
+            asset_or_id=asset,
+            output_path=tmp_path / "out.txt",
+            token="my-token",
+            strategy="unsupported-strategy",
+        )
+
+
+def test_fetch_asset_content_unsupported_strategy_raises():
+    entity_id = uuid4()
+    asset_id = uuid4()
+    asset = Asset(
+        id=asset_id,
+        path="foo.txt",
+        full_path="/foo/foo.txt",
+        storage_type=StorageType.aws_s3_internal,
+        is_directory=False,
+        content_type="text/plain",
+        label="morphology",
+        size=1,
+        status="created",
+    )
+
+    with pytest.raises(EntitySDKError, match="Unsupported strategy"):
+        test_module.fetch_asset_content(
+            api_url="http://mock-host:8000",
+            entity_id=entity_id,
+            entity_type=models.Entity,
+            asset_or_id=asset,
+            token="my-token",
+            strategy="unsupported-strategy",
+        )

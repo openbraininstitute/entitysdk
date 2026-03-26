@@ -2,7 +2,6 @@
 
 import io
 import logging
-import os
 from collections.abc import Iterator
 from pathlib import Path
 from typing import TypeVar
@@ -28,16 +27,16 @@ from entitysdk.route import (
     get_entity_derivations_endpoint,
 )
 from entitysdk.schemas.asset import MultipartUploadTransferConfig
-from entitysdk.store import LocalAssetStore
 from entitysdk.token_manager import TokenManager
-from entitysdk.types import ID, AssetLabel, DerivationType
+from entitysdk.types import ID, AssetLabel, DerivationType, FetchContentStrategy, FetchFileStrategy
 from entitysdk.util import (
-    create_intermediate_directories,
     make_db_api_request,
     stream_paginated_request,
     validate_filename_extension_consistency,
 )
-from entitysdk.utils.filesystem import get_filesize
+from entitysdk.utils.asset import resolve_asset_path
+from entitysdk.utils.filesystem import create_dir, get_filesize
+from entitysdk.utils.store import LocalAssetStore
 
 L = logging.getLogger(__name__)
 
@@ -396,38 +395,21 @@ def list_directory(
     return serdes.deserialize_model(response.json(), DetailedFileList)
 
 
-def download_asset_file(
+def fetch_asset_file(
     *,
     api_url: str,
     entity_id: ID,
     entity_type: type[Identifiable],
     asset_or_id: ID | Asset,
     output_path: Path,
-    asset_path: os.PathLike | None = None,
+    asset_path: Path | None = None,
     project_context: ProjectContext | None = None,
     token: str,
     http_client: httpx.Client | None = None,
     local_store: LocalAssetStore | None = None,
-    link_from_store: bool = False,
+    strategy: FetchFileStrategy,
 ) -> Path:
-    """Download asset file to a file path.
-
-    Args:
-        api_url: The API URL to entitycore service.
-        entity_id: Resource id
-        entity_type: Resource type
-        asset_or_id: Asset id or asset instance
-        output_path: Path to save the file to.
-        asset_path: for asset directories, the path within the directory to the file
-        project_context: Project context.
-        token: Authorization access token.
-        http_client: HTTP client.
-        local_store: LocalAssetStore for using a local store.
-        link_from_store: Whether to link from store.
-
-    Returns:
-        Output file path.
-    """
+    """Fetch asset file."""
     asset_endpoint = get_assets_endpoint(
         api_url=api_url,
         entity_type=entity_type,
@@ -446,71 +428,106 @@ def download_asset_file(
     else:
         asset = asset_or_id
 
+    source_path = resolve_asset_path(asset, directory_file=asset_path)
     target_path = Path(output_path)
-    source_path = Path(str(asset.storage_type)) / asset.full_path
-    if asset.is_directory:
-        if not asset_path:
-            raise EntitySDKError("Directory from directories require an `asset_path`")
-        source_path /= asset_path
-    else:
-        if asset_path:
-            raise EntitySDKError("Cannot pass `asset_path` to non-directories")
 
+    if not asset.is_directory:
         target_path = (
             target_path / asset.path
             if target_path.is_dir()
             else validate_filename_extension_consistency(target_path, Path(asset.path).suffix)
         )
 
-    create_intermediate_directories(target_path)
+    create_dir(target_path.parent)
 
-    if link_from_store and local_store and local_store.path_exists(source_path):
-        L.info("Path %s found on local store and is symlinked.", source_path)
-        local_store.link_path(source_path, target_path)
+    def try_copy_path() -> Path | None:
+        if local_store is None:
+            return None
+
+        if local_store.path_exists(source_path):
+            return local_store.copy_path(path=source_path, target_path=target_path)
+
+        return None
+
+    def try_link_path() -> Path | None:
+        if local_store is None:
+            return None
+
+        if local_store.path_exists(source_path):
+            return local_store.link_path(path=source_path, target_path=target_path)
+
+        return None
+
+    def download_file():
+        bytes_content = fetch_asset_content(
+            api_url=api_url,
+            asset_or_id=asset,
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_path=asset_path,
+            project_context=project_context,
+            token=token,
+            http_client=http_client,
+            strategy=FetchFileStrategy.download_only,
+        )
+        target_path.write_bytes(bytes_content)
         return target_path
 
-    bytes_content = download_asset_content(
-        api_url=api_url,
-        asset_id=asset.id,
-        entity_id=entity_id,
-        entity_type=entity_type,
-        asset_path=asset_path,
-        project_context=project_context,
-        token=token,
-        http_client=http_client,
-    )
-    target_path.write_bytes(bytes_content)
-    return target_path
+    match strategy:
+        case FetchFileStrategy.copy_only:
+            if path := try_copy_path():
+                return path
+            raise EntitySDKError("copy strategy failed: Asset path not found in store")
+        case FetchFileStrategy.copy_or_download:
+            if path := try_copy_path():
+                return path
+            return download_file()
+        case FetchFileStrategy.link_only:
+            if path := try_link_path():
+                return path
+            raise EntitySDKError("link strategy failed: Asset path not found in store")
+        case FetchFileStrategy.link_or_download:
+            if path := try_link_path():
+                return path
+            return download_file()
+        case FetchFileStrategy.download_only:
+            return download_file()
+        case _:
+            raise EntitySDKError(f"{strategy} strategy failed: Unsupported strategy")
 
 
-def download_asset_content(
+def fetch_asset_content(
     *,
     api_url: str,
     entity_id: ID,
     entity_type: type[Identifiable],
-    asset_id: ID,
-    asset_path: os.PathLike | None = None,
+    asset_or_id: ID | Asset,
+    asset_path: Path | None = None,
     project_context: ProjectContext | None = None,
     token: str,
     http_client: httpx.Client | None = None,
     local_store: LocalAssetStore | None = None,
+    strategy: FetchContentStrategy,
 ) -> bytes:
-    """Download asset content.
+    """Fetch asset content.
 
     Args:
         api_url: The API URL to entitycore service.
         entity_id: Resource id
         entity_type: Resource type
-        asset_id: Asset id
+        asset_or_id: Asset id
         asset_path: for asset directories, the path within the directory to the file
         project_context: Project context.
         token: Authorization access token.
         http_client: HTTP client.
         local_store: LocalAssetStore for using a local store.
+        strategy: Output strategy to fetch the asset content.
 
     Returns:
         Asset content in bytes.
     """
+    asset_id = asset_or_id.id if isinstance(asset_or_id, Asset) else asset_or_id
+
     asset_endpoint = get_assets_endpoint(
         api_url=api_url,
         entity_type=entity_type,
@@ -518,32 +535,52 @@ def download_asset_content(
         asset_id=asset_id,
     )
 
-    if local_store:
-        asset = get_entity(
-            asset_endpoint,
-            entity_type=Asset,
-            project_context=project_context,
-            http_client=http_client,
-            token=token,
-        )
-        source_path: Path = Path(str(asset.storage_type)) / asset.full_path
-        if asset.is_directory:
-            assert asset_path
-            source_path /= asset_path
+    def try_read_from_store() -> bytes | None:
+
+        if local_store is None:
+            return None
+
+        if isinstance(asset_or_id, ID):
+            asset = get_entity(
+                asset_endpoint,
+                entity_type=Asset,
+                project_context=project_context,
+                http_client=http_client,
+                token=token,
+            )
+        else:
+            asset = asset_or_id
+
+        source_path: Path = resolve_asset_path(asset, directory_file=asset_path)
+
         if local_store.path_exists(source_path):
             return local_store.read_bytes(source_path)
 
-    download_endpoint = f"{asset_endpoint}/download"
+        return None
 
-    response = make_db_api_request(
-        url=download_endpoint,
-        method="GET",
-        parameters={"asset_path": str(asset_path)} if asset_path else {},
-        project_context=project_context,
-        token=token,
-        http_client=http_client,
-    )
-    return response.content
+    def download_content():
+        return make_db_api_request(
+            url=f"{asset_endpoint}/download",
+            method="GET",
+            parameters={"asset_path": str(asset_path)} if asset_path else {},
+            project_context=project_context,
+            token=token,
+            http_client=http_client,
+        ).content
+
+    match strategy:
+        case FetchContentStrategy.local_only:
+            if content := try_read_from_store():
+                return content
+            raise EntitySDKError("copy strategy failed: No asset path found in store.")
+        case FetchContentStrategy.local_or_download:
+            if content := try_read_from_store():
+                return content
+            return download_content()
+        case FetchContentStrategy.download_only:
+            return download_content()
+        case _:
+            raise EntitySDKError(f"{strategy} failed: Unsupported strategy")
 
 
 def delete_asset(

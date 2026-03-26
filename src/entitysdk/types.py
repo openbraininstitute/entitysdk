@@ -61,3 +61,21 @@ class DeploymentEnvironment(StrEnum):
 
     staging = "staging"
     production = "production"
+
+
+class FetchFileStrategy(StrEnum):
+    """File fetching strategy."""
+
+    link_only = "link_only"
+    link_or_download = "link_or_download"
+    copy_only = "copy_only"
+    copy_or_download = "copy_or_download"
+    download_only = "download_only"
+
+
+class FetchContentStrategy(StrEnum):
+    """Content fetching strategy."""
+
+    local_only = "local_only"
+    local_or_download = "local_or_download"
+    download_only = "download_only"

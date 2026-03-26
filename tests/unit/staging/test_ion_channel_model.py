@@ -157,6 +157,38 @@ def test_create_hoc_file(client, tmp_path, httpx_mock, api_url, request_headers)
         assert "insert CaDynamics_DC0" in hoc_content
 
 
+def test_create_hoc_file_logs_warning_when_conductance_name_missing(
+    client, tmp_path, httpx_mock, api_url, request_headers, caplog
+):
+    ion_channel_model_data = {
+        "CaDynamics_DC0": {
+            "id": uuid.uuid4(),
+            "conductance": 0.123,
+        },
+    }
+    create_http_ic_mock(
+        ion_channel_model_data["CaDynamics_DC0"]["id"],
+        "CaDynamics_DC0",
+        httpx_mock,
+        api_url,
+        request_headers,
+        with_conductance=False,
+    )
+
+    (tmp_path / "hocs").mkdir(parents=True, exist_ok=True)
+    (tmp_path / "mechanisms").mkdir(parents=True, exist_ok=True)
+
+    hoc_dst = icm.create_hoc_file(
+        client=client,
+        ion_channel_model_data=ion_channel_model_data,
+        subdir_mech=tmp_path / "mechanisms",
+        subdir_hoc=tmp_path / "hocs",
+    )
+
+    assert hoc_dst == tmp_path / "hocs" / "cell.hoc"
+    assert "Could not find conductance parameter name for ion channel model" in caplog.text
+
+
 def test_stage_sonata_from_config(client, tmp_path, httpx_mock, api_url, request_headers):
     ion_channel_model_data = {
         "Ca_LVAst": {

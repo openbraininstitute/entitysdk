@@ -8,6 +8,17 @@ def test_create_dir(tmp_path):
     assert create_dir(tmp_path / "test_dir").is_dir() is True
 
 
+def test_create_intermediate_directories(tmp_path):
+    path = tmp_path / "foo" / "bar"
+
+    assert not path.parent.is_dir()
+
+    create_dir(path)
+
+    assert path.parent.is_dir()
+    assert path.parent.parent.is_dir()
+
+
 def test_get_filesize_existing_file(tmp_path):
     file = tmp_path / "test.txt"
     content = b"hello world"

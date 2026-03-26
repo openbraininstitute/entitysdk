@@ -156,8 +156,3 @@ def validate_filename_extension_consistency(path: Path, expected_extension: str)
     if path.suffix.lower() == expected_extension.lower():
         return path
     raise EntitySDKError(f"File path {path} does not have expected extension {expected_extension}.")
-
-
-def create_intermediate_directories(path: Path) -> None:
-    """Create intermediate directories in a path."""
-    path.parent.mkdir(parents=True, exist_ok=True)

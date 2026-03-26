@@ -1,14 +1,14 @@
 from pathlib import Path
 
 import pytest
+from pydantic import ValidationError
 
-from entitysdk import store as test_module
-from entitysdk.exception import EntitySDKError
+from entitysdk.utils import store as test_module
 
 
 def test_prefix_raises():
-    with pytest.raises(EntitySDKError, match="does not exist"):
-        test_module.LocalAssetStore("/foo")
+    with pytest.raises(ValidationError, match="Path does not point to a directory"):
+        test_module.LocalAssetStore(prefix="/foo")
 
 
 @pytest.fixture(scope="module")

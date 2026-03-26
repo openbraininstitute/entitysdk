@@ -6,6 +6,7 @@ from unittest.mock import patch
 
 import httpx
 import pytest
+from pydantic import ValidationError
 
 from entitysdk.client import Client
 from entitysdk.config import settings
@@ -19,6 +20,7 @@ from entitysdk.types import (
     ContentType,
     DeploymentEnvironment,
     DerivationType,
+    FetchFileStrategy,
     StorageType,
 )
 
@@ -381,7 +383,7 @@ def test_client_download_file__asset_path(
         json=_mock_asset_response(asset_id=asset_id) | {"is_directory": True},
     )
 
-    with pytest.raises(EntitySDKError, match="require an `asset_path`"):
+    with pytest.raises(EntitySDKError, match="requires an `asset_path`"):
         client.download_file(
             entity_id=entity_id,
             entity_type=Entity,
@@ -773,23 +775,31 @@ def test_client_download_assets__non_entity(
 ):
     entity_id = uuid.uuid4()
 
-    httpx_mock.add_response(
-        method="GET",
-        url=f"{api_url}/mtype/{entity_id}",
-        match_headers=request_headers,
-        json=(
-            _mock_entity_response(entity_id, named=False)
-            | {"pref_label": "foo", "definition": "bar"}
-        ),
-    )
-
-    with pytest.raises(EntitySDKError, match="has no assets"):
+    with pytest.raises(ValidationError):
         client.download_assets(
             (entity_id, MTypeClass),
             selection={"content_type": "application/swc"},
             output_path=tmp_path,
             project_context=project_context,
         ).one()
+
+
+def test_client_fetch_assets_raw__non_entity_raises(client, tmp_path):
+    class NotEntity(Identifiable):
+        name: str
+
+    obj = NotEntity(id=uuid.uuid4(), name="not-entity")
+
+    with pytest.raises(EntitySDKError, match="has no assets"):
+        # Use the undecorated function to exercise the internal runtime check.
+        Client.fetch_assets.__wrapped__(
+            client,
+            entity_or_id=obj,
+            selection=None,
+            output_path=tmp_path,
+            project_context=None,
+            strategy=FetchFileStrategy.link_or_download,
+        )
 
 
 def test_client_download_assets__directory_not_supported(
