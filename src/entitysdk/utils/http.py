@@ -2,6 +2,7 @@
 
 import sys
 from collections.abc import Iterator
+from http import HTTPMethod
 from json import dumps
 
 import httpx
@@ -139,3 +140,45 @@ def stream_paginated_request(
             if number_of_items >= limit:
                 return
         page += 1
+
+
+def stream_response(
+    *,
+    url: str,
+    method: HTTPMethod,
+    headers: dict[str, str] | None = None,
+    parameters: dict | None = None,
+    http_client: httpx.Client,
+) -> Iterator[bytes]:
+    """Stream an HTTP response body.
+
+    Args:
+        url: The URL to request.
+        method: HTTP method.
+        headers: Optional request headers.
+        parameters: Optional query parameters.
+        http_client: HTTP client to use.
+
+    Returns:
+        An iterator over response bytes chunks.
+    """
+    try:
+        with http_client.stream(
+            method,
+            url=url,
+            headers=headers,
+            params=parameters,
+            follow_redirects=True,
+            timeout=httpx.Timeout(
+                connect=settings.connect_timeout,
+                read=settings.read_timeout,
+                write=settings.write_timeout,
+                pool=settings.pool_timeout,
+            ),
+        ) as response:
+            response.raise_for_status()
+            yield from response.iter_bytes(chunk_size=settings.download_stream_data_buffer_size)
+    except httpx.RequestError as e:
+        raise EntitySDKError(f"Request error: {e}") from e
+    except httpx.HTTPStatusError as e:
+        raise EntitySDKError(f"HTTP error {e.response.status_code} for {method} {url}") from e
