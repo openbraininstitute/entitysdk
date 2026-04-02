@@ -3,7 +3,6 @@
 import io
 import logging
 from collections.abc import Iterator
-from http import HTTPMethod
 from pathlib import Path
 from typing import TypeVar
 
@@ -527,7 +526,7 @@ def download_asset_file(
     with target_path.open("wb") as f:
         for chunk in stream_response(
             url=f"{asset_endpoint}/download",
-            method=HTTPMethod.GET,
+            method="GET",
             headers=headers,
             parameters=parameters,
             http_client=http_client,

@@ -2,7 +2,6 @@
 
 import sys
 from collections.abc import Iterator
-from http import HTTPMethod
 from json import dumps
 
 import httpx
@@ -145,7 +144,7 @@ def stream_paginated_request(
 def stream_response(
     *,
     url: str,
-    method: HTTPMethod,
+    method: str,
     headers: dict[str, str] | None = None,
     parameters: dict | None = None,
     http_client: httpx.Client,
