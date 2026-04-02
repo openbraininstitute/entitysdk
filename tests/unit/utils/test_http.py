@@ -1,9 +1,9 @@
 import httpx
 import pytest
 
-from entitysdk import util as test_module
 from entitysdk.common import ProjectContext
 from entitysdk.exception import EntitySDKError
+from entitysdk.utils import http as test_module
 
 
 def test_make_db_api_request(httpx_mock, api_url, project_context, auth_token, request_headers):
@@ -459,8 +459,3 @@ def test_stream_paginated_request_with_unexpected_page_size(
         match="Unexpected response: payload.pagination.page_size=2 but it should be 123",
     ):
         next(it)
-
-
-def test_validate_filename_extension_consistency(tmp_path):
-    assert test_module.validate_filename_extension_consistency(tmp_path / "foo.txt", ".txt")
-    assert test_module.validate_filename_extension_consistency(tmp_path / "foo.txt", ".TXT")

@@ -17,9 +17,9 @@ from entitysdk.route import (
 from entitysdk.schemas.asset import MultipartUploadTransferConfig, PartUpload
 from entitysdk.token_manager import TokenManager
 from entitysdk.types import ID
-from entitysdk.util import make_db_api_request
 from entitysdk.utils.execution import execute_with_retry
 from entitysdk.utils.filesystem import get_filesize
+from entitysdk.utils.http import make_db_api_request
 from entitysdk.utils.io import calculate_sha256_digest, iter_bytes_chunk
 
 L = logging.getLogger(__name__)

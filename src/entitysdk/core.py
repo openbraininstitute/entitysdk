@@ -29,13 +29,13 @@ from entitysdk.route import (
 from entitysdk.schemas.asset import MultipartUploadTransferConfig
 from entitysdk.token_manager import TokenManager
 from entitysdk.types import ID, AssetLabel, DerivationType, FetchContentStrategy, FetchFileStrategy
-from entitysdk.util import (
-    make_db_api_request,
-    stream_paginated_request,
+from entitysdk.utils.asset import resolve_asset_path
+from entitysdk.utils.filesystem import (
+    create_dir,
+    get_filesize,
     validate_filename_extension_consistency,
 )
-from entitysdk.utils.asset import resolve_asset_path
-from entitysdk.utils.filesystem import create_dir, get_filesize
+from entitysdk.utils.http import make_db_api_request, stream_paginated_request
 from entitysdk.utils.store import LocalAssetStore
 
 L = logging.getLogger(__name__)
@@ -468,7 +468,7 @@ def fetch_asset_file(
             project_context=project_context,
             token=token,
             http_client=http_client,
-            strategy=FetchFileStrategy.download_only,
+            strategy=FetchContentStrategy.download_only,
         )
         target_path.write_bytes(bytes_content)
         return target_path
