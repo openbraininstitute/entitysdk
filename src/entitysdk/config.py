@@ -62,7 +62,7 @@ class Settings(BaseSettings):
         ),
     ] = "ignore"
     download_stream_data_buffer_size: Annotated[
-        int, Field(description="The chunk size when streaming a file to a file.")
+        int, Field(description="Buffer size in bytes for streaming downloads.")
     ] = 256 * 1024
 
 
