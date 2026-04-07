@@ -62,12 +62,14 @@ def _mock_emodel_asset_response(asset_id):
     }
 
 
+@pytest.mark.parametrize("max_concurrent", [1, 4])
 def test_download_memodel(
     tmp_path,
     client,
     httpx_mock,
     api_url,
     request_headers,
+    max_concurrent,
 ):
     """Test downloading all memodel-related files from an MEModel entity."""
     memodel_id = uuid.uuid4()
@@ -204,6 +206,7 @@ def test_download_memodel(
         client=client,
         memodel=memodel,
         output_dir=tmp_path,
+        max_concurrent=max_concurrent,
     )
     assert downloaded_memodel.hoc_path.is_file()
     assert downloaded_memodel.morphology_path.is_file()
@@ -236,7 +239,8 @@ def test_download_memodel_hoc_missing(tmp_path):
     assert "HOC does not exist" in str(excinfo.value)
 
 
-def test_download_memodel_morphology_asc_fallback_to_swc(tmp_path):
+@pytest.mark.parametrize("max_concurrent", [1, 4])
+def test_download_memodel_morphology_asc_fallback_to_swc(tmp_path, max_concurrent):
     class DummyMEModel:
         emodel = type("EModel", (), {"id": "dummy_id"})()
         morphology = "dummy_morphology"
@@ -259,5 +263,7 @@ def test_download_memodel_morphology_asc_fallback_to_swc(tmp_path):
 
     memodel_mod.download_hoc = dummy_download_hoc
     memodel_mod.download_morphology = dummy_download_morphology
-    result = download_memodel(DummyClient(), DummyMEModel(), tmp_path)
+    result = download_memodel(
+        DummyClient(), DummyMEModel(), tmp_path, max_concurrent=max_concurrent
+    )
     assert result.morphology_path.name == "dummy.swc"
