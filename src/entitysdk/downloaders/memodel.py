@@ -52,7 +52,7 @@ def download_memodel(
     if max_concurrent == 1:
         hoc_path = download_hoc(client, emodel, hoc_dir)
         if not hoc_path.exists():
-            raise StagingError(f"HOC does not exist: {hoc_path}")
+            raise StagingError(f"HOC file does not exist: {hoc_path}")
         morphology_path = _download_morph()
         mechanism_paths = [
             download_ion_channel_mechanism(client, ic, mechanisms_dir) for ic in ion_channels
@@ -69,7 +69,7 @@ def download_memodel(
             morphology_path = morphology_future.result()
             mechanism_paths = [f.result() for f in mechanism_futures]
         if not hoc_path.exists():
-            raise StagingError(f"HOC does not exist: {hoc_path}")
+            raise StagingError(f"HOC file does not exist: {hoc_path}")
 
     return DownloadedMEModel(
         hoc_path=hoc_path,
