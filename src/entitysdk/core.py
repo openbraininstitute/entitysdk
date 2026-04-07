@@ -35,7 +35,7 @@ from entitysdk.utils.filesystem import (
     get_filesize,
     validate_filename_extension_consistency,
 )
-from entitysdk.utils.http import make_db_api_request, stream_paginated_request
+from entitysdk.utils.http import make_db_api_request, stream_paginated_request, stream_response
 from entitysdk.utils.store import LocalAssetStore
 
 L = logging.getLogger(__name__)
@@ -440,6 +440,16 @@ def fetch_asset_file(
 
     create_dir(target_path.parent)
 
+    def download_file():
+        return download_asset_file(
+            asset_endpoint=asset_endpoint,
+            target_path=target_path,
+            token=token,
+            project_context=project_context,
+            http_client=http_client,
+            asset_path=asset_path,
+        )
+
     def try_copy_path() -> Path | None:
         if local_store is None:
             return None
@@ -457,21 +467,6 @@ def fetch_asset_file(
             return local_store.link_path(path=source_path, target_path=target_path)
 
         return None
-
-    def download_file():
-        bytes_content = fetch_asset_content(
-            api_url=api_url,
-            asset_or_id=asset,
-            entity_id=entity_id,
-            entity_type=entity_type,
-            asset_path=asset_path,
-            project_context=project_context,
-            token=token,
-            http_client=http_client,
-            strategy=FetchContentStrategy.download_only,
-        )
-        target_path.write_bytes(bytes_content)
-        return target_path
 
     match strategy:
         case FetchFileStrategy.copy_only:
@@ -494,6 +489,51 @@ def fetch_asset_file(
             return download_file()
         case _:
             raise EntitySDKError(f"{strategy} strategy failed: Unsupported strategy")
+
+
+def download_asset_file(
+    *,
+    asset_endpoint: str,
+    target_path: Path,
+    token: str,
+    project_context: ProjectContext | None = None,
+    http_client: httpx.Client,
+    asset_path: Path | None = None,
+) -> Path:
+    """Download an asset from the entitycore download endpoint to a local file.
+
+    Streams the HTTP response body to ``target_path`` without loading the full
+    payload into memory.
+
+    Args:
+        asset_endpoint: Base URL of the asset resource (``.../download`` is appended).
+        target_path: Local path to write the downloaded bytes.
+        token: Authorization access token.
+        project_context: Optional project context for ``project-id`` / ``virtual-lab-id`` headers.
+        http_client: HTTP client used for the streaming request.
+        asset_path: For directory assets, path within the directory to the file.
+
+    Returns:
+        ``target_path`` after the download completes.
+    """
+    headers = {"Authorization": f"Bearer {token}"}
+    if project_context:
+        headers["project-id"] = str(project_context.project_id)
+        if vlab_id := project_context.virtual_lab_id:
+            headers["virtual-lab-id"] = str(vlab_id)
+
+    parameters = {"asset_path": str(asset_path)} if asset_path else {}
+    with target_path.open("wb") as f:
+        for chunk in stream_response(
+            url=f"{asset_endpoint}/download",
+            method="GET",
+            headers=headers,
+            parameters=parameters,
+            http_client=http_client,
+        ):
+            if chunk:
+                f.write(chunk)
+    return target_path
 
 
 def fetch_asset_content(

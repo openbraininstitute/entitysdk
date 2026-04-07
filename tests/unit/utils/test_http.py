@@ -6,6 +6,58 @@ from entitysdk.exception import EntitySDKError
 from entitysdk.utils import http as test_module
 
 
+def test_stream_response_streams_bytes(httpx_mock):
+    httpx_mock.add_response(
+        method="GET",
+        url="http://example.com/file?x=y",
+        match_headers={"Authorization": "Bearer t"},
+        content=b"abcd",
+    )
+
+    with httpx.Client() as http_client:
+        chunks = list(
+            test_module.stream_response(
+                url="http://example.com/file",
+                method="GET",
+                headers={"Authorization": "Bearer t"},
+                parameters={"x": "y"},
+                http_client=http_client,
+            )
+        )
+
+    assert b"".join(chunks) == b"abcd"
+
+
+def test_stream_response_request_error_raises(httpx_mock):
+    httpx_mock.add_exception(httpx.ConnectError("boom"))
+
+    with httpx.Client() as http_client:
+        with pytest.raises(EntitySDKError, match="Request error: boom"):
+            list(
+                test_module.stream_response(
+                    url="http://example.com/file",
+                    method="GET",
+                    http_client=http_client,
+                )
+            )
+
+
+def test_stream_response_http_status_error_raises(httpx_mock):
+    httpx_mock.add_response(
+        method="GET", url="http://example.com/file", status_code=404, text="nope"
+    )
+
+    with httpx.Client() as http_client:
+        with pytest.raises(EntitySDKError, match="HTTP error 404 for GET http://example.com/file"):
+            list(
+                test_module.stream_response(
+                    url="http://example.com/file",
+                    method="GET",
+                    http_client=http_client,
+                )
+            )
+
+
 def test_make_db_api_request(httpx_mock, api_url, project_context, auth_token, request_headers):
     url = f"{api_url}/api/v1/entity/person"
     httpx_mock.add_response(
