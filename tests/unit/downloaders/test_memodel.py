@@ -223,7 +223,8 @@ class DummyClient:
         return DummyEModel()
 
 
-def test_download_memodel_hoc_missing(tmp_path):
+@pytest.mark.parametrize("max_concurrent", [1, 4])
+def test_download_memodel_hoc_missing(tmp_path, max_concurrent):
     class DummyMEModel:
         emodel = type("EModel", (), {"id": "dummy_id"})()
         morphology = "dummy_morphology"
@@ -231,11 +232,18 @@ def test_download_memodel_hoc_missing(tmp_path):
     def dummy_download_hoc(client, emodel, path):
         return tmp_path / "nonexistent_hoc_file.hoc"
 
+    def dummy_download_morphology(client, morphology, path, fmt):
+        morph_file = path / "dummy.asc"
+        morph_file.parent.mkdir(parents=True, exist_ok=True)
+        morph_file.write_text("asc")
+        return morph_file
+
     import entitysdk.downloaders.memodel as memodel_mod
 
     memodel_mod.download_hoc = dummy_download_hoc
+    memodel_mod.download_morphology = dummy_download_morphology
     with pytest.raises(StagingError) as excinfo:
-        download_memodel(DummyClient(), DummyMEModel(), tmp_path)
+        download_memodel(DummyClient(), DummyMEModel(), tmp_path, max_concurrent=max_concurrent)
     assert "HOC file does not exist" in str(excinfo.value)
 
 
