@@ -236,7 +236,7 @@ def test_download_memodel_hoc_missing(tmp_path):
     memodel_mod.download_hoc = dummy_download_hoc
     with pytest.raises(StagingError) as excinfo:
         download_memodel(DummyClient(), DummyMEModel(), tmp_path)
-    assert "HOC does not exist" in str(excinfo.value)
+    assert "HOC file does not exist" in str(excinfo.value)
 
 
 @pytest.mark.parametrize("max_concurrent", [1, 4])
