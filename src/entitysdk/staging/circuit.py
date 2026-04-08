@@ -7,7 +7,7 @@ from typing import cast
 from entitysdk.client import Client
 from entitysdk.dependencies.entity import ensure_has_assets, ensure_has_id
 from entitysdk.models import Circuit
-from entitysdk.types import ID
+from entitysdk.types import ID, FetchFileStrategy
 
 L = logging.getLogger(__name__)
 
@@ -28,13 +28,14 @@ def stage_circuit(
         },
     ).one()
 
-    paths = client.download_directory(
+    paths = client.fetch_directory(
         entity_id=cast(ID, model.id),
         entity_type=Circuit,
         asset_id=asset,
         output_path=output_dir,
         ignore_directory_name=True,
         max_concurrent=max_concurrent,
+        strategy=FetchFileStrategy.link_or_download,
     )
 
     L.debug("Downloaded circuit %s paths: %s", model.id, paths)
