@@ -236,7 +236,9 @@ def create_hoc_file(client, ion_channel_model_data, subdir_mech, subdir_hoc) -> 
         if "conductance" in icm_dict:
             conductance_name = find_conductance_or_max_permeability_name(icm_entity)
             if conductance_name is not None:
-                parameters[conductance_name] = icm_dict["conductance"]
+                parameters[f"{conductance_name}_{icm_entity.nmodl_suffix}"] = icm_dict[
+                    "conductance"
+                ]
             else:
                 L.warning(
                     "Could not find conductance parameter name for ion channel model "
