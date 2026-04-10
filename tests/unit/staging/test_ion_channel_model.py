@@ -152,7 +152,7 @@ def test_create_hoc_file(client, tmp_path, httpx_mock, api_url, request_headers)
     assert (tmp_path / "mechanisms" / "Ca_LVAst.mod").exists()
     with open(tmp_path / "hocs" / "cell.hoc") as f:
         hoc_content = f.read()
-        assert "gCa_LVAstbar = 0.011" in hoc_content
+        assert "gCa_LVAstbar_Ca_LVAst = 0.011" in hoc_content
         assert "insert Ca_LVAst" in hoc_content
         assert "insert CaDynamics_DC0" in hoc_content
 
