@@ -172,6 +172,7 @@ class AssetLabel(StrEnum):
     circuit_extraction_config = "circuit_extraction_config"
     skeletonization_config = "skeletonization_config"
     task_config = "task_config"
+    lod_mesh_block = "lod_mesh_block"
 
 
 class AssetStatus(StrEnum):
@@ -186,18 +187,18 @@ class Author(BaseModel):
 
 
 class BodyUploadEntityAssetEntityRouteEntityIdAssetsPost(BaseModel):
-    file: Annotated[bytes, Field(title="File")]
+    file: Annotated[str, Field(title="File")]
     label: AssetLabel
     meta: Annotated[dict[str, Any] | None, Field(title="Meta")] = None
 
 
 class BrainAtlasCreate(BaseModel):
+    species_id: Annotated[UUID, Field(title="Species Id")]
+    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     hierarchy_id: Annotated[UUID, Field(title="Hierarchy Id")]
-    species_id: Annotated[UUID, Field(title="Species Id")]
-    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
 
 
 class BrainAtlasRegionCreate(BaseModel):
@@ -222,6 +223,10 @@ class BrainAtlasRegionUpdate(BaseModel):
 
 
 class BrainAtlasUpdate(BaseModel):
+    species_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Species Id")] = (
+        "<NOT_SET>"
+    )
+    strain_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Strain Id")] = "<NOT_SET>"
     name: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Name")] = "<NOT_SET>"
     description: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Description")] = (
         "<NOT_SET>"
@@ -229,10 +234,6 @@ class BrainAtlasUpdate(BaseModel):
     hierarchy_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Hierarchy Id")] = (
         "<NOT_SET>"
     )
-    species_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Species Id")] = (
-        "<NOT_SET>"
-    )
-    strain_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Strain Id")] = "<NOT_SET>"
 
 
 class BrainRegionAdminUpdate(BaseModel):
@@ -262,17 +263,17 @@ class BrainRegionCreate(BaseModel):
 
 
 class BrainRegionHierarchyAdminUpdate(BaseModel):
-    name: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Name")] = "<NOT_SET>"
     species_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Species Id")] = (
         "<NOT_SET>"
     )
     strain_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Strain Id")] = "<NOT_SET>"
+    name: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Name")] = "<NOT_SET>"
 
 
 class BrainRegionHierarchyCreate(BaseModel):
-    name: Annotated[str, Field(title="Name")]
     species_id: Annotated[UUID, Field(title="Species Id")]
     strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
+    name: Annotated[str, Field(title="Name")]
 
 
 class CalibrationCreate(BaseModel):
@@ -282,6 +283,29 @@ class CalibrationCreate(BaseModel):
     status: ActivityStatus | None = "done"
     used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
     generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
+
+
+class CellCompositionCreate(BaseModel):
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    species_id: Annotated[UUID, Field(title="Species Id")]
+    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
+    brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+
+
+class CellCompositionUserUpdate(BaseModel):
+    name: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Name")] = "<NOT_SET>"
+    description: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Description")] = (
+        "<NOT_SET>"
+    )
+    species_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Species Id")] = (
+        "<NOT_SET>"
+    )
+    strain_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Strain Id")] = "<NOT_SET>"
+    brain_region_id: Annotated[
+        UUID | Literal["<NOT_SET>"] | None, Field(title="Brain Region Id")
+    ] = "<NOT_SET>"
 
 
 class CellMorphologyGenerationType(StrEnum):
@@ -436,6 +460,16 @@ class ComputationallySynthesizedCellMorphologyProtocolCreate(BaseModel):
     method_type: Annotated[str, Field(title="Method Type")]
 
 
+class ConsortiumAdminUpdate(BaseModel):
+    pref_label: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Pref Label")] = (
+        "<NOT_SET>"
+    )
+    alternative_name: Annotated[
+        str | Literal["<NOT_SET>"] | None, Field(title="Alternative Name")
+    ] = "<NOT_SET>"
+    legacy_id: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Legacy Id")] = "<NOT_SET>"
+
+
 class ConsortiumCreate(BaseModel):
     pref_label: Annotated[str, Field(title="Pref Label")]
     alternative_name: Annotated[str | None, Field(title="Alternative Name")] = None
@@ -469,6 +503,12 @@ class ContributionCreate(BaseModel):
     agent_id: Annotated[UUID, Field(title="Agent Id")]
     role_id: Annotated[UUID, Field(title="Role Id")]
     entity_id: Annotated[UUID, Field(title="Entity Id")]
+
+
+class ContributionUserUpdate(BaseModel):
+    agent_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Agent Id")] = "<NOT_SET>"
+    role_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Role Id")] = "<NOT_SET>"
+    entity_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Entity Id")] = "<NOT_SET>"
 
 
 class DeleteResponse(BaseModel):
@@ -598,49 +638,36 @@ class EMCellMeshUserUpdate(BaseModel):
     ] = "<NOT_SET>"
 
 
+class ProtocolDocument4(RootModel[AnyUrl]):
+    root: Annotated[AnyUrl, Field(title="Protocol Document")] = "<NOT_SET>"
+
+
 class ReleaseUrl(RootModel[AnyUrl]):
-    root: Annotated[AnyUrl, Field(title="Release Url")]
+    root: Annotated[AnyUrl, Field(title="Release Url")] = "<NOT_SET>"
 
 
 class CaveClientUrl(RootModel[AnyUrl]):
-    root: Annotated[AnyUrl, Field(title="Cave Client Url")]
+    root: Annotated[AnyUrl, Field(title="Cave Client Url")] = "<NOT_SET>"
 
 
 class PrecomputedMeshUrl(RootModel[AnyUrl]):
+    root: Annotated[AnyUrl, Field(title="Precomputed Mesh Url")] = "<NOT_SET>"
+
+
+class ProtocolDocument5(RootModel[AnyUrl]):
+    root: Annotated[AnyUrl, Field(title="Protocol Document")]
+
+
+class ReleaseUrl1(RootModel[AnyUrl]):
+    root: Annotated[AnyUrl, Field(title="Release Url")]
+
+
+class CaveClientUrl1(RootModel[AnyUrl]):
+    root: Annotated[AnyUrl, Field(title="Cave Client Url")]
+
+
+class PrecomputedMeshUrl1(RootModel[AnyUrl]):
     root: Annotated[AnyUrl, Field(title="Precomputed Mesh Url")]
-
-
-class EModelCreate(BaseModel):
-    name: Annotated[str, Field(title="Name")]
-    description: Annotated[str, Field(title="Description")]
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    iteration: Annotated[str, Field(title="Iteration")]
-    score: Annotated[float, Field(title="Score")]
-    seed: Annotated[int, Field(title="Seed")]
-    species_id: Annotated[UUID, Field(title="Species Id")]
-    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
-    brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
-    exemplar_morphology_id: Annotated[UUID, Field(title="Exemplar Morphology Id")]
-
-
-class EModelUserUpdate(BaseModel):
-    name: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Name")] = "<NOT_SET>"
-    description: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Description")] = (
-        "<NOT_SET>"
-    )
-    iteration: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Iteration")] = "<NOT_SET>"
-    score: Annotated[float | Literal["<NOT_SET>"] | None, Field(title="Score")] = "<NOT_SET>"
-    seed: Annotated[int | Literal["<NOT_SET>"] | None, Field(title="Seed")] = "<NOT_SET>"
-    species_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Species Id")] = (
-        "<NOT_SET>"
-    )
-    strain_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Strain Id")] = "<NOT_SET>"
-    brain_region_id: Annotated[
-        UUID | Literal["<NOT_SET>"] | None, Field(title="Brain Region Id")
-    ] = "<NOT_SET>"
-    exemplar_morphology_id: Annotated[
-        UUID | Literal["<NOT_SET>"] | None, Field(title="Exemplar Morphology Id")
-    ] = "<NOT_SET>"
 
 
 class ETypeClassificationCreate(BaseModel):
@@ -711,14 +738,12 @@ class EntityCountRead(RootModel[dict[str, int]]):
 
 
 class EntityRoute(StrEnum):
-    analysis_software_source_code = "analysis-software-source-code"
     brain_atlas = "brain-atlas"
     brain_atlas_region = "brain-atlas-region"
     cell_composition = "cell-composition"
     cell_morphology = "cell-morphology"
     cell_morphology_protocol = "cell-morphology-protocol"
     electrical_cell_recording = "electrical-cell-recording"
-    electrical_recording = "electrical-recording"
     electrical_recording_stimulus = "electrical-recording-stimulus"
     emodel = "emodel"
     experimental_bouton_density = "experimental-bouton-density"
@@ -731,11 +756,9 @@ class EntityRoute(StrEnum):
     ion_channel_recording = "ion-channel-recording"
     memodel = "memodel"
     memodel_calibration_result = "memodel-calibration-result"
-    me_type_density = "me-type-density"
     simulation = "simulation"
     simulation_campaign = "simulation-campaign"
     simulation_result = "simulation-result"
-    scientific_artifact = "scientific-artifact"
     single_neuron_simulation = "single-neuron-simulation"
     single_neuron_synaptome = "single-neuron-synaptome"
     single_neuron_synaptome_simulation = "single-neuron-synaptome-simulation"
@@ -847,6 +870,24 @@ class ExternalSource(StrEnum):
     icgenealogy = "icgenealogy"
 
 
+class Url(RootModel[AnyUrl]):
+    root: Annotated[AnyUrl, Field(title="Url")] = "<NOT_SET>"
+
+
+class ExternalUrlAdminUpdate(BaseModel):
+    name: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Name")] = "<NOT_SET>"
+    description: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Description")] = (
+        "<NOT_SET>"
+    )
+    source: Annotated[ExternalSource | Literal["<NOT_SET>"] | None, Field(title="Source")] = (
+        "<NOT_SET>"
+    )
+    url: Annotated[
+        Url | Literal["<NOT_SET>"] | None,
+        Field(default_factory=lambda: Url("<NOT_SET>"), title="Url"),
+    ]
+
+
 class ExternalUrlCreate(BaseModel):
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -916,23 +957,6 @@ class IonChannelCreate(BaseModel):
     label: Annotated[str, Field(title="Label")]
     gene: Annotated[str, Field(title="Gene")]
     synonyms: Annotated[list[str], Field(title="Synonyms")]
-
-
-class IonChannelModelingCampaignCreate(BaseModel):
-    name: Annotated[str, Field(title="Name")]
-    description: Annotated[str, Field(title="Description")]
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
-
-
-class IonChannelModelingCampaignUserUpdate(BaseModel):
-    name: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Name")] = "<NOT_SET>"
-    description: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Description")] = (
-        "<NOT_SET>"
-    )
-    scan_parameters: Annotated[
-        dict[str, Any] | Literal["<NOT_SET>"] | None, Field(title="Scan Parameters")
-    ] = "<NOT_SET>"
 
 
 class IonChannelModelingConfigCreate(BaseModel):
@@ -1221,7 +1245,7 @@ class ModifiedMorphologyMethodType(StrEnum):
 
 
 class ModifiedReconstructionCellMorphologyProtocolCreate(BaseModel):
-    protocol_document: Annotated[ProtocolDocument | None, Field(title="Protocol Document")] = None
+    protocol_document: Annotated[ProtocolDocument5 | None, Field(title="Protocol Document")] = None
     protocol_design: CellMorphologyProtocolDesign
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -1244,7 +1268,7 @@ class NestedBrainRegionRead(BaseModel):
 
 
 class NestedComputationallySynthesizedCellMorphologyProtocolRead(BaseModel):
-    protocol_document: Annotated[ProtocolDocument | None, Field(title="Protocol Document")] = None
+    protocol_document: Annotated[ProtocolDocument5 | None, Field(title="Protocol Document")] = None
     protocol_design: CellMorphologyProtocolDesign
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -1446,7 +1470,7 @@ class NestedIonChannelRecordingRead(BaseModel):
 
 
 class NestedModifiedReconstructionCellMorphologyProtocolRead(BaseModel):
-    protocol_document: Annotated[ProtocolDocument | None, Field(title="Protocol Document")] = None
+    protocol_document: Annotated[ProtocolDocument5 | None, Field(title="Protocol Document")] = None
     protocol_design: CellMorphologyProtocolDesign
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -1579,6 +1603,16 @@ class NotSet(RootModel[Literal["<NOT_SET>"]]):
     root: Literal["<NOT_SET>"]
 
 
+class OrganizationAdminUpdate(BaseModel):
+    pref_label: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Pref Label")] = (
+        "<NOT_SET>"
+    )
+    alternative_name: Annotated[
+        str | Literal["<NOT_SET>"] | None, Field(title="Alternative Name")
+    ] = "<NOT_SET>"
+    legacy_id: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Legacy Id")] = "<NOT_SET>"
+
+
 class OrganizationCreate(BaseModel):
     pref_label: Annotated[str, Field(title="Pref Label")]
     alternative_name: Annotated[str | None, Field(title="Alternative Name")] = None
@@ -1632,6 +1666,19 @@ class PaginationResponse(BaseModel):
     page: Annotated[int, Field(title="Page")]
     page_size: Annotated[int, Field(title="Page Size")]
     total_items: Annotated[int, Field(title="Total Items")]
+
+
+class PersonAdminUpdate(BaseModel):
+    given_name: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Given Name")] = (
+        "<NOT_SET>"
+    )
+    family_name: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Family Name")] = (
+        "<NOT_SET>"
+    )
+    pref_label: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Pref Label")] = (
+        "<NOT_SET>"
+    )
+    legacy_id: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Legacy Id")] = "<NOT_SET>"
 
 
 class PersonCreate(BaseModel):
@@ -2069,6 +2116,9 @@ class SkeletonizationCampaignCreate(BaseModel):
     description: Annotated[str, Field(title="Description")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
+    input_meshes: Annotated[
+        list[NestedEntityCreate] | None, Field(default_factory=list, title="Input Meshes")
+    ]
 
 
 class SkeletonizationCampaignUserUpdate(BaseModel):
@@ -2078,6 +2128,9 @@ class SkeletonizationCampaignUserUpdate(BaseModel):
     )
     scan_parameters: Annotated[
         dict[str, Any] | Literal["<NOT_SET>"] | None, Field(title="Scan Parameters")
+    ] = "<NOT_SET>"
+    input_meshes: Annotated[
+        list[NestedEntityCreate] | Literal["<NOT_SET>"] | None, Field(title="Input Meshes")
     ] = "<NOT_SET>"
 
 
@@ -2296,14 +2349,16 @@ class SubjectCreate(BaseModel):
         float | None, Field(description="Maximum age range", title="Maximum age range")
     ] = None
     age_period: AgePeriod | None = None
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     species_id: Annotated[UUID, Field(title="Species Id")]
     strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
 
 
 class SubjectRead(BaseModel):
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
+    species: NestedSpeciesRead
+    strain: NestedStrainRead | None = None
     id: Annotated[UUID, Field(title="Id")]
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
@@ -2323,8 +2378,6 @@ class SubjectRead(BaseModel):
         float | None, Field(description="Maximum age range", title="Maximum age range")
     ] = None
     age_period: AgePeriod | None = None
-    species: NestedSpeciesRead
-    strain: NestedStrainRead | None
 
 
 class SubjectUserUpdate(BaseModel):
@@ -2660,6 +2713,8 @@ class BasicEntityRead(BaseModel):
 
 
 class BrainAtlasRead(BaseModel):
+    species: NestedSpeciesRead
+    strain: NestedStrainRead | None = None
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
@@ -2671,7 +2726,6 @@ class BrainAtlasRead(BaseModel):
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     hierarchy_id: Annotated[UUID, Field(title="Hierarchy Id")]
-    species: NestedSpeciesRead
 
 
 class BrainAtlasRegionRead(BaseModel):
@@ -2690,17 +2744,19 @@ class BrainAtlasRegionRead(BaseModel):
 
 
 class BrainRegionHierarchyRead(BaseModel):
+    species: NestedSpeciesRead
+    strain: NestedStrainRead | None = None
     id: Annotated[UUID, Field(title="Id")]
     created_by: NestedPersonRead
     updated_by: NestedPersonRead
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     name: Annotated[str, Field(title="Name")]
-    species: NestedSpeciesRead
-    strain: NestedStrainRead | None = None
 
 
 class BrainRegionRead(BaseModel):
+    species: NestedSpeciesRead
+    strain: NestedStrainRead | None = None
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -2710,8 +2766,6 @@ class BrainRegionRead(BaseModel):
     color_hex_triplet: Annotated[str, Field(title="Color Hex Triplet")]
     parent_structure_id: Annotated[UUID | None, Field(title="Parent Structure Id")] = None
     hierarchy_id: Annotated[UUID, Field(title="Hierarchy Id")]
-    species: NestedSpeciesRead
-    strain: NestedStrainRead | None = None
 
 
 class CalibrationRead(BaseModel):
@@ -3116,6 +3170,94 @@ class EMCellMeshCreate(BaseModel):
     ]
 
 
+class EMDenseReconstructionDatasetAdminUpdate(BaseModel):
+    name: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Name")] = "<NOT_SET>"
+    description: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Description")] = (
+        "<NOT_SET>"
+    )
+    authorized_public: Annotated[
+        bool | Literal["<NOT_SET>"] | None, Field(title="Authorized Public")
+    ] = "<NOT_SET>"
+    license_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="License Id")] = (
+        "<NOT_SET>"
+    )
+    brain_region_id: Annotated[
+        UUID | Literal["<NOT_SET>"] | None, Field(title="Brain Region Id")
+    ] = "<NOT_SET>"
+    subject_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Subject Id")] = (
+        "<NOT_SET>"
+    )
+    experiment_date: Annotated[
+        AwareDatetime | Literal["<NOT_SET>"] | None, Field(title="Experiment Date")
+    ] = "<NOT_SET>"
+    contact_email: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Contact Email")] = (
+        "<NOT_SET>"
+    )
+    published_in: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Published In")] = (
+        "<NOT_SET>"
+    )
+    notice_text: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Notice Text")] = (
+        "<NOT_SET>"
+    )
+    protocol_document: Annotated[
+        ProtocolDocument4 | Literal["<NOT_SET>"] | None,
+        Field(default_factory=lambda: ProtocolDocument4("<NOT_SET>"), title="Protocol Document"),
+    ]
+    fixation: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Fixation")] = "<NOT_SET>"
+    staining_type: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Staining Type")] = (
+        "<NOT_SET>"
+    )
+    slicing_thickness: Annotated[
+        float | Literal["<NOT_SET>"] | None, Field(title="Slicing Thickness")
+    ] = "<NOT_SET>"
+    tissue_shrinkage: Annotated[
+        float | Literal["<NOT_SET>"] | None, Field(title="Tissue Shrinkage")
+    ] = "<NOT_SET>"
+    microscope_type: Annotated[
+        str | Literal["<NOT_SET>"] | None, Field(title="Microscope Type")
+    ] = "<NOT_SET>"
+    detector: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Detector")] = "<NOT_SET>"
+    slicing_direction: Annotated[
+        SlicingDirectionType | Literal["<NOT_SET>"] | None, Field(title="Slicing Direction")
+    ] = "<NOT_SET>"
+    landmarks: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Landmarks")] = "<NOT_SET>"
+    voltage: Annotated[float | Literal["<NOT_SET>"] | None, Field(title="Voltage")] = "<NOT_SET>"
+    current: Annotated[float | Literal["<NOT_SET>"] | None, Field(title="Current")] = "<NOT_SET>"
+    dose: Annotated[float | Literal["<NOT_SET>"] | None, Field(title="Dose")] = "<NOT_SET>"
+    temperature: Annotated[float | Literal["<NOT_SET>"] | None, Field(title="Temperature")] = (
+        "<NOT_SET>"
+    )
+    volume_resolution_x_nm: Annotated[
+        float | Literal["<NOT_SET>"] | None, Field(title="Volume Resolution X Nm")
+    ] = "<NOT_SET>"
+    volume_resolution_y_nm: Annotated[
+        float | Literal["<NOT_SET>"] | None, Field(title="Volume Resolution Y Nm")
+    ] = "<NOT_SET>"
+    volume_resolution_z_nm: Annotated[
+        float | Literal["<NOT_SET>"] | None, Field(title="Volume Resolution Z Nm")
+    ] = "<NOT_SET>"
+    release_url: Annotated[
+        ReleaseUrl | Literal["<NOT_SET>"] | None,
+        Field(default_factory=lambda: ReleaseUrl("<NOT_SET>"), title="Release Url"),
+    ]
+    cave_client_url: Annotated[
+        CaveClientUrl | Literal["<NOT_SET>"] | None,
+        Field(default_factory=lambda: CaveClientUrl("<NOT_SET>"), title="Cave Client Url"),
+    ]
+    cave_datastack: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Cave Datastack")] = (
+        "<NOT_SET>"
+    )
+    precomputed_mesh_url: Annotated[
+        PrecomputedMeshUrl | Literal["<NOT_SET>"] | None,
+        Field(
+            default_factory=lambda: PrecomputedMeshUrl("<NOT_SET>"), title="Precomputed Mesh Url"
+        ),
+    ]
+    cell_identifying_property: Annotated[
+        str | Literal["<NOT_SET>"] | None, Field(title="Cell Identifying Property")
+    ] = "<NOT_SET>"
+
+
 class EMDenseReconstructionDatasetCreate(BaseModel):
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -3151,7 +3293,7 @@ class EMDenseReconstructionDatasetCreate(BaseModel):
             title="Notice Text",
         ),
     ] = None
-    protocol_document: Annotated[ProtocolDocument | None, Field(title="Protocol Document")] = None
+    protocol_document: Annotated[ProtocolDocument5 | None, Field(title="Protocol Document")] = None
     fixation: Annotated[str | None, Field(title="Fixation")] = None
     staining_type: Annotated[str | None, Field(title="Staining Type")] = None
     slicing_thickness: Annotated[float | None, Field(title="Slicing Thickness")] = None
@@ -3167,15 +3309,59 @@ class EMDenseReconstructionDatasetCreate(BaseModel):
     volume_resolution_x_nm: Annotated[float, Field(title="Volume Resolution X Nm")]
     volume_resolution_y_nm: Annotated[float, Field(title="Volume Resolution Y Nm")]
     volume_resolution_z_nm: Annotated[float, Field(title="Volume Resolution Z Nm")]
-    release_url: Annotated[ReleaseUrl | None, Field(title="Release Url")] = None
-    cave_client_url: Annotated[CaveClientUrl | None, Field(title="Cave Client Url")] = None
+    release_url: Annotated[ReleaseUrl1 | None, Field(title="Release Url")] = None
+    cave_client_url: Annotated[CaveClientUrl1 | None, Field(title="Cave Client Url")] = None
     cave_datastack: Annotated[str | None, Field(title="Cave Datastack")] = None
     precomputed_mesh_url: Annotated[
-        PrecomputedMeshUrl | None, Field(title="Precomputed Mesh Url")
+        PrecomputedMeshUrl1 | None, Field(title="Precomputed Mesh Url")
     ] = None
     cell_identifying_property: Annotated[str | None, Field(title="Cell Identifying Property")] = (
         None
     )
+
+
+class EModelCreate(BaseModel):
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    species_id: Annotated[UUID, Field(title="Species Id")]
+    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    iteration: Annotated[str, Field(title="Iteration")]
+    score: Annotated[float, Field(title="Score")]
+    seed: Annotated[int, Field(title="Seed")]
+    brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
+    exemplar_morphology_id: Annotated[UUID, Field(title="Exemplar Morphology Id")]
+    ion_channel_models: Annotated[
+        list[NestedEntityCreate] | None,
+        Field(
+            default_factory=list,
+            description="List of ion channel models (only ids).",
+            title="Ion Channel Models",
+        ),
+    ]
+
+
+class EModelUserUpdate(BaseModel):
+    name: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Name")] = "<NOT_SET>"
+    description: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Description")] = (
+        "<NOT_SET>"
+    )
+    species_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Species Id")] = (
+        "<NOT_SET>"
+    )
+    strain_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Strain Id")] = "<NOT_SET>"
+    iteration: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Iteration")] = "<NOT_SET>"
+    score: Annotated[float | Literal["<NOT_SET>"] | None, Field(title="Score")] = "<NOT_SET>"
+    seed: Annotated[int | Literal["<NOT_SET>"] | None, Field(title="Seed")] = "<NOT_SET>"
+    brain_region_id: Annotated[
+        UUID | Literal["<NOT_SET>"] | None, Field(title="Brain Region Id")
+    ] = "<NOT_SET>"
+    exemplar_morphology_id: Annotated[
+        UUID | Literal["<NOT_SET>"] | None, Field(title="Exemplar Morphology Id")
+    ] = "<NOT_SET>"
+    ion_channel_models: Annotated[
+        list[NestedEntityCreate] | Literal["<NOT_SET>"] | None, Field(title="Ion Channel Models")
+    ] = "<NOT_SET>"
 
 
 class ETypeClassificationRead(BaseModel):
@@ -3374,6 +3560,29 @@ class ExternalUrlRead(BaseModel):
     source: ExternalSource
     url: Annotated[AnyUrl, Field(title="Url")]
     source_name: Annotated[str, Field(title="Source Name")]
+
+
+class IonChannelModelingCampaignCreate(BaseModel):
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
+    input_recordings: Annotated[
+        list[NestedEntityCreate] | None, Field(default_factory=list, title="Input Recordings")
+    ]
+
+
+class IonChannelModelingCampaignUserUpdate(BaseModel):
+    name: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Name")] = "<NOT_SET>"
+    description: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Description")] = (
+        "<NOT_SET>"
+    )
+    scan_parameters: Annotated[
+        dict[str, Any] | Literal["<NOT_SET>"] | None, Field(title="Scan Parameters")
+    ] = "<NOT_SET>"
+    input_recordings: Annotated[
+        list[NestedEntityCreate] | Literal["<NOT_SET>"] | None, Field(title="Input Recordings")
+    ] = "<NOT_SET>"
 
 
 class IonChannelModelingConfigGenerationRead(BaseModel):
@@ -3678,13 +3887,13 @@ class MEModelCalibrationResultRead(BaseModel):
 class MEModelCreate(BaseModel):
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
+    species_id: Annotated[UUID, Field(title="Species Id")]
+    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     validation_status: ValidationStatus | None = "created"
     brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
     morphology_id: Annotated[UUID, Field(title="Morphology Id")]
     emodel_id: Annotated[UUID, Field(title="Emodel Id")]
-    species_id: Annotated[UUID, Field(title="Species Id")]
-    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
 
 
 class MEModelUserUpdate(BaseModel):
@@ -3692,6 +3901,10 @@ class MEModelUserUpdate(BaseModel):
     description: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Description")] = (
         "<NOT_SET>"
     )
+    species_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Species Id")] = (
+        "<NOT_SET>"
+    )
+    strain_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Strain Id")] = "<NOT_SET>"
     validation_status: Annotated[
         ValidationStatus | Literal["<NOT_SET>"] | None, Field(title="Validation Status")
     ] = "<NOT_SET>"
@@ -3702,10 +3915,6 @@ class MEModelUserUpdate(BaseModel):
         "<NOT_SET>"
     )
     emodel_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Emodel Id")] = "<NOT_SET>"
-    species_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Species Id")] = (
-        "<NOT_SET>"
-    )
-    strain_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Strain Id")] = "<NOT_SET>"
 
 
 class MTypeClassificationRead(BaseModel):
@@ -3764,7 +3973,7 @@ class MeasurementRecordRead(BaseModel):
 
 
 class ModifiedReconstructionCellMorphologyProtocolRead(BaseModel):
-    protocol_document: Annotated[ProtocolDocument | None, Field(title="Protocol Document")] = None
+    protocol_document: Annotated[ProtocolDocument5 | None, Field(title="Protocol Document")] = None
     protocol_design: CellMorphologyProtocolDesign
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -3804,7 +4013,7 @@ class NestedContributionRead(BaseModel):
 
 
 class NestedDigitalReconstructionCellMorphologyProtocolRead(BaseModel):
-    protocol_document: Annotated[ProtocolDocument | None, Field(title="Protocol Document")] = None
+    protocol_document: Annotated[ProtocolDocument5 | None, Field(title="Protocol Document")] = None
     protocol_design: CellMorphologyProtocolDesign
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -3835,6 +4044,8 @@ class NestedMEModel(BaseModel):
 class NestedSubjectRead(BaseModel):
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
+    species: NestedSpeciesRead
+    strain: NestedStrainRead | None = None
     id: Annotated[UUID, Field(title="Id")]
     sex: Annotated[Sex, Field(description="Sex of the subject")]
     weight: Annotated[Weight | None, Field(description="Weight in grams", title="Weight")] = None
@@ -3848,8 +4059,6 @@ class NestedSubjectRead(BaseModel):
         float | None, Field(description="Maximum age range", title="Maximum age range")
     ] = None
     age_period: AgePeriod | None = None
-    species: NestedSpeciesRead
-    strain: NestedStrainRead | None
 
 
 class NeuronBlock(BaseModel):
@@ -4167,8 +4376,13 @@ class AssetAndPresignedURLS(BaseModel):
 class CellCompositionRead(BaseModel):
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
+    species: NestedSpeciesRead
+    strain: NestedStrainRead | None = None
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    brain_region: NestedBrainRegionRead
     type: EntityType | None = None
     id: Annotated[UUID, Field(title="Id")]
     authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
@@ -4403,7 +4617,7 @@ class EMDenseReconstructionDatasetRead(BaseModel):
             title="Notice Text",
         ),
     ] = None
-    protocol_document: Annotated[ProtocolDocument | None, Field(title="Protocol Document")] = None
+    protocol_document: Annotated[ProtocolDocument5 | None, Field(title="Protocol Document")] = None
     fixation: Annotated[str | None, Field(title="Fixation")] = None
     staining_type: Annotated[str | None, Field(title="Staining Type")] = None
     slicing_thickness: Annotated[float | None, Field(title="Slicing Thickness")] = None
@@ -4419,11 +4633,11 @@ class EMDenseReconstructionDatasetRead(BaseModel):
     volume_resolution_x_nm: Annotated[float, Field(title="Volume Resolution X Nm")]
     volume_resolution_y_nm: Annotated[float, Field(title="Volume Resolution Y Nm")]
     volume_resolution_z_nm: Annotated[float, Field(title="Volume Resolution Z Nm")]
-    release_url: Annotated[ReleaseUrl | None, Field(title="Release Url")] = None
-    cave_client_url: Annotated[CaveClientUrl | None, Field(title="Cave Client Url")] = None
+    release_url: Annotated[ReleaseUrl1 | None, Field(title="Release Url")] = None
+    cave_client_url: Annotated[CaveClientUrl1 | None, Field(title="Cave Client Url")] = None
     cave_datastack: Annotated[str | None, Field(title="Cave Datastack")] = None
     precomputed_mesh_url: Annotated[
-        PrecomputedMeshUrl | None, Field(title="Precomputed Mesh Url")
+        PrecomputedMeshUrl1 | None, Field(title="Precomputed Mesh Url")
     ] = None
     cell_identifying_property: Annotated[str | None, Field(title="Cell Identifying Property")] = (
         None
@@ -4433,6 +4647,8 @@ class EMDenseReconstructionDatasetRead(BaseModel):
 class EModelRead(BaseModel):
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
+    species: NestedSpeciesRead
+    strain: NestedStrainRead | None = None
     brain_region: NestedBrainRegionRead
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     created_by: NestedPersonRead
@@ -4447,8 +4663,6 @@ class EModelRead(BaseModel):
     score: Annotated[float, Field(title="Score")]
     seed: Annotated[int, Field(title="Seed")]
     id: Annotated[UUID, Field(title="Id")]
-    species: NestedSpeciesRead
-    strain: NestedStrainRead | None
     mtypes: Annotated[list[AnnotationRead] | None, Field(title="Mtypes")]
     etypes: Annotated[list[AnnotationRead] | None, Field(title="Etypes")]
     exemplar_morphology: ExemplarMorphology
@@ -5526,6 +5740,8 @@ class EMCellMeshAnnotationExpandedRead(BaseModel):
 class EModelReadExpanded(BaseModel):
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
+    species: NestedSpeciesRead
+    strain: NestedStrainRead | None = None
     brain_region: NestedBrainRegionRead
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     created_by: NestedPersonRead
@@ -5540,8 +5756,6 @@ class EModelReadExpanded(BaseModel):
     score: Annotated[float, Field(title="Score")]
     seed: Annotated[int, Field(title="Seed")]
     id: Annotated[UUID, Field(title="Id")]
-    species: NestedSpeciesRead
-    strain: NestedStrainRead | None
     mtypes: Annotated[list[AnnotationRead] | None, Field(title="Mtypes")]
     etypes: Annotated[list[AnnotationRead] | None, Field(title="Etypes")]
     exemplar_morphology: ExemplarMorphology
@@ -5569,6 +5783,8 @@ class ListResponseMeasurementAnnotationRead(BaseModel):
 class MEModelRead(BaseModel):
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
+    species: NestedSpeciesRead
+    strain: NestedStrainRead | None = None
     brain_region: NestedBrainRegionRead
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     created_by: NestedPersonRead
@@ -5580,8 +5796,6 @@ class MEModelRead(BaseModel):
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     validation_status: ValidationStatus | None = "created"
     id: Annotated[UUID, Field(title="Id")]
-    species: NestedSpeciesRead
-    strain: NestedStrainRead | None
     mtypes: Annotated[list[AnnotationRead] | None, Field(title="Mtypes")]
     etypes: Annotated[list[AnnotationRead] | None, Field(title="Etypes")]
     morphology: CellMorphologyRead

@@ -11,7 +11,7 @@
       },
       "creation_date": "2025-01-01T00:00:00Z",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Test brain-region-hierarchy 1",
+      "name": "my-hierarchy",
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
         "name": "Test Species",
@@ -32,7 +32,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 100,
+    "page_size": 30,
     "total_items": 1
   }
 }

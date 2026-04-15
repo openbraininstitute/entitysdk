@@ -3,7 +3,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -23,7 +23,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Test EModel Description",
+      "description": "morph description",
       "etypes": [],
       "exemplar_morphology": {
         "creation_date": "2025-01-01T00:00:00Z",
@@ -44,11 +44,11 @@
       },
       "id": "00000000-0000-4000-8000-000001234678",
       "ion_channel_models": [],
-      "iteration": "test iteration",
+      "iteration": "0",
       "mtypes": [],
-      "name": "Test EModel Name",
-      "score": -1.0,
-      "seed": -1,
+      "name": "public emodel",
+      "score": 0.0,
+      "seed": 0,
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
         "name": "Test Species",
@@ -75,7 +75,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 100,
+    "page_size": 30,
     "total_items": 1
   }
 }

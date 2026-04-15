@@ -30,7 +30,7 @@
   },
   "creation_date": "2025-01-01T00:00:00Z",
   "description": "Test Morphology Description",
-  "experiment_date": "2025-01-01T00:00:00",
+  "experiment_date": "2025-01-01T00:00:00Z",
   "has_segmented_spines": false,
   "id": "00000000-0000-4000-8000-000001234678",
   "legacy_id": [
@@ -45,9 +45,9 @@
     "update_date": "2025-01-01T00:00:00Z"
   },
   "location": {
-    "x": 10.0,
-    "y": 20.0,
-    "z": 30.0
+    "x": 100.0,
+    "y": 200.0,
+    "z": 300.0
   },
   "mtypes": [],
   "name": "Test Morphology Name",

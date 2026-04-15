@@ -14,13 +14,13 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "description-2",
+      "description": "task-config-description",
       "id": "00000000-0000-4000-8000-000001234678",
       "inputs": [],
       "meta": {
         "foo": "bar"
       },
-      "name": "name-2",
+      "name": "config-2",
       "task_config_generator_id": "00000000-0000-4000-8000-000001234678",
       "task_config_type": "skeletonization__config",
       "type": "task_config",
@@ -48,13 +48,13 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "description-1",
+      "description": "task-config-description",
       "id": "00000000-0000-4000-8000-000001234678",
       "inputs": [],
       "meta": {
         "foo": "bar"
       },
-      "name": "name-1",
+      "name": "config-1",
       "task_config_generator_id": "00000000-0000-4000-8000-000001234678",
       "task_config_type": "skeletonization__config",
       "type": "task_config",
@@ -72,7 +72,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 2,
-    "total_items": 4
+    "page_size": 30,
+    "total_items": 2
   }
 }

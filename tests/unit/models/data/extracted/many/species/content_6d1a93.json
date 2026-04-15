@@ -11,8 +11,8 @@
       },
       "creation_date": "2025-01-01T00:00:00Z",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Test Species 1",
-      "taxonomy_id": "12345_1",
+      "name": "Test Species 2",
+      "taxonomy_id": "12345_2",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
@@ -34,8 +34,8 @@
       },
       "creation_date": "2025-01-01T00:00:00Z",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Test Species 2",
-      "taxonomy_id": "12345_2",
+      "name": "Test Species 1",
+      "taxonomy_id": "12345_1",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,
@@ -73,7 +73,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 100,
+    "page_size": 30,
     "total_items": 3
   }
 }

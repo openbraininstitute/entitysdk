@@ -16,7 +16,7 @@
       "description": "simulation-campaign-description",
       "entity_id": "00000000-0000-4000-8000-000001234678",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Public u2/0",
+      "name": "simulation-campaign",
       "scan_parameters": {
         "foo1": "bar2"
       },
@@ -48,7 +48,7 @@
       "description": "simulation-campaign-description",
       "entity_id": "00000000-0000-4000-8000-000001234678",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Public u1/0",
+      "name": "simulation-campaign",
       "scan_parameters": {
         "foo1": "bar2"
       },
@@ -68,7 +68,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 100,
+    "page_size": 30,
     "total_items": 2
   }
 }
