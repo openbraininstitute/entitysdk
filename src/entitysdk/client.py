@@ -162,6 +162,7 @@ class Client:
         query: dict | None = None,
         limit: int | None = None,
         project_context: ProjectContext | None = None,
+        admin: bool = False,
     ) -> IteratorResult[TIdentifiable]:
         """Search for entities.
 
@@ -170,9 +171,16 @@ class Client:
             query: Query parameters.
             limit: Optional limit of the number of entities to yield. Default is None.
             project_context: Optional project context.
+            admin: Use admin endpoints if True
         """
-        url = route.get_entities_endpoint(api_url=self.api_url, entity_type=entity_type)
-        context = self._optional_user_context(override_context=project_context)
+        url = route.get_entities_endpoint(
+            api_url=self.api_url,
+            entity_type=entity_type,
+            admin=admin,
+        )
+        context = (
+            self._optional_user_context(override_context=project_context) if not admin else None
+        )
         return core.search_entities(
             url=url,
             query=query,

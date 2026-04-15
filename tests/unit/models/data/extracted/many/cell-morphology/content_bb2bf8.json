@@ -958,7 +958,7 @@
   },
   "pagination": {
     "page": 1,
-    "page_size": 100,
+    "page_size": 30,
     "total_items": 9
   }
 }

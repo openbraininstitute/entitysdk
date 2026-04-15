@@ -26,7 +26,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "my-description",
+      "description": "brain-region-0",
       "experiment_date": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "ion_channel": {
@@ -50,7 +50,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "ljp": 11.5,
-      "name": "name-0",
+      "name": "trace-0",
       "notice_text": null,
       "published_in": null,
       "recording_location": [
@@ -147,7 +147,7 @@
   },
   "pagination": {
     "page": 1,
-    "page_size": 100,
+    "page_size": 30,
     "total_items": 1
   }
 }

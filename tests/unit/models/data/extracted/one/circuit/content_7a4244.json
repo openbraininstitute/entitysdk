@@ -41,7 +41,7 @@
   },
   "name": "my-circuit",
   "notice_text": null,
-  "number_connections": 750,
+  "number_connections": 10,
   "number_neurons": 5,
   "number_synapses": 100,
   "published_in": null,
