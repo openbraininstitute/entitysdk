@@ -19,6 +19,12 @@ class Settings(BaseSettings):
             description="Default pagination page size, or None to use server default.",
         ),
     ] = None
+    local_api_url: Annotated[
+        str,
+        Field(
+            description="Default local entitycore API url.",
+        ),
+    ] = "http://127.0.0.1:8000"
     staging_api_url: Annotated[
         str,
         Field(
