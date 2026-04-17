@@ -67,7 +67,8 @@ class Client:
             http_client: Optional HTTP client to use.
             token_manager: Token manager or token to be used for authentication.
             environment: Deployment environent.
-            local_store: LocalAssetStore object for using a local store.
+            local_store: LocalAssetStore object for using a local store. It needs to be specified
+                to be able to access local assets, or they will be always downloaded.
         """
         try:
             environment = DeploymentEnvironment(environment) if environment else None

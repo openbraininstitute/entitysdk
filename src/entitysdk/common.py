@@ -1,17 +1,12 @@
 """Common stuff."""
 
 import re
-import sys
 from uuid import UUID
 
 from pydantic import BaseModel
 
 from entitysdk.exception import EntitySDKError
-
-if sys.version_info < (3, 11):  # pragma: no cover
-    from typing_extensions import Self
-else:
-    from typing import Self
+from entitysdk.types import DeploymentEnvironment
 
 UUID_RE = "[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}"
 
@@ -31,15 +26,20 @@ class ProjectContext(BaseModel):
     # therefore it is not mandatory
     virtual_lab_id: UUID | None = None
 
-    @classmethod
-    def from_vlab_url(cls, url: str) -> Self:
-        """Construct a ProjectContext from a virtual lab url."""
-        result = VLAB_URL_PATTERN.match(url)
 
-        if not result:
-            raise EntitySDKError(f"Badly formed vlab url: {url}")
+def project_context_env_from_vlab_url(url: str) -> tuple[ProjectContext, DeploymentEnvironment]:
+    """Build and return ProjectContext and DeploymentEnvironment from a virtual lab url."""
+    result = VLAB_URL_PATTERN.match(url)
 
-        vlab_id = UUID(result.group("vlab"))
-        proj_id = UUID(result.group("proj"))
+    if not result:
+        raise EntitySDKError(f"Badly formed vlab url: {url}")
 
-        return cls(project_id=proj_id, virtual_lab_id=vlab_id)
+    env = {
+        "www": DeploymentEnvironment.production,
+        "staging": DeploymentEnvironment.staging,
+    }[result.group("env")]
+
+    vlab_id = UUID(result.group("vlab"))
+    proj_id = UUID(result.group("proj"))
+
+    return ProjectContext(project_id=proj_id, virtual_lab_id=vlab_id), env
