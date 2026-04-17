@@ -60,6 +60,7 @@ StrOrPath = str | os.PathLike[str]
 class DeploymentEnvironment(StrEnum):
     """Deployment environment."""
 
+    local = "local"
     staging = "staging"
     production = "production"
 
