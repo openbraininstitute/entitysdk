@@ -9,6 +9,7 @@ import pytest
 from pydantic import ValidationError
 
 from entitysdk.client import Client
+from entitysdk.common import ProjectContext
 from entitysdk.config import settings
 from entitysdk.exception import EntitySDKError
 from entitysdk.models import Asset, Circuit, MTypeClass
@@ -23,6 +24,7 @@ from entitysdk.types import (
     FetchFileStrategy,
     StorageType,
 )
+from tests.unit.util import PROJECT_ID, VIRTUAL_LAB_ID
 
 
 def test_client_api_url():
@@ -50,6 +52,16 @@ def test_client_api_url():
     expected = f"'foo' is not a valid DeploymentEnvironment. Choose one of: {str_envs}"
     with pytest.raises(EntitySDKError, match=re.escape(expected)):
         Client(environment="foo", token_manager="foo")
+
+
+def test_client_from_vlab_url():
+    url = f"https://staging.openbraininstitute.org/app/virtual-lab/{VIRTUAL_LAB_ID}/{PROJECT_ID}"
+    client = Client.from_vlab_url(url, token_manager="foo")
+    assert client.project_context == ProjectContext(
+        project_id=PROJECT_ID,
+        virtual_lab_id=VIRTUAL_LAB_ID,
+    )
+    assert client.api_url == settings.staging_api_url
 
 
 def test_client_project_context__raises():
