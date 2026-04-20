@@ -1,13 +1,7 @@
 """Types definitions."""
 
 import os
-import sys
 import uuid
-
-if sys.version_info < (3, 11):  # pragma: no cover
-    from backports.strenum import StrEnum
-else:
-    from enum import StrEnum
 
 from entitysdk._server_schemas import ActivityStatus as ActivityStatus
 from entitysdk._server_schemas import ActivityType as ActivityType
@@ -51,6 +45,7 @@ from entitysdk._server_schemas import StructuralDomain as StructuralDomain
 from entitysdk._server_schemas import TaskActivityType as TaskActivityType
 from entitysdk._server_schemas import TaskConfigType as TaskConfigType
 from entitysdk._server_schemas import ValidationStatus as ValidationStatus
+from entitysdk.compat import StrEnum
 
 ID = uuid.UUID
 Token = str

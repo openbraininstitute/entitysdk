@@ -3,7 +3,6 @@
 import concurrent.futures
 import io
 import os
-import sys
 from pathlib import Path
 from typing import Any, TypeVar, cast
 
@@ -12,6 +11,7 @@ from pydantic import validate_call
 
 from entitysdk import core, route
 from entitysdk.common import ProjectContext, parse_vlab_url
+from entitysdk.compat import Self
 from entitysdk.exception import EntitySDKError
 from entitysdk.models.asset import (
     Asset,
@@ -42,11 +42,6 @@ from entitysdk.utils.store import LocalAssetStore
 from entitysdk.utils.url import (
     build_api_url,
 )
-
-if sys.version_info < (3, 11):  # pragma: no cover
-    from typing_extensions import Self
-else:
-    from typing import Self
 
 TEntity = TypeVar("TEntity", bound=Entity)
 TIdentifiable = TypeVar("TIdentifiable", bound=Identifiable)
