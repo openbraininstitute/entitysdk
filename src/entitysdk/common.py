@@ -27,7 +27,7 @@ class ProjectContext(BaseModel):
     virtual_lab_id: UUID | None = None
 
 
-def project_context_env_from_vlab_url(url: str) -> tuple[ProjectContext, DeploymentEnvironment]:
+def parse_vlab_url(url: str) -> tuple[ProjectContext, DeploymentEnvironment]:
     """Build and return ProjectContext and DeploymentEnvironment from a virtual lab url."""
     result = VLAB_URL_PATTERN.match(url)
 

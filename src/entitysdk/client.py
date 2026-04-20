@@ -3,6 +3,7 @@
 import concurrent.futures
 import io
 import os
+import sys
 from pathlib import Path
 from typing import Any, TypeVar, cast
 
@@ -10,7 +11,7 @@ import httpx
 from pydantic import validate_call
 
 from entitysdk import core, route
-from entitysdk.common import ProjectContext
+from entitysdk.common import ProjectContext, parse_vlab_url
 from entitysdk.exception import EntitySDKError
 from entitysdk.models.asset import (
     Asset,
@@ -41,6 +42,11 @@ from entitysdk.utils.store import LocalAssetStore
 from entitysdk.utils.url import (
     build_api_url,
 )
+
+if sys.version_info < (3, 11):  # pragma: no cover
+    from typing_extensions import Self
+else:
+    from typing import Self
 
 TEntity = TypeVar("TEntity", bound=Entity)
 TIdentifiable = TypeVar("TIdentifiable", bound=Identifiable)
@@ -88,6 +94,27 @@ class Client:
             TokenFromValue(token_manager) if isinstance(token_manager, Token) else token_manager
         )
         self._local_store = local_store
+
+    @classmethod
+    def from_vlab_url(
+        cls,
+        vlab_url: str,
+        *,
+        api_url: str | None = None,
+        http_client: httpx.Client | None = None,
+        token_manager: TokenManager | Token,
+        local_store: LocalAssetStore | None = None,
+    ) -> Self:
+        """Initialize client from a platform url containing the virtual lab and project."""
+        project_context, environment = parse_vlab_url(vlab_url)
+        return cls(
+            api_url=api_url,
+            project_context=project_context,
+            http_client=http_client,
+            token_manager=token_manager,
+            environment=environment,
+            local_store=local_store,
+        )
 
     @staticmethod
     def _handle_api_url(api_url: str | None, environment: DeploymentEnvironment | None) -> str:

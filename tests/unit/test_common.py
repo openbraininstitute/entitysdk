@@ -29,8 +29,8 @@ PROJ_ID = "f373e771-3a2f-4f45-ab59-0955efd7b1f4"
         ),
     ],
 )
-def test_project_context_env_from_vlab_url(url, expected_context, expected_env):
-    context, env = test_module.project_context_env_from_vlab_url(url)
+def test_parse_vlab_url(url, expected_context, expected_env):
+    context, env = test_module.parse_vlab_url(url)
     assert context == expected_context
     assert env == expected_env
 
@@ -69,6 +69,6 @@ def test_project_context_env_from_vlab_url(url, expected_context, expected_env):
         ),
     ],
 )
-def test_project_context_env_from_vlab_url__raises(url, expected_error, expected_msg):
+def test_parse_vlab_url__raises(url, expected_error, expected_msg):
     with pytest.raises(expected_error, match=expected_msg):
-        test_module.project_context_env_from_vlab_url(url)
+        test_module.parse_vlab_url(url)
