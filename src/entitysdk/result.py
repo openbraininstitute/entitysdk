@@ -1,15 +1,10 @@
 """Iterator wrapper for iterable results."""
 
-import sys
 from collections.abc import Iterable, Iterator
 from typing import TypeVar
 
+from entitysdk.compat import Self
 from entitysdk.exception import IteratorResultError
-
-if sys.version_info < (3, 11):  # pragma: no cover
-    from typing_extensions import Self
-else:
-    from typing import Self
 
 ResultType = TypeVar("ResultType")
 
