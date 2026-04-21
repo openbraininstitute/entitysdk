@@ -6,9 +6,10 @@ import pytest
 from entitysdk.downloaders.memodel import download_memodel
 from entitysdk.exception import IteratorResultError, StagingError
 from entitysdk.models.cell_morphology import CellMorphology
+from entitysdk.models.cell_morphology_protocol import CellMorphologyProtocol
 from entitysdk.models.emodel import EModel
 from entitysdk.models.memodel import MEModel
-from entitysdk.types import AssetLabel, ContentType, ValidationStatus
+from entitysdk.types import AssetLabel, CellMorphologyGenerationType, ContentType, ValidationStatus
 
 
 def _mock_morph_asset_response(asset_id):
@@ -165,6 +166,9 @@ def test_download_memodel(
         },
     )
 
+    cell_morphology_protocol = CellMorphologyProtocol(
+        generation_type=CellMorphologyGenerationType.placeholder
+    )
     memodel = MEModel(
         id=memodel_id,
         name="foo",
@@ -179,7 +183,10 @@ def test_download_memodel(
         },
         validation_status=ValidationStatus.done,
         morphology=CellMorphology(
-            id=morph_id, name="foo", assets=[_mock_morph_asset_response(morph_asset_id)]
+            id=morph_id,
+            name="foo",
+            cell_morphology_protocol=cell_morphology_protocol,
+            assets=[_mock_morph_asset_response(morph_asset_id)],
         ),
         emodel=EModel(
             id=emodel_id,

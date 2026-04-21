@@ -20,6 +20,8 @@ from entitysdk.models import (
     Subject,
 )
 from entitysdk.models.brain_region import BrainRegion
+from entitysdk.models.cell_morphology_protocol import CellMorphologyProtocol
+from entitysdk.types import CellMorphologyGenerationType
 
 DATA_DIR = Path(__file__).parent / "data"
 
@@ -316,10 +318,16 @@ def simulation_result_httpx_mocks(
 
 
 @pytest.fixture
-def cell_morphology(brain_region, subject, mtype):
+def cell_morphology_protocol():
+    return CellMorphologyProtocol(generation_type=CellMorphologyGenerationType.placeholder)
+
+
+@pytest.fixture
+def cell_morphology(brain_region, subject, mtype, cell_morphology_protocol):
     return CellMorphology(
         name="cell-morphology",
         description="cell-morphology-description",
+        cell_morphology_protocol=cell_morphology_protocol,
         brain_region=brain_region,
         subject=subject,
         mtypes=[mtype],

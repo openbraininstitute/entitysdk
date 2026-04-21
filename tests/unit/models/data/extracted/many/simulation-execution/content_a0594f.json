@@ -20,12 +20,12 @@
           "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
           "id": "00000000-0000-4000-8000-000001234678",
-          "type": "simulation_result"
+          "type": "emodel"
         }
       ],
       "id": "00000000-0000-4000-8000-000001234678",
       "start_time": "2025-01-01T00:00:00Z",
-      "status": "error",
+      "status": "done",
       "type": "simulation_execution",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -39,9 +39,9 @@
       "used": [
         {
           "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-          "authorized_public": true,
+          "authorized_public": false,
           "id": "00000000-0000-4000-8000-000001234678",
-          "type": "circuit"
+          "type": "cell_morphology"
         }
       ]
     }

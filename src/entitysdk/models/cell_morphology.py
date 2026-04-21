@@ -16,9 +16,9 @@ class CellMorphology(ScientificArtifact):
     """Cell Morphology model."""
 
     cell_morphology_protocol: Annotated[
-        CellMorphologyProtocolUnion | None,
+        CellMorphologyProtocolUnion,
         Field(description="The cell morphology protocol of the morphology."),
-    ] = None
+    ]
     location: Annotated[
         BrainLocation | None,
         Field(description="The location of the morphology in the brain."),

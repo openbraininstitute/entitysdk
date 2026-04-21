@@ -37,7 +37,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "validation_status": "created"
       },
-      "name": "Public u2/0",
+      "name": "original-sim",
       "recording_location": [
         "soma[0]_0.5"
       ],
@@ -90,7 +90,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "validation_status": "created"
       },
-      "name": "Public u1/0",
+      "name": "original-sim",
       "recording_location": [
         "soma[0]_0.5"
       ],
