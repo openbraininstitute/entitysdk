@@ -5,6 +5,8 @@ import pytest
 from entitysdk.downloaders.cell_morphology import download_morphology
 from entitysdk.exception import IteratorResultError
 from entitysdk.models.cell_morphology import CellMorphology
+from entitysdk.models.cell_morphology_protocol import CellMorphologyProtocol
+from entitysdk.types import CellMorphologyGenerationType
 
 
 def _mock_asset_response(asset_id):
@@ -47,7 +49,15 @@ def test_download_morphology(
         content="foo",
     )
 
-    morphology = CellMorphology(id=morph_id, name="foo", assets=[_mock_asset_response(asset_id)])
+    cell_morphology_protocol = CellMorphologyProtocol(
+        generation_type=CellMorphologyGenerationType.placeholder
+    )
+    morphology = CellMorphology(
+        id=morph_id,
+        name="foo",
+        cell_morphology_protocol=cell_morphology_protocol,
+        assets=[_mock_asset_response(asset_id)],
+    )
 
     output_path = download_morphology(
         client=client,

@@ -5,9 +5,9 @@ import pytest
 
 from entitysdk import Client, ProjectContext
 from entitysdk.exception import EntitySDKError
-from entitysdk.models import Asset, CellMorphology
+from entitysdk.models import Asset, CellMorphology, CellMorphologyProtocol
 from entitysdk.route import get_assets_endpoint
-from entitysdk.types import FetchContentStrategy, FetchFileStrategy
+from entitysdk.types import CellMorphologyGenerationType, FetchContentStrategy, FetchFileStrategy
 from entitysdk.utils.store import LocalAssetStore
 
 MOCK_DATE = "2025-11-07 13:59:27.938208+00:00"
@@ -224,10 +224,14 @@ def public_asset_directory_file2_download_httpx_mock(
 
 @pytest.fixture(scope="module")
 def entity(entity_id, public_asset_file_metadata, public_asset_directory_metadata):
+    cell_morphology_protocol = CellMorphologyProtocol(
+        generation_type=CellMorphologyGenerationType.placeholder
+    )
     return CellMorphology(
         id=entity_id,
         name="morphology",
         description="morphology",
+        cell_morphology_protocol=cell_morphology_protocol,
         assets=[
             Asset(**public_asset_file_metadata),
             Asset(**public_asset_directory_metadata),

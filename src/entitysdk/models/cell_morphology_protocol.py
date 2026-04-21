@@ -4,7 +4,6 @@ from typing import Annotated, Any, ClassVar, Literal
 
 from pydantic import ConfigDict, Field, HttpUrl, TypeAdapter
 
-from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.types import (
     CellMorphologyGenerationType,
@@ -107,7 +106,7 @@ CellMorphologyProtocolUnion = Annotated[
 ]
 
 
-class CellMorphologyProtocol(Identifiable):
+class CellMorphologyProtocol(Entity):
     """Polymorphic wrapper for consistent API, to be used for searching and retrieving.
 
     The correct specific protocols are automatically instantiated.

@@ -39,7 +39,7 @@
     "name": "Test License",
     "update_date": "2025-01-01T00:00:00Z"
   },
-  "name": "Public u2/0",
+  "name": "root-circuit",
   "notice_text": null,
   "number_connections": 100000000,
   "number_neurons": 10000000,
