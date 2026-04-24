@@ -21,4 +21,4 @@ class Circuit(ScientificArtifact):
 
     root_circuit_id: ID | None = None
     atlas_id: ID | None = None
-    target_simulator: TargetSimulator | None = None
+    target_simulator: TargetSimulator = TargetSimulator.NEURON
