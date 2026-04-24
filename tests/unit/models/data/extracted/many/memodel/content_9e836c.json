@@ -75,12 +75,10 @@
         "contributions": [
           {
             "agent": {
-              "family_name": "family name 1",
-              "given_name": "given name 1",
+              "alternative_name": "alt name 1",
               "id": "00000000-0000-4000-8000-000001234678",
-              "pref_label": "test_person_1",
-              "sub_id": "00000000-0000-4000-8000-000001234678",
-              "type": "person"
+              "pref_label": "test_organization_1",
+              "type": "organization"
             },
             "id": "00000000-0000-4000-8000-000001234678",
             "role": {
@@ -93,10 +91,12 @@
           },
           {
             "agent": {
-              "alternative_name": "alt name 1",
+              "family_name": "family name 1",
+              "given_name": "given name 1",
               "id": "00000000-0000-4000-8000-000001234678",
-              "pref_label": "test_organization_1",
-              "type": "organization"
+              "pref_label": "test_person_1",
+              "sub_id": "00000000-0000-4000-8000-000001234678",
+              "type": "person"
             },
             "id": "00000000-0000-4000-8000-000001234678",
             "role": {
@@ -391,12 +391,10 @@
         "contributions": [
           {
             "agent": {
-              "family_name": "family name 1",
-              "given_name": "given name 1",
+              "alternative_name": "alt name 1",
               "id": "00000000-0000-4000-8000-000001234678",
-              "pref_label": "test_person_1",
-              "sub_id": "00000000-0000-4000-8000-000001234678",
-              "type": "person"
+              "pref_label": "test_organization_1",
+              "type": "organization"
             },
             "id": "00000000-0000-4000-8000-000001234678",
             "role": {
@@ -409,10 +407,12 @@
           },
           {
             "agent": {
-              "alternative_name": "alt name 1",
+              "family_name": "family name 1",
+              "given_name": "given name 1",
               "id": "00000000-0000-4000-8000-000001234678",
-              "pref_label": "test_organization_1",
-              "type": "organization"
+              "pref_label": "test_person_1",
+              "sub_id": "00000000-0000-4000-8000-000001234678",
+              "type": "person"
             },
             "id": "00000000-0000-4000-8000-000001234678",
             "role": {
@@ -707,12 +707,10 @@
         "contributions": [
           {
             "agent": {
-              "family_name": "family name 1",
-              "given_name": "given name 1",
+              "alternative_name": "alt name 1",
               "id": "00000000-0000-4000-8000-000001234678",
-              "pref_label": "test_person_1",
-              "sub_id": "00000000-0000-4000-8000-000001234678",
-              "type": "person"
+              "pref_label": "test_organization_1",
+              "type": "organization"
             },
             "id": "00000000-0000-4000-8000-000001234678",
             "role": {
@@ -725,10 +723,12 @@
           },
           {
             "agent": {
-              "alternative_name": "alt name 1",
+              "family_name": "family name 1",
+              "given_name": "given name 1",
               "id": "00000000-0000-4000-8000-000001234678",
-              "pref_label": "test_organization_1",
-              "type": "organization"
+              "pref_label": "test_person_1",
+              "sub_id": "00000000-0000-4000-8000-000001234678",
+              "type": "person"
             },
             "id": "00000000-0000-4000-8000-000001234678",
             "role": {
@@ -952,7 +952,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 3,
+    "page_size": 4,
     "total_items": 3
   }
 }

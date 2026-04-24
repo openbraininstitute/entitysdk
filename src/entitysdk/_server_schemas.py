@@ -379,63 +379,6 @@ class CircuitScale(StrEnum):
     whole_brain = "whole_brain"
 
 
-class CircuitUserUpdate(BaseModel):
-    name: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Name")] = "<NOT_SET>"
-    description: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Description")] = (
-        "<NOT_SET>"
-    )
-    license_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="License Id")] = (
-        "<NOT_SET>"
-    )
-    brain_region_id: Annotated[
-        UUID | Literal["<NOT_SET>"] | None, Field(title="Brain Region Id")
-    ] = "<NOT_SET>"
-    subject_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Subject Id")] = (
-        "<NOT_SET>"
-    )
-    experiment_date: Annotated[
-        AwareDatetime | Literal["<NOT_SET>"] | None, Field(title="Experiment Date")
-    ] = "<NOT_SET>"
-    contact_email: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Contact Email")] = (
-        "<NOT_SET>"
-    )
-    published_in: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Published In")] = (
-        "<NOT_SET>"
-    )
-    notice_text: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Notice Text")] = (
-        "<NOT_SET>"
-    )
-    has_morphologies: Annotated[
-        bool | Literal["<NOT_SET>"] | None, Field(title="Has Morphologies")
-    ] = "<NOT_SET>"
-    has_point_neurons: Annotated[
-        bool | Literal["<NOT_SET>"] | None, Field(title="Has Point Neurons")
-    ] = "<NOT_SET>"
-    has_electrical_cell_models: Annotated[
-        bool | Literal["<NOT_SET>"] | None, Field(title="Has Electrical Cell Models")
-    ] = "<NOT_SET>"
-    has_spines: Annotated[bool | Literal["<NOT_SET>"] | None, Field(title="Has Spines")] = (
-        "<NOT_SET>"
-    )
-    number_neurons: Annotated[int | Literal["<NOT_SET>"] | None, Field(title="Number Neurons")] = (
-        "<NOT_SET>"
-    )
-    number_synapses: Annotated[
-        int | Literal["<NOT_SET>"] | None, Field(title="Number Synapses")
-    ] = "<NOT_SET>"
-    number_connections: Annotated[
-        int | Literal["<NOT_SET>"] | None, Field(title="Number Connections")
-    ] = "<NOT_SET>"
-    scale: Annotated[CircuitScale | Literal["<NOT_SET>"] | None, Field(title="Scale")] = "<NOT_SET>"
-    build_category: Annotated[
-        CircuitBuildCategory | Literal["<NOT_SET>"] | None, Field(title="Build Category")
-    ] = "<NOT_SET>"
-    root_circuit_id: Annotated[
-        UUID | Literal["<NOT_SET>"] | None, Field(title="Root Circuit Id")
-    ] = "<NOT_SET>"
-    atlas_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Atlas Id")] = "<NOT_SET>"
-
-
 class ProtocolDocument(RootModel[AnyUrl]):
     root: Annotated[AnyUrl, Field(title="Protocol Document")]
 
@@ -2386,6 +2329,13 @@ class SubjectUserUpdate(BaseModel):
     strain_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Strain Id")] = "<NOT_SET>"
 
 
+class TargetSimulator(StrEnum):
+    NEURON = "NEURON"
+    CORENEURON = "CORENEURON"
+    LearningEngine = "LearningEngine"
+    Brian2 = "Brian2"
+
+
 class TaskActivityType(StrEnum):
     circuit_simulation__config_generation = "circuit_simulation__config_generation"
     circuit_simulation__execution = "circuit_simulation__execution"
@@ -2893,6 +2843,7 @@ class CircuitCreate(BaseModel):
     build_category: CircuitBuildCategory
     root_circuit_id: Annotated[UUID | None, Field(title="Root Circuit Id")] = None
     atlas_id: Annotated[UUID | None, Field(title="Atlas Id")] = None
+    target_simulator: TargetSimulator | None = "NEURON"
 
 
 class CircuitExtractionConfigGenerationRead(BaseModel):
@@ -2969,6 +2920,66 @@ class CircuitExtractionExecutionUserUpdate(BaseModel):
     ] = "<NOT_SET>"
     status: Annotated[
         ActivityStatus | NotSet | None, Field(title="Status", validate_default=True)
+    ] = "<NOT_SET>"
+
+
+class CircuitUserUpdate(BaseModel):
+    name: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Name")] = "<NOT_SET>"
+    description: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Description")] = (
+        "<NOT_SET>"
+    )
+    license_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="License Id")] = (
+        "<NOT_SET>"
+    )
+    brain_region_id: Annotated[
+        UUID | Literal["<NOT_SET>"] | None, Field(title="Brain Region Id")
+    ] = "<NOT_SET>"
+    subject_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Subject Id")] = (
+        "<NOT_SET>"
+    )
+    experiment_date: Annotated[
+        AwareDatetime | Literal["<NOT_SET>"] | None, Field(title="Experiment Date")
+    ] = "<NOT_SET>"
+    contact_email: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Contact Email")] = (
+        "<NOT_SET>"
+    )
+    published_in: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Published In")] = (
+        "<NOT_SET>"
+    )
+    notice_text: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Notice Text")] = (
+        "<NOT_SET>"
+    )
+    has_morphologies: Annotated[
+        bool | Literal["<NOT_SET>"] | None, Field(title="Has Morphologies")
+    ] = "<NOT_SET>"
+    has_point_neurons: Annotated[
+        bool | Literal["<NOT_SET>"] | None, Field(title="Has Point Neurons")
+    ] = "<NOT_SET>"
+    has_electrical_cell_models: Annotated[
+        bool | Literal["<NOT_SET>"] | None, Field(title="Has Electrical Cell Models")
+    ] = "<NOT_SET>"
+    has_spines: Annotated[bool | Literal["<NOT_SET>"] | None, Field(title="Has Spines")] = (
+        "<NOT_SET>"
+    )
+    number_neurons: Annotated[int | Literal["<NOT_SET>"] | None, Field(title="Number Neurons")] = (
+        "<NOT_SET>"
+    )
+    number_synapses: Annotated[
+        int | Literal["<NOT_SET>"] | None, Field(title="Number Synapses")
+    ] = "<NOT_SET>"
+    number_connections: Annotated[
+        int | Literal["<NOT_SET>"] | None, Field(title="Number Connections")
+    ] = "<NOT_SET>"
+    scale: Annotated[CircuitScale | Literal["<NOT_SET>"] | None, Field(title="Scale")] = "<NOT_SET>"
+    build_category: Annotated[
+        CircuitBuildCategory | Literal["<NOT_SET>"] | None, Field(title="Build Category")
+    ] = "<NOT_SET>"
+    root_circuit_id: Annotated[
+        UUID | Literal["<NOT_SET>"] | None, Field(title="Root Circuit Id")
+    ] = "<NOT_SET>"
+    atlas_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Atlas Id")] = "<NOT_SET>"
+    target_simulator: Annotated[
+        TargetSimulator | Literal["<NOT_SET>"] | None, Field(title="Target Simulator")
     ] = "<NOT_SET>"
 
 
@@ -4441,6 +4452,7 @@ class CircuitRead(BaseModel):
     build_category: CircuitBuildCategory
     root_circuit_id: Annotated[UUID | None, Field(title="Root Circuit Id")] = None
     atlas_id: Annotated[UUID | None, Field(title="Atlas Id")] = None
+    target_simulator: TargetSimulator | None = "NEURON"
 
 
 class EMCellMeshRead(BaseModel):

@@ -36,20 +36,20 @@
       },
       "measurements": [
         {
-          "id": 3,
+          "id": 7,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 4,
+          "id": 8,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
         }
       ],
       "mtypes": [],
-      "name": "Public u2/0",
+      "name": "my-name",
       "subject": {
         "age_max": null,
         "age_min": null,
@@ -119,20 +119,20 @@
       },
       "measurements": [
         {
-          "id": 1,
+          "id": 3,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 2,
+          "id": 4,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
         }
       ],
       "mtypes": [],
-      "name": "Public u1/0",
+      "name": "my-name",
       "subject": {
         "age_max": null,
         "age_min": null,

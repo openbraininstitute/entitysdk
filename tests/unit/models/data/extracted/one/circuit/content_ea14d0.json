@@ -12,7 +12,7 @@
     "name": "RedRegion",
     "parent_structure_id": null
   },
-  "build_category": "computational_model",
+  "build_category": "em_reconstruction",
   "contact_email": null,
   "contributions": [],
   "created_by": {
@@ -24,12 +24,12 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "description",
+  "description": "root-circuit-description",
   "experiment_date": null,
   "has_electrical_cell_models": true,
   "has_morphologies": true,
-  "has_point_neurons": false,
-  "has_spines": false,
+  "has_point_neurons": true,
+  "has_spines": true,
   "id": "00000000-0000-4000-8000-000001234678",
   "license": {
     "creation_date": "2025-01-01T00:00:00Z",
@@ -39,14 +39,14 @@
     "name": "Test License",
     "update_date": "2025-01-01T00:00:00Z"
   },
-  "name": "name",
+  "name": "Public u1/0",
   "notice_text": null,
-  "number_connections": 10,
-  "number_neurons": 5,
-  "number_synapses": 100,
+  "number_connections": 100000000,
+  "number_neurons": 10000000,
+  "number_synapses": 1000000000,
   "published_in": null,
-  "root_circuit_id": "00000000-0000-4000-8000-000001234678",
-  "scale": "microcircuit",
+  "root_circuit_id": null,
+  "scale": "whole_brain",
   "subject": {
     "age_max": null,
     "age_min": null,
@@ -69,13 +69,14 @@
     },
     "weight": 1.5
   },
+  "target_simulator": "CORENEURON",
   "type": "circuit",
   "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
-    "family_name": null,
-    "given_name": null,
+    "family_name": "courcol",
+    "given_name": "jd",
     "id": "00000000-0000-4000-8000-000001234678",
-    "pref_label": "Admin User",
+    "pref_label": "jd courcol",
     "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }

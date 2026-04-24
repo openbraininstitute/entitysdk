@@ -58,14 +58,14 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "2_description",
+      "description": "1_description",
       "etypes": [
         {
-          "alt_label": "etype-emodel-2",
+          "alt_label": "etype-emodel-1",
           "creation_date": "2025-01-01T00:00:00Z",
           "definition": "e1d",
           "id": "00000000-0000-4000-8000-000001234678",
-          "pref_label": "etype-emodel-2",
+          "pref_label": "etype-emodel-1",
           "update_date": "2025-01-01T00:00:00Z"
         }
       ],
@@ -97,8 +97,8 @@
       "ion_channel_models": [],
       "iteration": "test iteration",
       "mtypes": [],
-      "name": "2",
-      "score": 20.0,
+      "name": "1",
+      "score": 10.0,
       "seed": -1,
       "species": {
         "id": "00000000-0000-4000-8000-000001234678",
@@ -125,7 +125,7 @@
   ],
   "facets": null,
   "pagination": {
-    "page": 1,
+    "page": 2,
     "page_size": 1,
     "total_items": 3
   }

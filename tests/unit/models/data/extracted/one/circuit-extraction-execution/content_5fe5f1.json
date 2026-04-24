@@ -5,7 +5,7 @@
     "family_name": null,
     "given_name": null,
     "id": "00000000-0000-4000-8000-000001234678",
-    "pref_label": "Regular User With Project Id",
+    "pref_label": "Regular User With Different Project Id",
     "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
@@ -16,9 +16,9 @@
   "generated": [
     {
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "id": "00000000-0000-4000-8000-000001234678",
-      "type": "circuit_extraction_config"
+      "type": "circuit"
     }
   ],
   "id": "00000000-0000-4000-8000-000001234678",
@@ -30,7 +30,7 @@
     "family_name": null,
     "given_name": null,
     "id": "00000000-0000-4000-8000-000001234678",
-    "pref_label": "Regular User With Project Id",
+    "pref_label": "Regular User With Different Project Id",
     "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   },
@@ -39,7 +39,7 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "id": "00000000-0000-4000-8000-000001234678",
-      "type": "circuit_extraction_campaign"
+      "type": "circuit_extraction_config"
     }
   ]
 }

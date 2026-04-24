@@ -11,8 +11,8 @@
       },
       "creation_date": "2025-01-01T00:00:00Z",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Test Species 1",
-      "taxonomy_id": "12345_1",
+      "name": "my-species",
+      "taxonomy_id": "NCBITaxon:1000",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": null,

@@ -1,7 +1,7 @@
 """Circuit model."""
 
 from entitysdk.models.scientific_artifact import ScientificArtifact
-from entitysdk.types import ID, CircuitBuildCategory, CircuitScale
+from entitysdk.types import ID, CircuitBuildCategory, CircuitScale, TargetSimulator
 
 
 class Circuit(ScientificArtifact):
@@ -21,3 +21,4 @@ class Circuit(ScientificArtifact):
 
     root_circuit_id: ID | None = None
     atlas_id: ID | None = None
+    target_simulator: TargetSimulator = TargetSimulator.NEURON
