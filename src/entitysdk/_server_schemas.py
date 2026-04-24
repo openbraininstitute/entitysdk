@@ -820,10 +820,9 @@ class ExternalUrlAdminUpdate(BaseModel):
     source: Annotated[ExternalSource | Literal["<NOT_SET>"] | None, Field(title="Source")] = (
         "<NOT_SET>"
     )
-    url: Annotated[
-        Url | Literal["<NOT_SET>"] | None,
-        Field(default_factory=lambda: Url("<NOT_SET>"), title="Url"),
-    ]
+    url: Annotated[Url | Literal["<NOT_SET>"] | None, Field(title="Url", validate_default=True)] = (
+        "<NOT_SET>"
+    )
 
 
 class ExternalUrlCreate(BaseModel):
@@ -848,7 +847,9 @@ class HierarchyNode(BaseModel):
     id: Annotated[UUID, Field(title="Id")]
     name: Annotated[str, Field(title="Name")]
     parent_id: Annotated[UUID | None, Field(title="Parent Id")]
-    children: Annotated[list[HierarchyNode] | None, Field(default_factory=list, title="Children")]
+    children: Annotated[
+        list[HierarchyNode] | None, Field(title="Children", validate_default=True)
+    ] = []
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
 
@@ -1674,9 +1675,9 @@ class PointLocationBase(BaseModel):
 class PublicationAdminUpdate(BaseModel):
     DOI: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Doi")] = "<NOT_SET>"
     title: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Title")] = "<NOT_SET>"
-    authors: Annotated[list[Author] | Literal["<NOT_SET>"] | None, Field(title="Authors")] = (
-        "<NOT_SET>"
-    )
+    authors: Annotated[
+        list[Author] | Literal["<NOT_SET>"] | None, Field(title="Authors", validate_default=True)
+    ] = "<NOT_SET>"
     publication_year: Annotated[
         int | Literal["<NOT_SET>"] | None, Field(title="Publication Year")
     ] = "<NOT_SET>"
@@ -1869,21 +1870,17 @@ class SimulationExecutionUserUpdate(BaseModel):
     executor: ExecutorType | None = None
     execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
     start_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Start Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="Start Time", validate_default=True)
+    ] = "<NOT_SET>"
     end_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="End Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="End Time", validate_default=True)
+    ] = "<NOT_SET>"
     generated_ids: Annotated[
-        list[UUID] | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
-    ]
+        list[UUID] | NotSet | None, Field(title="Generated Ids", validate_default=True)
+    ] = "<NOT_SET>"
     status: Annotated[
-        ActivityStatus | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
-    ]
+        ActivityStatus | NotSet | None, Field(title="Status", validate_default=True)
+    ] = "<NOT_SET>"
 
 
 class SimulationGenerationCreate(BaseModel):
@@ -1913,21 +1910,17 @@ class SimulationGenerationRead(BaseModel):
 
 class SimulationGenerationUserUpdate(BaseModel):
     start_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Start Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="Start Time", validate_default=True)
+    ] = "<NOT_SET>"
     end_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="End Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="End Time", validate_default=True)
+    ] = "<NOT_SET>"
     generated_ids: Annotated[
-        list[UUID] | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
-    ]
+        list[UUID] | NotSet | None, Field(title="Generated Ids", validate_default=True)
+    ] = "<NOT_SET>"
     status: Annotated[
-        ActivityStatus | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
-    ]
+        ActivityStatus | NotSet | None, Field(title="Status", validate_default=True)
+    ] = "<NOT_SET>"
 
 
 class SimulationResultCreate(BaseModel):
@@ -2055,8 +2048,8 @@ class SkeletonizationCampaignCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
     input_meshes: Annotated[
-        list[NestedEntityCreate] | None, Field(default_factory=list, title="Input Meshes")
-    ]
+        list[NestedEntityCreate] | None, Field(title="Input Meshes", validate_default=True)
+    ] = []
 
 
 class SkeletonizationCampaignUserUpdate(BaseModel):
@@ -2068,7 +2061,8 @@ class SkeletonizationCampaignUserUpdate(BaseModel):
         dict[str, Any] | Literal["<NOT_SET>"] | None, Field(title="Scan Parameters")
     ] = "<NOT_SET>"
     input_meshes: Annotated[
-        list[NestedEntityCreate] | Literal["<NOT_SET>"] | None, Field(title="Input Meshes")
+        list[NestedEntityCreate] | Literal["<NOT_SET>"] | None,
+        Field(title="Input Meshes", validate_default=True),
     ] = "<NOT_SET>"
 
 
@@ -2108,21 +2102,17 @@ class SkeletonizationConfigGenerationRead(BaseModel):
 
 class SkeletonizationConfigGenerationUserUpdate(BaseModel):
     start_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Start Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="Start Time", validate_default=True)
+    ] = "<NOT_SET>"
     end_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="End Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="End Time", validate_default=True)
+    ] = "<NOT_SET>"
     generated_ids: Annotated[
-        list[UUID] | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
-    ]
+        list[UUID] | NotSet | None, Field(title="Generated Ids", validate_default=True)
+    ] = "<NOT_SET>"
     status: Annotated[
-        ActivityStatus | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
-    ]
+        ActivityStatus | NotSet | None, Field(title="Status", validate_default=True)
+    ] = "<NOT_SET>"
 
 
 class SkeletonizationConfigUserUpdate(BaseModel):
@@ -2174,21 +2164,17 @@ class SkeletonizationExecutionUserUpdate(BaseModel):
     executor: ExecutorType | None = None
     execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
     start_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Start Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="Start Time", validate_default=True)
+    ] = "<NOT_SET>"
     end_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="End Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="End Time", validate_default=True)
+    ] = "<NOT_SET>"
     generated_ids: Annotated[
-        list[UUID] | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
-    ]
+        list[UUID] | NotSet | None, Field(title="Generated Ids", validate_default=True)
+    ] = "<NOT_SET>"
     status: Annotated[
-        ActivityStatus | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
-    ]
+        ActivityStatus | NotSet | None, Field(title="Status", validate_default=True)
+    ] = "<NOT_SET>"
 
 
 class SlicingDirectionType(StrEnum):
@@ -2370,21 +2356,17 @@ class TaskActivityUserUpdate(BaseModel):
     execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
     task_activity_type: TaskActivityType | None = None
     start_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Start Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="Start Time", validate_default=True)
+    ] = "<NOT_SET>"
     end_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="End Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="End Time", validate_default=True)
+    ] = "<NOT_SET>"
     generated_ids: Annotated[
-        list[UUID] | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
-    ]
+        list[UUID] | NotSet | None, Field(title="Generated Ids", validate_default=True)
+    ] = "<NOT_SET>"
     status: Annotated[
-        ActivityStatus | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
-    ]
+        ActivityStatus | NotSet | None, Field(title="Status", validate_default=True)
+    ] = "<NOT_SET>"
 
 
 class TaskConfigType(StrEnum):
@@ -2415,7 +2397,8 @@ class TaskConfigUserUpdate(BaseModel):
         UUID | Literal["<NOT_SET>"] | None, Field(title="Task Config Generator Id")
     ] = "<NOT_SET>"
     inputs: Annotated[
-        list[NestedEntityCreate] | Literal["<NOT_SET>"] | None, Field(title="Inputs")
+        list[NestedEntityCreate] | Literal["<NOT_SET>"] | None,
+        Field(title="Inputs", validate_default=True),
     ] = "<NOT_SET>"
 
 
@@ -2489,21 +2472,17 @@ class ValidationStatus(StrEnum):
 
 class ValidationUserUpdate(BaseModel):
     start_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Start Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="Start Time", validate_default=True)
+    ] = "<NOT_SET>"
     end_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="End Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="End Time", validate_default=True)
+    ] = "<NOT_SET>"
     generated_ids: Annotated[
-        list[UUID] | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
-    ]
+        list[UUID] | NotSet | None, Field(title="Generated Ids", validate_default=True)
+    ] = "<NOT_SET>"
     status: Annotated[
-        ActivityStatus | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
-    ]
+        ActivityStatus | NotSet | None, Field(title="Status", validate_default=True)
+    ] = "<NOT_SET>"
 
 
 class WithinBrainRegionDirection(StrEnum):
@@ -2523,7 +2502,8 @@ class AnalysisNotebookEnvironmentCreate(BaseModel):
 
 class AnalysisNotebookEnvironmentUpdate(BaseModel):
     runtime_info: Annotated[
-        RuntimeInfo | Literal["<NOT_SET>"] | None, Field(title="Runtime Info")
+        RuntimeInfo | Literal["<NOT_SET>"] | None,
+        Field(title="Runtime Info", validate_default=True),
     ] = "<NOT_SET>"
 
 
@@ -2548,21 +2528,17 @@ class AnalysisNotebookExecutionUpdate(BaseModel):
     executor: ExecutorType | None = None
     execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
     start_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Start Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="Start Time", validate_default=True)
+    ] = "<NOT_SET>"
     end_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="End Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="End Time", validate_default=True)
+    ] = "<NOT_SET>"
     generated_ids: Annotated[
-        list[UUID] | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
-    ]
+        list[UUID] | NotSet | None, Field(title="Generated Ids", validate_default=True)
+    ] = "<NOT_SET>"
     status: Annotated[
-        ActivityStatus | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
-    ]
+        ActivityStatus | NotSet | None, Field(title="Status", validate_default=True)
+    ] = "<NOT_SET>"
     analysis_notebook_template_id: Annotated[
         UUID | None, Field(title="Analysis Notebook Template Id")
     ] = None
@@ -2576,9 +2552,7 @@ class AnalysisNotebookTemplateInputType(BaseModel):
     entity_type: EntityType
     is_list: Annotated[bool | None, Field(title="Is List")] = False
     count_min: Annotated[int | None, Field(ge=0, title="Count Min")] = 1
-    count_max: Annotated[
-        CountMax | None, Field(default_factory=lambda: CountMax(1), title="Count Max")
-    ]
+    count_max: Annotated[CountMax | None, Field(title="Count Max", validate_default=True)] = 1
 
 
 class AnalysisNotebookTemplateSpecifications(BaseModel):
@@ -2586,8 +2560,8 @@ class AnalysisNotebookTemplateSpecifications(BaseModel):
     python: PythonDependency | None = None
     docker: DockerDependency | None = None
     inputs: Annotated[
-        list[AnalysisNotebookTemplateInputType] | None, Field(default_factory=list, title="Inputs")
-    ]
+        list[AnalysisNotebookTemplateInputType] | None, Field(title="Inputs", validate_default=True)
+    ] = []
 
 
 class AnalysisNotebookTemplateUpdate(BaseModel):
@@ -2597,7 +2571,7 @@ class AnalysisNotebookTemplateUpdate(BaseModel):
     )
     specifications: Annotated[
         AnalysisNotebookTemplateSpecifications | Literal["<NOT_SET>"] | None,
-        Field(title="Specifications"),
+        Field(title="Specifications", validate_default=True),
     ] = "<NOT_SET>"
     scale: Annotated[AnalysisScale | Literal["<NOT_SET>"] | None, Field(title="Scale")] = (
         "<NOT_SET>"
@@ -2722,21 +2696,17 @@ class CalibrationRead(BaseModel):
 
 class CalibrationUserUpdate(BaseModel):
     start_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Start Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="Start Time", validate_default=True)
+    ] = "<NOT_SET>"
     end_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="End Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="End Time", validate_default=True)
+    ] = "<NOT_SET>"
     generated_ids: Annotated[
-        list[UUID] | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
-    ]
+        list[UUID] | NotSet | None, Field(title="Generated Ids", validate_default=True)
+    ] = "<NOT_SET>"
     status: Annotated[
-        ActivityStatus | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
-    ]
+        ActivityStatus | NotSet | None, Field(title="Status", validate_default=True)
+    ] = "<NOT_SET>"
 
 
 class CellMorphologyCreate(BaseModel):
@@ -2808,7 +2778,8 @@ class CellMorphologyUserUpdate(BaseModel):
         "<NOT_SET>"
     )
     location: Annotated[
-        PointLocationBase | Literal["<NOT_SET>"] | None, Field(title="Location")
+        PointLocationBase | Literal["<NOT_SET>"] | None,
+        Field(title="Location", validate_default=True),
     ] = "<NOT_SET>"
     legacy_id: Annotated[list[str] | Literal["<NOT_SET>"] | None, Field(title="Legacy Id")] = (
         "<NOT_SET>"
@@ -2893,21 +2864,17 @@ class CircuitExtractionConfigGenerationRead(BaseModel):
 
 class CircuitExtractionConfigGenerationUserUpdate(BaseModel):
     start_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Start Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="Start Time", validate_default=True)
+    ] = "<NOT_SET>"
     end_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="End Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="End Time", validate_default=True)
+    ] = "<NOT_SET>"
     generated_ids: Annotated[
-        list[UUID] | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
-    ]
+        list[UUID] | NotSet | None, Field(title="Generated Ids", validate_default=True)
+    ] = "<NOT_SET>"
     status: Annotated[
-        ActivityStatus | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
-    ]
+        ActivityStatus | NotSet | None, Field(title="Status", validate_default=True)
+    ] = "<NOT_SET>"
 
 
 class CircuitExtractionExecutionCreate(BaseModel):
@@ -2943,21 +2910,17 @@ class CircuitExtractionExecutionUserUpdate(BaseModel):
     executor: ExecutorType | None = None
     execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
     start_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Start Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="Start Time", validate_default=True)
+    ] = "<NOT_SET>"
     end_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="End Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="End Time", validate_default=True)
+    ] = "<NOT_SET>"
     generated_ids: Annotated[
-        list[UUID] | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
-    ]
+        list[UUID] | NotSet | None, Field(title="Generated Ids", validate_default=True)
+    ] = "<NOT_SET>"
     status: Annotated[
-        ActivityStatus | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
-    ]
+        ActivityStatus | NotSet | None, Field(title="Status", validate_default=True)
+    ] = "<NOT_SET>"
 
 
 class CircuitUserUpdate(BaseModel):
@@ -3196,8 +3159,8 @@ class EMDenseReconstructionDatasetAdminUpdate(BaseModel):
     )
     protocol_document: Annotated[
         ProtocolDocument4 | Literal["<NOT_SET>"] | None,
-        Field(default_factory=lambda: ProtocolDocument4("<NOT_SET>"), title="Protocol Document"),
-    ]
+        Field(title="Protocol Document", validate_default=True),
+    ] = "<NOT_SET>"
     fixation: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Fixation")] = "<NOT_SET>"
     staining_type: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Staining Type")] = (
         "<NOT_SET>"
@@ -3232,22 +3195,19 @@ class EMDenseReconstructionDatasetAdminUpdate(BaseModel):
         float | Literal["<NOT_SET>"] | None, Field(title="Volume Resolution Z Nm")
     ] = "<NOT_SET>"
     release_url: Annotated[
-        ReleaseUrl | Literal["<NOT_SET>"] | None,
-        Field(default_factory=lambda: ReleaseUrl("<NOT_SET>"), title="Release Url"),
-    ]
+        ReleaseUrl | Literal["<NOT_SET>"] | None, Field(title="Release Url", validate_default=True)
+    ] = "<NOT_SET>"
     cave_client_url: Annotated[
         CaveClientUrl | Literal["<NOT_SET>"] | None,
-        Field(default_factory=lambda: CaveClientUrl("<NOT_SET>"), title="Cave Client Url"),
-    ]
+        Field(title="Cave Client Url", validate_default=True),
+    ] = "<NOT_SET>"
     cave_datastack: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Cave Datastack")] = (
         "<NOT_SET>"
     )
     precomputed_mesh_url: Annotated[
         PrecomputedMeshUrl | Literal["<NOT_SET>"] | None,
-        Field(
-            default_factory=lambda: PrecomputedMeshUrl("<NOT_SET>"), title="Precomputed Mesh Url"
-        ),
-    ]
+        Field(title="Precomputed Mesh Url", validate_default=True),
+    ] = "<NOT_SET>"
     cell_identifying_property: Annotated[
         str | Literal["<NOT_SET>"] | None, Field(title="Cell Identifying Property")
     ] = "<NOT_SET>"
@@ -3329,11 +3289,11 @@ class EModelCreate(BaseModel):
     ion_channel_models: Annotated[
         list[NestedEntityCreate] | None,
         Field(
-            default_factory=list,
             description="List of ion channel models (only ids).",
             title="Ion Channel Models",
+            validate_default=True,
         ),
-    ]
+    ] = []
 
 
 class EModelUserUpdate(BaseModel):
@@ -3355,7 +3315,8 @@ class EModelUserUpdate(BaseModel):
         UUID | Literal["<NOT_SET>"] | None, Field(title="Exemplar Morphology Id")
     ] = "<NOT_SET>"
     ion_channel_models: Annotated[
-        list[NestedEntityCreate] | Literal["<NOT_SET>"] | None, Field(title="Ion Channel Models")
+        list[NestedEntityCreate] | Literal["<NOT_SET>"] | None,
+        Field(title="Ion Channel Models", validate_default=True),
     ] = "<NOT_SET>"
 
 
@@ -3551,8 +3512,8 @@ class IonChannelModelingCampaignCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
     input_recordings: Annotated[
-        list[NestedEntityCreate] | None, Field(default_factory=list, title="Input Recordings")
-    ]
+        list[NestedEntityCreate] | None, Field(title="Input Recordings", validate_default=True)
+    ] = []
 
 
 class IonChannelModelingCampaignUserUpdate(BaseModel):
@@ -3564,7 +3525,8 @@ class IonChannelModelingCampaignUserUpdate(BaseModel):
         dict[str, Any] | Literal["<NOT_SET>"] | None, Field(title="Scan Parameters")
     ] = "<NOT_SET>"
     input_recordings: Annotated[
-        list[NestedEntityCreate] | Literal["<NOT_SET>"] | None, Field(title="Input Recordings")
+        list[NestedEntityCreate] | Literal["<NOT_SET>"] | None,
+        Field(title="Input Recordings", validate_default=True),
     ] = "<NOT_SET>"
 
 
@@ -3586,21 +3548,17 @@ class IonChannelModelingConfigGenerationRead(BaseModel):
 
 class IonChannelModelingConfigGenerationUserUpdate(BaseModel):
     start_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Start Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="Start Time", validate_default=True)
+    ] = "<NOT_SET>"
     end_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="End Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="End Time", validate_default=True)
+    ] = "<NOT_SET>"
     generated_ids: Annotated[
-        list[UUID] | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
-    ]
+        list[UUID] | NotSet | None, Field(title="Generated Ids", validate_default=True)
+    ] = "<NOT_SET>"
     status: Annotated[
-        ActivityStatus | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
-    ]
+        ActivityStatus | NotSet | None, Field(title="Status", validate_default=True)
+    ] = "<NOT_SET>"
 
 
 class IonChannelModelingExecutionRead(BaseModel):
@@ -3625,21 +3583,17 @@ class IonChannelModelingExecutionUserUpdate(BaseModel):
     executor: ExecutorType | None = None
     execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
     start_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Start Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="Start Time", validate_default=True)
+    ] = "<NOT_SET>"
     end_time: Annotated[
-        AwareDatetime | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="End Time"),
-    ]
+        AwareDatetime | NotSet | None, Field(title="End Time", validate_default=True)
+    ] = "<NOT_SET>"
     generated_ids: Annotated[
-        list[UUID] | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Generated Ids"),
-    ]
+        list[UUID] | NotSet | None, Field(title="Generated Ids", validate_default=True)
+    ] = "<NOT_SET>"
     status: Annotated[
-        ActivityStatus | NotSet | None,
-        Field(default_factory=lambda: NotSet("<NOT_SET>"), title="Status"),
-    ]
+        ActivityStatus | NotSet | None, Field(title="Status", validate_default=True)
+    ] = "<NOT_SET>"
 
 
 class IonChannelRead(BaseModel):
@@ -4049,7 +4003,7 @@ class NeuronBlock(BaseModel):
         list[dict[str, str | None]] | None, Field(alias="global", title="Global")
     ] = []
     range: Annotated[list[dict[str, str | None]] | None, Field(title="Range")] = []
-    useion: Annotated[list[UseIon] | None, Field(default_factory=list, title="Useion")]
+    useion: Annotated[list[UseIon] | None, Field(title="Useion", validate_default=True)] = []
     nonspecific: Annotated[list[dict[str, str | None]] | None, Field(title="Nonspecific")] = []
 
 
@@ -4238,9 +4192,9 @@ class TaskConfigCreate(BaseModel):
     inputs: Annotated[
         list[NestedEntityCreate] | None,
         Field(
-            default_factory=list, description="List of input entities (only ids).", title="Inputs"
+            description="List of input entities (only ids).", title="Inputs", validate_default=True
         ),
-    ]
+    ] = []
 
 
 class TaskConfigRead(BaseModel):
@@ -4261,8 +4215,8 @@ class TaskConfigRead(BaseModel):
     task_config_generator_id: Annotated[UUID | None, Field(title="Task Config Generator Id")] = None
     inputs: Annotated[
         list[NestedEntityRead] | None,
-        Field(default_factory=list, description="List of input entities.", title="Inputs"),
-    ]
+        Field(description="List of input entities.", title="Inputs", validate_default=True),
+    ] = []
 
 
 class ValidationResultRead(BaseModel):
@@ -4768,7 +4722,8 @@ class ExperimentalBoutonDensityUserUpdate(BaseModel):
     ] = "<NOT_SET>"
     legacy_id: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Legacy Id")] = "<NOT_SET>"
     measurements: Annotated[
-        list[MeasurementRecordCreate] | Literal["<NOT_SET>"] | None, Field(title="Measurements")
+        list[MeasurementRecordCreate] | Literal["<NOT_SET>"] | None,
+        Field(title="Measurements", validate_default=True),
     ] = "<NOT_SET>"
 
 
@@ -4820,7 +4775,8 @@ class ExperimentalNeuronDensityUserUpdate(BaseModel):
     ] = "<NOT_SET>"
     legacy_id: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Legacy Id")] = "<NOT_SET>"
     measurements: Annotated[
-        list[MeasurementRecordCreate] | Literal["<NOT_SET>"] | None, Field(title="Measurements")
+        list[MeasurementRecordCreate] | Literal["<NOT_SET>"] | None,
+        Field(title="Measurements", validate_default=True),
     ] = "<NOT_SET>"
 
 
@@ -4878,7 +4834,8 @@ class ExperimentalSynapsesPerConnectionUserUpdate(BaseModel):
     ] = "<NOT_SET>"
     legacy_id: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Legacy Id")] = "<NOT_SET>"
     measurements: Annotated[
-        list[MeasurementRecordCreate] | Literal["<NOT_SET>"] | None, Field(title="Measurements")
+        list[MeasurementRecordCreate] | Literal["<NOT_SET>"] | None,
+        Field(title="Measurements", validate_default=True),
     ] = "<NOT_SET>"
     pre_mtype_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Pre Mtype Id")] = (
         "<NOT_SET>"
@@ -5090,7 +5047,8 @@ class IonChannelModelUserUpdate(BaseModel):
         "<NOT_SET>"
     )
     neuron_block: Annotated[
-        NeuronBlock | Literal["<NOT_SET>"] | None, Field(title="Neuron Block")
+        NeuronBlock | Literal["<NOT_SET>"] | None,
+        Field(title="Neuron Block", validate_default=True),
     ] = "<NOT_SET>"
     conductance_name: Annotated[
         str | Literal["<NOT_SET>"] | None, Field(title="Conductance Name")
@@ -5514,7 +5472,8 @@ class MeasurementAnnotationUserUpdate(BaseModel):
         MeasurableEntity | Literal["<NOT_SET>"] | None, Field(title="Entity Type")
     ] = "<NOT_SET>"
     measurement_kinds: Annotated[
-        list[MeasurementKindCreate] | Literal["<NOT_SET>"] | None, Field(title="Measurement Kinds")
+        list[MeasurementKindCreate] | Literal["<NOT_SET>"] | None,
+        Field(title="Measurement Kinds", validate_default=True),
     ] = "<NOT_SET>"
 
 
