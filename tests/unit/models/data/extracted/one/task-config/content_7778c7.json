@@ -18,7 +18,7 @@
   "meta": {
     "foo": "bar"
   },
-  "name": "task-config",
+  "name": "config-1",
   "task_config_generator_id": "00000000-0000-4000-8000-000001234678",
   "task_config_type": "skeletonization__config",
   "type": "task_config",

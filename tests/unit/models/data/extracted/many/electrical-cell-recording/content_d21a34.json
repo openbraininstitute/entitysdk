@@ -25,7 +25,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "my-description",
+      "description": "brain-region-0",
       "etypes": [],
       "experiment_date": null,
       "id": "00000000-0000-4000-8000-000001234678",
@@ -39,7 +39,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "ljp": 11.5,
-      "name": "name-0",
+      "name": "trace-0",
       "notice_text": null,
       "published_in": null,
       "recording_location": [

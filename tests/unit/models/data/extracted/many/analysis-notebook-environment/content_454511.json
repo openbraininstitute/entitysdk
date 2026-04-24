@@ -8,7 +8,7 @@
         "family_name": null,
         "given_name": null,
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Project Id",
+        "pref_label": "Regular User With Different Project Id",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
@@ -41,7 +41,7 @@
         "family_name": null,
         "given_name": null,
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Project Id",
+        "pref_label": "Regular User With Different Project Id",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }

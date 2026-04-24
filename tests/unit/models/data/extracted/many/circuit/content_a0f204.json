@@ -4,7 +4,7 @@
       "assets": [],
       "atlas_id": "00000000-0000-4000-8000-000001234678",
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -14,89 +14,7 @@
         "name": "RedRegion",
         "parent_structure_id": null
       },
-      "build_category": "em_reconstruction",
-      "contact_email": null,
-      "contributions": [],
-      "created_by": {
-        "family_name": null,
-        "given_name": null,
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "description": "root-circuit-description",
-      "experiment_date": null,
-      "has_electrical_cell_models": true,
-      "has_morphologies": true,
-      "has_point_neurons": true,
-      "has_spines": true,
-      "id": "00000000-0000-4000-8000-000001234678",
-      "license": {
-        "creation_date": "2025-01-01T00:00:00Z",
-        "description": "a license description",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "label": "test label",
-        "name": "Test License",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "name": "root-circuit",
-      "notice_text": null,
-      "number_connections": 100000000,
-      "number_neurons": 10000000,
-      "number_synapses": 1000000000,
-      "published_in": null,
-      "root_circuit_id": null,
-      "scale": "whole_brain",
-      "subject": {
-        "age_max": null,
-        "age_min": null,
-        "age_period": "postnatal",
-        "age_value": 1209600.0,
-        "description": "my-description",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "my-subject",
-        "sex": "female",
-        "species": {
-          "id": "00000000-0000-4000-8000-000001234678",
-          "name": "Test Species",
-          "taxonomy_id": "12345"
-        },
-        "strain": {
-          "id": "00000000-0000-4000-8000-000001234678",
-          "name": "Test Strain",
-          "species_id": "00000000-0000-4000-8000-000001234678",
-          "taxonomy_id": "Taxonomy ID"
-        },
-        "weight": 1.5
-      },
-      "type": "circuit",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "family_name": null,
-        "given_name": null,
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      }
-    },
-    {
-      "assets": [],
-      "atlas_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
-      "brain_region": {
-        "acronym": "acronym64",
-        "annotation_value": 64,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "RedRegion",
-        "parent_structure_id": null
-      },
-      "build_category": "em_reconstruction",
+      "build_category": "computational_model",
       "contact_email": null,
       "contributions": [],
       "created_by": {
@@ -108,7 +26,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "root-circuit-description",
+      "description": "circuit-description-4",
       "experiment_date": null,
       "has_electrical_cell_models": true,
       "has_morphologies": true,
@@ -123,14 +41,14 @@
         "name": "Test License",
         "update_date": "2025-01-01T00:00:00Z"
       },
-      "name": "root-circuit",
+      "name": "circuit-4",
       "notice_text": null,
-      "number_connections": 100000000,
-      "number_neurons": 10000000,
-      "number_synapses": 1000000000,
-      "published_in": null,
-      "root_circuit_id": null,
-      "scale": "whole_brain",
+      "number_connections": 401,
+      "number_neurons": 41,
+      "number_synapses": 4001,
+      "published_in": "journal-4",
+      "root_circuit_id": "00000000-0000-4000-8000-000001234678",
+      "scale": "microcircuit",
       "subject": {
         "age_max": null,
         "age_min": null,
@@ -153,6 +71,7 @@
         },
         "weight": 1.5
       },
+      "target_simulator": "NEURON",
       "type": "circuit",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -178,7 +97,7 @@
         "name": "RedRegion",
         "parent_structure_id": null
       },
-      "build_category": "em_reconstruction",
+      "build_category": "computational_model",
       "contact_email": null,
       "contributions": [],
       "created_by": {
@@ -190,7 +109,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "root-circuit-description",
+      "description": "circuit-description-2",
       "experiment_date": null,
       "has_electrical_cell_models": true,
       "has_morphologies": true,
@@ -205,13 +124,13 @@
         "name": "Test License",
         "update_date": "2025-01-01T00:00:00Z"
       },
-      "name": "root-circuit",
+      "name": "circuit-2",
       "notice_text": null,
-      "number_connections": 100000000,
-      "number_neurons": 10000000,
-      "number_synapses": 1000000000,
-      "published_in": null,
-      "root_circuit_id": null,
+      "number_connections": 201,
+      "number_neurons": 21,
+      "number_synapses": 2001,
+      "published_in": "journal-2",
+      "root_circuit_id": "00000000-0000-4000-8000-000001234678",
       "scale": "whole_brain",
       "subject": {
         "age_max": null,
@@ -235,6 +154,90 @@
         },
         "weight": 1.5
       },
+      "target_simulator": "NEURON",
+      "type": "circuit",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "atlas_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "build_category": "computational_model",
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "circuit-description-0",
+      "experiment_date": null,
+      "has_electrical_cell_models": true,
+      "has_morphologies": true,
+      "has_point_neurons": true,
+      "has_spines": true,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "license": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "description": "a license description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "label": "test label",
+        "name": "Test License",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "name": "circuit-0",
+      "notice_text": null,
+      "number_connections": 1,
+      "number_neurons": 1,
+      "number_synapses": 1,
+      "published_in": "journal-0",
+      "root_circuit_id": "00000000-0000-4000-8000-000001234678",
+      "scale": "single",
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "my-subject",
+        "sex": "female",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Species",
+          "taxonomy_id": "12345"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "Test Strain",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "Taxonomy ID"
+        },
+        "weight": 1.5
+      },
+      "target_simulator": "NEURON",
       "type": "circuit",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {

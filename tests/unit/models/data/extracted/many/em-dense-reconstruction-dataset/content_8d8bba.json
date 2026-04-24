@@ -3,7 +3,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -28,7 +28,7 @@
       },
       "creation_date": "2025-01-01T00:00:00Z",
       "current": null,
-      "description": "",
+      "description": "description-1",
       "detector": null,
       "dose": null,
       "experiment_date": null,
@@ -37,7 +37,7 @@
       "landmarks": null,
       "license": null,
       "microscope_type": null,
-      "name": "MICrONS",
+      "name": "name-1",
       "notice_text": null,
       "precomputed_mesh_url": "precomputed://gs//iarpa_microns/minnie/minnie65/seg_m1300/",
       "protocol_document": null,

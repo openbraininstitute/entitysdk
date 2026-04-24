@@ -21,7 +21,7 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "d3",
+  "description": "d11",
   "id": "00000000-0000-4000-8000-000001234678",
   "license": {
     "creation_date": "2025-01-01T00:00:00Z",
@@ -33,19 +33,19 @@
   },
   "measurements": [
     {
-      "id": 7,
+      "id": 23,
       "name": "minimum",
       "unit": "\u03bcm",
       "value": 1.23
     },
     {
-      "id": 8,
+      "id": 24,
       "name": "maximum",
       "unit": "\u03bcm",
       "value": 1.45
     }
   ],
-  "name": "s3",
+  "name": "s11",
   "post_mtype": {
     "alt_label": "post-m3",
     "creation_date": "2025-01-01T00:00:00Z",
@@ -72,12 +72,12 @@
     "update_date": "2025-01-01T00:00:00Z"
   },
   "pre_region": {
-    "acronym": "acronym0",
-    "annotation_value": 0,
+    "acronym": "acronym1",
+    "annotation_value": 1,
     "color_hex_triplet": "FF0000",
     "hierarchy_id": "00000000-0000-4000-8000-000001234678",
     "id": "00000000-0000-4000-8000-000001234678",
-    "name": "pre-r0",
+    "name": "pre-r1",
     "parent_structure_id": null
   },
   "subject": {
