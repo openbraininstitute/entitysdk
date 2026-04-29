@@ -11,31 +11,44 @@ from pydantic_settings import (
 
 from entitysdk.migration.context import migration_context
 from entitysdk.migration.settings import ApplySettings, RevertSettings
-from entitysdk.migration.tracking import ExecutionSummary
 
 
-def run[ApplySettingsT: ApplySettings, RevertSettingsT: RevertSettings](
+def run(
     *,
-    apply: Callable[[ApplySettingsT, ExecutionSummary], None],
-    apply_settings: type[ApplySettingsT] = ApplySettings,
-    revert: Callable[[RevertSettingsT, ExecutionSummary], None],
-    revert_settings: type[RevertSettingsT] = RevertSettings,
+    apply: Callable[..., None],
+    apply_settings: type[ApplySettings] = ApplySettings,
+    revert: Callable[..., None],
+    revert_settings: type[RevertSettings] = RevertSettings,
 ) -> None:
-    """Build the CLI from the given functions and settings types, then run it."""
+    """Build a CLI with ``apply`` and ``revert`` subcommands, then run it.
+
+    The CLI is constructed dynamically from the provided callback functions and
+    their associated settings types, which are exposed as CLI arguments.
+
+    Args:
+        apply: Callback invoked for the ``apply`` subcommand.
+            Receives the parsed settings instance and an ExecutionSummary.
+        apply_settings: Settings class for the ``apply`` subcommand.
+            Must be a subclass of ApplySettings.
+        revert: Callback invoked for the ``revert`` subcommand.
+            Receives the parsed settings instance and an ExecutionSummary.
+        revert_settings: Settings class for the ``revert`` subcommand.
+            Must be a subclass of RevertSettings.
+    """
     apply_fn = apply
     revert_fn = revert
 
-    class _Apply(apply_settings):
+    class _Apply(apply_settings):  # type: ignore[misc, valid-type]
         """Apply the migration."""
 
-        def cli_cmd(self: ApplySettingsT) -> None:  # type: ignore[override]
+        def cli_cmd(self) -> None:
             with migration_context(self, subcommand="apply") as summary:
                 apply_fn(self, summary)
 
-    class _Revert(revert_settings):
+    class _Revert(revert_settings):  # type: ignore[misc, valid-type]
         """Revert the migration."""
 
-        def cli_cmd(self: RevertSettingsT) -> None:  # type: ignore[override]
+        def cli_cmd(self) -> None:
             with migration_context(self, subcommand="revert") as summary:
                 revert_fn(self, summary)
 

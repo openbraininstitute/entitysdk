@@ -41,6 +41,7 @@ class RuntimeContext(BaseModel):
 
     @classmethod
     def collect(cls) -> "RuntimeContext":
+        """Collect and return the current runtime context."""
         git_root = cls._git_root()
         script = cls._get_script_name(git_root)
         return cls(
@@ -56,15 +57,15 @@ class RuntimeContext(BaseModel):
 
     @staticmethod
     def _git_root() -> str:
-        return subprocess.check_output(["git", "rev-parse", "--show-toplevel"], text=True).strip()
+        return subprocess.check_output(["git", "rev-parse", "--show-toplevel"], text=True).strip()  # noqa: S607
 
     @staticmethod
     def _git_remote_url() -> str:
-        return subprocess.check_output(["git", "remote", "get-url", "origin"], text=True).strip()
+        return subprocess.check_output(["git", "remote", "get-url", "origin"], text=True).strip()  # noqa: S607
 
     @staticmethod
     def _git_commit() -> str:
-        return subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
+        return subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()  # noqa: S607
 
     @staticmethod
     def _git_dirty() -> list[str]:
@@ -73,7 +74,7 @@ class RuntimeContext(BaseModel):
         This ignores changes in logs/ and manifests/ directories.
         """
         cmd = [
-            "git",
+            "git",  # noqa: S607
             "diff",
             "--name-only",
             "HEAD",
@@ -82,7 +83,7 @@ class RuntimeContext(BaseModel):
             ":!**/logs/",
             ":!**/manifests/",
         ]
-        output = subprocess.check_output(cmd, text=True).strip()
+        output = subprocess.check_output(cmd, text=True).strip()  # noqa: S603
         return output.splitlines() if output else []
 
     @staticmethod

@@ -17,15 +17,19 @@ class EntityKey(NamedTuple):
     id: UUID
 
     def __str__(self) -> str:
+        """Return the string representation as 'type::id'."""
         return f"{self.type}::{self.id}"
 
     @classmethod
     def from_string(cls, value: str) -> "EntityKey":
+        """Parse an EntityKey from its 'type::id' string representation."""
         type_, _, id_ = value.partition("::")
         return cls(type=type_, id=UUID(id_))
 
 
 class OperationType(StrEnum):
+    """Types of operations that can be performed on entities."""
+
     created = auto()
     updated = auto()
     deleted = auto()
@@ -33,6 +37,8 @@ class OperationType(StrEnum):
 
 
 class SnapshotLabel(StrEnum):
+    """Labels for before/after entity snapshots."""
+
     before = auto()
     after = auto()
 
@@ -50,12 +56,15 @@ class ExecutionSummary(BaseModel):
     ] = {}
 
     def record_operation(self, entity_key: EntityKey, operation: OperationType) -> None:
+        """Record an operation performed on an entity."""
         self.operations.setdefault(operation, []).append(str(entity_key))
 
     def record_snapshot(self, entity_key: EntityKey, label: SnapshotLabel, data: Any) -> None:
+        """Record a before/after snapshot of an entity's data."""
         self.snapshots.setdefault(str(entity_key), {})[label] = data
 
     def log_summary(self) -> None:
+        """Log a summary of all recorded operations."""
         counts = ", ".join(
             f"{len(data)} {operation}" for operation, data in self.operations.items()
         )
