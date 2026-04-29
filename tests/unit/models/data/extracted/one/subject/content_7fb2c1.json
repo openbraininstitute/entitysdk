@@ -4,7 +4,7 @@
   "age_period": "postnatal",
   "age_value": 1209600.0,
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": true,
+  "authorized_public": false,
   "created_by": {
     "family_name": "courcol",
     "given_name": "jd",

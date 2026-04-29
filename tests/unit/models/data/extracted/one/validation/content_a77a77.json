@@ -14,14 +14,14 @@
   "generated": [
     {
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "id": "00000000-0000-4000-8000-000001234678",
-      "type": "circuit"
+      "type": "cell_morphology"
     }
   ],
   "id": "00000000-0000-4000-8000-000001234678",
   "start_time": "2025-01-01T00:00:00Z",
-  "status": "done",
+  "status": "created",
   "type": "validation",
   "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
@@ -37,7 +37,7 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": true,
       "id": "00000000-0000-4000-8000-000001234678",
-      "type": "circuit"
+      "type": "cell_morphology"
     }
   ]
 }

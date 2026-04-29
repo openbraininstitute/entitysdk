@@ -21,7 +21,7 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "d11",
+  "description": "d0",
   "id": "00000000-0000-4000-8000-000001234678",
   "license": {
     "creation_date": "2025-01-01T00:00:00Z",
@@ -33,25 +33,25 @@
   },
   "measurements": [
     {
-      "id": 23,
+      "id": 1,
       "name": "minimum",
       "unit": "\u03bcm",
       "value": 1.23
     },
     {
-      "id": 24,
+      "id": 2,
       "name": "maximum",
       "unit": "\u03bcm",
       "value": 1.45
     }
   ],
-  "name": "s11",
+  "name": "s0",
   "post_mtype": {
-    "alt_label": "post-m3",
+    "alt_label": "post-m2",
     "creation_date": "2025-01-01T00:00:00Z",
     "definition": "",
     "id": "00000000-0000-4000-8000-000001234678",
-    "pref_label": "post-m3",
+    "pref_label": "post-m2",
     "update_date": "2025-01-01T00:00:00Z"
   },
   "post_region": {
@@ -64,20 +64,20 @@
     "parent_structure_id": null
   },
   "pre_mtype": {
-    "alt_label": "pre-m1",
+    "alt_label": "pre-m0",
     "creation_date": "2025-01-01T00:00:00Z",
     "definition": "",
     "id": "00000000-0000-4000-8000-000001234678",
-    "pref_label": "pre-m1",
+    "pref_label": "pre-m0",
     "update_date": "2025-01-01T00:00:00Z"
   },
   "pre_region": {
-    "acronym": "acronym1",
-    "annotation_value": 1,
+    "acronym": "acronym0",
+    "annotation_value": 0,
     "color_hex_triplet": "FF0000",
     "hierarchy_id": "00000000-0000-4000-8000-000001234678",
     "id": "00000000-0000-4000-8000-000001234678",
-    "name": "pre-r1",
+    "name": "pre-r0",
     "parent_structure_id": null
   },
   "subject": {
