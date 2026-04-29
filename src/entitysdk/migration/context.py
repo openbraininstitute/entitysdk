@@ -56,19 +56,19 @@ class RuntimeContext(BaseModel):
         )
 
     @staticmethod
-    def _git_root() -> str:
+    def _git_root() -> str:  # pragma: no cover
         return subprocess.check_output(["git", "rev-parse", "--show-toplevel"], text=True).strip()  # noqa: S607
 
     @staticmethod
-    def _git_remote_url() -> str:
+    def _git_remote_url() -> str:  # pragma: no cover
         return subprocess.check_output(["git", "remote", "get-url", "origin"], text=True).strip()  # noqa: S607
 
     @staticmethod
-    def _git_commit() -> str:
+    def _git_commit() -> str:  # pragma: no cover
         return subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()  # noqa: S607
 
     @staticmethod
-    def _git_dirty() -> list[str]:
+    def _git_dirty() -> list[str]:  # pragma: no cover
         """Return the list of uncommitted changed files in the script's directory.
 
         This ignores changes in logs/ and manifests/ directories.
