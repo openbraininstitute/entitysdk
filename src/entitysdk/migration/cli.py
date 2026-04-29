@@ -19,6 +19,7 @@ def run(
     apply_settings: type[ApplySettings] = ApplySettings,
     revert: Callable[..., None],
     revert_settings: type[RevertSettings] = RevertSettings,
+    cli_args: list[str] | None = None,
 ) -> None:
     """Build a CLI with ``apply`` and ``revert`` subcommands, then run it.
 
@@ -34,6 +35,7 @@ def run(
             Receives the parsed settings instance and an ExecutionSummary.
         revert_settings: Settings class for the ``revert`` subcommand.
             Must be a subclass of RevertSettings.
+        cli_args: Explicit CLI arguments. If None, sys.argv is used.
     """
     apply_fn = apply
     revert_fn = revert
@@ -74,4 +76,4 @@ def run(
         def cli_cmd(self) -> None:
             CliApp.run_subcommand(self)
 
-    CliApp.run(RootSettings)
+    CliApp.run(RootSettings, cli_args=cli_args)

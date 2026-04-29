@@ -30,6 +30,10 @@ classifiers = [
 dynamic = ["version"]
 
 [project.optional-dependencies]
+migration = [
+    "obi-auth",
+    "rich",
+]
 staging = [
     "h5py",
 ]

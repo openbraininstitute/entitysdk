@@ -134,9 +134,29 @@ def script_dir() -> Path:
 
 
 @contextmanager
-def migration_context(settings: CommonSettings, *, subcommand: str) -> Generator[ExecutionSummary]:
-    """Set up logging, confirm execution, yield summary, and write manifest."""
-    base = script_dir()
+def migration_context(
+    settings: CommonSettings, *, subcommand: str, base: Path | None = None
+) -> Generator[ExecutionSummary]:
+    """Manage the full lifecycle of a migration script execution.
+
+    Sets up file and console logging, collects git and runtime metadata,
+    prompts the user for confirmation, and yields an ``ExecutionSummary``
+    for the caller to record operations and snapshots.  On exit (whether
+    successful or not) an ``ExecutionManifest`` is written to disk for
+    audit purposes.
+
+    Args:
+        settings: Parsed CLI settings shared by apply/revert commands.
+        subcommand: Name of the active subcommand (``"apply"`` or
+            ``"revert"``), shown in the confirmation prompt.
+        base: Root directory for logs and manifests.  Defaults to the
+            parent directory of the running script (``sys.argv[0]``).
+
+    Yields:
+        An ``ExecutionSummary`` instance that the caller should populate
+        with ``record_operation`` / ``record_snapshot`` calls.
+    """
+    base = base or script_dir()
     _setup_logging(settings, base)
     ctx = RuntimeContext.collect()
     L.info(f"Running {ctx.command_line} settings={settings.model_dump_json()}")
