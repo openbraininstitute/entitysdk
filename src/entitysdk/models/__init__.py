@@ -59,6 +59,9 @@ from entitysdk.models.mtype import MTypeClass
 from entitysdk.models.publication import Publication
 from entitysdk.models.scientific_artifact_external_url_link import ScientificArtifactExternalUrlLink
 from entitysdk.models.scientific_artifact_publication_link import ScientificArtifactPublicationLink
+from entitysdk.models.simulatable_extracellular_recording_array import (
+    SimulatableExtracellularRecordingArray,
+)
 from entitysdk.models.simulation import Simulation
 from entitysdk.models.simulation_campaign import SimulationCampaign
 from entitysdk.models.simulation_execution import SimulationExecution
@@ -136,6 +139,7 @@ __all__ = [
     "Role",
     "ScientificArtifactExternalUrlLink",
     "ScientificArtifactPublicationLink",
+    "SimulatableExtracellularRecordingArray",
     "Simulation",
     "SimulationCampaign",
     "SingleNeuronSimulation",

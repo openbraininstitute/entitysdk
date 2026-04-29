@@ -168,6 +168,7 @@ class AssetLabel(StrEnum):
     skeletonization_config = "skeletonization_config"
     task_config = "task_config"
     lod_mesh_block = "lod_mesh_block"
+    electrode_array_weight_matrix = "electrode_array_weight_matrix"
 
 
 class AssetStatus(StrEnum):
@@ -671,6 +672,13 @@ class ElectricalRecordingType(StrEnum):
     unknown = "unknown"
 
 
+class ElectrodeType(StrEnum):
+    neuropixels_v1 = "neuropixels_v1"
+    neuropixels_v2 = "neuropixels_v2"
+    neuropixels_ultra = "neuropixels_ultra"
+    custom = "custom"
+
+
 class EntityCountRead(RootModel[dict[str, int]]):
     root: dict[str, int]
 
@@ -700,6 +708,7 @@ class EntityRoute(StrEnum):
     single_neuron_simulation = "single-neuron-simulation"
     single_neuron_synaptome = "single-neuron-synaptome"
     single_neuron_synaptome_simulation = "single-neuron-synaptome-simulation"
+    simulatable_extracellular_recording_array = "simulatable-extracellular-recording-array"
     subject = "subject"
     validation_result = "validation-result"
     circuit = "circuit"
@@ -744,6 +753,7 @@ class EntityType(StrEnum):
     single_neuron_simulation = "single_neuron_simulation"
     single_neuron_synaptome = "single_neuron_synaptome"
     single_neuron_synaptome_simulation = "single_neuron_synaptome_simulation"
+    simulatable_extracellular_recording_array = "simulatable_extracellular_recording_array"
     subject = "subject"
     validation_result = "validation_result"
     circuit = "circuit"
@@ -1806,6 +1816,27 @@ class Sex(StrEnum):
     male = "male"
     female = "female"
     unknown = "unknown"
+
+
+class SimulatableExtracellularRecordingArrayCreate(BaseModel):
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    electrode_type: ElectrodeType
+    circuit_id: Annotated[UUID, Field(title="Circuit Id")]
+
+
+class SimulatableExtracellularRecordingArrayUserUpdate(BaseModel):
+    name: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Name")] = "<NOT_SET>"
+    description: Annotated[str | Literal["<NOT_SET>"] | None, Field(title="Description")] = (
+        "<NOT_SET>"
+    )
+    electrode_type: Annotated[
+        ElectrodeType | Literal["<NOT_SET>"] | None, Field(title="Electrode Type")
+    ] = "<NOT_SET>"
+    circuit_id: Annotated[UUID | Literal["<NOT_SET>"] | None, Field(title="Circuit Id")] = (
+        "<NOT_SET>"
+    )
 
 
 class SimulationCampaignCreate(BaseModel):
@@ -4007,6 +4038,23 @@ class NeuronBlock(BaseModel):
     nonspecific: Annotated[list[dict[str, str | None]] | None, Field(title="Nonspecific")] = []
 
 
+class SimulatableExtracellularRecordingArrayRead(BaseModel):
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
+    authorized_project_id: Annotated[UUID4, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    assets: Annotated[list[AssetRead], Field(title="Assets")]
+    id: Annotated[UUID, Field(title="Id")]
+    type: EntityType | None = None
+    electrode_type: ElectrodeType
+    circuit_id: Annotated[UUID, Field(title="Circuit Id")]
+
+
 class SimulationCampaignRead(BaseModel):
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -5381,6 +5429,12 @@ class ListResponseMTypeClassificationRead(BaseModel):
 
 class ListResponseMeasurementLabelRead(BaseModel):
     data: Annotated[list[MeasurementLabelRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
+class ListResponseSimulatableExtracellularRecordingArrayRead(BaseModel):
+    data: Annotated[list[SimulatableExtracellularRecordingArrayRead], Field(title="Data")]
     pagination: PaginationResponse
     facets: Facets | None = None
 

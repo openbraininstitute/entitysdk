@@ -57,6 +57,7 @@ _ROUTES = {
     "Publication": "publication",
     "ScientificArtifactExternalUrlLink": "scientific-artifact-external-url-link",
     "ScientificArtifactPublicationLink": "scientific-artifact-publication-link",
+    "SimulatableExtracellularRecordingArray": "simulatable-extracellular-recording-array",
     "Simulation": "simulation",
     "SimulationCampaign": "simulation-campaign",
     "SingleNeuronSimulation": "single-neuron-simulation",
