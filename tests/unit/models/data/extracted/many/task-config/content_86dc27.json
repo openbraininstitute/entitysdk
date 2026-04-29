@@ -9,7 +9,7 @@
         "family_name": null,
         "given_name": null,
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
+        "pref_label": "Regular User With Project Id",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
@@ -20,7 +20,7 @@
       "meta": {
         "foo": "bar"
       },
-      "name": "Public u2/0",
+      "name": "Public u1/0",
       "task_config_generator_id": null,
       "task_config_type": "skeletonization__config",
       "type": "task_config",
@@ -29,7 +29,7 @@
         "family_name": null,
         "given_name": null,
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
+        "pref_label": "Regular User With Project Id",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       }

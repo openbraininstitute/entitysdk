@@ -13,19 +13,19 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Campaign for circuit 1",
+      "description": "Campaign for circuit 0",
       "entity_id": "00000000-0000-4000-8000-000001234678",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "campaign-circuit-1",
+      "name": "campaign-circuit-0",
       "scan_parameters": {
         "foo1": "bar2"
       },
       "simulations": [
         {
-          "description": "simulation-description-1",
+          "description": "simulation-description-0",
           "entity_id": "00000000-0000-4000-8000-000001234678",
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "simulation-1",
+          "name": "simulation-0",
           "number_neurons": 42,
           "scan_parameters": {
             "foo1": "bar1",
@@ -52,7 +52,7 @@
       {
         "count": 1,
         "id": "00000000-0000-4000-8000-000001234678",
-        "label": "micro-circuit-2",
+        "label": "micro-circuit-1",
         "type": "circuit"
       }
     ],
@@ -69,7 +69,7 @@
       {
         "count": 1,
         "id": "00000000-0000-4000-8000-000001234678",
-        "label": "simulation-1",
+        "label": "simulation-0",
         "type": "simulation"
       }
     ],

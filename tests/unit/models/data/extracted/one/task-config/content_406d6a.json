@@ -18,7 +18,7 @@
   "meta": {
     "foo": "bar"
   },
-  "name": "task-config",
+  "name": "Private u1/1",
   "task_config_generator_id": null,
   "task_config_type": "skeletonization__config",
   "type": "task_config",

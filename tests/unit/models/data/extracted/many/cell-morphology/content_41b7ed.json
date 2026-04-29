@@ -5,12 +5,12 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "root",
-        "annotation_value": 997,
-        "color_hex_triplet": "BFDAE3",
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "root",
+        "name": "RedRegion",
         "parent_structure_id": null
       },
       "cell_morphology_protocol": {
@@ -31,7 +31,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Description root-hier1",
+      "description": "Test Morphology Description",
       "experiment_date": null,
       "has_segmented_spines": false,
       "id": "00000000-0000-4000-8000-000001234678",
@@ -45,7 +45,7 @@
         "z": 30.0
       },
       "mtypes": [],
-      "name": "root-hier1",
+      "name": "TestMorphologyName1",
       "notice_text": null,
       "published_in": null,
       "repair_pipeline_state": null,
@@ -54,20 +54,20 @@
         "age_min": null,
         "age_period": "postnatal",
         "age_value": 1209600.0,
-        "description": "my-description",
+        "description": "my-description-1",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "my-subject",
-        "sex": "female",
+        "name": "subject-1",
+        "sex": "male",
         "species": {
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "Test Species",
-          "taxonomy_id": "12345"
+          "name": "TestSpecies0",
+          "taxonomy_id": "0"
         },
         "strain": {
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "Test Strain",
+          "name": "Strain0",
           "species_id": "00000000-0000-4000-8000-000001234678",
-          "taxonomy_id": "Taxonomy ID"
+          "taxonomy_id": "strain0"
         },
         "weight": 1.5
       },
@@ -85,8 +85,8 @@
   ],
   "facets": null,
   "pagination": {
-    "page": 1,
-    "page_size": 30,
-    "total_items": 1
+    "page": 2,
+    "page_size": 1,
+    "total_items": 3
   }
 }

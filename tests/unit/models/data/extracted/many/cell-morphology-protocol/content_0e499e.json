@@ -13,11 +13,11 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Description Test",
+      "description": "description-2",
       "generation_type": "digital_reconstruction",
       "id": "00000000-0000-4000-8000-000001234678",
       "magnification": null,
-      "name": "Private u1/1",
+      "name": "name-2",
       "protocol_design": "cell_patch",
       "protocol_document": "https://example.com/",
       "slicing_direction": "horizontal",
@@ -48,11 +48,11 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Description Test",
+      "description": "description-1",
       "generation_type": "digital_reconstruction",
       "id": "00000000-0000-4000-8000-000001234678",
       "magnification": null,
-      "name": "Private u1/0",
+      "name": "name-1",
       "protocol_design": "cell_patch",
       "protocol_document": "https://example.com/",
       "slicing_direction": "horizontal",
@@ -74,7 +74,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 30,
-    "total_items": 2
+    "page_size": 2,
+    "total_items": 3
   }
 }

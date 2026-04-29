@@ -3,12 +3,12 @@
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "brain_region": {
-    "acronym": "acronym0",
-    "annotation_value": 0,
+    "acronym": "acronym1",
+    "annotation_value": 1,
     "color_hex_triplet": "FF0000",
     "hierarchy_id": "00000000-0000-4000-8000-000001234678",
     "id": "00000000-0000-4000-8000-000001234678",
-    "name": "region0",
+    "name": "region1",
     "parent_structure_id": null
   },
   "contributions": [],
@@ -21,7 +21,7 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "emodel-desc-1",
+  "description": "emodel-desc-3",
   "etypes": [],
   "exemplar_morphology": {
     "cell_morphology_protocol": {
@@ -170,8 +170,8 @@
   ],
   "iteration": "test iteration",
   "mtypes": [],
-  "name": "e-1",
-  "score": 10.0,
+  "name": "e-3",
+  "score": 30.0,
   "seed": -1,
   "species": {
     "id": "00000000-0000-4000-8000-000001234678",
