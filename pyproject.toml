@@ -31,7 +31,7 @@ dynamic = ["version"]
 
 [project.optional-dependencies]
 migration = [
-    "obi-auth",
+    "obi-auth; python_version >= '3.11'",
     "rich",
 ]
 staging = [
