@@ -147,3 +147,6 @@ exclude = ["^_server_schemas\\.py$"]
 [[tool.mypy.overrides]]
 module = "entitysdk._server_schemas"
 ignore_errors = true
+
+[tool.ty.environment]
+python-version = "3.12"
