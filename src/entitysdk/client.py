@@ -540,7 +540,7 @@ class Client:
             )
             + "/list"
         )
-        context = self._required_user_context(override_context=project_context)
+        context = self._optional_user_context(override_context=project_context)
         return core.list_directory(
             url=url,
             project_context=context,

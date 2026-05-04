@@ -380,8 +380,8 @@ def upload_asset_directory(
 def list_directory(
     url: str,
     *,
-    project_context: ProjectContext,
     token: str,
+    project_context: ProjectContext | None = None,
     http_client: httpx.Client | None = None,
 ) -> DetailedFileList:
     """List all files within an asset directory."""
