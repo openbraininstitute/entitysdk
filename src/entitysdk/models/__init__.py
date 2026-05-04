@@ -1,5 +1,6 @@
 """Models for entitysdk."""
 
+from entitysdk.models.activity import Activity
 from entitysdk.models.analysis_notebook_environment import AnalysisNotebookEnvironment
 from entitysdk.models.analysis_notebook_execution import AnalysisNotebookExecution
 from entitysdk.models.analysis_notebook_result import AnalysisNotebookResult
@@ -82,6 +83,7 @@ from entitysdk.models.validation import Validation
 from entitysdk.models.validation_result import ValidationResult
 
 __all__ = [
+    "Activity",
     "AnalysisNotebookEnvironment",
     "AnalysisNotebookExecution",
     "AnalysisNotebookResult",
