@@ -172,7 +172,7 @@ def _transform_inputs(inputs: dict, spike_paths: list[Path]) -> dict:
 
     transformed_inputs = deepcopy(inputs)
     for values in transformed_inputs.values():
-        if values["input_type"] != "spikes":
+        if not (values["input_type"] == "spikes" and values["module"] == "synapse_replay"):
             continue
 
         path = Path(values["spike_file"]).name

@@ -99,7 +99,7 @@ def test_stage_simulation__external_circuit_config(
 
 
 def test_transform_inputs__raises():
-    inputs = {"foo": {"input_type": "spikes", "spike_file": "foo.txt"}}
+    inputs = {"foo": {"input_type": "spikes", "module": "synapse_replay", "spike_file": "foo.txt"}}
 
     with pytest.raises(StagingError, match="not present in spike asset file names"):
         test_module._transform_inputs(inputs, [])
