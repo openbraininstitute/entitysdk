@@ -20,8 +20,8 @@ from rich import print as rprint
 from entitysdk.client import Client
 from entitysdk.migration.settings import CommonSettings
 from entitysdk.migration.tracking import ExecutionSummary
-from entitysdk.token_manager import TokenFromFunction
-from entitysdk.types import DeploymentEnvironment
+from entitysdk.token_manager import TokenFromFunction, TokenManager
+from entitysdk.types import DeploymentEnvironment, Token
 
 # filename for logs and manifest, without extension
 FILENAME = datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
@@ -114,6 +114,7 @@ class ExecutionManifest(BaseModel):
 
 def init_client(settings: CommonSettings) -> Client:
     """Initialise and return the entitysdk client."""
+    token_manager: TokenManager | Token
     if settings.environment == DeploymentEnvironment.local:
         token_manager = "DISABLED"  # noqa: S105
     else:
