@@ -10,7 +10,12 @@ from entitysdk import models
 from entitysdk.common import ProjectContext
 from entitysdk.exception import EntitySDKError
 from entitysdk.models import Asset
-from entitysdk.types import FetchContentStrategy, FetchFileStrategy, StorageType
+from entitysdk.types import (
+    AssetStatus,
+    FetchContentStrategy,
+    FetchFileStrategy,
+    StorageType,
+)
 
 
 @pytest.fixture
@@ -96,7 +101,7 @@ def test_fetch_asset_content_copy_or_download_reads_from_store_when_asset_is_pro
         content_type="text/plain",
         label="morphology",
         size=1,
-        status="created",
+        status=AssetStatus.created,
     )
 
     store = Mock()

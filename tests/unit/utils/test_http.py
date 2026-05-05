@@ -3,6 +3,7 @@ import pytest
 
 from entitysdk.common import ProjectContext
 from entitysdk.exception import EntitySDKError
+from entitysdk.types import ID
 from entitysdk.utils import http as test_module
 
 
@@ -105,7 +106,7 @@ def test_make_db_api_request__no_context(
 
 
 def test_make_db_api_request__context_without_virtual_lab_id(httpx_mock, api_url, auth_token):
-    project_context = ProjectContext(project_id="f373e771-3a2f-4f45-ab59-0955efd7b1f4")
+    project_context = ProjectContext(project_id=ID("f373e771-3a2f-4f45-ab59-0955efd7b1f4"))
     headers = {
         "project-id": str(project_context.project_id),
         "Authorization": f"Bearer {auth_token}",

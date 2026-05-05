@@ -18,6 +18,7 @@ from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.types import (
     AssetLabel,
+    AssetStatus,
     ContentType,
     DeploymentEnvironment,
     DerivationType,
@@ -151,9 +152,9 @@ def _mock_asset_response(
     *,
     asset_id,
     path: str = "path_to_asset",
-    content_type: str = "text/plain",
-    status: str = "created",
-    label: str = "morphology",
+    content_type: ContentType = ContentType.text_plain,
+    status: AssetStatus = AssetStatus.created,
+    label: AssetLabel = AssetLabel.morphology,
 ):
     return {
         "id": str(asset_id),
@@ -199,7 +200,7 @@ def test_client_upload_file(
         file_path=path,
         file_content_type="application/swc",
         file_metadata={"key": "value"},
-        asset_label="morphology",
+        asset_label=AssetLabel.morphology,
     )
 
     assert res.id == asset_id
@@ -223,9 +224,9 @@ def test_client_upload_content(client, httpx_mock, api_url, request_headers):
         entity_type=Entity,
         file_name="foo.swc",
         file_content=buffer,
-        file_content_type="application/swc",
+        file_content_type=ContentType.application_swc,
         file_metadata={"key": "value"},
-        asset_label="morphology",
+        asset_label=AssetLabel.morphology,
     )
 
     assert res.id == asset_id
@@ -616,7 +617,7 @@ def test_client_delete_asset(
 
     res = client.delete_asset(
         entity_id=entity_id,
-        entity_type=None,
+        entity_type=Entity,
         asset_id=asset_id,
     )
 
@@ -656,10 +657,10 @@ def test_client_update_asset(
 
     res = client.update_asset_file(
         entity_id=entity_id,
-        entity_type=None,
+        entity_type=Entity,
         file_path=path,
         file_name="foo.txt",
-        file_content_type="application/swc",
+        file_content_type=ContentType.application_swc,
         asset_id=asset_id,
     )
 
@@ -907,7 +908,7 @@ def test_upload_directory_by_paths(
             entity_type=Entity,
             name="test-directory",
             paths=paths,
-            label="sonata_circuit",
+            label=AssetLabel.sonata_circuit,
             metadata=None,
         )
 
@@ -916,17 +917,17 @@ def test_upload_directory_by_paths(
         p.open("w").close()
 
     asset = {
-        "content_type": "application/vnd.directory",
+        "content_type": ContentType.application_vnd_directory,
         "full_path": "asdf",
         "id": "a370a57b-7211-4426-8046-970758ceaf68",
         "is_directory": True,
-        "label": "sonata_circuit",
+        "label": AssetLabel.sonata_circuit,
         "meta": {},
         "path": "",
         "sha256_digest": None,
         "size": -1,
-        "status": "created",
-        "storage_type": "aws_s3_internal",
+        "status": AssetStatus.created,
+        "storage_type": StorageType.aws_s3_internal,
     }
     httpx_mock.add_response(
         method="POST",
@@ -951,7 +952,7 @@ def test_upload_directory_by_paths(
         entity_type=Entity,
         name="test-directory",
         paths=paths,
-        label=None,
+        label=AssetLabel.sonata_circuit,
         metadata=None,
     )
     assert res == Asset.model_validate(asset)
@@ -991,7 +992,7 @@ def test_upload_directory_by_paths(
             entity_type=Entity,
             name="test-directory",
             paths=paths,
-            label=None,
+            label=AssetLabel.sonata_circuit,
             metadata=None,
         )
 
@@ -1018,7 +1019,7 @@ def test_upload_directory_by_paths(
             entity_type=Entity,
             name="test-directory",
             paths={Path("file0.txt"): tmp_path / "file0.txt"},
-            label=None,
+            label=AssetLabel.sonata_circuit,
             metadata=None,
         )
 
@@ -1252,7 +1253,7 @@ def test_client_register_asset(
 
     res = client.register_asset(
         entity_id=entity_id,
-        entity_type=None,
+        entity_type=Entity,
         name="foo.swc",
         storage_path="path/to/foo.swc",
         storage_type=StorageType.aws_s3_open,
