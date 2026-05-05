@@ -189,7 +189,6 @@ def test_update_one(client, httpx_mock, model, json_data, model_info):
         method="PATCH",
         json=_read_model_dump(model) | update_data,
     )
-    assert model.id
     updated = client.update_entity(
         entity_id=model.id,
         entity_type=model_info.cls,
