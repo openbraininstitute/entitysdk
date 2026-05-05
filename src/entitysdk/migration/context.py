@@ -8,6 +8,7 @@ import sys
 from collections.abc import Generator
 from contextlib import contextmanager
 from datetime import UTC, datetime
+from functools import partial
 from pathlib import Path
 from typing import Literal
 
@@ -19,7 +20,8 @@ from rich import print as rprint
 from entitysdk.client import Client
 from entitysdk.migration.settings import CommonSettings
 from entitysdk.migration.tracking import ExecutionSummary
-from entitysdk.types import DeploymentEnvironment
+from entitysdk.token_manager import TokenFromFunction, TokenManager
+from entitysdk.types import DeploymentEnvironment, Token
 
 # filename for logs and manifest, without extension
 FILENAME = datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
@@ -112,14 +114,20 @@ class ExecutionManifest(BaseModel):
 
 def init_client(settings: CommonSettings) -> Client:
     """Initialise and return the entitysdk client."""
+    token_manager: TokenManager | Token
     if settings.environment == DeploymentEnvironment.local:
-        token = "DISABLED"  # noqa: S105
+        token_manager = "DISABLED"  # noqa: S105
     else:
-        token = get_token(environment=AuthEnvironment(settings.environment))
+        token_manager = TokenFromFunction(
+            partial(
+                get_token,
+                environment=AuthEnvironment(settings.environment),
+            ),
+        )
     return Client(
         environment=settings.environment,
         project_context=settings.project_context,
-        token_manager=token,
+        token_manager=token_manager,
     )
 
 
