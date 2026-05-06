@@ -139,6 +139,7 @@ class Client:
             raise EntitySDKError("A project context is mandatory for this operation.")
         return context
 
+    @validate_call
     def get_entity(
         self,
         entity_id: ID,
@@ -178,6 +179,7 @@ class Client:
             token=self._token_manager.get_token(),
         )
 
+    @validate_call
     def search_entity(
         self,
         *,
@@ -214,6 +216,7 @@ class Client:
             token=self._token_manager.get_token(),
         )
 
+    @validate_call
     def get_entity_derivations(
         self,
         *,
@@ -242,6 +245,7 @@ class Client:
             token=self._token_manager.get_token(),
         )
 
+    @validate_call
     def register_entity(
         self,
         entity: TIdentifiable,
@@ -267,6 +271,7 @@ class Client:
             token=self._token_manager.get_token(),
         )
 
+    @validate_call
     def get_entity_assets(
         self,
         entity_id: ID,
@@ -299,6 +304,7 @@ class Client:
             admin=admin,
         )
 
+    @validate_call
     def update_entity(
         self,
         entity_id: ID,
@@ -335,6 +341,7 @@ class Client:
             token=self._token_manager.get_token(),
         )
 
+    @validate_call
     def delete_entity(
         self,
         entity_id: ID,
@@ -362,6 +369,7 @@ class Client:
             token=self._token_manager.get_token(),
         )
 
+    @validate_call
     def upload_file(
         self,
         *,
@@ -417,7 +425,7 @@ class Client:
         self,
         *,
         entity_id: ID,
-        entity_type: type[Identifiable],
+        entity_type: type[Entity],
         file_content: io.BufferedIOBase,
         file_name: str,
         file_content_type: ContentType,
@@ -462,11 +470,12 @@ class Client:
             token=self._token_manager.get_token(),
         )
 
+    @validate_call
     def upload_directory(
         self,
         *,
         entity_id: ID,
-        entity_type: type[Identifiable],
+        entity_type: type[Entity],
         name: str,
         paths: dict[os.PathLike, os.PathLike],
         metadata: dict | None = None,
@@ -512,11 +521,12 @@ class Client:
             token=self._token_manager.get_token(),
         )
 
+    @validate_call
     def list_directory(
         self,
         *,
         entity_id: ID,
-        entity_type: type[Identifiable],
+        entity_type: type[Entity],
         asset_id: ID,
         project_context: ProjectContext | None = None,
     ) -> DetailedFileList:
@@ -553,7 +563,7 @@ class Client:
         self,
         *,
         entity_id: ID,
-        entity_type: type[Identifiable],
+        entity_type: type[Entity],
         asset_id: ID | Asset,
         output_path: Path,
         project_context: ProjectContext | None = None,
@@ -651,11 +661,12 @@ class Client:
 
         return paths
 
+    @validate_call
     def download_directory(
         self,
         *,
         entity_id: ID,
-        entity_type: type[Identifiable],
+        entity_type: type[Entity],
         asset_id: ID | Asset,
         output_path: os.PathLike,
         project_context: ProjectContext | None = None,
@@ -693,7 +704,7 @@ class Client:
         self,
         *,
         entity_id: ID,
-        entity_type: type[Identifiable],
+        entity_type: type[Entity],
         asset_or_id: ID | Asset,
         asset_path: Path | None = None,
         project_context: ProjectContext | None = None,
@@ -728,11 +739,12 @@ class Client:
             strategy=strategy,
         )
 
+    @validate_call
     def download_content(
         self,
         *,
         entity_id: ID,
-        entity_type: type[Identifiable],
+        entity_type: type[Entity],
         asset_id: ID,
         asset_path: StrOrPath | None = None,
         project_context: ProjectContext | None = None,
@@ -763,7 +775,7 @@ class Client:
         self,
         *,
         entity_id: ID,
-        entity_type: type[Identifiable],
+        entity_type: type[Entity],
         asset_id: ID | Asset,
         output_path: Path,
         asset_path: Path | None = None,
@@ -799,11 +811,12 @@ class Client:
             strategy=strategy,
         )
 
+    @validate_call
     def download_file(
         self,
         *,
         entity_id: ID,
-        entity_type: type[Identifiable],
+        entity_type: type[Entity],
         asset_id: ID | Asset,
         output_path: os.PathLike,
         asset_path: os.PathLike | None = None,
@@ -912,6 +925,7 @@ class Client:
             )
         return IteratorResult(map(_fetch_entity_asset, assets))
 
+    @validate_call
     def download_assets(
         self,
         entity_or_id: Entity | tuple[ID, type[Entity]],
@@ -939,11 +953,12 @@ class Client:
             strategy=FetchFileStrategy.download_only,
         )
 
+    @validate_call
     def delete_asset(
         self,
         *,
         entity_id: ID,
-        entity_type: type[Identifiable],
+        entity_type: type[Entity],
         asset_id: ID,
         project_context: ProjectContext | None = None,
         admin: bool = False,
@@ -977,6 +992,7 @@ class Client:
             token=self._token_manager.get_token(),
         )
 
+    @validate_call
     def update_asset_file(
         self,
         *,
@@ -1023,11 +1039,12 @@ class Client:
             asset_label=deleted_asset.label,
         )
 
+    @validate_call
     def register_asset(
         self,
         *,
         entity_id: ID,
-        entity_type: type[Identifiable],
+        entity_type: type[Entity],
         name: str,
         storage_path: str,
         storage_type: StorageType,
