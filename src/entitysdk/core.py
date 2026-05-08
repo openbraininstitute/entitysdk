@@ -51,7 +51,7 @@ def search_entities(
     limit: int | None,
     project_context: ProjectContext | None = None,
     token: str,
-    http_client: httpx.Client | None = None,
+    http_client: httpx.Client,
 ) -> IteratorResult[TIdentifiable]:
     """Search for entities.
 
@@ -88,7 +88,7 @@ def get_entity(
     project_context: ProjectContext | None = None,
     token: str,
     options: dict | None = None,
-    http_client: httpx.Client | None = None,
+    http_client: httpx.Client,
 ) -> TIdentifiable:
     """Instantiate entity with model ``entity_type`` from resource id."""
     response = make_db_api_request(
@@ -111,7 +111,7 @@ def get_entity_derivations(
     project_context: ProjectContext,
     derivation_type: DerivationType,
     token: str,
-    http_client: httpx.Client | None = None,
+    http_client: httpx.Client,
 ) -> IteratorResult[Entity]:
     """Get derivations for entity."""
     url = get_entity_derivations_endpoint(
@@ -142,7 +142,7 @@ def get_entity_assets(
     entity_type: type[Entity],
     project_context: ProjectContext | None,
     token: str,
-    http_client: httpx.Client | None = None,
+    http_client: httpx.Client,
     admin: bool = False,
 ):
     """Get all assets of an entity."""
@@ -171,7 +171,7 @@ def register_entity(
     entity: TIdentifiable,
     project_context: ProjectContext | None,
     token: str,
-    http_client: httpx.Client | None = None,
+    http_client: httpx.Client,
 ) -> TIdentifiable:
     """Register entity."""
     json_data = serdes.serialize_model(entity)
@@ -194,7 +194,7 @@ def update_entity(
     attrs_or_entity: dict | Identifiable,
     project_context: ProjectContext | None,
     token: str,
-    http_client: httpx.Client | None = None,
+    http_client: httpx.Client,
 ) -> TIdentifiable:
     """Update entity."""
     if isinstance(attrs_or_entity, dict):
@@ -221,7 +221,7 @@ def delete_entity(
     *,
     entity_type: type[Identifiable],
     token: str,
-    http_client: httpx.Client | None = None,
+    http_client: httpx.Client,
 ) -> None:
     """Delete entity."""
     make_db_api_request(
@@ -241,7 +241,7 @@ def upload_asset_file(
     asset_metadata: LocalAssetMetadata,
     project_context: ProjectContext,
     token_manager: TokenManager,
-    http_client: httpx.Client | None = None,
+    http_client: httpx.Client,
     transfer_config: MultipartUploadTransferConfig | None = None,
 ) -> Asset:
     """Upload asset to an existing entity's endpoint from a file path."""
@@ -284,7 +284,7 @@ def upload_asset_content(
     asset_metadata: LocalAssetMetadata,
     project_context: ProjectContext,
     token: str,
-    http_client: httpx.Client | None = None,
+    http_client: httpx.Client,
 ) -> Asset:
     """Upload asset to an existing entity's endpoint from a file-like object."""
     files = {
@@ -315,7 +315,7 @@ def upload_asset_directory(
     label: AssetLabel,
     project_context: ProjectContext,
     token: str,
-    http_client: httpx.Client | None = None,
+    http_client: httpx.Client,
 ) -> Asset:
     """Upload a group of files to a directory."""
     for concrete_path in paths.values():
@@ -340,12 +340,11 @@ def upload_asset_directory(
     js = response.json()
 
     def upload(to_upload):
-        upload_client = http_client or httpx.Client()
         failed = {}
         for path, url in to_upload.items():
             with open(paths[Path(path)], "rb") as fd:
                 try:
-                    response = upload_client.request(
+                    response = http_client.request(
                         method="PUT",
                         url=url,
                         content=fd,
@@ -382,7 +381,7 @@ def list_directory(
     *,
     token: str,
     project_context: ProjectContext | None = None,
-    http_client: httpx.Client | None = None,
+    http_client: httpx.Client,
 ) -> DetailedFileList:
     """List all files within an asset directory."""
     response = make_db_api_request(
@@ -405,7 +404,7 @@ def fetch_asset_file(
     asset_path: Path | None = None,
     project_context: ProjectContext | None = None,
     token: str,
-    http_client: httpx.Client | None = None,
+    http_client: httpx.Client,
     local_store: LocalAssetStore | None = None,
     strategy: FetchFileStrategy,
 ) -> Path:
@@ -545,7 +544,7 @@ def fetch_asset_content(
     asset_path: Path | None = None,
     project_context: ProjectContext | None = None,
     token: str,
-    http_client: httpx.Client | None = None,
+    http_client: httpx.Client,
     local_store: LocalAssetStore | None = None,
     strategy: FetchContentStrategy,
 ) -> bytes:
@@ -628,7 +627,7 @@ def delete_asset(
     *,
     project_context: ProjectContext | None,
     token: str,
-    http_client: httpx.Client | None = None,
+    http_client: httpx.Client,
 ) -> Asset:
     """Delete asset."""
     response = make_db_api_request(
@@ -647,7 +646,7 @@ def register_asset(
     asset_metadata: ExistingAssetMetadata,
     project_context: ProjectContext,
     token: str,
-    http_client: httpx.Client | None = None,
+    http_client: httpx.Client,
 ) -> Asset:
     """Register a file or directory already existing."""
     response = make_db_api_request(

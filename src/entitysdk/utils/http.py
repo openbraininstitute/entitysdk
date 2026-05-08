@@ -22,12 +22,9 @@ def make_db_api_request(
     files: dict | None = None,
     project_context: ProjectContext | None = None,
     token: str,
-    http_client: httpx.Client | None = None,
+    http_client: httpx.Client,
 ) -> httpx.Response:
     """Make a request to entitycore api."""
-    if http_client is None:
-        http_client = httpx.Client()
-
     headers = {"Authorization": f"Bearer {token}"}
 
     if project_context:
@@ -79,7 +76,7 @@ def stream_paginated_request(
     json: dict | None = None,
     parameters: dict | None = None,
     project_context: ProjectContext | None = None,
-    http_client: httpx.Client | None = None,
+    http_client: httpx.Client,
     page_size: int | None = None,
     limit: int | None = None,
     token: str,

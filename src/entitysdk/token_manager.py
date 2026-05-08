@@ -11,8 +11,9 @@ from entitysdk.types import Token
 class TokenManager(Protocol):
     """Protocol for token managers."""
 
-    def get_token(self) -> str:
+    def get_token(self) -> Token:
         """Get the token."""
+        ...
 
 
 class TokenFromEnv:

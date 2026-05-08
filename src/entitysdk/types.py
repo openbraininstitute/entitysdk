@@ -5,6 +5,7 @@ import uuid
 
 from entitysdk._server_schemas import ActivityStatus as ActivityStatus
 from entitysdk._server_schemas import ActivityType as ActivityType
+from entitysdk._server_schemas import AgentType as AgentType
 from entitysdk._server_schemas import AgePeriod as AgePeriod
 from entitysdk._server_schemas import AnalysisScale as AnalysisScale
 from entitysdk._server_schemas import AssetLabel as AssetLabel

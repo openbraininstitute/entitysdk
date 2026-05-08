@@ -6,7 +6,7 @@ from typing import Annotated, Literal
 from pydantic import Field
 
 from entitysdk.models.base import BaseModel
-from entitysdk.types import ID
+from entitysdk.types import ID, AgentType
 
 
 class Struct(BaseModel):
@@ -52,7 +52,7 @@ class Agent(Identifiable):
     """Agent model."""
 
     type: Annotated[
-        str,
+        AgentType,
         Field(
             description="The type of this agent.",
         ),
@@ -69,11 +69,11 @@ class Person(Agent):
     """Person model."""
 
     type: Annotated[
-        Literal["person"],
+        Literal[AgentType.person],
         Field(
             description="The type of this agent. Should be 'agent'",
         ),
-    ] = "person"
+    ] = AgentType.person  # pyright: ignore[reportIncompatibleVariableOverride]
     given_name: Annotated[
         str | None,
         Field(
@@ -99,11 +99,11 @@ class Organization(Agent):
     """Organization model."""
 
     type: Annotated[
-        Literal["organization"],
+        Literal[AgentType.organization],
         Field(
             description="The organization type. Should be 'organization'",
         ),
-    ] = "organization"
+    ] = AgentType.organization  # pyright: ignore[reportIncompatibleVariableOverride]
     alternative_name: Annotated[
         str | None,
         Field(
@@ -117,11 +117,11 @@ class Consortium(Agent):
     """Consortium model."""
 
     type: Annotated[
-        Literal["consortium"],
+        Literal[AgentType.consortium],
         Field(
             description="The Consortium type. Should be 'consortium'",
         ),
-    ] = "consortium"
+    ] = AgentType.consortium  # pyright: ignore[reportIncompatibleVariableOverride]
     alternative_name: Annotated[
         str | None,
         Field(

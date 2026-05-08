@@ -30,7 +30,7 @@ def stage_simulation_result(
     simulation_config_file: StrOrPath | None = None,
 ) -> Path:
     """Stage a SimulationResult entity."""
-    output_dir: Path = create_dir(output_dir)
+    out_dir: Path = create_dir(output_dir)
 
     if simulation_config_file is None:
         L.info(
@@ -40,7 +40,7 @@ def stage_simulation_result(
         simulation_config_file = stage_simulation(
             client,
             model=client.get_entity(entity_id=model.simulation_id, entity_type=Simulation),
-            output_dir=output_dir,
+            output_dir=out_dir,
         )
     else:
         L.info(
