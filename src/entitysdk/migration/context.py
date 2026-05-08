@@ -2,7 +2,9 @@
 
 import getpass
 import hashlib
+import importlib.metadata
 import logging
+import os
 import subprocess
 import sys
 from collections.abc import Generator
@@ -40,6 +42,8 @@ class RuntimeContext(BaseModel):
     git_dirty: list[str]
     script_hash: str
     uv_lock_hash: str
+    installed_packages: dict[str, str]
+    entitysdk_env: dict[str, str]
 
     @classmethod
     def collect(cls) -> "RuntimeContext":
@@ -55,6 +59,8 @@ class RuntimeContext(BaseModel):
             git_dirty=cls._git_dirty(),
             script_hash=cls._get_file_hash(git_root, script),
             uv_lock_hash=cls._get_file_hash(git_root, "uv.lock"),
+            installed_packages=cls._installed_packages(),
+            entitysdk_env=cls._entitysdk_env(),
         )
 
     @staticmethod
@@ -96,6 +102,19 @@ class RuntimeContext(BaseModel):
     def _get_file_hash(git_root: str, filename: str) -> str:
         content = (Path(git_root) / filename).read_bytes()
         return hashlib.sha256(content).hexdigest()
+
+    @staticmethod
+    def _installed_packages() -> dict[str, str]:
+        """Return installed packages as a name-version mapping."""
+        return {
+            dist.metadata["Name"]: dist.metadata["Version"]
+            for dist in importlib.metadata.distributions()
+        }
+
+    @staticmethod
+    def _entitysdk_env() -> dict[str, str]:
+        """Return environment variables starting with ENTITYSDK."""
+        return {key: value for key, value in os.environ.items() if key.startswith("ENTITYSDK")}
 
 
 class ExecutionManifest(BaseModel):
