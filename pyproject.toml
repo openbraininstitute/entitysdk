@@ -141,7 +141,7 @@ fail_under = 80
 [tool.mypy]
 show_error_codes = true
 ignore_missing_imports = true
-allow_redefinition = true
+allow_redefinition_old = true
 exclude = ["^_server_schemas\\.py$"]
 
 [[tool.mypy.overrides]]

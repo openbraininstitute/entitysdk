@@ -28,7 +28,7 @@ def test_entity_key_named_tuple_fields():
 
 
 def test_operation_type_values():
-    assert set(test_module.OperationType) == {"created", "updated", "deleted", "skipped"}
+    assert set(test_module.OperationType) == {"created", "updated", "deleted", "skipped", "failed"}
 
 
 def test_snapshot_label_values():

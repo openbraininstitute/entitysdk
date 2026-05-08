@@ -33,7 +33,8 @@ class OperationType(StrEnum):
     created = auto()
     updated = auto()
     deleted = auto()
-    skipped = auto()
+    skipped = auto()  # for ignored records
+    failed = auto()  # for failed records
 
 
 class SnapshotLabel(StrEnum):
