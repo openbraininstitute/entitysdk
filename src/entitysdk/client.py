@@ -477,7 +477,7 @@ class Client:
         entity_id: ID,
         entity_type: type[Entity],
         name: str,
-        paths: dict[os.PathLike, os.PathLike],
+        paths: dict[Path, Path],
         metadata: dict | None = None,
         label: AssetLabel,
         project_context: ProjectContext | None = None,
