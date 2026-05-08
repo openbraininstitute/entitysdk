@@ -12,7 +12,7 @@ class BrainAtlasRegion(Entity):
     """BrainAtlasRegion model."""
 
     volume: Annotated[
-        float,
+        float | None,
         Field(
             examples=[0.25],
             description=(
