@@ -421,8 +421,10 @@ class DeleteResponse(BaseModel):
 
 
 class DerivationType(StrEnum):
+    circuit_customization = "circuit_customization"
     circuit_extraction = "circuit_extraction"
     circuit_rewiring = "circuit_rewiring"
+    emodel_circuit = "emodel_circuit"
     unspecified = "unspecified"
 
 
@@ -2672,12 +2674,14 @@ class DerivationCreate(BaseModel):
     used_id: Annotated[UUID, Field(title="Used Id")]
     generated_id: Annotated[UUID, Field(title="Generated Id")]
     derivation_type: DerivationType
+    label: Annotated[str | None, Field(title="Label")] = None
 
 
 class DerivationRead(BaseModel):
     used: BasicEntityRead
     generated: BasicEntityRead
     derivation_type: DerivationType
+    label: Annotated[str | None, Field(title="Label")] = None
 
 
 class DigitalReconstructionCellMorphologyProtocolCreate(BaseModel):

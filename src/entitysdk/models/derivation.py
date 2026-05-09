@@ -11,3 +11,4 @@ class Derivation(Identifiable):
     used: Entity
     generated: Entity
     derivation_type: DerivationType | None = None
+    label: str | None = None
