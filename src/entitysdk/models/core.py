@@ -68,12 +68,12 @@ class Agent(Identifiable):
 class Person(Agent):
     """Person model."""
 
-    type: Annotated[
+    type: Annotated[  # pyright: ignore[reportIncompatibleVariableOverride]
         Literal[AgentType.person],
         Field(
             description="The type of this agent. Should be 'agent'",
         ),
-    ] = AgentType.person  # pyright: ignore[reportIncompatibleVariableOverride]
+    ] = AgentType.person
     given_name: Annotated[
         str | None,
         Field(
@@ -98,12 +98,12 @@ Identifiable.model_rebuild()
 class Organization(Agent):
     """Organization model."""
 
-    type: Annotated[
+    type: Annotated[  # pyright: ignore[reportIncompatibleVariableOverride]
         Literal[AgentType.organization],
         Field(
             description="The organization type. Should be 'organization'",
         ),
-    ] = AgentType.organization  # pyright: ignore[reportIncompatibleVariableOverride]
+    ] = AgentType.organization
     alternative_name: Annotated[
         str | None,
         Field(
@@ -116,12 +116,12 @@ class Organization(Agent):
 class Consortium(Agent):
     """Consortium model."""
 
-    type: Annotated[
+    type: Annotated[  # pyright: ignore[reportIncompatibleVariableOverride]
         Literal[AgentType.consortium],
         Field(
             description="The Consortium type. Should be 'consortium'",
         ),
-    ] = AgentType.consortium  # pyright: ignore[reportIncompatibleVariableOverride]
+    ] = AgentType.consortium
     alternative_name: Annotated[
         str | None,
         Field(

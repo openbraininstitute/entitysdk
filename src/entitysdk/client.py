@@ -565,7 +565,7 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Entity],
-        asset_id: ID | Asset,
+        asset_id: ID | Asset,  # pyright: ignore[reportRedeclaration]
         output_path: Path,
         project_context: ProjectContext | None = None,
         ignore_directory_name: bool = False,
@@ -600,7 +600,7 @@ class Client:
 
         if isinstance(asset_id, Asset):
             asset = asset_id
-            asset_id: ID = asset.id  # pyright: ignore[reportRedeclaration]
+            asset_id: ID = asset.id  # pyright: ignore[reportRedeclaration, reportAssignmentType]
         else:
             asset = None
 
