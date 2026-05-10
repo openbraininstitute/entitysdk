@@ -1,7 +1,6 @@
 """Identifiable SDK client."""
 
 import concurrent.futures
-import io
 import os
 from pathlib import Path
 from typing import Any, TypeVar, cast
@@ -28,6 +27,7 @@ from entitysdk.types import (
     ID,
     AssetLabel,
     AssetStatus,
+    BytesOrStream,
     ContentType,
     DeploymentEnvironment,
     DerivationType,
@@ -427,7 +427,7 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Entity],
-        file_content: io.BufferedIOBase,
+        file_content: BytesOrStream,
         file_name: str,
         file_content_type: ContentType,
         file_metadata: dict | None = None,

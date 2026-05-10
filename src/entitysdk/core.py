@@ -1,6 +1,5 @@
 """Core SDK operations."""
 
-import io
 import logging
 from collections.abc import Iterator
 from pathlib import Path
@@ -28,7 +27,14 @@ from entitysdk.route import (
 )
 from entitysdk.schemas.asset import MultipartUploadTransferConfig
 from entitysdk.token_manager import TokenManager
-from entitysdk.types import ID, AssetLabel, DerivationType, FetchContentStrategy, FetchFileStrategy
+from entitysdk.types import (
+    ID,
+    AssetLabel,
+    BytesOrStream,
+    DerivationType,
+    FetchContentStrategy,
+    FetchFileStrategy,
+)
 from entitysdk.utils.asset import resolve_asset_path
 from entitysdk.utils.filesystem import (
     create_dir,
@@ -280,7 +286,7 @@ def upload_asset_file(
 def upload_asset_content(
     url: str,
     *,
-    asset_content: io.BufferedIOBase,
+    asset_content: BytesOrStream,
     asset_metadata: LocalAssetMetadata,
     project_context: ProjectContext,
     token: str,

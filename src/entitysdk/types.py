@@ -1,5 +1,6 @@
 """Types definitions."""
 
+import io
 import os
 import uuid
 
@@ -53,6 +54,7 @@ from entitysdk.compat import StrEnum
 ID = uuid.UUID
 Token = str
 StrOrPath = str | os.PathLike[str]
+BytesOrStream = bytes | io.BufferedIOBase
 
 
 class DeploymentEnvironment(StrEnum):
