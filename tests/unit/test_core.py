@@ -53,6 +53,7 @@ def test_upload_asset_file(asset_file, token_manager):
             token_manager=token_manager,
             asset_path=asset_file,
             asset_metadata=None,
+            http_client=httpx.Client(),
         )
         patched_content.assert_called_once()
 
@@ -69,6 +70,7 @@ def test_upload_asset_file(asset_file, token_manager):
             asset_path=asset_file,
             asset_metadata=None,
             transfer_config=transfer_config,
+            http_client=httpx.Client(),
         )
         patched_content.assert_called_once()
 
@@ -85,6 +87,7 @@ def test_upload_asset_file(asset_file, token_manager):
             asset_path=asset_file,
             asset_metadata=None,
             transfer_config=transfer_config,
+            http_client=httpx.Client(),
         )
         patched_file.assert_called_once()
 
@@ -116,6 +119,7 @@ def test_fetch_asset_content_copy_or_download_reads_from_store_when_asset_is_pro
         token="my-token",
         local_store=store,
         strategy=FetchContentStrategy.local_or_download,
+        http_client=httpx.Client(),
     )
 
     assert content == b"from-store"
@@ -156,6 +160,7 @@ def test_fetch_asset_file_download_streams_to_disk(tmp_path):
             output_path=tmp_path,
             token="my-token",
             strategy=FetchFileStrategy.download_only,
+            http_client=httpx.Client(),
         )
 
     assert out.read_bytes() == b"abcdef"
@@ -197,6 +202,7 @@ def test_fetch_asset_file_download_stream_sets_context_headers(tmp_path):
             token="my-token",
             project_context=ctx,
             strategy=FetchFileStrategy.download_only,
+            http_client=httpx.Client(),
         )
 
     assert out.read_text() == "x"
@@ -230,6 +236,7 @@ def test_fetch_asset_file_download_request_error_raises(tmp_path):
                 output_path=tmp_path,
                 token="my-token",
                 strategy=FetchFileStrategy.download_only,
+                http_client=httpx.Client(),
             )
 
 
@@ -258,6 +265,7 @@ def test_fetch_asset_file_download_http_status_error_raises(tmp_path):
                 output_path=tmp_path,
                 token="my-token",
                 strategy=FetchFileStrategy.download_only,
+                http_client=httpx.Client(),
             )
 
 
@@ -285,6 +293,7 @@ def test_fetch_asset_file_unsupported_strategy_raises(tmp_path):
             output_path=tmp_path / "out.txt",
             token="my-token",
             strategy="unsupported-strategy",
+            http_client=httpx.Client(),
         )
 
 
@@ -311,6 +320,7 @@ def test_fetch_asset_content_unsupported_strategy_raises():
             asset_or_id=asset,
             token="my-token",
             strategy="unsupported-strategy",
+            http_client=httpx.Client(),
         )
 
 

@@ -189,7 +189,7 @@ def test_make_db_api_request_with_none_http_client__client_none(
         parameters={"foo": "bar"},
         project_context=project_context,
         token=auth_token,
-        http_client=None,
+        http_client=httpx.Client(),
     )
 
     assert res.status_code == 200
@@ -204,6 +204,7 @@ def test_stream_paginated_request_validate_limit(api_url, project_context, auth_
         limit=limit,
         project_context=project_context,
         token=auth_token,
+        http_client=httpx.Client(),
     )
     with pytest.raises(EntitySDKError, match="limit must be either None or strictly positive."):
         next(it)
@@ -220,6 +221,7 @@ def test_stream_paginated_request_validate_page_size(
         page_size=page_size,
         project_context=project_context,
         token=auth_token,
+        http_client=httpx.Client(),
     )
     with pytest.raises(EntitySDKError, match="page_size must be either None or strictly positive."):
         next(it)
@@ -246,6 +248,7 @@ def test_stream_paginated_request_one_item(
         project_context=project_context,
         token=auth_token,
         page_size=2,
+        http_client=httpx.Client(),
     )
     assert [item["id"] for item in it] == [1]
 
@@ -281,6 +284,7 @@ def test_stream_paginated_request_two_pages(
         project_context=project_context,
         token=auth_token,
         page_size=2,
+        http_client=httpx.Client(),
     )
     assert [item["id"] for item in it] == [1, 2, 3, 4]
 
@@ -316,6 +320,7 @@ def test_stream_paginated_request_two_pages_and_lower_limit(
         project_context=project_context,
         token=auth_token,
         page_size=2,
+        http_client=httpx.Client(),
     )
     assert [item["id"] for item in it] == [1, 2, 3]
 
@@ -351,6 +356,7 @@ def test_stream_paginated_request_two_pages_and_higher_limit(
         project_context=project_context,
         token=auth_token,
         page_size=2,
+        http_client=httpx.Client(),
     )
     assert [item["id"] for item in it] == [1, 2, 3, 4]
 
@@ -386,6 +392,7 @@ def test_stream_paginated_request_one_page_and_some(
         project_context=project_context,
         token=auth_token,
         page_size=2,
+        http_client=httpx.Client(),
     )
     assert [item["id"] for item in it] == [1, 2, 3]
 
@@ -415,6 +422,7 @@ def test_stream_paginated_request_one_page_exactly(
         method="GET",
         project_context=project_context,
         token=auth_token,
+        http_client=httpx.Client(),
     )
     assert [item["id"] for item in it] == [1, 2]
 
@@ -444,6 +452,7 @@ def test_stream_paginated_request_no_items(
         method="GET",
         project_context=project_context,
         token=auth_token,
+        http_client=httpx.Client(),
     )
     assert [item["id"] for item in it] == []
 
@@ -473,6 +482,7 @@ def test_stream_paginated_request_with_unexpected_page(
         method="GET",
         project_context=project_context,
         token=auth_token,
+        http_client=httpx.Client(),
     )
     with pytest.raises(
         EntitySDKError, match="Unexpected response: payload.pagination.page=2 but it should be 1"
@@ -506,6 +516,7 @@ def test_stream_paginated_request_with_unexpected_page_size(
         project_context=project_context,
         token=auth_token,
         page_size=123,
+        http_client=httpx.Client(),
     )
     with pytest.raises(
         EntitySDKError,
