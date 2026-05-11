@@ -1,10 +1,12 @@
 """Types definitions."""
 
+import io
 import os
 import uuid
 
 from entitysdk._server_schemas import ActivityStatus as ActivityStatus
 from entitysdk._server_schemas import ActivityType as ActivityType
+from entitysdk._server_schemas import AgentType as AgentType
 from entitysdk._server_schemas import AgePeriod as AgePeriod
 from entitysdk._server_schemas import AnalysisScale as AnalysisScale
 from entitysdk._server_schemas import AssetLabel as AssetLabel
@@ -52,6 +54,7 @@ from entitysdk.compat import StrEnum
 ID = uuid.UUID
 Token = str
 StrOrPath = str | os.PathLike[str]
+BytesOrStream = bytes | io.BufferedIOBase
 
 
 class DeploymentEnvironment(StrEnum):

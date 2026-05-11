@@ -128,6 +128,7 @@ def test_multipart_upload_asset_file(
             project_context=project_context,
             token_manager=token_manager,
             transfer_config=transfer_config_sequential,
+            http_client=httpx.Client(),
         )
 
         mock_initiate.assert_called_once()
@@ -216,7 +217,7 @@ def test_initiate_upload(asset_file, asset_metadata, project_context, httpx_mock
         project_context=project_context,
         preferred_part_count=10,
         token="my-token",
-        http_client=None,
+        http_client=httpx.Client(),
     )
 
     assert res_asset_id == ASSET_ID

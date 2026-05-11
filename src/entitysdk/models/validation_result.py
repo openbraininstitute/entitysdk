@@ -18,7 +18,7 @@ class ValidationResult(Entity):
             examples=[True],
         ),
     ]
-    name: Annotated[
+    name: Annotated[  # pyright: ignore[reportGeneralTypeIssues, reportIncompatibleVariableOverride]
         str,
         Field(
             description="Name of the validation.",
