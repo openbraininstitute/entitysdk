@@ -213,7 +213,7 @@ class Client:
             project_context=context,
             entity_type=entity_type,
             http_client=self._http_client,
-            token=self._token_manager.get_token(),
+            token_manager=self._token_manager,
         )
 
     @validate_call

@@ -56,7 +56,7 @@ def search_entities(
     query: dict | None = None,
     limit: int | None,
     project_context: ProjectContext | None = None,
-    token: str,
+    token_manager: TokenManager,
     http_client: httpx.Client,
 ) -> IteratorResult[TIdentifiable]:
     """Search for entities.
@@ -67,7 +67,7 @@ def search_entities(
         query: Query parameters
         limit: Limit of the number of entities to yield or None.
         project_context: Project context.
-        token: Authorization access token.
+        token_manager: Token manager to issue tokens.
         http_client: HTTP client.
 
     Returns:
@@ -79,7 +79,7 @@ def search_entities(
         parameters=query,
         limit=limit,
         project_context=project_context,
-        token=token,
+        token_manager=token_manager,
         http_client=http_client,
     )
     return IteratorResult(

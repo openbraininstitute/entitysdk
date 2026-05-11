@@ -196,14 +196,16 @@ def test_make_db_api_request_with_none_http_client__client_none(
 
 
 @pytest.mark.parametrize("limit", [0, -1])
-def test_stream_paginated_request_validate_limit(api_url, project_context, auth_token, limit):
+def test_stream_paginated_request_validate_limit(
+    api_url, project_context, token_from_value_manager, limit
+):
     url = f"{api_url}/api/v1/entity/person"
     it = test_module.stream_paginated_request(
         url=url,
         method="GET",
         limit=limit,
         project_context=project_context,
-        token=auth_token,
+        token_manager=token_from_value_manager,
         http_client=httpx.Client(),
     )
     with pytest.raises(EntitySDKError, match="limit must be either None or strictly positive."):
@@ -212,7 +214,7 @@ def test_stream_paginated_request_validate_limit(api_url, project_context, auth_
 
 @pytest.mark.parametrize("page_size", [0, -1])
 def test_stream_paginated_request_validate_page_size(
-    api_url, project_context, auth_token, page_size
+    api_url, project_context, token_from_value_manager, page_size
 ):
     url = f"{api_url}/api/v1/entity/person"
     it = test_module.stream_paginated_request(
@@ -220,7 +222,7 @@ def test_stream_paginated_request_validate_page_size(
         method="GET",
         page_size=page_size,
         project_context=project_context,
-        token=auth_token,
+        token_manager=token_from_value_manager,
         http_client=httpx.Client(),
     )
     with pytest.raises(EntitySDKError, match="page_size must be either None or strictly positive."):
@@ -228,7 +230,7 @@ def test_stream_paginated_request_validate_page_size(
 
 
 def test_stream_paginated_request_one_item(
-    httpx_mock, api_url, project_context, auth_token, request_headers
+    httpx_mock, api_url, project_context, token_from_value_manager, request_headers
 ):
     url = f"{api_url}/api/v1/entity/person"
     httpx_mock.add_response(
@@ -246,7 +248,7 @@ def test_stream_paginated_request_one_item(
         method="GET",
         limit=1,
         project_context=project_context,
-        token=auth_token,
+        token_manager=token_from_value_manager,
         page_size=2,
         http_client=httpx.Client(),
     )
@@ -254,7 +256,7 @@ def test_stream_paginated_request_one_item(
 
 
 def test_stream_paginated_request_two_pages(
-    httpx_mock, api_url, project_context, auth_token, request_headers
+    httpx_mock, api_url, project_context, token_from_value_manager, request_headers
 ):
     url = f"{api_url}/api/v1/entity/person"
     for page, json_response in enumerate(
@@ -282,7 +284,7 @@ def test_stream_paginated_request_two_pages(
         method="GET",
         limit=None,
         project_context=project_context,
-        token=auth_token,
+        token_manager=token_from_value_manager,
         page_size=2,
         http_client=httpx.Client(),
     )
@@ -290,7 +292,7 @@ def test_stream_paginated_request_two_pages(
 
 
 def test_stream_paginated_request_two_pages_and_lower_limit(
-    httpx_mock, api_url, project_context, auth_token, request_headers
+    httpx_mock, api_url, project_context, token_from_value_manager, request_headers
 ):
     url = f"{api_url}/api/v1/entity/person"
     for page, json_response in enumerate(
@@ -318,7 +320,7 @@ def test_stream_paginated_request_two_pages_and_lower_limit(
         method="GET",
         limit=3,
         project_context=project_context,
-        token=auth_token,
+        token_manager=token_from_value_manager,
         page_size=2,
         http_client=httpx.Client(),
     )
@@ -326,7 +328,7 @@ def test_stream_paginated_request_two_pages_and_lower_limit(
 
 
 def test_stream_paginated_request_two_pages_and_higher_limit(
-    httpx_mock, api_url, project_context, auth_token, request_headers
+    httpx_mock, api_url, project_context, token_from_value_manager, request_headers
 ):
     url = f"{api_url}/api/v1/entity/person"
     for page, json_response in enumerate(
@@ -354,7 +356,7 @@ def test_stream_paginated_request_two_pages_and_higher_limit(
         method="GET",
         limit=5,
         project_context=project_context,
-        token=auth_token,
+        token_manager=token_from_value_manager,
         page_size=2,
         http_client=httpx.Client(),
     )
@@ -362,7 +364,7 @@ def test_stream_paginated_request_two_pages_and_higher_limit(
 
 
 def test_stream_paginated_request_one_page_and_some(
-    httpx_mock, api_url, project_context, auth_token, request_headers
+    httpx_mock, api_url, project_context, token_from_value_manager, request_headers
 ):
     url = f"{api_url}/api/v1/entity/person"
     for page, json_response in enumerate(
@@ -390,7 +392,7 @@ def test_stream_paginated_request_one_page_and_some(
         method="GET",
         limit=5,
         project_context=project_context,
-        token=auth_token,
+        token_manager=token_from_value_manager,
         page_size=2,
         http_client=httpx.Client(),
     )
@@ -398,7 +400,7 @@ def test_stream_paginated_request_one_page_and_some(
 
 
 def test_stream_paginated_request_one_page_exactly(
-    httpx_mock, api_url, project_context, auth_token, request_headers
+    httpx_mock, api_url, project_context, token_from_value_manager, request_headers
 ):
     url = f"{api_url}/api/v1/entity/person"
     for page, json_response in enumerate(
@@ -421,14 +423,14 @@ def test_stream_paginated_request_one_page_exactly(
         url=url,
         method="GET",
         project_context=project_context,
-        token=auth_token,
+        token_manager=token_from_value_manager,
         http_client=httpx.Client(),
     )
     assert [item["id"] for item in it] == [1, 2]
 
 
 def test_stream_paginated_request_no_items(
-    httpx_mock, api_url, project_context, auth_token, request_headers
+    httpx_mock, api_url, project_context, token_from_value_manager, request_headers
 ):
     url = f"{api_url}/api/v1/entity/person"
     for page, json_response in enumerate(
@@ -451,14 +453,14 @@ def test_stream_paginated_request_no_items(
         url=url,
         method="GET",
         project_context=project_context,
-        token=auth_token,
+        token_manager=token_from_value_manager,
         http_client=httpx.Client(),
     )
     assert [item["id"] for item in it] == []
 
 
 def test_stream_paginated_request_with_unexpected_page(
-    httpx_mock, api_url, project_context, auth_token, request_headers
+    httpx_mock, api_url, project_context, token_from_value_manager, request_headers
 ):
     url = f"{api_url}/api/v1/entity/person"
     for page, json_response in enumerate(
@@ -481,7 +483,7 @@ def test_stream_paginated_request_with_unexpected_page(
         url=url,
         method="GET",
         project_context=project_context,
-        token=auth_token,
+        token_manager=token_from_value_manager,
         http_client=httpx.Client(),
     )
     with pytest.raises(
@@ -491,7 +493,7 @@ def test_stream_paginated_request_with_unexpected_page(
 
 
 def test_stream_paginated_request_with_unexpected_page_size(
-    httpx_mock, api_url, project_context, auth_token, request_headers
+    httpx_mock, api_url, project_context, token_from_value_manager, request_headers
 ):
     url = f"{api_url}/api/v1/entity/person"
     for page, json_response in enumerate(
@@ -514,7 +516,7 @@ def test_stream_paginated_request_with_unexpected_page_size(
         url=url,
         method="GET",
         project_context=project_context,
-        token=auth_token,
+        token_manager=token_from_value_manager,
         page_size=123,
         http_client=httpx.Client(),
     )
