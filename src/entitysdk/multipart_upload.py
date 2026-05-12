@@ -80,7 +80,7 @@ def multipart_upload_asset_file(
         asset_path=asset_path,
         asset_metadata=asset_metadata,
         project_context=project_context,
-        token=token_manager.get_token(),
+        token_manager=token_manager,
         http_client=http_client,
         preferred_part_count=transfer_config.preferred_part_count,
     )
@@ -96,7 +96,7 @@ def multipart_upload_asset_file(
         entity_type=entity_type,
         asset_id=asset_id,
         project_context=project_context,
-        token=token_manager.get_token(),
+        token_manager=token_manager,
         http_client=http_client,
     )
 
@@ -110,7 +110,7 @@ def _initiate_upload(
     asset_metadata: LocalAssetMetadata,
     project_context: ProjectContext,
     preferred_part_count: int,
-    token: str,
+    token_manager: TokenManager,
     http_client: httpx.Client,
 ) -> tuple[ID, list[PartUpload]]:
     """Initiate a multipart upload with the backend and prepare part metadata.
@@ -147,7 +147,7 @@ def _initiate_upload(
             "preferred_part_count": preferred_part_count,
         },
         project_context=project_context,
-        token=token,
+        token_manager=token_manager,
         http_client=http_client,
     ).json()
 
@@ -298,7 +298,7 @@ def _complete_upload(
     entity_type: type[Entity],
     asset_id: ID,
     project_context: ProjectContext,
-    token: str,
+    token_manager: TokenManager,
     http_client: httpx.Client,
 ) -> Asset:
     """Finalize a multipart upload with the backend and return the created asset.
@@ -322,7 +322,7 @@ def _complete_upload(
     data = make_db_api_request(
         url=url,
         method="POST",
-        token=token,
+        token_manager=token_manager,
         http_client=http_client,
         project_context=project_context,
     ).json()

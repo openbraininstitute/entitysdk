@@ -201,7 +201,9 @@ def test_execute_with_retry_raises_after_max_retries():
     assert mock_fn.call_count == 3
 
 
-def test_initiate_upload(asset_file, asset_metadata, project_context, httpx_mock, asset_payload):
+def test_initiate_upload(
+    asset_file, asset_metadata, project_context, httpx_mock, asset_payload, token_from_value_manager
+):
 
     httpx_mock.add_response(
         url=f"http://my-url/cell-morphology/{ENTITY_ID}/assets/multipart-upload/initiate",
@@ -216,7 +218,7 @@ def test_initiate_upload(asset_file, asset_metadata, project_context, httpx_mock
         asset_metadata=asset_metadata,
         project_context=project_context,
         preferred_part_count=10,
-        token="my-token",
+        token_manager=token_from_value_manager,
         http_client=httpx.Client(),
     )
 
@@ -270,7 +272,7 @@ def test_upload_part(httpx_mock, asset_file):
     )
 
 
-def test_complete_upload(httpx_mock, project_context, asset_payload):
+def test_complete_upload(httpx_mock, project_context, asset_payload, token_from_value_manager):
 
     del asset_payload["upload_meta"]
 
@@ -289,7 +291,7 @@ def test_complete_upload(httpx_mock, project_context, asset_payload):
         entity_type=ENTITY_TYPE,
         asset_id=ASSET_ID,
         project_context=project_context,
-        token="my-token",
+        token_manager=token_from_value_manager,
         http_client=http_client,
     )
     assert res.status == "created"

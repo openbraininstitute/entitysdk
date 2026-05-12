@@ -92,7 +92,9 @@ def test_upload_asset_file(asset_file, token_manager):
         patched_file.assert_called_once()
 
 
-def test_fetch_asset_content_copy_or_download_reads_from_store_when_asset_is_provided():
+def test_fetch_asset_content_copy_or_download_reads_from_store_when_asset_is_provided(
+    token_from_value_manager,
+):
     entity_id = uuid4()
     asset_id = uuid4()
     asset = Asset(
@@ -116,7 +118,7 @@ def test_fetch_asset_content_copy_or_download_reads_from_store_when_asset_is_pro
         entity_id=entity_id,
         entity_type=models.Entity,
         asset_or_id=asset,
-        token="my-token",
+        token_manager=token_from_value_manager,
         local_store=store,
         strategy=FetchContentStrategy.local_or_download,
         http_client=httpx.Client(),
@@ -126,7 +128,7 @@ def test_fetch_asset_content_copy_or_download_reads_from_store_when_asset_is_pro
     store.read_bytes.assert_called_once()
 
 
-def test_fetch_asset_file_download_streams_to_disk(tmp_path):
+def test_fetch_asset_file_download_streams_to_disk(tmp_path, token_from_value_manager):
     asset_id = uuid4()
     asset = Asset(
         id=asset_id,
@@ -158,7 +160,7 @@ def test_fetch_asset_file_download_streams_to_disk(tmp_path):
             entity_type=models.Entity,
             asset_or_id=asset,
             output_path=tmp_path,
-            token="my-token",
+            token_manager=token_from_value_manager,
             strategy=FetchFileStrategy.download_only,
             http_client=httpx.Client(),
         )
@@ -167,7 +169,7 @@ def test_fetch_asset_file_download_streams_to_disk(tmp_path):
     download_asset_file.assert_called_once()
 
 
-def test_fetch_asset_file_download_stream_sets_context_headers(tmp_path):
+def test_fetch_asset_file_download_stream_sets_context_headers(tmp_path, token_from_value_manager):
     asset_id = uuid4()
     asset = Asset(
         id=asset_id,
@@ -199,7 +201,7 @@ def test_fetch_asset_file_download_stream_sets_context_headers(tmp_path):
             entity_type=models.Entity,
             asset_or_id=asset,
             output_path=tmp_path,
-            token="my-token",
+            token_manager=token_from_value_manager,
             project_context=ctx,
             strategy=FetchFileStrategy.download_only,
             http_client=httpx.Client(),
@@ -207,11 +209,10 @@ def test_fetch_asset_file_download_stream_sets_context_headers(tmp_path):
 
     assert out.read_text() == "x"
     _, kwargs = download_asset_file.call_args
-    assert kwargs["token"] == "my-token"  # noqa: S105
     assert kwargs["project_context"] == ctx
 
 
-def test_fetch_asset_file_download_request_error_raises(tmp_path):
+def test_fetch_asset_file_download_request_error_raises(tmp_path, token_from_value_manager):
     asset_id = uuid4()
     asset = Asset(
         id=asset_id,
@@ -234,13 +235,13 @@ def test_fetch_asset_file_download_request_error_raises(tmp_path):
                 entity_type=models.Entity,
                 asset_or_id=asset,
                 output_path=tmp_path,
-                token="my-token",
+                token_manager=token_from_value_manager,
                 strategy=FetchFileStrategy.download_only,
                 http_client=httpx.Client(),
             )
 
 
-def test_fetch_asset_file_download_http_status_error_raises(tmp_path):
+def test_fetch_asset_file_download_http_status_error_raises(tmp_path, token_from_value_manager):
     asset_id = uuid4()
     asset = Asset(
         id=asset_id,
@@ -263,13 +264,13 @@ def test_fetch_asset_file_download_http_status_error_raises(tmp_path):
                 entity_type=models.Entity,
                 asset_or_id=asset,
                 output_path=tmp_path,
-                token="my-token",
+                token_manager=token_from_value_manager,
                 strategy=FetchFileStrategy.download_only,
                 http_client=httpx.Client(),
             )
 
 
-def test_fetch_asset_file_unsupported_strategy_raises(tmp_path):
+def test_fetch_asset_file_unsupported_strategy_raises(tmp_path, token_from_value_manager):
     entity_id = uuid4()
     asset_id = uuid4()
     asset = Asset(
@@ -291,13 +292,13 @@ def test_fetch_asset_file_unsupported_strategy_raises(tmp_path):
             entity_type=models.Entity,
             asset_or_id=asset,
             output_path=tmp_path / "out.txt",
-            token="my-token",
+            token_manager=token_from_value_manager,
             strategy="unsupported-strategy",
             http_client=httpx.Client(),
         )
 
 
-def test_fetch_asset_content_unsupported_strategy_raises():
+def test_fetch_asset_content_unsupported_strategy_raises(token_from_value_manager):
     entity_id = uuid4()
     asset_id = uuid4()
     asset = Asset(
@@ -318,27 +319,34 @@ def test_fetch_asset_content_unsupported_strategy_raises():
             entity_id=entity_id,
             entity_type=models.Entity,
             asset_or_id=asset,
-            token="my-token",
+            token_manager=token_from_value_manager,
             strategy="unsupported-strategy",
             http_client=httpx.Client(),
         )
 
 
-def test_download_asset_file_without_project_context(tmp_path, httpx_mock):
+def test_download_asset_file_without_project_context(
+    tmp_path, httpx_mock, token_from_value_manager, auth_token
+):
     out = tmp_path / "downloaded.bin"
-    endpoint = "http://mock-host:8000/entity/e1/assets/a1"
+    api_url = "http://mock-host:8000"
+    entity_id = uuid4()
+    asset_id = uuid4()
     httpx_mock.add_response(
         method="GET",
-        url=f"{endpoint}/download",
-        match_headers={"Authorization": "Bearer my-token"},
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download",
+        match_headers={"Authorization": f"Bearer {auth_token}"},
         content=b"payload",
     )
 
     with httpx.Client() as client:
         res = test_module.download_asset_file(
-            asset_endpoint=endpoint,
+            api_url=api_url,
+            entity_id=entity_id,
+            entity_type=models.Entity,
+            asset_id=asset_id,
             target_path=out,
-            token="my-token",
+            token_manager=token_from_value_manager,
             project_context=None,
             http_client=client,
         )
@@ -347,15 +355,19 @@ def test_download_asset_file_without_project_context(tmp_path, httpx_mock):
     assert out.read_bytes() == b"payload"
 
 
-def test_download_asset_file_project_context_without_virtual_lab_id(tmp_path, httpx_mock):
+def test_download_asset_file_project_context_without_virtual_lab_id(
+    tmp_path, httpx_mock, token_from_value_manager, auth_token
+):
     out = tmp_path / "downloaded.bin"
-    endpoint = "http://mock-host:8000/entity/e1/assets/a1"
+    api_url = "http://mock-host:8000"
+    entity_id = uuid4()
+    asset_id = uuid4()
     ctx = ProjectContext(project_id="f373e771-3a2f-4f45-ab59-0955efd7b1f4")
     httpx_mock.add_response(
         method="GET",
-        url=f"{endpoint}/download",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download",
         match_headers={
-            "Authorization": "Bearer my-token",
+            "Authorization": f"Bearer {auth_token}",
             "project-id": str(ctx.project_id),
         },
         content=b"z",
@@ -363,9 +375,12 @@ def test_download_asset_file_project_context_without_virtual_lab_id(tmp_path, ht
 
     with httpx.Client() as client:
         res = test_module.download_asset_file(
-            asset_endpoint=endpoint,
+            api_url=api_url,
+            entity_id=entity_id,
+            entity_type=models.Entity,
+            asset_id=asset_id,
             target_path=out,
-            token="my-token",
+            token_manager=token_from_value_manager,
             project_context=ctx,
             http_client=client,
         )
@@ -374,21 +389,25 @@ def test_download_asset_file_project_context_without_virtual_lab_id(tmp_path, ht
     assert out.read_bytes() == b"z"
 
 
-def test_download_asset_file_with_asset_path_query(tmp_path, httpx_mock):
+def test_download_asset_file_with_asset_path_query(tmp_path, httpx_mock, token_from_value_manager):
     out = tmp_path / "nested.txt"
-    endpoint = "http://mock-host:8000/entity/e1/assets/a1"
+    entity_id = uuid4()
+    asset_id = uuid4()
+    api_url = "http://mock-host:8000"
     httpx_mock.add_response(
         method="GET",
-        url=f"{endpoint}/download?asset_path=sub%2Ffile.txt",
-        match_headers={"Authorization": "Bearer my-token"},
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download?asset_path=sub%2Ffile.txt",
         content=b"inner",
     )
 
     with httpx.Client() as client:
         res = test_module.download_asset_file(
-            asset_endpoint=endpoint,
+            api_url=api_url,
+            entity_id=entity_id,
+            entity_type=models.Entity,
+            asset_id=asset_id,
             target_path=out,
-            token="my-token",
+            token_manager=token_from_value_manager,
             project_context=None,
             http_client=client,
             asset_path=Path("sub/file.txt"),
@@ -398,7 +417,7 @@ def test_download_asset_file_with_asset_path_query(tmp_path, httpx_mock):
     assert out.read_bytes() == b"inner"
 
 
-def test_download_asset_file_skips_empty_chunks(tmp_path):
+def test_download_asset_file_skips_empty_chunks(tmp_path, token_from_value_manager):
     out = tmp_path / "out.bin"
 
     def _fake_stream(**_kwargs):
@@ -408,9 +427,12 @@ def test_download_asset_file_skips_empty_chunks(tmp_path):
     with patch("entitysdk.core.stream_response", side_effect=_fake_stream):
         with httpx.Client() as client:
             res = test_module.download_asset_file(
-                asset_endpoint="http://mock-host:8000/x",
+                api_url="http://mock-host:8000",
+                entity_id=uuid4(),
+                entity_type=models.Entity,
+                asset_id=uuid4(),
                 target_path=out,
-                token="t",
+                token_manager=token_from_value_manager,
                 http_client=client,
             )
 

@@ -8,7 +8,7 @@ from typing import Any, TypeVar, cast
 import httpx
 from pydantic import validate_call
 
-from entitysdk import core, route
+from entitysdk import core
 from entitysdk.common import ProjectContext, parse_vlab_url
 from entitysdk.compat import Self
 from entitysdk.exception import EntitySDKError
@@ -161,22 +161,18 @@ class Client:
         Returns:
             entity_type instantiated by deserializing the response.
         """
-        url = route.get_entities_endpoint(
-            api_url=self.api_url,
-            entity_type=entity_type,
-            entity_id=entity_id,
-            admin=admin,
-        )
         context = (
             self._optional_user_context(override_context=project_context) if not admin else None
         )
         return core.get_entity(
-            url=url,
+            api_url=self.api_url,
+            entity_id=entity_id,
             options=options,
             entity_type=entity_type,
             project_context=context,
             http_client=self._http_client,
-            token=self._token_manager.get_token(),
+            token_manager=self._token_manager,
+            admin=admin,
         )
 
     @validate_call
@@ -198,22 +194,18 @@ class Client:
             project_context: Optional project context.
             admin: Use admin endpoints if True
         """
-        url = route.get_entities_endpoint(
-            api_url=self.api_url,
-            entity_type=entity_type,
-            admin=admin,
-        )
         context = (
             self._optional_user_context(override_context=project_context) if not admin else None
         )
         return core.search_entities(
-            url=url,
+            api_url=self.api_url,
+            entity_type=entity_type,
             query=query,
             limit=limit,
             project_context=context,
-            entity_type=entity_type,
             http_client=self._http_client,
             token_manager=self._token_manager,
+            admin=admin,
         )
 
     @validate_call
@@ -242,7 +234,7 @@ class Client:
             entity_type=entity_type,
             derivation_type=derivation_type,
             project_context=self._required_user_context(override_context=project_context),
-            token=self._token_manager.get_token(),
+            token_manager=self._token_manager,
             http_client=self._http_client,
         )
 
@@ -262,14 +254,13 @@ class Client:
         Returns:
             Registered entity with id.
         """
-        url = route.get_entities_endpoint(api_url=self.api_url, entity_type=type(entity))
         context = self._optional_user_context(override_context=project_context)
         return core.register_entity(
-            url=url,
+            api_url=self.api_url,
             entity=entity,
             project_context=context,
             http_client=self._http_client,
-            token=self._token_manager.get_token(),
+            token_manager=self._token_manager,
         )
 
     @validate_call
@@ -301,7 +292,7 @@ class Client:
             entity_type=entity_type,
             project_context=context,
             http_client=self._http_client,
-            token=self._token_manager.get_token(),
+            token_manager=self._token_manager,
             admin=admin,
         )
 
@@ -324,22 +315,18 @@ class Client:
             project_context: Optional project context.
             admin: whether to use the admin endpoint or not.
         """
-        url = route.get_entities_endpoint(
-            api_url=self.api_url,
-            entity_type=entity_type,
-            entity_id=entity_id,
-            admin=admin,
-        )
         context = (
             self._optional_user_context(override_context=project_context) if not admin else None
         )
         return core.update_entity(
-            url=url,
+            api_url=self.api_url,
+            entity_id=entity_id,
             project_context=context,
             entity_type=entity_type,
             attrs_or_entity=attrs_or_entity,
             http_client=self._http_client,
-            token=self._token_manager.get_token(),
+            token_manager=self._token_manager,
+            admin=admin,
         )
 
     @validate_call
@@ -357,17 +344,13 @@ class Client:
             entity_type: Type of the entity.
             admin: Whether to use the admin endpoint or not.
         """
-        url = route.get_entities_endpoint(
-            api_url=self.api_url,
-            entity_type=entity_type,
-            entity_id=entity_id,
-            admin=admin,
-        )
         core.delete_entity(
-            url=url,
+            api_url=self.api_url,
+            entity_id=entity_id,
             entity_type=entity_type,
             http_client=self._http_client,
-            token=self._token_manager.get_token(),
+            token_manager=self._token_manager,
+            admin=admin,
         )
 
     @validate_call
@@ -449,12 +432,6 @@ class Client:
         Returns:
             The created Asset.
         """
-        url = route.get_assets_endpoint(
-            api_url=self.api_url,
-            entity_type=entity_type,
-            entity_id=entity_id,
-            asset_id=None,
-        )
         asset_metadata = LocalAssetMetadata(
             file_name=file_name,
             content_type=file_content_type,
@@ -463,12 +440,14 @@ class Client:
         )
         context = self._required_user_context(override_context=project_context)
         return core.upload_asset_content(
-            url=url,
+            api_url=self.api_url,
+            entity_id=entity_id,
+            entity_type=entity_type,
             project_context=context,
             asset_content=file_content,
             asset_metadata=asset_metadata,
             http_client=self._http_client,
-            token=self._token_manager.get_token(),
+            token_manager=self._token_manager,
         )
 
     @validate_call
@@ -498,28 +477,21 @@ class Client:
         Returns:
             The created directory Asset.
         """
-        url = (
-            route.get_assets_endpoint(
-                api_url=self.api_url,
-                entity_type=entity_type,
-                entity_id=entity_id,
-                asset_id=None,
-            )
-            + "/directory/upload"
-        )
         context = self._required_user_context(override_context=project_context)
 
         paths_dict = {Path(k): Path(v) for k, v in paths.items()}
 
         return core.upload_asset_directory(
-            url=url,
+            api_url=self.api_url,
+            entity_id=entity_id,
+            entity_type=entity_type,
             name=name,
             paths=paths_dict,
             metadata=metadata,
             label=label,
             project_context=context,
             http_client=self._http_client,
-            token=self._token_manager.get_token(),
+            token_manager=self._token_manager,
         )
 
     @validate_call
@@ -542,21 +514,15 @@ class Client:
         Returns:
             A `DetailedFileList` describing the directory contents.
         """
-        url = (
-            route.get_assets_endpoint(
-                api_url=self.api_url,
-                entity_type=entity_type,
-                entity_id=entity_id,
-                asset_id=asset_id,
-            )
-            + "/list"
-        )
         context = self._optional_user_context(override_context=project_context)
         return core.list_directory(
-            url=url,
+            api_url=self.api_url,
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=asset_id,
             project_context=context,
             http_client=self._http_client,
-            token=self._token_manager.get_token(),
+            token_manager=self._token_manager,
         )
 
     @validate_call
@@ -606,18 +572,14 @@ class Client:
 
         if not ignore_directory_name:
             if asset is None:
-                asset_endpoint = route.get_assets_endpoint(
+                asset = core.get_entity_asset(
                     api_url=self.api_url,
-                    entity_type=entity_type,
-                    entity_id=cast(ID, entity_id),
+                    entity_id=entity_id,
                     asset_id=asset_id,
-                )
-                asset = core.get_entity(
-                    asset_endpoint,
-                    entity_type=Asset,
+                    entity_type=entity_type,
                     project_context=context,
                     http_client=self._http_client,
-                    token=self._token_manager.get_token(),
+                    token_manager=self._token_manager,
                 )
 
             output_path /= asset.path
@@ -735,7 +697,7 @@ class Client:
             asset_path=asset_path,
             project_context=context,
             http_client=self._http_client,
-            token=self._token_manager.get_token(),
+            token_manager=self._token_manager,
             local_store=self._local_store,
             strategy=strategy,
         )
@@ -807,7 +769,7 @@ class Client:
             asset_path=asset_path,
             output_path=output_path,
             http_client=self._http_client,
-            token=self._token_manager.get_token(),
+            token_manager=self._token_manager,
             local_store=self._local_store,
             strategy=strategy,
         )
@@ -976,21 +938,18 @@ class Client:
         Returns:
             The deleted Asset (as returned by the backend).
         """
-        url = route.get_assets_endpoint(
-            api_url=self.api_url,
-            entity_type=entity_type,
-            entity_id=entity_id,
-            asset_id=asset_id,
-            admin=admin,
-        )
         context = (
             self._required_user_context(override_context=project_context) if not admin else None
         )
         return core.delete_asset(
-            url=url,
+            api_url=self.api_url,
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=asset_id,
             project_context=context,
             http_client=self._http_client,
-            token=self._token_manager.get_token(),
+            token_manager=self._token_manager,
+            admin=admin,
         )
 
     @validate_call
@@ -1070,15 +1029,6 @@ class Client:
         Returns:
             The registered Asset.
         """
-        url = (
-            route.get_assets_endpoint(
-                api_url=self.api_url,
-                entity_type=entity_type,
-                entity_id=entity_id,
-                asset_id=None,
-            )
-            + "/register"
-        )
         asset_metadata = ExistingAssetMetadata(
             path=name,
             full_path=storage_path,
@@ -1089,9 +1039,11 @@ class Client:
         )
         context = self._required_user_context(override_context=project_context)
         return core.register_asset(
-            url=url,
+            api_url=self.api_url,
+            entity_id=entity_id,
+            entity_type=entity_type,
             project_context=context,
             asset_metadata=asset_metadata,
             http_client=self._http_client,
-            token=self._token_manager.get_token(),
+            token_manager=self._token_manager,
         )
