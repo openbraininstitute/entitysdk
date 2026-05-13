@@ -6,6 +6,7 @@ import pytest
 from entitysdk.client import Client
 from entitysdk.common import ProjectContext
 from entitysdk.config import settings
+from entitysdk.token_manager import TokenFromValue
 from tests.unit.util import PROJECT_ID, VIRTUAL_LAB_ID
 
 
@@ -36,6 +37,11 @@ def project_context():
 @pytest.fixture(scope="session")
 def auth_token():
     return "mock-token"
+
+
+@pytest.fixture(scope="session")
+def token_from_value_manager(auth_token):
+    return TokenFromValue(value=auth_token)
 
 
 @pytest.fixture(scope="session")

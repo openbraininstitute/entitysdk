@@ -10,6 +10,7 @@ from entitysdk.common import ProjectContext
 from entitysdk.config import settings
 from entitysdk.exception import EntitySDKError
 from entitysdk.models.response import ListResponse
+from entitysdk.token_manager import TokenManager
 
 
 def make_db_api_request(
@@ -22,12 +23,9 @@ def make_db_api_request(
     files: dict | None = None,
     project_context: ProjectContext | None = None,
     token: str,
-    http_client: httpx.Client | None = None,
+    http_client: httpx.Client,
 ) -> httpx.Response:
     """Make a request to entitycore api."""
-    if http_client is None:
-        http_client = httpx.Client()
-
     headers = {"Authorization": f"Bearer {token}"}
 
     if project_context:
@@ -79,10 +77,10 @@ def stream_paginated_request(
     json: dict | None = None,
     parameters: dict | None = None,
     project_context: ProjectContext | None = None,
-    http_client: httpx.Client | None = None,
+    http_client: httpx.Client,
     page_size: int | None = None,
     limit: int | None = None,
-    token: str,
+    token_manager: TokenManager,
 ) -> Iterator[dict]:
     """Paginate a request to entitycore api.
 
@@ -95,7 +93,7 @@ def stream_paginated_request(
         http_client: The http client to use.
         page_size: The page size to use, or None to use server default.
         limit: Limit the number of entities to return. Default is None.
-        token: The token to use.
+        token_manager: The token_manager to issue tokens.
 
     Returns:
         An iterator of dicts.
@@ -118,7 +116,7 @@ def stream_paginated_request(
             json=json,
             parameters=parameters | {"page": page},
             project_context=project_context,
-            token=token,
+            token=token_manager.get_token(),
             http_client=http_client,
         )
         payload = ListResponse.model_validate_json(response.text)

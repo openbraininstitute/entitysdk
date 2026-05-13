@@ -85,7 +85,7 @@ class NeuronBlock(BaseModel):
 class IonChannelModel(ScientificArtifact):
     """Ion channel mechanism model."""
 
-    name: Annotated[
+    name: Annotated[  # pyright: ignore[reportGeneralTypeIssues, reportIncompatibleVariableOverride]
         str,
         Field(
             description="The name of the ion channel model "
@@ -112,7 +112,7 @@ class IonChannelModel(ScientificArtifact):
             examples=["Ca_HVA"],
         ),
     ]
-    description: Annotated[
+    description: Annotated[  # pyright: ignore[reportGeneralTypeIssues, reportIncompatibleVariableOverride]
         str,
         Field(
             description="A description of the ion channel mechanism.",

@@ -32,6 +32,8 @@ def runtime_context():
         git_dirty=[],
         script_hash="aaa",
         uv_lock_hash="bbb",
+        installed_packages={"entitysdk": "0.1.0"},
+        entitysdk_env={},
     )
 
 
@@ -74,6 +76,20 @@ def test_runtime_context_collect(tmp_path, monkeypatch):
     assert ctx.git_dirty == []
     assert ctx.script_hash
     assert ctx.uv_lock_hash
+
+
+def test_runtime_context_installed_packages():
+    packages = test_module.RuntimeContext._installed_packages()
+    assert isinstance(packages, dict)
+    assert "pydantic" in packages
+
+
+def test_runtime_context_entitysdk_env(monkeypatch):
+    monkeypatch.setenv("ENTITYSDK_FOO", "bar")
+    monkeypatch.setenv("OTHER_VAR", "ignored")
+    env = test_module.RuntimeContext._entitysdk_env()
+    assert env["ENTITYSDK_FOO"] == "bar"
+    assert "OTHER_VAR" not in env
 
 
 def test_load_manifest(tmp_path, common_settings, runtime_context):

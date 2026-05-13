@@ -12,7 +12,7 @@ from entitysdk.types import ID
 class BrainAtlas(Entity):
     """BrainAtlas model."""
 
-    name: Annotated[
+    name: Annotated[  # pyright: ignore[reportGeneralTypeIssues, reportIncompatibleVariableOverride]
         str,
         Field(
             examples=["Thalamus"],

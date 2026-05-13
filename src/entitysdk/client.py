@@ -1,7 +1,6 @@
 """Identifiable SDK client."""
 
 import concurrent.futures
-import io
 import os
 from pathlib import Path
 from typing import Any, TypeVar, cast
@@ -28,6 +27,7 @@ from entitysdk.types import (
     ID,
     AssetLabel,
     AssetStatus,
+    BytesOrStream,
     ContentType,
     DeploymentEnvironment,
     DerivationType,
@@ -213,7 +213,7 @@ class Client:
             project_context=context,
             entity_type=entity_type,
             http_client=self._http_client,
-            token=self._token_manager.get_token(),
+            token_manager=self._token_manager,
         )
 
     @validate_call
@@ -243,6 +243,7 @@ class Client:
             derivation_type=derivation_type,
             project_context=self._required_user_context(override_context=project_context),
             token=self._token_manager.get_token(),
+            http_client=self._http_client,
         )
 
     @validate_call
@@ -426,7 +427,7 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Entity],
-        file_content: io.BufferedIOBase,
+        file_content: BytesOrStream,
         file_name: str,
         file_content_type: ContentType,
         file_metadata: dict | None = None,
@@ -508,12 +509,12 @@ class Client:
         )
         context = self._required_user_context(override_context=project_context)
 
-        paths = {Path(k): Path(v) for k, v in paths.items()}
+        paths_dict = {Path(k): Path(v) for k, v in paths.items()}
 
         return core.upload_asset_directory(
             url=url,
             name=name,
-            paths=paths,
+            paths=paths_dict,
             metadata=metadata,
             label=label,
             project_context=context,
@@ -564,7 +565,7 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Entity],
-        asset_id: ID | Asset,
+        asset_id: ID | Asset,  # pyright: ignore[reportRedeclaration]
         output_path: Path,
         project_context: ProjectContext | None = None,
         ignore_directory_name: bool = False,
@@ -599,7 +600,7 @@ class Client:
 
         if isinstance(asset_id, Asset):
             asset = asset_id
-            asset_id = asset.id
+            asset_id: ID = asset.id  # pyright: ignore[reportRedeclaration, reportAssignmentType]
         else:
             asset = None
 
@@ -882,14 +883,14 @@ class Client:
             An iterator yielding `DownloadedAssetFile` objects.
         """
 
-        def _fetch_entity_asset(asset):
+        def _fetch_entity_asset(asset: Asset) -> DownloadedAssetFile:
             if asset.is_directory:
                 raise NotImplementedError("Downloading asset directories is not supported yet.")
             else:
                 path = self.fetch_file(
-                    entity_id=entity.id,
+                    entity_id=cast(ID, entity.id),
                     entity_type=type(entity),
-                    asset_id=asset.id,
+                    asset_id=cast(ID, asset.id),
                     output_path=output_path,
                     project_context=context,
                     strategy=strategy,

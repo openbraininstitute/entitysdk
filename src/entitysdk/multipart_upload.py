@@ -47,7 +47,7 @@ def multipart_upload_asset_file(
     asset_metadata: LocalAssetMetadata,
     project_context: ProjectContext,
     token_manager: TokenManager,
-    http_client: httpx.Client | None = None,
+    http_client: httpx.Client,
     transfer_config: MultipartUploadTransferConfig,
 ) -> Asset:
     """Upload a local asset file in multiple parts to the storage service using presigned URLs.
@@ -64,7 +64,7 @@ def multipart_upload_asset_file(
         asset_metadata: Metadata associated with the asset.
         project_context: Context of the project.
         token_manager: Object providing authentication tokens for API requests.
-        http_client (httpx.Client | None): Optional HTTP client to use for uploads.
+        http_client: HTTP client to use for uploads.
         transfer_config (MultipartUploadTransferConfig): Configuration for multipart upload.
 
     Returns:
@@ -111,7 +111,7 @@ def _initiate_upload(
     project_context: ProjectContext,
     preferred_part_count: int,
     token: str,
-    http_client: httpx.Client | None,
+    http_client: httpx.Client,
 ) -> tuple[ID, list[PartUpload]]:
     """Initiate a multipart upload with the backend and prepare part metadata.
 
@@ -299,7 +299,7 @@ def _complete_upload(
     asset_id: ID,
     project_context: ProjectContext,
     token: str,
-    http_client: httpx.Client | None,
+    http_client: httpx.Client,
 ) -> Asset:
     """Finalize a multipart upload with the backend and return the created asset.
 
