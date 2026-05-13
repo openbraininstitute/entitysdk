@@ -21,7 +21,7 @@
     "type": "person"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "description-0",
+  "description": "my-description",
   "id": "00000000-0000-4000-8000-000001234678",
   "license": {
     "creation_date": "2025-01-01T00:00:00Z",
@@ -46,7 +46,7 @@
     }
   ],
   "mtypes": [],
-  "name": "name-0",
+  "name": "my-name",
   "subject": {
     "age_max": null,
     "age_min": null,

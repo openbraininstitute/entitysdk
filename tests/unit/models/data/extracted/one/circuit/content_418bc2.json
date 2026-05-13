@@ -2,7 +2,7 @@
   "assets": [],
   "atlas_id": "00000000-0000-4000-8000-000001234678",
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": true,
+  "authorized_public": false,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
@@ -41,7 +41,7 @@
   },
   "name": "my-circuit",
   "notice_text": null,
-  "number_connections": 10,
+  "number_connections": 750,
   "number_neurons": 5,
   "number_synapses": 100,
   "published_in": null,

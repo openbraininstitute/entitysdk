@@ -3,7 +3,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "brain_atlas_id": "00000000-0000-4000-8000-000001234678",
       "brain_region_id": "00000000-0000-4000-8000-000001234678",
       "created_by": {
