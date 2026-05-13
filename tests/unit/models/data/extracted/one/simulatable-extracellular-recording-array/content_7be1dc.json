@@ -16,7 +16,7 @@
   "description": "my-description",
   "electrode_type": "custom",
   "id": "00000000-0000-4000-8000-000001234678",
-  "name": "my-array",
+  "name": "Public u2/0",
   "type": "simulatable_extracellular_recording_array",
   "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {

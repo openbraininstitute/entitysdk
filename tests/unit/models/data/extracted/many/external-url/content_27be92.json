@@ -10,11 +10,11 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Contains description of potassium channels...",
+      "description": "description-1",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Potassium channel page on Channelpedia",
-      "source": "channelpedia",
-      "source_name": "Channelpedia",
+      "name": "name-1",
+      "source": "icgenealogy",
+      "source_name": "ICGenealogy",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "family_name": "courcol",
@@ -24,7 +24,7 @@
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person"
       },
-      "url": "https://channelpedia.epfl.ch/wikipages/188"
+      "url": "https://icg.neurotheory.ox.ac.uk//wiki/page-1"
     }
   ],
   "facets": null,

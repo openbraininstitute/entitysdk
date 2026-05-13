@@ -31,7 +31,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Test Morphology Description 0",
+      "description": "Test Morphology Description 9",
       "experiment_date": null,
       "has_segmented_spines": false,
       "id": "00000000-0000-4000-8000-000001234678",
@@ -45,7 +45,7 @@
         "z": 30.0
       },
       "mtypes": [],
-      "name": "Test Morphology Name 0",
+      "name": "Test Morphology Name 9",
       "notice_text": null,
       "published_in": null,
       "repair_pipeline_state": null,
@@ -54,20 +54,266 @@
         "age_min": null,
         "age_period": "postnatal",
         "age_value": 1209600.0,
-        "description": "my-description-0",
+        "description": "my-description-9",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "subject-0",
+        "name": "subject-9",
         "sex": "male",
         "species": {
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "TestSpecies1",
-          "taxonomy_id": "0"
+          "name": "TestSpecies2",
+          "taxonomy_id": "1"
         },
         "strain": {
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "TestStrain1",
+          "name": "TestStrain2",
           "species_id": "00000000-0000-4000-8000-000001234678",
-          "taxonomy_id": "0"
+          "taxonomy_id": "1"
+        },
+        "weight": 1.5
+      },
+      "type": "cell_morphology",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "cell_morphology_protocol": {
+        "description": "Description Test",
+        "generation_type": "placeholder",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "Placeholder Protocol Test",
+        "type": "cell_morphology_protocol"
+      },
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test Morphology Description 7",
+      "experiment_date": null,
+      "has_segmented_spines": false,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "legacy_id": [
+        "Test Legacy ID"
+      ],
+      "license": null,
+      "location": {
+        "x": 10.0,
+        "y": 20.0,
+        "z": 30.0
+      },
+      "mtypes": [],
+      "name": "Test Morphology Name 7",
+      "notice_text": null,
+      "published_in": null,
+      "repair_pipeline_state": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description-7",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "subject-7",
+        "sex": "male",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "TestSpecies2",
+          "taxonomy_id": "1"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "TestStrain2",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "1"
+        },
+        "weight": 1.5
+      },
+      "type": "cell_morphology",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "cell_morphology_protocol": {
+        "description": "Description Test",
+        "generation_type": "placeholder",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "Placeholder Protocol Test",
+        "type": "cell_morphology_protocol"
+      },
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test Morphology Description 5",
+      "experiment_date": null,
+      "has_segmented_spines": false,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "legacy_id": [
+        "Test Legacy ID"
+      ],
+      "license": null,
+      "location": {
+        "x": 10.0,
+        "y": 20.0,
+        "z": 30.0
+      },
+      "mtypes": [],
+      "name": "Test Morphology Name 5",
+      "notice_text": null,
+      "published_in": null,
+      "repair_pipeline_state": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description-5",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "subject-5",
+        "sex": "male",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "TestSpecies2",
+          "taxonomy_id": "1"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "TestStrain2",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "1"
+        },
+        "weight": 1.5
+      },
+      "type": "cell_morphology",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "cell_morphology_protocol": {
+        "description": "Description Test",
+        "generation_type": "placeholder",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "Placeholder Protocol Test",
+        "type": "cell_morphology_protocol"
+      },
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test Morphology Description 3",
+      "experiment_date": null,
+      "has_segmented_spines": false,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "legacy_id": [
+        "Test Legacy ID"
+      ],
+      "license": null,
+      "location": {
+        "x": 10.0,
+        "y": 20.0,
+        "z": 30.0
+      },
+      "mtypes": [],
+      "name": "Test Morphology Name 3",
+      "notice_text": null,
+      "published_in": null,
+      "repair_pipeline_state": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description-3",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "subject-3",
+        "sex": "male",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "TestSpecies2",
+          "taxonomy_id": "1"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "TestStrain2",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "1"
         },
         "weight": 1.5
       },
@@ -277,7 +523,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Test Morphology Description 2",
+      "description": "Test Morphology Description 8",
       "experiment_date": null,
       "has_segmented_spines": false,
       "id": "00000000-0000-4000-8000-000001234678",
@@ -291,7 +537,7 @@
         "z": 30.0
       },
       "mtypes": [],
-      "name": "Test Morphology Name 2",
+      "name": "Test Morphology Name 8",
       "notice_text": null,
       "published_in": null,
       "repair_pipeline_state": null,
@@ -300,9 +546,9 @@
         "age_min": null,
         "age_period": "postnatal",
         "age_value": 1209600.0,
-        "description": "my-description-2",
+        "description": "my-description-8",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "subject-2",
+        "name": "subject-8",
         "sex": "male",
         "species": {
           "id": "00000000-0000-4000-8000-000001234678",
@@ -314,252 +560,6 @@
           "name": "TestStrain1",
           "species_id": "00000000-0000-4000-8000-000001234678",
           "taxonomy_id": "0"
-        },
-        "weight": 1.5
-      },
-      "type": "cell_morphology",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      }
-    },
-    {
-      "assets": [],
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
-      "brain_region": {
-        "acronym": "acronym64",
-        "annotation_value": 64,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "RedRegion",
-        "parent_structure_id": null
-      },
-      "cell_morphology_protocol": {
-        "description": "Description Test",
-        "generation_type": "placeholder",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "Placeholder Protocol Test",
-        "type": "cell_morphology_protocol"
-      },
-      "contact_email": null,
-      "contributions": [],
-      "created_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Test Morphology Description 3",
-      "experiment_date": null,
-      "has_segmented_spines": false,
-      "id": "00000000-0000-4000-8000-000001234678",
-      "legacy_id": [
-        "Test Legacy ID"
-      ],
-      "license": null,
-      "location": {
-        "x": 10.0,
-        "y": 20.0,
-        "z": 30.0
-      },
-      "mtypes": [],
-      "name": "Test Morphology Name 3",
-      "notice_text": null,
-      "published_in": null,
-      "repair_pipeline_state": null,
-      "subject": {
-        "age_max": null,
-        "age_min": null,
-        "age_period": "postnatal",
-        "age_value": 1209600.0,
-        "description": "my-description-3",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "subject-3",
-        "sex": "male",
-        "species": {
-          "id": "00000000-0000-4000-8000-000001234678",
-          "name": "TestSpecies2",
-          "taxonomy_id": "1"
-        },
-        "strain": {
-          "id": "00000000-0000-4000-8000-000001234678",
-          "name": "TestStrain2",
-          "species_id": "00000000-0000-4000-8000-000001234678",
-          "taxonomy_id": "1"
-        },
-        "weight": 1.5
-      },
-      "type": "cell_morphology",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      }
-    },
-    {
-      "assets": [],
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
-      "brain_region": {
-        "acronym": "acronym64",
-        "annotation_value": 64,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "RedRegion",
-        "parent_structure_id": null
-      },
-      "cell_morphology_protocol": {
-        "description": "Description Test",
-        "generation_type": "placeholder",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "Placeholder Protocol Test",
-        "type": "cell_morphology_protocol"
-      },
-      "contact_email": null,
-      "contributions": [],
-      "created_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Test Morphology Description 4",
-      "experiment_date": null,
-      "has_segmented_spines": false,
-      "id": "00000000-0000-4000-8000-000001234678",
-      "legacy_id": [
-        "Test Legacy ID"
-      ],
-      "license": null,
-      "location": {
-        "x": 10.0,
-        "y": 20.0,
-        "z": 30.0
-      },
-      "mtypes": [],
-      "name": "Test Morphology Name 4",
-      "notice_text": null,
-      "published_in": null,
-      "repair_pipeline_state": null,
-      "subject": {
-        "age_max": null,
-        "age_min": null,
-        "age_period": "postnatal",
-        "age_value": 1209600.0,
-        "description": "my-description-4",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "subject-4",
-        "sex": "male",
-        "species": {
-          "id": "00000000-0000-4000-8000-000001234678",
-          "name": "TestSpecies1",
-          "taxonomy_id": "0"
-        },
-        "strain": {
-          "id": "00000000-0000-4000-8000-000001234678",
-          "name": "TestStrain1",
-          "species_id": "00000000-0000-4000-8000-000001234678",
-          "taxonomy_id": "0"
-        },
-        "weight": 1.5
-      },
-      "type": "cell_morphology",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      }
-    },
-    {
-      "assets": [],
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
-      "brain_region": {
-        "acronym": "acronym64",
-        "annotation_value": 64,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "RedRegion",
-        "parent_structure_id": null
-      },
-      "cell_morphology_protocol": {
-        "description": "Description Test",
-        "generation_type": "placeholder",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "Placeholder Protocol Test",
-        "type": "cell_morphology_protocol"
-      },
-      "contact_email": null,
-      "contributions": [],
-      "created_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Test Morphology Description 5",
-      "experiment_date": null,
-      "has_segmented_spines": false,
-      "id": "00000000-0000-4000-8000-000001234678",
-      "legacy_id": [
-        "Test Legacy ID"
-      ],
-      "license": null,
-      "location": {
-        "x": 10.0,
-        "y": 20.0,
-        "z": 30.0
-      },
-      "mtypes": [],
-      "name": "Test Morphology Name 5",
-      "notice_text": null,
-      "published_in": null,
-      "repair_pipeline_state": null,
-      "subject": {
-        "age_max": null,
-        "age_min": null,
-        "age_period": "postnatal",
-        "age_value": 1209600.0,
-        "description": "my-description-5",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "subject-5",
-        "sex": "male",
-        "species": {
-          "id": "00000000-0000-4000-8000-000001234678",
-          "name": "TestSpecies2",
-          "taxonomy_id": "1"
-        },
-        "strain": {
-          "id": "00000000-0000-4000-8000-000001234678",
-          "name": "TestStrain2",
-          "species_id": "00000000-0000-4000-8000-000001234678",
-          "taxonomy_id": "1"
         },
         "weight": 1.5
       },
@@ -687,7 +687,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Test Morphology Description 7",
+      "description": "Test Morphology Description 4",
       "experiment_date": null,
       "has_segmented_spines": false,
       "id": "00000000-0000-4000-8000-000001234678",
@@ -701,7 +701,7 @@
         "z": 30.0
       },
       "mtypes": [],
-      "name": "Test Morphology Name 7",
+      "name": "Test Morphology Name 4",
       "notice_text": null,
       "published_in": null,
       "repair_pipeline_state": null,
@@ -710,91 +710,9 @@
         "age_min": null,
         "age_period": "postnatal",
         "age_value": 1209600.0,
-        "description": "my-description-7",
+        "description": "my-description-4",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "subject-7",
-        "sex": "male",
-        "species": {
-          "id": "00000000-0000-4000-8000-000001234678",
-          "name": "TestSpecies2",
-          "taxonomy_id": "1"
-        },
-        "strain": {
-          "id": "00000000-0000-4000-8000-000001234678",
-          "name": "TestStrain2",
-          "species_id": "00000000-0000-4000-8000-000001234678",
-          "taxonomy_id": "1"
-        },
-        "weight": 1.5
-      },
-      "type": "cell_morphology",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      }
-    },
-    {
-      "assets": [],
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
-      "brain_region": {
-        "acronym": "acronym64",
-        "annotation_value": 64,
-        "color_hex_triplet": "FF0000",
-        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "RedRegion",
-        "parent_structure_id": null
-      },
-      "cell_morphology_protocol": {
-        "description": "Description Test",
-        "generation_type": "placeholder",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "Placeholder Protocol Test",
-        "type": "cell_morphology_protocol"
-      },
-      "contact_email": null,
-      "contributions": [],
-      "created_by": {
-        "family_name": "courcol",
-        "given_name": "jd",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Test Morphology Description 8",
-      "experiment_date": null,
-      "has_segmented_spines": false,
-      "id": "00000000-0000-4000-8000-000001234678",
-      "legacy_id": [
-        "Test Legacy ID"
-      ],
-      "license": null,
-      "location": {
-        "x": 10.0,
-        "y": 20.0,
-        "z": 30.0
-      },
-      "mtypes": [],
-      "name": "Test Morphology Name 8",
-      "notice_text": null,
-      "published_in": null,
-      "repair_pipeline_state": null,
-      "subject": {
-        "age_max": null,
-        "age_min": null,
-        "age_period": "postnatal",
-        "age_value": 1209600.0,
-        "description": "my-description-8",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "name": "subject-8",
+        "name": "subject-4",
         "sex": "male",
         "species": {
           "id": "00000000-0000-4000-8000-000001234678",
@@ -851,7 +769,7 @@
         "type": "person"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Test Morphology Description 9",
+      "description": "Test Morphology Description 2",
       "experiment_date": null,
       "has_segmented_spines": false,
       "id": "00000000-0000-4000-8000-000001234678",
@@ -865,7 +783,7 @@
         "z": 30.0
       },
       "mtypes": [],
-      "name": "Test Morphology Name 9",
+      "name": "Test Morphology Name 2",
       "notice_text": null,
       "published_in": null,
       "repair_pipeline_state": null,
@@ -874,20 +792,102 @@
         "age_min": null,
         "age_period": "postnatal",
         "age_value": 1209600.0,
-        "description": "my-description-9",
+        "description": "my-description-2",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "subject-9",
+        "name": "subject-2",
         "sex": "male",
         "species": {
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "TestSpecies2",
-          "taxonomy_id": "1"
+          "name": "TestSpecies1",
+          "taxonomy_id": "0"
         },
         "strain": {
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "TestStrain2",
+          "name": "TestStrain1",
           "species_id": "00000000-0000-4000-8000-000001234678",
-          "taxonomy_id": "1"
+          "taxonomy_id": "0"
+        },
+        "weight": 1.5
+      },
+      "type": "cell_morphology",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      }
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym64",
+        "annotation_value": 64,
+        "color_hex_triplet": "FF0000",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "RedRegion",
+        "parent_structure_id": null
+      },
+      "cell_morphology_protocol": {
+        "description": "Description Test",
+        "generation_type": "placeholder",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "Placeholder Protocol Test",
+        "type": "cell_morphology_protocol"
+      },
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Test Morphology Description 0",
+      "experiment_date": null,
+      "has_segmented_spines": false,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "legacy_id": [
+        "Test Legacy ID"
+      ],
+      "license": null,
+      "location": {
+        "x": 10.0,
+        "y": 20.0,
+        "z": 30.0
+      },
+      "mtypes": [],
+      "name": "Test Morphology Name 0",
+      "notice_text": null,
+      "published_in": null,
+      "repair_pipeline_state": null,
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "description": "my-description-0",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "subject-0",
+        "sex": "male",
+        "species": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "TestSpecies1",
+          "taxonomy_id": "0"
+        },
+        "strain": {
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "TestStrain1",
+          "species_id": "00000000-0000-4000-8000-000001234678",
+          "taxonomy_id": "0"
         },
         "weight": 1.5
       },

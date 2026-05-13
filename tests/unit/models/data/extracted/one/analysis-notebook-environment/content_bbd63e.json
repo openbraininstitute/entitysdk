@@ -1,7 +1,7 @@
 {
   "assets": [],
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": true,
+  "authorized_public": false,
   "created_by": {
     "family_name": null,
     "given_name": null,
@@ -19,7 +19,7 @@
     "family_name": null,
     "given_name": null,
     "id": "00000000-0000-4000-8000-000001234678",
-    "pref_label": "Admin User",
+    "pref_label": "Regular User With Project Id",
     "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person"
   }

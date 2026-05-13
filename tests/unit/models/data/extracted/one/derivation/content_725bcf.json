@@ -1,0 +1,12 @@
+{
+  "derivation_type": "circuit_customization",
+  "generated": {
+    "id": "00000000-0000-4000-8000-000001234678",
+    "type": "circuit"
+  },
+  "label": "synaptic_modification",
+  "used": {
+    "id": "00000000-0000-4000-8000-000001234678",
+    "type": "circuit"
+  }
+}
