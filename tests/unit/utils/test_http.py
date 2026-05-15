@@ -59,7 +59,9 @@ def test_stream_response_http_status_error_raises(httpx_mock):
             )
 
 
-def test_make_db_api_request(httpx_mock, api_url, project_context, auth_token, request_headers):
+def test_make_db_api_request(
+    httpx_mock, api_url, project_context, token_from_value_manager, request_headers
+):
     url = f"{api_url}/api/v1/entity/person"
     httpx_mock.add_response(
         method="POST",
@@ -74,7 +76,7 @@ def test_make_db_api_request(httpx_mock, api_url, project_context, auth_token, r
             method="POST",
             json={"name": "John Doe"},
             parameters={"foo": "bar"},
-            token=auth_token,
+            token_manager=token_from_value_manager,
             project_context=project_context,
             http_client=http_client,
         )
@@ -82,7 +84,7 @@ def test_make_db_api_request(httpx_mock, api_url, project_context, auth_token, r
 
 
 def test_make_db_api_request__no_context(
-    httpx_mock, api_url, auth_token, request_headers_no_context
+    httpx_mock, api_url, token_from_value_manager, request_headers_no_context
 ):
     url = f"{api_url}/api/v1/entity/person"
     httpx_mock.add_response(
@@ -98,18 +100,20 @@ def test_make_db_api_request__no_context(
             method="POST",
             json={"name": "John Doe"},
             parameters={"foo": "bar"},
-            token=auth_token,
+            token_manager=token_from_value_manager,
             project_context=None,
             http_client=http_client,
         )
         assert res.status_code == 200
 
 
-def test_make_db_api_request__context_without_virtual_lab_id(httpx_mock, api_url, auth_token):
+def test_make_db_api_request__context_without_virtual_lab_id(
+    httpx_mock, api_url, token_from_value_manager
+):
     project_context = ProjectContext(project_id=ID("f373e771-3a2f-4f45-ab59-0955efd7b1f4"))
     headers = {
         "project-id": str(project_context.project_id),
-        "Authorization": f"Bearer {auth_token}",
+        "Authorization": f"Bearer {token_from_value_manager.get_token()}",
     }
 
     url = f"{api_url}/api/v1/entity/person"
@@ -126,7 +130,7 @@ def test_make_db_api_request__context_without_virtual_lab_id(httpx_mock, api_url
             method="POST",
             json={"name": "John Doe"},
             parameters={"foo": "bar"},
-            token=auth_token,
+            token_manager=token_from_value_manager,
             project_context=project_context,
             http_client=http_client,
         )
@@ -134,7 +138,7 @@ def test_make_db_api_request__context_without_virtual_lab_id(httpx_mock, api_url
 
 
 def test_make_db_api_request_with_none_http_client__raises_request(
-    httpx_mock, api_url, project_context, auth_token
+    httpx_mock, api_url, project_context, token_from_value_manager
 ):
     url = f"{api_url}/api/v1/entity/person"
     httpx_mock.add_exception(httpx.RequestError(message="Test"))
@@ -147,13 +151,13 @@ def test_make_db_api_request_with_none_http_client__raises_request(
                 json={"name": "John Doe"},
                 parameters={"foo": "bar"},
                 project_context=project_context,
-                token=auth_token,
+                token_manager=token_from_value_manager,
                 http_client=http_client,
             )
 
 
 def test_make_db_api_request_with_none_http_client__raises(
-    httpx_mock, api_url, project_context, auth_token
+    httpx_mock, api_url, project_context, token_from_value_manager
 ):
     url = f"{api_url}/api/v1/entity/person"
     httpx_mock.add_response(status_code=404)
@@ -166,13 +170,13 @@ def test_make_db_api_request_with_none_http_client__raises(
                 json={"name": "John Doe"},
                 parameters={"foo": "bar"},
                 project_context=project_context,
-                token=auth_token,
+                token_manager=token_from_value_manager,
                 http_client=http_client,
             )
 
 
 def test_make_db_api_request_with_none_http_client__client_none(
-    httpx_mock, api_url, project_context, auth_token, request_headers
+    httpx_mock, api_url, project_context, token_from_value_manager, request_headers
 ):
     url = f"{api_url}/api/v1/entity/person"
     httpx_mock.add_response(
@@ -188,7 +192,7 @@ def test_make_db_api_request_with_none_http_client__client_none(
         json={"name": "John Doe"},
         parameters={"foo": "bar"},
         project_context=project_context,
-        token=auth_token,
+        token_manager=token_from_value_manager,
         http_client=httpx.Client(),
     )
 

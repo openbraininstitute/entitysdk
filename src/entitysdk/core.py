@@ -3,7 +3,7 @@
 import logging
 from collections.abc import Iterator
 from pathlib import Path
-from typing import TypeVar
+from typing import TypeVar, cast
 
 import httpx
 
@@ -23,6 +23,7 @@ from entitysdk.multipart_upload import multipart_upload_asset_file
 from entitysdk.result import IteratorResult
 from entitysdk.route import (
     get_assets_endpoint,
+    get_entities_endpoint,
     get_entity_derivations_endpoint,
 )
 from entitysdk.schemas.asset import MultipartUploadTransferConfig
@@ -50,29 +51,36 @@ TIdentifiable = TypeVar("TIdentifiable", bound=Identifiable)
 
 
 def search_entities(
-    url: str,
     *,
+    api_url: str,
     entity_type: type[TIdentifiable],
     query: dict | None = None,
     limit: int | None,
     project_context: ProjectContext | None = None,
     token_manager: TokenManager,
     http_client: httpx.Client,
+    admin: bool,
 ) -> IteratorResult[TIdentifiable]:
     """Search for entities.
 
     Args:
-        url: URL of the resource.
+        api_url: the api url to entitycore service.
         entity_type: Type of the entity.
         query: Query parameters
         limit: Limit of the number of entities to yield or None.
         project_context: Project context.
         token_manager: Token manager to issue tokens.
         http_client: HTTP client.
+        admin: Use admin endpoint if True
 
     Returns:
         List of entities.
     """
+    url = get_entities_endpoint(
+        api_url=api_url,
+        entity_type=entity_type,
+        admin=admin,
+    )
     iterator: Iterator[dict] = stream_paginated_request(
         url=url,
         method="GET",
@@ -88,22 +96,30 @@ def search_entities(
 
 
 def get_entity(
-    url: str,
     *,
+    api_url: str,
+    entity_id: ID,
     entity_type: type[TIdentifiable],
     project_context: ProjectContext | None = None,
-    token: str,
+    token_manager: TokenManager,
     options: dict | None = None,
     http_client: httpx.Client,
+    admin: bool,
 ) -> TIdentifiable:
     """Instantiate entity with model ``entity_type`` from resource id."""
+    url = get_entities_endpoint(
+        api_url=api_url,
+        entity_type=entity_type,
+        entity_id=entity_id,
+        admin=admin,
+    )
     response = make_db_api_request(
         url=url,
         method="GET",
         json=None,
         parameters=options,
         project_context=project_context,
-        token=token,
+        token_manager=token_manager,
         http_client=http_client,
     )
     return serdes.deserialize_model(response.json(), entity_type)
@@ -116,7 +132,7 @@ def get_entity_derivations(
     entity_type: type[Entity],
     project_context: ProjectContext,
     derivation_type: DerivationType,
-    token: str,
+    token_manager: TokenManager,
     http_client: httpx.Client,
 ) -> IteratorResult[Entity]:
     """Get derivations for entity."""
@@ -132,7 +148,7 @@ def get_entity_derivations(
         url=url,
         method="GET",
         project_context=project_context,
-        token=token,
+        token_manager=token_manager,
         http_client=http_client,
         parameters=params,
     )
@@ -141,13 +157,42 @@ def get_entity_derivations(
     )
 
 
+def get_entity_asset(
+    *,
+    api_url: str,
+    entity_id: ID,
+    asset_id: ID,
+    entity_type: type[Entity],
+    project_context: ProjectContext | None,
+    token_manager: TokenManager,
+    http_client: httpx.Client,
+    admin: bool = False,
+) -> Asset:
+    """Get an entity's asset metadata."""
+    url = get_assets_endpoint(
+        api_url=api_url,
+        entity_type=entity_type,
+        entity_id=entity_id,
+        asset_id=asset_id,
+        admin=admin,
+    )
+    response = make_db_api_request(
+        url=url,
+        method="GET",
+        project_context=project_context,
+        token_manager=token_manager,
+        http_client=http_client,
+    )
+    return serdes.deserialize_model(response.json(), Asset)
+
+
 def get_entity_assets(
     *,
     api_url: str,
     entity_id: ID,
     entity_type: type[Entity],
     project_context: ProjectContext | None,
-    token: str,
+    token_manager: TokenManager,
     http_client: httpx.Client,
     admin: bool = False,
 ):
@@ -163,7 +208,7 @@ def get_entity_assets(
         url=url,
         method="GET",
         project_context=project_context,
-        token=token,
+        token_manager=token_manager,
         http_client=http_client,
     )
     return IteratorResult(
@@ -172,14 +217,16 @@ def get_entity_assets(
 
 
 def register_entity(
-    url: str,
     *,
+    api_url: str,
     entity: TIdentifiable,
     project_context: ProjectContext | None,
-    token: str,
+    token_manager: TokenManager,
     http_client: httpx.Client,
 ) -> TIdentifiable:
     """Register entity."""
+    url = get_entities_endpoint(api_url=api_url, entity_type=type(entity))
+
     json_data = serdes.serialize_model(entity)
 
     response = make_db_api_request(
@@ -187,20 +234,22 @@ def register_entity(
         method="POST",
         json=json_data,
         project_context=project_context,
-        token=token,
+        token_manager=token_manager,
         http_client=http_client,
     )
     return serdes.deserialize_model(response.json(), type(entity))
 
 
 def update_entity(
-    url: str,
     *,
+    api_url: str,
+    entity_id: ID,
     entity_type: type[TIdentifiable],
     attrs_or_entity: dict | Identifiable,
     project_context: ProjectContext | None,
-    token: str,
+    token_manager: TokenManager,
     http_client: httpx.Client,
+    admin: bool,
 ) -> TIdentifiable:
     """Update entity."""
     if isinstance(attrs_or_entity, dict):
@@ -208,12 +257,19 @@ def update_entity(
     else:
         json_data = serdes.serialize_model(attrs_or_entity)
 
+    url = get_entities_endpoint(
+        api_url=api_url,
+        entity_type=entity_type,
+        entity_id=entity_id,
+        admin=admin,
+    )
+
     response = make_db_api_request(
         url=url,
         method="PATCH",
         json=json_data,
         project_context=project_context,
-        token=token,
+        token_manager=token_manager,
         http_client=http_client,
     )
 
@@ -223,17 +279,25 @@ def update_entity(
 
 
 def delete_entity(
-    url: str,
     *,
+    api_url: str,
+    entity_id: ID,
     entity_type: type[Identifiable],
-    token: str,
+    token_manager: TokenManager,
     http_client: httpx.Client,
+    admin: bool,
 ) -> None:
     """Delete entity."""
+    url = get_entities_endpoint(
+        api_url=api_url,
+        entity_type=entity_type,
+        entity_id=entity_id,
+        admin=admin,
+    )
     make_db_api_request(
         url=url,
         method="DELETE",
-        token=token,
+        token_manager=token_manager,
         http_client=http_client,
     )
 
@@ -264,32 +328,28 @@ def upload_asset_file(
             transfer_config=transfer_config,
             http_client=http_client,
         )
-
-    url = get_assets_endpoint(
-        api_url=api_url,
-        entity_type=entity_type,
-        entity_id=entity_id,
-        asset_id=None,
-    )
-
     with open(asset_path, "rb") as file_content:
         return upload_asset_content(
-            url=url,
+            api_url=api_url,
+            entity_id=entity_id,
+            entity_type=entity_type,
             asset_content=file_content,
             asset_metadata=asset_metadata,
             project_context=project_context,
-            token=token_manager.get_token(),
+            token_manager=token_manager,
             http_client=http_client,
         )
 
 
 def upload_asset_content(
-    url: str,
     *,
+    api_url: str,
+    entity_id: ID,
+    entity_type: type[Entity],
     asset_content: BytesOrStream,
     asset_metadata: LocalAssetMetadata,
     project_context: ProjectContext,
-    token: str,
+    token_manager: TokenManager,
     http_client: httpx.Client,
 ) -> Asset:
     """Upload asset to an existing entity's endpoint from a file-like object."""
@@ -300,27 +360,35 @@ def upload_asset_content(
             asset_metadata.content_type,
         )
     }
+    url = get_assets_endpoint(
+        api_url=api_url,
+        entity_type=entity_type,
+        entity_id=entity_id,
+        asset_id=None,
+    )
     response = make_db_api_request(
         url=url,
         method="POST",
         files=files,
         data={"label": asset_metadata.label} if asset_metadata.label else None,
         project_context=project_context,
-        token=token,
+        token_manager=token_manager,
         http_client=http_client,
     )
     return serdes.deserialize_model(response.json(), Asset)
 
 
 def upload_asset_directory(
-    url: str,
     *,
+    api_url: str,
+    entity_id: ID,
+    entity_type: type[Entity],
     name: str,
     paths: dict[Path, Path],
     metadata: dict | None = None,
     label: AssetLabel,
     project_context: ProjectContext,
-    token: str,
+    token_manager: TokenManager,
     http_client: httpx.Client,
 ) -> Asset:
     """Upload a group of files to a directory."""
@@ -329,11 +397,20 @@ def upload_asset_directory(
             msg = f"Path {concrete_path} does not exist"
             raise EntitySDKError(msg)
 
+    url = (
+        get_assets_endpoint(
+            api_url=api_url,
+            entity_type=entity_type,
+            entity_id=entity_id,
+            asset_id=None,
+        )
+        + "/directory/upload"
+    )
     response = make_db_api_request(
         url=url,
         method="POST",
         project_context=project_context,
-        token=token,
+        token_manager=token_manager,
         http_client=http_client,
         json={
             "files": [str(p) for p in paths],
@@ -383,18 +460,30 @@ def upload_asset_directory(
 
 
 def list_directory(
-    url: str,
     *,
-    token: str,
+    api_url: str,
+    entity_id: ID,
+    entity_type: type[Entity],
+    asset_id: ID,
+    token_manager: TokenManager,
     project_context: ProjectContext | None = None,
     http_client: httpx.Client,
 ) -> DetailedFileList:
     """List all files within an asset directory."""
+    url = (
+        get_assets_endpoint(
+            api_url=api_url,
+            entity_type=entity_type,
+            entity_id=entity_id,
+            asset_id=asset_id,
+        )
+        + "/list"
+    )
     response = make_db_api_request(
         url=url,
         method="GET",
         project_context=project_context,
-        token=token,
+        token_manager=token_manager,
         http_client=http_client,
     )
     return serdes.deserialize_model(response.json(), DetailedFileList)
@@ -404,31 +493,26 @@ def fetch_asset_file(
     *,
     api_url: str,
     entity_id: ID,
-    entity_type: type[Identifiable],
+    entity_type: type[Entity],
     asset_or_id: ID | Asset,
     output_path: Path,
     asset_path: Path | None = None,
     project_context: ProjectContext | None = None,
-    token: str,
+    token_manager: TokenManager,
     http_client: httpx.Client,
     local_store: LocalAssetStore | None = None,
     strategy: FetchFileStrategy,
 ) -> Path:
     """Fetch asset file."""
-    asset_endpoint = get_assets_endpoint(
-        api_url=api_url,
-        entity_type=entity_type,
-        entity_id=entity_id,
-        asset_id=asset_or_id if isinstance(asset_or_id, ID) else asset_or_id.id,
-    )
-
     if isinstance(asset_or_id, ID):
-        asset = get_entity(
-            asset_endpoint,
-            entity_type=Asset,
+        asset = get_entity_asset(
+            api_url=api_url,
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=asset_or_id,
             project_context=project_context,
             http_client=http_client,
-            token=token,
+            token_manager=token_manager,
         )
     else:
         asset = asset_or_id
@@ -447,9 +531,12 @@ def fetch_asset_file(
 
     def download_file():
         return download_asset_file(
-            asset_endpoint=asset_endpoint,
+            api_url=api_url,
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=cast(ID, asset.id),
             target_path=target_path,
-            token=token,
+            token_manager=token_manager,
             project_context=project_context,
             http_client=http_client,
             asset_path=asset_path,
@@ -498,9 +585,12 @@ def fetch_asset_file(
 
 def download_asset_file(
     *,
-    asset_endpoint: str,
+    api_url: str,
+    entity_id: ID,
+    entity_type: type[Entity],
+    asset_id: ID,
     target_path: Path,
-    token: str,
+    token_manager: TokenManager,
     project_context: ProjectContext | None = None,
     http_client: httpx.Client,
     asset_path: Path | None = None,
@@ -511,9 +601,12 @@ def download_asset_file(
     payload into memory.
 
     Args:
-        asset_endpoint: Base URL of the asset resource (``.../download`` is appended).
+        api_url: the api url to entitycore service.
+        entity_id: Resource id
+        entity_type: Resource type
+        asset_id: Asset id
         target_path: Local path to write the downloaded bytes.
-        token: Authorization access token.
+        token_manager: Authorization access token manager.
         project_context: Optional project context for ``project-id`` / ``virtual-lab-id`` headers.
         http_client: HTTP client used for the streaming request.
         asset_path: For directory assets, path within the directory to the file.
@@ -521,6 +614,13 @@ def download_asset_file(
     Returns:
         ``target_path`` after the download completes.
     """
+    asset_endpoint = get_assets_endpoint(
+        api_url=api_url,
+        entity_type=entity_type,
+        entity_id=entity_id,
+        asset_id=asset_id,
+    )
+    token = token_manager.get_token()
     headers = {"Authorization": f"Bearer {token}"}
     if project_context:
         headers["project-id"] = str(project_context.project_id)
@@ -545,11 +645,11 @@ def fetch_asset_content(
     *,
     api_url: str,
     entity_id: ID,
-    entity_type: type[Identifiable],
+    entity_type: type[Entity],
     asset_or_id: ID | Asset,
     asset_path: Path | None = None,
     project_context: ProjectContext | None = None,
-    token: str,
+    token_manager: TokenManager,
     http_client: httpx.Client,
     local_store: LocalAssetStore | None = None,
     strategy: FetchContentStrategy,
@@ -557,13 +657,13 @@ def fetch_asset_content(
     """Fetch asset content.
 
     Args:
-        api_url: The API URL to entitycore service.
+        api_url: the api url to entitycore service.
         entity_id: Resource id
         entity_type: Resource type
         asset_or_id: Asset id
         asset_path: for asset directories, the path within the directory to the file
         project_context: Project context.
-        token: Authorization access token.
+        token_manager: Authorization access token manager.
         http_client: HTTP client.
         local_store: LocalAssetStore for using a local store.
         strategy: Output strategy to fetch the asset content.
@@ -573,25 +673,20 @@ def fetch_asset_content(
     """
     asset_id = asset_or_id.id if isinstance(asset_or_id, Asset) else asset_or_id
 
-    asset_endpoint = get_assets_endpoint(
-        api_url=api_url,
-        entity_type=entity_type,
-        entity_id=entity_id,
-        asset_id=asset_id,
-    )
-
     def try_read_from_store() -> bytes | None:
 
         if local_store is None:
             return None
 
         if isinstance(asset_or_id, ID):
-            asset = get_entity(
-                asset_endpoint,
-                entity_type=Asset,
+            asset = get_entity_asset(
+                api_url=api_url,
+                entity_id=entity_id,
+                entity_type=entity_type,
+                asset_id=cast(ID, asset_id),
                 project_context=project_context,
                 http_client=http_client,
-                token=token,
+                token_manager=token_manager,
             )
         else:
             asset = asset_or_id
@@ -604,12 +699,18 @@ def fetch_asset_content(
         return None
 
     def download_content():
+        asset_endpoint = get_assets_endpoint(
+            api_url=api_url,
+            entity_type=entity_type,
+            entity_id=entity_id,
+            asset_id=asset_id,
+        )
         return make_db_api_request(
             url=f"{asset_endpoint}/download",
             method="GET",
             parameters={"asset_path": str(asset_path)} if asset_path else {},
             project_context=project_context,
-            token=token,
+            token_manager=token_manager,
             http_client=http_client,
         ).content
 
@@ -629,38 +730,60 @@ def fetch_asset_content(
 
 
 def delete_asset(
-    url: str,
     *,
+    api_url: str,
+    entity_id: ID,
+    asset_id: ID,
+    entity_type: type[Entity],
     project_context: ProjectContext | None,
-    token: str,
+    token_manager: TokenManager,
     http_client: httpx.Client,
+    admin: bool,
 ) -> Asset:
     """Delete asset."""
+    url = get_assets_endpoint(
+        api_url=api_url,
+        entity_type=entity_type,
+        entity_id=entity_id,
+        asset_id=asset_id,
+        admin=admin,
+    )
     response = make_db_api_request(
         url=url,
         method="DELETE",
         project_context=project_context,
-        token=token,
+        token_manager=token_manager,
         http_client=http_client,
     )
     return serdes.deserialize_model(response.json(), Asset)
 
 
 def register_asset(
-    url: str,
     *,
+    api_url: str,
+    entity_id: ID,
+    entity_type: type[Entity],
     asset_metadata: ExistingAssetMetadata,
     project_context: ProjectContext,
-    token: str,
+    token_manager: TokenManager,
     http_client: httpx.Client,
 ) -> Asset:
     """Register a file or directory already existing."""
+    url = (
+        get_assets_endpoint(
+            api_url=api_url,
+            entity_type=entity_type,
+            entity_id=entity_id,
+            asset_id=None,
+        )
+        + "/register"
+    )
     response = make_db_api_request(
         url=url,
         method="POST",
         json=asset_metadata.model_dump(),
         project_context=project_context,
-        token=token,
+        token_manager=token_manager,
         http_client=http_client,
     )
     return serdes.deserialize_model(response.json(), Asset)
