@@ -62,7 +62,7 @@ class Asset(Identifiable):
     status: Annotated[
         AssetStatus | None,
         Field(
-            examples=["created", "deleted"],
+            examples=["created", "uploading"],
             description="The status of the asset.",
         ),
     ] = None
@@ -71,6 +71,29 @@ class Asset(Identifiable):
         Field(description="Asset json metadata."),
     ] = {}
     label: Annotated[AssetLabel, Field(description="Asset label.")]
+
+
+class ToUploadPart(BaseModel):
+    """Multipart upload metadata needed to upload a part of a file."""
+
+    part_number: Annotated[int, Field(description="Index of this part in the multipart upload.")]
+    url: Annotated[str, Field(description="Presigned url to upload file part.")]
+
+
+class UploadMeta(BaseModel):
+    """Multipart upload metadata needed to upload a file."""
+
+    parts: list[ToUploadPart]
+    part_size: Annotated[int, Field(description="Size in bytes for each part.")]
+
+
+class AssetWithUploadMeta(Asset):
+    """Asset model with multipart upload metadata."""
+
+    upload_meta: Annotated[
+        UploadMeta,
+        Field(description="Upload metadata populated server-side in case of multipart upload."),
+    ]
 
 
 class LocalAssetMetadata(BaseModel):

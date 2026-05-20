@@ -1,20 +1,31 @@
 """Multipart upload functionality for large assets."""
 
 import logging
+import math
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+from typing import cast
 
 import httpx
 
 from entitysdk import serdes
 from entitysdk.common import ProjectContext
-from entitysdk.models.asset import Asset, LocalAssetMetadata
+from entitysdk.exception import EntitySDKError
+from entitysdk.models.asset import Asset, AssetWithUploadMeta, LocalAssetMetadata
 from entitysdk.models.entity import Entity
 from entitysdk.route import (
     multipart_upload_complete_endpoint,
+    multipart_upload_complete_endpoint_directory,
     multipart_upload_initiate_endpoint,
+    multipart_upload_initiate_endpoint_directory,
 )
-from entitysdk.schemas.asset import MultipartUploadTransferConfig, PartUpload
+from entitysdk.schemas.asset import (
+    MultipartDirectoryUploadRequest,
+    MultipartDirectoryUploadResponse,
+    MultipartDirectoryUploadTransferConfig,
+    MultipartUploadTransferConfig,
+    PartUpload,
+)
 from entitysdk.token_manager import TokenManager
 from entitysdk.types import ID
 from entitysdk.utils.execution import execute_with_retry
@@ -36,6 +47,36 @@ RETRIABLE_EXCEPTIONS = (
     httpx.RemoteProtocolError,  # low-level network glitch
 )
 STREAM_DATA_BUFFER_SIZE = 256 * 1024
+
+S3_DEFAULT_PART_SIZE = 64 * 1024 * 1024  # 64 MiB
+S3_MAX_PART_SIZE = 5 * 1024 * 1024 * 1024  # 5 GiB
+S3_MAX_PARTS = 10_000
+
+
+def calculate_part_size(filesize: int) -> int:
+    """Calculate an appropriate S3 multipart upload part size.
+
+    The returned size:
+    - uses a default minimum of 64 MiB for efficient uploads
+    - ensures the total number of parts does not exceed S3's 10,000-part limit
+    - never exceeds S3's 5 GiB maximum part size
+
+    Args:
+        filesize: Total file size in bytes.
+
+    Returns:
+        Recommended multipart upload part size in bytes.
+
+    Raises:
+        ValueError: If file_size is not positive.
+    """
+    if filesize < 0:
+        msg = "file_size must be >= 0"
+        raise ValueError(msg)
+
+    minimum_required_size = math.ceil(filesize / S3_MAX_PARTS)
+    part_size = max(S3_DEFAULT_PART_SIZE, minimum_required_size)
+    return min(part_size, S3_MAX_PART_SIZE)
 
 
 def multipart_upload_asset_file(
@@ -65,14 +106,11 @@ def multipart_upload_asset_file(
         project_context: Context of the project.
         token_manager: Object providing authentication tokens for API requests.
         http_client: HTTP client to use for uploads.
-        transfer_config (MultipartUploadTransferConfig): Configuration for multipart upload.
+        transfer_config: Configuration for multipart upload.
 
     Returns:
-        Asset: The asset object as returned by the backend after completion.
+        Asset: The file asset object as returned by the backend after completion.
     """
-    if http_client is None:
-        http_client = httpx.Client()
-
     asset_id, parts = _initiate_upload(
         api_url=api_url,
         entity_id=entity_id,
@@ -86,7 +124,6 @@ def multipart_upload_asset_file(
     )
     _upload_parts(
         parts=parts,
-        file_path=asset_path,
         http_client=http_client,
         transfer_config=transfer_config,
     )
@@ -151,27 +188,27 @@ def _initiate_upload(
         http_client=http_client,
     ).json()
 
-    upload_meta = data["upload_meta"]
-    part_size = upload_meta["part_size"]
+    asset = AssetWithUploadMeta.model_validate(data)
+    part_size = asset.upload_meta.part_size
 
     parts = [
         PartUpload(
-            part_number=part["part_number"],
-            offset=(part["part_number"] - 1) * part_size,
-            size=min(part_size, filesize - (part["part_number"] - 1) * part_size),
-            url=part["url"],
+            file_path=asset_path,
+            part_number=part.part_number,
+            offset=(part.part_number - 1) * part_size,
+            size=min(part_size, filesize - (part.part_number - 1) * part_size),
+            url=part.url,
         )
-        for part in upload_meta["parts"]
+        for part in asset.upload_meta.parts
     ]
 
-    return ID(data["id"]), parts
+    return cast("ID", asset.id), parts
 
 
 def _upload_parts(
     parts: list[PartUpload],
-    file_path: Path,
     http_client: httpx.Client,
-    transfer_config: MultipartUploadTransferConfig,
+    transfer_config: MultipartUploadTransferConfig | MultipartDirectoryUploadTransferConfig,
 ) -> None:
     """Upload file parts either sequentially or concurrently.
 
@@ -182,7 +219,6 @@ def _upload_parts(
         L.info("Parts are concurrently uploaded using threads.")
         _upload_parts_threaded(
             parts=parts,
-            file_path=file_path,
             http_client=http_client,
             max_concurrency=transfer_config.max_concurrency,
         )
@@ -190,14 +226,12 @@ def _upload_parts(
         L.info("Parts are sequentially uploaded.")
         _upload_parts_sequential(
             parts=parts,
-            file_path=file_path,
             http_client=http_client,
         )
 
 
 def _upload_parts_sequential(
     *,
-    file_path: Path,
     parts: list[PartUpload],
     http_client: httpx.Client,
 ) -> None:
@@ -207,7 +241,6 @@ def _upload_parts_sequential(
     The function blocks until all parts have been uploaded.
 
     Args:
-        file_path: Path to the source file being uploaded.
         parts: A list of PartUpload objects describing the parts to upload.
         http_client: An initialized httpx.Client used to perform HTTP requests.
 
@@ -215,12 +248,11 @@ def _upload_parts_sequential(
         Exception: Propagates any exception raised by `_upload_part`.
     """
     for part in parts:
-        _upload_part_with_retry(file_path=file_path, part=part, http_client=http_client)
+        _upload_part_with_retry(part=part, http_client=http_client)
 
 
 def _upload_parts_threaded(
     *,
-    file_path: Path,
     parts: list[PartUpload],
     http_client: httpx.Client,
     max_concurrency: int,
@@ -232,7 +264,6 @@ def _upload_parts_threaded(
     function blocks until all parts have completed uploading.
 
     Args:
-        file_path: Path to the source file being uploaded.
         parts: A list of PartUpload objects describing the parts to upload.
         http_client: An initialized httpx.Client used to perform HTTP requests.
         max_concurrency: Maximum number of concurrent upload threads.
@@ -242,31 +273,46 @@ def _upload_parts_threaded(
     """
 
     def _task(part: PartUpload) -> None:
-        _upload_part_with_retry(file_path, part, http_client)
+        _upload_part_with_retry(part, http_client)
 
     with ThreadPoolExecutor(max_workers=max_concurrency) as pool:
         list(pool.map(_task, parts))
 
 
-def _upload_part_with_retry(file_path: Path, part: PartUpload, http_client: httpx.Client) -> None:
+def _upload_part_with_retry(part: PartUpload, http_client: httpx.Client) -> None:
     """Upload a single file part to its presigned URL.
 
     Reads the corresponding byte range from the file and sends it using
     the provided HTTP client. Retries transient failures according to the
     configured retry policy. Raises an exception if all retry attempts fail.
     """
-    execute_with_retry(
-        lambda: _upload_part(
-            file_path=file_path,
-            offset=part.offset,
-            size=part.size,
-            url=part.url,
-            http_client=http_client,
-        ),
-        max_retries=MAX_RETRIES,
-        backoff_base=BACKOFF_BASE,
-        retry_on=RETRIABLE_EXCEPTIONS,
-    )
+    try:
+        execute_with_retry(
+            lambda: _upload_part(
+                file_path=part.file_path,
+                offset=part.offset,
+                size=part.size,
+                url=part.url,
+                http_client=http_client,
+            ),
+            max_retries=MAX_RETRIES,
+            backoff_base=BACKOFF_BASE,
+            retry_on=RETRIABLE_EXCEPTIONS,
+        )
+    except httpx.RequestError as e:
+        msg = (
+            f"Failed to upload part {part.part_number} of file {part.file_path}\n"
+            f"Request exception: {e!r}"
+        )
+        raise EntitySDKError(msg) from e
+    except httpx.HTTPStatusError as e:
+        message = (
+            f"Failed to upload part {part.part_number} of file {part.file_path}\n"
+            f"HTTP error {e.response.status_code} for {e.request.method} {e.request.url}\n"
+            f"response: {e.response.text}"
+        )
+        raise EntitySDKError(message) from e
+
     L.debug("Uploaded part %d (offset=%d, size=%d)", part.part_number, part.offset, part.size)
 
 
@@ -314,6 +360,153 @@ def _complete_upload(
         Asset: The finalized asset as returned by the backend.
     """
     url = multipart_upload_complete_endpoint(
+        api_url=api_url,
+        entity_id=entity_id,
+        entity_type=entity_type,
+        asset_id=asset_id,
+    )
+    data = make_db_api_request(
+        url=url,
+        method="POST",
+        token_manager=token_manager,
+        http_client=http_client,
+        project_context=project_context,
+    ).json()
+    return serdes.deserialize_model(data, Asset)
+
+
+def multipart_upload_asset_directory(
+    *,
+    api_url: str,
+    entity_id: ID,
+    entity_type: type[Entity],
+    project_context: ProjectContext,
+    token_manager: TokenManager,
+    http_client: httpx.Client,
+    transfer_config: MultipartDirectoryUploadTransferConfig,
+    upload_request: MultipartDirectoryUploadRequest,
+    paths: dict[Path, Path],
+) -> Asset:
+    """Upload files in a local directory in multiple parts using presigned URLs.
+
+    This function is similar to `multipart_upload_asset_file`, but it can be used to upload files
+    in a local directory as a single directory asset.
+
+    It requests presigned URLs from the backend, then uploads the file parts
+    either sequentially or concurrently using threads according to the transfer configuration.
+    Once all parts are uploaded, it finalizes the asset in the backend.
+
+    Args:
+        api_url: Base URL of the backend API to request presigned URLs.
+        entity_id: ID of the entity the asset belongs to.
+        entity_type: Type of the entity.
+        project_context: Context of the project.
+        token_manager: Object providing authentication tokens for API requests.
+        http_client: HTTP client to use for uploads.
+        transfer_config: Configuration for multipart upload.
+        upload_request: Request parameters for the upload.
+        paths: Mapping of relative paths to local file paths.
+
+    Returns:
+        Asset: The directory asset object as returned by the backend after completion.
+    """
+    asset_id, parts = _initiate_directory_upload(
+        api_url=api_url,
+        entity_id=entity_id,
+        entity_type=entity_type,
+        project_context=project_context,
+        token_manager=token_manager,
+        http_client=http_client,
+        upload_request=upload_request,
+        paths=paths,
+    )
+    _upload_parts(
+        parts=parts,
+        http_client=http_client,
+        transfer_config=transfer_config,
+    )
+    return _complete_upload_directory(
+        api_url=api_url,
+        entity_id=entity_id,
+        entity_type=entity_type,
+        asset_id=asset_id,
+        project_context=project_context,
+        token_manager=token_manager,
+        http_client=http_client,
+    )
+
+
+def _initiate_directory_upload(
+    *,
+    api_url: str,
+    entity_id: ID,
+    entity_type: type[Entity],
+    project_context: ProjectContext,
+    token_manager: TokenManager,
+    http_client: httpx.Client,
+    upload_request: MultipartDirectoryUploadRequest,
+    paths: dict[Path, Path],
+) -> tuple[ID, list[PartUpload]]:
+    """Initiate a multipart directory upload with the backend and prepare part metadata.
+
+    Similar to `_initiate_upload` but for directories.
+    """
+    url = multipart_upload_initiate_endpoint_directory(
+        api_url=api_url,
+        entity_id=entity_id,
+        entity_type=entity_type,
+    )
+    data = make_db_api_request(
+        url=url,
+        method="POST",
+        json=upload_request.model_dump(mode="json"),
+        project_context=project_context,
+        token_manager=token_manager,
+        http_client=http_client,
+    ).json()
+
+    upload_response = MultipartDirectoryUploadResponse.model_validate(data)
+    if len(upload_response.files) != len(paths):
+        msg = (
+            f"Backend returned {len(upload_response.files)} files, but {len(paths)} were expected."
+        )
+        raise EntitySDKError(msg)
+
+    directory_asset = upload_response.asset
+    parts = []
+    for asset in upload_response.files:
+        part_size = asset.upload_meta.part_size
+        # strip the directory name from the returned file path and retrieve the local path
+        local_path = paths[Path(asset.path).relative_to(upload_request.directory_name)]
+        parts += [
+            PartUpload(
+                file_path=local_path,
+                part_number=part.part_number,
+                offset=(part.part_number - 1) * part_size,
+                size=min(part_size, asset.size - (part.part_number - 1) * part_size),
+                url=part.url,
+            )
+            for part in asset.upload_meta.parts
+        ]
+
+    return cast("ID", directory_asset.id), parts
+
+
+def _complete_upload_directory(
+    *,
+    api_url: str,
+    entity_id: ID,
+    entity_type: type[Entity],
+    asset_id: ID,
+    project_context: ProjectContext,
+    token_manager: TokenManager,
+    http_client: httpx.Client,
+) -> Asset:
+    """Finalize a multipart directory upload with the backend and return the created asset.
+
+    Similar to `_complete_upload` but for directories.
+    """
+    url = multipart_upload_complete_endpoint_directory(
         api_url=api_url,
         entity_id=entity_id,
         entity_type=entity_type,

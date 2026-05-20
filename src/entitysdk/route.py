@@ -187,3 +187,36 @@ def multipart_upload_complete_endpoint(
         admin=False,
     )
     return f"{base_url}/assets/{asset_id}/multipart-upload/complete"
+
+
+def multipart_upload_initiate_endpoint_directory(
+    *,
+    api_url: str,
+    entity_id: str | ID,
+    entity_type: type[Entity],
+):
+    """Return multipart upload initiate upload for directories."""
+    base_url = get_entities_endpoint(
+        api_url=api_url,
+        entity_type=entity_type,
+        entity_id=entity_id,
+        admin=False,
+    )
+    return f"{base_url}/assets/directory/multipart-upload/initiate"
+
+
+def multipart_upload_complete_endpoint_directory(
+    *,
+    api_url: str,
+    entity_id: str | ID,
+    entity_type: type[Entity],
+    asset_id: str | ID,
+):
+    """Return multipart upload complete endpoint for directories."""
+    base_url = get_entities_endpoint(
+        api_url=api_url,
+        entity_type=entity_type,
+        entity_id=entity_id,
+        admin=False,
+    )
+    return f"{base_url}/assets/{asset_id}/directory/multipart-upload/complete"

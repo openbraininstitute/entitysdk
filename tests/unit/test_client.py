@@ -16,6 +16,7 @@ from entitysdk.models import Asset, Circuit, MTypeClass
 from entitysdk.models.asset import DetailedFile, DetailedFileList
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
+from entitysdk.schemas.asset import MultipartDirectoryUploadTransferConfig
 from entitysdk.types import (
     AssetLabel,
     AssetStatus,
@@ -580,6 +581,7 @@ def test_client_admin_get(
 
 
 def _mock_asset_delete_response(asset_id):
+    # status is `created` even in case of deletion because it's the record before the deletion
     return {
         "path": "buffer.h5",
         "full_path": "private/103d7868/103d7868/assets/cell_morphology/8703/buffer.swc",
@@ -590,7 +592,7 @@ def _mock_asset_delete_response(asset_id):
         "sha256_digest": "47ddc1b6e05dcbfbd2db9dcec4a49d83c6f9f10ad595649bacdcb629671fd954",
         "meta": {},
         "id": str(asset_id),
-        "status": "deleted",
+        "status": "created",
         "storage_type": "aws_s3_internal",
     }
 
@@ -622,7 +624,7 @@ def test_client_delete_asset(
     )
 
     assert res.id == asset_id
-    assert res.status == "deleted"
+    assert res.status == "created"
 
 
 @patch("entitysdk.route.get_route_name")
@@ -747,7 +749,7 @@ def test_client_download_assets__uploading(
                     asset_id=asset2_id,
                     path="foo/bar/bar.swc",
                     content_type="application/swc",
-                    status="deleted",
+                    status="uploading",
                 ),
             ],
         ),
@@ -895,6 +897,23 @@ def test_upload_directory_by_paths(
     project_context,
     request_headers,
 ):
+    def _mock_file_asset_payload(relative_path, urls):
+        return {
+            "id": str(uuid.uuid4()),
+            "path": f"{directory_name}/{relative_path}",
+            "full_path": f"internal/path/to/{directory_name}/{relative_path}",
+            "storage_type": "aws_s3_internal",
+            "status": "uploading",
+            "is_directory": False,
+            "content_type": "application/octet-stream",
+            "size": 12345,
+            "label": "directory_child",
+            "upload_meta": {
+                "part_size": 5242880,
+                "parts": [{"part_number": i, "url": url} for i, url in enumerate(urls, start=1)],
+            },
+        }
+
     entity_id = uuid.uuid4()
 
     paths = {
@@ -902,11 +921,12 @@ def test_upload_directory_by_paths(
         Path("foo/bar/baz/file0.txt"): tmp_path / "file0.txt",
         Path("subdir0/subdir1/file2.txt"): tmp_path / "subdir0/subdir1/file2.txt",
     }
+    directory_name = "test-directory"
     with pytest.raises(Exception, match="does not exist"):
         client.upload_directory(
             entity_id=entity_id,
             entity_type=Entity,
-            name="test-directory",
+            name=directory_name,
             paths=paths,
             label=AssetLabel.sonata_circuit,
             metadata=None,
@@ -914,113 +934,135 @@ def test_upload_directory_by_paths(
 
     for p in paths.values():
         p.parent.mkdir(parents=True, exist_ok=True)
-        p.open("w").close()
+        p.write_text(p.name)
 
-    asset = {
+    directory_asset_id = str(uuid.uuid4())
+    directory_asset = {
+        "id": directory_asset_id,
         "content_type": ContentType.application_vnd_directory,
-        "full_path": "asdf",
-        "id": "a370a57b-7211-4426-8046-970758ceaf68",
+        "full_path": f"internal/path/to/{directory_name}",
         "is_directory": True,
         "label": AssetLabel.sonata_circuit,
         "meta": {},
-        "path": "",
+        "path": directory_name,
         "sha256_digest": None,
         "size": -1,
-        "status": AssetStatus.created,
+        "status": AssetStatus.uploading,
         "storage_type": StorageType.aws_s3_internal,
+    }
+    json_response = {
+        "asset": directory_asset,
+        "files": [
+            _mock_file_asset_payload(
+                relative_path="foo/bar/baz/subdir0/file1.txt",
+                urls=["http://upload_url0_0", "http://upload_url0_1"],
+            ),
+            _mock_file_asset_payload(
+                relative_path="foo/bar/baz/file0.txt",
+                urls=["http://upload_url1_0"],
+            ),
+            _mock_file_asset_payload(
+                relative_path="subdir0/subdir1/file2.txt",
+                urls=["http://upload_url2_0"],
+            ),
+        ],
     }
     httpx_mock.add_response(
         method="POST",
-        url=f"{api_url}/entity/{entity_id}/assets/directory/upload",
+        url=f"{api_url}/entity/{entity_id}/assets/directory/multipart-upload/initiate",
         match_headers=request_headers,
-        json={
-            "asset": asset,
-            "files": {
-                "foo/bar/baz/subdir0/file1.txt": "http://upload_url0",
-                "foo/bar/baz/file0.txt": "http://upload_url1",
-                "subdir0/subdir1/file2.txt": "http://upload_url2",
-            },
-        },
+        json=json_response,
     )
 
-    httpx_mock.add_response(method="PUT", url="http://upload_url0")
-    httpx_mock.add_response(method="PUT", url="http://upload_url1")
-    httpx_mock.add_response(method="PUT", url="http://upload_url2")
+    httpx_mock.add_response(method="PUT", url="http://upload_url0_0")
+    httpx_mock.add_response(method="PUT", url="http://upload_url0_1")
+    httpx_mock.add_response(method="PUT", url="http://upload_url1_0")
+    httpx_mock.add_response(method="PUT", url="http://upload_url2_0")
+
+    httpx_mock.add_response(
+        method="POST",
+        url=f"{api_url}/entity/{entity_id}/assets/{directory_asset_id}/directory/multipart-upload/complete",
+        match_headers=request_headers,
+        json=directory_asset | {"status": "created"},
+    )
 
     res = client.upload_directory(
         entity_id=entity_id,
         entity_type=Entity,
-        name="test-directory",
+        name=directory_name,
         paths=paths,
         label=AssetLabel.sonata_circuit,
         metadata=None,
     )
-    assert res == Asset.model_validate(asset)
+    assert res == Asset.model_validate(directory_asset | {"status": "created"})
 
     httpx_mock.add_response(
         method="POST",
-        url=f"{api_url}/entity/{entity_id}/assets/directory/upload",
+        url=f"{api_url}/entity/{entity_id}/assets/directory/multipart-upload/initiate",
         match_headers=request_headers,
-        json={
-            "asset": asset,
-            "files": {
-                "foo/bar/baz/subdir0/file1.txt": "http://upload_url0",
-            },
-        },
+        json=json_response,
     )
 
     # have read error / exception
     httpx_mock.add_exception(
         httpx.ReadTimeout("Unable to read within timeout"),
         method="PUT",
-        url="http://upload_url0",
+        url="http://upload_url0_0",
     )
     httpx_mock.add_exception(
         httpx.ReadTimeout("Unable to read within timeout"),
         method="PUT",
-        url="http://upload_url0",
+        url="http://upload_url0_0",
     )
     httpx_mock.add_exception(
         httpx.ReadTimeout("Unable to read within timeout"),
         method="PUT",
-        url="http://upload_url0",
+        url="http://upload_url0_0",
     )
 
-    with pytest.raises(EntitySDKError, match="Uploading these files failed"):
+    with pytest.raises(
+        EntitySDKError,
+        match=(
+            r"Failed to upload part 1 of file .*\n"
+            r"Request exception: ReadTimeout\('Unable to read within timeout'\)"
+        ),
+    ):
         client.upload_directory(
             entity_id=entity_id,
             entity_type=Entity,
-            name="test-directory",
+            name=directory_name,
             paths=paths,
             label=AssetLabel.sonata_circuit,
             metadata=None,
+            transfer_config=MultipartDirectoryUploadTransferConfig(max_concurrency=1),
         )
 
     # have s3 upload fail:
     httpx_mock.add_response(
         method="POST",
-        url=f"{api_url}/entity/{entity_id}/assets/directory/upload",
+        url=f"{api_url}/entity/{entity_id}/assets/directory/multipart-upload/initiate",
         match_headers=request_headers,
-        json={
-            "asset": asset,
-            "files": {
-                "file0.txt": "http://upload_url0",
-            },
-        },
+        json=json_response,
     )
 
-    httpx_mock.add_response(method="PUT", url="http://upload_url0", status_code=404)
-    httpx_mock.add_response(method="PUT", url="http://upload_url0", status_code=404)
-    httpx_mock.add_response(method="PUT", url="http://upload_url0", status_code=404)
+    # mock PUT response only once, because 404 errors aren't retried
+    httpx_mock.add_response(method="PUT", url="http://upload_url0_0", status_code=404)
 
-    with pytest.raises(EntitySDKError, match="Uploading these files failed"):
+    with pytest.raises(
+        EntitySDKError,
+        match=(
+            r"Failed to upload part 1 of file .*\n"
+            r"HTTP error 404 for PUT http://upload_url0_0"
+        ),
+    ):
         client.upload_directory(
             entity_id=entity_id,
             entity_type=Entity,
-            name="test-directory",
-            paths={Path("file0.txt"): tmp_path / "file0.txt"},
+            name=directory_name,
+            paths=paths,
             label=AssetLabel.sonata_circuit,
             metadata=None,
+            transfer_config=MultipartDirectoryUploadTransferConfig(max_concurrency=1),
         )
 
 
