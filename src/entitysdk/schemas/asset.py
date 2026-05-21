@@ -67,7 +67,7 @@ class MultipartDirectoryFileRequest(Schema):
         int,
         Field(description="File size to be uploaded in bytes.", ge=0),
     ]
-    sha256_digest: str | None = None
+    sha256_digest: str
     content_type: Annotated[
         ContentType | None,
         Field(

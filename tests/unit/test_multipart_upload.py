@@ -25,6 +25,7 @@ ENTITY_TYPE = models.CellMorphology
 API_URL = "http://my-url"
 VIRTUAL_LAB_ID = uuid4()
 PROJECT_ID = uuid4()
+DUMMY_DIGEST = "a" * 64
 
 
 @pytest.fixture
@@ -400,10 +401,16 @@ def test_initiate_directory_upload_file_count_mismatch(httpx_mock, project_conte
         directory_name="test-dir",
         files=[
             MultipartDirectoryFileRequest(
-                filename="file1.txt", filesize=100, preferred_part_count=1
+                filename="file1.txt",
+                filesize=100,
+                preferred_part_count=1,
+                sha256_digest=DUMMY_DIGEST,
             ),
             MultipartDirectoryFileRequest(
-                filename="file2.txt", filesize=200, preferred_part_count=1
+                filename="file2.txt",
+                filesize=200,
+                preferred_part_count=1,
+                sha256_digest=DUMMY_DIGEST,
             ),
         ],
         label=ASSET_LABEL,
@@ -433,10 +440,16 @@ def test_directory_upload_request_duplicate_filenames():
             directory_name="test-dir",
             files=[
                 MultipartDirectoryFileRequest(
-                    filename="file.txt", filesize=100, preferred_part_count=1
+                    filename="file.txt",
+                    filesize=100,
+                    preferred_part_count=1,
+                    sha256_digest=DUMMY_DIGEST,
                 ),
                 MultipartDirectoryFileRequest(
-                    filename="file.txt", filesize=200, preferred_part_count=1
+                    filename="file.txt",
+                    filesize=200,
+                    preferred_part_count=1,
+                    sha256_digest=DUMMY_DIGEST,
                 ),
             ],
             label=ASSET_LABEL,
