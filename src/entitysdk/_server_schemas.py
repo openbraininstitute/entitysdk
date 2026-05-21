@@ -165,6 +165,17 @@ class AssetLabel(StrEnum):
     electrode_array_weight_matrix = "electrode_array_weight_matrix"
 
 
+class Sha256Digest(RootModel[str]):
+    root: Annotated[
+        str,
+        Field(
+            description="SHA256 digest of the file content in hexadecimal format.",
+            pattern="^[a-fA-F0-9]{64}$",
+            title="Sha256 Digest",
+        ),
+    ]
+
+
 class AssetStatus(StrEnum):
     created = "created"
     uploading = "uploading"
@@ -1094,7 +1105,14 @@ class MultipartDirectoryFileRequest(BaseModel):
             title="Filesize",
         ),
     ]
-    sha256_digest: Annotated[str | None, Field(title="Sha256 Digest")] = None
+    sha256_digest: Annotated[
+        str,
+        Field(
+            description="SHA256 digest of the file content in hexadecimal format.",
+            pattern="^[a-fA-F0-9]{64}$",
+            title="Sha256 Digest",
+        ),
+    ]
     content_type: Annotated[
         ContentType | None,
         Field(
@@ -1138,7 +1156,14 @@ class MultipartUploadInitiateRequest(BaseModel):
             title="Filesize",
         ),
     ]
-    sha256_digest: Annotated[str, Field(title="Sha256 Digest")]
+    sha256_digest: Annotated[
+        str,
+        Field(
+            description="SHA256 digest of the file content in hexadecimal format.",
+            pattern="^[a-fA-F0-9]{64}$",
+            title="Sha256 Digest",
+        ),
+    ]
     content_type: Annotated[
         ContentType | None,
         Field(
@@ -2402,7 +2427,7 @@ class AnalysisNotebookTemplateUpdate(BaseModel):
 
 class AssetRead(BaseModel):
     size: Annotated[int, Field(title="Size")]
-    sha256_digest: Annotated[str | None, Field(title="Sha256 Digest")]
+    sha256_digest: Annotated[Sha256Digest | None, Field(title="Sha256 Digest")]
     path: Annotated[str, Field(title="Path")]
     full_path: Annotated[str, Field(title="Full Path")]
     is_directory: Annotated[bool, Field(title="Is Directory")]
@@ -2416,7 +2441,7 @@ class AssetRead(BaseModel):
 
 class AssetReadWithUploadMeta(BaseModel):
     size: Annotated[int, Field(title="Size")]
-    sha256_digest: Annotated[str | None, Field(title="Sha256 Digest")]
+    sha256_digest: Annotated[Sha256Digest | None, Field(title="Sha256 Digest")]
     path: Annotated[str, Field(title="Path")]
     full_path: Annotated[str, Field(title="Full Path")]
     is_directory: Annotated[bool, Field(title="Is Directory")]
