@@ -2200,6 +2200,12 @@ class TaskActivityType(StrEnum):
     aind_ephys_preprocessing__execution = "aind_ephys_preprocessing__execution"
     aind_ephys_spikesorting__config_generation = "aind_ephys_spikesorting__config_generation"
     aind_ephys_spikesorting__execution = "aind_ephys_spikesorting__execution"
+    extracellular_recording_weights_calculation__config_generation = (
+        "extracellular_recording_weights_calculation__config_generation"
+    )
+    extracellular_recording_weights_calculation__execution = (
+        "extracellular_recording_weights_calculation__execution"
+    )
 
 
 class TaskActivityUserUpdate(BaseModel):
@@ -2229,6 +2235,12 @@ class TaskConfigType(StrEnum):
     aind_ephys_preprocessing__config = "aind_ephys_preprocessing__config"
     aind_ephys_spikesorting__campaign = "aind_ephys_spikesorting__campaign"
     aind_ephys_spikesorting__config = "aind_ephys_spikesorting__config"
+    extracellular_recording_weights_calculation__campaign = (
+        "extracellular_recording_weights_calculation__campaign"
+    )
+    extracellular_recording_weights_calculation__config = (
+        "extracellular_recording_weights_calculation__config"
+    )
 
 
 class TaskConfigUserUpdate(BaseModel):
