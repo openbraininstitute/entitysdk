@@ -1,3 +1,4 @@
+from pathlib import Path
 from unittest.mock import Mock, call, patch
 from uuid import uuid4
 
@@ -6,8 +7,14 @@ import pytest
 
 from entitysdk import ProjectContext, models
 from entitysdk import multipart_upload as test_module
+from entitysdk.exception import EntitySDKError
 from entitysdk.models.asset import LocalAssetMetadata
-from entitysdk.schemas.asset import MultipartUploadTransferConfig, PartUpload
+from entitysdk.schemas.asset import (
+    MultipartDirectoryFileRequest,
+    MultipartDirectoryUploadRequest,
+    MultipartUploadTransferConfig,
+    PartUpload,
+)
 from entitysdk.types import AssetLabel, ContentType
 
 ENTITY_ID = uuid4()
@@ -18,6 +25,7 @@ ENTITY_TYPE = models.CellMorphology
 API_URL = "http://my-url"
 VIRTUAL_LAB_ID = uuid4()
 PROJECT_ID = uuid4()
+DUMMY_DIGEST = "a" * 64
 
 
 @pytest.fixture
@@ -54,7 +62,7 @@ def asset_payload(asset_file, parts):
         "content_type": ASSET_CONTENT_TYPE,
         "label": ASSET_LABEL,
         "path": asset_file.name,
-        "status": "UPLOADING",
+        "status": "uploading",
         "full_path": (
             f"/private/{VIRTUAL_LAB_ID}/{PROJECT_ID}/assets/"
             f"cell_morphology/{ENTITY_ID}/{asset_file.name}"
@@ -63,7 +71,6 @@ def asset_payload(asset_file, parts):
         "storage_type": "aws_s3_internal",
         "is_directory": False,
         "upload_meta": {
-            "part_count": 2,
             "parts": [
                 {
                     "part_number": 1,
@@ -91,8 +98,12 @@ def project_context():
 def parts(asset_file):
     """Return a list of fake PartUpload objects."""
     return [
-        PartUpload(part_number=1, offset=0, size=50, url="https://example.com/part1"),
-        PartUpload(part_number=2, offset=50, size=50, url="https://example.com/part2"),
+        PartUpload(
+            file_path=asset_file, part_number=1, offset=0, size=50, url="https://example.com/part1"
+        ),
+        PartUpload(
+            file_path=asset_file, part_number=2, offset=50, size=50, url="https://example.com/part2"
+        ),
     ]
 
 
@@ -104,6 +115,23 @@ def transfer_config_sequential():
 @pytest.fixture
 def transfer_config_threaded():
     return MultipartUploadTransferConfig(preferred_part_count=2, max_concurrency=1)
+
+
+def test_calculate_part_size_negative_raises():
+    with pytest.raises(ValueError, match="file_size must be >= 0"):
+        test_module.calculate_part_size(-1)
+
+
+def test_calculate_part_size_small_file_returns_default():
+    assert test_module.calculate_part_size(0) == test_module.S3_DEFAULT_PART_SIZE
+    assert test_module.calculate_part_size(1024) == test_module.S3_DEFAULT_PART_SIZE
+
+
+def test_calculate_part_size_large_file():
+    filesize = test_module.S3_DEFAULT_PART_SIZE * test_module.S3_MAX_PARTS * 2
+    result = test_module.calculate_part_size(filesize)
+    assert result > test_module.S3_DEFAULT_PART_SIZE
+    assert result <= test_module.S3_MAX_PART_SIZE
 
 
 def test_multipart_upload_asset_file(
@@ -225,12 +253,14 @@ def test_initiate_upload(
     assert res_asset_id == ASSET_ID
     assert len(res_parts) == 2
     assert res_parts[0].model_dump() == {
+        "file_path": asset_file,
         "part_number": 1,
         "offset": 0,
         "size": 100,
         "url": "http://part-1",
     }
     assert res_parts[1].model_dump() == {
+        "file_path": asset_file,
         "part_number": 2,
         "offset": 100,
         "size": 100,
@@ -245,15 +275,11 @@ def test_upload_parts():
         patch("entitysdk.multipart_upload._upload_parts_sequential", autospec=True) as p_seq,
     ):
         transfer_config = MultipartUploadTransferConfig(max_concurrency=1)
-        test_module._upload_parts(
-            parts=[], file_path="foo.txt", http_client=None, transfer_config=transfer_config
-        )
+        test_module._upload_parts(parts=[], http_client=None, transfer_config=transfer_config)
         p_seq.assert_called_once()
 
         transfer_config = MultipartUploadTransferConfig(max_concurrency=2)
-        test_module._upload_parts(
-            parts=[], file_path="foo.txt", http_client=None, transfer_config=transfer_config
-        )
+        test_module._upload_parts(parts=[], http_client=None, transfer_config=transfer_config)
         p_thread.assert_called_once()
 
 
@@ -297,28 +323,24 @@ def test_complete_upload(httpx_mock, project_context, asset_payload, token_from_
     assert res.status == "created"
 
 
-def test_upload_parts_sequential_calls_upload_part_in_order(parts, asset_file):
+def test_upload_parts_sequential_calls_upload_part_in_order(parts):
     http_client = httpx.Client()
     with patch("entitysdk.multipart_upload._upload_part_with_retry") as mock_upload_part:
         test_module._upload_parts_sequential(
             parts=parts,
-            file_path=asset_file,
             http_client=http_client,
         )
 
-        expected_calls = [
-            call(file_path=asset_file, part=part, http_client=http_client) for part in parts
-        ]
+        expected_calls = [call(part=part, http_client=http_client) for part in parts]
 
         mock_upload_part.assert_has_calls(expected_calls)
         assert mock_upload_part.call_count == len(parts)
 
 
-def test_upload_parts_threaded_executes_all_parts(parts, asset_file, httpx_mock):
+def test_upload_parts_threaded_executes_all_parts(parts, httpx_mock):
     http_client = httpx.Client()
     with patch("entitysdk.multipart_upload._upload_part_with_retry") as mock_upload_part:
         test_module._upload_parts_threaded(
-            file_path=asset_file,
             parts=parts,
             http_client=http_client,
             max_concurrency=3,
@@ -327,12 +349,108 @@ def test_upload_parts_threaded_executes_all_parts(parts, asset_file, httpx_mock)
         assert mock_upload_part.call_count == len(parts)
 
         for part in parts:
-            mock_upload_part.assert_any_call(asset_file, part, http_client)
+            mock_upload_part.assert_any_call(part, http_client)
 
 
 @patch("entitysdk.multipart_upload._upload_part")
 def test_upload_part_with_retry(asset_file, parts):
     http_client = httpx.Client()
-    test_module._upload_part_with_retry(
-        file_path=asset_file, part=parts[0], http_client=http_client
+    test_module._upload_part_with_retry(part=parts[0], http_client=http_client)
+
+
+def test_initiate_directory_upload_file_count_mismatch(httpx_mock, project_context, token_manager):
+    """Backend returns different number of files than expected."""
+    entity_id = uuid4()
+    directory_asset = {
+        "id": str(uuid4()),
+        "content_type": "application/vnd.directory",
+        "full_path": "internal/path",
+        "is_directory": True,
+        "label": "morphology",
+        "path": "test-dir",
+        "size": -1,
+        "status": "uploading",
+        "storage_type": "aws_s3_internal",
+    }
+    # Backend returns 1 file but we expect 2
+    httpx_mock.add_response(
+        method="POST",
+        json={
+            "asset": directory_asset,
+            "files": [
+                {
+                    "id": str(uuid4()),
+                    "path": "test-dir/file1.txt",
+                    "full_path": "internal/test-dir/file1.txt",
+                    "storage_type": "aws_s3_internal",
+                    "status": "uploading",
+                    "is_directory": False,
+                    "content_type": "application/octet-stream",
+                    "size": 100,
+                    "label": "morphology",
+                    "upload_meta": {
+                        "part_size": 100,
+                        "parts": [{"part_number": 1, "url": "http://url1"}],
+                    },
+                }
+            ],
+        },
     )
+
+    upload_request = MultipartDirectoryUploadRequest(
+        directory_name="test-dir",
+        files=[
+            MultipartDirectoryFileRequest(
+                filename="file1.txt",
+                filesize=100,
+                preferred_part_count=1,
+                sha256_digest=DUMMY_DIGEST,
+            ),
+            MultipartDirectoryFileRequest(
+                filename="file2.txt",
+                filesize=200,
+                preferred_part_count=1,
+                sha256_digest=DUMMY_DIGEST,
+            ),
+        ],
+        label=ASSET_LABEL,
+    )
+    paths = {
+        Path("file1.txt"): Path("/path/to/file1.txt"),
+        Path("file2.txt"): Path("/path/to/file2.txt"),
+    }
+
+    with pytest.raises(EntitySDKError, match="Backend returned 1 files, but 2 were expected"):
+        test_module._initiate_directory_upload(
+            api_url=API_URL,
+            entity_id=entity_id,
+            entity_type=ENTITY_TYPE,
+            project_context=project_context,
+            token_manager=token_manager,
+            http_client=httpx.Client(),
+            upload_request=upload_request,
+            paths=paths,
+        )
+
+
+def test_directory_upload_request_duplicate_filenames():
+    """Duplicate filenames in a directory upload request should raise."""
+    with pytest.raises(ValueError, match="Filenames must be unique"):
+        MultipartDirectoryUploadRequest(
+            directory_name="test-dir",
+            files=[
+                MultipartDirectoryFileRequest(
+                    filename="file.txt",
+                    filesize=100,
+                    preferred_part_count=1,
+                    sha256_digest=DUMMY_DIGEST,
+                ),
+                MultipartDirectoryFileRequest(
+                    filename="file.txt",
+                    filesize=200,
+                    preferred_part_count=1,
+                    sha256_digest=DUMMY_DIGEST,
+                ),
+            ],
+            label=ASSET_LABEL,
+        )

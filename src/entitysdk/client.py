@@ -21,7 +21,11 @@ from entitysdk.models.asset import (
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.result import IteratorResult
-from entitysdk.schemas.asset import DownloadedAssetFile, MultipartUploadTransferConfig
+from entitysdk.schemas.asset import (
+    DownloadedAssetFile,
+    MultipartDirectoryUploadTransferConfig,
+    MultipartUploadTransferConfig,
+)
 from entitysdk.token_manager import TokenFromValue, TokenManager
 from entitysdk.types import (
     ID,
@@ -461,6 +465,7 @@ class Client:
         metadata: dict | None = None,
         label: AssetLabel,
         project_context: ProjectContext | None = None,
+        transfer_config: MultipartDirectoryUploadTransferConfig | None = None,
     ) -> Asset:
         """Attach a local directory to an entity.
 
@@ -468,11 +473,11 @@ class Client:
             entity_id: Resource id of the entity.
             entity_type: Type of the entity.
             name: Directory name to attach.
-            paths: Mapping of relative paths to local paths (or the other
-                way around, depending on the backend expectations).
+            paths: Mapping of relative paths to local paths.
             metadata: Optional extra metadata to attach to the directory asset.
             label: Label for the asset.
             project_context: Optional project context.
+            transfer_config: Optional multipart upload configuration.
 
         Returns:
             The created directory Asset.
@@ -492,6 +497,7 @@ class Client:
             project_context=context,
             http_client=self._http_client,
             token_manager=self._token_manager,
+            transfer_config=transfer_config,
         )
 
     @validate_call

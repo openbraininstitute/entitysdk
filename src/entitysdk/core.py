@@ -9,7 +9,6 @@ import httpx
 
 from entitysdk import serdes
 from entitysdk.common import ProjectContext
-from entitysdk.config import settings
 from entitysdk.exception import EntitySDKError
 from entitysdk.models.asset import (
     Asset,
@@ -19,14 +18,23 @@ from entitysdk.models.asset import (
 )
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
-from entitysdk.multipart_upload import multipart_upload_asset_file
+from entitysdk.multipart_upload import (
+    calculate_part_size,
+    multipart_upload_asset_directory,
+    multipart_upload_asset_file,
+)
 from entitysdk.result import IteratorResult
 from entitysdk.route import (
     get_assets_endpoint,
     get_entities_endpoint,
     get_entity_derivations_endpoint,
 )
-from entitysdk.schemas.asset import MultipartUploadTransferConfig
+from entitysdk.schemas.asset import (
+    MultipartDirectoryFileRequest,
+    MultipartDirectoryUploadRequest,
+    MultipartDirectoryUploadTransferConfig,
+    MultipartUploadTransferConfig,
+)
 from entitysdk.token_manager import TokenManager
 from entitysdk.types import (
     ID,
@@ -43,6 +51,7 @@ from entitysdk.utils.filesystem import (
     validate_filename_extension_consistency,
 )
 from entitysdk.utils.http import make_db_api_request, stream_paginated_request, stream_response
+from entitysdk.utils.io import calculate_sha256_digest
 from entitysdk.utils.store import LocalAssetStore
 
 L = logging.getLogger(__name__)
@@ -390,73 +399,41 @@ def upload_asset_directory(
     project_context: ProjectContext,
     token_manager: TokenManager,
     http_client: httpx.Client,
+    transfer_config: MultipartDirectoryUploadTransferConfig | None = None,
 ) -> Asset:
-    """Upload a group of files to a directory."""
-    for concrete_path in paths.values():
-        if not concrete_path.exists():
-            msg = f"Path {concrete_path} does not exist"
-            raise EntitySDKError(msg)
+    """Upload a group of files to a directory using multipart-upload."""
+    transfer_config = transfer_config or MultipartDirectoryUploadTransferConfig()
 
-    url = (
-        get_assets_endpoint(
-            api_url=api_url,
-            entity_type=entity_type,
-            entity_id=entity_id,
-            asset_id=None,
+    files = []
+    for relative_path, local_path in paths.items():
+        filesize = get_filesize(local_path)
+        files.append(
+            MultipartDirectoryFileRequest(
+                filename=str(relative_path),
+                filesize=filesize,
+                sha256_digest=calculate_sha256_digest(local_path),
+                preferred_part_count=calculate_part_size(filesize),
+            )
         )
-        + "/directory/upload"
+
+    upload_request = MultipartDirectoryUploadRequest(
+        directory_name=name,
+        label=label,
+        meta=metadata,
+        files=files,
     )
-    response = make_db_api_request(
-        url=url,
-        method="POST",
+
+    return multipart_upload_asset_directory(
+        api_url=api_url,
+        entity_id=entity_id,
+        entity_type=entity_type,
         project_context=project_context,
-        token_manager=token_manager,
         http_client=http_client,
-        json={
-            "files": [str(p) for p in paths],
-            "meta": metadata,
-            "label": label,
-            "directory_name": name,
-        },
+        token_manager=token_manager,
+        transfer_config=transfer_config,
+        upload_request=upload_request,
+        paths=paths,
     )
-
-    js = response.json()
-
-    def upload(to_upload):
-        failed = {}
-        for path, url in to_upload.items():
-            with open(paths[Path(path)], "rb") as fd:
-                try:
-                    response = http_client.request(
-                        method="PUT",
-                        url=url,
-                        content=fd,
-                        follow_redirects=True,
-                        timeout=httpx.Timeout(
-                            connect=settings.connect_timeout,
-                            read=settings.read_timeout,
-                            write=settings.write_timeout,
-                            pool=settings.pool_timeout,
-                        ),
-                    )
-                except httpx.HTTPError:
-                    L.exception("Upload failed, will retry again")
-                    failed[path] = url
-                else:
-                    if response.status_code != 200:
-                        failed[path] = url
-        return failed
-
-    to_upload = js["files"]
-    for _ in range(3):
-        to_upload = upload(to_upload)
-        if not to_upload:
-            break
-
-    if to_upload:
-        raise EntitySDKError(f"Uploading these files failed: {to_upload}")
-
-    return serdes.deserialize_model(js["asset"], Asset)
 
 
 def list_directory(

@@ -7,7 +7,6 @@ from enum import Enum
 from typing import Annotated, Any, Literal
 from pydantic import AnyUrl, AwareDatetime, BaseModel, Field, RootModel, UUID4
 from uuid import UUID
-from pathlib import Path
 from datetime import timedelta
 
 
@@ -116,6 +115,7 @@ class ApiErrorCode(StrEnum):
 
 
 class AssetLabel(StrEnum):
+    directory_child = "directory_child"
     morphology = "morphology"
     morphology_with_spines = "morphology_with_spines"
     cell_composition_summary = "cell_composition_summary"
@@ -165,10 +165,20 @@ class AssetLabel(StrEnum):
     electrode_array_weight_matrix = "electrode_array_weight_matrix"
 
 
+class Sha256Digest(RootModel[str]):
+    root: Annotated[
+        str,
+        Field(
+            description="SHA256 digest of the file content in hexadecimal format.",
+            pattern="^[a-fA-F0-9]{64}$",
+            title="Sha256 Digest",
+        ),
+    ]
+
+
 class AssetStatus(StrEnum):
     created = "created"
     uploading = "uploading"
-    deleted = "deleted"
 
 
 class Author(BaseModel):
@@ -402,6 +412,7 @@ class ContentType(StrEnum):
     image_webp = "image/webp"
     application_x_ipynb_json = "application/x-ipynb+json"
     application_zip = "application/zip"
+    application_octet_stream = "application/octet-stream"
 
 
 class ContributionCreate(BaseModel):
@@ -428,6 +439,10 @@ class DerivationType(StrEnum):
     unspecified = "unspecified"
 
 
+class DerivationUserUpdate(BaseModel):
+    label: Annotated[str | None, Field(title="Label")] = None
+
+
 class DetailedFile(BaseModel):
     name: Annotated[str, Field(title="Name")]
     size: Annotated[int, Field(title="Size")]
@@ -446,10 +461,24 @@ class TissueShrinkage(RootModel[float]):
     root: Annotated[float, Field(ge=0.0, title="Tissue Shrinkage")]
 
 
-class DirectoryUpload(BaseModel):
-    directory_name: Annotated[Path, Field(title="Directory Name")]
-    files: Annotated[list[Path], Field(title="Files")]
-    meta: Annotated[dict[str, Any] | None, Field(title="Meta")]
+class DirectoryUploadRequest(BaseModel):
+    directory_name: Annotated[
+        str,
+        Field(
+            description="Name of the directory to be uploaded. Nested directories aren't allowed.",
+            min_length=1,
+            title="Directory Name",
+        ),
+    ]
+    files: Annotated[
+        list[str],
+        Field(
+            description="List of filenames to be uploaded, relative to the base directory.",
+            min_length=1,
+            title="Files",
+        ),
+    ]
+    meta: Annotated[dict[str, Any] | None, Field(title="Meta")] = None
     label: AssetLabel
 
 
@@ -777,25 +806,6 @@ class HierarchyTree(BaseModel):
     data: Annotated[list[HierarchyNode], Field(title="Data")]
 
 
-class InitiateUploadRequest(BaseModel):
-    filename: Annotated[str, Field(description="File name to be uploaded.", title="Filename")]
-    filesize: Annotated[
-        int, Field(description="File size to be uploaded in bytes.", gt=0, title="Filesize")
-    ]
-    sha256_digest: Annotated[str, Field(title="Sha256 Digest")]
-    content_type: Annotated[
-        str | None,
-        Field(
-            description="Content type of file. If not provided it will be deduced from the file's extension.",
-            title="Content Type",
-        ),
-    ] = None
-    label: AssetLabel
-    preferred_part_count: Annotated[
-        int | None, Field(description="Hint of desired part count.", title="Preferred Part Count")
-    ] = 100
-
-
 class IonChannelAdminUpdate(BaseModel):
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
@@ -1080,6 +1090,94 @@ class ModifiedReconstructionCellMorphologyProtocolCreate(BaseModel):
     )
     generation_type: Annotated[Literal["modified_reconstruction"], Field(title="Generation Type")]
     method_type: ModifiedMorphologyMethodType
+
+
+class MultipartDirectoryFileRequest(BaseModel):
+    filename: Annotated[
+        str,
+        Field(
+            description="File name to be uploaded, relative to the base directory.",
+            title="Filename",
+        ),
+    ]
+    filesize: Annotated[
+        int,
+        Field(
+            description="File size to be uploaded in bytes.",
+            ge=0,
+            lt=1099511627776,
+            title="Filesize",
+        ),
+    ]
+    sha256_digest: Annotated[
+        str,
+        Field(
+            description="SHA256 digest of the file content in hexadecimal format.",
+            pattern="^[a-fA-F0-9]{64}$",
+            title="Sha256 Digest",
+        ),
+    ]
+    content_type: Annotated[
+        ContentType | None,
+        Field(
+            description="Content type of file. If not provided it will be deduced from the file's extension."
+        ),
+    ] = None
+    label: Annotated[Literal["directory_child"], Field(title="Label")] = "directory_child"
+    preferred_part_count: Annotated[
+        int | None, Field(description="Hint of desired part count.", title="Preferred Part Count")
+    ] = 100
+
+
+class MultipartDirectoryUploadRequest(BaseModel):
+    directory_name: Annotated[
+        str,
+        Field(
+            description="Name of the directory to be uploaded. Nested directories are not allowed.",
+            title="Directory Name",
+        ),
+    ]
+    files: Annotated[
+        list[MultipartDirectoryFileRequest],
+        Field(
+            description="List of files to be uploaded inside the directory.",
+            min_length=1,
+            title="Files",
+        ),
+    ]
+    meta: Annotated[dict[str, Any] | None, Field(title="Meta")] = None
+    label: AssetLabel
+
+
+class MultipartUploadInitiateRequest(BaseModel):
+    filename: Annotated[str, Field(description="File name to be uploaded.", title="Filename")]
+    filesize: Annotated[
+        int,
+        Field(
+            description="File size to be uploaded in bytes.",
+            gt=0,
+            lt=1099511627776,
+            title="Filesize",
+        ),
+    ]
+    sha256_digest: Annotated[
+        str,
+        Field(
+            description="SHA256 digest of the file content in hexadecimal format.",
+            pattern="^[a-fA-F0-9]{64}$",
+            title="Sha256 Digest",
+        ),
+    ]
+    content_type: Annotated[
+        ContentType | None,
+        Field(
+            description="Content type of file. If not provided it will be deduced from the file's extension."
+        ),
+    ] = None
+    label: AssetLabel
+    preferred_part_count: Annotated[
+        int | None, Field(description="Hint of desired part count.", title="Preferred Part Count")
+    ] = 100
 
 
 class NestedBrainRegionRead(BaseModel):
@@ -2333,7 +2431,7 @@ class AnalysisNotebookTemplateUpdate(BaseModel):
 
 class AssetRead(BaseModel):
     size: Annotated[int, Field(title="Size")]
-    sha256_digest: Annotated[str | None, Field(title="Sha256 Digest")]
+    sha256_digest: Annotated[Sha256Digest | None, Field(title="Sha256 Digest")]
     path: Annotated[str, Field(title="Path")]
     full_path: Annotated[str, Field(title="Full Path")]
     is_directory: Annotated[bool, Field(title="Is Directory")]
@@ -2347,7 +2445,7 @@ class AssetRead(BaseModel):
 
 class AssetReadWithUploadMeta(BaseModel):
     size: Annotated[int, Field(title="Size")]
-    sha256_digest: Annotated[str | None, Field(title="Sha256 Digest")]
+    sha256_digest: Annotated[Sha256Digest | None, Field(title="Sha256 Digest")]
     path: Annotated[str, Field(title="Path")]
     full_path: Annotated[str, Field(title="Full Path")]
     is_directory: Annotated[bool, Field(title="Is Directory")]
@@ -2690,6 +2788,11 @@ class DerivationCreate(BaseModel):
 
 
 class DerivationRead(BaseModel):
+    id: Annotated[UUID, Field(title="Id")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     used: BasicEntityRead
     generated: BasicEntityRead
     derivation_type: DerivationType
@@ -3220,6 +3323,12 @@ class ListResponseContributionRead(BaseModel):
     facets: Facets | None = None
 
 
+class ListResponseDerivationRead(BaseModel):
+    data: Annotated[list[DerivationRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
 class ListResponseETypeClassificationRead(BaseModel):
     data: Annotated[list[ETypeClassificationRead], Field(title="Data")]
     pagination: PaginationResponse
@@ -3455,6 +3564,11 @@ class ModifiedReconstructionCellMorphologyProtocolRead(BaseModel):
     )
     generation_type: Annotated[Literal["modified_reconstruction"], Field(title="Generation Type")]
     method_type: ModifiedMorphologyMethodType
+
+
+class MultipartDirectoryUploadResponse(BaseModel):
+    asset: AssetRead
+    files: Annotated[list[AssetReadWithUploadMeta], Field(title="Files")]
 
 
 class NestedAnalysisNotebookEnvironmentRead(BaseModel):
