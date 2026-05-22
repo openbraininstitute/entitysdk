@@ -439,6 +439,10 @@ class DerivationType(StrEnum):
     unspecified = "unspecified"
 
 
+class DerivationUserUpdate(BaseModel):
+    label: Annotated[str | None, Field(title="Label")] = None
+
+
 class DetailedFile(BaseModel):
     name: Annotated[str, Field(title="Name")]
     size: Annotated[int, Field(title="Size")]
@@ -2784,6 +2788,11 @@ class DerivationCreate(BaseModel):
 
 
 class DerivationRead(BaseModel):
+    id: Annotated[UUID, Field(title="Id")]
+    created_by: NestedPersonRead
+    updated_by: NestedPersonRead
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     used: BasicEntityRead
     generated: BasicEntityRead
     derivation_type: DerivationType
@@ -3310,6 +3319,12 @@ class ListResponseConsortiumRead(BaseModel):
 
 class ListResponseContributionRead(BaseModel):
     data: Annotated[list[ContributionRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
+class ListResponseDerivationRead(BaseModel):
+    data: Annotated[list[DerivationRead], Field(title="Data")]
     pagination: PaginationResponse
     facets: Facets | None = None
 
