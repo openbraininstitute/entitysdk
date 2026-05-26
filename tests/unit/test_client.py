@@ -73,6 +73,21 @@ def test_client_project_context__raises():
         client._required_user_context(override_context=None)
 
 
+def test_client_get_api_version(client, httpx_mock, api_url, request_headers_no_context):
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/version",
+        match_headers=request_headers_no_context,
+        json={"app_name": "entitycore", "app_version": "1.2.3", "commit_sha": "abc123"},
+    )
+
+    result = client.get_api_version()
+
+    assert result.app_name == "entitycore"
+    assert result.app_version == "1.2.3"
+    assert result.commit_sha == "abc123"
+
+
 def test_client_search(client, httpx_mock):
     id1 = uuid.uuid4()
     id2 = uuid.uuid4()
