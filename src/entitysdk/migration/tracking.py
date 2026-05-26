@@ -13,8 +13,8 @@ from entitysdk.models.core import Identifiable
 L = logging.getLogger(__name__)
 
 
-class EntityKey(NamedTuple):
-    """Unique identifier for an entity."""
+class IdentifiableKey(NamedTuple):
+    """Unique identifier for an Identifiable."""
 
     type: type[Identifiable]
     id: UUID
@@ -24,8 +24,8 @@ class EntityKey(NamedTuple):
         return f"{self.type.__name__}::{self.id}"
 
     @classmethod
-    def from_string(cls, value: str) -> "EntityKey":
-        """Parse an EntityKey from its 'type::id' string representation."""
+    def from_string(cls, value: str) -> "IdentifiableKey":
+        """Parse an IdentifiableKey from its 'type::id' string representation."""
         type_str, _, id_str = value.partition("::")
         type_class = getattr(models, type_str, None)
         if not type_class:
@@ -64,13 +64,15 @@ class ExecutionSummary(BaseModel):
         Field(description="Before/after attribute values keyed by entity key."),
     ] = {}
 
-    def record_operation(self, entity_key: EntityKey, operation: OperationType) -> None:
+    def record_operation(self, identifiable_key: IdentifiableKey, operation: OperationType) -> None:
         """Record an operation performed on an entity."""
-        self.operations.setdefault(operation, []).append(str(entity_key))
+        self.operations.setdefault(operation, []).append(str(identifiable_key))
 
-    def record_snapshot(self, entity_key: EntityKey, label: SnapshotLabel, data: Any) -> None:
+    def record_snapshot(
+        self, identifiable_key: IdentifiableKey, label: SnapshotLabel, data: Any
+    ) -> None:
         """Record a before/after snapshot of an entity's data."""
-        self.snapshots.setdefault(str(entity_key), {})[label] = data
+        self.snapshots.setdefault(str(identifiable_key), {})[label] = data
 
     def log_summary(self) -> None:
         """Log a summary of all recorded operations."""

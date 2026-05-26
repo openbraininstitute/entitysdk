@@ -4,8 +4,8 @@ from entitysdk.migration.cli import run
 from entitysdk.migration.context import ExecutionManifest, init_client, load_manifest, script_dir
 from entitysdk.migration.settings import ApplySettings, CommonSettings, RevertSettings
 from entitysdk.migration.tracking import (
-    EntityKey,
     ExecutionSummary,
+    IdentifiableKey,
     OperationType,
     SnapshotLabel,
 )
@@ -13,7 +13,7 @@ from entitysdk.migration.tracking import (
 __all__ = [
     "ApplySettings",
     "CommonSettings",
-    "EntityKey",
+    "IdentifiableKey",
     "ExecutionManifest",
     "ExecutionSummary",
     "OperationType",
