@@ -3,7 +3,10 @@
 from entitysdk.client import Client
 from entitysdk.common import ProjectContext
 from entitysdk.exception import EntitySDKError
-from entitysdk.schemas.asset import MultipartUploadTransferConfig
+from entitysdk.schemas.asset import (
+    MultipartDirectoryUploadTransferConfig,
+    MultipartUploadTransferConfig,
+)
 from entitysdk.utils.store import LocalAssetStore
 
 __all__ = [
@@ -11,5 +14,6 @@ __all__ = [
     "EntitySDKError",
     "LocalAssetStore",
     "MultipartUploadTransferConfig",
+    "MultipartDirectoryUploadTransferConfig",
     "ProjectContext",
 ]
