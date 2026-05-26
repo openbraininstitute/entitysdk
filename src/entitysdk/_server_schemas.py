@@ -436,6 +436,9 @@ class DerivationType(StrEnum):
     circuit_extraction = "circuit_extraction"
     circuit_rewiring = "circuit_rewiring"
     emodel_circuit = "emodel_circuit"
+    em_dense_reconstruction_dataset_cell_morphology = (
+        "em_dense_reconstruction_dataset_cell_morphology"
+    )
     unspecified = "unspecified"
 
 
