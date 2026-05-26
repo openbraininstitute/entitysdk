@@ -1,29 +1,45 @@
 import uuid
 
+import pytest
+
+from entitysdk import models
 from entitysdk.migration import tracking as test_module
 
 
 def test_entity_key_str():
-    key = test_module.EntityKey(type="Morphology", id=uuid.UUID(int=1))
-    assert str(key) == f"Morphology::{uuid.UUID(int=1)}"
+    key = test_module.EntityKey(type=models.CellMorphology, id=uuid.UUID(int=1))
+    assert str(key) == f"CellMorphology::{uuid.UUID(int=1)}"
 
 
 def test_entity_key_from_string():
     uid = uuid.uuid4()
-    key = test_module.EntityKey.from_string(f"Morphology::{uid}")
-    assert key.type == "Morphology"
+    key = test_module.EntityKey.from_string(f"CellMorphology::{uid}")
+    assert key.type == models.CellMorphology
     assert key.id == uid
 
 
+def test_entity_key_from_string_raises_when_unknown():
+    uid = uuid.uuid4()
+    with pytest.raises(ValueError, match="Unknown entity type"):
+        test_module.EntityKey.from_string(f"Unknown::{uid}")
+
+
+def test_entity_key_from_string_raises_when_not_identifiable(monkeypatch):
+    uid = uuid.uuid4()
+    monkeypatch.setattr(models, "NotIdentifiable", object, raising=False)
+    with pytest.raises(ValueError, match="Invalid entity type"):
+        test_module.EntityKey.from_string(f"NotIdentifiable::{uid}")
+
+
 def test_entity_key_roundtrip():
-    key = test_module.EntityKey(type="Circuit", id=uuid.uuid4())
+    key = test_module.EntityKey(type=models.Circuit, id=uuid.uuid4())
     assert test_module.EntityKey.from_string(str(key)) == key
 
 
 def test_entity_key_named_tuple_fields():
     uid = uuid.uuid4()
-    key = test_module.EntityKey(type="EModel", id=uid)
-    assert key.type == "EModel"
+    key = test_module.EntityKey(type=models.CellMorphology, id=uid)
+    assert key.type == models.CellMorphology
     assert key.id == uid
 
 
@@ -44,7 +60,7 @@ def test_execution_summary_default_operations():
 
 def test_execution_summary_record_operation():
     summary = test_module.ExecutionSummary()
-    key = test_module.EntityKey(type="Morphology", id=uuid.uuid4())
+    key = test_module.EntityKey(type=models.CellMorphology, id=uuid.uuid4())
     summary.record_operation(key, test_module.OperationType.created)
     assert str(key) in summary.operations[test_module.OperationType.created]
 
@@ -52,14 +68,14 @@ def test_execution_summary_record_operation():
 def test_execution_summary_record_operation_new_type():
     summary = test_module.ExecutionSummary()
     summary.operations.clear()
-    key = test_module.EntityKey(type="X", id=uuid.uuid4())
+    key = test_module.EntityKey(type=models.CellMorphology, id=uuid.uuid4())
     summary.record_operation(key, test_module.OperationType.updated)
     assert str(key) in summary.operations[test_module.OperationType.updated]
 
 
 def test_execution_summary_record_snapshot():
     summary = test_module.ExecutionSummary()
-    key = test_module.EntityKey(type="Morphology", id=uuid.uuid4())
+    key = test_module.EntityKey(type=models.CellMorphology, id=uuid.uuid4())
     summary.record_snapshot(key, test_module.SnapshotLabel.before, {"name": "old"})
     summary.record_snapshot(key, test_module.SnapshotLabel.after, {"name": "new"})
     entry = summary.snapshots[str(key)]
@@ -69,7 +85,7 @@ def test_execution_summary_record_snapshot():
 
 def test_execution_summary_log_summary(caplog):
     summary = test_module.ExecutionSummary()
-    key = test_module.EntityKey(type="X", id=uuid.uuid4())
+    key = test_module.EntityKey(type=models.CellMorphology, id=uuid.uuid4())
     summary.record_operation(key, test_module.OperationType.created)
     summary.record_operation(key, test_module.OperationType.skipped)
     with caplog.at_level("INFO"):

@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 
+from entitysdk import models
 from entitysdk.common import ProjectContext
 from entitysdk.migration import context as test_module
 from entitysdk.migration.settings import CommonSettings
@@ -135,7 +136,7 @@ def test_migration_context_success(tmp_path, common_settings):
         common_settings, subcommand="apply", base=tmp_path
     ) as summary:
         summary.record_operation(
-            EntityKey(type="X", id=PROJECT_ID),
+            EntityKey(type=models.CellMorphology, id=PROJECT_ID),
             OperationType.created,
         )
 

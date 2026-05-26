@@ -7,24 +7,32 @@ from uuid import UUID
 
 from pydantic import BaseModel, Field
 
+from entitysdk import models
+from entitysdk.models.core import Identifiable
+
 L = logging.getLogger(__name__)
 
 
 class EntityKey(NamedTuple):
     """Unique identifier for an entity."""
 
-    type: str
+    type: type[Identifiable]
     id: UUID
 
     def __str__(self) -> str:
         """Return the string representation as 'type::id'."""
-        return f"{self.type}::{self.id}"
+        return f"{self.type.__name__}::{self.id}"
 
     @classmethod
     def from_string(cls, value: str) -> "EntityKey":
         """Parse an EntityKey from its 'type::id' string representation."""
-        type_, _, id_ = value.partition("::")
-        return cls(type=type_, id=UUID(id_))
+        type_str, _, id_str = value.partition("::")
+        type_class = getattr(models, type_str, None)
+        if not type_class:
+            raise ValueError(f"Unknown entity type: {type_str}")
+        if not issubclass(type_class, Identifiable):
+            raise ValueError(f"Invalid entity type: {type_str}")
+        return cls(type=type_class, id=UUID(id_str))
 
 
 class OperationType(StrEnum):
