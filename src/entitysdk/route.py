@@ -101,6 +101,11 @@ def get_route_name(entity_type: type[Identifiable]) -> str:
         ) from e
 
 
+def get_version_endpoint(*, api_url: str) -> str:
+    """Get the API endpoint returning the version."""
+    return f"{api_url}/version"
+
+
 def get_entities_endpoint(
     *,
     api_url: str,

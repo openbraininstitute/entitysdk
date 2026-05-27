@@ -26,6 +26,7 @@ from entitysdk.schemas.asset import (
     MultipartDirectoryUploadTransferConfig,
     MultipartUploadTransferConfig,
 )
+from entitysdk.schemas.version import APIVersion
 from entitysdk.token_manager import TokenFromValue, TokenManager
 from entitysdk.types import (
     ID,
@@ -142,6 +143,14 @@ class Client:
         if context is None:
             raise EntitySDKError("A project context is mandatory for this operation.")
         return context
+
+    def get_api_version(self) -> APIVersion:
+        """Return the entitycore version."""
+        return core.get_api_version(
+            api_url=self.api_url,
+            token_manager=self._token_manager,
+            http_client=self._http_client,
+        )
 
     @validate_call
     def get_entity(

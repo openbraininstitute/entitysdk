@@ -28,6 +28,7 @@ from entitysdk.route import (
     get_assets_endpoint,
     get_entities_endpoint,
     get_entity_derivations_endpoint,
+    get_version_endpoint,
 )
 from entitysdk.schemas.asset import (
     MultipartDirectoryFileRequest,
@@ -35,6 +36,7 @@ from entitysdk.schemas.asset import (
     MultipartDirectoryUploadTransferConfig,
     MultipartUploadTransferConfig,
 )
+from entitysdk.schemas.version import APIVersion
 from entitysdk.token_manager import TokenManager
 from entitysdk.types import (
     ID,
@@ -57,6 +59,23 @@ from entitysdk.utils.store import LocalAssetStore
 L = logging.getLogger(__name__)
 
 TIdentifiable = TypeVar("TIdentifiable", bound=Identifiable)
+
+
+def get_api_version(
+    *,
+    api_url: str,
+    token_manager: TokenManager,
+    http_client: httpx.Client,
+) -> APIVersion:
+    """Return the entitycore version."""
+    url = get_version_endpoint(api_url=api_url)
+    response = make_db_api_request(
+        url=url,
+        method="GET",
+        token_manager=token_manager,
+        http_client=http_client,
+    )
+    return APIVersion.model_validate(response.json())
 
 
 def search_entities(

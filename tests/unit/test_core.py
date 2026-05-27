@@ -36,6 +36,26 @@ def asset_file(tmp_path):
     return file_path
 
 
+def test_get_api_version(httpx_mock, token_from_value_manager):
+    api_url = "http://mock-host:8000"
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/version",
+        json={"app_name": "entitycore", "app_version": "2.0.0", "commit_sha": "def456"},
+    )
+
+    with httpx.Client() as client:
+        result = test_module.get_api_version(
+            api_url=api_url,
+            token_manager=token_from_value_manager,
+            http_client=client,
+        )
+
+    assert result.app_name == "entitycore"
+    assert result.app_version == "2.0.0"
+    assert result.commit_sha == "def456"
+
+
 def test_upload_asset_file(asset_file, token_manager):
 
     transfer_config = Mock()
