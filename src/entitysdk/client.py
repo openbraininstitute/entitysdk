@@ -396,7 +396,7 @@ class Client:
         Returns:
             The created Asset.
         """
-        context = self._required_user_context(override_context=project_context)
+        context = self._optional_user_context(override_context=project_context)
 
         asset_path = Path(file_path)
 
@@ -451,7 +451,7 @@ class Client:
             metadata=file_metadata or {},
             label=asset_label,
         )
-        context = self._required_user_context(override_context=project_context)
+        context = self._optional_user_context(override_context=project_context)
         return core.upload_asset_content(
             api_url=self.api_url,
             entity_id=entity_id,
@@ -491,7 +491,7 @@ class Client:
         Returns:
             The created directory Asset.
         """
-        context = self._required_user_context(override_context=project_context)
+        context = self._optional_user_context(override_context=project_context)
 
         paths_dict = {Path(k): Path(v) for k, v in paths.items()}
 
@@ -954,7 +954,7 @@ class Client:
             The deleted Asset (as returned by the backend).
         """
         context = (
-            self._required_user_context(override_context=project_context) if not admin else None
+            self._optional_user_context(override_context=project_context) if not admin else None
         )
         return core.delete_asset(
             api_url=self.api_url,
@@ -1052,7 +1052,7 @@ class Client:
             content_type=content_type,
             label=asset_label,
         )
-        context = self._required_user_context(override_context=project_context)
+        context = self._optional_user_context(override_context=project_context)
         return core.register_asset(
             api_url=self.api_url,
             entity_id=entity_id,

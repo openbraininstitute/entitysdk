@@ -108,6 +108,7 @@ class ApiErrorCode(StrEnum):
     ASSET_UPLOAD_INCOMPLETE = "ASSET_UPLOAD_INCOMPLETE"
     ASSET_UPLOAD_INCONSISTENT_SIZE = "ASSET_UPLOAD_INCONSISTENT_SIZE"
     ASSET_NOT_UPLOADING = "ASSET_NOT_UPLOADING"
+    ASSET_VIRTUAL_LAB_ID_NOT_FOUND = "ASSET_VIRTUAL_LAB_ID_NOT_FOUND"
     ION_NAME_NOT_FOUND = "ION_NAME_NOT_FOUND"
     S3_CANNOT_CREATE_PRESIGNED_URL = "S3_CANNOT_CREATE_PRESIGNED_URL"
     OPENAI_API_KEY_MISSING = "OPENAI_API_KEY_MISSING"
@@ -187,7 +188,9 @@ class Author(BaseModel):
 
 
 class BodyUploadEntityAssetEntityRouteEntityIdAssetsPost(BaseModel):
-    file: Annotated[str, Field(title="File")]
+    file: Annotated[
+        str, Field(json_schema_extra={"contentMediaType": "application/octet-stream"}, title="File")
+    ]
     label: AssetLabel
     meta: Annotated[dict[str, Any] | None, Field(title="Meta")] = None
 
