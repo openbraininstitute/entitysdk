@@ -5,9 +5,9 @@ def test_public_api():
     expected = {
         "ApplySettings",
         "CommonSettings",
-        "EntityKey",
         "ExecutionManifest",
         "ExecutionSummary",
+        "IdentifiableKey",
         "OperationType",
         "RevertSettings",
         "SnapshotLabel",
