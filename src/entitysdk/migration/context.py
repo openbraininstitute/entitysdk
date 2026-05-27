@@ -22,6 +22,7 @@ from rich import print as rprint
 from entitysdk.client import Client
 from entitysdk.migration.settings import CommonSettings
 from entitysdk.migration.tracking import ExecutionSummary
+from entitysdk.schemas.version import APIVersion
 from entitysdk.token_manager import TokenFromFunction, TokenManager
 from entitysdk.types import DeploymentEnvironment, Token
 
@@ -106,10 +107,12 @@ class RuntimeContext(BaseModel):
     @staticmethod
     def _installed_packages() -> dict[str, str]:
         """Return installed packages as a name-version mapping."""
-        return {
-            dist.metadata["Name"]: dist.metadata["Version"]
-            for dist in importlib.metadata.distributions()
-        }
+        return dict(
+            sorted(
+                (dist.metadata["Name"], dist.metadata["Version"])
+                for dist in importlib.metadata.distributions()
+            )
+        )
 
     @staticmethod
     def _entitysdk_env() -> dict[str, str]:
@@ -121,6 +124,7 @@ class ExecutionManifest(BaseModel):
     """Structured audit record written after each execution."""
 
     version: str
+    api_version: APIVersion
     context: RuntimeContext
     settings: CommonSettings
     start_time: datetime
@@ -186,6 +190,7 @@ def migration_context(
     base = base or script_dir()
     _setup_logging(settings, base)
     ctx = RuntimeContext.collect()
+    api_version = init_client(settings).get_api_version()
     L.info(f"Running {ctx.command_line} settings={settings.model_dump_json()}")
     _confirm_execution(settings, ctx, subcommand=subcommand)
     summary = ExecutionSummary()
@@ -201,7 +206,14 @@ def migration_context(
         end_time = datetime.now(UTC)
         summary.log_summary()
         _write_execution_manifest(
-            settings, ctx, summary, start_time, end_time, error=error, base=base
+            settings=settings,
+            ctx=ctx,
+            summary=summary,
+            start_time=start_time,
+            end_time=end_time,
+            api_version=api_version,
+            error=error,
+            base=base,
         )
 
 
@@ -247,12 +259,13 @@ def _confirm_execution(settings: CommonSettings, ctx: RuntimeContext, *, subcomm
 
 
 def _write_execution_manifest(
+    *,
     settings: CommonSettings,
     ctx: RuntimeContext,
     summary: ExecutionSummary,
     start_time: datetime,
     end_time: datetime,
-    *,
+    api_version: APIVersion,
     error: str | None,
     base: Path,
 ) -> None:
@@ -262,6 +275,7 @@ def _write_execution_manifest(
     manifest_path = manifest_dir / f"{FILENAME}.json"
     manifest = ExecutionManifest(
         version=settings.version,
+        api_version=api_version,
         context=ctx,
         settings=settings,
         start_time=start_time,
