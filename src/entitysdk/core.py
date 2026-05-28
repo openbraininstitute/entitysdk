@@ -337,10 +337,11 @@ def upload_asset_file(
     entity_type: type[Entity],
     asset_path: Path,
     asset_metadata: LocalAssetMetadata,
-    project_context: ProjectContext,
+    project_context: ProjectContext | None,
     token_manager: TokenManager,
     http_client: httpx.Client,
     transfer_config: MultipartUploadTransferConfig | None = None,
+    admin: bool,
 ) -> Asset:
     """Upload asset to an existing entity's endpoint from a file path."""
     if transfer_config and get_filesize(asset_path) > transfer_config.threshold:
@@ -366,6 +367,7 @@ def upload_asset_file(
             project_context=project_context,
             token_manager=token_manager,
             http_client=http_client,
+            admin=admin,
         )
 
 
@@ -376,9 +378,10 @@ def upload_asset_content(
     entity_type: type[Entity],
     asset_content: BytesOrStream,
     asset_metadata: LocalAssetMetadata,
-    project_context: ProjectContext,
+    project_context: ProjectContext | None,
     token_manager: TokenManager,
     http_client: httpx.Client,
+    admin: bool,
 ) -> Asset:
     """Upload asset to an existing entity's endpoint from a file-like object."""
     files = {
@@ -393,6 +396,7 @@ def upload_asset_content(
         entity_type=entity_type,
         entity_id=entity_id,
         asset_id=None,
+        admin=admin,
     )
     response = make_db_api_request(
         url=url,
@@ -415,7 +419,7 @@ def upload_asset_directory(
     paths: dict[Path, Path],
     metadata: dict | None = None,
     label: AssetLabel,
-    project_context: ProjectContext,
+    project_context: ProjectContext | None,
     token_manager: TokenManager,
     http_client: httpx.Client,
     transfer_config: MultipartDirectoryUploadTransferConfig | None = None,
@@ -498,6 +502,7 @@ def fetch_asset_file(
     http_client: httpx.Client,
     local_store: LocalAssetStore | None = None,
     strategy: FetchFileStrategy,
+    admin: bool,
 ) -> Path:
     """Fetch asset file."""
     if isinstance(asset_or_id, ID):
@@ -509,6 +514,7 @@ def fetch_asset_file(
             project_context=project_context,
             http_client=http_client,
             token_manager=token_manager,
+            admin=admin,
         )
     else:
         asset = asset_or_id
@@ -536,6 +542,7 @@ def fetch_asset_file(
             project_context=project_context,
             http_client=http_client,
             asset_path=asset_path,
+            admin=admin,
         )
 
     def try_copy_path() -> Path | None:
@@ -590,6 +597,7 @@ def download_asset_file(
     project_context: ProjectContext | None = None,
     http_client: httpx.Client,
     asset_path: Path | None = None,
+    admin: bool,
 ) -> Path:
     """Download an asset from the entitycore download endpoint to a local file.
 
@@ -606,6 +614,7 @@ def download_asset_file(
         project_context: Optional project context for ``project-id`` / ``virtual-lab-id`` headers.
         http_client: HTTP client used for the streaming request.
         asset_path: For directory assets, path within the directory to the file.
+        admin: Whether to use admin endpoints.
 
     Returns:
         ``target_path`` after the download completes.
@@ -615,6 +624,7 @@ def download_asset_file(
         entity_type=entity_type,
         entity_id=entity_id,
         asset_id=asset_id,
+        admin=admin,
     )
     token = token_manager.get_token()
     headers = {"Authorization": f"Bearer {token}"}
@@ -649,6 +659,7 @@ def fetch_asset_content(
     http_client: httpx.Client,
     local_store: LocalAssetStore | None = None,
     strategy: FetchContentStrategy,
+    admin: bool,
 ) -> bytes:
     """Fetch asset content.
 
@@ -663,6 +674,7 @@ def fetch_asset_content(
         http_client: HTTP client.
         local_store: LocalAssetStore for using a local store.
         strategy: Output strategy to fetch the asset content.
+        admin: Whether to use admin endpoints.
 
     Returns:
         Asset content in bytes.
@@ -683,6 +695,7 @@ def fetch_asset_content(
                 project_context=project_context,
                 http_client=http_client,
                 token_manager=token_manager,
+                admin=admin,
             )
         else:
             asset = asset_or_id
@@ -700,6 +713,7 @@ def fetch_asset_content(
             entity_type=entity_type,
             entity_id=entity_id,
             asset_id=asset_id,
+            admin=admin,
         )
         return make_db_api_request(
             url=f"{asset_endpoint}/download",
@@ -760,9 +774,10 @@ def register_asset(
     entity_id: ID,
     entity_type: type[Entity],
     asset_metadata: ExistingAssetMetadata,
-    project_context: ProjectContext,
+    project_context: ProjectContext | None,
     token_manager: TokenManager,
     http_client: httpx.Client,
+    admin: bool,
 ) -> Asset:
     """Register a file or directory already existing."""
     url = (
@@ -771,6 +786,7 @@ def register_asset(
             entity_type=entity_type,
             entity_id=entity_id,
             asset_id=None,
+            admin=admin,
         )
         + "/register"
     )
