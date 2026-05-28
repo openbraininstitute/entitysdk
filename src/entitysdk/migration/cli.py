@@ -28,11 +28,11 @@ def run(
 
     Args:
         apply: Callback invoked for the ``apply`` subcommand.
-            Receives the parsed settings instance and an ExecutionSummary.
+            Receives the parsed settings instance, an ExecutionSummary and the entitysdk Client.
         apply_settings: Settings class for the ``apply`` subcommand.
             Must be a subclass of ApplySettings.
         revert: Callback invoked for the ``revert`` subcommand.
-            Receives the parsed settings instance and an ExecutionSummary.
+            Receives the parsed settings instance, an ExecutionSummary and the entitysdk Client.
         revert_settings: Settings class for the ``revert`` subcommand.
             Must be a subclass of RevertSettings.
         cli_args: Explicit CLI arguments. If None, sys.argv is used.
@@ -44,15 +44,15 @@ def run(
         """Apply the migration."""
 
         def cli_cmd(self) -> None:
-            with migration_context(self, subcommand="apply") as summary:
-                apply_fn(self, summary)
+            with migration_context(self, subcommand="apply") as (summary, client):
+                apply_fn(settings=self, summary=summary, client=client)
 
     class _Revert(revert_settings):  # type: ignore[misc, valid-type]
         """Revert the migration."""
 
         def cli_cmd(self) -> None:
-            with migration_context(self, subcommand="revert") as summary:
-                revert_fn(self, summary)
+            with migration_context(self, subcommand="revert") as (summary, client):
+                revert_fn(settings=self, summary=summary, client=client)
 
     class RootSettings(BaseSettings):
         model_config = SettingsConfigDict(

@@ -142,8 +142,10 @@ def test_script_dir(monkeypatch):
 @pytest.mark.usefixtures("_patch_migration_context")
 def test_migration_context_success(tmp_path, common_settings):
     with test_module.migration_context(
-        common_settings, subcommand="apply", base=tmp_path
-    ) as summary:
+        common_settings,
+        subcommand="apply",
+        base=tmp_path,
+    ) as (summary, client):
         summary.record_operation(
             IdentifiableKey(type=models.CellMorphology, id=PROJECT_ID),
             OperationType.created,

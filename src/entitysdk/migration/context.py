@@ -167,7 +167,7 @@ def script_dir() -> Path:
 @contextmanager
 def migration_context(
     settings: CommonSettings, *, subcommand: str, base: Path | None = None
-) -> Generator[ExecutionSummary]:
+) -> Generator[tuple[ExecutionSummary, Client]]:
     """Manage the full lifecycle of a migration script execution.
 
     Sets up file and console logging, collects git and runtime metadata,
@@ -190,14 +190,15 @@ def migration_context(
     base = base or script_dir()
     _setup_logging(settings, base)
     ctx = RuntimeContext.collect()
-    api_version = init_client(settings).get_api_version()
+    client = init_client(settings)
+    api_version = client.get_api_version()
     L.info(f"Running {ctx.command_line} settings={settings.model_dump_json()}")
     _confirm_execution(settings, ctx, subcommand=subcommand)
     summary = ExecutionSummary()
     start_time = datetime.now(UTC)
     error = None
     try:
-        yield summary
+        yield summary, client
     except Exception as exc:
         error = str(exc)
         L.exception("Script failed")
