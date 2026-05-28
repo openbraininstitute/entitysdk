@@ -10,8 +10,14 @@ from entitysdk.common import ProjectContext
 from entitysdk.migration import context as test_module
 from entitysdk.migration.settings import CommonSettings
 from entitysdk.migration.tracking import ExecutionSummary, IdentifiableKey, OperationType
+from entitysdk.schemas.version import APIVersion
 from entitysdk.types import DeploymentEnvironment
 from tests.unit.util import PROJECT_ID, VIRTUAL_LAB_ID
+
+
+class _FakeClient:
+    def get_api_version(self):
+        return APIVersion(app_name="entitycore", app_version="1.0.0", commit_sha="abc123")
 
 
 @pytest.fixture()
@@ -59,6 +65,7 @@ def _patch_migration_context(monkeypatch, runtime_context):
     )
     monkeypatch.setattr(test_module, "_setup_logging", lambda *a, **kw: None)
     monkeypatch.setattr(test_module, "_confirm_execution", lambda *a, **kw: None)
+    monkeypatch.setattr(test_module, "init_client", lambda *a, **kw: _FakeClient())
 
 
 @pytest.mark.usefixtures("_patch_git")
@@ -95,8 +102,10 @@ def test_runtime_context_entitysdk_env(monkeypatch):
 
 def test_load_manifest(tmp_path, common_settings, runtime_context):
     now = datetime.now(UTC)
+    api_version = APIVersion(app_name="entitycore", app_version="1.0.0", commit_sha="abc123")
     manifest = test_module.ExecutionManifest(
         version="0.1.0",
+        api_version=api_version,
         context=runtime_context,
         settings=common_settings,
         start_time=now,
@@ -133,8 +142,10 @@ def test_script_dir(monkeypatch):
 @pytest.mark.usefixtures("_patch_migration_context")
 def test_migration_context_success(tmp_path, common_settings):
     with test_module.migration_context(
-        common_settings, subcommand="apply", base=tmp_path
-    ) as summary:
+        common_settings,
+        subcommand="apply",
+        base=tmp_path,
+    ) as (summary, client):
         summary.record_operation(
             IdentifiableKey(type=models.CellMorphology, id=PROJECT_ID),
             OperationType.created,
@@ -184,13 +195,15 @@ def test_confirm_execution_abort(monkeypatch, common_settings, runtime_context):
 
 def test_write_execution_manifest(tmp_path, common_settings, runtime_context):
     now = datetime.now(UTC)
+    api_version = APIVersion(app_name="entitycore", app_version="1.0.0", commit_sha="abc123")
     test_module._write_execution_manifest(
-        common_settings,
-        runtime_context,
-        ExecutionSummary(),
-        now,
-        now,
+        settings=common_settings,
+        ctx=runtime_context,
+        summary=ExecutionSummary(),
+        start_time=now,
+        end_time=now,
         error=None,
+        api_version=api_version,
         base=tmp_path,
     )
     manifest_dir = tmp_path / "manifests" / str(common_settings.environment)
