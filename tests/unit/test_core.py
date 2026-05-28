@@ -74,6 +74,7 @@ def test_upload_asset_file(asset_file, token_manager):
             asset_path=asset_file,
             asset_metadata=None,
             http_client=httpx.Client(),
+            admin=False,
         )
         patched_content.assert_called_once()
 
@@ -91,6 +92,7 @@ def test_upload_asset_file(asset_file, token_manager):
             asset_metadata=None,
             transfer_config=transfer_config,
             http_client=httpx.Client(),
+            admin=False,
         )
         patched_content.assert_called_once()
 
@@ -108,6 +110,7 @@ def test_upload_asset_file(asset_file, token_manager):
             asset_metadata=None,
             transfer_config=transfer_config,
             http_client=httpx.Client(),
+            admin=False,
         )
         patched_file.assert_called_once()
 
@@ -142,6 +145,7 @@ def test_fetch_asset_content_copy_or_download_reads_from_store_when_asset_is_pro
         local_store=store,
         strategy=FetchContentStrategy.local_or_download,
         http_client=httpx.Client(),
+        admin=False,
     )
 
     assert content == b"from-store"
@@ -183,6 +187,7 @@ def test_fetch_asset_file_download_streams_to_disk(tmp_path, token_from_value_ma
             token_manager=token_from_value_manager,
             strategy=FetchFileStrategy.download_only,
             http_client=httpx.Client(),
+            admin=False,
         )
 
     assert out.read_bytes() == b"abcdef"
@@ -225,6 +230,7 @@ def test_fetch_asset_file_download_stream_sets_context_headers(tmp_path, token_f
             project_context=ctx,
             strategy=FetchFileStrategy.download_only,
             http_client=httpx.Client(),
+            admin=False,
         )
 
     assert out.read_text() == "x"
@@ -258,6 +264,7 @@ def test_fetch_asset_file_download_request_error_raises(tmp_path, token_from_val
                 token_manager=token_from_value_manager,
                 strategy=FetchFileStrategy.download_only,
                 http_client=httpx.Client(),
+                admin=False,
             )
 
 
@@ -287,6 +294,7 @@ def test_fetch_asset_file_download_http_status_error_raises(tmp_path, token_from
                 token_manager=token_from_value_manager,
                 strategy=FetchFileStrategy.download_only,
                 http_client=httpx.Client(),
+                admin=False,
             )
 
 
@@ -315,6 +323,7 @@ def test_fetch_asset_file_unsupported_strategy_raises(tmp_path, token_from_value
             token_manager=token_from_value_manager,
             strategy="unsupported-strategy",
             http_client=httpx.Client(),
+            admin=False,
         )
 
 
@@ -342,6 +351,7 @@ def test_fetch_asset_content_unsupported_strategy_raises(token_from_value_manage
             token_manager=token_from_value_manager,
             strategy="unsupported-strategy",
             http_client=httpx.Client(),
+            admin=False,
         )
 
 
@@ -369,6 +379,7 @@ def test_download_asset_file_without_project_context(
             token_manager=token_from_value_manager,
             project_context=None,
             http_client=client,
+            admin=False,
         )
 
     assert res == out
@@ -403,6 +414,7 @@ def test_download_asset_file_project_context_without_virtual_lab_id(
             token_manager=token_from_value_manager,
             project_context=ctx,
             http_client=client,
+            admin=False,
         )
 
     assert res == out
@@ -431,6 +443,7 @@ def test_download_asset_file_with_asset_path_query(tmp_path, httpx_mock, token_f
             project_context=None,
             http_client=client,
             asset_path=Path("sub/file.txt"),
+            admin=False,
         )
 
     assert res == out
@@ -454,6 +467,7 @@ def test_download_asset_file_skips_empty_chunks(tmp_path, token_from_value_manag
                 target_path=out,
                 token_manager=token_from_value_manager,
                 http_client=client,
+                admin=False,
             )
 
     assert res == out

@@ -132,14 +132,16 @@ class Client:
                 raise EntitySDKError("Either api_url or environment is of the wrong type.")
 
     def _optional_user_context(
-        self, override_context: ProjectContext | None
+        self,
+        override_context: ProjectContext | None,
+        admin: bool = False,
     ) -> ProjectContext | None:
         """Return an optional project context."""
-        return override_context or self.project_context
+        return None if admin else (override_context or self.project_context)
 
     def _required_user_context(self, override_context: ProjectContext | None) -> ProjectContext:
         """Return a required project context."""
-        context = self._optional_user_context(override_context)
+        context = override_context or self.project_context
         if context is None:
             raise EntitySDKError("A project context is mandatory for this operation.")
         return context
@@ -174,15 +176,12 @@ class Client:
         Returns:
             entity_type instantiated by deserializing the response.
         """
-        context = (
-            self._optional_user_context(override_context=project_context) if not admin else None
-        )
         return core.get_entity(
             api_url=self.api_url,
             entity_id=entity_id,
             options=options,
             entity_type=entity_type,
-            project_context=context,
+            project_context=self._optional_user_context(project_context, admin),
             http_client=self._http_client,
             token_manager=self._token_manager,
             admin=admin,
@@ -207,15 +206,12 @@ class Client:
             project_context: Optional project context.
             admin: Use admin endpoints if True
         """
-        context = (
-            self._optional_user_context(override_context=project_context) if not admin else None
-        )
         return core.search_entities(
             api_url=self.api_url,
             entity_type=entity_type,
             query=query,
             limit=limit,
-            project_context=context,
+            project_context=self._optional_user_context(project_context, admin),
             http_client=self._http_client,
             token_manager=self._token_manager,
             admin=admin,
@@ -267,11 +263,10 @@ class Client:
         Returns:
             Registered entity with id.
         """
-        context = self._optional_user_context(override_context=project_context)
         return core.register_entity(
             api_url=self.api_url,
             entity=entity,
-            project_context=context,
+            project_context=self._optional_user_context(project_context, admin=False),
             http_client=self._http_client,
             token_manager=self._token_manager,
         )
@@ -296,14 +291,11 @@ class Client:
         Returns:
             An iterator over assets.
         """
-        context = (
-            self._optional_user_context(override_context=project_context) if not admin else None
-        )
         return core.get_entity_assets(
             api_url=self.api_url,
             entity_id=entity_id,
             entity_type=entity_type,
-            project_context=context,
+            project_context=self._optional_user_context(project_context, admin),
             http_client=self._http_client,
             token_manager=self._token_manager,
             admin=admin,
@@ -328,13 +320,10 @@ class Client:
             project_context: Optional project context.
             admin: whether to use the admin endpoint or not.
         """
-        context = (
-            self._optional_user_context(override_context=project_context) if not admin else None
-        )
         return core.update_entity(
             api_url=self.api_url,
             entity_id=entity_id,
-            project_context=context,
+            project_context=self._optional_user_context(project_context, admin),
             entity_type=entity_type,
             attrs_or_entity=attrs_or_entity,
             http_client=self._http_client,
@@ -379,6 +368,7 @@ class Client:
         asset_label: AssetLabel,
         project_context: ProjectContext | None = None,
         transfer_config: MultipartUploadTransferConfig | None = None,
+        admin: bool = False,
     ) -> Asset:
         """Upload a file to an entity.
 
@@ -392,11 +382,12 @@ class Client:
             asset_label: Label for the asset.
             project_context: Optional project context.
             transfer_config: Optional multipart upload configuration.
+            admin: Whether to use admin endpoints.
 
         Returns:
             The created Asset.
         """
-        context = self._optional_user_context(override_context=project_context)
+        context = self._optional_user_context(project_context, admin)
 
         asset_path = Path(file_path)
 
@@ -416,6 +407,7 @@ class Client:
             project_context=context,
             token_manager=self._token_manager,
             transfer_config=transfer_config,
+            admin=admin,
         )
 
     def upload_content(
@@ -429,6 +421,7 @@ class Client:
         file_metadata: dict | None = None,
         asset_label: AssetLabel,
         project_context: ProjectContext | None = None,
+        admin: bool = False,
     ) -> Asset:
         """Upload file-like content to an entity.
 
@@ -441,6 +434,7 @@ class Client:
             file_metadata: Optional extra metadata to attach to the asset.
             asset_label: Label for the asset.
             project_context: Optional project context.
+            admin: Whether to use the admin endpoints.
 
         Returns:
             The created Asset.
@@ -461,6 +455,7 @@ class Client:
             asset_metadata=asset_metadata,
             http_client=self._http_client,
             token_manager=self._token_manager,
+            admin=admin,
         )
 
     @validate_call
@@ -687,6 +682,7 @@ class Client:
         asset_path: Path | None = None,
         project_context: ProjectContext | None = None,
         strategy: FetchContentStrategy = FetchContentStrategy.local_or_download,
+        admin: bool = False,
     ) -> bytes:
         """Retrieve the binary content of an asset associated with an entity.
 
@@ -699,22 +695,23 @@ class Client:
             strategy: Strategy controlling how the asset file content is materialized
                 (for example copying from a local store or downloading from the
                 remote service).
+            admin: Whether to use the admin endpoints.
 
         Returns:
             The asset content as raw bytes.
         """
-        context = self._optional_user_context(override_context=project_context)
         return core.fetch_asset_content(
             api_url=self.api_url,
             entity_id=entity_id,
             entity_type=entity_type,
             asset_or_id=asset_or_id,
             asset_path=asset_path,
-            project_context=context,
+            project_context=self._optional_user_context(project_context, admin),
             http_client=self._http_client,
             token_manager=self._token_manager,
             local_store=self._local_store,
             strategy=strategy,
+            admin=admin,
         )
 
     @validate_call
@@ -726,6 +723,7 @@ class Client:
         asset_id: ID,
         asset_path: StrOrPath | None = None,
         project_context: ProjectContext | None = None,
+        admin: bool = False,
     ) -> bytes:
         """Download asset content.
 
@@ -735,6 +733,7 @@ class Client:
             asset_id: Id of the asset.
             asset_path: for asset directories, the path within the directory to the file.
             project_context: Optional project context.
+            admin: Whether to use admin endpoints.
 
         Returns:
             Asset content in bytes.
@@ -746,6 +745,7 @@ class Client:
             asset_path=Path(asset_path) if asset_path else None,
             project_context=project_context,
             strategy=FetchContentStrategy.download_only,
+            admin=admin,
         )
 
     @validate_call
@@ -759,6 +759,7 @@ class Client:
         asset_path: Path | None = None,
         project_context: ProjectContext | None = None,
         strategy: FetchFileStrategy = FetchFileStrategy.link_or_download,
+        admin: bool = False,
     ) -> Path:
         """Fetch a file asset to a local output path.
 
@@ -770,23 +771,24 @@ class Client:
             asset_path: For directory assets, path within the directory to the file.
             project_context: Optional project context.
             strategy: Strategy controlling how the asset file is materialized.
+            admin: Whether to use admin endpoints.
 
         Returns:
             The path of the created local file.
         """
-        context = self._optional_user_context(override_context=project_context)
         return core.fetch_asset_file(
             api_url=self.api_url,
             entity_id=entity_id,
             entity_type=entity_type,
             asset_or_id=asset_id,
-            project_context=context,
+            project_context=self._optional_user_context(project_context, admin),
             asset_path=asset_path,
             output_path=output_path,
             http_client=self._http_client,
             token_manager=self._token_manager,
             local_store=self._local_store,
             strategy=strategy,
+            admin=admin,
         )
 
     @validate_call
@@ -799,6 +801,7 @@ class Client:
         output_path: os.PathLike,
         asset_path: os.PathLike | None = None,
         project_context: ProjectContext | None = None,
+        admin: bool = False,
     ) -> Path:
         """Download asset file to a file path.
 
@@ -809,6 +812,7 @@ class Client:
             output_path: Either be a file path to write the file to or an output directory.
             asset_path: for asset directories, the path within the directory to the file.
             project_context: Optional project context.
+            admin: Whether to use admin endpoints.
 
         Returns:
             Output file path.
@@ -821,6 +825,7 @@ class Client:
             project_context=project_context,
             asset_path=Path(asset_path) if asset_path else None,
             strategy=FetchFileStrategy.download_only,
+            admin=admin,
         )
 
     @staticmethod
@@ -845,6 +850,7 @@ class Client:
         output_path: Path,
         project_context: ProjectContext | None = None,
         strategy: FetchFileStrategy = FetchFileStrategy.link_or_download,
+        admin: bool = False,
     ):
         """Fetch assets belonging to an entity.
 
@@ -855,6 +861,7 @@ class Client:
             output_path: Local output directory base path.
             project_context: Optional project context.
             strategy: Strategy controlling how each file is materialized.
+            admin: Whether to use admin endpoints.
 
         Returns:
             An iterator yielding `DownloadedAssetFile` objects.
@@ -871,6 +878,7 @@ class Client:
                     output_path=output_path,
                     project_context=context,
                     strategy=strategy,
+                    admin=admin,
                 )
 
             return DownloadedAssetFile(
@@ -878,13 +886,14 @@ class Client:
                 path=path,
             )
 
-        context = self._optional_user_context(override_context=project_context)
+        context = self._optional_user_context(project_context, admin)
         if isinstance(entity_or_id, tuple):
             entity_id, entity_type = entity_or_id
             entity = self.get_entity(
                 entity_id=entity_id,
                 entity_type=entity_type,
                 project_context=context,
+                admin=admin,
             )
         else:
             entity = entity_or_id
@@ -911,6 +920,7 @@ class Client:
         selection: dict[str, Any] | None = None,
         output_path: Path,
         project_context: ProjectContext | None = None,
+        admin: bool = False,
     ) -> IteratorResult:
         """Download assets belonging to an entity.
 
@@ -919,6 +929,7 @@ class Client:
             selection: Optional selection/filter dict.
             output_path: Local output directory base path.
             project_context: Optional project context.
+            admin: Whether to use admin endpoints.
 
         Returns:
             An iterator yielding `DownloadedAssetFile` objects.
@@ -929,6 +940,7 @@ class Client:
             output_path=output_path,
             project_context=project_context,
             strategy=FetchFileStrategy.download_only,
+            admin=admin,
         )
 
     @validate_call
@@ -953,15 +965,12 @@ class Client:
         Returns:
             The deleted Asset (as returned by the backend).
         """
-        context = (
-            self._optional_user_context(override_context=project_context) if not admin else None
-        )
         return core.delete_asset(
             api_url=self.api_url,
             entity_id=entity_id,
             entity_type=entity_type,
             asset_id=asset_id,
-            project_context=context,
+            project_context=self._optional_user_context(project_context, admin),
             http_client=self._http_client,
             token_manager=self._token_manager,
             admin=admin,
@@ -979,6 +988,7 @@ class Client:
         file_name: str | None = None,
         file_metadata: dict | None = None,
         project_context: ProjectContext | None = None,
+        admin: bool = False,
     ) -> Asset:
         """Update an entity's asset file.
 
@@ -993,6 +1003,7 @@ class Client:
             file_name: Optional override for the uploaded filename.
             file_metadata: Optional extra metadata to attach to the asset.
             project_context: Optional project context.
+            admin: Whether to use admin endpoints.
 
         Returns:
             The updated Asset (as created by re-uploading).
@@ -1002,6 +1013,7 @@ class Client:
             entity_type=entity_type,
             asset_id=asset_id,
             project_context=project_context,
+            admin=admin,
         )
         return self.upload_file(
             entity_id=entity_id,
@@ -1012,6 +1024,7 @@ class Client:
             file_metadata=file_metadata,
             project_context=project_context,
             asset_label=deleted_asset.label,
+            admin=admin,
         )
 
     @validate_call
@@ -1027,6 +1040,7 @@ class Client:
         content_type: ContentType,
         asset_label: AssetLabel,
         project_context: ProjectContext | None = None,
+        admin: bool = False,
     ) -> Asset:
         """Register a file or directory already existing.
 
@@ -1040,6 +1054,7 @@ class Client:
             content_type: MIME content type.
             asset_label: Label for the asset.
             project_context: Optional project context.
+            admin: Whether to use admin endpoints.
 
         Returns:
             The registered Asset.
@@ -1052,7 +1067,7 @@ class Client:
             content_type=content_type,
             label=asset_label,
         )
-        context = self._optional_user_context(override_context=project_context)
+        context = self._optional_user_context(project_context, admin)
         return core.register_asset(
             api_url=self.api_url,
             entity_id=entity_id,
@@ -1061,4 +1076,5 @@ class Client:
             asset_metadata=asset_metadata,
             http_client=self._http_client,
             token_manager=self._token_manager,
+            admin=admin,
         )
