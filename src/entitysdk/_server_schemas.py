@@ -2244,6 +2244,7 @@ class TaskActivityType(StrEnum):
     mesh_lod_generation__config_generation = "mesh_lod_generation__config_generation"
     mesh_lod_generation__execution = "mesh_lod_generation__execution"
 
+
 class TaskActivityUserUpdate(BaseModel):
     executor: ExecutorType | None = None
     execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
@@ -2279,6 +2280,7 @@ class TaskConfigType(StrEnum):
     )
     mesh_lod_generation__campaign = "mesh_lod_generation__campaign"
     mesh_lod_generation__config = "mesh_lod_generation__config"
+
 
 class TaskConfigUserUpdate(BaseModel):
     name: Annotated[str | None, Field(title="Name")] = None
