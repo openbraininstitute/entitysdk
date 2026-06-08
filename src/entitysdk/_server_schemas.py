@@ -2437,6 +2437,7 @@ class AnalysisNotebookTemplateUpdate(BaseModel):
     description: Annotated[str | None, Field(title="Description")] = None
     specifications: AnalysisNotebookTemplateSpecifications | None = None
     scale: AnalysisScale | None = None
+    exercise_id: Annotated[UUID | None, Field(title="Exercise Id")] = None
 
 
 class AssetRead(BaseModel):
@@ -3594,6 +3595,7 @@ class NestedAnalysisNotebookTemplateRead(BaseModel):
     type: EntityType | None = None
     specifications: AnalysisNotebookTemplateSpecifications | None = None
     scale: AnalysisScale
+    exercise_id: Annotated[UUID | None, Field(title="Exercise Id")] = None
 
 
 class NestedContributionRead(BaseModel):
@@ -3956,6 +3958,7 @@ class AnalysisNotebookTemplateCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     specifications: AnalysisNotebookTemplateSpecifications | None = None
     scale: AnalysisScale
+    exercise_id: Annotated[UUID | None, Field(title="Exercise Id")] = None
 
 
 class AnalysisNotebookTemplateRead(BaseModel):
@@ -3973,6 +3976,7 @@ class AnalysisNotebookTemplateRead(BaseModel):
     type: EntityType | None = None
     specifications: AnalysisNotebookTemplateSpecifications | None = None
     scale: AnalysisScale
+    exercise_id: Annotated[UUID | None, Field(title="Exercise Id")] = None
 
 
 class AssetAndPresignedURLS(BaseModel):
@@ -5074,7 +5078,7 @@ class MeasurementAnnotationRead(BaseModel):
     measurement_kinds: Annotated[list[MeasurementKindRead], Field(title="Measurement Kinds")]
 
 
-class MeasurementAnnotationUserUpdate(BaseModel):
+class MeasurementAnnotationUpdate(BaseModel):
     entity_id: Annotated[UUID | None, Field(title="Entity Id")] = None
     entity_type: MeasurableEntity | None = None
     measurement_kinds: Annotated[
