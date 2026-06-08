@@ -2241,7 +2241,8 @@ class TaskActivityType(StrEnum):
     extracellular_recording_weights_calculation__execution = (
         "extracellular_recording_weights_calculation__execution"
     )
-
+    mesh_lod_generation__config_generation = "mesh_lod_generation__config_generation"
+    mesh_lod_generation__execution = "mesh_lod_generation__execution"
 
 class TaskActivityUserUpdate(BaseModel):
     executor: ExecutorType | None = None
@@ -2276,7 +2277,8 @@ class TaskConfigType(StrEnum):
     extracellular_recording_weights_calculation__config = (
         "extracellular_recording_weights_calculation__config"
     )
-
+    mesh_lod_generation__campaign = "mesh_lod_generation__campaign"
+    mesh_lod_generation__config = "mesh_lod_generation__config"
 
 class TaskConfigUserUpdate(BaseModel):
     name: Annotated[str | None, Field(title="Name")] = None
