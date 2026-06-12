@@ -188,9 +188,7 @@ class Author(BaseModel):
 
 
 class BodyUploadEntityAssetEntityRouteEntityIdAssetsPost(BaseModel):
-    file: Annotated[
-        str, Field(json_schema_extra={"contentMediaType": "application/octet-stream"}, title="File")
-    ]
+    file: Annotated[str, Field(title="File")]
     label: AssetLabel
     meta: Annotated[dict[str, Any] | None, Field(title="Meta")] = None
 
@@ -2243,6 +2241,22 @@ class TaskActivityType(StrEnum):
     )
     mesh_lod_generation__config_generation = "mesh_lod_generation__config_generation"
     mesh_lod_generation__execution = "mesh_lod_generation__execution"
+    efeature_extraction__config_generation = "efeature_extraction__config_generation"
+    efeature_extraction__execution = "efeature_extraction__execution"
+    emodel_optimization__config_generation = "emodel_optimization__config_generation"
+    emodel_optimization__execution = "emodel_optimization__execution"
+    optimized_emodel_analysis_validation__config_generation = (
+        "optimized_emodel_analysis_validation__config_generation"
+    )
+    optimized_emodel_analysis_validation__execution = (
+        "optimized_emodel_analysis_validation__execution"
+    )
+    circuit_synaptic_physiology_assignment__config_generation = (
+        "circuit_synaptic_physiology_assignment__config_generation"
+    )
+    circuit_synaptic_physiology_assignment__execution = (
+        "circuit_synaptic_physiology_assignment__execution"
+    )
 
 
 class TaskActivityUserUpdate(BaseModel):
@@ -2280,6 +2294,20 @@ class TaskConfigType(StrEnum):
     )
     mesh_lod_generation__campaign = "mesh_lod_generation__campaign"
     mesh_lod_generation__config = "mesh_lod_generation__config"
+    efeature_extraction__campaign = "efeature_extraction__campaign"
+    efeature_extraction__config = "efeature_extraction__config"
+    emodel_optimization__campaign = "emodel_optimization__campaign"
+    emodel_optimization__config = "emodel_optimization__config"
+    optimized_emodel_analysis_validation__campaign = (
+        "optimized_emodel_analysis_validation__campaign"
+    )
+    optimized_emodel_analysis_validation__config = "optimized_emodel_analysis_validation__config"
+    circuit_synaptic_physiology_assignment__campaign = (
+        "circuit_synaptic_physiology_assignment__campaign"
+    )
+    circuit_synaptic_physiology_assignment__config = (
+        "circuit_synaptic_physiology_assignment__config"
+    )
 
 
 class TaskConfigUserUpdate(BaseModel):
