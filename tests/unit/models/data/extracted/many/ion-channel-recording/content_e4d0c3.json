@@ -1,0 +1,115 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "brain_region": {
+        "acronym": "acronym-1",
+        "annotation_value": 1,
+        "color_hex_triplet": "FF0000",
+        "creation_date": "2025-01-01T00:00:00Z",
+        "hierarchy_id": "00000000-0000-4000-8000-000001234678",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "region-1",
+        "parent_structure_id": null,
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "cell_line": "CHO_FT",
+      "comment": "test comment",
+      "contact_email": null,
+      "contributions": [],
+      "created_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "my-description",
+      "experiment_date": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "ion_channel": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "description": "ion-channel-description",
+        "gene": "Kcnma1",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "label": "label-1",
+        "name": "name-1",
+        "synonyms": [
+          "BK channel",
+          "BK channel alpha subunit"
+        ],
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "legacy_id": null,
+      "license": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "description": "a license description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "label": "test label",
+        "name": "Test License",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "lifecycle_status": "active",
+      "ljp": 11.5,
+      "name": "e-1",
+      "notice_text": null,
+      "published_in": null,
+      "recording_location": [
+        "soma[0]_0.5"
+      ],
+      "recording_origin": "in_vitro",
+      "recording_type": "intracellular",
+      "stimuli": [],
+      "subject": {
+        "age_max": null,
+        "age_min": null,
+        "age_period": "postnatal",
+        "age_value": 1209600.0,
+        "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+        "authorized_public": false,
+        "creation_date": "2025-01-01T00:00:00Z",
+        "description": "my-description",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "lifecycle_status": "active",
+        "name": "subject-1",
+        "sex": "female",
+        "species": {
+          "creation_date": "2025-01-01T00:00:00Z",
+          "id": "00000000-0000-4000-8000-000001234678",
+          "name": "species-1",
+          "taxonomy_id": "taxonomy-1",
+          "update_date": "2025-01-01T00:00:00Z"
+        },
+        "strain": null,
+        "type": "subject",
+        "update_date": "2025-01-01T00:00:00Z",
+        "weight": 1.5
+      },
+      "temperature": 35.0,
+      "type": "ion_channel_recording",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person",
+        "update_date": "2025-01-01T00:00:00Z"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 30,
+    "total_items": 1
+  }
+}
