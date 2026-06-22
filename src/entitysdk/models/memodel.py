@@ -8,7 +8,6 @@ from entitysdk.models.base import BaseModel
 from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.cell_morphology import CellMorphology
 from entitysdk.models.contribution import Contribution
-from entitysdk.models.core import Identifiable
 from entitysdk.models.emodel import EModel
 from entitysdk.models.entity import Entity
 from entitysdk.models.etype import ETypeClass
@@ -44,7 +43,7 @@ class MEModelBase(BaseModel):
     ]
 
 
-class NestedMEModel(MEModelBase, Identifiable):
+class NestedMEModel(MEModelBase, Entity):
     """Nested simulatable neuron model."""
 
     etypes: Annotated[
