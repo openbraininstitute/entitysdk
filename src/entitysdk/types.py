@@ -30,6 +30,7 @@ from entitysdk._server_schemas import ElectricalRecordingType as ElectricalRecor
 from entitysdk._server_schemas import ElectrodeType as ElectrodeType
 from entitysdk._server_schemas import EMCellMeshGenerationMethod as EMCellMeshGenerationMethod
 from entitysdk._server_schemas import EMCellMeshType as EMCellMeshType
+from entitysdk._server_schemas import EntityLifecycleStatus as EntityLifecycleStatus
 from entitysdk._server_schemas import EntityRoute as EntityRoute
 from entitysdk._server_schemas import EntityType as EntityType
 from entitysdk._server_schemas import ExecutorType as ExecutorType
