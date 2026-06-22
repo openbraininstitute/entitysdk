@@ -49,6 +49,7 @@ from entitysdk._server_schemas import StructuralDomain as StructuralDomain
 from entitysdk._server_schemas import TargetSimulator as TargetSimulator
 from entitysdk._server_schemas import TaskActivityType as TaskActivityType
 from entitysdk._server_schemas import TaskConfigType as TaskConfigType
+from entitysdk._server_schemas import TaskResultType as TaskResultType
 from entitysdk._server_schemas import ValidationStatus as ValidationStatus
 from entitysdk.compat import StrEnum
 
