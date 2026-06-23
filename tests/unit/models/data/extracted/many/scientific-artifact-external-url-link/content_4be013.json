@@ -1,0 +1,106 @@
+{
+  "data": [
+    {
+      "created_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "external_url": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "description": "Contains description of potassium channels...",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "Potassium channel page on Channelpedia",
+        "source": "channelpedia",
+        "source_name": "Channelpedia",
+        "update_date": "2025-01-01T00:00:00Z",
+        "url": "https://channelpedia.epfl.ch/wikipages/188"
+      },
+      "id": "00000000-0000-4000-8000-000001234678",
+      "scientific_artifact": {
+        "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+        "authorized_public": false,
+        "contact_email": null,
+        "creation_date": "2025-01-01T00:00:00Z",
+        "experiment_date": null,
+        "id": "00000000-0000-4000-8000-000001234678",
+        "lifecycle_status": "active",
+        "notice_text": null,
+        "published_in": null,
+        "type": "circuit",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person",
+        "update_date": "2025-01-01T00:00:00Z"
+      }
+    },
+    {
+      "created_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "external_url": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "description": "Contains description of potassium channels...",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "name": "Potassium channel page on Channelpedia",
+        "source": "channelpedia",
+        "source_name": "Channelpedia",
+        "update_date": "2025-01-01T00:00:00Z",
+        "url": "https://channelpedia.epfl.ch/wikipages/188"
+      },
+      "id": "00000000-0000-4000-8000-000001234678",
+      "scientific_artifact": {
+        "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+        "authorized_public": true,
+        "contact_email": null,
+        "creation_date": "2025-01-01T00:00:00Z",
+        "experiment_date": null,
+        "id": "00000000-0000-4000-8000-000001234678",
+        "lifecycle_status": "active",
+        "notice_text": null,
+        "published_in": null,
+        "type": "circuit",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "family_name": "courcol",
+        "given_name": "jd",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person",
+        "update_date": "2025-01-01T00:00:00Z"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 30,
+    "total_items": 2
+  }
+}

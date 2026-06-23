@@ -76,6 +76,7 @@ _ROUTES = {
     "Subject": "subject",
     "TaskActivity": "task-activity",
     "TaskConfig": "task-config",
+    "TaskResult": "task-result",
     "Validation": "validation",
     "ValidationResult": "validation-result",
     # CellMorphologyProtocol type for retrieving

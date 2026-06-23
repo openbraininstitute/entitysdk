@@ -7,7 +7,6 @@ from pydantic import Field
 from entitysdk.models.base import BaseModel
 from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.contribution import Contribution
-from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.models.memodel import NestedMEModel
 
@@ -38,7 +37,7 @@ class SingleNeuronSynaptomeBase(BaseModel):
     ]
 
 
-class NestedSynaptome(SingleNeuronSynaptomeBase, Identifiable):
+class NestedSynaptome(SingleNeuronSynaptomeBase, Entity):
     """Nested single neuron synaptome."""
 
     pass

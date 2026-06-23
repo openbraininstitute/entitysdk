@@ -78,6 +78,7 @@ from entitysdk.models.subject import Subject
 from entitysdk.models.synaptome import SingleNeuronSynaptome
 from entitysdk.models.task_activity import TaskActivity
 from entitysdk.models.task_config import TaskConfig
+from entitysdk.models.task_result import TaskResult
 from entitysdk.models.taxonomy import Species, Strain
 from entitysdk.models.validation import Validation
 from entitysdk.models.validation_result import ValidationResult
@@ -161,6 +162,7 @@ __all__ = [
     "UseIon",
     "TaskActivity",
     "TaskConfig",
+    "TaskResult",
     "Validation",
     "ValidationResult",
 ]

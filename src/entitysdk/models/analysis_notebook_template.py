@@ -59,3 +59,4 @@ class AnalysisNotebookTemplate(Entity):
 
     specifications: AnalysisNotebookTemplateSpecifications | None = None
     scale: AnalysisScale
+    exercise_id: str | None = None

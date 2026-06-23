@@ -7,7 +7,7 @@ from pydantic import Field
 
 from entitysdk.mixin import HasAssets
 from entitysdk.models.core import Identifiable
-from entitysdk.types import ID, EntityType
+from entitysdk.types import ID, EntityLifecycleStatus, EntityType
 
 
 class Entity(Identifiable, HasAssets):
@@ -55,6 +55,9 @@ class Entity(Identifiable, HasAssets):
         list[str] | None,
         Field(description="Legacy NEXUS ids."),
     ] = None
+    lifecycle_status: Annotated[
+        EntityLifecycleStatus, Field(description="The lifecycle status of this entity.")
+    ] = EntityLifecycleStatus.active
 
 
 # Update forward reference for Contribution
