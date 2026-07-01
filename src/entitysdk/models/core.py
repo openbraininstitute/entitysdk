@@ -90,6 +90,8 @@ class Person(Agent):
     ] = None
     sub_id: Annotated[ID | None, Field(description="External subject id on Keycloak")] = None
 
+    orcid: Annotated[str | None, Field(description="Open Researcher and Contributor ID")] = None
+
 
 # update forward reference in Identifiable's created_by/uodated_by
 Identifiable.model_rebuild()
@@ -111,6 +113,8 @@ class Organization(Agent):
             description="The alternative name of the organization.",
         ),
     ] = None
+
+    ror_id: Annotated[str | None, Field(description="Research Organization Registry Id")] = None
 
 
 class Consortium(Agent):
