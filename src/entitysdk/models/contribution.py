@@ -1,5 +1,7 @@
 """Contribution models."""
 
+from __future__ import annotations
+
 from typing import Annotated
 
 from pydantic import Field
@@ -40,7 +42,7 @@ class Contribution(Identifiable):
         ),
     ]
     entity: Annotated[
-        "Entity | None",
+        Entity | None,
         Field(description="The entity that resulted in this contribution."),
     ] = None
 
