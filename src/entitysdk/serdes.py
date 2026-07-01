@@ -13,6 +13,8 @@ SERIALIZATION_EXCLUDE_KEYS = {
     "creation_date",
     "id",
     "update_date",
+    "generated_from_derivations",
+    "generated_by_derivations",
 }
 
 TBaseModel = TypeVar("TBaseModel", bound=BaseModel)
