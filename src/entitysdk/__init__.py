@@ -1,6 +1,5 @@
 """entitysdk."""
 
-#from . import models  # noqa: F401
 from entitysdk.client import Client
 from entitysdk.common import ProjectContext
 from entitysdk.exception import EntitySDKError
