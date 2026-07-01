@@ -1,13 +1,11 @@
 """Models for entitysdk."""
 
+import sys
+
 from entitysdk.models.contribution import Contribution, Role
 from entitysdk.models.core import Consortium, Organization, Person
 from entitysdk.models.derivation import Derivation
 from entitysdk.models.entity import Entity
-
-Entity.model_rebuild()
-Contribution.model_rebuild()
-Derivation.model_rebuild()
 
 from entitysdk.models.activity import Activity
 from entitysdk.models.analysis_notebook_environment import AnalysisNotebookEnvironment
@@ -88,6 +86,16 @@ from entitysdk.models.taxonomy import Species, Strain
 from entitysdk.models.validation import Validation
 from entitysdk.models.validation_result import ValidationResult
 
+'''
+if sys.version_info < (3, 11):
+    # Entity declares forward refs to Derivation (see entity.py). Subclasses inherit
+    # those fields but do not import Derivation in their own module. Pydantic 2.x
+    # completes subclasses automatically on Python 3.11+, but on 3.10 they stay
+    # incomplete until explicitly rebuilt after all models are imported.
+    for _model in Entity.__subclasses__():
+        _model.model_rebuild()
+    del _model
+'''
 __all__ = [
     "Activity",
     "AnalysisNotebookEnvironment",

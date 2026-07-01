@@ -1,5 +1,7 @@
 """Entity model."""
 
+from __future__ import annotations
+
 from typing import Annotated
 from uuid import UUID
 
@@ -49,7 +51,7 @@ class Entity(Identifiable, HasAssets):
         ),
     ] = None
     contributions: Annotated[
-        "list[Contribution] | None", Field(description="The constributions for this entity.")
+        list[Contribution] | None, Field(description="The constributions for this entity.")
     ] = None
     legacy_id: Annotated[
         list[str] | None,
@@ -59,9 +61,11 @@ class Entity(Identifiable, HasAssets):
         EntityLifecycleStatus, Field(description="The lifecycle status of this entity.")
     ] = EntityLifecycleStatus.active
 
-    generated_from_derivations: list["Derivation"] | None = None
-    used_by_derivations: list["Derivation"] | None = None
+    generated_from_derivations: list[Derivation] | None = None
+    used_by_derivations: list[Derivation] | None = None
 
 
 from entitysdk.models.contribution import Contribution  # noqa: E402
 from entitysdk.models.derivation import Derivation  # noqa: E402
+
+Entity.model_rebuild()
