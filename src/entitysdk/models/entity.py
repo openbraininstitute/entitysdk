@@ -59,8 +59,12 @@ class Entity(Identifiable, HasAssets):
         EntityLifecycleStatus, Field(description="The lifecycle status of this entity.")
     ] = EntityLifecycleStatus.active
 
+    generated_from_derivations: list["Derivation"] | None = None
+    used_by_derivations: list["Derivation"] | None = None
 
-# Update forward reference for Contribution
+
+# Update forward references for Contribution and Derivation
 from entitysdk.models.contribution import Contribution  # noqa: E402
+from entitysdk.models.derivation import Derivation  # noqa: E402
 
-Entity.model_rebuild(force=True)
+Entity.model_rebuild()
