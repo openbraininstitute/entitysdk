@@ -1,0 +1,77 @@
+{
+  "data": [
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": true,
+      "contributions": [],
+      "created_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "family_name": null,
+        "given_name": null,
+        "id": "00000000-0000-4000-8000-000001234678",
+        "orcid": null,
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "analysis-notebook-template-description",
+      "exercise_id": "00000000-0000-4000-8000-000001234678",
+      "generated_from_derivations": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "lifecycle_status": "active",
+      "name": "Public u2/0",
+      "scale": "cellular",
+      "specifications": {
+        "docker": {
+          "docker_version": null,
+          "image_digest": null,
+          "image_repository": "obi-notebook-image",
+          "image_tag": null
+        },
+        "inputs": [
+          {
+            "count_max": 1,
+            "count_min": 1,
+            "entity_type": "simulation_campaign",
+            "is_list": false,
+            "name": "my-simulation-campaign"
+          },
+          {
+            "count_max": 3,
+            "count_min": 1,
+            "entity_type": "circuit",
+            "is_list": true,
+            "name": "my-circuit"
+          }
+        ],
+        "python": {
+          "version": ">=3.10"
+        },
+        "schema_version": 1
+      },
+      "type": "analysis_notebook_template",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "family_name": null,
+        "given_name": null,
+        "id": "00000000-0000-4000-8000-000001234678",
+        "orcid": null,
+        "pref_label": "Regular User With Different Project Id",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "used_by_derivations": null
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 30,
+    "total_items": 1
+  }
+}

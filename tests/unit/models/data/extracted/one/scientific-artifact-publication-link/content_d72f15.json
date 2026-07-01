@@ -1,0 +1,60 @@
+{
+  "created_by": {
+    "creation_date": "2025-01-01T00:00:00Z",
+    "family_name": null,
+    "given_name": null,
+    "id": "00000000-0000-4000-8000-000001234678",
+    "orcid": null,
+    "pref_label": "Regular User With Different Project Id",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
+    "type": "person",
+    "update_date": "2025-01-01T00:00:00Z"
+  },
+  "creation_date": "2025-01-01T00:00:00Z",
+  "id": "00000000-0000-4000-8000-000001234678",
+  "publication": {
+    "DOI": "10.1080/10509585.2015.1092083",
+    "abstract": "my-abstract",
+    "authors": [
+      {
+        "family_name": "Smith",
+        "given_name": "John"
+      },
+      {
+        "family_name": "Smith",
+        "given_name": "Joanne"
+      }
+    ],
+    "creation_date": "2025-01-01T00:00:00Z",
+    "id": "00000000-0000-4000-8000-000001234678",
+    "publication_year": 2024,
+    "title": "my-title",
+    "update_date": "2025-01-01T00:00:00Z"
+  },
+  "publication_type": "entity_source",
+  "scientific_artifact": {
+    "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+    "authorized_public": false,
+    "contact_email": null,
+    "creation_date": "2025-01-01T00:00:00Z",
+    "experiment_date": null,
+    "id": "00000000-0000-4000-8000-000001234678",
+    "lifecycle_status": "draft",
+    "notice_text": null,
+    "published_in": null,
+    "type": "circuit",
+    "update_date": "2025-01-01T00:00:00Z"
+  },
+  "update_date": "2025-01-01T00:00:00Z",
+  "updated_by": {
+    "creation_date": "2025-01-01T00:00:00Z",
+    "family_name": null,
+    "given_name": null,
+    "id": "00000000-0000-4000-8000-000001234678",
+    "orcid": null,
+    "pref_label": "Regular User With Different Project Id",
+    "sub_id": "00000000-0000-4000-8000-000001234678",
+    "type": "person",
+    "update_date": "2025-01-01T00:00:00Z"
+  }
+}
