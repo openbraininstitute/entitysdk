@@ -17,7 +17,7 @@
   "description": "Description Test",
   "generation_type": "digital_reconstruction",
   "id": "00000000-0000-4000-8000-000001234678",
-  "lifecycle_status": "active",
+  "lifecycle_status": "draft",
   "magnification": null,
   "name": "Digital Reconstruction Protocol Test",
   "protocol_design": "cell_patch",

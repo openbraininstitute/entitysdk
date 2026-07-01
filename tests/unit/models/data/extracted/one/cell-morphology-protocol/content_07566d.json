@@ -16,7 +16,7 @@
   "description": "Description Test",
   "generation_type": "computationally_synthesized",
   "id": "00000000-0000-4000-8000-000001234678",
-  "lifecycle_status": "active",
+  "lifecycle_status": "draft",
   "method_type": "free-text",
   "name": "Computationally Synthesized Protocol Test",
   "protocol_design": "electron_microscopy",

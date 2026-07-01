@@ -28,8 +28,8 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "dense_reconstruction_cell_id": 9223372036854775807,
-      "description": "description-2",
+      "dense_reconstruction_cell_id": 2,
+      "description": "desc-2",
       "em_dense_reconstruction_dataset": {
         "id": "00000000-0000-4000-8000-000001234678",
         "type": "em_dense_reconstruction_dataset"
@@ -38,15 +38,15 @@
       "generation_method": "marching_cubes",
       "generation_parameters": null,
       "id": "00000000-0000-4000-8000-000001234678",
-      "level_of_detail": 10,
+      "level_of_detail": 2,
       "license": null,
       "lifecycle_status": "active",
       "mesh_type": "static",
       "mtypes": [],
-      "name": "name-2",
+      "name": "mesh-2",
       "notice_text": null,
       "published_in": null,
-      "release_version": 1,
+      "release_version": 2,
       "subject": {
         "age_max": null,
         "age_min": null,
@@ -120,8 +120,8 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "dense_reconstruction_cell_id": 9223372036854775807,
-      "description": "description-1",
+      "dense_reconstruction_cell_id": 1,
+      "description": "desc-1",
       "em_dense_reconstruction_dataset": {
         "id": "00000000-0000-4000-8000-000001234678",
         "type": "em_dense_reconstruction_dataset"
@@ -130,12 +130,12 @@
       "generation_method": "marching_cubes",
       "generation_parameters": null,
       "id": "00000000-0000-4000-8000-000001234678",
-      "level_of_detail": 10,
+      "level_of_detail": 1,
       "license": null,
       "lifecycle_status": "active",
-      "mesh_type": "static",
+      "mesh_type": "dynamic",
       "mtypes": [],
-      "name": "name-1",
+      "name": "mesh-1",
       "notice_text": null,
       "published_in": null,
       "release_version": 1,
@@ -188,7 +188,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 2,
-    "total_items": 3
+    "page_size": 30,
+    "total_items": 2
   }
 }

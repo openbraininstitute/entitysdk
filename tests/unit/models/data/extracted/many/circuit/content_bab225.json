@@ -45,7 +45,7 @@
         "name": "Test License",
         "update_date": "2025-01-01T00:00:00Z"
       },
-      "lifecycle_status": "active",
+      "lifecycle_status": "draft",
       "name": "root-circuit",
       "notice_text": null,
       "number_connections": 100000000,
@@ -145,7 +145,7 @@
         "name": "Test License",
         "update_date": "2025-01-01T00:00:00Z"
       },
-      "lifecycle_status": "active",
+      "lifecycle_status": "draft",
       "name": "root-circuit",
       "notice_text": null,
       "number_connections": 100000000,
@@ -245,7 +245,7 @@
         "name": "Test License",
         "update_date": "2025-01-01T00:00:00Z"
       },
-      "lifecycle_status": "active",
+      "lifecycle_status": "draft",
       "name": "root-circuit",
       "notice_text": null,
       "number_connections": 100000000,

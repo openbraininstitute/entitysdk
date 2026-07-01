@@ -25,7 +25,7 @@
     "update_date": "2025-01-01T00:00:00Z"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "Test MEModel Description",
+  "description": "description",
   "emodel": {
     "assets": [],
     "authorized_project_id": "00000000-0000-4000-8000-000001234678",
@@ -278,7 +278,7 @@
     }
   },
   "mtypes": [],
-  "name": "Test MEModel Name",
+  "name": "private obj 1",
   "species": {
     "creation_date": "2025-01-01T00:00:00Z",
     "id": "00000000-0000-4000-8000-000001234678",

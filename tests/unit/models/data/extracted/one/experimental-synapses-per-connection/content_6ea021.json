@@ -38,19 +38,19 @@
   "lifecycle_status": "active",
   "measurements": [
     {
-      "id": 3,
+      "id": 7,
       "name": "minimum",
       "unit": "\u03bcm",
       "value": 1.23
     },
     {
-      "id": 4,
+      "id": 8,
       "name": "maximum",
       "unit": "\u03bcm",
       "value": 1.45
     }
   ],
-  "name": "Public u2/0",
+  "name": "my-name",
   "post_mtype": {
     "alt_label": "mtype-alt-label",
     "creation_date": "2025-01-01T00:00:00Z",

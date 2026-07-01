@@ -3,7 +3,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "contributions": [],
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
@@ -19,7 +19,7 @@
       "description": "simulation-result-description",
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "simulation-result",
+      "name": "Public u1/0",
       "simulation_id": "00000000-0000-4000-8000-000001234678",
       "type": "simulation_result",
       "update_date": "2025-01-01T00:00:00Z",

@@ -57,7 +57,7 @@
       },
       "lifecycle_status": "active",
       "ljp": 11.5,
-      "name": "Public u2/0",
+      "name": "my-name",
       "notice_text": null,
       "published_in": null,
       "recording_location": [
@@ -169,7 +169,7 @@
       },
       "lifecycle_status": "active",
       "ljp": 11.5,
-      "name": "Public u1/0",
+      "name": "my-name",
       "notice_text": null,
       "published_in": null,
       "recording_location": [

@@ -22,7 +22,7 @@
       "creation_date": "2025-01-01T00:00:00Z",
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "type": "circuit",
+      "type": "cell_morphology",
       "update_date": "2025-01-01T00:00:00Z"
     }
   ],
@@ -44,11 +44,11 @@
   "used": [
     {
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "creation_date": "2025-01-01T00:00:00Z",
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "type": "circuit",
+      "type": "cell_morphology",
       "update_date": "2025-01-01T00:00:00Z"
     }
   ]

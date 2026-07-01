@@ -20,7 +20,7 @@
       "entity_id": "00000000-0000-4000-8000-000001234678",
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "simulation-campaign",
+      "name": "Public u2/0",
       "scan_parameters": {
         "foo1": "bar2"
       },
@@ -58,7 +58,7 @@
       "entity_id": "00000000-0000-4000-8000-000001234678",
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "simulation-campaign",
+      "name": "Public u1/0",
       "scan_parameters": {
         "foo1": "bar2"
       },

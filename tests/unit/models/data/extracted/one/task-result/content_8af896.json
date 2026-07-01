@@ -1,7 +1,7 @@
 {
   "assets": [],
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": false,
+  "authorized_public": true,
   "contributions": [],
   "created_by": {
     "creation_date": "2025-01-01T00:00:00Z",
@@ -15,10 +15,10 @@
   },
   "creation_date": "2025-01-01T00:00:00Z",
   "data_payload": {},
-  "description": "description-0",
+  "description": "description",
   "id": "00000000-0000-4000-8000-000001234678",
   "lifecycle_status": "active",
-  "name": "name-0",
+  "name": "name",
   "task_result_type": "circuit_extraction__circuit",
   "type": "task_result",
   "update_date": "2025-01-01T00:00:00Z",
@@ -27,7 +27,7 @@
     "family_name": null,
     "given_name": null,
     "id": "00000000-0000-4000-8000-000001234678",
-    "pref_label": "Regular User With Project Id",
+    "pref_label": "Admin User",
     "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person",
     "update_date": "2025-01-01T00:00:00Z"

@@ -50,7 +50,7 @@
           "creation_date": "2025-01-01T00:00:00Z",
           "id": "00000000-0000-4000-8000-000001234678",
           "lifecycle_status": "active",
-          "type": "cell_morphology",
+          "type": "ion_channel_modeling_config",
           "update_date": "2025-01-01T00:00:00Z"
         },
         {
@@ -59,7 +59,7 @@
           "creation_date": "2025-01-01T00:00:00Z",
           "id": "00000000-0000-4000-8000-000001234678",
           "lifecycle_status": "active",
-          "type": "ion_channel_modeling_config",
+          "type": "cell_morphology",
           "update_date": "2025-01-01T00:00:00Z"
         }
       ]
@@ -123,7 +123,7 @@
           "creation_date": "2025-01-01T00:00:00Z",
           "id": "00000000-0000-4000-8000-000001234678",
           "lifecycle_status": "active",
-          "type": "ion_channel_modeling_config",
+          "type": "ion_channel_model",
           "update_date": "2025-01-01T00:00:00Z"
         },
         {
@@ -132,7 +132,7 @@
           "creation_date": "2025-01-01T00:00:00Z",
           "id": "00000000-0000-4000-8000-000001234678",
           "lifecycle_status": "active",
-          "type": "ion_channel_model",
+          "type": "ion_channel_modeling_config",
           "update_date": "2025-01-01T00:00:00Z"
         }
       ]

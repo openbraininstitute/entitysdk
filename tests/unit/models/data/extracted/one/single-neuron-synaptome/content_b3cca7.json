@@ -16,11 +16,13 @@
   "contributions": [
     {
       "agent": {
-        "alternative_name": "alt name 1",
         "creation_date": "2025-01-01T00:00:00Z",
+        "family_name": "family name 1",
+        "given_name": "given name 1",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "test_organization_1",
-        "type": "organization",
+        "pref_label": "test_person_1",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
@@ -36,13 +38,11 @@
     },
     {
       "agent": {
+        "alternative_name": "alt name 1",
         "creation_date": "2025-01-01T00:00:00Z",
-        "family_name": "family name 1",
-        "given_name": "given name 1",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "test_person_1",
-        "sub_id": "00000000-0000-4000-8000-000001234678",
-        "type": "person",
+        "pref_label": "test_organization_1",
+        "type": "organization",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",

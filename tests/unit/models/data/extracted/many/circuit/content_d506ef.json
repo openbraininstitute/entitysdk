@@ -86,7 +86,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "target_simulator": "NEURON",
+      "target_simulator": "CORENEURON",
       "type": "circuit",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -186,7 +186,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "target_simulator": "NEURON",
+      "target_simulator": "Brian2",
       "type": "circuit",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -286,7 +286,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "target_simulator": "NEURON",
+      "target_simulator": "LearningEngine",
       "type": "circuit",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {

@@ -3,13 +3,13 @@
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "brain_region": {
-    "acronym": "acronym0",
-    "annotation_value": 0,
+    "acronym": "acronym1",
+    "annotation_value": 1,
     "color_hex_triplet": "FF0000",
     "creation_date": "2025-01-01T00:00:00Z",
     "hierarchy_id": "00000000-0000-4000-8000-000001234678",
     "id": "00000000-0000-4000-8000-000001234678",
-    "name": "region0",
+    "name": "region1",
     "parent_structure_id": null,
     "update_date": "2025-01-01T00:00:00Z"
   },
@@ -25,7 +25,7 @@
     "update_date": "2025-01-01T00:00:00Z"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "emodel-desc-5",
+  "description": "emodel-desc-2",
   "etypes": [],
   "exemplar_morphology": {
     "cell_morphology_protocol": {
@@ -47,7 +47,7 @@
       "y": 20.0,
       "z": 30.0
     },
-    "name": "test exemplar morphology 1",
+    "name": "test exemplar morphology 0",
     "repair_pipeline_state": null,
     "update_date": "2025-01-01T00:00:00Z"
   },
@@ -201,14 +201,14 @@
   "iteration": "test iteration",
   "lifecycle_status": "active",
   "mtypes": [],
-  "name": "e-5",
-  "score": 50.0,
+  "name": "e-2",
+  "score": 20.0,
   "seed": -1,
   "species": {
     "creation_date": "2025-01-01T00:00:00Z",
     "id": "00000000-0000-4000-8000-000001234678",
-    "name": "TestSpecies1",
-    "taxonomy_id": "1",
+    "name": "TestSpecies0",
+    "taxonomy_id": "0",
     "update_date": "2025-01-01T00:00:00Z"
   },
   "strain": null,
