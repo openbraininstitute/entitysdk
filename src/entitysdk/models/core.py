@@ -93,7 +93,6 @@ class Person(Agent):
     orcid: Annotated[str | None, Field(description="Open Researcher and Contributor ID")] = None
 
 
-# update forward reference in Identifiable's created_by/uodated_by
 Identifiable.model_rebuild()
 
 

@@ -45,7 +45,4 @@ class Contribution(Identifiable):
     ] = None
 
 
-# Update forward reference for Entity
 from entitysdk.models.entity import Entity  # noqa: E402
-
-Contribution.model_rebuild()

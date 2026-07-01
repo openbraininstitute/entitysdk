@@ -63,8 +63,5 @@ class Entity(Identifiable, HasAssets):
     used_by_derivations: list["Derivation"] | None = None
 
 
-# Update forward references for Contribution and Derivation
 from entitysdk.models.contribution import Contribution  # noqa: E402
 from entitysdk.models.derivation import Derivation  # noqa: E402
-
-Entity.model_rebuild()

@@ -13,7 +13,4 @@ class Derivation(Identifiable):
     label: str | None = None
 
 
-# Update forward references
 from entitysdk.models.entity import Entity  # noqa: E402
-
-Derivation.model_rebuild()

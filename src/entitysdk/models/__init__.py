@@ -1,5 +1,14 @@
 """Models for entitysdk."""
 
+from entitysdk.models.contribution import Contribution, Role
+from entitysdk.models.core import Consortium, Organization, Person
+from entitysdk.models.derivation import Derivation
+from entitysdk.models.entity import Entity
+
+Entity.model_rebuild()
+Contribution.model_rebuild()
+Derivation.model_rebuild()
+
 from entitysdk.models.activity import Activity
 from entitysdk.models.analysis_notebook_environment import AnalysisNotebookEnvironment
 from entitysdk.models.analysis_notebook_execution import AnalysisNotebookExecution
@@ -23,14 +32,11 @@ from entitysdk.models.circuit_extraction import (
     CircuitExtractionExecution,
 )
 from entitysdk.models.classification import ETypeClassification, MTypeClassification
-from entitysdk.models.contribution import Contribution, Role
-from entitysdk.models.core import Consortium, Organization, Person
 from entitysdk.models.density import (
     ExperimentalBoutonDensity,
     ExperimentalNeuronDensity,
     ExperimentalSynapsesPerConnection,
 )
-from entitysdk.models.derivation import Derivation
 from entitysdk.models.electrical_cell_recording import ElectricalCellRecording
 from entitysdk.models.electrical_recording import ElectricalRecordingStimulus
 from entitysdk.models.em_cell_mesh import EMCellMesh, EMCellMeshGenerationMethod, EMCellMeshType
@@ -39,7 +45,6 @@ from entitysdk.models.em_dense_reconstruction_dataset import (
     SlicingDirectionType,
 )
 from entitysdk.models.emodel import EModel
-from entitysdk.models.entity import Entity
 from entitysdk.models.etype import ETypeClass
 from entitysdk.models.external_url import ExternalUrl
 from entitysdk.models.ion_channel import IonChannel
