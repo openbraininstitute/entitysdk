@@ -1,12 +1,5 @@
 """Models for entitysdk."""
 
-import sys
-
-from entitysdk.models.contribution import Contribution, Role
-from entitysdk.models.core import Consortium, Organization, Person
-from entitysdk.models.derivation import Derivation
-from entitysdk.models.entity import Entity
-
 from entitysdk.models.activity import Activity
 from entitysdk.models.analysis_notebook_environment import AnalysisNotebookEnvironment
 from entitysdk.models.analysis_notebook_execution import AnalysisNotebookExecution
@@ -30,11 +23,14 @@ from entitysdk.models.circuit_extraction import (
     CircuitExtractionExecution,
 )
 from entitysdk.models.classification import ETypeClassification, MTypeClassification
+from entitysdk.models.contribution import Contribution, Role
+from entitysdk.models.core import Consortium, Organization, Person
 from entitysdk.models.density import (
     ExperimentalBoutonDensity,
     ExperimentalNeuronDensity,
     ExperimentalSynapsesPerConnection,
 )
+from entitysdk.models.derivation import Derivation
 from entitysdk.models.electrical_cell_recording import ElectricalCellRecording
 from entitysdk.models.electrical_recording import ElectricalRecordingStimulus
 from entitysdk.models.em_cell_mesh import EMCellMesh, EMCellMeshGenerationMethod, EMCellMeshType
@@ -43,6 +39,7 @@ from entitysdk.models.em_dense_reconstruction_dataset import (
     SlicingDirectionType,
 )
 from entitysdk.models.emodel import EModel
+from entitysdk.models.entity import Entity
 from entitysdk.models.etype import ETypeClass
 from entitysdk.models.external_url import ExternalUrl
 from entitysdk.models.ion_channel import IonChannel
@@ -86,16 +83,6 @@ from entitysdk.models.taxonomy import Species, Strain
 from entitysdk.models.validation import Validation
 from entitysdk.models.validation_result import ValidationResult
 
-'''
-if sys.version_info < (3, 11):
-    # Entity declares forward refs to Derivation (see entity.py). Subclasses inherit
-    # those fields but do not import Derivation in their own module. Pydantic 2.x
-    # completes subclasses automatically on Python 3.11+, but on 3.10 they stay
-    # incomplete until explicitly rebuilt after all models are imported.
-    for _model in Entity.__subclasses__():
-        _model.model_rebuild()
-    del _model
-'''
 __all__ = [
     "Activity",
     "AnalysisNotebookEnvironment",
