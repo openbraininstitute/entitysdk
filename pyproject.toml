@@ -92,7 +92,6 @@ convention = "google"
     "SLF001",  # private member access
 ]
 "_server_schemas.py" = ["ALL"]
-"src/entitysdk/models/__init__.py" = ["E402"]
 
 [tool.ruff.lint.pylint]
 # Maximum number of arguments for function / method
