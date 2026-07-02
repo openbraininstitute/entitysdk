@@ -46,17 +46,6 @@ class AgentType(StrEnum):
     consortium = "consortium"
 
 
-class AnalysisNotebookResultCreate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    name: Annotated[str, Field(title="Name")]
-    description: Annotated[str, Field(title="Description")]
-
-
-class AnalysisNotebookResultUpdate(BaseModel):
-    name: Annotated[str | None, Field(title="Name")] = None
-    description: Annotated[str | None, Field(title="Description")] = None
-
-
 class ExerciseId(RootModel[str]):
     root: Annotated[str, Field(max_length=255, min_length=1, title="Exercise Id")]
 
@@ -137,6 +126,7 @@ class AssetLabel(StrEnum):
     nwb = "nwb"
     neuron_hoc = "neuron_hoc"
     emodel_optimization_output = "emodel_optimization_output"
+    emodel_optimisation_checkpoint = "emodel_optimisation_checkpoint"
     sonata_simulation_config = "sonata_simulation_config"
     simulation_generation_config = "simulation_generation_config"
     ion_channel_modeling_generation_config = "ion_channel_modeling_generation_config"
@@ -204,38 +194,6 @@ class BodyUploadEntityAssetEntityRouteEntityIdAssetsPost(BaseModel):
     meta: Annotated[dict[str, Any] | None, Field(title="Meta")] = None
 
 
-class BrainAtlasCreate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    species_id: Annotated[UUID, Field(title="Species Id")]
-    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
-    name: Annotated[str, Field(title="Name")]
-    description: Annotated[str, Field(title="Description")]
-    hierarchy_id: Annotated[UUID, Field(title="Hierarchy Id")]
-
-
-class BrainAtlasRegionCreate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    volume: Annotated[float | None, Field(title="Volume")]
-    is_leaf_region: Annotated[bool, Field(title="Is Leaf Region")]
-    brain_atlas_id: Annotated[UUID, Field(title="Brain Atlas Id")]
-    brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
-
-
-class BrainAtlasRegionUpdate(BaseModel):
-    volume: Annotated[float | None, Field(title="Volume")] = None
-    is_leaf_region: Annotated[bool | None, Field(title="Is Leaf Region")] = None
-    brain_atlas_id: Annotated[UUID | None, Field(title="Brain Atlas Id")] = None
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
-
-
-class BrainAtlasUpdate(BaseModel):
-    species_id: Annotated[UUID | None, Field(title="Species Id")] = None
-    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
-    name: Annotated[str | None, Field(title="Name")] = None
-    description: Annotated[str | None, Field(title="Description")] = None
-    hierarchy_id: Annotated[UUID | None, Field(title="Hierarchy Id")] = None
-
-
 class BrainRegionAdminUpdate(BaseModel):
     annotation_value: Annotated[int | None, Field(title="Annotation Value")] = None
     name: Annotated[str | None, Field(title="Name")] = None
@@ -282,23 +240,6 @@ class CalibrationUserUpdate(BaseModel):
     status: ActivityStatus | None = None
 
 
-class CellCompositionCreate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    species_id: Annotated[UUID, Field(title="Species Id")]
-    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
-    brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
-    name: Annotated[str, Field(title="Name")]
-    description: Annotated[str, Field(title="Description")]
-
-
-class CellCompositionUserUpdate(BaseModel):
-    species_id: Annotated[UUID | None, Field(title="Species Id")] = None
-    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
-    name: Annotated[str | None, Field(title="Name")] = None
-    description: Annotated[str | None, Field(title="Description")] = None
-
-
 class CellMorphologyGenerationType(StrEnum):
     digital_reconstruction = "digital_reconstruction"
     modified_reconstruction = "modified_reconstruction"
@@ -318,27 +259,6 @@ class CircuitBuildCategory(StrEnum):
     em_reconstruction = "em_reconstruction"
 
 
-class CircuitExtractionCampaignCreate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    name: Annotated[str, Field(title="Name")]
-    description: Annotated[str, Field(title="Description")]
-    scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
-
-
-class CircuitExtractionCampaignUserUpdate(BaseModel):
-    name: Annotated[str | None, Field(title="Name")] = None
-    description: Annotated[str | None, Field(title="Description")] = None
-    scan_parameters: Annotated[dict[str, Any] | None, Field(title="Scan Parameters")] = None
-
-
-class CircuitExtractionConfigCreate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    name: Annotated[str, Field(title="Name")]
-    description: Annotated[str, Field(title="Description")]
-    circuit_id: Annotated[UUID, Field(title="Circuit Id")]
-    scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
-
-
 class CircuitExtractionConfigGenerationCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
@@ -353,13 +273,6 @@ class CircuitExtractionConfigGenerationUserUpdate(BaseModel):
     end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
     generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = None
     status: ActivityStatus | None = None
-
-
-class CircuitExtractionConfigUserUpdate(BaseModel):
-    name: Annotated[str | None, Field(title="Name")] = None
-    description: Annotated[str | None, Field(title="Description")] = None
-    circuit_id: Annotated[UUID | None, Field(title="Circuit Id")] = None
-    scan_parameters: Annotated[dict[str, Any] | None, Field(title="Scan Parameters")] = None
 
 
 class CircuitScale(StrEnum):
@@ -384,7 +297,7 @@ class ConsortiumAdminUpdate(BaseModel):
 
 class ConsortiumCreate(BaseModel):
     pref_label: Annotated[str, Field(title="Pref Label")]
-    alternative_name: Annotated[str | None, Field(title="Alternative Name")] = None
+    alternative_name: Annotated[str, Field(title="Alternative Name")]
     legacy_id: Annotated[str | None, Field(title="Legacy Id")] = None
 
 
@@ -525,31 +438,6 @@ class EMCellMeshType(StrEnum):
     dynamic = "dynamic"
 
 
-class EMCellMeshUserUpdate(BaseModel):
-    license_id: Annotated[UUID | None, Field(title="License Id")] = None
-    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
-    subject_id: Annotated[UUID | None, Field(title="Subject Id")] = None
-    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
-    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
-    published_in: Annotated[str | None, Field(title="Published In")] = None
-    notice_text: Annotated[str | None, Field(title="Notice Text")] = None
-    name: Annotated[str | None, Field(title="Name")] = None
-    description: Annotated[str | None, Field(title="Description")] = None
-    release_version: Annotated[int | None, Field(title="Release Version")] = None
-    dense_reconstruction_cell_id: Annotated[
-        int | None, Field(title="Dense Reconstruction Cell Id")
-    ] = None
-    generation_method: EMCellMeshGenerationMethod | None = None
-    level_of_detail: Annotated[int | None, Field(title="Level Of Detail")] = None
-    generation_parameters: Annotated[
-        dict[str, Any] | None, Field(title="Generation Parameters")
-    ] = None
-    mesh_type: EMCellMeshType | None = None
-    em_dense_reconstruction_dataset_id: Annotated[
-        UUID | None, Field(title="Em Dense Reconstruction Dataset Id")
-    ] = None
-
-
 class ReleaseUrl(RootModel[AnyUrl]):
     root: Annotated[AnyUrl, Field(title="Release Url")]
 
@@ -597,17 +485,6 @@ class ElectricalRecordingStimulusType(StrEnum):
     unknown = "unknown"
 
 
-class ElectricalRecordingStimulusUserUpdate(BaseModel):
-    name: Annotated[str | None, Field(title="Name")] = None
-    description: Annotated[str | None, Field(title="Description")] = None
-    dt: Annotated[float | None, Field(title="Dt")] = None
-    injection_type: ElectricalRecordingStimulusType | None = None
-    shape: ElectricalRecordingStimulusShape | None = None
-    start_time: Annotated[float | None, Field(title="Start Time")] = None
-    end_time: Annotated[float | None, Field(title="End Time")] = None
-    recording_id: Annotated[UUID | None, Field(title="Recording Id")] = None
-
-
 class ElectricalRecordingType(StrEnum):
     intracellular = "intracellular"
     extracellular = "extracellular"
@@ -626,9 +503,15 @@ class EntityCountRead(RootModel[dict[str, int]]):
     root: dict[str, int]
 
 
+class EntityExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    used_by_derivations = "used_by_derivations"
+
+
 class EntityLifecycleStatus(StrEnum):
     draft = "draft"
     active = "active"
+    disqualified = "disqualified"
 
 
 class EntityRoute(StrEnum):
@@ -756,10 +639,14 @@ class ExecutorType(StrEnum):
 
 class Expandable(StrEnum):
     measurement_annotation = "measurement_annotation"
+    generated_from_derivations = "generated_from_derivations"
+    used_by_derivations = "used_by_derivations"
 
 
 class ExpandableAttribute(StrEnum):
     measurement_annotation = "measurement_annotation"
+    generated_from_derivations = "generated_from_derivations"
+    used_by_derivations = "used_by_derivations"
 
 
 class ExternalSource(StrEnum):
@@ -831,6 +718,7 @@ class IonChannelCreate(BaseModel):
 
 class IonChannelModelingConfigCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     ion_channel_modeling_campaign_id: Annotated[
@@ -856,6 +744,7 @@ class IonChannelModelingConfigGenerationUserUpdate(BaseModel):
 
 
 class IonChannelModelingConfigUserUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     ion_channel_modeling_campaign_id: Annotated[
@@ -917,6 +806,7 @@ class IonChannelRecordingCreate(BaseModel):
             title="Notice Text",
         ),
     ] = None
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     ljp: Annotated[
@@ -980,6 +870,7 @@ class IonChannelRecordingUserUpdate(BaseModel):
     contact_email: Annotated[str | None, Field(title="Contact Email")] = None
     published_in: Annotated[str | None, Field(title="Published In")] = None
     notice_text: Annotated[str | None, Field(title="Notice Text")] = None
+    lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     ljp: Annotated[float | None, Field(title="Ljp")] = None
@@ -1007,6 +898,7 @@ class LicenseCreate(BaseModel):
 
 class MEModelCalibrationResultCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     holding_current: Annotated[float, Field(title="Holding Current")]
     threshold_current: Annotated[float, Field(title="Threshold Current")]
     rin: Annotated[float | None, Field(title="Rin")] = None
@@ -1014,6 +906,7 @@ class MEModelCalibrationResultCreate(BaseModel):
 
 
 class MEModelCalibrationResultUserUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
     holding_current: Annotated[float | None, Field(title="Holding Current")] = None
     threshold_current: Annotated[float | None, Field(title="Threshold Current")] = None
     rin: Annotated[float | None, Field(title="Rin")] = None
@@ -1086,6 +979,7 @@ class ModifiedReconstructionCellMorphologyProtocolCreate(BaseModel):
     generation_type: Annotated[Literal["modified_reconstruction"], Field(title="Generation Type")]
     method_type: ModifiedMorphologyMethodType
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
 
 
 class MultipartDirectoryFileRequest(BaseModel):
@@ -1206,14 +1100,14 @@ class NestedConsortiumRead(BaseModel):
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
     pref_label: Annotated[str, Field(title="Pref Label")]
-    alternative_name: Annotated[str | None, Field(title="Alternative Name")] = None
+    alternative_name: Annotated[str, Field(title="Alternative Name")]
     type: AgentType
 
 
 class NestedEMCellMeshRead(BaseModel):
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     experiment_date: Annotated[
@@ -1261,7 +1155,7 @@ class NestedEMCellMeshRead(BaseModel):
 class NestedElectricalRecordingStimulusRead(BaseModel):
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -1283,7 +1177,7 @@ class NestedEntityCreate(BaseModel):
 class NestedEntityRead(BaseModel):
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -1304,7 +1198,7 @@ class NestedExternalUrlRead(BaseModel):
 class NestedIonChannelModelingConfigRead(BaseModel):
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -1331,7 +1225,7 @@ class NestedIonChannelRead(BaseModel):
 class NestedIonChannelRecordingRead(BaseModel):
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     experiment_date: Annotated[
@@ -1422,6 +1316,20 @@ class NestedLicenseRead(BaseModel):
     label: Annotated[str, Field(title="Label")]
 
 
+class NestedMEModelCalibrationResultRead(BaseModel):
+    authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool, Field(title="Authorized Public")]
+    lifecycle_status: EntityLifecycleStatus
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    id: Annotated[UUID, Field(title="Id")]
+    type: EntityType
+    holding_current: Annotated[float, Field(title="Holding Current")]
+    threshold_current: Annotated[float, Field(title="Threshold Current")]
+    rin: Annotated[float | None, Field(title="Rin")] = None
+    calibrated_entity_id: Annotated[UUID, Field(title="Calibrated Entity Id")]
+
+
 class NestedModifiedReconstructionCellMorphologyProtocolRead(BaseModel):
     protocol_document: Annotated[ProtocolDocument | None, Field(title="Protocol Document")] = None
     protocol_design: CellMorphologyProtocolDesign
@@ -1438,8 +1346,9 @@ class NestedOrganizationRead(BaseModel):
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
     pref_label: Annotated[str, Field(title="Pref Label")]
-    alternative_name: Annotated[str | None, Field(title="Alternative Name")] = None
+    alternative_name: Annotated[str, Field(title="Alternative Name")]
     type: AgentType
+    ror_id: Annotated[str | None, Field(title="Ror Id")]
 
 
 class NestedPersonRead(BaseModel):
@@ -1451,6 +1360,7 @@ class NestedPersonRead(BaseModel):
     pref_label: Annotated[str, Field(title="Pref Label")]
     type: AgentType
     sub_id: Annotated[UUID | None, Field(title="Sub Id")]
+    orcid: Annotated[str | None, Field(title="Orcid")]
 
 
 class NestedPlaceholderCellMorphologyProtocolRead(BaseModel):
@@ -1475,7 +1385,7 @@ class NestedPublicationRead(BaseModel):
 class NestedScientificArtifactRead(BaseModel):
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     experiment_date: Annotated[
@@ -1513,7 +1423,7 @@ class NestedScientificArtifactRead(BaseModel):
 class NestedSimulationRead(BaseModel):
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -1529,7 +1439,7 @@ class NestedSimulationRead(BaseModel):
 class NestedSkeletonizationConfigRead(BaseModel):
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -1565,7 +1475,7 @@ class Weight(RootModel[float]):
 class NestedSynaptome(BaseModel):
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -1579,12 +1489,14 @@ class OrganizationAdminUpdate(BaseModel):
     pref_label: Annotated[str | None, Field(title="Pref Label")] = None
     alternative_name: Annotated[str | None, Field(title="Alternative Name")] = None
     legacy_id: Annotated[str | None, Field(title="Legacy Id")] = None
+    ror_id: Annotated[str | None, Field(title="Ror Id")] = None
 
 
 class OrganizationCreate(BaseModel):
     pref_label: Annotated[str, Field(title="Pref Label")]
-    alternative_name: Annotated[str | None, Field(title="Alternative Name")] = None
+    alternative_name: Annotated[str, Field(title="Alternative Name")]
     legacy_id: Annotated[str | None, Field(title="Legacy Id")] = None
+    ror_id: Annotated[str | None, Field(title="Ror Id")] = None
 
 
 class OrganizationRead(BaseModel):
@@ -1594,8 +1506,9 @@ class OrganizationRead(BaseModel):
     created_by: NestedPersonRead
     updated_by: NestedPersonRead
     pref_label: Annotated[str, Field(title="Pref Label")]
-    alternative_name: Annotated[str | None, Field(title="Alternative Name")] = None
+    alternative_name: Annotated[str, Field(title="Alternative Name")]
     type: AgentType
+    ror_id: Annotated[str | None, Field(title="Ror Id")]
 
 
 class OsRuntimeInfo(BaseModel):
@@ -1641,6 +1554,7 @@ class PersonAdminUpdate(BaseModel):
     family_name: Annotated[str | None, Field(title="Family Name")] = None
     pref_label: Annotated[str | None, Field(title="Pref Label")] = None
     legacy_id: Annotated[str | None, Field(title="Legacy Id")] = None
+    orcid: Annotated[str | None, Field(title="Orcid")] = None
 
 
 class PersonCreate(BaseModel):
@@ -1648,6 +1562,7 @@ class PersonCreate(BaseModel):
     family_name: Annotated[str | None, Field(title="Family Name")] = None
     pref_label: Annotated[str, Field(title="Pref Label")]
     legacy_id: Annotated[str | None, Field(title="Legacy Id")] = None
+    orcid: Annotated[str | None, Field(title="Orcid")] = None
 
 
 class PersonRead(BaseModel):
@@ -1661,6 +1576,7 @@ class PersonRead(BaseModel):
     pref_label: Annotated[str, Field(title="Pref Label")]
     type: AgentType
     sub_id: Annotated[UUID | None, Field(title="Sub Id")]
+    orcid: Annotated[str | None, Field(title="Orcid")]
 
 
 class PlaceholderCellMorphologyProtocolCreate(BaseModel):
@@ -1669,6 +1585,7 @@ class PlaceholderCellMorphologyProtocolCreate(BaseModel):
     type: EntityType | None = "cell_morphology_protocol"
     generation_type: Annotated[Literal["placeholder"], Field(title="Generation Type")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
 
 
 class PointLocationBase(BaseModel):
@@ -1815,6 +1732,7 @@ class Sex(StrEnum):
 
 class SimulatableExtracellularRecordingArrayCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     electrode_type: ElectrodeType
@@ -1822,6 +1740,7 @@ class SimulatableExtracellularRecordingArrayCreate(BaseModel):
 
 
 class SimulatableExtracellularRecordingArrayUserUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     electrode_type: ElectrodeType | None = None
@@ -1830,6 +1749,7 @@ class SimulatableExtracellularRecordingArrayUserUpdate(BaseModel):
 
 class SimulationCampaignCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
@@ -1837,6 +1757,7 @@ class SimulationCampaignCreate(BaseModel):
 
 
 class SimulationCampaignUserUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     scan_parameters: Annotated[dict[str, Any] | None, Field(title="Scan Parameters")] = None
@@ -1845,6 +1766,7 @@ class SimulationCampaignUserUpdate(BaseModel):
 
 class SimulationCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     simulation_campaign_id: Annotated[UUID, Field(title="Simulation Campaign Id")]
@@ -1925,18 +1847,21 @@ class SimulationGenerationUserUpdate(BaseModel):
 
 class SimulationResultCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     simulation_id: Annotated[UUID, Field(title="Simulation Id")]
 
 
 class SimulationResultUserUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     simulation_id: Annotated[UUID | None, Field(title="Simulation Id")] = None
 
 
 class SimulationUserUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     simulation_campaign_id: Annotated[UUID | None, Field(title="Simulation Campaign Id")] = None
@@ -1947,6 +1872,7 @@ class SimulationUserUpdate(BaseModel):
 
 class SingleNeuronSimulationCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -1957,6 +1883,7 @@ class SingleNeuronSimulationCreate(BaseModel):
 
 
 class SingleNeuronSimulationUserUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
     brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
@@ -1968,6 +1895,7 @@ class SingleNeuronSimulationUserUpdate(BaseModel):
 
 class SingleNeuronSynaptomeCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     seed: Annotated[int, Field(title="Seed")]
@@ -1977,6 +1905,7 @@ class SingleNeuronSynaptomeCreate(BaseModel):
 
 class SingleNeuronSynaptomeSimulationCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -1987,6 +1916,7 @@ class SingleNeuronSynaptomeSimulationCreate(BaseModel):
 
 
 class SingleNeuronSynaptomeSimulationUserUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
     brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
@@ -1997,6 +1927,7 @@ class SingleNeuronSynaptomeSimulationUserUpdate(BaseModel):
 
 
 class SingleNeuronSynaptomeUserUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     seed: Annotated[int | None, Field(title="Seed")] = None
@@ -2006,6 +1937,7 @@ class SingleNeuronSynaptomeUserUpdate(BaseModel):
 
 class SkeletonizationCampaignCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
@@ -2015,6 +1947,7 @@ class SkeletonizationCampaignCreate(BaseModel):
 
 
 class SkeletonizationCampaignUserUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     scan_parameters: Annotated[dict[str, Any] | None, Field(title="Scan Parameters")] = None
@@ -2023,6 +1956,7 @@ class SkeletonizationCampaignUserUpdate(BaseModel):
 
 class SkeletonizationConfigCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     skeletonization_campaign_id: Annotated[UUID, Field(title="Skeletonization Campaign Id")]
@@ -2063,6 +1997,7 @@ class SkeletonizationConfigGenerationUserUpdate(BaseModel):
 
 
 class SkeletonizationConfigUserUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     skeletonization_campaign_id: Annotated[
@@ -2201,6 +2136,7 @@ class SubjectCreate(BaseModel):
     ] = None
     age_period: AgePeriod | None = None
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     species_id: Annotated[UUID, Field(title="Species Id")]
     strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
 
@@ -2214,15 +2150,16 @@ class SubjectUserUpdate(BaseModel):
     age_min: Annotated[timedelta | None, Field(title="Age Min")] = None
     age_max: Annotated[timedelta | None, Field(title="Age Max")] = None
     age_period: AgePeriod | None = None
+    lifecycle_status: EntityLifecycleStatus | None = None
     species_id: Annotated[UUID | None, Field(title="Species Id")] = None
     strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
 
 
 class TargetSimulator(StrEnum):
-    NEURON = "NEURON"
+    Brian2 = "Brian2"
     CORENEURON = "CORENEURON"
     LearningEngine = "LearningEngine"
-    Brian2 = "Brian2"
+    NEURON = "NEURON"
 
 
 class TaskActivityType(StrEnum):
@@ -2325,6 +2262,7 @@ class TaskConfigUserUpdate(BaseModel):
     task_config_type: TaskConfigType | None = None
     meta: Annotated[dict[str, Any] | None, Field(title="Meta")] = None
     task_config_generator_id: Annotated[UUID | None, Field(title="Task Config Generator Id")] = None
+    lifecycle_status: EntityLifecycleStatus | None = None
     inputs: Annotated[list[NestedEntityCreate] | None, Field(title="Inputs")] = None
 
 
@@ -2350,6 +2288,7 @@ class TaskResultType(StrEnum):
 
 
 class TaskResultUserUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     data_payload: Annotated[dict[str, Any] | None, Field(title="Data Payload")] = None
@@ -2374,6 +2313,12 @@ class UseIon(BaseModel):
     write: Annotated[list[str] | None, Field(title="Write")] = []
     valence: Annotated[int | None, Field(title="Valence")] = None
     main_ion: Annotated[bool | None, Field(title="Main Ion")] = None
+
+
+class UsedDerivationRead(BaseModel):
+    generated: NestedEntityRead
+    derivation_type: DerivationType
+    label: Annotated[str | None, Field(title="Label")] = None
 
 
 class ValidationCreate(BaseModel):
@@ -2403,12 +2348,14 @@ class ValidationRead(BaseModel):
 
 class ValidationResultCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     name: Annotated[str, Field(title="Name")]
     passed: Annotated[bool, Field(title="Passed")]
     validated_entity_id: Annotated[UUID, Field(title="Validated Entity Id")]
 
 
 class ValidationResultUserUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     passed: Annotated[bool | None, Field(title="Passed")] = None
     validated_entity_id: Annotated[UUID | None, Field(title="Validated Entity Id")] = None
@@ -2441,10 +2388,12 @@ class AgentRead(RootModel[NestedPersonRead | NestedOrganizationRead | NestedCons
 
 class AnalysisNotebookEnvironmentCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     runtime_info: RuntimeInfo | None
 
 
 class AnalysisNotebookEnvironmentUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
     runtime_info: RuntimeInfo | None = None
 
 
@@ -2480,6 +2429,19 @@ class AnalysisNotebookExecutionUpdate(BaseModel):
     ] = None
 
 
+class AnalysisNotebookResultCreate(BaseModel):
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+
+
+class AnalysisNotebookResultUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
+    name: Annotated[str | None, Field(title="Name")] = None
+    description: Annotated[str | None, Field(title="Description")] = None
+
+
 class AnalysisNotebookTemplateInputType(BaseModel):
     name: Annotated[str, Field(title="Name")]
     entity_type: EntityType
@@ -2498,6 +2460,7 @@ class AnalysisNotebookTemplateSpecifications(BaseModel):
 
 
 class AnalysisNotebookTemplateUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     specifications: AnalysisNotebookTemplateSpecifications | None = None
@@ -2549,6 +2512,42 @@ class BasicEntityRead(BaseModel):
     type: EntityType
 
 
+class BrainAtlasCreate(BaseModel):
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    species_id: Annotated[UUID, Field(title="Species Id")]
+    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    lifecycle_status: EntityLifecycleStatus | None = "active"
+    hierarchy_id: Annotated[UUID, Field(title="Hierarchy Id")]
+
+
+class BrainAtlasRegionCreate(BaseModel):
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
+    volume: Annotated[float | None, Field(title="Volume")]
+    is_leaf_region: Annotated[bool, Field(title="Is Leaf Region")]
+    brain_atlas_id: Annotated[UUID, Field(title="Brain Atlas Id")]
+    brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
+
+
+class BrainAtlasRegionUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
+    volume: Annotated[float | None, Field(title="Volume")] = None
+    is_leaf_region: Annotated[bool | None, Field(title="Is Leaf Region")] = None
+    brain_atlas_id: Annotated[UUID | None, Field(title="Brain Atlas Id")] = None
+    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
+
+
+class BrainAtlasUpdate(BaseModel):
+    species_id: Annotated[UUID | None, Field(title="Species Id")] = None
+    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
+    name: Annotated[str | None, Field(title="Name")] = None
+    description: Annotated[str | None, Field(title="Description")] = None
+    lifecycle_status: EntityLifecycleStatus | None = None
+    hierarchy_id: Annotated[UUID | None, Field(title="Hierarchy Id")] = None
+
+
 class BrainRegionHierarchyRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
@@ -2590,6 +2589,25 @@ class CalibrationRead(BaseModel):
     generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
 
 
+class CellCompositionCreate(BaseModel):
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
+    species_id: Annotated[UUID, Field(title="Species Id")]
+    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
+    brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+
+
+class CellCompositionUserUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
+    species_id: Annotated[UUID | None, Field(title="Species Id")] = None
+    strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
+    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
+    name: Annotated[str | None, Field(title="Name")] = None
+    description: Annotated[str | None, Field(title="Description")] = None
+
+
 class CellMorphologyCreate(BaseModel):
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
@@ -2623,6 +2641,7 @@ class CellMorphologyCreate(BaseModel):
             title="Notice Text",
         ),
     ] = None
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     location: PointLocationBase | None
@@ -2640,6 +2659,7 @@ class CellMorphologyUserUpdate(BaseModel):
     contact_email: Annotated[str | None, Field(title="Contact Email")] = None
     published_in: Annotated[str | None, Field(title="Published In")] = None
     notice_text: Annotated[str | None, Field(title="Notice Text")] = None
+    lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     location: PointLocationBase | None = None
@@ -2684,6 +2704,7 @@ class CircuitCreate(BaseModel):
             title="Notice Text",
         ),
     ] = None
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     has_morphologies: Annotated[bool | None, Field(title="Has Morphologies")] = False
@@ -2702,6 +2723,30 @@ class CircuitCreate(BaseModel):
     target_simulator: TargetSimulator | None = "NEURON"
 
 
+class CircuitExtractionCampaignCreate(BaseModel):
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
+
+
+class CircuitExtractionCampaignUserUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
+    name: Annotated[str | None, Field(title="Name")] = None
+    description: Annotated[str | None, Field(title="Description")] = None
+    scan_parameters: Annotated[dict[str, Any] | None, Field(title="Scan Parameters")] = None
+
+
+class CircuitExtractionConfigCreate(BaseModel):
+    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    circuit_id: Annotated[UUID, Field(title="Circuit Id")]
+    scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
+
+
 class CircuitExtractionConfigGenerationRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
@@ -2716,6 +2761,14 @@ class CircuitExtractionConfigGenerationRead(BaseModel):
     status: ActivityStatus | None = "done"
     used: Annotated[list[NestedEntityRead], Field(title="Used")]
     generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
+
+
+class CircuitExtractionConfigUserUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
+    name: Annotated[str | None, Field(title="Name")] = None
+    description: Annotated[str | None, Field(title="Description")] = None
+    circuit_id: Annotated[UUID | None, Field(title="Circuit Id")] = None
+    scan_parameters: Annotated[dict[str, Any] | None, Field(title="Scan Parameters")] = None
 
 
 class CircuitExtractionExecutionCreate(BaseModel):
@@ -2764,6 +2817,7 @@ class CircuitUserUpdate(BaseModel):
     contact_email: Annotated[str | None, Field(title="Contact Email")] = None
     published_in: Annotated[str | None, Field(title="Published In")] = None
     notice_text: Annotated[str | None, Field(title="Notice Text")] = None
+    lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     has_morphologies: Annotated[bool | None, Field(title="Has Morphologies")] = None
@@ -2793,6 +2847,7 @@ class ComputationallySynthesizedCellMorphologyProtocolCreate(BaseModel):
     ]
     method_type: Annotated[str, Field(title="Method Type")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
 
 
 class ConsortiumRead(BaseModel):
@@ -2802,7 +2857,7 @@ class ConsortiumRead(BaseModel):
     created_by: NestedPersonRead
     updated_by: NestedPersonRead
     pref_label: Annotated[str, Field(title="Pref Label")]
-    alternative_name: Annotated[str | None, Field(title="Alternative Name")] = None
+    alternative_name: Annotated[str, Field(title="Alternative Name")]
     type: AgentType
 
 
@@ -2850,6 +2905,7 @@ class DigitalReconstructionCellMorphologyProtocolCreate(BaseModel):
     tissue_shrinkage: Annotated[TissueShrinkage | None, Field(title="Tissue Shrinkage")] = None
     corrected_for_shrinkage: Annotated[bool | None, Field(title="Corrected For Shrinkage")] = None
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
 
 
 class EMCellMeshCreate(BaseModel):
@@ -2885,6 +2941,7 @@ class EMCellMeshCreate(BaseModel):
             title="Notice Text",
         ),
     ] = None
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     release_version: Annotated[int, Field(title="Release Version")]
@@ -2900,6 +2957,32 @@ class EMCellMeshCreate(BaseModel):
     ]
 
 
+class EMCellMeshUserUpdate(BaseModel):
+    license_id: Annotated[UUID | None, Field(title="License Id")] = None
+    brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
+    subject_id: Annotated[UUID | None, Field(title="Subject Id")] = None
+    experiment_date: Annotated[AwareDatetime | None, Field(title="Experiment Date")] = None
+    contact_email: Annotated[str | None, Field(title="Contact Email")] = None
+    published_in: Annotated[str | None, Field(title="Published In")] = None
+    notice_text: Annotated[str | None, Field(title="Notice Text")] = None
+    lifecycle_status: EntityLifecycleStatus | None = None
+    name: Annotated[str | None, Field(title="Name")] = None
+    description: Annotated[str | None, Field(title="Description")] = None
+    release_version: Annotated[int | None, Field(title="Release Version")] = None
+    dense_reconstruction_cell_id: Annotated[
+        int | None, Field(title="Dense Reconstruction Cell Id")
+    ] = None
+    generation_method: EMCellMeshGenerationMethod | None = None
+    level_of_detail: Annotated[int | None, Field(title="Level Of Detail")] = None
+    generation_parameters: Annotated[
+        dict[str, Any] | None, Field(title="Generation Parameters")
+    ] = None
+    mesh_type: EMCellMeshType | None = None
+    em_dense_reconstruction_dataset_id: Annotated[
+        UUID | None, Field(title="Em Dense Reconstruction Dataset Id")
+    ] = None
+
+
 class EMDenseReconstructionDatasetAdminUpdate(BaseModel):
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = None
@@ -2909,6 +2992,7 @@ class EMDenseReconstructionDatasetAdminUpdate(BaseModel):
     contact_email: Annotated[str | None, Field(title="Contact Email")] = None
     published_in: Annotated[str | None, Field(title="Published In")] = None
     notice_text: Annotated[str | None, Field(title="Notice Text")] = None
+    lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     protocol_document: Annotated[ProtocolDocument | None, Field(title="Protocol Document")] = None
@@ -2971,6 +3055,7 @@ class EMDenseReconstructionDatasetCreate(BaseModel):
             title="Notice Text",
         ),
     ] = None
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     protocol_document: Annotated[ProtocolDocument | None, Field(title="Protocol Document")] = None
@@ -3005,6 +3090,7 @@ class EModelCreate(BaseModel):
     brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
     species_id: Annotated[UUID, Field(title="Species Id")]
     strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     iteration: Annotated[str, Field(title="Iteration")]
@@ -3025,6 +3111,7 @@ class EModelUserUpdate(BaseModel):
     brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
     species_id: Annotated[UUID | None, Field(title="Species Id")] = None
     strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
+    lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     iteration: Annotated[str | None, Field(title="Iteration")] = None
@@ -3081,6 +3168,7 @@ class ElectricalCellRecordingCreate(BaseModel):
             title="Notice Text",
         ),
     ] = None
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     ljp: Annotated[
@@ -3132,6 +3220,7 @@ class ElectricalCellRecordingUserUpdate(BaseModel):
     contact_email: Annotated[str | None, Field(title="Contact Email")] = None
     published_in: Annotated[str | None, Field(title="Published In")] = None
     notice_text: Annotated[str | None, Field(title="Notice Text")] = None
+    lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     ljp: Annotated[float | None, Field(title="Ljp")] = None
@@ -3145,6 +3234,7 @@ class ElectricalCellRecordingUserUpdate(BaseModel):
 
 class ElectricalRecordingStimulusCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     dt: Annotated[float | None, Field(title="Dt")] = None
@@ -3153,6 +3243,18 @@ class ElectricalRecordingStimulusCreate(BaseModel):
     start_time: Annotated[float | None, Field(title="Start Time")] = None
     end_time: Annotated[float | None, Field(title="End Time")] = None
     recording_id: Annotated[UUID, Field(title="Recording Id")]
+
+
+class ElectricalRecordingStimulusUserUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
+    name: Annotated[str | None, Field(title="Name")] = None
+    description: Annotated[str | None, Field(title="Description")] = None
+    dt: Annotated[float | None, Field(title="Dt")] = None
+    injection_type: ElectricalRecordingStimulusType | None = None
+    shape: ElectricalRecordingStimulusShape | None = None
+    start_time: Annotated[float | None, Field(title="Start Time")] = None
+    end_time: Annotated[float | None, Field(title="End Time")] = None
+    recording_id: Annotated[UUID | None, Field(title="Recording Id")] = None
 
 
 class ExternalUrlRead(BaseModel):
@@ -3168,8 +3270,15 @@ class ExternalUrlRead(BaseModel):
     source_name: Annotated[str, Field(title="Source Name")]
 
 
+class GeneratedDerivationRead(BaseModel):
+    used: NestedEntityRead
+    derivation_type: DerivationType
+    label: Annotated[str | None, Field(title="Label")] = None
+
+
 class IonChannelModelingCampaignCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
@@ -3179,6 +3288,7 @@ class IonChannelModelingCampaignCreate(BaseModel):
 
 
 class IonChannelModelingCampaignUserUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     scan_parameters: Annotated[dict[str, Any] | None, Field(title="Scan Parameters")] = None
@@ -3427,6 +3537,7 @@ class ListResponseValidationRead(BaseModel):
 
 class MEModelCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     species_id: Annotated[UUID, Field(title="Species Id")]
     strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
     name: Annotated[str, Field(title="Name")]
@@ -3438,6 +3549,7 @@ class MEModelCreate(BaseModel):
 
 
 class MEModelUserUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
     species_id: Annotated[UUID | None, Field(title="Species Id")] = None
     strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
     name: Annotated[str | None, Field(title="Name")] = None
@@ -3511,7 +3623,7 @@ class MultipartDirectoryUploadResponse(BaseModel):
 class NestedAnalysisNotebookEnvironmentRead(BaseModel):
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -3522,7 +3634,7 @@ class NestedAnalysisNotebookEnvironmentRead(BaseModel):
 class NestedAnalysisNotebookTemplateRead(BaseModel):
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -3561,7 +3673,7 @@ class NestedDigitalReconstructionCellMorphologyProtocolRead(BaseModel):
 class NestedMEModel(BaseModel):
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -3571,22 +3683,6 @@ class NestedMEModel(BaseModel):
     validation_status: ValidationStatus | None = "created"
     mtypes: Annotated[list[AnnotationRead] | None, Field(title="Mtypes")]
     etypes: Annotated[list[AnnotationRead] | None, Field(title="Etypes")]
-
-
-class NestedMEModelCalibrationResultRead(BaseModel):
-    authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
-    authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
-    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
-    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
-    id: Annotated[UUID, Field(title="Id")]
-    type: EntityType
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
-    holding_current: Annotated[float, Field(title="Holding Current")]
-    threshold_current: Annotated[float, Field(title="Threshold Current")]
-    rin: Annotated[float | None, Field(title="Rin")] = None
-    calibrated_entity_id: Annotated[UUID, Field(title="Calibrated Entity Id")]
 
 
 class NestedSubjectRead(BaseModel):
@@ -3606,7 +3702,7 @@ class NestedSubjectRead(BaseModel):
     age_period: AgePeriod | None = None
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -3629,10 +3725,16 @@ class PlaceholderCellMorphologyProtocolRead(BaseModel):
     description: Annotated[str, Field(title="Description")]
     type: EntityType | None = "cell_morphology_protocol"
     generation_type: Annotated[Literal["placeholder"], Field(title="Generation Type")]
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -3641,11 +3743,17 @@ class PlaceholderCellMorphologyProtocolRead(BaseModel):
 
 
 class SimulatableExtracellularRecordingArrayRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -3659,11 +3767,17 @@ class SimulatableExtracellularRecordingArrayRead(BaseModel):
 
 
 class SimulationCampaignRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -3678,11 +3792,17 @@ class SimulationCampaignRead(BaseModel):
 
 
 class SimulationRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -3698,11 +3818,17 @@ class SimulationRead(BaseModel):
 
 
 class SimulationResultRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -3715,11 +3841,17 @@ class SimulationResultRead(BaseModel):
 
 
 class SingleNeuronSimulationRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -3736,11 +3868,17 @@ class SingleNeuronSimulationRead(BaseModel):
 
 
 class SingleNeuronSynaptomeRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     brain_region: NestedBrainRegionRead
@@ -3755,11 +3893,17 @@ class SingleNeuronSynaptomeRead(BaseModel):
 
 
 class SingleNeuronSynaptomeSimulationRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -3776,11 +3920,17 @@ class SingleNeuronSynaptomeSimulationRead(BaseModel):
 
 
 class SkeletonizationCampaignRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -3797,11 +3947,17 @@ class SkeletonizationCampaignRead(BaseModel):
 
 
 class SkeletonizationConfigRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -3830,10 +3986,16 @@ class SubjectRead(BaseModel):
         float | None, Field(description="Maximum age range", title="Maximum age range")
     ] = None
     age_period: AgePeriod | None = None
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -3882,6 +4044,7 @@ class TaskConfigCreate(BaseModel):
     meta: Annotated[dict[str, Any], Field(title="Meta")]
     task_config_generator_id: Annotated[UUID | None, Field(title="Task Config Generator Id")] = None
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     inputs: Annotated[
         list[NestedEntityCreate] | None,
         Field(
@@ -3896,11 +4059,17 @@ class TaskConfigRead(BaseModel):
     task_config_type: TaskConfigType
     meta: Annotated[dict[str, Any], Field(title="Meta")]
     task_config_generator_id: Annotated[UUID | None, Field(title="Task Config Generator Id")] = None
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -3915,6 +4084,7 @@ class TaskConfigRead(BaseModel):
 
 class TaskResultCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     data_payload: Annotated[dict[str, Any] | None, Field(title="Data Payload")] = {}
@@ -3922,11 +4092,17 @@ class TaskResultCreate(BaseModel):
 
 
 class TaskResultRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -3940,11 +4116,17 @@ class TaskResultRead(BaseModel):
 
 
 class ValidationResultRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -3957,11 +4139,17 @@ class ValidationResultRead(BaseModel):
 
 
 class AnalysisNotebookEnvironmentRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -3992,11 +4180,17 @@ class AnalysisNotebookExecutionRead(BaseModel):
 
 
 class AnalysisNotebookResultRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -4009,6 +4203,7 @@ class AnalysisNotebookResultRead(BaseModel):
 
 class AnalysisNotebookTemplateCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     specifications: AnalysisNotebookTemplateSpecifications | None = None
@@ -4017,11 +4212,17 @@ class AnalysisNotebookTemplateCreate(BaseModel):
 
 
 class AnalysisNotebookTemplateRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -4041,11 +4242,17 @@ class AssetAndPresignedURLS(BaseModel):
 
 
 class BrainAtlasRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     species: NestedSpeciesRead
@@ -4060,11 +4267,17 @@ class BrainAtlasRead(BaseModel):
 
 
 class BrainAtlasRegionRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -4078,11 +4291,17 @@ class BrainAtlasRegionRead(BaseModel):
 
 
 class CellCompositionRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -4114,11 +4333,17 @@ class CellMorphologyProtocolCreate(
 
 
 class CircuitExtractionCampaignRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -4131,11 +4356,17 @@ class CircuitExtractionCampaignRead(BaseModel):
 
 
 class CircuitExtractionConfigRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -4150,11 +4381,17 @@ class CircuitExtractionConfigRead(BaseModel):
 
 class CircuitRead(BaseModel):
     license: NestedLicenseRead | None = None
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     brain_region: NestedBrainRegionRead
@@ -4219,10 +4456,16 @@ class ComputationallySynthesizedCellMorphologyProtocolRead(BaseModel):
         Literal["computationally_synthesized"], Field(title="Generation Type")
     ]
     method_type: Annotated[str, Field(title="Method Type")]
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -4243,10 +4486,16 @@ class DigitalReconstructionCellMorphologyProtocolRead(BaseModel):
     magnification: Annotated[Magnification | None, Field(title="Magnification")] = None
     tissue_shrinkage: Annotated[TissueShrinkage | None, Field(title="Tissue Shrinkage")] = None
     corrected_for_shrinkage: Annotated[bool | None, Field(title="Corrected For Shrinkage")] = None
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -4256,11 +4505,17 @@ class DigitalReconstructionCellMorphologyProtocolRead(BaseModel):
 
 class EMCellMeshRead(BaseModel):
     license: NestedLicenseRead | None = None
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     brain_region: NestedBrainRegionRead
@@ -4313,11 +4568,17 @@ class EMCellMeshRead(BaseModel):
 
 class EMDenseReconstructionDatasetRead(BaseModel):
     license: NestedLicenseRead | None = None
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     brain_region: NestedBrainRegionRead
@@ -4385,11 +4646,17 @@ class EMDenseReconstructionDatasetRead(BaseModel):
 
 class ElectricalCellRecordingRead(BaseModel):
     license: NestedLicenseRead | None = None
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     brain_region: NestedBrainRegionRead
@@ -4478,10 +4745,16 @@ class ElectricalCellRecordingRead(BaseModel):
 
 
 class ElectricalRecordingStimulusRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -4499,11 +4772,17 @@ class ElectricalRecordingStimulusRead(BaseModel):
 
 
 class EntityRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -4514,6 +4793,7 @@ class EntityRead(BaseModel):
 
 class ExperimentalBoutonDensityCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     subject_id: Annotated[UUID, Field(title="Subject Id")]
     brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
@@ -4524,11 +4804,17 @@ class ExperimentalBoutonDensityCreate(BaseModel):
 
 
 class ExperimentalBoutonDensityRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     brain_region: NestedBrainRegionRead
@@ -4545,6 +4831,7 @@ class ExperimentalBoutonDensityRead(BaseModel):
 
 
 class ExperimentalBoutonDensityUserUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
     subject_id: Annotated[UUID | None, Field(title="Subject Id")] = None
     brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
@@ -4558,6 +4845,7 @@ class ExperimentalBoutonDensityUserUpdate(BaseModel):
 
 class ExperimentalNeuronDensityCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     subject_id: Annotated[UUID, Field(title="Subject Id")]
     brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
@@ -4568,11 +4856,17 @@ class ExperimentalNeuronDensityCreate(BaseModel):
 
 
 class ExperimentalNeuronDensityRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     brain_region: NestedBrainRegionRead
@@ -4590,6 +4884,7 @@ class ExperimentalNeuronDensityRead(BaseModel):
 
 
 class ExperimentalNeuronDensityUserUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
     subject_id: Annotated[UUID | None, Field(title="Subject Id")] = None
     brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
@@ -4603,6 +4898,7 @@ class ExperimentalNeuronDensityUserUpdate(BaseModel):
 
 class ExperimentalSynapsesPerConnectionCreate(BaseModel):
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
+    lifecycle_status: EntityLifecycleStatus | None = "active"
     subject_id: Annotated[UUID, Field(title="Subject Id")]
     brain_region_id: Annotated[UUID, Field(title="Brain Region Id")]
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
@@ -4617,11 +4913,17 @@ class ExperimentalSynapsesPerConnectionCreate(BaseModel):
 
 
 class ExperimentalSynapsesPerConnectionRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     brain_region: NestedBrainRegionRead
@@ -4641,6 +4943,7 @@ class ExperimentalSynapsesPerConnectionRead(BaseModel):
 
 
 class ExperimentalSynapsesPerConnectionUserUpdate(BaseModel):
+    lifecycle_status: EntityLifecycleStatus | None = None
     subject_id: Annotated[UUID | None, Field(title="Subject Id")] = None
     brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
@@ -4701,15 +5004,22 @@ class IonChannelModelCreate(BaseModel):
             title="Notice Text",
         ),
     ] = None
+    lifecycle_status: EntityLifecycleStatus | None = "active"
 
 
 class IonChannelModelExpanded(BaseModel):
     license: NestedLicenseRead | None = None
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     brain_region: NestedBrainRegionRead
@@ -4763,7 +5073,7 @@ class IonChannelModelExpanded(BaseModel):
 class IonChannelModelRead(BaseModel):
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     brain_region: NestedBrainRegionRead
@@ -4830,13 +5140,14 @@ class IonChannelModelUserUpdate(BaseModel):
     contact_email: Annotated[str | None, Field(title="Contact Email")] = None
     published_in: Annotated[str | None, Field(title="Published In")] = None
     notice_text: Annotated[str | None, Field(title="Notice Text")] = None
+    lifecycle_status: EntityLifecycleStatus | None = None
 
 
 class IonChannelModelWAssets(BaseModel):
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     brain_region: NestedBrainRegionRead
@@ -4886,11 +5197,17 @@ class IonChannelModelWAssets(BaseModel):
 
 
 class IonChannelModelingCampaignRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -4909,11 +5226,17 @@ class IonChannelModelingCampaignRead(BaseModel):
 
 
 class IonChannelModelingConfigRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -4930,11 +5253,17 @@ class IonChannelModelingConfigRead(BaseModel):
 
 class IonChannelRecordingRead(BaseModel):
     license: NestedLicenseRead | None = None
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     brain_region: NestedBrainRegionRead
@@ -5087,12 +5416,6 @@ class ListResponseCircuitExtractionConfigRead(BaseModel):
 
 class ListResponseCircuitRead(BaseModel):
     data: Annotated[list[CircuitRead], Field(title="Data")]
-    pagination: PaginationResponse
-    facets: Facets | None = None
-
-
-class ListResponseEMCellMeshRead(BaseModel):
-    data: Annotated[list[EMCellMeshRead], Field(title="Data")]
     pagination: PaginationResponse
     facets: Facets | None = None
 
@@ -5254,10 +5577,16 @@ class ListResponseValidationResultRead(BaseModel):
 
 
 class MEModelCalibrationResultRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -5301,10 +5630,16 @@ class ModifiedReconstructionCellMorphologyProtocolRead(BaseModel):
     type: EntityType | None = "cell_morphology_protocol"
     generation_type: Annotated[Literal["modified_reconstruction"], Field(title="Generation Type")]
     method_type: ModifiedMorphologyMethodType
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
@@ -5331,11 +5666,17 @@ class NestedCellMorphologyProtocolRead(
 
 class CellMorphologyAnnotationExpandedRead(BaseModel):
     license: NestedLicenseRead | None = None
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     brain_region: NestedBrainRegionRead
@@ -5402,11 +5743,17 @@ class CellMorphologyProtocolRead(
 
 class CellMorphologyRead(BaseModel):
     license: NestedLicenseRead | None = None
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     brain_region: NestedBrainRegionRead
@@ -5455,11 +5802,17 @@ class CellMorphologyRead(BaseModel):
 
 class EMCellMeshAnnotationExpandedRead(BaseModel):
     license: NestedLicenseRead | None = None
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     brain_region: NestedBrainRegionRead
@@ -5530,12 +5883,6 @@ class ListResponseCellMorphologyProtocolRead(BaseModel):
     facets: Facets | None = None
 
 
-class ListResponseCellMorphologyRead(BaseModel):
-    data: Annotated[list[CellMorphologyRead], Field(title="Data")]
-    pagination: PaginationResponse
-    facets: Facets | None = None
-
-
 class ListResponseMEModelCalibrationResultRead(BaseModel):
     data: Annotated[list[MEModelCalibrationResultRead], Field(title="Data")]
     pagination: PaginationResponse
@@ -5548,12 +5895,32 @@ class ListResponseMeasurementAnnotationRead(BaseModel):
     facets: Facets | None = None
 
 
+class ListResponseUnionCellMorphologyReadCellMorphologyAnnotationExpandedRead(BaseModel):
+    data: Annotated[
+        list[CellMorphologyRead | CellMorphologyAnnotationExpandedRead], Field(title="Data")
+    ]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
+class ListResponseUnionEMCellMeshReadEMCellMeshAnnotationExpandedRead(BaseModel):
+    data: Annotated[list[EMCellMeshRead | EMCellMeshAnnotationExpandedRead], Field(title="Data")]
+    pagination: PaginationResponse
+    facets: Facets | None = None
+
+
 class EModelRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     species: NestedSpeciesRead
@@ -5574,11 +5941,17 @@ class EModelRead(BaseModel):
 
 
 class EModelReadExpanded(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     assets: Annotated[list[AssetRead], Field(title="Assets")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     species: NestedSpeciesRead
@@ -5606,10 +5979,16 @@ class ListResponseEModelReadExpanded(BaseModel):
 
 
 class MEModelRead(BaseModel):
+    generated_from_derivations: Annotated[
+        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
+    ] = None
+    used_by_derivations: Annotated[
+        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
+    ] = None
     contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus | None = "active"
+    lifecycle_status: EntityLifecycleStatus
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     species: NestedSpeciesRead

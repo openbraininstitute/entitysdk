@@ -1,0 +1,292 @@
+{
+  "data": [
+    {
+      "created_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "family_name": "Brown",
+        "given_name": "Bob",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "orcid": null,
+        "pref_label": "bob",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "derivation_type": "circuit_extraction",
+      "generated": {
+        "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+        "authorized_public": true,
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "lifecycle_status": "draft",
+        "type": "circuit",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "id": "00000000-0000-4000-8000-000001234678",
+      "label": "label-c",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "family_name": "Brown",
+        "given_name": "Bob",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "orcid": null,
+        "pref_label": "bob",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "used": {
+        "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+        "authorized_public": false,
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "lifecycle_status": "active",
+        "type": "circuit",
+        "update_date": "2025-01-01T00:00:00Z"
+      }
+    },
+    {
+      "created_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "family_name": "Anderson",
+        "given_name": "Alice",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "orcid": null,
+        "pref_label": "alice",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "derivation_type": "unspecified",
+      "generated": {
+        "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+        "authorized_public": true,
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "lifecycle_status": "draft",
+        "type": "circuit",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "id": "00000000-0000-4000-8000-000001234678",
+      "label": null,
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "family_name": "Anderson",
+        "given_name": "Alice",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "orcid": null,
+        "pref_label": "alice",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "used": {
+        "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+        "authorized_public": true,
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "lifecycle_status": "active",
+        "type": "circuit",
+        "update_date": "2025-01-01T00:00:00Z"
+      }
+    },
+    {
+      "created_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "family_name": "Brown",
+        "given_name": "Bob",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "orcid": null,
+        "pref_label": "bob",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "derivation_type": "emodel_circuit",
+      "generated": {
+        "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+        "authorized_public": false,
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "lifecycle_status": "active",
+        "type": "circuit",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "id": "00000000-0000-4000-8000-000001234678",
+      "label": "label-c",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "family_name": "Brown",
+        "given_name": "Bob",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "orcid": null,
+        "pref_label": "bob",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "used": {
+        "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+        "authorized_public": true,
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "lifecycle_status": "active",
+        "type": "circuit",
+        "update_date": "2025-01-01T00:00:00Z"
+      }
+    },
+    {
+      "created_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "family_name": "Anderson",
+        "given_name": "Alice",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "orcid": null,
+        "pref_label": "alice",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "derivation_type": "circuit_customization",
+      "generated": {
+        "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+        "authorized_public": true,
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "lifecycle_status": "active",
+        "type": "circuit",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "id": "00000000-0000-4000-8000-000001234678",
+      "label": "label-a",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "family_name": "Anderson",
+        "given_name": "Alice",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "orcid": null,
+        "pref_label": "alice",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "used": {
+        "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+        "authorized_public": false,
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "lifecycle_status": "active",
+        "type": "circuit",
+        "update_date": "2025-01-01T00:00:00Z"
+      }
+    },
+    {
+      "created_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "family_name": "Brown",
+        "given_name": "Bob",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "orcid": null,
+        "pref_label": "bob",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "derivation_type": "circuit_rewiring",
+      "generated": {
+        "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+        "authorized_public": true,
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "lifecycle_status": "active",
+        "type": "circuit",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "id": "00000000-0000-4000-8000-000001234678",
+      "label": "label-b",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "family_name": "Brown",
+        "given_name": "Bob",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "orcid": null,
+        "pref_label": "bob",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "used": {
+        "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+        "authorized_public": true,
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "lifecycle_status": "draft",
+        "type": "circuit",
+        "update_date": "2025-01-01T00:00:00Z"
+      }
+    },
+    {
+      "created_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "family_name": "Anderson",
+        "given_name": "Alice",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "orcid": null,
+        "pref_label": "alice",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "derivation_type": "circuit_extraction",
+      "generated": {
+        "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+        "authorized_public": false,
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "lifecycle_status": "active",
+        "type": "circuit",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "id": "00000000-0000-4000-8000-000001234678",
+      "label": null,
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "family_name": "Anderson",
+        "given_name": "Alice",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "orcid": null,
+        "pref_label": "alice",
+        "sub_id": "00000000-0000-4000-8000-000001234678",
+        "type": "person",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "used": {
+        "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+        "authorized_public": true,
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "lifecycle_status": "draft",
+        "type": "circuit",
+        "update_date": "2025-01-01T00:00:00Z"
+      }
+    }
+  ],
+  "facets": null,
+  "pagination": {
+    "page": 1,
+    "page_size": 30,
+    "total_items": 6
+  }
+}
