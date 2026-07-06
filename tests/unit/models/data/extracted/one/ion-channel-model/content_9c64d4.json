@@ -23,7 +23,7 @@
   "is_temperature_dependent": false,
   "lifecycle_status": "active",
   "max_permeability_name": null,
-  "name": "test_icm",
+  "name": "ion-channel-model",
   "neuron_block": {
     "global": [],
     "nonspecific": [],

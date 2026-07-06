@@ -23,7 +23,7 @@
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "s-2",
+      "name": "Private u1/1",
       "type": "simulatable_extracellular_recording_array",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -62,7 +62,7 @@
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "s-1",
+      "name": "Private u1/0",
       "type": "simulatable_extracellular_recording_array",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -81,7 +81,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "circuit_id": "00000000-0000-4000-8000-000001234678",
       "contributions": [],
       "created_by": {
@@ -101,7 +101,7 @@
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "s-0",
+      "name": "Public u1/0",
       "type": "simulatable_extracellular_recording_array",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {

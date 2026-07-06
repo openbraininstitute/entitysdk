@@ -34,7 +34,7 @@
     "update_date": "2025-01-01T00:00:00Z"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "Test morph",
+  "description": "morph description",
   "experiment_date": null,
   "generated_from_derivations": null,
   "has_segmented_spines": false,
@@ -57,7 +57,7 @@
     "z": 30.0
   },
   "mtypes": [],
-  "name": "Test morph",
+  "name": "Public u2/0",
   "notice_text": null,
   "published_in": null,
   "repair_pipeline_state": null,

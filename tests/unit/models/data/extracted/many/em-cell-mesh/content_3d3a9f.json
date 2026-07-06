@@ -3,7 +3,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -45,7 +45,7 @@
       "lifecycle_status": "active",
       "mesh_type": "static",
       "mtypes": [],
-      "name": "mesh-name",
+      "name": "Public u1/0",
       "notice_text": null,
       "published_in": null,
       "release_version": 1,

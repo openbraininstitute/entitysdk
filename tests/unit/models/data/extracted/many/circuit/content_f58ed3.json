@@ -48,7 +48,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "lifecycle_status": "draft",
-      "name": "root-circuit",
+      "name": "Public u1/0",
       "notice_text": null,
       "number_connections": 100000000,
       "number_neurons": 10000000,
@@ -108,7 +108,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 1,
+    "page_size": 30,
     "total_items": 1
   }
 }

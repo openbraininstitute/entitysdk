@@ -37,14 +37,14 @@
     },
     {
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "family_name": null,
         "given_name": null,
         "id": "00000000-0000-4000-8000-000001234678",
         "orcid": null,
-        "pref_label": "Regular User With Project Id",
+        "pref_label": "Regular User With Different Project Id",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person",
         "update_date": "2025-01-01T00:00:00Z"
@@ -63,7 +63,7 @@
         "given_name": null,
         "id": "00000000-0000-4000-8000-000001234678",
         "orcid": null,
-        "pref_label": "Regular User With Project Id",
+        "pref_label": "Regular User With Different Project Id",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person",
         "update_date": "2025-01-01T00:00:00Z"
@@ -72,7 +72,7 @@
     },
     {
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "family_name": null,

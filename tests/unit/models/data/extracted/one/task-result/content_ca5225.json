@@ -1,7 +1,7 @@
 {
   "assets": [],
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": false,
+  "authorized_public": true,
   "contributions": [],
   "created_by": {
     "creation_date": "2025-01-01T00:00:00Z",
@@ -21,7 +21,7 @@
   "id": "00000000-0000-4000-8000-000001234678",
   "lifecycle_status": "active",
   "name": "task-result",
-  "task_result_type": "optimized_emodel_analysis_validation__result",
+  "task_result_type": "circuit_extraction__circuit",
   "type": "task_result",
   "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {
