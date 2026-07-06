@@ -46,7 +46,7 @@
     "update_date": "2025-01-01T00:00:00Z"
   },
   "lifecycle_status": "active",
-  "name": "circuit-u3-delete",
+  "name": "my-circuit",
   "notice_text": null,
   "number_connections": 10,
   "number_neurons": 5,

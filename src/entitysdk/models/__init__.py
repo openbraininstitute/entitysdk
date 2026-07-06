@@ -16,12 +16,6 @@ from entitysdk.models.cell_composition import CellComposition
 from entitysdk.models.cell_morphology import CellMorphology
 from entitysdk.models.cell_morphology_protocol import CellMorphologyProtocol
 from entitysdk.models.circuit import Circuit
-from entitysdk.models.circuit_extraction import (
-    CircuitExtractionCampaign,
-    CircuitExtractionConfig,
-    CircuitExtractionConfigGeneration,
-    CircuitExtractionExecution,
-)
 from entitysdk.models.classification import ETypeClassification, MTypeClassification
 from entitysdk.models.contribution import Contribution, Role
 from entitysdk.models.core import Consortium, Organization, Person
@@ -100,10 +94,6 @@ __all__ = [
     "CellMorphology",
     "CellMorphologyProtocol",
     "Circuit",
-    "CircuitExtractionCampaign",
-    "CircuitExtractionConfig",
-    "CircuitExtractionExecution",
-    "CircuitExtractionConfigGeneration",
     "Consortium",
     "Contribution",
     "Derivation",

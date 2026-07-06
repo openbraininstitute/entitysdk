@@ -27,8 +27,6 @@ class ActivityType(StrEnum):
     analysis_notebook_execution = "analysis_notebook_execution"
     ion_channel_modeling_execution = "ion_channel_modeling_execution"
     ion_channel_modeling_config_generation = "ion_channel_modeling_config_generation"
-    circuit_extraction_config_generation = "circuit_extraction_config_generation"
-    circuit_extraction_execution = "circuit_extraction_execution"
     skeletonization_execution = "skeletonization_execution"
     skeletonization_config_generation = "skeletonization_config_generation"
     task_activity = "task_activity"
@@ -46,8 +44,8 @@ class AgentType(StrEnum):
     consortium = "consortium"
 
 
-class ExerciseId(RootModel[str]):
-    root: Annotated[str, Field(max_length=255, min_length=1, title="Exercise Id")]
+class AssignmentId(RootModel[str]):
+    root: Annotated[str, Field(max_length=255, min_length=1, title="Assignment Id")]
 
 
 class CountMax(RootModel[int]):
@@ -127,6 +125,8 @@ class AssetLabel(StrEnum):
     neuron_hoc = "neuron_hoc"
     emodel_optimization_output = "emodel_optimization_output"
     emodel_optimisation_checkpoint = "emodel_optimisation_checkpoint"
+    emodel_analysis_figures = "emodel_analysis_figures"
+    emodel_analysis_summary = "emodel_analysis_summary"
     sonata_simulation_config = "sonata_simulation_config"
     simulation_generation_config = "simulation_generation_config"
     ion_channel_modeling_generation_config = "ion_channel_modeling_generation_config"
@@ -257,22 +257,6 @@ class CellMorphologyProtocolDesign(StrEnum):
 class CircuitBuildCategory(StrEnum):
     computational_model = "computational_model"
     em_reconstruction = "em_reconstruction"
-
-
-class CircuitExtractionConfigGenerationCreate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
-    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
-    status: ActivityStatus | None = "done"
-    used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
-    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
-
-
-class CircuitExtractionConfigGenerationUserUpdate(BaseModel):
-    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
-    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
-    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = None
-    status: ActivityStatus | None = None
 
 
 class CircuitScale(StrEnum):
@@ -544,8 +528,6 @@ class EntityRoute(StrEnum):
     subject = "subject"
     validation_result = "validation-result"
     circuit = "circuit"
-    circuit_extraction_campaign = "circuit-extraction-campaign"
-    circuit_extraction_config = "circuit-extraction-config"
     em_dense_reconstruction_dataset = "em-dense-reconstruction-dataset"
     em_cell_mesh = "em-cell-mesh"
     analysis_notebook_template = "analysis-notebook-template"
@@ -590,8 +572,6 @@ class EntityType(StrEnum):
     subject = "subject"
     validation_result = "validation_result"
     circuit = "circuit"
-    circuit_extraction_campaign = "circuit_extraction_campaign"
-    circuit_extraction_config = "circuit_extraction_config"
     em_dense_reconstruction_dataset = "em_dense_reconstruction_dataset"
     em_cell_mesh = "em_cell_mesh"
     analysis_notebook_template = "analysis_notebook_template"
@@ -2465,7 +2445,7 @@ class AnalysisNotebookTemplateUpdate(BaseModel):
     description: Annotated[str | None, Field(title="Description")] = None
     specifications: AnalysisNotebookTemplateSpecifications | None = None
     scale: AnalysisScale | None = None
-    exercise_id: Annotated[str | None, Field(title="Exercise Id")] = None
+    assignment_id: Annotated[str | None, Field(title="Assignment Id")] = None
 
 
 class AssetRead(BaseModel):
@@ -2721,92 +2701,6 @@ class CircuitCreate(BaseModel):
     root_circuit_id: Annotated[UUID | None, Field(title="Root Circuit Id")] = None
     atlas_id: Annotated[UUID | None, Field(title="Atlas Id")] = None
     target_simulator: TargetSimulator | None = "NEURON"
-
-
-class CircuitExtractionCampaignCreate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    lifecycle_status: EntityLifecycleStatus | None = "active"
-    name: Annotated[str, Field(title="Name")]
-    description: Annotated[str, Field(title="Description")]
-    scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
-
-
-class CircuitExtractionCampaignUserUpdate(BaseModel):
-    lifecycle_status: EntityLifecycleStatus | None = None
-    name: Annotated[str | None, Field(title="Name")] = None
-    description: Annotated[str | None, Field(title="Description")] = None
-    scan_parameters: Annotated[dict[str, Any] | None, Field(title="Scan Parameters")] = None
-
-
-class CircuitExtractionConfigCreate(BaseModel):
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    lifecycle_status: EntityLifecycleStatus | None = "active"
-    name: Annotated[str, Field(title="Name")]
-    description: Annotated[str, Field(title="Description")]
-    circuit_id: Annotated[UUID, Field(title="Circuit Id")]
-    scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
-
-
-class CircuitExtractionConfigGenerationRead(BaseModel):
-    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
-    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
-    id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
-    authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    type: ActivityType | None = None
-    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
-    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
-    status: ActivityStatus | None = "done"
-    used: Annotated[list[NestedEntityRead], Field(title="Used")]
-    generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
-
-
-class CircuitExtractionConfigUserUpdate(BaseModel):
-    lifecycle_status: EntityLifecycleStatus | None = None
-    name: Annotated[str | None, Field(title="Name")] = None
-    description: Annotated[str | None, Field(title="Description")] = None
-    circuit_id: Annotated[UUID | None, Field(title="Circuit Id")] = None
-    scan_parameters: Annotated[dict[str, Any] | None, Field(title="Scan Parameters")] = None
-
-
-class CircuitExtractionExecutionCreate(BaseModel):
-    executor: ExecutorType | None = None
-    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
-    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
-    status: ActivityStatus | None = "done"
-    used_ids: Annotated[list[UUID] | None, Field(title="Used Ids")] = []
-    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = []
-
-
-class CircuitExtractionExecutionRead(BaseModel):
-    executor: ExecutorType | None = None
-    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
-    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
-    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
-    id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
-    authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
-    authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
-    type: ActivityType | None = None
-    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
-    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
-    status: ActivityStatus | None = "done"
-    used: Annotated[list[NestedEntityRead], Field(title="Used")]
-    generated: Annotated[list[NestedEntityRead], Field(title="Generated")]
-
-
-class CircuitExtractionExecutionUserUpdate(BaseModel):
-    executor: ExecutorType | None = None
-    execution_id: Annotated[UUID | None, Field(title="Execution Id")] = None
-    start_time: Annotated[AwareDatetime | None, Field(title="Start Time")] = None
-    end_time: Annotated[AwareDatetime | None, Field(title="End Time")] = None
-    generated_ids: Annotated[list[UUID] | None, Field(title="Generated Ids")] = None
-    status: ActivityStatus | None = None
 
 
 class CircuitUserUpdate(BaseModel):
@@ -3391,18 +3285,6 @@ class ListResponseCalibrationRead(BaseModel):
     facets: Facets | None = None
 
 
-class ListResponseCircuitExtractionConfigGenerationRead(BaseModel):
-    data: Annotated[list[CircuitExtractionConfigGenerationRead], Field(title="Data")]
-    pagination: PaginationResponse
-    facets: Facets | None = None
-
-
-class ListResponseCircuitExtractionExecutionRead(BaseModel):
-    data: Annotated[list[CircuitExtractionExecutionRead], Field(title="Data")]
-    pagination: PaginationResponse
-    facets: Facets | None = None
-
-
 class ListResponseConsortiumRead(BaseModel):
     data: Annotated[list[ConsortiumRead], Field(title="Data")]
     pagination: PaginationResponse
@@ -3643,7 +3525,7 @@ class NestedAnalysisNotebookTemplateRead(BaseModel):
     description: Annotated[str, Field(title="Description")]
     specifications: AnalysisNotebookTemplateSpecifications | None = None
     scale: AnalysisScale
-    exercise_id: Annotated[ExerciseId | None, Field(title="Exercise Id")] = None
+    assignment_id: Annotated[AssignmentId | None, Field(title="Assignment Id")] = None
 
 
 class NestedContributionRead(BaseModel):
@@ -4208,7 +4090,7 @@ class AnalysisNotebookTemplateCreate(BaseModel):
     description: Annotated[str, Field(title="Description")]
     specifications: AnalysisNotebookTemplateSpecifications | None = None
     scale: AnalysisScale
-    exercise_id: Annotated[ExerciseId | None, Field(title="Exercise Id")] = None
+    assignment_id: Annotated[AssignmentId | None, Field(title="Assignment Id")] = None
 
 
 class AnalysisNotebookTemplateRead(BaseModel):
@@ -4233,7 +4115,7 @@ class AnalysisNotebookTemplateRead(BaseModel):
     description: Annotated[str, Field(title="Description")]
     specifications: AnalysisNotebookTemplateSpecifications | None = None
     scale: AnalysisScale
-    exercise_id: Annotated[ExerciseId | None, Field(title="Exercise Id")] = None
+    assignment_id: Annotated[AssignmentId | None, Field(title="Assignment Id")] = None
 
 
 class AssetAndPresignedURLS(BaseModel):
@@ -4330,53 +4212,6 @@ class CellMorphologyProtocolCreate(
         | PlaceholderCellMorphologyProtocolCreate,
         Field(discriminator="generation_type"),
     ]
-
-
-class CircuitExtractionCampaignRead(BaseModel):
-    generated_from_derivations: Annotated[
-        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
-    ] = None
-    used_by_derivations: Annotated[
-        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
-    ] = None
-    contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
-    assets: Annotated[list[AssetRead], Field(title="Assets")]
-    authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
-    authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus
-    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
-    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
-    id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
-    type: EntityType
-    name: Annotated[str, Field(title="Name")]
-    description: Annotated[str, Field(title="Description")]
-    scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
-
-
-class CircuitExtractionConfigRead(BaseModel):
-    generated_from_derivations: Annotated[
-        list[GeneratedDerivationRead] | None, Field(title="Generated From Derivations")
-    ] = None
-    used_by_derivations: Annotated[
-        list[UsedDerivationRead] | None, Field(title="Used By Derivations")
-    ] = None
-    contributions: Annotated[list[NestedContributionRead] | None, Field(title="Contributions")]
-    assets: Annotated[list[AssetRead], Field(title="Assets")]
-    authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
-    authorized_public: Annotated[bool, Field(title="Authorized Public")]
-    lifecycle_status: EntityLifecycleStatus
-    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
-    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
-    id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
-    type: EntityType
-    name: Annotated[str, Field(title="Name")]
-    description: Annotated[str, Field(title="Description")]
-    circuit_id: Annotated[UUID, Field(title="Circuit Id")]
-    scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
 
 
 class CircuitRead(BaseModel):
@@ -5398,18 +5233,6 @@ class ListResponseBrainAtlasRegionRead(BaseModel):
 
 class ListResponseCellCompositionRead(BaseModel):
     data: Annotated[list[CellCompositionRead], Field(title="Data")]
-    pagination: PaginationResponse
-    facets: Facets | None = None
-
-
-class ListResponseCircuitExtractionCampaignRead(BaseModel):
-    data: Annotated[list[CircuitExtractionCampaignRead], Field(title="Data")]
-    pagination: PaginationResponse
-    facets: Facets | None = None
-
-
-class ListResponseCircuitExtractionConfigRead(BaseModel):
-    data: Annotated[list[CircuitExtractionConfigRead], Field(title="Data")]
     pagination: PaginationResponse
     facets: Facets | None = None
 

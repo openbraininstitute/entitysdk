@@ -18,12 +18,12 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "description-2",
+      "description": "my-description",
       "electrode_type": "custom",
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "name-2",
+      "name": "Private u1/1",
       "type": "simulatable_extracellular_recording_array",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -57,12 +57,12 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "description-1",
+      "description": "my-description",
       "electrode_type": "custom",
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "name-1",
+      "name": "Private u1/0",
       "type": "simulatable_extracellular_recording_array",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -82,7 +82,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 2,
-    "total_items": 3
+    "page_size": 30,
+    "total_items": 2
   }
 }

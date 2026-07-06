@@ -16,12 +16,12 @@
     "update_date": "2025-01-01T00:00:00Z"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "my-description",
+  "description": "description-2",
   "electrode_type": "custom",
   "generated_from_derivations": null,
   "id": "00000000-0000-4000-8000-000001234678",
   "lifecycle_status": "active",
-  "name": "my-array",
+  "name": "name-2",
   "type": "simulatable_extracellular_recording_array",
   "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {

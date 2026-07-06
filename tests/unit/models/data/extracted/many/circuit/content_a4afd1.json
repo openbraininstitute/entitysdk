@@ -4,7 +4,7 @@
       "assets": [],
       "atlas_id": "00000000-0000-4000-8000-000001234678",
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -31,7 +31,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "description-2",
+      "description": "root-circuit-description",
       "experiment_date": null,
       "generated_from_derivations": null,
       "has_electrical_cell_models": true,
@@ -48,7 +48,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "lifecycle_status": "draft",
-      "name": "name-2",
+      "name": "Private u1/1",
       "notice_text": null,
       "number_connections": 100000000,
       "number_neurons": 10000000,
@@ -108,7 +108,7 @@
       "assets": [],
       "atlas_id": "00000000-0000-4000-8000-000001234678",
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -135,7 +135,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "description-1",
+      "description": "root-circuit-description",
       "experiment_date": null,
       "generated_from_derivations": null,
       "has_electrical_cell_models": true,
@@ -152,7 +152,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "lifecycle_status": "draft",
-      "name": "name-1",
+      "name": "Private u1/0",
       "notice_text": null,
       "number_connections": 100000000,
       "number_neurons": 10000000,
@@ -212,7 +212,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 2,
-    "total_items": 3
+    "page_size": 30,
+    "total_items": 2
   }
 }

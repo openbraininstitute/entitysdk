@@ -1,7 +1,7 @@
 {
   "assets": [],
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": false,
+  "authorized_public": true,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
@@ -28,7 +28,7 @@
   },
   "creation_date": "2025-01-01T00:00:00Z",
   "dense_reconstruction_cell_id": 9223372036854775807,
-  "description": "description-0",
+  "description": "mesh-description",
   "em_dense_reconstruction_dataset": {
     "id": "00000000-0000-4000-8000-000001234678",
     "type": "em_dense_reconstruction_dataset"
@@ -43,7 +43,7 @@
   "lifecycle_status": "active",
   "mesh_type": "static",
   "mtypes": [],
-  "name": "name-0",
+  "name": "mesh-name",
   "notice_text": null,
   "published_in": null,
   "release_version": 1,
