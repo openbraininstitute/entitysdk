@@ -21,7 +21,7 @@ HOC_TEMPLATE = """
 {{load_file("stdrun.hoc")}}
 {{load_file("import3d.hoc")}}
 
-begintemplate single_comp_cell
+begintemplate cell
   public init, morphology, geom_nseg_fixed, geom_nsec, getCell, getCCell, setCCell, gid
   public channel_seed, channel_seed_set
   public clear
@@ -179,7 +179,7 @@ proc geom_nsec() {{ local nSec
   }}
 }}
 
-endtemplate single_comp_cell
+endtemplate cell
 """
 
 
