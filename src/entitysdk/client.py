@@ -20,6 +20,16 @@ from entitysdk.models.asset import (
 )
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
+from entitysdk.models.types import (
+    RegisteredAsset,
+    RegisteredAssetOrId,
+    RegisteredEntity,
+    RegisteredIdentifiable,
+    TEntity,
+    TIdentifiable,
+    UnregisteredIdentifiable,
+    ensure_id_is_set,
+)
 from entitysdk.result import IteratorResult
 from entitysdk.schemas.asset import (
     DownloadedAssetFile,
@@ -38,17 +48,9 @@ from entitysdk.types import (
     DerivationType,
     FetchContentStrategy,
     FetchFileStrategy,
-    RegisteredAsset,
-    RegisteredAssetOrId,
-    RegisteredEntity,
-    RegisteredIdentifiable,
     StorageType,
     StrOrPath,
-    TEntity,
-    TIdentifiable,
     Token,
-    UnregisteredIdentifiable,
-    ensure_id_is_set,
 )
 from entitysdk.utils.asset import filter_assets
 from entitysdk.utils.store import LocalAssetStore
