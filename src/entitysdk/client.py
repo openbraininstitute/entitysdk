@@ -860,7 +860,7 @@ class Client:
     @validate_call
     def fetch_assets(
         self,
-        entity_or_id: RegisteredEntity | tuple[ID, type[TEntity]],
+        entity_or_id: RegisteredEntity | tuple[ID, type[Entity]],
         *,
         selection: dict[str, Any] | None = None,
         output_path: Path,
@@ -933,7 +933,7 @@ class Client:
     @validate_call
     def download_assets(
         self,
-        entity_or_id: RegisteredEntity | tuple[ID, type[TEntity]],
+        entity_or_id: RegisteredEntity | tuple[ID, type[Entity]],
         *,
         selection: dict[str, Any] | None = None,
         output_path: Path,
