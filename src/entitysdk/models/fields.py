@@ -12,7 +12,7 @@ from entitysdk.types import ID
 
 
 @dataclass(frozen=True)
-class _NullableUuid:
+class _NullableId:
     """Pydantic metadata: validate as UUID when set, otherwise accept ``None``."""
 
     @classmethod
@@ -22,9 +22,9 @@ class _NullableUuid:
         return core_schema.nullable_schema(handler(ID))
 
 
-ResourceId = Annotated[
+NullableId = Annotated[
     ID,
-    _NullableUuid,
+    _NullableId,
     Field(
         description="The primary key identifier of the resource.",
         default=None,
