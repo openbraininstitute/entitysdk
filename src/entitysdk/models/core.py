@@ -8,29 +8,29 @@ from pydantic import Field
 from entitysdk.models.base import BaseModel
 
 # Identifiable models use a single Pydantic class for every lifecycle stage (staging,
-# registration, fetch, update). At runtime, ``id`` is often unset:
+# registration, fetch, update). At runtime, metadata fields are often unset:
 #
 # - new entities built in memory before ``register_entity``
-# - JSON payloads with ``"id": null`` or the field omitted
-# - nested models deserialized before the server assigns an id
+# - JSON payloads with ``null`` values or fields omitted
+# - nested models deserialized before the server assigns values
 #
-# After a successful fetch, callers rely on static checkers treating ``res.id`` as
-# ``ID``, not ``ID | None`` (for example ``id_res: ID = res.id`` in client code).
+# After a successful fetch, callers rely on static checkers treating populated fields
+# as non-optional (for example ``id_res: ID = res.id`` in client code).
 #
-# A plain ``id: ID | None`` annotation would be honest at runtime but would force
-# every consumer to narrow or assert, even right after ``get_entity``. Conversely,
-# ``id: ID = Field(default=None)`` satisfies pyright but Pydantic v2 rejects
-# ``None`` values because ``ID`` is not nullable in the core schema.
+# A plain ``T | None`` annotation would be honest at runtime but would force every
+# consumer to narrow or assert, even right after ``get_entity``. Conversely,
+# ``field: T = Field(default=None)`` satisfies pyright but Pydantic v2 rejects
+# ``None`` values because ``T`` is not nullable in the core schema.
 #
-# ``Annotated[ID, RuntimeNullableField, Field(default=None)]`` bridges that gap:
+# ``Annotated[T, RuntimeNullableField, Field(default=None)]`` bridges that gap:
 #
-# - the annotated type stays ``ID``, so pyright reports ``.id`` as ``ID``
-# - ``RuntimeNullableField`` wraps the UUID schema with ``nullable_schema``, so
-#   Pydantic accepts ``None``, an explicit ``id=None``, and ``"id": null`` in JSON
-# - ``Field(default=None)`` keeps the default unset for staging and registration
+# - the annotated type stays ``T``, so pyright reports the field as ``T`` when set
+# - ``RuntimeNullableField`` wraps the schema with ``nullable_schema``, so Pydantic
+#   accepts ``None``, explicit ``field=None``, and ``"field": null`` in JSON
+# - ``Field(default=None)`` keeps defaults unset for staging and registration
 #
-# The ``type: ignore[assignment]`` on ``Identifiable.id`` applies only to the
-# default ``= None``, not to uses of ``.id`` afterward.
+# The ``type: ignore[assignment]`` markers on ``Identifiable`` fields apply only to
+# the default ``= None``, not to uses of those fields afterward.
 from entitysdk.models.fields import RuntimeNullableField
 from entitysdk.types import ID, AgentType
 
@@ -51,29 +51,39 @@ class Identifiable(BaseModel):
         ),
     ] = None  # type: ignore[assignment]
     creation_date: Annotated[
-        datetime | None,
+        datetime,
+        RuntimeNullableField,
         Field(
             examples=[datetime(2025, 1, 1)],
             description="The date and time the resource was created.",
+            default=None,
         ),
-    ] = None
+    ] = None  # type: ignore[assignment]
     update_date: Annotated[
-        datetime | None,
+        datetime,
+        RuntimeNullableField,
         Field(
             examples=[datetime(2025, 1, 1)],
             description="The date and time the resource was last updated.",
+            default=None,
         ),
-    ] = None
+    ] = None  # type: ignore[assignment]
     created_by: Annotated[
-        "Person | None",
-        Field(description="The agent that created this entity."),
-    ] = None
+        "Person",
+        RuntimeNullableField,
+        Field(
+            description="The agent that created this entity.",
+            default=None,
+        ),
+    ] = None  # type: ignore[assignment]
     updated_by: Annotated[
-        "Person | None",
+        "Person",
+        RuntimeNullableField,
         Field(
             description="The agent that updated this entity.",
+            default=None,
         ),
-    ] = None
+    ] = None  # type: ignore[assignment]
 
 
 class Agent(Identifiable):
