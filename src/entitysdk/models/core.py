@@ -6,7 +6,32 @@ from typing import Annotated, Literal
 from pydantic import Field
 
 from entitysdk.models.base import BaseModel
-from entitysdk.models.fields import NullableId
+
+# Identifiable models use a single Pydantic class for every lifecycle stage (staging,
+# registration, fetch, update). At runtime, ``id`` is often unset:
+#
+# - new entities built in memory before ``register_entity``
+# - JSON payloads with ``"id": null`` or the field omitted
+# - nested models deserialized before the server assigns an id
+#
+# After a successful fetch, callers rely on static checkers treating ``res.id`` as
+# ``ID``, not ``ID | None`` (for example ``id_res: ID = res.id`` in client code).
+#
+# A plain ``id: ID | None`` annotation would be honest at runtime but would force
+# every consumer to narrow or assert, even right after ``get_entity``. Conversely,
+# ``id: ID = Field(default=None)`` satisfies pyright but Pydantic v2 rejects
+# ``None`` values because ``ID`` is not nullable in the core schema.
+#
+# ``Annotated[ID, RuntimeNullableField, Field(default=None)]`` bridges that gap:
+#
+# - the annotated type stays ``ID``, so pyright reports ``.id`` as ``ID``
+# - ``RuntimeNullableField`` wraps the UUID schema with ``nullable_schema``, so
+#   Pydantic accepts ``None``, an explicit ``id=None``, and ``"id": null`` in JSON
+# - ``Field(default=None)`` keeps the default unset for staging and registration
+#
+# The ``type: ignore[assignment]`` on ``Identifiable.id`` applies only to the
+# default ``= None``, not to uses of ``.id`` afterward.
+from entitysdk.models.fields import RuntimeNullableField
 from entitysdk.types import ID, AgentType
 
 
@@ -17,7 +42,14 @@ class Struct(BaseModel):
 class Identifiable(BaseModel):
     """Identifiable is a model with an id."""
 
-    id: NullableId = None  # type: ignore[assignment]
+    id: Annotated[
+        ID,
+        RuntimeNullableField,
+        Field(
+            description="The primary key identifier of the resource.",
+            default=None,
+        ),
+    ] = None  # type: ignore[assignment]
     creation_date: Annotated[
         datetime | None,
         Field(
