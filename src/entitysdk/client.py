@@ -1,7 +1,5 @@
 """Identifiable SDK client."""
 
-from __future__ import annotations
-
 import concurrent.futures
 import os
 from pathlib import Path
@@ -25,7 +23,6 @@ from entitysdk.models.entity import Entity
 from entitysdk.models.types import (
     RegisteredAssetOrId,
     RegisteredEntity,
-    TEntity,
     TIdentifiable,
     ensure_id_is_none,
 )
@@ -302,7 +299,7 @@ class Client:
         Returns:
             An iterator over assets, each with an assigned id.
         """
-        result = core.get_entity_assets(
+        return core.get_entity_assets(
             api_url=self.api_url,
             entity_id=entity_id,
             entity_type=entity_type,
@@ -311,7 +308,6 @@ class Client:
             token_manager=self._token_manager,
             admin=admin,
         )
-        return IteratorResult(result)
 
     @validate_call
     def update_entity(
@@ -372,7 +368,7 @@ class Client:
         self,
         *,
         entity_id: ID,
-        entity_type: type[TEntity],
+        entity_type: type[Entity],
         file_path: os.PathLike,
         file_content_type: ContentType,
         file_name: str | None = None,
@@ -426,7 +422,7 @@ class Client:
         self,
         *,
         entity_id: ID,
-        entity_type: type[TEntity],
+        entity_type: type[Entity],
         file_content: BytesOrStream,
         file_name: str,
         file_content_type: ContentType,
@@ -475,7 +471,7 @@ class Client:
         self,
         *,
         entity_id: ID,
-        entity_type: type[TEntity],
+        entity_type: type[Entity],
         name: str,
         paths: dict[os.PathLike, os.PathLike],
         metadata: dict | None = None,
@@ -521,7 +517,7 @@ class Client:
         self,
         *,
         entity_id: ID,
-        entity_type: type[TEntity],
+        entity_type: type[Entity],
         asset_id: ID,
         project_context: ProjectContext | None = None,
     ) -> DetailedFileList:
@@ -552,7 +548,7 @@ class Client:
         self,
         *,
         entity_id: ID,
-        entity_type: type[TEntity],
+        entity_type: type[Entity],
         asset_id: RegisteredAssetOrId,  # pyright: ignore[reportRedeclaration]
         output_path: Path,
         project_context: ProjectContext | None = None,
@@ -651,7 +647,7 @@ class Client:
         self,
         *,
         entity_id: ID,
-        entity_type: type[TEntity],
+        entity_type: type[Entity],
         asset_id: RegisteredAssetOrId,
         output_path: os.PathLike,
         project_context: ProjectContext | None = None,
@@ -689,7 +685,7 @@ class Client:
         self,
         *,
         entity_id: ID,
-        entity_type: type[TEntity],
+        entity_type: type[Entity],
         asset_or_id: RegisteredAssetOrId,
         asset_path: Path | None = None,
         project_context: ProjectContext | None = None,
@@ -731,7 +727,7 @@ class Client:
         self,
         *,
         entity_id: ID,
-        entity_type: type[TEntity],
+        entity_type: type[Entity],
         asset_id: ID,
         asset_path: StrOrPath | None = None,
         project_context: ProjectContext | None = None,
@@ -765,7 +761,7 @@ class Client:
         self,
         *,
         entity_id: ID,
-        entity_type: type[TEntity],
+        entity_type: type[Entity],
         asset_id: RegisteredAssetOrId,
         output_path: Path,
         asset_path: Path | None = None,
@@ -808,7 +804,7 @@ class Client:
         self,
         *,
         entity_id: ID,
-        entity_type: type[TEntity],
+        entity_type: type[Entity],
         asset_id: RegisteredAssetOrId,
         output_path: os.PathLike,
         asset_path: os.PathLike | None = None,
@@ -963,7 +959,7 @@ class Client:
         self,
         *,
         entity_id: ID,
-        entity_type: type[TEntity],
+        entity_type: type[Entity],
         asset_id: ID,
         project_context: ProjectContext | None = None,
         admin: bool = False,
@@ -996,7 +992,7 @@ class Client:
         self,
         *,
         entity_id: ID,
-        entity_type: type[TEntity],
+        entity_type: type[Entity],
         asset_id: ID,
         file_path: os.PathLike,
         file_content_type: ContentType,
@@ -1047,7 +1043,7 @@ class Client:
         self,
         *,
         entity_id: ID,
-        entity_type: type[TEntity],
+        entity_type: type[Entity],
         name: str,
         storage_path: str,
         storage_type: StorageType,
