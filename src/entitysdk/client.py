@@ -244,7 +244,7 @@ class Client:
         Returns:
             An iterator over derivation entities, each with an assigned id.
         """
-        result = core.get_entity_derivations(
+        return core.get_entity_derivations(
             api_url=self.api_url,
             entity_id=entity_id,
             entity_type=entity_type,
@@ -253,7 +253,6 @@ class Client:
             token_manager=self._token_manager,
             http_client=self._http_client,
         )
-        return result
 
     @validate_call
     def register_entity(

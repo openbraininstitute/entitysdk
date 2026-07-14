@@ -1,7 +1,5 @@
 """Registered and unregistered model type aliases."""
 
-from __future__ import annotations
-
 from typing import Annotated, TypeVar
 
 from pydantic import AfterValidator
