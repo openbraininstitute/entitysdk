@@ -32,29 +32,15 @@ def ensure_id_is_set(value: TIdentifiable) -> TIdentifiable:
     return value
 
 
-UnregisteredIdentifiable = Annotated[
-    TIdentifiable,
-    AfterValidator(ensure_id_is_none),
-]
-RegisteredIdentifiable = Annotated[
-    TIdentifiable,
-    AfterValidator(ensure_id_is_set),
-]
-UnregisteredEntity = Annotated[
-    TEntity,
-    AfterValidator(ensure_id_is_none),
-]
 RegisteredEntity = Annotated[
     TEntity,
     AfterValidator(ensure_id_is_set),
 ]
-UnregisteredAsset = Annotated[
-    TAsset,
-    AfterValidator(ensure_id_is_none),
-]
-RegisteredAsset = Annotated[
-    TAsset,
-    AfterValidator(ensure_id_is_set),
-]
 
-RegisteredAssetOrId = ID | RegisteredAsset
+RegisteredAssetOrId = (
+    ID
+    | Annotated[
+        TAsset,
+        AfterValidator(ensure_id_is_set),
+    ]
+)

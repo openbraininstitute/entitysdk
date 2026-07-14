@@ -232,10 +232,10 @@ class Client:
         self,
         *,
         entity_id: ID,
-        entity_type: type[TEntity],
+        entity_type: type[Entity],
         derivation_type: DerivationType,
         project_context: ProjectContext | None = None,
-    ) -> IteratorResult[TEntity]:
+    ) -> IteratorResult[Entity]:
         """Get all derivations for an entity.
 
         Args:

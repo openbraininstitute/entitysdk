@@ -4,7 +4,7 @@ import pytest
 from pydantic import ValidationError
 
 from entitysdk.client import Client
-from entitysdk.models import Asset, Circuit, MTypeClass
+from entitysdk.models import Asset, MTypeClass
 from entitysdk.models.entity import Entity
 from entitysdk.types import (
     AssetLabel,
