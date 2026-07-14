@@ -47,61 +47,6 @@ def test_register_entity_accepts_unregistered_input(client, httpx_mock, api_url,
     assert registered.id == entity_id
 
 
-def test_get_entity_rejects_response_without_id(client, httpx_mock, api_url, request_headers):
-    entity_id = uuid.uuid4()
-    httpx_mock.add_response(
-        method="GET",
-        url=f"{api_url}/entity/{entity_id}",
-        match_headers=request_headers,
-        json={"name": "entity"},
-    )
-
-    with pytest.raises(ValidationError):
-        client.get_entity(entity_id=entity_id, entity_type=Entity)
-
-
-def test_search_entity_rejects_result_without_id(client, httpx_mock, api_url, request_headers):
-    httpx_mock.add_response(
-        method="GET",
-        json={
-            "data": [{"name": "entity"}],
-            "pagination": {"page": 1, "page_size": 10, "total_items": 1},
-        },
-        match_headers=request_headers,
-    )
-
-    with pytest.raises(ValueError, match="Resource must have an id"):
-        list(client.search_entity(entity_type=Entity, limit=1))
-
-
-def test_get_entity_assets_rejects_asset_without_id(client, httpx_mock, api_url, request_headers):
-    entity_id = uuid.uuid4()
-    httpx_mock.add_response(
-        method="GET",
-        url=f"{api_url}/circuit/{entity_id}/assets",
-        match_headers=request_headers,
-        json={
-            "data": [
-                {
-                    "path": "path/to/asset",
-                    "full_path": "full/path/to/asset",
-                    "storage_type": "aws_s3_internal",
-                    "label": "morphology",
-                    "is_directory": False,
-                    "content_type": "text/plain",
-                    "size": 1,
-                    "status": "created",
-                    "meta": {},
-                }
-            ],
-            "pagination": {"page": 1, "page_size": 10, "total_items": 1},
-        },
-    )
-
-    with pytest.raises(ValueError, match="Resource must have an id"):
-        list(client.get_entity_assets(entity_id=entity_id, entity_type=Circuit))
-
-
 def test_fetch_file_rejects_unregistered_asset(client, tmp_path):
     with pytest.raises(ValidationError):
         client.fetch_file(

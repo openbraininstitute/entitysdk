@@ -1,23 +1,19 @@
 """Registered and unregistered model type aliases."""
 
-from typing import TYPE_CHECKING, Annotated, TypeVar
+from __future__ import annotations
+
+from typing import Annotated, TypeVar
 
 from pydantic import AfterValidator
 
+from entitysdk.models.asset import Asset
+from entitysdk.models.core import Identifiable
+from entitysdk.models.entity import Entity
 from entitysdk.types import ID
 
-if TYPE_CHECKING:
-    from entitysdk.models.asset import Asset
-    from entitysdk.models.core import Identifiable
-    from entitysdk.models.entity import Entity
-
-    TIdentifiable = TypeVar("TIdentifiable", bound=Identifiable)
-    TEntity = TypeVar("TEntity", bound=Entity)
-    TAsset = TypeVar("TAsset", bound=Asset)
-else:
-    TIdentifiable = TypeVar("TIdentifiable")
-    TEntity = TypeVar("TEntity")
-    TAsset = TypeVar("TAsset")
+TIdentifiable = TypeVar("TIdentifiable", bound=Identifiable)
+TEntity = TypeVar("TEntity", bound=Entity)
+TAsset = TypeVar("TAsset", bound=Asset)
 
 
 def ensure_id_is_none(value: TIdentifiable) -> TIdentifiable:

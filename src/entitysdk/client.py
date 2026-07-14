@@ -1,12 +1,14 @@
 """Identifiable SDK client."""
 
+from __future__ import annotations
+
 import concurrent.futures
 import os
 from pathlib import Path
-from typing import Any, cast
+from typing import Annotated, Any, cast
 
 import httpx
-from pydantic import validate_call
+from pydantic import AfterValidator, validate_call
 
 from entitysdk import core
 from entitysdk.common import ProjectContext, parse_vlab_url
@@ -21,14 +23,11 @@ from entitysdk.models.asset import (
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.models.types import (
-    RegisteredAsset,
     RegisteredAssetOrId,
     RegisteredEntity,
-    RegisteredIdentifiable,
     TEntity,
     TIdentifiable,
-    UnregisteredIdentifiable,
-    ensure_id_is_set,
+    ensure_id_is_none,
 )
 from entitysdk.result import IteratorResult
 from entitysdk.schemas.asset import (
@@ -161,7 +160,7 @@ class Client:
             http_client=self._http_client,
         )
 
-    @validate_call(validate_return=True)
+    @validate_call
     def get_entity(
         self,
         entity_id: ID,
@@ -170,7 +169,7 @@ class Client:
         project_context: ProjectContext | None = None,
         options: dict | None = None,
         admin: bool = False,
-    ) -> RegisteredIdentifiable:
+    ) -> TIdentifiable:
         """Get entity from resource id.
 
         Args:
@@ -203,7 +202,7 @@ class Client:
         limit: int | None = None,
         project_context: ProjectContext | None = None,
         admin: bool = False,
-    ) -> IteratorResult[RegisteredIdentifiable]:
+    ) -> IteratorResult[TIdentifiable]:
         """Search for entities.
 
         Args:
@@ -226,7 +225,7 @@ class Client:
             token_manager=self._token_manager,
             admin=admin,
         )
-        return IteratorResult(ensure_id_is_set(entity) for entity in result)
+        return IteratorResult(result)
 
     @validate_call
     def get_entity_derivations(
@@ -236,7 +235,7 @@ class Client:
         entity_type: type[TEntity],
         derivation_type: DerivationType,
         project_context: ProjectContext | None = None,
-    ) -> IteratorResult[RegisteredEntity]:
+    ) -> IteratorResult[TEntity]:
         """Get all derivations for an entity.
 
         Args:
@@ -257,15 +256,18 @@ class Client:
             token_manager=self._token_manager,
             http_client=self._http_client,
         )
-        return IteratorResult(ensure_id_is_set(entity) for entity in result)
+        return cast(
+            IteratorResult[TEntity],
+            IteratorResult(result),
+        )
 
-    @validate_call(validate_return=True)
+    @validate_call
     def register_entity(
         self,
-        entity: UnregisteredIdentifiable,
+        entity: Annotated[TIdentifiable, AfterValidator(ensure_id_is_none)],
         *,
         project_context: ProjectContext | None = None,
-    ) -> RegisteredIdentifiable:
+    ) -> TIdentifiable:
         """Register entity.
 
         Args:
@@ -288,10 +290,10 @@ class Client:
         self,
         entity_id: ID,
         *,
-        entity_type: type[TEntity],
+        entity_type: type[Entity],
         project_context: ProjectContext | None = None,
         admin: bool = False,
-    ) -> IteratorResult[RegisteredAsset]:
+    ) -> IteratorResult[Asset]:
         """Get all assets of an entity.
 
         Args:
@@ -312,7 +314,7 @@ class Client:
             token_manager=self._token_manager,
             admin=admin,
         )
-        return IteratorResult(ensure_id_is_set(asset) for asset in result)
+        return IteratorResult(result)
 
     @validate_call
     def update_entity(
@@ -368,7 +370,7 @@ class Client:
             admin=admin,
         )
 
-    @validate_call(validate_return=True)
+    @validate_call
     def upload_file(
         self,
         *,
@@ -382,7 +384,7 @@ class Client:
         project_context: ProjectContext | None = None,
         transfer_config: MultipartUploadTransferConfig | None = None,
         admin: bool = False,
-    ) -> RegisteredAsset:
+    ) -> Asset:
         """Upload a file to an entity.
 
         Args:
@@ -435,7 +437,7 @@ class Client:
         asset_label: AssetLabel,
         project_context: ProjectContext | None = None,
         admin: bool = False,
-    ) -> RegisteredAsset:
+    ) -> Asset:
         """Upload file-like content to an entity.
 
         Args:
@@ -459,21 +461,19 @@ class Client:
             label=asset_label,
         )
         context = self._optional_user_context(override_context=project_context)
-        return ensure_id_is_set(
-            core.upload_asset_content(
-                api_url=self.api_url,
-                entity_id=entity_id,
-                entity_type=entity_type,
-                project_context=context,
-                asset_content=file_content,
-                asset_metadata=asset_metadata,
-                http_client=self._http_client,
-                token_manager=self._token_manager,
-                admin=admin,
-            )
+        return core.upload_asset_content(
+            api_url=self.api_url,
+            entity_id=entity_id,
+            entity_type=entity_type,
+            project_context=context,
+            asset_content=file_content,
+            asset_metadata=asset_metadata,
+            http_client=self._http_client,
+            token_manager=self._token_manager,
+            admin=admin,
         )
 
-    @validate_call(validate_return=True)
+    @validate_call
     def upload_directory(
         self,
         *,
@@ -485,7 +485,7 @@ class Client:
         label: AssetLabel,
         project_context: ProjectContext | None = None,
         transfer_config: MultipartDirectoryUploadTransferConfig | None = None,
-    ) -> RegisteredAsset:
+    ) -> Asset:
         """Attach a local directory to an entity.
 
         Args:
@@ -845,7 +845,7 @@ class Client:
 
     @staticmethod
     @validate_call
-    def select_assets(entity: RegisteredEntity, selection: dict) -> IteratorResult[RegisteredAsset]:
+    def select_assets(entity: RegisteredEntity, selection: dict) -> IteratorResult[Asset]:
         """Select assets from an entity based on a selection dict.
 
         Args:
@@ -855,9 +855,7 @@ class Client:
         Returns:
             An iterator over matching assets, each with an assigned id.
         """
-        return IteratorResult(
-            ensure_id_is_set(asset) for asset in filter_assets(entity.assets, selection)
-        )
+        return IteratorResult(filter_assets(entity.assets, selection))
 
     @validate_call
     def fetch_assets(
@@ -885,7 +883,9 @@ class Client:
             An iterator yielding `DownloadedAssetFile` objects.
         """
 
-        def _fetch_entity_asset(asset: RegisteredAsset) -> DownloadedAssetFile:
+        def _fetch_entity_asset(
+            asset: Asset,
+        ) -> DownloadedAssetFile:
             if asset.is_directory:
                 raise NotImplementedError("Downloading asset directories is not supported yet.")
             else:
@@ -928,9 +928,7 @@ class Client:
             raise EntitySDKError(
                 f"Entity {entity.id} has assets that are uploading and cannot be downloaded."
             )
-        return IteratorResult(
-            map(_fetch_entity_asset, (ensure_id_is_set(asset) for asset in assets))
-        )
+        return IteratorResult(map(_fetch_entity_asset, assets))
 
     @validate_call
     def download_assets(
@@ -963,7 +961,7 @@ class Client:
             admin=admin,
         )
 
-    @validate_call(validate_return=True)
+    @validate_call
     def delete_asset(
         self,
         *,
@@ -972,7 +970,7 @@ class Client:
         asset_id: ID,
         project_context: ProjectContext | None = None,
         admin: bool = False,
-    ) -> RegisteredAsset:
+    ) -> Asset:
         """Delete an entity's asset.
 
         Args:
@@ -996,7 +994,7 @@ class Client:
             admin=admin,
         )
 
-    @validate_call(validate_return=True)
+    @validate_call
     def update_asset_file(
         self,
         *,
@@ -1009,7 +1007,7 @@ class Client:
         file_metadata: dict | None = None,
         project_context: ProjectContext | None = None,
         admin: bool = False,
-    ) -> RegisteredAsset:
+    ) -> Asset:
         """Update an entity's asset file.
 
         Note: This operation is not atomic. Deletion can succeed and upload can fail.
@@ -1047,7 +1045,7 @@ class Client:
             admin=admin,
         )
 
-    @validate_call(validate_return=True)
+    @validate_call
     def register_asset(
         self,
         *,
@@ -1061,7 +1059,7 @@ class Client:
         asset_label: AssetLabel,
         project_context: ProjectContext | None = None,
         admin: bool = False,
-    ) -> RegisteredAsset:
+    ) -> Asset:
         """Register a file or directory already existing.
 
         Args:
