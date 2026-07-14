@@ -5,7 +5,7 @@ from __future__ import annotations
 import concurrent.futures
 import os
 from pathlib import Path
-from typing import Annotated, Any, cast
+from typing import Annotated, Any
 
 import httpx
 from pydantic import AfterValidator, validate_call
@@ -256,10 +256,7 @@ class Client:
             token_manager=self._token_manager,
             http_client=self._http_client,
         )
-        return cast(
-            IteratorResult[TEntity],
-            IteratorResult(result),
-        )
+        return result
 
     @validate_call
     def register_entity(
@@ -890,9 +887,9 @@ class Client:
                 raise NotImplementedError("Downloading asset directories is not supported yet.")
             else:
                 path = self.fetch_file(
-                    entity_id=cast(ID, entity.id),
+                    entity_id=entity.id,
                     entity_type=type(entity),
-                    asset_id=cast(ID, asset.id),
+                    asset_id=asset.id,
                     output_path=output_path,
                     project_context=context,
                     strategy=strategy,
