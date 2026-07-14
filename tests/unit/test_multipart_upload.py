@@ -134,6 +134,19 @@ def test_calculate_part_size_large_file():
     assert result <= test_module.S3_MAX_PART_SIZE
 
 
+def test_calculate_part_count_zero():
+    assert test_module.calculate_part_count(0) == 1
+
+
+def test_calculate_part_count_small_file():
+    assert test_module.calculate_part_count(1024) == 1
+
+
+def test_calculate_part_count_large_file():
+    filesize = test_module.S3_DEFAULT_PART_SIZE * 200
+    assert test_module.calculate_part_count(filesize) == 200
+
+
 def test_multipart_upload_asset_file(
     asset_file, asset_metadata, project_context, token_manager, transfer_config_sequential
 ):

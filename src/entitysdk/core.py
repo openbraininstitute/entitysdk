@@ -19,7 +19,7 @@ from entitysdk.models.asset import (
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.multipart_upload import (
-    calculate_part_size,
+    calculate_part_count,
     multipart_upload_asset_directory,
     multipart_upload_asset_file,
 )
@@ -435,7 +435,7 @@ def upload_asset_directory(
                 filename=str(relative_path),
                 filesize=filesize,
                 sha256_digest=calculate_sha256_digest(local_path),
-                preferred_part_count=calculate_part_size(filesize),
+                preferred_part_count=calculate_part_count(filesize),
             )
         )
 
