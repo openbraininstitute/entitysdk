@@ -2,29 +2,16 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Annotated, Any
+from typing import Annotated
 
-from pydantic import Field, GetCoreSchemaHandler
+from pydantic import Field, GetPydanticSchema
 from pydantic_core import core_schema
 
 from entitysdk.types import ID
 
-
-@dataclass(frozen=True)
-class _NullableId:
-    """Pydantic metadata: validate as UUID when set, otherwise accept ``None``."""
-
-    @classmethod
-    def __get_pydantic_core_schema__(
-        cls, source_type: Any, handler: GetCoreSchemaHandler
-    ) -> core_schema.CoreSchema:
-        return core_schema.nullable_schema(handler(ID))
-
-
 NullableId = Annotated[
     ID,
-    _NullableId,
+    GetPydanticSchema(lambda _source_type, handler: core_schema.nullable_schema(handler(ID))),
     Field(
         description="The primary key identifier of the resource.",
         default=None,
