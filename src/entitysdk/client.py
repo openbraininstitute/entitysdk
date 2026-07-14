@@ -212,7 +212,7 @@ class Client:
         Returns:
             An iterator over matching entities, each with an assigned id.
         """
-        result = core.search_entities(
+        return core.search_entities(
             api_url=self.api_url,
             entity_type=entity_type,
             query=query,
@@ -222,7 +222,6 @@ class Client:
             token_manager=self._token_manager,
             admin=admin,
         )
-        return IteratorResult(result)
 
     @validate_call
     def get_entity_derivations(
