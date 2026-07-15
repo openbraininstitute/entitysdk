@@ -7,6 +7,7 @@ from pydantic import Field
 
 from entitysdk.models.base import BaseModel
 from entitysdk.types import ID, AgentType
+from entitysdk.utils.pydantic import RuntimeNullableField
 
 
 class Struct(BaseModel):
@@ -17,35 +18,42 @@ class Identifiable(BaseModel):
     """Identifiable is a model with an id."""
 
     id: Annotated[
-        ID | None,
+        ID,
+        RuntimeNullableField,
         Field(
             description="The primary key identifier of the resource.",
         ),
-    ] = None
+    ] = None  # type: ignore[assignment]
     creation_date: Annotated[
-        datetime | None,
+        datetime,
+        RuntimeNullableField,
         Field(
             examples=[datetime(2025, 1, 1)],
             description="The date and time the resource was created.",
         ),
-    ] = None
+    ] = None  # type: ignore[assignment]
     update_date: Annotated[
-        datetime | None,
+        datetime,
+        RuntimeNullableField,
         Field(
             examples=[datetime(2025, 1, 1)],
             description="The date and time the resource was last updated.",
         ),
-    ] = None
+    ] = None  # type: ignore[assignment]
     created_by: Annotated[
-        "Person | None",
-        Field(description="The agent that created this entity."),
-    ] = None
+        "Person",
+        RuntimeNullableField,
+        Field(
+            description="The agent that created this entity.",
+        ),
+    ] = None  # type: ignore[assignment]
     updated_by: Annotated[
-        "Person | None",
+        "Person",
+        RuntimeNullableField,
         Field(
             description="The agent that updated this entity.",
         ),
-    ] = None
+    ] = None  # type: ignore[assignment]
 
 
 class Agent(Identifiable):

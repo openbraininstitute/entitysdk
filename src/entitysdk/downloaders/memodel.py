@@ -2,7 +2,6 @@
 
 import concurrent.futures
 from pathlib import Path
-from typing import cast
 
 from entitysdk.client import Client
 from entitysdk.downloaders.cell_morphology import download_morphology
@@ -30,10 +29,7 @@ def download_memodel(
         max_concurrent (int): maximum number of concurrent downloads. Defaults to 1 (sequential).
     """
     # we have to get the emodel to get the ion channel models.
-    emodel = cast(
-        EModel,
-        client.get_entity(entity_id=memodel.emodel.id, entity_type=EModel),  # type: ignore
-    )
+    emodel = client.get_entity(entity_id=memodel.emodel.id, entity_type=EModel)
 
     output_dir = Path(output_dir)
     hoc_dir = output_dir / "hoc"

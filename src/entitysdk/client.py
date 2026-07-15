@@ -3,10 +3,10 @@
 import concurrent.futures
 import os
 from pathlib import Path
-from typing import Any, TypeVar, cast
+from typing import Annotated, Any
 
 import httpx
-from pydantic import validate_call
+from pydantic import AfterValidator, validate_call
 
 from entitysdk import core
 from entitysdk.common import ProjectContext, parse_vlab_url
@@ -20,6 +20,12 @@ from entitysdk.models.asset import (
 )
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
+from entitysdk.models.types import (
+    RegisteredAssetOrId,
+    RegisteredEntity,
+    TIdentifiable,
+    ensure_id_is_none,
+)
 from entitysdk.result import IteratorResult
 from entitysdk.schemas.asset import (
     DownloadedAssetFile,
@@ -47,9 +53,6 @@ from entitysdk.utils.store import LocalAssetStore
 from entitysdk.utils.url import (
     build_api_url,
 )
-
-TEntity = TypeVar("TEntity", bound=Entity)
-TIdentifiable = TypeVar("TIdentifiable", bound=Identifiable)
 
 
 class Client:
@@ -174,7 +177,7 @@ class Client:
             admin: Whether to use the admin endpoint or not.
 
         Returns:
-            entity_type instantiated by deserializing the response.
+            entity_type instantiated by deserializing the response, with an assigned id.
         """
         return core.get_entity(
             api_url=self.api_url,
@@ -205,6 +208,9 @@ class Client:
             limit: Optional limit of the number of entities to yield. Default is None.
             project_context: Optional project context.
             admin: Use admin endpoints if True
+
+        Returns:
+            An iterator over matching entities, each with an assigned id.
         """
         return core.search_entities(
             api_url=self.api_url,
@@ -235,7 +241,7 @@ class Client:
             project_context: Optional project context.
 
         Returns:
-            An iterator over derivation entities.
+            An iterator over derivation entities, each with an assigned id.
         """
         return core.get_entity_derivations(
             api_url=self.api_url,
@@ -250,18 +256,18 @@ class Client:
     @validate_call
     def register_entity(
         self,
-        entity: TIdentifiable,
+        entity: Annotated[TIdentifiable, AfterValidator(ensure_id_is_none)],
         *,
         project_context: ProjectContext | None = None,
     ) -> TIdentifiable:
         """Register entity.
 
         Args:
-            entity: Identifiable to register.
+            entity: Identifiable to register. Its ``id`` must be ``None``.
             project_context: Optional project context.
 
         Returns:
-            Registered entity with id.
+            Registered entity with an assigned id.
         """
         return core.register_entity(
             api_url=self.api_url,
@@ -276,7 +282,7 @@ class Client:
         self,
         entity_id: ID,
         *,
-        entity_type: type[TEntity],
+        entity_type: type[Entity],
         project_context: ProjectContext | None = None,
         admin: bool = False,
     ) -> IteratorResult[Asset]:
@@ -289,7 +295,7 @@ class Client:
             admin: Whether to use the admin endpoint or not.
 
         Returns:
-            An iterator over assets.
+            An iterator over assets, each with an assigned id.
         """
         return core.get_entity_assets(
             api_url=self.api_url,
@@ -541,7 +547,7 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Entity],
-        asset_id: ID | Asset,  # pyright: ignore[reportRedeclaration]
+        asset_id: RegisteredAssetOrId,  # pyright: ignore[reportRedeclaration]
         output_path: Path,
         project_context: ProjectContext | None = None,
         ignore_directory_name: bool = False,
@@ -640,7 +646,7 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Entity],
-        asset_id: ID | Asset,
+        asset_id: RegisteredAssetOrId,
         output_path: os.PathLike,
         project_context: ProjectContext | None = None,
         ignore_directory_name: bool = False,
@@ -678,7 +684,7 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Entity],
-        asset_or_id: ID | Asset,
+        asset_or_id: RegisteredAssetOrId,
         asset_path: Path | None = None,
         project_context: ProjectContext | None = None,
         strategy: FetchContentStrategy = FetchContentStrategy.local_or_download,
@@ -754,7 +760,7 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Entity],
-        asset_id: ID | Asset,
+        asset_id: RegisteredAssetOrId,
         output_path: Path,
         asset_path: Path | None = None,
         project_context: ProjectContext | None = None,
@@ -797,7 +803,7 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Entity],
-        asset_id: ID | Asset,
+        asset_id: RegisteredAssetOrId,
         output_path: os.PathLike,
         asset_path: os.PathLike | None = None,
         project_context: ProjectContext | None = None,
@@ -829,29 +835,30 @@ class Client:
         )
 
     @staticmethod
-    def select_assets(entity: Entity, selection: dict) -> IteratorResult:
+    @validate_call
+    def select_assets(entity: RegisteredEntity, selection: dict) -> IteratorResult[Asset]:
         """Select assets from an entity based on a selection dict.
 
         Args:
-            entity: Entity whose assets should be filtered.
+            entity: Entity whose assets should be filtered. Must have an assigned id.
             selection: Selection/filter criteria.
 
         Returns:
-            An iterator over matching assets.
+            An iterator over matching assets, each with an assigned id.
         """
         return IteratorResult(filter_assets(entity.assets, selection))
 
     @validate_call
     def fetch_assets(
         self,
-        entity_or_id: Entity | tuple[ID, type[Entity]],
+        entity_or_id: RegisteredEntity | tuple[ID, type[Entity]],
         *,
         selection: dict[str, Any] | None = None,
         output_path: Path,
         project_context: ProjectContext | None = None,
         strategy: FetchFileStrategy = FetchFileStrategy.link_or_download,
         admin: bool = False,
-    ):
+    ) -> IteratorResult[DownloadedAssetFile]:
         """Fetch assets belonging to an entity.
 
         Args:
@@ -867,14 +874,16 @@ class Client:
             An iterator yielding `DownloadedAssetFile` objects.
         """
 
-        def _fetch_entity_asset(asset: Asset) -> DownloadedAssetFile:
+        def _fetch_entity_asset(
+            asset: Asset,
+        ) -> DownloadedAssetFile:
             if asset.is_directory:
                 raise NotImplementedError("Downloading asset directories is not supported yet.")
             else:
                 path = self.fetch_file(
-                    entity_id=cast(ID, entity.id),
+                    entity_id=entity.id,
                     entity_type=type(entity),
-                    asset_id=cast(ID, asset.id),
+                    asset_id=asset.id,
                     output_path=output_path,
                     project_context=context,
                     strategy=strategy,
@@ -915,13 +924,13 @@ class Client:
     @validate_call
     def download_assets(
         self,
-        entity_or_id: Entity | tuple[ID, type[Entity]],
+        entity_or_id: RegisteredEntity | tuple[ID, type[Entity]],
         *,
         selection: dict[str, Any] | None = None,
         output_path: Path,
         project_context: ProjectContext | None = None,
         admin: bool = False,
-    ) -> IteratorResult:
+    ) -> IteratorResult[DownloadedAssetFile]:
         """Download assets belonging to an entity.
 
         Args:

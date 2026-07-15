@@ -2,12 +2,10 @@
 
 import logging
 from pathlib import Path
-from typing import cast
 
 from entitysdk.client import Client
 from entitysdk.dependencies.entity import ensure_has_assets, ensure_has_id
 from entitysdk.models import SimulationResult
-from entitysdk.types import ID
 
 L = logging.getLogger(__name__)
 
@@ -25,7 +23,7 @@ def download_spike_report_file(
     ).one()
 
     path = client.download_file(
-        entity_id=cast(ID, model.id),
+        entity_id=model.id,
         entity_type=SimulationResult,
         asset_id=asset,
         output_path=output_path / asset.path if output_path.is_dir() else output_path,
@@ -48,7 +46,7 @@ def download_voltage_report_files(
 
     files: list[Path] = [
         client.download_file(
-            entity_id=cast(ID, model.id),
+            entity_id=model.id,
             entity_type=SimulationResult,
             asset_id=asset,
             output_path=output_dir / asset.path,

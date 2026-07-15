@@ -4,7 +4,6 @@ import logging
 import math
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-from typing import cast
 
 import httpx
 
@@ -216,7 +215,7 @@ def _initiate_upload(
         for part in asset.upload_meta.parts
     ]
 
-    return cast("ID", asset.id), parts
+    return asset.id, parts
 
 
 def _upload_parts(
@@ -503,7 +502,7 @@ def _initiate_directory_upload(
             for part in asset.upload_meta.parts
         ]
 
-    return cast("ID", directory_asset.id), parts
+    return directory_asset.id, parts
 
 
 def _complete_upload_directory(

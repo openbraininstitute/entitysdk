@@ -3,7 +3,7 @@
 import logging
 from collections.abc import Iterator
 from pathlib import Path
-from typing import TypeVar, cast
+from typing import TypeVar
 
 import httpx
 
@@ -536,7 +536,7 @@ def fetch_asset_file(
             api_url=api_url,
             entity_id=entity_id,
             entity_type=entity_type,
-            asset_id=cast(ID, asset.id),
+            asset_id=asset.id,
             target_path=target_path,
             token_manager=token_manager,
             project_context=project_context,
@@ -691,7 +691,7 @@ def fetch_asset_content(
                 api_url=api_url,
                 entity_id=entity_id,
                 entity_type=entity_type,
-                asset_id=cast(ID, asset_id),
+                asset_id=asset_id,
                 project_context=project_context,
                 http_client=http_client,
                 token_manager=token_manager,

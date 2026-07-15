@@ -2,12 +2,11 @@
 
 import logging
 from pathlib import Path
-from typing import cast
 
 from entitysdk.client import Client
 from entitysdk.dependencies.entity import ensure_has_assets, ensure_has_id
 from entitysdk.models import Circuit
-from entitysdk.types import ID, FetchFileStrategy
+from entitysdk.types import FetchFileStrategy
 
 L = logging.getLogger(__name__)
 
@@ -29,7 +28,7 @@ def stage_circuit(
     ).one()
 
     paths = client.fetch_directory(
-        entity_id=cast(ID, model.id),
+        entity_id=model.id,
         entity_type=Circuit,
         asset_id=asset,
         output_path=output_dir,
