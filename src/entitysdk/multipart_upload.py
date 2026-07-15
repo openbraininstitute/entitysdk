@@ -79,6 +79,20 @@ def calculate_part_size(filesize: int) -> int:
     return min(part_size, S3_MAX_PART_SIZE)
 
 
+def calculate_part_count(filesize: int) -> int:
+    """Calculate the number of parts needed for a multipart upload.
+
+    Args:
+        filesize: Total file size in bytes.
+
+    Returns:
+        Number of parts needed for the upload.
+    """
+    if filesize == 0:
+        return 1
+    return math.ceil(filesize / calculate_part_size(filesize))
+
+
 def multipart_upload_asset_file(
     *,
     api_url: str,
