@@ -6,6 +6,7 @@ from typing import Annotated, Literal
 from pydantic import Field
 
 from entitysdk.models.base import BaseModel
+from entitysdk.types import ID, AgentType
 
 # Identifiable models use a single Pydantic class for every lifecycle stage (staging,
 # registration, fetch, update). At runtime, metadata fields are often unset:
@@ -31,8 +32,7 @@ from entitysdk.models.base import BaseModel
 #
 # The ``type: ignore[assignment]`` markers on ``Identifiable`` fields apply only to
 # the default ``= None``, not to uses of those fields afterward.
-from entitysdk.models.fields import RuntimeNullableField
-from entitysdk.types import ID, AgentType
+from entitysdk.utils.pydantic import RuntimeNullableField
 
 
 class Struct(BaseModel):

@@ -1,4 +1,4 @@
-"""Reusable Pydantic field types."""
+"""Pydantic related functionality."""
 
 from typing import Any
 
