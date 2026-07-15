@@ -1,8 +1,15 @@
 """Tests for MEModel registration."""
 
-import uuid
-
-from entitysdk.models import BrainRegion, CellMorphology, EModel, ETypeClass, License, MEModel, MTypeClass, Species
+from entitysdk.models import (
+    BrainRegion,
+    CellMorphology,
+    EModel,
+    ETypeClass,
+    License,
+    MEModel,
+    MTypeClass,
+    Species,
+)
 from entitysdk.registration.memodel import register_memodel
 from entitysdk.types import EntityLifecycleStatus, ValidationStatus
 
