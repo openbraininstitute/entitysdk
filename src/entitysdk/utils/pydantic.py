@@ -15,7 +15,7 @@ def _nullable_schema(source_type: Any, handler: GetCoreSchemaHandler) -> core_sc
 # fields are often unset (``None``, omitted, or JSON ``null``), but after
 # ``get_entity`` callers want checkers to treat them as ``T``, not ``T | None``.
 #
-# ``Annotated[T, RuntimeNullableField, Field(default=None)]`` bridges that gap:
+# ``Annotated[T, RuntimeNullableField]`` bridges that gap:
 # pyright keeps ``T``, while ``RuntimeNullableField`` wraps the schema with
 # ``nullable_schema`` so Pydantic accepts ``None``. Use ``= None`` with
 # ``# type: ignore[assignment]`` on the default only. Example:
