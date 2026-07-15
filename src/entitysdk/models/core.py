@@ -47,7 +47,6 @@ class Identifiable(BaseModel):
         RuntimeNullableField,
         Field(
             description="The primary key identifier of the resource.",
-            default=None,
         ),
     ] = None  # type: ignore[assignment]
     creation_date: Annotated[
@@ -56,7 +55,6 @@ class Identifiable(BaseModel):
         Field(
             examples=[datetime(2025, 1, 1)],
             description="The date and time the resource was created.",
-            default=None,
         ),
     ] = None  # type: ignore[assignment]
     update_date: Annotated[
@@ -65,7 +63,6 @@ class Identifiable(BaseModel):
         Field(
             examples=[datetime(2025, 1, 1)],
             description="The date and time the resource was last updated.",
-            default=None,
         ),
     ] = None  # type: ignore[assignment]
     created_by: Annotated[
@@ -73,7 +70,6 @@ class Identifiable(BaseModel):
         RuntimeNullableField,
         Field(
             description="The agent that created this entity.",
-            default=None,
         ),
     ] = None  # type: ignore[assignment]
     updated_by: Annotated[
@@ -81,7 +77,6 @@ class Identifiable(BaseModel):
         RuntimeNullableField,
         Field(
             description="The agent that updated this entity.",
-            default=None,
         ),
     ] = None  # type: ignore[assignment]
 
