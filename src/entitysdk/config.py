@@ -48,7 +48,7 @@ class Settings(BaseSettings):
         Field(
             description="Maximum time to wait for a chunk of data to be received, in seconds.",
         ),
-    ] = 30
+    ] = 300
     write_timeout: Annotated[
         float,
         Field(
