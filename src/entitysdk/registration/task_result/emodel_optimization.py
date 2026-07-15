@@ -26,7 +26,7 @@ def register_emodel_optimization_result(
             name=name,
             description=description,
             authorized_public=authorized_public,
-            task_result_type=TaskResultType.emodel_optimisation__result,
+            task_result_type=TaskResultType.emodel_optimization__result,
         )
     )
     L.info("Registered optimiation TaskResult(id=%s)", task_result.id)
@@ -42,7 +42,7 @@ def register_emodel_optimization_result(
         entity_id=task_result.id,
         entity_type=TaskResult,
         paths={
-            str(p.relative_to(analysis_figures_dir)): p
+            p.relative_to(analysis_figures_dir): p
             for p in analysis_figures_dir.iterdir()
             if p.is_file()
         },

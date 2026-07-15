@@ -48,13 +48,13 @@ def register_memodel(
     )
 
     L.info("Registered MEModel(id=%s, name=%s)", memodel.id, memodel.name)
-    for mtype in morphology.mtypes:
+    for mtype in morphology.mtypes or []:
         register_mtype_classification(
             client=client,
             entity=memodel,
             mtype_class=mtype,
         )
-    for etype in emodel.etypes:
+    for etype in emodel.etypes or []:
         register_etype_classification(
             client=client,
             entity=memodel,
