@@ -4,7 +4,9 @@ import uuid
 from unittest.mock import patch
 
 from entitysdk.models import Asset, TaskResult
-from entitysdk.registration.task_result.emodel_optimization import register_emodel_optimization_result
+from entitysdk.registration.task_result.emodel_optimization import (
+    register_emodel_optimization_result,
+)
 from entitysdk.types import AssetLabel, AssetStatus, ContentType, StorageType
 
 from .conftest import mock_asset_json

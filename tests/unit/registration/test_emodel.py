@@ -3,7 +3,15 @@
 import uuid
 from pathlib import Path
 
-from entitysdk.models import BrainRegion, CellMorphology, EModel, ETypeClass, IonChannelModel, License, Species
+from entitysdk.models import (
+    BrainRegion,
+    CellMorphology,
+    EModel,
+    ETypeClass,
+    IonChannelModel,
+    License,
+    Species,
+)
 from entitysdk.registration.emodel import register_emodel
 from entitysdk.types import EntityLifecycleStatus
 

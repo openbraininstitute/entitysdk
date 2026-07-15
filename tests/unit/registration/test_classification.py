@@ -2,7 +2,13 @@
 
 import uuid
 
-from entitysdk.models import EModel, ETypeClass, ETypeClassification, MTypeClass, MTypeClassification
+from entitysdk.models import (
+    EModel,
+    ETypeClass,
+    ETypeClassification,
+    MTypeClass,
+    MTypeClassification,
+)
 from entitysdk.registration.classification import (
     register_etype_classification,
     register_mtype_classification,

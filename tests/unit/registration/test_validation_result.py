@@ -6,7 +6,7 @@ import pytest
 
 from entitysdk.models import ValidationResult
 from entitysdk.registration.validation_result import register_validation_result_figure
-from entitysdk.types import AssetLabel, ContentType
+from entitysdk.types import ContentType
 
 from .conftest import load_extracted_json
 
