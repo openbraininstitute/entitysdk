@@ -1,0 +1,1 @@
+"""TaskResult registration."""
