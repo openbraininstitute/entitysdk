@@ -9,15 +9,15 @@ from entitysdk.models import (
     Derivation,
     EModel,
     Entity,
+    ETypeClass,
     IonChannelModel,
     License,
-    MTypeClass,
     Species,
 )
-from entitysdk.registartion.validation_result import register_validation_result_figure
 from entitysdk.registration.classification import (
     register_etype_classification,
 )
+from entitysdk.registration.validation_result import register_validation_result_figure
 from entitysdk.types import (
     ID,
     AssetLabel,
@@ -40,12 +40,12 @@ def register_emodel(
     brain_region: BrainRegion,
     license: License,  # noqa: A002
     seed: int,
-    iteration: int,
+    iteration: str,
     score: float,
     exemplar_morphology: CellMorphology,
     ion_channel_models: list[IonChannelModel],
     lifecycle_status: EntityLifecycleStatus,
-    etype_class: MTypeClass,
+    etype_class: ETypeClass,
     hoc_file: Path,
     emodel_summary_file: Path,
     electrical_cell_recording_ids: list[ID],
@@ -60,10 +60,13 @@ def register_emodel(
             authorized_public=authorized_public,
             license=license,
             seed=seed,
-            iteration=iteration,
             score=score,
-            exemplar_morphology=exemplar_morphology,
+            species=species,
+            iteration=iteration,
+            brain_region=brain_region,
             lifecycle_status=lifecycle_status,
+            ion_channel_models=ion_channel_models,
+            exemplar_morphology=exemplar_morphology,
         )
     )
     L.info("Registered EModel(id=%s, name=%s)", emodel.id, name)
@@ -106,6 +109,7 @@ def register_emodel(
             client=client,
             authorized_public=emodel.authorized_public,
             figure_file=figure_file,
+            validated_entity_id=emodel.id,
             passed=False,
         )
     return emodel
