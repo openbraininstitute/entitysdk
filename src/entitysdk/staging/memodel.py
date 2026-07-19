@@ -1,6 +1,7 @@
 """Staging functions for Single-Cell."""
 
 import logging
+import re
 import shutil
 import tempfile
 from pathlib import Path
@@ -21,6 +22,53 @@ from entitysdk.utils.io import write_json
 L = logging.getLogger(__name__)
 
 DEFAULT_CIRCUIT_CONFIG_FILENAME = "circuit_config.json"
+
+
+def _extract_hoc_template_name(hoc_file: Path) -> str:
+    """Extract the template name from a HOC file by parsing the 'begintemplate' statement.
+
+    The SONATA model_template field requires the HOC template name (e.g. 'cADpyr_bin_4'),
+    not the filename. Neurodamus uses this name to look up the template in the NEURON namespace.
+
+    Skips lines that are inside comments (// single-line or /* */ block comments).
+
+    Args:
+        hoc_file: Path to the HOC file.
+
+    Returns:
+        The template name found in the HOC file.
+
+    Raises:
+        StagingError: If no 'begintemplate' statement is found in the HOC file.
+    """
+    content = Path(hoc_file).read_text()
+    in_block_comment = False
+
+    for line in content.splitlines():
+        stripped = line.strip()
+
+        # Track block comment state
+        if in_block_comment:
+            if "*/" in stripped:
+                in_block_comment = False
+            continue
+
+        if stripped.startswith("/*"):
+            if "*/" not in stripped:
+                in_block_comment = True
+            continue
+
+        # Skip single-line comments
+        if stripped.startswith("//"):
+            continue
+
+        match = re.match(r"begintemplate\s+(\w+)", stripped)
+        if match:
+            return match.group(1)
+
+    raise StagingError(
+        f"Could not find 'begintemplate' statement in HOC file: {hoc_file}"
+    )
 
 
 def stage_sonata_from_memodel(
@@ -106,6 +154,8 @@ def _generate_sonata_files_from_memodel(
             target = subdirs["mechanisms"] / file
             shutil.copy(src_path, target)
 
+    template_name = _extract_hoc_template_name(hoc_dst)
+
     create_nodes_file(
         hoc_file=str(hoc_dst),
         morph_file=str(morph_dst),
@@ -113,6 +163,7 @@ def _generate_sonata_files_from_memodel(
         mtype=mtype,
         threshold_current=threshold_current,
         holding_current=holding_current,
+        template_name=template_name,
     )
 
     create_circuit_config(output_path=output_path)
@@ -128,6 +179,7 @@ def create_nodes_file(
     mtype: str,
     threshold_current: float,
     holding_current: float,
+    template_name: str,
 ):
     """Create a SONATA nodes.h5 file for a single cell population.
 
@@ -138,6 +190,7 @@ def create_nodes_file(
         mtype (str): Cell mtype.
         threshold_current (float): Threshold current value.
         holding_current (float): Holding current value.
+        template_name (str): HOC template name (from begintemplate statement).
     """
     output_file = Path(output_file)  # ensure Path type
     output_file.parent.mkdir(parents=True, exist_ok=True)
@@ -154,7 +207,7 @@ def create_nodes_file(
 
         # Standard string properties
         group_0.create_dataset("model_template", (1,), dtype=h5py.string_dtype())[0] = (
-            f"hoc:{Path(hoc_file).stem}"
+            f"hoc:{template_name}"
         )
         group_0.create_dataset("model_type", (1,), dtype="int32")[0] = 0
         group_0.create_dataset("morph_class", (1,), dtype="int32")[0] = 0
