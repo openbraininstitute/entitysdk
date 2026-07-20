@@ -217,3 +217,24 @@ def test_mechanism_file_not_exists(tmp_path):
     )
     # The missing file should not be copied
     assert not (tmp_path / "mechanisms" / "missing.mod").exists()
+
+
+def test_extract_hoc_template_name_skips_comments(tmp_path):
+    hoc_file = tmp_path / "commented.hoc"
+    hoc_file.write_text(
+        "// begintemplate FakeComment\n"
+        "/*\n"
+        "  begintemplate FakeBlock\n"
+        "*/\n"
+        "/* begintemplate FakeSingleLine */\n"
+        "begintemplate RealTemplate\n"
+        "endtemplate RealTemplate\n"
+    )
+    assert memodel_mod._extract_hoc_template_name(hoc_file) == "RealTemplate"
+
+
+def test_extract_hoc_template_name_raises_when_missing(tmp_path):
+    hoc_file = tmp_path / "no_template.hoc"
+    hoc_file.write_text("// just a comment\nsome hoc code\n")
+    with pytest.raises(StagingError, match="Could not find 'begintemplate'"):
+        memodel_mod._extract_hoc_template_name(hoc_file)
