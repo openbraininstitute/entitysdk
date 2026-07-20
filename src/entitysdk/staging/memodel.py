@@ -123,7 +123,8 @@ def _generate_sonata_files_from_memodel(
     hoc_file = downloaded_memodel.hoc_path
     if not downloaded_memodel.hoc_path.exists():
         raise FileNotFoundError(f"No HOC file found {downloaded_memodel.hoc_path}")
-    hoc_dst = subdirs["hocs"] / hoc_file.name
+    template_name = _extract_hoc_template_name(hoc_file)
+    hoc_dst = subdirs["hocs"] / f"{template_name}.hoc"
     shutil.copy(hoc_file, hoc_dst)
 
     # Copy morphology file
@@ -138,8 +139,6 @@ def _generate_sonata_files_from_memodel(
         if Path(src_path).exists():
             target = subdirs["mechanisms"] / file
             shutil.copy(src_path, target)
-
-    template_name = _extract_hoc_template_name(hoc_dst)
 
     create_nodes_file(
         hoc_file=str(hoc_dst),
