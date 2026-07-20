@@ -41,12 +41,11 @@ def _extract_hoc_template_name(hoc_file: Path) -> str:
     Raises:
         StagingError: If no 'begintemplate' statement is found in the HOC file.
     """
-    content = Path(hoc_file).read_text()
     content = hoc_file.read_text()
 
     # Remove block comments
     content = re.sub(r"/\*.*?\*/", "", content, flags=re.DOTALL)
-    
+
     # Remove line comments
     content = re.sub(r"//.*$", "", content, flags=re.MULTILINE)
 
