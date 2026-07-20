@@ -137,7 +137,7 @@ class Client:
     def _optional_user_context(
         self,
         override_context: ProjectContext | None,
-        admin: bool = False,
+        admin: bool,
     ) -> ProjectContext | None:
         """Return an optional project context."""
         return None if admin else (override_context or self.project_context)
@@ -231,6 +231,7 @@ class Client:
         entity_type: type[Entity],
         derivation_type: DerivationType,
         project_context: ProjectContext | None = None,
+        admin: bool = False,
     ) -> IteratorResult[Entity]:
         """Get all derivations for an entity.
 
@@ -239,6 +240,7 @@ class Client:
             entity_type: Type of the entity.
             derivation_type: Derivation type to filter by.
             project_context: Optional project context.
+            admin: Whether to use the admin endpoints.
 
         Returns:
             An iterator over derivation entities, each with an assigned id.
@@ -248,9 +250,12 @@ class Client:
             entity_id=entity_id,
             entity_type=entity_type,
             derivation_type=derivation_type,
-            project_context=self._required_user_context(override_context=project_context),
+            project_context=self._optional_user_context(
+                override_context=project_context, admin=admin
+            ),
             token_manager=self._token_manager,
             http_client=self._http_client,
+            admin=admin,
         )
 
     @validate_call
@@ -272,7 +277,7 @@ class Client:
         return core.register_entity(
             api_url=self.api_url,
             entity=entity,
-            project_context=self._optional_user_context(project_context, admin=False),
+            project_context=self._required_user_context(project_context),
             http_client=self._http_client,
             token_manager=self._token_manager,
         )
@@ -451,7 +456,7 @@ class Client:
             metadata=file_metadata or {},
             label=asset_label,
         )
-        context = self._optional_user_context(override_context=project_context)
+        context = self._optional_user_context(override_context=project_context, admin=admin)
         return core.upload_asset_content(
             api_url=self.api_url,
             entity_id=entity_id,
@@ -476,6 +481,7 @@ class Client:
         label: AssetLabel,
         project_context: ProjectContext | None = None,
         transfer_config: MultipartDirectoryUploadTransferConfig | None = None,
+        admin: bool = False,
     ) -> Asset:
         """Attach a local directory to an entity.
 
@@ -488,11 +494,12 @@ class Client:
             label: Label for the asset.
             project_context: Optional project context.
             transfer_config: Optional multipart upload configuration.
+            admin: Whether to use the admin endpoints.
 
         Returns:
             The created directory Asset.
         """
-        context = self._optional_user_context(override_context=project_context)
+        context = self._optional_user_context(override_context=project_context, admin=admin)
 
         paths_dict = {Path(k): Path(v) for k, v in paths.items()}
 
@@ -508,6 +515,7 @@ class Client:
             http_client=self._http_client,
             token_manager=self._token_manager,
             transfer_config=transfer_config,
+            admin=admin,
         )
 
     @validate_call
@@ -518,6 +526,7 @@ class Client:
         entity_type: type[Entity],
         asset_id: ID,
         project_context: ProjectContext | None = None,
+        admin: bool = False,
     ) -> DetailedFileList:
         """List files in a directory asset.
 
@@ -526,11 +535,12 @@ class Client:
             entity_type: Type of the entity.
             asset_id: Directory asset id.
             project_context: Optional project context.
+            admin: Whether to use the admin endpoints.
 
         Returns:
             A `DetailedFileList` describing the directory contents.
         """
-        context = self._optional_user_context(override_context=project_context)
+        context = self._optional_user_context(override_context=project_context, admin=admin)
         return core.list_directory(
             api_url=self.api_url,
             entity_id=entity_id,
@@ -539,6 +549,7 @@ class Client:
             project_context=context,
             http_client=self._http_client,
             token_manager=self._token_manager,
+            admin=admin,
         )
 
     @validate_call
@@ -553,6 +564,7 @@ class Client:
         ignore_directory_name: bool = False,
         max_concurrent: int = 1,
         strategy: FetchFileStrategy = FetchFileStrategy.link_or_download,
+        admin: bool = False,
     ) -> list[Path]:
         """Fetch a directory asset to a local output directory.
 
@@ -566,6 +578,7 @@ class Client:
                 folder for the directory name.
             max_concurrent: Maximum number of concurrent downloads.
             strategy: Strategy controlling how files are materialized.
+            admin: Whether to use the admin endpoints.
 
         Returns:
             List of output file paths that were created.
@@ -578,7 +591,7 @@ class Client:
 
         output_path.mkdir(parents=True, exist_ok=True)
 
-        context = self._optional_user_context(override_context=project_context)
+        context = self._optional_user_context(override_context=project_context, admin=admin)
 
         if isinstance(asset_id, Asset):
             asset = asset_id
@@ -596,6 +609,7 @@ class Client:
                     project_context=context,
                     http_client=self._http_client,
                     token_manager=self._token_manager,
+                    admin=admin,
                 )
 
             output_path /= asset.path
@@ -605,6 +619,7 @@ class Client:
             entity_type=entity_type,
             asset_id=asset_id,
             project_context=project_context,
+            admin=admin,
         )
 
         if max_concurrent == 1:
@@ -617,6 +632,7 @@ class Client:
                     asset_path=path,
                     project_context=context,
                     strategy=strategy,
+                    admin=admin,
                 )
                 for path in contents.files
             ]
@@ -632,6 +648,7 @@ class Client:
                         asset_path=path,
                         project_context=context,
                         strategy=strategy,
+                        admin=admin,
                     )
                     for path in contents.files
                 ]
@@ -651,6 +668,7 @@ class Client:
         project_context: ProjectContext | None = None,
         ignore_directory_name: bool = False,
         max_concurrent: int = 1,
+        admin: bool = False,
     ) -> list[Path]:
         """Download a directory asset to local disk.
 
@@ -663,6 +681,7 @@ class Client:
             ignore_directory_name: If `True`, do not create an extra nested
                 folder for the directory name.
             max_concurrent: Maximum number of concurrent downloads.
+            admin: Whether to use the admin endpoints.
 
         Returns:
             List of output file paths that were created.
@@ -676,6 +695,7 @@ class Client:
             ignore_directory_name=ignore_directory_name,
             max_concurrent=max_concurrent,
             strategy=FetchFileStrategy.download_only,
+            admin=admin,
         )
 
     @validate_call

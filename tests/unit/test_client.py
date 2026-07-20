@@ -1447,3 +1447,106 @@ def test_client_delete_entity(mock_route, clients, httpx_mock, api_url, request_
     )
 
     clients.wout_context.delete_entity(entity_id=entity_id, entity_type=Entity, admin=True)
+
+
+@patch("entitysdk.route.get_route_name")
+def test_client_admin_get_entity_derivations(
+    mock_route, client, httpx_mock, api_url, request_headers_no_context
+):
+    mock_route.return_value = "circuit"
+    entity_id = uuid.uuid4()
+    used_id = uuid.uuid4()
+
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/admin/circuit/{entity_id}/derived-from?derivation_type=circuit_extraction",
+        match_headers=request_headers_no_context,
+        json={"data": [{"type": "circuit", "id": str(used_id)}]},
+    )
+
+    res = client.get_entity_derivations(
+        entity_id=entity_id,
+        entity_type=Circuit,
+        derivation_type=DerivationType.circuit_extraction,
+        admin=True,
+    ).all()
+    assert len(res) == 1
+    assert res[0].id == used_id
+
+
+@patch("entitysdk.route.get_route_name")
+def test_client_admin_upload_content(
+    mock_route, client, httpx_mock, api_url, request_headers_no_context
+):
+    mock_route.return_value = "entity"
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+
+    httpx_mock.add_response(
+        method="POST",
+        url=f"{api_url}/admin/entity/{entity_id}/assets",
+        match_headers=request_headers_no_context,
+        json=_mock_asset_response(asset_id=asset_id),
+    )
+
+    res = client.upload_content(
+        entity_id=entity_id,
+        entity_type=Entity,
+        file_name="foo.swc",
+        file_content=b"foo",
+        file_content_type=ContentType.application_swc,
+        asset_label=AssetLabel.morphology,
+        admin=True,
+    )
+    assert res.id == asset_id
+
+
+@patch("entitysdk.route.get_route_name")
+def test_client_admin_list_directory(
+    mock_route, client, httpx_mock, api_url, request_headers_no_context
+):
+    mock_route.return_value = "entity"
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+    date = "2025-01-01T00:00:00Z"
+
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/admin/entity/{entity_id}/assets/{asset_id}/list",
+        match_headers=request_headers_no_context,
+        json={"files": {"foo.txt": {"name": "foo.txt", "size": 1, "last_modified": date}}},
+    )
+
+    res = client.list_directory(
+        entity_id=entity_id,
+        entity_type=Entity,
+        asset_id=asset_id,
+        admin=True,
+    )
+    assert isinstance(res, DetailedFileList)
+    assert len(res.files) == 1
+
+
+@patch("entitysdk.route.get_route_name")
+def test_client_admin_upload_directory(
+    mock_route, client, httpx_mock, api_url, request_headers_no_context, tmp_path
+):
+    mock_route.return_value = "entity"
+    entity_id = uuid.uuid4()
+
+    file_path = tmp_path / "file.txt"
+    file_path.write_text("hello")
+
+    with patch("entitysdk.core.upload_asset_directory") as mock_upload:
+        mock_upload.return_value = _mock_asset_response(asset_id=uuid.uuid4())
+        client.upload_directory(
+            entity_id=entity_id,
+            entity_type=Entity,
+            name="my-dir",
+            paths={Path("file.txt"): file_path},
+            label=AssetLabel.morphology,
+            admin=True,
+        )
+        _, kwargs = mock_upload.call_args
+        assert kwargs["admin"] is True
+        assert kwargs["project_context"] is None
