@@ -325,6 +325,7 @@ def cell_morphology_protocol():
 @pytest.fixture
 def cell_morphology(brain_region, subject, mtype, cell_morphology_protocol):
     return CellMorphology(
+        id=uuid.uuid4(),
         name="cell-morphology",
         description="cell-morphology-description",
         cell_morphology_protocol=cell_morphology_protocol,
@@ -341,6 +342,7 @@ def cell_morphology(brain_region, subject, mtype, cell_morphology_protocol):
                 size=0,
                 is_directory=False,
                 storage_type=types.StorageType.aws_s3_internal,
+                status="created",
             ),
             Asset(
                 id=uuid.uuid4(),
@@ -351,6 +353,7 @@ def cell_morphology(brain_region, subject, mtype, cell_morphology_protocol):
                 size=0,
                 is_directory=False,
                 storage_type=types.StorageType.aws_s3_internal,
+                status="created",
             ),
             Asset(
                 id=uuid.uuid4(),
@@ -361,6 +364,7 @@ def cell_morphology(brain_region, subject, mtype, cell_morphology_protocol):
                 size=0,
                 is_directory=False,
                 storage_type=types.StorageType.aws_s3_internal,
+                status="created",
             ),
         ],
     )
@@ -376,10 +380,31 @@ def cell_morphology_httpx_mocks(
     entity_id = cell_morphology.id
     assets = cell_morphology.assets
 
+    # Asset metadata endpoints
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/{route}/{entity_id}/assets/{assets[0].id}",
+        json=assets[0].model_dump(mode="json"),
+        is_optional=True,
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/{route}/{entity_id}/assets/{assets[1].id}",
+        json=assets[1].model_dump(mode="json"),
+        is_optional=True,
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/{route}/{entity_id}/assets/{assets[2].id}",
+        json=assets[2].model_dump(mode="json"),
+        is_optional=True,
+    )
+    # Asset download endpoints
     httpx_mock.add_response(
         method="GET",
         url=_download_url(api_url, route, entity_id, assets[0].id),
         content=Path(DATA_DIR, "morph.swc").read_bytes(),
+        is_optional=True,
     )
     httpx_mock.add_response(
         method="GET",
@@ -390,6 +415,7 @@ def cell_morphology_httpx_mocks(
         method="GET",
         url=_download_url(api_url, route, entity_id, assets[2].id),
         content=Path(DATA_DIR, "morph.h5").read_bytes(),
+        is_optional=True,
     )
 
 
@@ -415,6 +441,7 @@ def emodel(brain_region, etype, species):
                 full_path="/emodel_optimization_output.json",
                 is_directory=False,
                 storage_type=types.StorageType.aws_s3_internal,
+                status="created",
             ),
             Asset(
                 id=uuid.uuid4(),
@@ -425,6 +452,7 @@ def emodel(brain_region, etype, species):
                 full_path="/neuron_hoc.hoc",
                 is_directory=False,
                 storage_type=types.StorageType.aws_s3_internal,
+                status="created",
             ),
         ],
     )
@@ -445,6 +473,20 @@ def emodel_httpx_mocks(
         url=f"{api_url}/emodel/{emodel.id}",
         json=emodel.model_dump(mode="json"),
     )
+    # Asset metadata endpoints (used by fetch_file when asset_id is a UUID)
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/{route}/{entity_id}/assets/{assets[0].id}",
+        json=assets[0].model_dump(mode="json"),
+        is_optional=True,
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/{route}/{entity_id}/assets/{assets[1].id}",
+        json=assets[1].model_dump(mode="json"),
+        is_optional=True,
+    )
+    # Asset download endpoints
     httpx_mock.add_response(
         method="GET",
         url=_download_url(api_url, route, entity_id, assets[0].id),

@@ -306,6 +306,7 @@ def stage_sonata_from_config(
         mtype=mtype,
         threshold_current=threshold_current,
         holding_current=holding_current,
+        template_name="cell",
     )
 
     create_circuit_config(output_path=output_dir)
