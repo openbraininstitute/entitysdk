@@ -66,9 +66,7 @@ def _extract_hoc_template_name(hoc_file: Path) -> str:
         if match:
             return match.group(1)
 
-    raise StagingError(
-        f"Could not find 'begintemplate' statement in HOC file: {hoc_file}"
-    )
+    raise StagingError(f"Could not find 'begintemplate' statement in HOC file: {hoc_file}")
 
 
 def stage_sonata_from_memodel(

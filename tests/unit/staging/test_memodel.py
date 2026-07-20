@@ -74,7 +74,7 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
     morph_path.parent.mkdir()
     mech_dir.mkdir()
 
-    (hoc_path).write_text("hoc content")
+    (hoc_path).write_text("begintemplate TestCell\nendtemplate TestCell\n")
     (morph_path).write_text("morph content")
     (mech_dir / "mech.mod").write_text("mod content")
 
@@ -105,6 +105,7 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
     # Validate content inside nodes.h5
     with h5py.File(output_path / "network" / "nodes.h5", "r") as f:
         group = f["nodes"]["All"]["0"]
+        assert group["model_template"][0].decode() == "hoc:TestCell"
         assert group["mtype"][0].decode() == "L5_TTPC1"
         assert group["dynamics_params"]["holding_current"][0] == pytest.approx(-0.1)
         assert group["dynamics_params"]["threshold_current"][0] == pytest.approx(0.2)
@@ -113,7 +114,7 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
 def test_create_json_configs(tmp_path):
     hoc_file = tmp_path / "cell.hoc"
     morph_file = tmp_path / "cell.asc"
-    hoc_file.write_text("hoc content")
+    hoc_file.write_text("begintemplate MyCell\nendtemplate MyCell\n")
     morph_file.write_text("morph content")
     network_dir = tmp_path / "network"
 
@@ -124,6 +125,7 @@ def test_create_json_configs(tmp_path):
         mtype="L5_TTPC1",
         threshold_current=0.2,
         holding_current=-0.1,
+        template_name="MyCell",
     )
 
     assert (network_dir / "nodes.h5").exists()
@@ -196,7 +198,7 @@ def test_mechanism_file_not_exists(tmp_path):
     (memodel_path / "hoc").mkdir()
     (memodel_path / "mechanisms").mkdir()
     (memodel_path / "morphology").mkdir()
-    (memodel_path / "hoc" / "cell.hoc").write_text("hoc content")
+    (memodel_path / "hoc" / "cell.hoc").write_text("begintemplate TestCell\nendtemplate TestCell\n")
     (memodel_path / "morphology" / "cell.asc").write_text("asc content")
     # Do not create the mechanism file
     downloaded_me_model = DownloadedMEModel(
