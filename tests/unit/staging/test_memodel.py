@@ -95,7 +95,7 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
         holding_current=-0.1,
     )
 
-    assert (output_path / "hocs" / "cell.hoc").exists()
+    assert (output_path / "hocs" / "TestCell.hoc").exists()
     assert (output_path / "morphologies" / "cell.asc").exists()
     assert (output_path / "mechanisms" / "mech.mod").exists()
     assert (output_path / "network" / "nodes.h5").exists()
@@ -174,7 +174,7 @@ def test_missing_morphology_file_raises(tmp_path):
     (memodel_path / "hoc").mkdir()
     (memodel_path / "mechanisms").mkdir()
     (memodel_path / "morphology").mkdir()
-    (memodel_path / "hoc" / "cell.hoc").write_text("hoc content")
+    (memodel_path / "hoc" / "cell.hoc").write_text("begintemplate TestCell\nendtemplate TestCell\n")
 
     downloaded_me_model = DownloadedMEModel(
         hoc_path=memodel_path / "hoc" / "cell.hoc",
