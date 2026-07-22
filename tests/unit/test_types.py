@@ -61,3 +61,7 @@ def test_ensure_id_is_set_rejects_asset_without_id():
     asset = _asset(asset_id=None)
     with pytest.raises(ValueError, match="Resource must have an id"):
         ensure_id_is_set(asset)
+
+
+def test_asset_label_includes_compartment_sets():
+    assert AssetLabel.compartment_sets.value == "compartment_sets"
