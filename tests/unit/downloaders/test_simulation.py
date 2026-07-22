@@ -96,6 +96,42 @@ def test_download_node_sets_file(
         assert expected == json.load(fd)
 
 
+def test_download_compartment_sets_file(
+    client,
+    tmp_path,
+    httpx_mock,
+    api_url,
+    request_headers,
+):
+    simulation_id = uuid.uuid4()
+
+    # no assets
+    model = _mock_simulation(simulation_id, assets=[])
+    res = test_module.download_compartment_sets_file(client, model=model, output_path=tmp_path)
+    assert res is None
+
+    # too many assets
+    asset_id = uuid.uuid4()
+    asset = _mock_asset_response(
+        asset_id, ContentType.application_json, AssetLabel.compartment_sets
+    )
+    model = _mock_simulation(simulation_id, assets=[asset, asset])
+    with pytest.raises(EntitySDKError, match="Too many compartment_sets_file for Simulation"):
+        test_module.download_compartment_sets_file(client, model=model, output_path=tmp_path)
+
+    expected = {"foo": "bar"}
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/simulation/{simulation_id}/assets/{asset_id}/download",
+        match_headers=request_headers,
+        content=json.dumps(expected),
+    )
+    model = _mock_simulation(simulation_id, assets=[asset])
+    res = test_module.download_compartment_sets_file(client, model=model, output_path=tmp_path)
+    with res.open() as fd:
+        assert expected == json.load(fd)
+
+
 def test_download_spike_replay_files(
     client,
     tmp_path,

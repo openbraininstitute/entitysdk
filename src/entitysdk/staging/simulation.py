@@ -6,6 +6,7 @@ from pathlib import Path
 
 from entitysdk.client import Client
 from entitysdk.downloaders.simulation import (
+    download_compartment_sets_file,
     download_node_sets_file,
     download_simulation_config_content,
     download_spike_replay_files,
@@ -56,6 +57,12 @@ def stage_simulation(
     spike_paths: list[Path] = download_spike_replay_files(
         client,
         model=model,
+        output_dir=output_dir,
+    )
+    compartment_sets_file = _stage_compartment_sets_file(
+        client=client,
+        model=model,
+        simulation_config=simulation_config,
         output_dir=output_dir,
     )
     if circuit_config_path is None:
@@ -112,6 +119,7 @@ def stage_simulation(
         simulation_config=simulation_config,
         circuit_config_path=circuit_config_path,
         node_sets_path=node_sets_file,
+        compartment_sets_path=compartment_sets_file,
         spike_paths=spike_paths,
         output_dir=output_dir,
         override_results_dir=override_results_dir,
@@ -140,10 +148,36 @@ def _stage_single_cell_node_sets_file(
     return output_path
 
 
+def _stage_compartment_sets_file(
+    client: Client,
+    *,
+    model: Simulation,
+    simulation_config: dict,
+    output_dir: Path,
+) -> Path | None:
+    compartment_sets_file = simulation_config.get("compartment_sets_file")
+    if compartment_sets_file is None:
+        return None
+
+    output_path = output_dir / Path(compartment_sets_file).name
+    path = download_compartment_sets_file(
+        client,
+        model=model,
+        output_path=output_path,
+    )
+    if path is None:
+        raise StagingError(
+            "Simulation config references `compartment_sets_file`, but no "
+            "`compartment_sets` asset was found."
+        )
+    return path
+
+
 def _transform_simulation_config(
     simulation_config: dict,
     circuit_config_path: Path,
     node_sets_path: Path | None,
+    compartment_sets_path: Path | None,
     spike_paths: list[Path],
     output_dir: Path,
     override_results_dir: Path | None,
@@ -163,6 +197,9 @@ def _transform_simulation_config(
 
     if node_sets_path is not None:
         ret["node_sets_file"] = str(node_sets_path.relative_to(output_dir))
+
+    if compartment_sets_path is not None:
+        ret["compartment_sets_file"] = str(compartment_sets_path.relative_to(output_dir))
 
     return ret
 

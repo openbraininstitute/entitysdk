@@ -57,6 +57,34 @@ def download_node_sets_file(client: Client, *, model: Simulation, output_path: P
     return path
 
 
+def download_compartment_sets_file(
+    client: Client, *, model: Simulation, output_path: Path
+) -> Path | None:
+    """Download the compartment sets file from simulation's assets."""
+    ensure_has_id(model)
+
+    asset = client.select_assets(
+        model,
+        selection={"label": "compartment_sets"},
+    ).all()
+
+    if len(asset) == 0:
+        return None
+    if len(asset) > 1:
+        raise EntitySDKError(f"Too many compartment_sets_file for Simulation {model.id}")
+
+    path = client.download_file(
+        entity_id=model.id,
+        entity_type=Simulation,
+        asset_id=asset[0],
+        output_path=output_path,
+    )
+
+    L.info("Compartment sets file downloaded at %s", path)
+
+    return path
+
+
 def download_spike_replay_files(
     client: Client, *, model: Simulation, output_dir: Path
 ) -> list[Path]:

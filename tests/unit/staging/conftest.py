@@ -148,6 +148,11 @@ def node_sets():
 
 
 @pytest.fixture
+def compartment_sets():
+    return {"L1CompartmentSet": {"population": "All", "compartment_set": [[0, 1, 0.5]]}}
+
+
+@pytest.fixture
 def spike_replays():
     return Path(DATA_DIR, "spike_replays.h5").read_bytes()
 
@@ -203,13 +208,29 @@ def simulation(circuit):
                 is_directory=False,
                 storage_type=types.StorageType.aws_s3_internal,
             ),
+            Asset(
+                id=uuid.uuid4(),
+                content_type="application/json",
+                label="compartment_sets",
+                path="compartment_sets.json",
+                full_path="/compartment_sets.json",
+                size=0,
+                is_directory=False,
+                storage_type=types.StorageType.aws_s3_internal,
+            ),
         ],
     )
 
 
 @pytest.fixture
 def simulation_httpx_mocks(
-    httpx_mock, simulation, node_sets, api_url, simulation_config, spike_replays
+    httpx_mock,
+    simulation,
+    node_sets,
+    compartment_sets,
+    api_url,
+    simulation_config,
+    spike_replays,
 ):
     httpx_mock.add_response(
         method="GET",
@@ -231,6 +252,12 @@ def simulation_httpx_mocks(
         method="GET",
         url=f"{api_url}/simulation/{simulation.id}/assets/{simulation.assets[3].id}/download",
         content=spike_replays,
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/simulation/{simulation.id}/assets/{simulation.assets[4].id}/download",
+        json=compartment_sets,
+        is_optional=True,
     )
 
 

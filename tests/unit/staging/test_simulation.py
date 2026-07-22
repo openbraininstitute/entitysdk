@@ -31,6 +31,7 @@ def test_stage_simulation(
 
     expected_simulation_config_path = tmp_path / "simulation_config.json"
     expected_node_sets_path = tmp_path / "node_sets.json"
+    expected_compartment_sets_path = tmp_path / "compartment_sets.json"
     expected_spikes_1 = tmp_path / "PoissonInputStimulus_spikes_1.h5"
     expected_spikes_2 = tmp_path / "PoissonInputStimulus_spikes_2.h5"
     expected_circuit_config_path = tmp_path / "circuit" / "circuit_config.json"
@@ -39,6 +40,7 @@ def test_stage_simulation(
 
     assert expected_simulation_config_path.exists()
     assert expected_node_sets_path.exists()
+    assert expected_compartment_sets_path.exists()
     assert expected_spikes_1.exists()
     assert expected_spikes_2.exists()
     assert expected_circuit_config_path.exists()
@@ -48,6 +50,7 @@ def test_stage_simulation(
     res = load_json(expected_simulation_config_path)
     assert res["network"] == str(expected_circuit_config_path)
     assert res["node_sets_file"] == Path(expected_node_sets_path).name
+    assert res["compartment_sets_file"] == Path(expected_compartment_sets_path).name
 
     assert res["reports"] == simulation_config["reports"]
     assert res["conditions"] == simulation_config["conditions"]
@@ -78,17 +81,20 @@ def test_stage_simulation__external_circuit_config(
 
     expected_simulation_config_path = tmp_path / "simulation_config.json"
     expected_node_sets_path = tmp_path / "node_sets.json"
+    expected_compartment_sets_path = tmp_path / "compartment_sets.json"
     expected_spikes_1 = tmp_path / "PoissonInputStimulus_spikes_1.h5"
     expected_spikes_2 = tmp_path / "PoissonInputStimulus_spikes_2.h5"
 
     assert expected_simulation_config_path.exists()
     assert expected_node_sets_path.exists()
+    assert expected_compartment_sets_path.exists()
     assert expected_spikes_1.exists()
     assert expected_spikes_2.exists()
 
     res = load_json(expected_simulation_config_path)
     assert res["network"] == circuit_config_path
     assert res["node_sets_file"] == Path(expected_node_sets_path).name
+    assert res["compartment_sets_file"] == Path(expected_compartment_sets_path).name
 
     assert res["reports"] == simulation_config["reports"]
     assert res["conditions"] == simulation_config["conditions"]
@@ -135,6 +141,7 @@ def test__transform_simulation_config():
         simulation_config={},
         circuit_config_path=circuit_config_path,
         node_sets_path=None,
+        compartment_sets_path=None,
         spike_paths=[],
         output_dir=Path(),
         override_results_dir=None,
@@ -146,6 +153,7 @@ def test__transform_simulation_config():
             simulation_config={},
             circuit_config_path=circuit_config_path,
             node_sets_path=None,
+            compartment_sets_path=None,
             spike_paths=[
                 Path(),
             ],
