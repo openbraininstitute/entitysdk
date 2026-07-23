@@ -8,6 +8,7 @@ from entitysdk.client import Client
 from entitysdk.dependencies.entity import ensure_has_assets, ensure_has_id
 from entitysdk.exception import EntitySDKError
 from entitysdk.models import Simulation
+from entitysdk.types import AssetLabel, ContentType
 
 L = logging.getLogger(__name__)
 
@@ -55,6 +56,22 @@ def download_node_sets_file(client: Client, *, model: Simulation, output_path: P
     L.info("Node sets file downloaded at %s", path)
 
     return path
+
+
+def fetch_compartment_sets_file(client: Client, *, model: Simulation, output_path: Path) -> Path:
+    """Fetch the compartment sets file from simulation's assets."""
+    downloaded = client.fetch_assets(
+        entity_or_id=model,
+        selection={
+            "label": AssetLabel.compartment_sets,
+            "content_type": ContentType.application_json,
+        },
+        output_path=output_path,
+    ).one()
+
+    L.info("Compartment sets file fetched at %s", downloaded.path)
+
+    return downloaded.path
 
 
 def download_spike_replay_files(
