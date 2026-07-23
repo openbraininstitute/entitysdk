@@ -61,7 +61,7 @@ def stage_simulation(
     )
     compartment_sets_file = None
     if compartment_sets_path := simulation_config.get("compartment_sets_file"):
-        compartment_sets_file = _stage_compartment_sets_file(
+        compartment_sets_file = fetch_compartment_sets_file(
             client=client,
             model=model,
             output_path=output_dir / Path(compartment_sets_path).name,
@@ -147,19 +147,6 @@ def _stage_single_cell_node_sets_file(
         output_path,
     )
     return output_path
-
-
-def _stage_compartment_sets_file(
-    client: Client,
-    *,
-    model: Simulation,
-    output_path: Path,
-) -> Path:
-    return fetch_compartment_sets_file(
-        client,
-        model=model,
-        output_path=output_path,
-    )
 
 
 def _transform_simulation_config(

@@ -8,6 +8,7 @@ from entitysdk.client import Client
 from entitysdk.dependencies.entity import ensure_has_assets, ensure_has_id
 from entitysdk.exception import EntitySDKError
 from entitysdk.models import Simulation
+from entitysdk.types import AssetLabel, ContentType
 
 L = logging.getLogger(__name__)
 
@@ -59,11 +60,12 @@ def download_node_sets_file(client: Client, *, model: Simulation, output_path: P
 
 def fetch_compartment_sets_file(client: Client, *, model: Simulation, output_path: Path) -> Path:
     """Fetch the compartment sets file from simulation's assets."""
-    ensure_has_id(model)
-
     downloaded = client.fetch_assets(
         entity_or_id=model,
-        selection={"label": "compartment_sets"},
+        selection={
+            "label": AssetLabel.compartment_sets,
+            "content_type": ContentType.application_json,
+        },
         output_path=output_path,
     ).one()
 
