@@ -103,6 +103,7 @@ def multipart_upload_asset_file(
     token_manager: TokenManager,
     http_client: httpx.Client,
     transfer_config: MultipartUploadTransferConfig,
+    admin: bool,
 ) -> Asset:
     """Upload a local asset file in multiple parts to the storage service using presigned URLs.
 
@@ -120,6 +121,7 @@ def multipart_upload_asset_file(
         token_manager: Object providing authentication tokens for API requests.
         http_client: HTTP client to use for uploads.
         transfer_config: Configuration for multipart upload.
+        admin: Whether to use the admin endpoints.
 
     Returns:
         Asset: The file asset object as returned by the backend after completion.
@@ -134,6 +136,7 @@ def multipart_upload_asset_file(
         token_manager=token_manager,
         http_client=http_client,
         preferred_part_count=transfer_config.preferred_part_count,
+        admin=admin,
     )
     _upload_parts(
         parts=parts,
@@ -148,6 +151,7 @@ def multipart_upload_asset_file(
         project_context=project_context,
         token_manager=token_manager,
         http_client=http_client,
+        admin=admin,
     )
 
 
@@ -162,6 +166,7 @@ def _initiate_upload(
     preferred_part_count: int,
     token_manager: TokenManager,
     http_client: httpx.Client,
+    admin: bool,
 ) -> tuple[ID, list[PartUpload]]:
     """Initiate a multipart upload with the backend and prepare part metadata.
 
@@ -183,6 +188,7 @@ def _initiate_upload(
         api_url=api_url,
         entity_id=entity_id,
         entity_type=entity_type,
+        admin=admin,
     )
     filesize = get_filesize(asset_path)
     data = make_db_api_request(
@@ -359,6 +365,7 @@ def _complete_upload(
     project_context: ProjectContext | None,
     token_manager: TokenManager,
     http_client: httpx.Client,
+    admin: bool,
 ) -> Asset:
     """Finalize a multipart upload with the backend and return the created asset.
 
@@ -377,6 +384,7 @@ def _complete_upload(
         entity_id=entity_id,
         entity_type=entity_type,
         asset_id=asset_id,
+        admin=admin,
     )
     data = make_db_api_request(
         url=url,
@@ -399,6 +407,7 @@ def multipart_upload_asset_directory(
     transfer_config: MultipartDirectoryUploadTransferConfig,
     upload_request: MultipartDirectoryUploadRequest,
     paths: dict[Path, Path],
+    admin: bool,
 ) -> Asset:
     """Upload files in a local directory in multiple parts using presigned URLs.
 
@@ -419,6 +428,7 @@ def multipart_upload_asset_directory(
         transfer_config: Configuration for multipart upload.
         upload_request: Request parameters for the upload.
         paths: Mapping of relative paths to local file paths.
+        admin: Whether to use the admin endpoints.
 
     Returns:
         Asset: The directory asset object as returned by the backend after completion.
@@ -432,6 +442,7 @@ def multipart_upload_asset_directory(
         http_client=http_client,
         upload_request=upload_request,
         paths=paths,
+        admin=admin,
     )
     _upload_parts(
         parts=parts,
@@ -446,6 +457,7 @@ def multipart_upload_asset_directory(
         project_context=project_context,
         token_manager=token_manager,
         http_client=http_client,
+        admin=admin,
     )
 
 
@@ -459,6 +471,7 @@ def _initiate_directory_upload(
     http_client: httpx.Client,
     upload_request: MultipartDirectoryUploadRequest,
     paths: dict[Path, Path],
+    admin: bool,
 ) -> tuple[ID, list[PartUpload]]:
     """Initiate a multipart directory upload with the backend and prepare part metadata.
 
@@ -468,6 +481,7 @@ def _initiate_directory_upload(
         api_url=api_url,
         entity_id=entity_id,
         entity_type=entity_type,
+        admin=admin,
     )
     data = make_db_api_request(
         url=url,
@@ -514,6 +528,7 @@ def _complete_upload_directory(
     project_context: ProjectContext | None,
     token_manager: TokenManager,
     http_client: httpx.Client,
+    admin: bool,
 ) -> Asset:
     """Finalize a multipart directory upload with the backend and return the created asset.
 
@@ -524,6 +539,7 @@ def _complete_upload_directory(
         entity_id=entity_id,
         entity_type=entity_type,
         asset_id=asset_id,
+        admin=admin,
     )
     data = make_db_api_request(
         url=url,
