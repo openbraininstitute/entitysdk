@@ -59,16 +59,13 @@ def stage_simulation(
         model=model,
         output_dir=output_dir,
     )
-    compartment_sets_path = simulation_config.get("compartment_sets_file")
-    compartment_sets_file = (
-        _stage_compartment_sets_file(
+    compartment_sets_file = None
+    if compartment_sets_path := simulation_config.get("compartment_sets_file"):
+        compartment_sets_file = _stage_compartment_sets_file(
             client=client,
             model=model,
             output_path=output_dir / Path(compartment_sets_path).name,
         )
-        if compartment_sets_path is not None
-        else None
-    )
     if circuit_config_path is None:
         L.info(
             "Circuit config path was not provided. Circuit is going to be staged from metadata. "
