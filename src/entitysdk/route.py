@@ -125,9 +125,14 @@ def get_entity_derivations_endpoint(
     api_url: str,
     entity_type: type[Entity],
     entity_id: ID,
+    admin: bool,
 ):
     """Get endpoint for entity derivations."""
     route_name = get_route_name(entity_type)
+
+    if admin:
+        route_name = f"admin/{route_name}"
+
     return f"{api_url}/{route_name}/{entity_id}/derived-from"
 
 
@@ -163,13 +168,14 @@ def multipart_upload_initiate_endpoint(
     api_url: str,
     entity_id: str | ID,
     entity_type: type[Entity],
+    admin: bool,
 ):
     """Return multipart upload initiate upload."""
     base_url = get_entities_endpoint(
         api_url=api_url,
         entity_type=entity_type,
         entity_id=entity_id,
-        admin=False,
+        admin=admin,
     )
     return f"{base_url}/assets/multipart-upload/initiate"
 
@@ -180,13 +186,14 @@ def multipart_upload_complete_endpoint(
     entity_id: str | ID,
     entity_type: type[Entity],
     asset_id: str | ID,
+    admin: bool,
 ):
     """Return multipart upload complete endpoint."""
     base_url = get_entities_endpoint(
         api_url=api_url,
         entity_type=entity_type,
         entity_id=entity_id,
-        admin=False,
+        admin=admin,
     )
     return f"{base_url}/assets/{asset_id}/multipart-upload/complete"
 
@@ -196,13 +203,14 @@ def multipart_upload_initiate_endpoint_directory(
     api_url: str,
     entity_id: str | ID,
     entity_type: type[Entity],
+    admin: bool,
 ):
     """Return multipart upload initiate upload for directories."""
     base_url = get_entities_endpoint(
         api_url=api_url,
         entity_type=entity_type,
         entity_id=entity_id,
-        admin=False,
+        admin=admin,
     )
     return f"{base_url}/assets/directory/multipart-upload/initiate"
 
@@ -213,12 +221,13 @@ def multipart_upload_complete_endpoint_directory(
     entity_id: str | ID,
     entity_type: type[Entity],
     asset_id: str | ID,
+    admin: bool,
 ):
     """Return multipart upload complete endpoint for directories."""
     base_url = get_entities_endpoint(
         api_url=api_url,
         entity_type=entity_type,
         entity_id=entity_id,
-        admin=False,
+        admin=admin,
     )
     return f"{base_url}/assets/{asset_id}/directory/multipart-upload/complete"

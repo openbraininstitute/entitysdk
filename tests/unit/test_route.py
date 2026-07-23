@@ -43,6 +43,11 @@ def test_get_assets_endpoint(api_url):
 
 def test_get_entity_derivations_endpoint(api_url):
     res = test_module.get_entity_derivations_endpoint(
-        api_url=api_url, entity_type=Entity, entity_id="1"
+        api_url=api_url, entity_type=Entity, entity_id="1", admin=False
     )
     assert res == f"{api_url}/entity/1/derived-from"
+
+    res = test_module.get_entity_derivations_endpoint(
+        api_url=api_url, entity_type=Entity, entity_id="1", admin=True
+    )
+    assert res == f"{api_url}/admin/entity/1/derived-from"
