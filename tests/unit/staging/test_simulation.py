@@ -1,4 +1,5 @@
 from pathlib import Path
+from unittest.mock import Mock
 
 import pytest
 
@@ -102,6 +103,32 @@ def test_stage_simulation__external_circuit_config(
     assert len(res["inputs"]) == len(simulation_config["inputs"])
     assert res["inputs"]["PoissonInputStimulus"]["spike_file"] == expected_spikes_1.name
     assert res["inputs"]["PoissonInputStimulus_2"]["spike_file"] == expected_spikes_2.name
+
+
+def test_stage_simulation__without_compartment_sets_file(
+    client,
+    tmp_path,
+    simulation,
+    monkeypatch,
+):
+    monkeypatch.setattr(
+        test_module,
+        "download_simulation_config_content",
+        lambda *_args, **_kwargs: {},
+    )
+    monkeypatch.setattr(test_module, "download_spike_replay_files", lambda *_args, **_kwargs: [])
+    monkeypatch.setattr(test_module, "download_node_sets_file", lambda *_args, **_kwargs: None)
+    fetch_compartment_sets_file = Mock()
+    monkeypatch.setattr(test_module, "fetch_compartment_sets_file", fetch_compartment_sets_file)
+
+    test_module.stage_simulation(
+        client,
+        model=simulation,
+        output_dir=tmp_path,
+        circuit_config_path=Path("my-external-path"),
+    )
+
+    fetch_compartment_sets_file.assert_not_called()
 
 
 def test_transform_inputs__raises():
