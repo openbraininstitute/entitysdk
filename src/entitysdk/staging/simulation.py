@@ -6,10 +6,10 @@ from pathlib import Path
 
 from entitysdk.client import Client
 from entitysdk.downloaders.simulation import (
-    download_compartment_sets_file,
     download_node_sets_file,
     download_simulation_config_content,
     download_spike_replay_files,
+    fetch_compartment_sets_file,
 )
 from entitysdk.exception import StagingError
 from entitysdk.models import Circuit, MEModel, Simulation
@@ -59,11 +59,15 @@ def stage_simulation(
         model=model,
         output_dir=output_dir,
     )
-    compartment_sets_file = _stage_compartment_sets_file(
-        client=client,
-        model=model,
-        simulation_config=simulation_config,
-        output_dir=output_dir,
+    compartment_sets_path = simulation_config.get("compartment_sets_file")
+    compartment_sets_file = (
+        _stage_compartment_sets_file(
+            client=client,
+            model=model,
+            output_path=output_dir / Path(compartment_sets_path).name,
+        )
+        if compartment_sets_path is not None
+        else None
     )
     if circuit_config_path is None:
         L.info(
@@ -152,25 +156,13 @@ def _stage_compartment_sets_file(
     client: Client,
     *,
     model: Simulation,
-    simulation_config: dict,
-    output_dir: Path,
-) -> Path | None:
-    compartment_sets_file = simulation_config.get("compartment_sets_file")
-    if compartment_sets_file is None:
-        return None
-
-    output_path = output_dir / Path(compartment_sets_file).name
-    path = download_compartment_sets_file(
+    output_path: Path,
+) -> Path:
+    return fetch_compartment_sets_file(
         client,
         model=model,
         output_path=output_path,
     )
-    if path is None:
-        raise StagingError(
-            "Simulation config references `compartment_sets_file`, but no "
-            "`compartment_sets` asset was found."
-        )
-    return path
 
 
 def _transform_simulation_config(

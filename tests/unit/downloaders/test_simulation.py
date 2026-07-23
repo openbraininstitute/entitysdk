@@ -4,7 +4,7 @@ import uuid
 import pytest
 
 from entitysdk.downloaders import simulation as test_module
-from entitysdk.exception import EntitySDKError
+from entitysdk.exception import EntitySDKError, IteratorResultError
 from entitysdk.models import Simulation
 from entitysdk.types import AssetLabel, ContentType
 
@@ -96,7 +96,7 @@ def test_download_node_sets_file(
         assert expected == json.load(fd)
 
 
-def test_download_compartment_sets_file(
+def test_fetch_compartment_sets_file(
     client,
     tmp_path,
     httpx_mock,
@@ -105,21 +105,30 @@ def test_download_compartment_sets_file(
 ):
     simulation_id = uuid.uuid4()
 
-    # no assets
-    model = _mock_simulation(simulation_id, assets=[])
-    res = test_module.download_compartment_sets_file(client, model=model, output_path=tmp_path)
-    assert res is None
+    # no matching assets
+    asset_id = uuid.uuid4()
+    asset = _mock_asset_response(
+        asset_id, ContentType.application_json, AssetLabel.custom_node_sets
+    )
+    model = _mock_simulation(simulation_id, assets=[asset])
+    with pytest.raises(IteratorResultError, match="Iterable is empty."):
+        test_module.fetch_compartment_sets_file(
+            client,
+            model=model,
+            output_path=tmp_path / "compartment_sets.json",
+        )
 
-    # too many assets
     asset_id = uuid.uuid4()
     asset = _mock_asset_response(
         asset_id, ContentType.application_json, AssetLabel.compartment_sets
     )
-    model = _mock_simulation(simulation_id, assets=[asset, asset])
-    with pytest.raises(EntitySDKError, match="Too many compartment_sets_file for Simulation"):
-        test_module.download_compartment_sets_file(client, model=model, output_path=tmp_path)
-
     expected = {"foo": "bar"}
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/simulation/{simulation_id}/assets/{asset_id}",
+        match_headers=request_headers,
+        json=asset,
+    )
     httpx_mock.add_response(
         method="GET",
         url=f"{api_url}/simulation/{simulation_id}/assets/{asset_id}/download",
@@ -127,7 +136,11 @@ def test_download_compartment_sets_file(
         content=json.dumps(expected),
     )
     model = _mock_simulation(simulation_id, assets=[asset])
-    res = test_module.download_compartment_sets_file(client, model=model, output_path=tmp_path)
+    res = test_module.fetch_compartment_sets_file(
+        client,
+        model=model,
+        output_path=tmp_path / "compartment_sets.json",
+    )
     with res.open() as fd:
         assert expected == json.load(fd)
 

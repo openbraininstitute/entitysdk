@@ -216,6 +216,7 @@ def simulation(circuit):
                 full_path="/compartment_sets.json",
                 size=0,
                 is_directory=False,
+                status=types.AssetStatus.created,
                 storage_type=types.StorageType.aws_s3_internal,
             ),
         ],
@@ -252,6 +253,12 @@ def simulation_httpx_mocks(
         method="GET",
         url=f"{api_url}/simulation/{simulation.id}/assets/{simulation.assets[3].id}/download",
         content=spike_replays,
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/simulation/{simulation.id}/assets/{simulation.assets[4].id}",
+        json=simulation.assets[4].model_dump(mode="json"),
+        is_optional=True,
     )
     httpx_mock.add_response(
         method="GET",
