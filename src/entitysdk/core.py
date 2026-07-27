@@ -346,7 +346,9 @@ def upload_asset_file(
     admin: bool,
 ) -> Asset:
     """Upload asset to an existing entity's endpoint from a file path."""
-    if transfer_config and get_filesize(asset_path) > transfer_config.threshold:
+    transfer_config = transfer_config or MultipartUploadTransferConfig()
+
+    if get_filesize(asset_path) > transfer_config.threshold:
         L.info("File is being uploaded using multipart upload")
         return multipart_upload_asset_file(
             api_url=api_url,

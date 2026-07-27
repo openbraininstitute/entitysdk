@@ -392,7 +392,8 @@ class Client:
             file_metadata: Optional extra metadata to attach to the asset.
             asset_label: Label for the asset.
             project_context: Optional project context.
-            transfer_config: Optional multipart upload configuration.
+            transfer_config: Optional multipart upload configuration. If not specified,
+                uses the defaults specified in ``MultipartUploadTransferConfig``.
             admin: Whether to use admin endpoints.
 
         Returns:
@@ -493,7 +494,8 @@ class Client:
             metadata: Optional extra metadata to attach to the directory asset.
             label: Label for the asset.
             project_context: Optional project context.
-            transfer_config: Optional multipart upload configuration.
+            transfer_config: Optional multipart upload configuration. If not specified,
+                uses the defaults from ``MultipartDirectoryUploadTransferConfig``.
             admin: Whether to use the admin endpoints.
 
         Returns:
