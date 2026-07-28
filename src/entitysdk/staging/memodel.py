@@ -68,15 +68,11 @@ def stage_sonata_from_memodel(
     Returns:
         Path to generated circuit_config.json (inside SONATA folder).
     """
-    etypes = memodel.emodel.etypes or []
-    if not etypes or not etypes[0].pref_label.strip():
-        raise StagingError(f"MEModel {memodel.id} has no e-type on its associated E-model.")
-    etype = etypes[0].pref_label.strip()
-
     with tempfile.TemporaryDirectory() as tmp_dir:
         downloaded_me_model = download_memodel(client, memodel=memodel, output_dir=tmp_dir)
 
         mtype = memodel.mtypes[0].pref_label if memodel.mtypes else ""
+        etype = memodel.emodel.etypes[0].pref_label if memodel.emodel.etypes else ""
 
         if memodel.calibration_result is None:
             raise StagingError(f"MEModel {memodel.id} has no calibration result.")

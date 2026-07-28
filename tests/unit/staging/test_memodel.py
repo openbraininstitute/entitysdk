@@ -14,13 +14,11 @@ class FakeMType:
 
 
 class FakeEType:
-    def __init__(self, pref_label="cADpyr"):
-        self.pref_label = pref_label
+    pref_label = "cADpyr"
 
 
 class FakeEModel:
-    def __init__(self):
-        self.etypes = [FakeEType()]
+    etypes = [FakeEType()]
 
 
 class FakeCalibration:
@@ -74,17 +72,6 @@ def test_stage_sonata_from_memodel_no_calibration(tmp_path, fake_memodel_no_cali
             memodel_mod.stage_sonata_from_memodel(
                 fake_client, fake_memodel_no_calib, output_dir=tmp_path
             )
-
-
-@pytest.mark.parametrize("etypes", [None, [], [FakeEType("")], [FakeEType("   ")]])
-def test_stage_sonata_from_memodel_requires_etype(tmp_path, fake_memodel, fake_client, etypes):
-    fake_memodel.emodel.etypes = etypes
-
-    with mock.patch.object(memodel_mod, "download_memodel") as mock_dl:
-        with pytest.raises(StagingError, match="has no e-type"):
-            memodel_mod.stage_sonata_from_memodel(fake_client, fake_memodel, output_dir=tmp_path)
-
-    mock_dl.assert_not_called()
 
 
 def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
