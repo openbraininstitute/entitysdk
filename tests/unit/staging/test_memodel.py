@@ -13,6 +13,14 @@ class FakeMType:
     pref_label = "L5_TTPC1"
 
 
+class FakeEType:
+    pref_label = "cADpyr"
+
+
+class FakeEModel:
+    etypes = [FakeEType()]
+
+
 class FakeCalibration:
     threshold_current = 0.234
     holding_current = -0.123
@@ -22,6 +30,7 @@ class FakeMEModel:
     def __init__(self, with_calibration=True):
         self.id = "fake_id"
         self.mtypes = [FakeMType()]
+        self.emodel = FakeEModel()
         self.calibration_result = FakeCalibration() if with_calibration else None
 
 
@@ -54,6 +63,7 @@ def test_stage_sonata_from_memodel_success(tmp_path, fake_memodel, fake_client):
         assert result == config_path
         mock_dl.assert_called_once()
         mock_gen.assert_called_once()
+        assert mock_gen.call_args.kwargs["etype"] == "cADpyr"
 
 
 def test_stage_sonata_from_memodel_no_calibration(tmp_path, fake_memodel_no_calib, fake_client):
@@ -91,6 +101,7 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
         downloaded_memodel=downloaded_me_model,
         output_path=output_path,
         mtype="L5_TTPC1",
+        etype="cADpyr",
         threshold_current=0.2,
         holding_current=-0.1,
     )
@@ -107,6 +118,7 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
         group = f["nodes"]["All"]["0"]
         assert group["model_template"][0].decode() == "hoc:TestCell"
         assert group["mtype"][0].decode() == "L5_TTPC1"
+        assert group["etype"][0].decode() == "cADpyr"
         assert group["dynamics_params"]["holding_current"][0] == pytest.approx(-0.1)
         assert group["dynamics_params"]["threshold_current"][0] == pytest.approx(0.2)
 
@@ -123,6 +135,7 @@ def test_create_json_configs(tmp_path):
         morph_file=str(morph_file),
         output_file=network_dir / "nodes.h5",
         mtype="L5_TTPC1",
+        etype="cADpyr",
         threshold_current=0.2,
         holding_current=-0.1,
         template_name="MyCell",
@@ -163,6 +176,7 @@ def test_missing_hoc_file_raise(tmp_path):
             downloaded_memodel=downloaded_me_model,
             output_path=tmp_path,
             mtype="Test",
+            etype="TestEType",
             threshold_current=0.2,
             holding_current=-0.1,
         )
@@ -187,6 +201,7 @@ def test_missing_morphology_file_raises(tmp_path):
             downloaded_memodel=downloaded_me_model,
             output_path=tmp_path,
             mtype="Test",
+            etype="TestEType",
             threshold_current=0.2,
             holding_current=-0.1,
         )
@@ -212,6 +227,7 @@ def test_mechanism_file_not_exists(tmp_path):
         downloaded_memodel=downloaded_me_model,
         output_path=tmp_path,
         mtype="Test",
+        etype="TestEType",
         threshold_current=0.2,
         holding_current=-0.1,
     )

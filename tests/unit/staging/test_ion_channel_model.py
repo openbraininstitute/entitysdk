@@ -1,5 +1,7 @@
 import uuid
 
+import h5py
+
 import entitysdk.staging.ion_channel_model as icm
 from entitysdk import models, types
 from entitysdk.models.ion_channel_model import IonChannelModel, NeuronBlock
@@ -204,6 +206,8 @@ def test_stage_sonata_from_config(client, tmp_path, httpx_mock, api_url, request
         client=client,
         ion_channel_model_data=ion_channel_model_data,
         output_dir=tmp_path,
+        mtype="TestMType",
+        etype="TestEType",
     )
 
     assert config_path == tmp_path / "circuit_config.json"
@@ -213,3 +217,7 @@ def test_stage_sonata_from_config(client, tmp_path, httpx_mock, api_url, request
     assert (tmp_path / "network" / "nodes.h5").exists()
     assert (tmp_path / "circuit_config.json").exists()
     assert (tmp_path / "node_sets.json").exists()
+    with h5py.File(tmp_path / "network" / "nodes.h5") as h5:
+        group = h5["nodes/All/0"]
+        assert group["mtype"].asstr()[0] == "TestMType"
+        assert group["etype"].asstr()[0] == "TestEType"
