@@ -71,8 +71,8 @@ def stage_sonata_from_memodel(
     with tempfile.TemporaryDirectory() as tmp_dir:
         downloaded_me_model = download_memodel(client, memodel=memodel, output_dir=tmp_dir)
 
-        mtype = memodel.mtypes[0].pref_label if memodel.mtypes else ""
-        etype = memodel.emodel.etypes[0].pref_label if memodel.emodel.etypes else ""
+        mtype = memodel.mtypes[0].pref_label if memodel.mtypes else None
+        etype = memodel.emodel.etypes[0].pref_label if memodel.emodel.etypes else None
 
         if memodel.calibration_result is None:
             raise StagingError(f"MEModel {memodel.id} has no calibration result.")
@@ -99,8 +99,8 @@ def stage_sonata_from_memodel(
 def _generate_sonata_files_from_memodel(
     downloaded_memodel: DownloadedMEModel,
     output_path: Path,
-    mtype: str,
-    etype: str,
+    mtype: str | None,
+    etype: str | None,
     threshold_current: float,
     holding_current: float,
 ):
@@ -109,8 +109,8 @@ def _generate_sonata_files_from_memodel(
     Args:
         downloaded_memodel (DownloadedMEModel): The downloaded MEModel object.
         output_path (str or Path): Path to the output 'sonata' folder.
-        mtype (str): Cell mtype.
-        etype (str): Cell etype.
+        mtype (str | None): Cell mtype, if available.
+        etype (str | None): Cell etype, if available.
         threshold_current (float): Threshold current.
         holding_current (float): Holding current.
     """
@@ -167,11 +167,12 @@ def create_nodes_file(
     hoc_file: str,
     morph_file: str,
     output_file: Path,
-    mtype: str,
-    etype: str,
     threshold_current: float,
     holding_current: float,
     template_name: str,
+    *,
+    mtype: str | None = None,
+    etype: str | None = None,
 ):
     """Create a SONATA nodes.h5 file for a single cell population.
 
@@ -179,11 +180,11 @@ def create_nodes_file(
         hoc_file (str): Path to the hoc file.
         morph_file (str): Path to the morphology file.
         output_file (Path): Output file path for nodes.h5.
-        mtype (str): Cell mtype.
-        etype (str): Cell etype.
         threshold_current (float): Threshold current value.
         holding_current (float): Holding current value.
         template_name (str): HOC template name (from begintemplate statement).
+        mtype (str | None): Cell mtype, if available.
+        etype (str | None): Cell etype, if available.
     """
     output_file = Path(output_file)  # ensure Path type
     output_file.parent.mkdir(parents=True, exist_ok=True)
@@ -207,8 +208,10 @@ def create_nodes_file(
         group_0.create_dataset("morphology", (1,), dtype=h5py.string_dtype())[0] = (
             f"morphologies/{Path(morph_file).stem}"
         )
-        group_0.create_dataset("mtype", (1,), dtype=h5py.string_dtype())[0] = mtype
-        group_0.create_dataset("etype", (1,), dtype=h5py.string_dtype())[0] = etype
+        if mtype is not None:
+            group_0.create_dataset("mtype", (1,), dtype=h5py.string_dtype())[0] = mtype
+        if etype is not None:
+            group_0.create_dataset("etype", (1,), dtype=h5py.string_dtype())[0] = etype
 
         # Coordinates and rotation
         for name in [
