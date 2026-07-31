@@ -276,8 +276,8 @@ def test_stage_recording_arrays(client, tmp_path, httpx_mock, api_url):
     path2 = tmp_path / "electrodes_files" / f"{id2}.h5"
     assert path1.read_bytes() == b"array-1"
     assert path2.read_bytes() == b"array-2"
-    assert res["lfp_report_A"]["electrodes_file"] == f"electrodes_files/{id1}.h5"
-    assert res["lfp_report_B"]["electrodes_file"] == f"electrodes_files/{id2}.h5"
+    assert res["lfp_report_A"]["electrodes_file"] == str(path1)
+    assert res["lfp_report_B"]["electrodes_file"] == str(path2)
     assert res["SomaVoltRec"] == reports["SomaVoltRec"]
 
 
