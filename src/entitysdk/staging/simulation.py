@@ -119,12 +119,10 @@ def stage_simulation(
             output_path=output_dir / DEFAULT_NODE_SETS_FILENAME,
         )
 
-    # recording_arrays will be added to Simulation later; getattr keeps this working meanwhile
-    recording_arrays = getattr(model, "recording_arrays", None) or []
     reports = _stage_recording_arrays(
         client,
         reports=simulation_config.get("reports", {}),
-        recording_arrays=recording_arrays,
+        recording_arrays=model.recording_arrays,
         output_dir=output_dir,
     )
 
