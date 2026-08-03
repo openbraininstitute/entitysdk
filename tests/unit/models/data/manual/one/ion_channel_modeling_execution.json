@@ -5,19 +5,15 @@
   "update_date": "2025-11-04T12:25:52.501998Z",
   "created_by": {
     "id": "20a4eb52-61c0-411b-be54-89b5df0314b9",
-    "given_name": null,
-    "family_name": null,
     "pref_label": "Regular User With Project Id",
-    "type": "person",
-    "sub_id": "00000000-0000-0000-0000-000000000001"
+    "creation_date": "2025-01-01T00:00:00",
+    "update_date": "2025-01-01T00:00:00"
   },
   "updated_by": {
     "id": "20a4eb52-61c0-411b-be54-89b5df0314b9",
-    "given_name": null,
-    "family_name": null,
     "pref_label": "Regular User With Project Id",
-    "type": "person",
-    "sub_id": "00000000-0000-0000-0000-000000000001"
+    "creation_date": "2025-01-01T00:00:00",
+    "update_date": "2025-01-01T00:00:00"
   },
   "id": "db9338fe-c642-49fb-bda4-8e0543f3c70e",
   "type": "ion_channel_modeling_execution",

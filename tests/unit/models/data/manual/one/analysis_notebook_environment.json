@@ -5,19 +5,15 @@
   "update_date": "2025-11-03T08:37:58.214230Z",
   "created_by": {
     "id": "ffdc6907-b0cc-4804-a673-a8bd823b1936",
-    "given_name": "John",
-    "family_name": "Doe",
     "pref_label": "John Doe",
-    "type": "person",
-    "sub_id": "00000000-0000-0000-0000-000000000001"
+    "creation_date": "2025-01-01T00:00:00",
+    "update_date": "2025-01-01T00:00:00"
   },
   "updated_by": {
     "id": "ffdc6907-b0cc-4804-a673-a8bd823b1936",
-    "given_name": "John",
-    "family_name": "Doe",
     "pref_label": "John Doe",
-    "type": "person",
-    "sub_id": "00000000-0000-0000-0000-000000000001"
+    "creation_date": "2025-01-01T00:00:00",
+    "update_date": "2025-01-01T00:00:00"
   },
   "assets": [],
   "id": "9581d27d-95de-45a2-ab9f-ee7a17b0d2db",

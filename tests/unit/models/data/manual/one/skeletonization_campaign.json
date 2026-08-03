@@ -6,26 +6,24 @@
   "update_date": "2025-11-06T15:47:16.833265Z",
   "created_by": {
     "id": "6da8a7a3-6272-4fb9-ba56-61a46cc9a202",
-    "given_name": null,
-    "family_name": null,
     "pref_label": "Regular User With Project Id",
-    "type": "person",
-    "sub_id": "00000000-0000-0000-0000-000000000001"
+    "creation_date": "2025-01-01T00:00:00",
+    "update_date": "2025-01-01T00:00:00"
   },
   "updated_by": {
     "id": "6da8a7a3-6272-4fb9-ba56-61a46cc9a202",
-    "given_name": null,
-    "family_name": null,
     "pref_label": "Regular User With Project Id",
-    "type": "person",
-    "sub_id": "00000000-0000-0000-0000-000000000001"
+    "creation_date": "2025-01-01T00:00:00",
+    "update_date": "2025-01-01T00:00:00"
   },
   "assets": [],
   "id": "0ccc42a9-ea40-4306-b489-a24c7c03a25c",
   "type": "skeletonization_campaign",
   "name": "skeletonization-campaign",
   "description": "my-skeletonization-campaign",
-  "scan_parameters": { "foo": "bar" },
+  "scan_parameters": {
+    "foo": "bar"
+  },
   "input_meshes": [],
   "skeletonization_configs": []
 }

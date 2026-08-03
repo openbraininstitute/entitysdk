@@ -5,19 +5,15 @@
   "update_date": "2025-11-03T08:40:59.768782Z",
   "created_by": {
     "id": "991b195f-64d1-428b-b503-cc0f4d61aac3",
-    "given_name": "John",
-    "family_name": "Doe",
     "pref_label": "John Doe",
-    "type": "person",
-    "sub_id": "00000000-0000-0000-0000-000000000001"
+    "creation_date": "2025-01-01T00:00:00",
+    "update_date": "2025-01-01T00:00:00"
   },
   "updated_by": {
     "id": "991b195f-64d1-428b-b503-cc0f4d61aac3",
-    "given_name": "John",
-    "family_name": "Doe",
     "pref_label": "John Doe",
-    "type": "person",
-    "sub_id": "00000000-0000-0000-0000-000000000001"
+    "creation_date": "2025-01-01T00:00:00",
+    "update_date": "2025-01-01T00:00:00"
   },
   "id": "654c1fb4-4027-4ff6-85ae-787ce2b68069",
   "type": "analysis_notebook_execution",
@@ -46,7 +42,9 @@
     "description": "analysis-notebook-template-description",
     "specifications": {
       "schema_version": 1,
-      "python": { "version": ">=3.10" },
+      "python": {
+        "version": ">=3.10"
+      },
       "docker": {
         "image_repository": "obi-notebook-image",
         "image_tag": null,

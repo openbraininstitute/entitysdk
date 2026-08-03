@@ -5,9 +5,8 @@ from datetime import datetime
 import pytest
 from pydantic import ValidationError
 
-from entitysdk.models.core import Person
+from entitysdk.models.core import PlatformUser
 from entitysdk.models.entity import Entity
-from entitysdk.types import AgentType
 
 from ..util import MOCK_UUID
 
@@ -50,41 +49,41 @@ def test_identifiable_defaults_metadata_fields_to_none():
 def test_identifiable_accepts_populated_metadata_fields():
     created = datetime(2025, 1, 1)
     updated = datetime(2025, 6, 1)
-    person = Person(
+    platform_user = PlatformUser(
+        id=MOCK_UUID,
         pref_label="Jane Doe",
-        type=AgentType.person,
-        given_name="Jane",
-        family_name="Doe",
+        creation_date=created,
+        update_date=updated,
     )
     entity = Entity(
         id=MOCK_UUID,
         name="entity",
         creation_date=created,
         update_date=updated,
-        created_by=person,
-        updated_by=person,
+        created_by=platform_user,
+        updated_by=platform_user,
     )
     assert entity.id == MOCK_UUID
     assert entity.creation_date == created
     assert entity.update_date == updated
-    assert entity.created_by is person
-    assert entity.updated_by is person
+    assert entity.created_by is platform_user
+    assert entity.updated_by is platform_user
 
 
-def test_identifiable_accepts_nested_person_from_json():
+def test_identifiable_accepts_nested_platform_user_from_json():
     entity = Entity.model_validate(
         {
             "name": "entity",
             "created_by": {
-                "type": "person",
+                "id": str(MOCK_UUID),
                 "pref_label": "Jane Doe",
-                "given_name": "Jane",
-                "family_name": "Doe",
+                "creation_date": "2025-01-01T00:00:00",
+                "update_date": "2025-01-01T00:00:00",
             },
         }
     )
-    assert isinstance(entity.created_by, Person)
-    assert entity.created_by.given_name == "Jane"
+    assert isinstance(entity.created_by, PlatformUser)
+    assert entity.created_by.pref_label == "Jane Doe"
 
 
 def test_identifiable_rejects_invalid_metadata_values():

@@ -7,19 +7,15 @@
   "update_date": "2025-01-01T00:00:00Z",
   "created_by": {
     "id": "83844b40-ffa9-49f1-9c14-bc4a829e07b0",
-    "given_name": "John",
-    "family_name": "Doe",
     "pref_label": "John Doe",
-    "type": "person",
-    "sub_id": "00000000-0000-0000-0000-000000000001"
+    "creation_date": "2025-01-01T00:00:00",
+    "update_date": "2025-01-01T00:00:00"
   },
   "updated_by": {
     "id": "59cc60b1-7604-44b4-a736-95c3e652c71a",
-    "given_name": "service-account",
-    "family_name": "service-account",
     "pref_label": "service-account",
-    "type": "person",
-    "sub_id": "00000000-0000-0000-0000-000000000001"
+    "creation_date": "2025-01-01T00:00:00",
+    "update_date": "2025-01-01T00:00:00"
   },
   "authorized_project_id": "123e4567-e89b-12d3-a456-426614174002",
   "authorized_public": false,
