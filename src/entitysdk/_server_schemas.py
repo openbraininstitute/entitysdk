@@ -336,6 +336,7 @@ class DerivationType(StrEnum):
     em_dense_reconstruction_dataset_cell_morphology = (
         "em_dense_reconstruction_dataset_cell_morphology"
     )
+    circuit_simplification = "circuit_simplification"
     unspecified = "unspecified"
 
 
@@ -2142,6 +2143,7 @@ class TargetSimulator(StrEnum):
     Brian2 = "Brian2"
     CORENEURON = "CORENEURON"
     LearningEngine = "LearningEngine"
+    NEST = "NEST"
     NEURON = "NEURON"
 
 
@@ -2186,6 +2188,8 @@ class TaskActivityType(StrEnum):
     circuit_synaptic_physiology_assignment__execution = (
         "circuit_synaptic_physiology_assignment__execution"
     )
+    circuit_simplification__config_generation = "circuit_simplification__config_generation"
+    circuit_simplification__execution = "circuit_simplification__execution"
 
 
 class TaskActivityUserUpdate(BaseModel):
@@ -2237,6 +2241,8 @@ class TaskConfigType(StrEnum):
     circuit_synaptic_physiology_assignment__config = (
         "circuit_synaptic_physiology_assignment__config"
     )
+    circuit_simplification__campaign = "circuit_simplification__campaign"
+    circuit_simplification__config = "circuit_simplification__config"
 
 
 class TaskConfigUserUpdate(BaseModel):
