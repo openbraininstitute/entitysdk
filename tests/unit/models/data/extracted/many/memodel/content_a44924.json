@@ -4,13 +4,13 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym0",
-        "annotation_value": 0,
+        "acronym": "acronym1",
+        "annotation_value": 1,
         "color_hex_triplet": "FF0000",
         "creation_date": "2025-01-01T00:00:00Z",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region0",
+        "name": "region1",
         "parent_structure_id": null,
         "update_date": "2025-01-01T00:00:00Z"
       },
@@ -73,7 +73,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "bar",
+      "description": "foo",
       "emodel": {
         "assets": [],
         "authorized_project_id": "00000000-0000-4000-8000-000001234678",
@@ -267,12 +267,12 @@
         "used_by_derivations": null
       },
       "mtypes": [],
-      "name": "m-11",
+      "name": "m-7",
       "species": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "TestSpecies1",
-        "taxonomy_id": "1",
+        "name": "TestSpecies0",
+        "taxonomy_id": "0",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "strain": null,
@@ -296,13 +296,13 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym0",
-        "annotation_value": 0,
+        "acronym": "acronym1",
+        "annotation_value": 1,
         "color_hex_triplet": "FF0000",
         "creation_date": "2025-01-01T00:00:00Z",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region0",
+        "name": "region1",
         "parent_structure_id": null,
         "update_date": "2025-01-01T00:00:00Z"
       },
@@ -365,7 +365,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "bar",
+      "description": "foo",
       "emodel": {
         "assets": [],
         "authorized_project_id": "00000000-0000-4000-8000-000001234678",
@@ -559,12 +559,12 @@
         "used_by_derivations": null
       },
       "mtypes": [],
-      "name": "m-10",
+      "name": "m-6",
       "species": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "TestSpecies1",
-        "taxonomy_id": "1",
+        "name": "TestSpecies0",
+        "taxonomy_id": "0",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "strain": null,
@@ -588,13 +588,13 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym0",
-        "annotation_value": 0,
+        "acronym": "acronym1",
+        "annotation_value": 1,
         "color_hex_triplet": "FF0000",
         "creation_date": "2025-01-01T00:00:00Z",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region0",
+        "name": "region1",
         "parent_structure_id": null,
         "update_date": "2025-01-01T00:00:00Z"
       },
@@ -657,7 +657,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "bar",
+      "description": "foo",
       "emodel": {
         "assets": [],
         "authorized_project_id": "00000000-0000-4000-8000-000001234678",
@@ -851,12 +851,12 @@
         "used_by_derivations": null
       },
       "mtypes": [],
-      "name": "m-9",
+      "name": "m-5",
       "species": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "TestSpecies1",
-        "taxonomy_id": "1",
+        "name": "TestSpecies0",
+        "taxonomy_id": "0",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "strain": null,
@@ -880,13 +880,13 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym0",
-        "annotation_value": 0,
+        "acronym": "acronym1",
+        "annotation_value": 1,
         "color_hex_triplet": "FF0000",
         "creation_date": "2025-01-01T00:00:00Z",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region0",
+        "name": "region1",
         "parent_structure_id": null,
         "update_date": "2025-01-01T00:00:00Z"
       },
@@ -949,7 +949,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "bar",
+      "description": "foo",
       "emodel": {
         "assets": [],
         "authorized_project_id": "00000000-0000-4000-8000-000001234678",
@@ -1143,12 +1143,12 @@
         "used_by_derivations": null
       },
       "mtypes": [],
-      "name": "m-8",
+      "name": "m-4",
       "species": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "TestSpecies1",
-        "taxonomy_id": "1",
+        "name": "TestSpecies0",
+        "taxonomy_id": "0",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "strain": null,

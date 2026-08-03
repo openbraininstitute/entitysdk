@@ -1,10 +1,13 @@
+import uuid
 from pathlib import Path
 from unittest.mock import Mock
 
 import pytest
 
 from entitysdk.exception import StagingError
+from entitysdk.models import Asset, SimulatableExtracellularRecordingArray
 from entitysdk.staging import simulation as test_module
+from entitysdk.types import StorageType
 from entitysdk.utils.io import load_json
 
 
@@ -186,4 +189,121 @@ def test__transform_simulation_config():
             ],
             output_dir=Path(),
             override_results_dir=None,
+        )
+
+
+def _recording_array(array_id, asset_id):
+    return SimulatableExtracellularRecordingArray(
+        id=array_id,
+        name="array",
+        description="array",
+        electrode_type="custom",
+        circuit_id=uuid.uuid4(),
+        assets=[
+            Asset(
+                id=asset_id,
+                content_type="application/x-hdf5",
+                label="electrode_locations",
+                path="electrodes.h5",
+                full_path="/electrodes.h5",
+                size=0,
+                is_directory=False,
+                storage_type=StorageType.aws_s3_internal,
+                status="created",
+            )
+        ],
+    )
+
+
+def test_stage_recording_arrays(client, tmp_path, httpx_mock, api_url):
+    id1 = uuid.uuid4()
+    id2 = uuid.uuid4()
+    asset1 = uuid.uuid4()
+    asset2 = uuid.uuid4()
+    arrays = [_recording_array(id1, asset1), _recording_array(id2, asset2)]
+
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/simulatable-extracellular-recording-array/{id1}",
+        json=arrays[0].model_dump(mode="json"),
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/simulatable-extracellular-recording-array/{id2}",
+        json=arrays[1].model_dump(mode="json"),
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/simulatable-extracellular-recording-array/{id1}/assets/{asset1}",
+        json=arrays[0].assets[0].model_dump(mode="json"),
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/simulatable-extracellular-recording-array/{id2}/assets/{asset2}",
+        json=arrays[1].assets[0].model_dump(mode="json"),
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=(f"{api_url}/simulatable-extracellular-recording-array/{id1}/assets/{asset1}/download"),
+        content=b"array-1",
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=(f"{api_url}/simulatable-extracellular-recording-array/{id2}/assets/{asset2}/download"),
+        content=b"array-2",
+    )
+
+    reports = {
+        "lfp_report_A": {
+            "type": "lfp",
+            "electrodes_file": f"electrodes_files/{id1}.h5",
+        },
+        "lfp_report_B": {
+            "type": "lfp",
+            "electrodes_file": f"wrong/path/{id2}.h5",
+        },
+        "SomaVoltRec": {"type": "compartment", "cells": "All"},
+    }
+
+    res = test_module._stage_recording_arrays(
+        client,
+        reports=reports,
+        recording_arrays=arrays,
+        output_dir=tmp_path,
+    )
+
+    path1 = tmp_path / "electrodes_files" / f"{id1}.h5"
+    path2 = tmp_path / "electrodes_files" / f"{id2}.h5"
+    assert path1.read_bytes() == b"array-1"
+    assert path2.read_bytes() == b"array-2"
+    assert res["lfp_report_A"]["electrodes_file"] == str(path1)
+    assert res["lfp_report_B"]["electrodes_file"] == str(path2)
+    assert res["SomaVoltRec"] == reports["SomaVoltRec"]
+
+
+def test_stage_recording_arrays__missing_config_id(client, tmp_path):
+    array = _recording_array(uuid.uuid4(), uuid.uuid4())
+    missing_id = uuid.uuid4()
+    reports = {"lfp": {"type": "lfp", "electrodes_file": f"electrodes_files/{missing_id}.h5"}}
+    with pytest.raises(StagingError, match="not present in recording_arrays"):
+        test_module._stage_recording_arrays(
+            client,
+            reports=reports,
+            recording_arrays=[array],
+            output_dir=tmp_path,
+        )
+
+
+def test_stage_recording_arrays__extra_array_not_in_config(client, tmp_path):
+    array_id = uuid.uuid4()
+    array = _recording_array(array_id, uuid.uuid4())
+    # reports reference array_id (so missing check passes), but recording_arrays has an extra one
+    extra_array = _recording_array(uuid.uuid4(), uuid.uuid4())
+    reports = {"lfp": {"type": "lfp", "electrodes_file": f"electrodes_files/{array_id}.h5"}}
+    with pytest.raises(StagingError, match="not referenced by any electrodes_file"):
+        test_module._stage_recording_arrays(
+            client,
+            reports=reports,
+            recording_arrays=[array, extra_array],
+            output_dir=tmp_path,
         )

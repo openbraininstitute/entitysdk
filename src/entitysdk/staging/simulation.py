@@ -3,10 +3,12 @@
 import logging
 from copy import deepcopy
 from pathlib import Path
+from uuid import UUID
 
 from entitysdk.client import Client
 from entitysdk.downloaders.simulation import (
     download_node_sets_file,
+    download_recording_array_file,
     download_simulation_config_content,
     download_spike_replay_files,
     fetch_compartment_sets_file,
@@ -29,6 +31,7 @@ L = logging.getLogger(__name__)
 DEFAULT_NODE_SETS_FILENAME = "node_sets.json"
 DEFAULT_SIMULATION_CONFIG_FILENAME = "simulation_config.json"
 DEFAULT_CIRCUIT_DIR = "circuit"
+DEFAULT_ELECTRODES_DIR = "electrodes_files"
 
 
 def stage_simulation(
@@ -116,8 +119,15 @@ def stage_simulation(
             output_path=output_dir / DEFAULT_NODE_SETS_FILENAME,
         )
 
+    reports = _stage_recording_arrays(
+        client,
+        reports=simulation_config.get("reports", {}),
+        recording_arrays=model.recording_arrays,
+        output_dir=output_dir,
+    )
+
     transformed_simulation_config: dict = _transform_simulation_config(
-        simulation_config=simulation_config,
+        simulation_config=simulation_config | {"reports": reports},
         circuit_config_path=circuit_config_path,
         node_sets_path=node_sets_file,
         compartment_sets_path=compartment_sets_file,
@@ -147,6 +157,63 @@ def _stage_single_cell_node_sets_file(
         output_path,
     )
     return output_path
+
+
+def _map_electrode_id_to_report_name(reports: dict) -> dict[UUID, str]:
+    id_to_report = {}
+    for name, values in reports.items():
+        if values["type"] == "lfp" and (electrodes_file := values.get("electrodes_file")):
+            id_to_report[UUID(Path(electrodes_file).stem)] = name
+    return id_to_report
+
+
+def _stage_recording_arrays(
+    client: Client,
+    *,
+    reports: dict,
+    recording_arrays: list,
+    output_dir: Path,
+) -> dict:
+    """Download recording arrays and rewrite electrodes_file paths in reports."""
+    id_to_report_name = _map_electrode_id_to_report_name(reports)
+    array_ids = {array.id for array in recording_arrays}
+
+    if not (id_to_report_name or array_ids):
+        return reports
+
+    missing = set(id_to_report_name) - array_ids
+    if missing:
+        raise StagingError(
+            f"electrodes_file ids in config are not present in recording_arrays.\n"
+            f"Config ids: {sorted(id_to_report_name)}\n"
+            f"recording_arrays ids: {sorted(array_ids)}\n"
+            f"Missing: {sorted(missing)}"
+        )
+
+    extra = array_ids - set(id_to_report_name)
+    if extra:
+        raise StagingError(
+            f"recording_arrays ids are not referenced by any electrodes_file in reports.\n"
+            f"Config ids: {sorted(id_to_report_name)}\n"
+            f"recording_arrays ids: {sorted(array_ids)}\n"
+            f"Extra: {sorted(extra)}"
+        )
+
+    electrodes_dir = create_dir(output_dir / DEFAULT_ELECTRODES_DIR)
+    staged_electrode_files: dict[UUID, Path] = {
+        array.id: download_recording_array_file(
+            client,
+            recording_array_id=array.id,
+            output_path=electrodes_dir / f"{array.id}.h5",
+        )
+        for array in recording_arrays
+    }
+
+    transformed = deepcopy(reports)
+    for array_id, report_name in id_to_report_name.items():
+        transformed[report_name]["electrodes_file"] = str(staged_electrode_files[array_id])
+
+    return transformed
 
 
 def _transform_simulation_config(

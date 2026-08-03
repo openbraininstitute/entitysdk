@@ -26,7 +26,7 @@
     "update_date": "2025-01-01T00:00:00Z"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "description-0",
+  "description": "my-description",
   "etypes": [],
   "generated_from_derivations": null,
   "id": "00000000-0000-4000-8000-000001234678",
@@ -41,20 +41,20 @@
   "lifecycle_status": "active",
   "measurements": [
     {
-      "id": 1,
+      "id": 223,
       "name": "minimum",
       "unit": "\u03bcm",
       "value": 1.23
     },
     {
-      "id": 2,
+      "id": 224,
       "name": "maximum",
       "unit": "\u03bcm",
       "value": 1.45
     }
   ],
   "mtypes": [],
-  "name": "name-0",
+  "name": "Private u1/0",
   "subject": {
     "age_max": null,
     "age_min": null,

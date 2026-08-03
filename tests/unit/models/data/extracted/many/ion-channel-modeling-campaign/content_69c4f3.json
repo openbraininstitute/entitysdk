@@ -3,7 +3,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "contributions": [],
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
@@ -11,19 +11,19 @@
         "given_name": null,
         "id": "00000000-0000-4000-8000-000001234678",
         "orcid": null,
-        "pref_label": "Regular User With Project Id",
+        "pref_label": "Regular User With Different Project Id",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "description-2",
+      "description": "my-ion-channel-modeling-campaign",
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "input_recordings": [],
       "ion_channel_modeling_configs": [],
       "lifecycle_status": "active",
-      "name": "name-2",
+      "name": "ion-channel-modeling-campaign",
       "scan_parameters": {
         "foo": "bar"
       },
@@ -35,7 +35,7 @@
         "given_name": null,
         "id": "00000000-0000-4000-8000-000001234678",
         "orcid": null,
-        "pref_label": "Regular User With Project Id",
+        "pref_label": "Regular User With Different Project Id",
         "sub_id": "00000000-0000-4000-8000-000001234678",
         "type": "person",
         "update_date": "2025-01-01T00:00:00Z"
@@ -45,7 +45,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "contributions": [],
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
@@ -59,13 +59,13 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "description-1",
+      "description": "my-ion-channel-modeling-campaign",
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "input_recordings": [],
       "ion_channel_modeling_configs": [],
       "lifecycle_status": "active",
-      "name": "name-1",
+      "name": "ion-channel-modeling-campaign",
       "scan_parameters": {
         "foo": "bar"
       },
@@ -88,7 +88,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 2,
-    "total_items": 3
+    "page_size": 30,
+    "total_items": 2
   }
 }

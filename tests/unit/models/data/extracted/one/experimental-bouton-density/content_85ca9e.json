@@ -40,7 +40,7 @@
   "lifecycle_status": "active",
   "measurements": [
     {
-      "id": 10,
+      "id": 20,
       "name": "mean",
       "unit": "\u03bcm",
       "value": 1.34

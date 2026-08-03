@@ -7,8 +7,8 @@ from pathlib import Path
 from entitysdk.client import Client
 from entitysdk.dependencies.entity import ensure_has_assets, ensure_has_id
 from entitysdk.exception import EntitySDKError
-from entitysdk.models import Simulation
-from entitysdk.types import AssetLabel, ContentType
+from entitysdk.models import SimulatableExtracellularRecordingArray, Simulation
+from entitysdk.types import ID, AssetLabel, ContentType
 
 L = logging.getLogger(__name__)
 
@@ -96,3 +96,28 @@ def download_spike_replay_files(
     L.info("Downloaded %d spike replay files: %s", len(spike_files), spike_files)
 
     return spike_files
+
+
+def download_recording_array_file(
+    client: Client,
+    *,
+    recording_array_id: ID,
+    output_path: Path,
+) -> Path:
+    """Download a recording array electrodes file to output_path."""
+    downloaded = client.fetch_assets(
+        (recording_array_id, SimulatableExtracellularRecordingArray),
+        selection={
+            "label": AssetLabel.electrode_locations,
+            "content_type": ContentType.application_x_hdf5,
+        },
+        output_path=output_path,
+    ).one()
+
+    L.info(
+        "Recording array %s electrodes file downloaded at %s",
+        recording_array_id,
+        downloaded.path,
+    )
+
+    return downloaded.path

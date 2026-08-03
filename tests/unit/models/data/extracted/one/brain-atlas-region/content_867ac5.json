@@ -19,7 +19,7 @@
   "creation_date": "2025-01-01T00:00:00Z",
   "generated_from_derivations": null,
   "id": "00000000-0000-4000-8000-000001234678",
-  "is_leaf_region": false,
+  "is_leaf_region": true,
   "lifecycle_status": "active",
   "type": "brain_atlas_region",
   "update_date": "2025-01-01T00:00:00Z",
@@ -35,5 +35,5 @@
     "update_date": "2025-01-01T00:00:00Z"
   },
   "used_by_derivations": null,
-  "volume": 10.0
+  "volume": 100.0
 }
