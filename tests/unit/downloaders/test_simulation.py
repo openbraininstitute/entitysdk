@@ -4,7 +4,7 @@ import uuid
 import pytest
 
 from entitysdk.downloaders import simulation as test_module
-from entitysdk.exception import EntitySDKError
+from entitysdk.exception import EntitySDKError, IteratorResultError
 from entitysdk.models import Simulation
 from entitysdk.types import AssetLabel, ContentType
 
@@ -92,6 +92,55 @@ def test_download_node_sets_file(
     )
     model = _mock_simulation(simulation_id, assets=[asset])
     res = test_module.download_node_sets_file(client, model=model, output_path=tmp_path)
+    with res.open() as fd:
+        assert expected == json.load(fd)
+
+
+def test_fetch_compartment_sets_file(
+    client,
+    tmp_path,
+    httpx_mock,
+    api_url,
+    request_headers,
+):
+    simulation_id = uuid.uuid4()
+
+    # no matching assets
+    asset_id = uuid.uuid4()
+    asset = _mock_asset_response(
+        asset_id, ContentType.application_json, AssetLabel.custom_node_sets
+    )
+    model = _mock_simulation(simulation_id, assets=[asset])
+    with pytest.raises(IteratorResultError, match="Iterable is empty."):
+        test_module.fetch_compartment_sets_file(
+            client,
+            model=model,
+            output_path=tmp_path / "compartment_sets.json",
+        )
+
+    asset_id = uuid.uuid4()
+    asset = _mock_asset_response(
+        asset_id, ContentType.application_json, AssetLabel.compartment_sets
+    )
+    expected = {"foo": "bar"}
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/simulation/{simulation_id}/assets/{asset_id}",
+        match_headers=request_headers,
+        json=asset,
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/simulation/{simulation_id}/assets/{asset_id}/download",
+        match_headers=request_headers,
+        content=json.dumps(expected),
+    )
+    model = _mock_simulation(simulation_id, assets=[asset])
+    res = test_module.fetch_compartment_sets_file(
+        client,
+        model=model,
+        output_path=tmp_path / "compartment_sets.json",
+    )
     with res.open() as fd:
         assert expected == json.load(fd)
 

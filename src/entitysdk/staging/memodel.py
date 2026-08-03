@@ -1,6 +1,7 @@
 """Staging functions for Single-Cell."""
 
 import logging
+import re
 import shutil
 import tempfile
 from pathlib import Path
@@ -23,6 +24,38 @@ L = logging.getLogger(__name__)
 DEFAULT_CIRCUIT_CONFIG_FILENAME = "circuit_config.json"
 
 
+def _extract_hoc_template_name(hoc_file: Path) -> str:
+    """Extract the template name from a HOC file by parsing the 'begintemplate' statement.
+
+    The SONATA model_template field requires the HOC template name (e.g. 'cADpyr_bin_4'),
+    not the filename. Neurodamus uses this name to look up the template in the NEURON namespace.
+
+    Skips lines that are inside comments (// single-line or /* */ block comments).
+
+    Args:
+        hoc_file: Path to the HOC file.
+
+    Returns:
+        The template name found in the HOC file.
+
+    Raises:
+        StagingError: If no 'begintemplate' statement is found in the HOC file.
+    """
+    content = hoc_file.read_text()
+
+    # Remove block comments
+    content = re.sub(r"/\*.*?\*/", "", content, flags=re.DOTALL)
+
+    # Remove line comments
+    content = re.sub(r"//.*$", "", content, flags=re.MULTILINE)
+
+    match = re.search(r"\bbegintemplate\s+(\w+)", content)
+    if match:
+        return match.group(1)
+
+    raise StagingError(f"Could not find 'begintemplate' statement in HOC file: {hoc_file}")
+
+
 def stage_sonata_from_memodel(
     client: Client,
     memodel: MEModel,
@@ -38,7 +71,8 @@ def stage_sonata_from_memodel(
     with tempfile.TemporaryDirectory() as tmp_dir:
         downloaded_me_model = download_memodel(client, memodel=memodel, output_dir=tmp_dir)
 
-        mtype = memodel.mtypes[0].pref_label if memodel.mtypes else ""
+        mtype = memodel.mtypes[0].pref_label if memodel.mtypes else None
+        etype = memodel.emodel.etypes[0].pref_label if memodel.emodel.etypes else None
 
         if memodel.calibration_result is None:
             raise StagingError(f"MEModel {memodel.id} has no calibration result.")
@@ -50,6 +84,7 @@ def stage_sonata_from_memodel(
             downloaded_memodel=downloaded_me_model,
             output_path=output_dir,
             mtype=mtype,
+            etype=etype,
             threshold_current=threshold_current,
             holding_current=holding_current,
         )
@@ -64,7 +99,8 @@ def stage_sonata_from_memodel(
 def _generate_sonata_files_from_memodel(
     downloaded_memodel: DownloadedMEModel,
     output_path: Path,
-    mtype: str,
+    mtype: str | None,
+    etype: str | None,
     threshold_current: float,
     holding_current: float,
 ):
@@ -73,7 +109,8 @@ def _generate_sonata_files_from_memodel(
     Args:
         downloaded_memodel (DownloadedMEModel): The downloaded MEModel object.
         output_path (str or Path): Path to the output 'sonata' folder.
-        mtype (str): Cell mtype.
+        mtype (str | None): Cell mtype, if available.
+        etype (str | None): Cell etype, if available.
         threshold_current (float): Threshold current.
         holding_current (float): Holding current.
     """
@@ -86,11 +123,14 @@ def _generate_sonata_files_from_memodel(
     for path in subdirs.values():
         create_dir(path)
 
-    # Copy hoc file
+    # Copy hoc file, renaming to match the template name inside it.
+    # Neurodamus loads HOC files as: <biophysical_neuron_models_dir>/<model_template>.hoc
+    # so the filename must match the begintemplate name.
     hoc_file = downloaded_memodel.hoc_path
     if not downloaded_memodel.hoc_path.exists():
         raise FileNotFoundError(f"No HOC file found {downloaded_memodel.hoc_path}")
-    hoc_dst = subdirs["hocs"] / hoc_file.name
+    template_name = _extract_hoc_template_name(hoc_file)
+    hoc_dst = subdirs["hocs"] / f"{template_name}.hoc"
     shutil.copy(hoc_file, hoc_dst)
 
     # Copy morphology file
@@ -111,8 +151,10 @@ def _generate_sonata_files_from_memodel(
         morph_file=str(morph_dst),
         output_file=Path(str(subdirs["network"])) / "nodes.h5",
         mtype=mtype,
+        etype=etype,
         threshold_current=threshold_current,
         holding_current=holding_current,
+        template_name=template_name,
     )
 
     create_circuit_config(output_path=output_path)
@@ -125,9 +167,12 @@ def create_nodes_file(
     hoc_file: str,
     morph_file: str,
     output_file: Path,
-    mtype: str,
     threshold_current: float,
     holding_current: float,
+    template_name: str,
+    *,
+    mtype: str | None = None,
+    etype: str | None = None,
 ):
     """Create a SONATA nodes.h5 file for a single cell population.
 
@@ -135,9 +180,11 @@ def create_nodes_file(
         hoc_file (str): Path to the hoc file.
         morph_file (str): Path to the morphology file.
         output_file (Path): Output file path for nodes.h5.
-        mtype (str): Cell mtype.
         threshold_current (float): Threshold current value.
         holding_current (float): Holding current value.
+        template_name (str): HOC template name (from begintemplate statement).
+        mtype (str | None): Cell mtype, if available.
+        etype (str | None): Cell etype, if available.
     """
     output_file = Path(output_file)  # ensure Path type
     output_file.parent.mkdir(parents=True, exist_ok=True)
@@ -154,14 +201,17 @@ def create_nodes_file(
 
         # Standard string properties
         group_0.create_dataset("model_template", (1,), dtype=h5py.string_dtype())[0] = (
-            f"hoc:{Path(hoc_file).stem}"
+            f"hoc:{template_name}"
         )
         group_0.create_dataset("model_type", (1,), dtype="int32")[0] = 0
         group_0.create_dataset("morph_class", (1,), dtype="int32")[0] = 0
         group_0.create_dataset("morphology", (1,), dtype=h5py.string_dtype())[0] = (
             f"morphologies/{Path(morph_file).stem}"
         )
-        group_0.create_dataset("mtype", (1,), dtype=h5py.string_dtype())[0] = mtype
+        if mtype is not None:
+            group_0.create_dataset("mtype", (1,), dtype=h5py.string_dtype())[0] = mtype
+        if etype is not None:
+            group_0.create_dataset("etype", (1,), dtype=h5py.string_dtype())[0] = etype
 
         # Coordinates and rotation
         for name in [

@@ -9,6 +9,7 @@ from entitysdk.downloaders.simulation import (
     download_node_sets_file,
     download_simulation_config_content,
     download_spike_replay_files,
+    fetch_compartment_sets_file,
 )
 from entitysdk.exception import StagingError
 from entitysdk.models import Circuit, MEModel, Simulation
@@ -58,6 +59,13 @@ def stage_simulation(
         model=model,
         output_dir=output_dir,
     )
+    compartment_sets_file = None
+    if compartment_sets_path := simulation_config.get("compartment_sets_file"):
+        compartment_sets_file = fetch_compartment_sets_file(
+            client=client,
+            model=model,
+            output_path=output_dir / Path(compartment_sets_path).name,
+        )
     if circuit_config_path is None:
         L.info(
             "Circuit config path was not provided. Circuit is going to be staged from metadata. "
@@ -112,6 +120,7 @@ def stage_simulation(
         simulation_config=simulation_config,
         circuit_config_path=circuit_config_path,
         node_sets_path=node_sets_file,
+        compartment_sets_path=compartment_sets_file,
         spike_paths=spike_paths,
         output_dir=output_dir,
         override_results_dir=override_results_dir,
@@ -144,6 +153,7 @@ def _transform_simulation_config(
     simulation_config: dict,
     circuit_config_path: Path,
     node_sets_path: Path | None,
+    compartment_sets_path: Path | None,
     spike_paths: list[Path],
     output_dir: Path,
     override_results_dir: Path | None,
@@ -163,6 +173,9 @@ def _transform_simulation_config(
 
     if node_sets_path is not None:
         ret["node_sets_file"] = str(node_sets_path.relative_to(output_dir))
+
+    if compartment_sets_path is not None:
+        ret["compartment_sets_file"] = str(compartment_sets_path.relative_to(output_dir))
 
     return ret
 

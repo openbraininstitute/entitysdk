@@ -134,6 +134,19 @@ def test_calculate_part_size_large_file():
     assert result <= test_module.S3_MAX_PART_SIZE
 
 
+def test_calculate_part_count_zero():
+    assert test_module.calculate_part_count(0) == 1
+
+
+def test_calculate_part_count_small_file():
+    assert test_module.calculate_part_count(1024) == 1
+
+
+def test_calculate_part_count_large_file():
+    filesize = test_module.S3_DEFAULT_PART_SIZE * 200
+    assert test_module.calculate_part_count(filesize) == 200
+
+
 def test_multipart_upload_asset_file(
     asset_file, asset_metadata, project_context, token_manager, transfer_config_sequential
 ):
@@ -157,6 +170,7 @@ def test_multipart_upload_asset_file(
             token_manager=token_manager,
             transfer_config=transfer_config_sequential,
             http_client=httpx.Client(),
+            admin=False,
         )
 
         mock_initiate.assert_called_once()
@@ -182,6 +196,7 @@ def test_multipart_upload_asset_file(
             token_manager=token_manager,
             transfer_config=transfer_config_sequential,
             http_client=http_client,
+            admin=False,
         )
 
         mock_initiate.assert_called_once()
@@ -248,6 +263,7 @@ def test_initiate_upload(
         preferred_part_count=10,
         token_manager=token_from_value_manager,
         http_client=httpx.Client(),
+        admin=False,
     )
 
     assert res_asset_id == ASSET_ID
@@ -319,6 +335,7 @@ def test_complete_upload(httpx_mock, project_context, asset_payload, token_from_
         project_context=project_context,
         token_manager=token_from_value_manager,
         http_client=http_client,
+        admin=False,
     )
     assert res.status == "created"
 
@@ -430,6 +447,7 @@ def test_initiate_directory_upload_file_count_mismatch(httpx_mock, project_conte
             http_client=httpx.Client(),
             upload_request=upload_request,
             paths=paths,
+            admin=False,
         )
 
 

@@ -21,7 +21,7 @@ HOC_TEMPLATE = """
 {{load_file("stdrun.hoc")}}
 {{load_file("import3d.hoc")}}
 
-begintemplate single_comp_cell
+begintemplate cell
   public init, morphology, geom_nseg_fixed, geom_nsec, getCell, getCCell, setCCell, gid
   public channel_seed, channel_seed_set
   public clear
@@ -179,7 +179,7 @@ proc geom_nsec() {{ local nSec
   }}
 }}
 
-endtemplate single_comp_cell
+endtemplate cell
 """
 
 
@@ -262,7 +262,6 @@ def stage_sonata_from_config(
     ion_channel_model_data: dict,
     output_dir: Path,
     radius: float = 10.0,
-    mtype: str = "",
     threshold_current: float = 0.0,
     holding_current: float = 0.0,
 ):
@@ -274,7 +273,6 @@ def stage_sonata_from_config(
             and conductance (or max permeability) values.
         output_dir (str or Path): Path to the output 'sonata' folder.
         radius (float): Radius of the soma in microns.
-        mtype (str): Cell mtype.
         threshold_current (float): Threshold current.
         holding_current (float): Holding current.
     """
@@ -303,9 +301,9 @@ def stage_sonata_from_config(
         hoc_file=str(hoc_dst),
         morph_file=str(morph_dst),
         output_file=Path(str(subdirs["network"])) / "nodes.h5",
-        mtype=mtype,
         threshold_current=threshold_current,
         holding_current=holding_current,
+        template_name="cell",
     )
 
     create_circuit_config(output_path=output_dir)

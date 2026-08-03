@@ -231,7 +231,7 @@ class DummyClient:
 
 
 @pytest.mark.parametrize("max_concurrent", [1, 4])
-def test_download_memodel_hoc_missing(tmp_path, max_concurrent):
+def test_download_memodel_hoc_missing(tmp_path, max_concurrent, monkeypatch):
     class DummyMEModel:
         emodel = type("EModel", (), {"id": "dummy_id"})()
         morphology = "dummy_morphology"
@@ -247,15 +247,15 @@ def test_download_memodel_hoc_missing(tmp_path, max_concurrent):
 
     import entitysdk.downloaders.memodel as memodel_mod
 
-    memodel_mod.download_hoc = dummy_download_hoc
-    memodel_mod.download_morphology = dummy_download_morphology
+    monkeypatch.setattr(memodel_mod, "download_hoc", dummy_download_hoc)
+    monkeypatch.setattr(memodel_mod, "download_morphology", dummy_download_morphology)
     with pytest.raises(StagingError) as excinfo:
         download_memodel(DummyClient(), DummyMEModel(), tmp_path, max_concurrent=max_concurrent)
     assert "HOC file does not exist" in str(excinfo.value)
 
 
 @pytest.mark.parametrize("max_concurrent", [1, 4])
-def test_download_memodel_morphology_asc_fallback_to_swc(tmp_path, max_concurrent):
+def test_download_memodel_morphology_asc_fallback_to_swc(tmp_path, max_concurrent, monkeypatch):
     class DummyMEModel:
         emodel = type("EModel", (), {"id": "dummy_id"})()
         morphology = "dummy_morphology"
@@ -276,8 +276,8 @@ def test_download_memodel_morphology_asc_fallback_to_swc(tmp_path, max_concurren
 
     import entitysdk.downloaders.memodel as memodel_mod
 
-    memodel_mod.download_hoc = dummy_download_hoc
-    memodel_mod.download_morphology = dummy_download_morphology
+    monkeypatch.setattr(memodel_mod, "download_hoc", dummy_download_hoc)
+    monkeypatch.setattr(memodel_mod, "download_morphology", dummy_download_morphology)
     result = download_memodel(
         DummyClient(), DummyMEModel(), tmp_path, max_concurrent=max_concurrent
     )

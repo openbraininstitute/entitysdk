@@ -13,6 +13,15 @@ class FakeMType:
     pref_label = "L5_TTPC1"
 
 
+class FakeEType:
+    pref_label = "cADpyr"
+
+
+class FakeEModel:
+    def __init__(self):
+        self.etypes = [FakeEType()]
+
+
 class FakeCalibration:
     threshold_current = 0.234
     holding_current = -0.123
@@ -22,6 +31,7 @@ class FakeMEModel:
     def __init__(self, with_calibration=True):
         self.id = "fake_id"
         self.mtypes = [FakeMType()]
+        self.emodel = FakeEModel()
         self.calibration_result = FakeCalibration() if with_calibration else None
 
 
@@ -54,6 +64,28 @@ def test_stage_sonata_from_memodel_success(tmp_path, fake_memodel, fake_client):
         assert result == config_path
         mock_dl.assert_called_once()
         mock_gen.assert_called_once()
+        assert mock_gen.call_args.kwargs["etype"] == "cADpyr"
+
+
+def test_stage_sonata_from_memodel_preserves_missing_classifications(
+    tmp_path, fake_memodel, fake_client
+):
+    config_path = tmp_path / "circuit_config.json"
+    config_path.write_text("{}")
+    fake_memodel.mtypes = None
+    fake_memodel.emodel.etypes = None
+
+    with (
+        mock.patch.object(memodel_mod, "download_memodel"),
+        mock.patch.object(memodel_mod, "_generate_sonata_files_from_memodel") as mock_gen,
+    ):
+        result = memodel_mod.stage_sonata_from_memodel(
+            fake_client, fake_memodel, output_dir=tmp_path
+        )
+
+    assert result == config_path
+    assert mock_gen.call_args.kwargs["mtype"] is None
+    assert mock_gen.call_args.kwargs["etype"] is None
 
 
 def test_stage_sonata_from_memodel_no_calibration(tmp_path, fake_memodel_no_calib, fake_client):
@@ -74,7 +106,7 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
     morph_path.parent.mkdir()
     mech_dir.mkdir()
 
-    (hoc_path).write_text("hoc content")
+    (hoc_path).write_text("begintemplate TestCell\nendtemplate TestCell\n")
     (morph_path).write_text("morph content")
     (mech_dir / "mech.mod").write_text("mod content")
 
@@ -91,11 +123,12 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
         downloaded_memodel=downloaded_me_model,
         output_path=output_path,
         mtype="L5_TTPC1",
+        etype="cADpyr",
         threshold_current=0.2,
         holding_current=-0.1,
     )
 
-    assert (output_path / "hocs" / "cell.hoc").exists()
+    assert (output_path / "hocs" / "TestCell.hoc").exists()
     assert (output_path / "morphologies" / "cell.asc").exists()
     assert (output_path / "mechanisms" / "mech.mod").exists()
     assert (output_path / "network" / "nodes.h5").exists()
@@ -105,15 +138,41 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
     # Validate content inside nodes.h5
     with h5py.File(output_path / "network" / "nodes.h5", "r") as f:
         group = f["nodes"]["All"]["0"]
+        assert group["model_template"][0].decode() == "hoc:TestCell"
         assert group["mtype"][0].decode() == "L5_TTPC1"
+        assert group["etype"][0].decode() == "cADpyr"
         assert group["dynamics_params"]["holding_current"][0] == pytest.approx(-0.1)
         assert group["dynamics_params"]["threshold_current"][0] == pytest.approx(0.2)
+
+
+def test_create_nodes_file_omits_missing_classifications(tmp_path):
+    hoc_file = tmp_path / "cell.hoc"
+    morph_file = tmp_path / "cell.asc"
+    hoc_file.write_text("begintemplate MyCell\nendtemplate MyCell\n")
+    morph_file.write_text("morph content")
+    output_file = tmp_path / "network" / "nodes.h5"
+
+    memodel_mod.create_nodes_file(
+        hoc_file=str(hoc_file),
+        morph_file=str(morph_file),
+        output_file=output_file,
+        mtype=None,
+        etype=None,
+        threshold_current=0.2,
+        holding_current=-0.1,
+        template_name="MyCell",
+    )
+
+    with h5py.File(output_file) as h5:
+        group = h5["nodes/All/0"]
+        assert "mtype" not in group
+        assert "etype" not in group
 
 
 def test_create_json_configs(tmp_path):
     hoc_file = tmp_path / "cell.hoc"
     morph_file = tmp_path / "cell.asc"
-    hoc_file.write_text("hoc content")
+    hoc_file.write_text("begintemplate MyCell\nendtemplate MyCell\n")
     morph_file.write_text("morph content")
     network_dir = tmp_path / "network"
 
@@ -122,8 +181,10 @@ def test_create_json_configs(tmp_path):
         morph_file=str(morph_file),
         output_file=network_dir / "nodes.h5",
         mtype="L5_TTPC1",
+        etype="cADpyr",
         threshold_current=0.2,
         holding_current=-0.1,
+        template_name="MyCell",
     )
 
     assert (network_dir / "nodes.h5").exists()
@@ -161,6 +222,7 @@ def test_missing_hoc_file_raise(tmp_path):
             downloaded_memodel=downloaded_me_model,
             output_path=tmp_path,
             mtype="Test",
+            etype="TestEType",
             threshold_current=0.2,
             holding_current=-0.1,
         )
@@ -172,7 +234,7 @@ def test_missing_morphology_file_raises(tmp_path):
     (memodel_path / "hoc").mkdir()
     (memodel_path / "mechanisms").mkdir()
     (memodel_path / "morphology").mkdir()
-    (memodel_path / "hoc" / "cell.hoc").write_text("hoc content")
+    (memodel_path / "hoc" / "cell.hoc").write_text("begintemplate TestCell\nendtemplate TestCell\n")
 
     downloaded_me_model = DownloadedMEModel(
         hoc_path=memodel_path / "hoc" / "cell.hoc",
@@ -185,6 +247,7 @@ def test_missing_morphology_file_raises(tmp_path):
             downloaded_memodel=downloaded_me_model,
             output_path=tmp_path,
             mtype="Test",
+            etype="TestEType",
             threshold_current=0.2,
             holding_current=-0.1,
         )
@@ -196,7 +259,7 @@ def test_mechanism_file_not_exists(tmp_path):
     (memodel_path / "hoc").mkdir()
     (memodel_path / "mechanisms").mkdir()
     (memodel_path / "morphology").mkdir()
-    (memodel_path / "hoc" / "cell.hoc").write_text("hoc content")
+    (memodel_path / "hoc" / "cell.hoc").write_text("begintemplate TestCell\nendtemplate TestCell\n")
     (memodel_path / "morphology" / "cell.asc").write_text("asc content")
     # Do not create the mechanism file
     downloaded_me_model = DownloadedMEModel(
@@ -210,8 +273,30 @@ def test_mechanism_file_not_exists(tmp_path):
         downloaded_memodel=downloaded_me_model,
         output_path=tmp_path,
         mtype="Test",
+        etype="TestEType",
         threshold_current=0.2,
         holding_current=-0.1,
     )
     # The missing file should not be copied
     assert not (tmp_path / "mechanisms" / "missing.mod").exists()
+
+
+def test_extract_hoc_template_name_skips_comments(tmp_path):
+    hoc_file = tmp_path / "commented.hoc"
+    hoc_file.write_text(
+        "// begintemplate FakeComment\n"
+        "/*\n"
+        "  begintemplate FakeBlock\n"
+        "*/\n"
+        "/* begintemplate FakeSingleLine */\n"
+        "begintemplate RealTemplate\n"
+        "endtemplate RealTemplate\n"
+    )
+    assert memodel_mod._extract_hoc_template_name(hoc_file) == "RealTemplate"
+
+
+def test_extract_hoc_template_name_raises_when_missing(tmp_path):
+    hoc_file = tmp_path / "no_template.hoc"
+    hoc_file.write_text("// just a comment\nsome hoc code\n")
+    with pytest.raises(StagingError, match="Could not find 'begintemplate'"):
+        memodel_mod._extract_hoc_template_name(hoc_file)

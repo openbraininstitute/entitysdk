@@ -3,7 +3,7 @@
 import logging
 from collections.abc import Iterator
 from pathlib import Path
-from typing import TypeVar, cast
+from typing import TypeVar
 
 import httpx
 
@@ -19,7 +19,7 @@ from entitysdk.models.asset import (
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.multipart_upload import (
-    calculate_part_size,
+    calculate_part_count,
     multipart_upload_asset_directory,
     multipart_upload_asset_file,
 )
@@ -158,16 +158,18 @@ def get_entity_derivations(
     api_url: str,
     entity_id: ID,
     entity_type: type[Entity],
-    project_context: ProjectContext,
+    project_context: ProjectContext | None,
     derivation_type: DerivationType,
     token_manager: TokenManager,
     http_client: httpx.Client,
+    admin: bool,
 ) -> IteratorResult[Entity]:
     """Get derivations for entity."""
     url = get_entity_derivations_endpoint(
         api_url=api_url,
         entity_type=entity_type,
         entity_id=entity_id,
+        admin=admin,
     )
 
     params = {"derivation_type": DerivationType(derivation_type)}
@@ -344,7 +346,9 @@ def upload_asset_file(
     admin: bool,
 ) -> Asset:
     """Upload asset to an existing entity's endpoint from a file path."""
-    if transfer_config and get_filesize(asset_path) > transfer_config.threshold:
+    transfer_config = transfer_config or MultipartUploadTransferConfig()
+
+    if get_filesize(asset_path) > transfer_config.threshold:
         L.info("File is being uploaded using multipart upload")
         return multipart_upload_asset_file(
             api_url=api_url,
@@ -356,6 +360,7 @@ def upload_asset_file(
             token_manager=token_manager,
             transfer_config=transfer_config,
             http_client=http_client,
+            admin=admin,
         )
     with open(asset_path, "rb") as file_content:
         return upload_asset_content(
@@ -423,6 +428,7 @@ def upload_asset_directory(
     token_manager: TokenManager,
     http_client: httpx.Client,
     transfer_config: MultipartDirectoryUploadTransferConfig | None = None,
+    admin: bool,
 ) -> Asset:
     """Upload a group of files to a directory using multipart-upload."""
     transfer_config = transfer_config or MultipartDirectoryUploadTransferConfig()
@@ -435,7 +441,7 @@ def upload_asset_directory(
                 filename=str(relative_path),
                 filesize=filesize,
                 sha256_digest=calculate_sha256_digest(local_path),
-                preferred_part_count=calculate_part_size(filesize),
+                preferred_part_count=calculate_part_count(filesize),
             )
         )
 
@@ -456,6 +462,7 @@ def upload_asset_directory(
         transfer_config=transfer_config,
         upload_request=upload_request,
         paths=paths,
+        admin=admin,
     )
 
 
@@ -468,6 +475,7 @@ def list_directory(
     token_manager: TokenManager,
     project_context: ProjectContext | None = None,
     http_client: httpx.Client,
+    admin: bool,
 ) -> DetailedFileList:
     """List all files within an asset directory."""
     url = (
@@ -476,6 +484,7 @@ def list_directory(
             entity_type=entity_type,
             entity_id=entity_id,
             asset_id=asset_id,
+            admin=admin,
         )
         + "/list"
     )
@@ -536,7 +545,7 @@ def fetch_asset_file(
             api_url=api_url,
             entity_id=entity_id,
             entity_type=entity_type,
-            asset_id=cast(ID, asset.id),
+            asset_id=asset.id,
             target_path=target_path,
             token_manager=token_manager,
             project_context=project_context,
@@ -691,7 +700,7 @@ def fetch_asset_content(
                 api_url=api_url,
                 entity_id=entity_id,
                 entity_type=entity_type,
-                asset_id=cast(ID, asset_id),
+                asset_id=asset_id,
                 project_context=project_context,
                 http_client=http_client,
                 token_manager=token_manager,

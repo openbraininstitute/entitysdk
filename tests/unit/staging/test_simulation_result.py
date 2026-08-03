@@ -96,6 +96,7 @@ def test_stage_simulation_result__memodel(
     memodel,
     httpx_mock,
     emodel_httpx_mocks,
+    cell_morphology_httpx_mocks,
     simulation_httpx_mocks,
     simulation_result_httpx_mocks,
 ):

@@ -176,7 +176,7 @@ def test_create_one(client, httpx_mock, model, json_data):
         method="POST",
         json=_read_model_dump(model) | {"id": str(MOCK_UUID)},
     )
-    registered = client.register_entity(entity=model)
+    registered = client.register_entity(entity=model.evolve(id=None))
     expected_json = json_data | {"id": str(MOCK_UUID)}
     assert _read_model_dump(registered) == expected_json
 

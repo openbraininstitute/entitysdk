@@ -3,10 +3,10 @@
 import concurrent.futures
 import os
 from pathlib import Path
-from typing import Any, TypeVar, cast
+from typing import Annotated, Any
 
 import httpx
-from pydantic import validate_call
+from pydantic import AfterValidator, validate_call
 
 from entitysdk import core
 from entitysdk.common import ProjectContext, parse_vlab_url
@@ -20,6 +20,12 @@ from entitysdk.models.asset import (
 )
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
+from entitysdk.models.types import (
+    RegisteredAssetOrId,
+    RegisteredEntity,
+    TIdentifiable,
+    ensure_id_is_none,
+)
 from entitysdk.result import IteratorResult
 from entitysdk.schemas.asset import (
     DownloadedAssetFile,
@@ -47,9 +53,6 @@ from entitysdk.utils.store import LocalAssetStore
 from entitysdk.utils.url import (
     build_api_url,
 )
-
-TEntity = TypeVar("TEntity", bound=Entity)
-TIdentifiable = TypeVar("TIdentifiable", bound=Identifiable)
 
 
 class Client:
@@ -134,7 +137,7 @@ class Client:
     def _optional_user_context(
         self,
         override_context: ProjectContext | None,
-        admin: bool = False,
+        admin: bool,
     ) -> ProjectContext | None:
         """Return an optional project context."""
         return None if admin else (override_context or self.project_context)
@@ -174,7 +177,7 @@ class Client:
             admin: Whether to use the admin endpoint or not.
 
         Returns:
-            entity_type instantiated by deserializing the response.
+            entity_type instantiated by deserializing the response, with an assigned id.
         """
         return core.get_entity(
             api_url=self.api_url,
@@ -205,6 +208,9 @@ class Client:
             limit: Optional limit of the number of entities to yield. Default is None.
             project_context: Optional project context.
             admin: Use admin endpoints if True
+
+        Returns:
+            An iterator over matching entities, each with an assigned id.
         """
         return core.search_entities(
             api_url=self.api_url,
@@ -225,6 +231,7 @@ class Client:
         entity_type: type[Entity],
         derivation_type: DerivationType,
         project_context: ProjectContext | None = None,
+        admin: bool = False,
     ) -> IteratorResult[Entity]:
         """Get all derivations for an entity.
 
@@ -233,40 +240,44 @@ class Client:
             entity_type: Type of the entity.
             derivation_type: Derivation type to filter by.
             project_context: Optional project context.
+            admin: Whether to use the admin endpoints.
 
         Returns:
-            An iterator over derivation entities.
+            An iterator over derivation entities, each with an assigned id.
         """
         return core.get_entity_derivations(
             api_url=self.api_url,
             entity_id=entity_id,
             entity_type=entity_type,
             derivation_type=derivation_type,
-            project_context=self._required_user_context(override_context=project_context),
+            project_context=self._optional_user_context(
+                override_context=project_context, admin=admin
+            ),
             token_manager=self._token_manager,
             http_client=self._http_client,
+            admin=admin,
         )
 
     @validate_call
     def register_entity(
         self,
-        entity: TIdentifiable,
+        entity: Annotated[TIdentifiable, AfterValidator(ensure_id_is_none)],
         *,
         project_context: ProjectContext | None = None,
     ) -> TIdentifiable:
         """Register entity.
 
         Args:
-            entity: Identifiable to register.
+            entity: Identifiable to register. Its ``id`` must be ``None``.
             project_context: Optional project context.
 
         Returns:
-            Registered entity with id.
+            Registered entity with an assigned id.
         """
         return core.register_entity(
             api_url=self.api_url,
             entity=entity,
-            project_context=self._optional_user_context(project_context, admin=False),
+            project_context=self._required_user_context(project_context),
             http_client=self._http_client,
             token_manager=self._token_manager,
         )
@@ -276,7 +287,7 @@ class Client:
         self,
         entity_id: ID,
         *,
-        entity_type: type[TEntity],
+        entity_type: type[Entity],
         project_context: ProjectContext | None = None,
         admin: bool = False,
     ) -> IteratorResult[Asset]:
@@ -289,7 +300,7 @@ class Client:
             admin: Whether to use the admin endpoint or not.
 
         Returns:
-            An iterator over assets.
+            An iterator over assets, each with an assigned id.
         """
         return core.get_entity_assets(
             api_url=self.api_url,
@@ -381,7 +392,8 @@ class Client:
             file_metadata: Optional extra metadata to attach to the asset.
             asset_label: Label for the asset.
             project_context: Optional project context.
-            transfer_config: Optional multipart upload configuration.
+            transfer_config: Optional multipart upload configuration. If not specified,
+                uses the defaults specified in ``MultipartUploadTransferConfig``.
             admin: Whether to use admin endpoints.
 
         Returns:
@@ -445,7 +457,7 @@ class Client:
             metadata=file_metadata or {},
             label=asset_label,
         )
-        context = self._optional_user_context(override_context=project_context)
+        context = self._optional_user_context(override_context=project_context, admin=admin)
         return core.upload_asset_content(
             api_url=self.api_url,
             entity_id=entity_id,
@@ -470,6 +482,7 @@ class Client:
         label: AssetLabel,
         project_context: ProjectContext | None = None,
         transfer_config: MultipartDirectoryUploadTransferConfig | None = None,
+        admin: bool = False,
     ) -> Asset:
         """Attach a local directory to an entity.
 
@@ -481,12 +494,14 @@ class Client:
             metadata: Optional extra metadata to attach to the directory asset.
             label: Label for the asset.
             project_context: Optional project context.
-            transfer_config: Optional multipart upload configuration.
+            transfer_config: Optional multipart upload configuration. If not specified,
+                uses the defaults from ``MultipartDirectoryUploadTransferConfig``.
+            admin: Whether to use the admin endpoints.
 
         Returns:
             The created directory Asset.
         """
-        context = self._optional_user_context(override_context=project_context)
+        context = self._optional_user_context(override_context=project_context, admin=admin)
 
         paths_dict = {Path(k): Path(v) for k, v in paths.items()}
 
@@ -502,6 +517,7 @@ class Client:
             http_client=self._http_client,
             token_manager=self._token_manager,
             transfer_config=transfer_config,
+            admin=admin,
         )
 
     @validate_call
@@ -512,6 +528,7 @@ class Client:
         entity_type: type[Entity],
         asset_id: ID,
         project_context: ProjectContext | None = None,
+        admin: bool = False,
     ) -> DetailedFileList:
         """List files in a directory asset.
 
@@ -520,11 +537,12 @@ class Client:
             entity_type: Type of the entity.
             asset_id: Directory asset id.
             project_context: Optional project context.
+            admin: Whether to use the admin endpoints.
 
         Returns:
             A `DetailedFileList` describing the directory contents.
         """
-        context = self._optional_user_context(override_context=project_context)
+        context = self._optional_user_context(override_context=project_context, admin=admin)
         return core.list_directory(
             api_url=self.api_url,
             entity_id=entity_id,
@@ -533,6 +551,7 @@ class Client:
             project_context=context,
             http_client=self._http_client,
             token_manager=self._token_manager,
+            admin=admin,
         )
 
     @validate_call
@@ -541,12 +560,13 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Entity],
-        asset_id: ID | Asset,  # pyright: ignore[reportRedeclaration]
+        asset_id: RegisteredAssetOrId,  # pyright: ignore[reportRedeclaration]
         output_path: Path,
         project_context: ProjectContext | None = None,
         ignore_directory_name: bool = False,
         max_concurrent: int = 1,
         strategy: FetchFileStrategy = FetchFileStrategy.link_or_download,
+        admin: bool = False,
     ) -> list[Path]:
         """Fetch a directory asset to a local output directory.
 
@@ -560,6 +580,7 @@ class Client:
                 folder for the directory name.
             max_concurrent: Maximum number of concurrent downloads.
             strategy: Strategy controlling how files are materialized.
+            admin: Whether to use the admin endpoints.
 
         Returns:
             List of output file paths that were created.
@@ -572,7 +593,7 @@ class Client:
 
         output_path.mkdir(parents=True, exist_ok=True)
 
-        context = self._optional_user_context(override_context=project_context)
+        context = self._optional_user_context(override_context=project_context, admin=admin)
 
         if isinstance(asset_id, Asset):
             asset = asset_id
@@ -590,6 +611,7 @@ class Client:
                     project_context=context,
                     http_client=self._http_client,
                     token_manager=self._token_manager,
+                    admin=admin,
                 )
 
             output_path /= asset.path
@@ -599,6 +621,7 @@ class Client:
             entity_type=entity_type,
             asset_id=asset_id,
             project_context=project_context,
+            admin=admin,
         )
 
         if max_concurrent == 1:
@@ -611,6 +634,7 @@ class Client:
                     asset_path=path,
                     project_context=context,
                     strategy=strategy,
+                    admin=admin,
                 )
                 for path in contents.files
             ]
@@ -626,6 +650,7 @@ class Client:
                         asset_path=path,
                         project_context=context,
                         strategy=strategy,
+                        admin=admin,
                     )
                     for path in contents.files
                 ]
@@ -640,11 +665,12 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Entity],
-        asset_id: ID | Asset,
+        asset_id: RegisteredAssetOrId,
         output_path: os.PathLike,
         project_context: ProjectContext | None = None,
         ignore_directory_name: bool = False,
         max_concurrent: int = 1,
+        admin: bool = False,
     ) -> list[Path]:
         """Download a directory asset to local disk.
 
@@ -657,6 +683,7 @@ class Client:
             ignore_directory_name: If `True`, do not create an extra nested
                 folder for the directory name.
             max_concurrent: Maximum number of concurrent downloads.
+            admin: Whether to use the admin endpoints.
 
         Returns:
             List of output file paths that were created.
@@ -670,6 +697,7 @@ class Client:
             ignore_directory_name=ignore_directory_name,
             max_concurrent=max_concurrent,
             strategy=FetchFileStrategy.download_only,
+            admin=admin,
         )
 
     @validate_call
@@ -678,7 +706,7 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Entity],
-        asset_or_id: ID | Asset,
+        asset_or_id: RegisteredAssetOrId,
         asset_path: Path | None = None,
         project_context: ProjectContext | None = None,
         strategy: FetchContentStrategy = FetchContentStrategy.local_or_download,
@@ -754,7 +782,7 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Entity],
-        asset_id: ID | Asset,
+        asset_id: RegisteredAssetOrId,
         output_path: Path,
         asset_path: Path | None = None,
         project_context: ProjectContext | None = None,
@@ -797,7 +825,7 @@ class Client:
         *,
         entity_id: ID,
         entity_type: type[Entity],
-        asset_id: ID | Asset,
+        asset_id: RegisteredAssetOrId,
         output_path: os.PathLike,
         asset_path: os.PathLike | None = None,
         project_context: ProjectContext | None = None,
@@ -829,29 +857,30 @@ class Client:
         )
 
     @staticmethod
-    def select_assets(entity: Entity, selection: dict) -> IteratorResult:
+    @validate_call
+    def select_assets(entity: RegisteredEntity, selection: dict) -> IteratorResult[Asset]:
         """Select assets from an entity based on a selection dict.
 
         Args:
-            entity: Entity whose assets should be filtered.
+            entity: Entity whose assets should be filtered. Must have an assigned id.
             selection: Selection/filter criteria.
 
         Returns:
-            An iterator over matching assets.
+            An iterator over matching assets, each with an assigned id.
         """
         return IteratorResult(filter_assets(entity.assets, selection))
 
     @validate_call
     def fetch_assets(
         self,
-        entity_or_id: Entity | tuple[ID, type[Entity]],
+        entity_or_id: RegisteredEntity | tuple[ID, type[Entity]],
         *,
         selection: dict[str, Any] | None = None,
         output_path: Path,
         project_context: ProjectContext | None = None,
         strategy: FetchFileStrategy = FetchFileStrategy.link_or_download,
         admin: bool = False,
-    ):
+    ) -> IteratorResult[DownloadedAssetFile]:
         """Fetch assets belonging to an entity.
 
         Args:
@@ -867,14 +896,16 @@ class Client:
             An iterator yielding `DownloadedAssetFile` objects.
         """
 
-        def _fetch_entity_asset(asset: Asset) -> DownloadedAssetFile:
+        def _fetch_entity_asset(
+            asset: Asset,
+        ) -> DownloadedAssetFile:
             if asset.is_directory:
                 raise NotImplementedError("Downloading asset directories is not supported yet.")
             else:
                 path = self.fetch_file(
-                    entity_id=cast(ID, entity.id),
+                    entity_id=entity.id,
                     entity_type=type(entity),
-                    asset_id=cast(ID, asset.id),
+                    asset_id=asset.id,
                     output_path=output_path,
                     project_context=context,
                     strategy=strategy,
@@ -915,13 +946,13 @@ class Client:
     @validate_call
     def download_assets(
         self,
-        entity_or_id: Entity | tuple[ID, type[Entity]],
+        entity_or_id: RegisteredEntity | tuple[ID, type[Entity]],
         *,
         selection: dict[str, Any] | None = None,
         output_path: Path,
         project_context: ProjectContext | None = None,
         admin: bool = False,
-    ) -> IteratorResult:
+    ) -> IteratorResult[DownloadedAssetFile]:
         """Download assets belonging to an entity.
 
         Args:

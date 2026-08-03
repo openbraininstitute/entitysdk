@@ -132,6 +132,7 @@ class AssetLabel(StrEnum):
     simulation_generation_config = "simulation_generation_config"
     ion_channel_modeling_generation_config = "ion_channel_modeling_generation_config"
     custom_node_sets = "custom_node_sets"
+    compartment_sets = "compartment_sets"
     campaign_generation_config = "campaign_generation_config"
     campaign_summary = "campaign_summary"
     replay_spikes = "replay_spikes"
