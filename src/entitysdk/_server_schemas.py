@@ -5,8 +5,9 @@ from entitysdk.compat import StrEnum
 
 from enum import Enum
 from typing import Annotated, Any, Literal
-from pydantic import AnyUrl, AwareDatetime, BaseModel, Field, RootModel
+from pydantic import AnyUrl, AwareDatetime, BaseModel, ConfigDict, Field, RootModel
 from uuid import UUID
+from typing_extensions import TypeAliasType
 from datetime import timedelta
 
 
@@ -60,6 +61,9 @@ class AnalysisScale(StrEnum):
 
 
 class AnnotationAdminUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     pref_label: Annotated[str | None, Field(title="Pref Label")] = None
     alt_label: Annotated[str | None, Field(title="Alt Label")] = None
     definition: Annotated[str | None, Field(title="Definition")] = None
@@ -104,6 +108,9 @@ class ApiErrorCode(StrEnum):
     S3_CANNOT_CREATE_PRESIGNED_URL = "S3_CANNOT_CREATE_PRESIGNED_URL"
     OPENAI_API_KEY_MISSING = "OPENAI_API_KEY_MISSING"
     OPENAI_API_ERROR = "OPENAI_API_ERROR"
+
+
+FilesAdditionalProperty = TypeAliasType("FilesAdditionalProperty", AnyUrl)
 
 
 class AssetLabel(StrEnum):
@@ -198,6 +205,9 @@ class BodyUploadEntityAssetEntityRouteEntityIdAssetsPost(BaseModel):
 
 
 class BrainRegionAdminUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     annotation_value: Annotated[int | None, Field(title="Annotation Value")] = None
     name: Annotated[str | None, Field(title="Name")] = None
     acronym: Annotated[str | None, Field(title="Acronym")] = None
@@ -216,6 +226,9 @@ class BrainRegionCreate(BaseModel):
 
 
 class BrainRegionHierarchyAdminUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     species_id: Annotated[UUID | None, Field(title="Species Id")] = None
     strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
     name: Annotated[str | None, Field(title="Name")] = None
@@ -277,6 +290,9 @@ class ProtocolDocument(RootModel[AnyUrl]):
 
 
 class ConsortiumAdminUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     pref_label: Annotated[str | None, Field(title="Pref Label")] = None
     alternative_name: Annotated[str | None, Field(title="Alternative Name")] = None
     legacy_id: Annotated[str | None, Field(title="Legacy Id")] = None
@@ -319,6 +335,9 @@ class ContributionCreate(BaseModel):
 
 
 class ContributionUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     agent_id: Annotated[UUID | None, Field(title="Agent Id")] = None
     role_id: Annotated[UUID | None, Field(title="Role Id")] = None
     entity_id: Annotated[UUID | None, Field(title="Entity Id")] = None
@@ -336,10 +355,14 @@ class DerivationType(StrEnum):
     em_dense_reconstruction_dataset_cell_morphology = (
         "em_dense_reconstruction_dataset_cell_morphology"
     )
+    circuit_simplification = "circuit_simplification"
     unspecified = "unspecified"
 
 
 class DerivationUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     label: Annotated[str | None, Field(title="Label")] = None
 
 
@@ -643,6 +666,9 @@ class Url(RootModel[AnyUrl]):
 
 
 class ExternalUrlAdminUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     source: ExternalSource | None = None
@@ -684,6 +710,9 @@ class HierarchyTree(BaseModel):
 
 
 class IonChannelAdminUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     label: Annotated[str | None, Field(title="Label")] = None
@@ -727,6 +756,9 @@ class IonChannelModelingConfigGenerationUserUpdate(BaseModel):
 
 
 class IonChannelModelingConfigUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
@@ -846,6 +878,9 @@ class IonChannelRecordingCreate(BaseModel):
 
 
 class IonChannelRecordingUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
     brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
     subject_id: Annotated[UUID | None, Field(title="Subject Id")] = None
@@ -868,6 +903,9 @@ class IonChannelRecordingUserUpdate(BaseModel):
 
 
 class LicenseAdminUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     label: Annotated[str | None, Field(title="Label")] = None
@@ -889,6 +927,9 @@ class MEModelCalibrationResultCreate(BaseModel):
 
 
 class MEModelCalibrationResultUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     holding_current: Annotated[float | None, Field(title="Holding Current")] = None
     threshold_current: Annotated[float | None, Field(title="Threshold Current")] = None
@@ -908,6 +949,9 @@ class MeasurableEntity(StrEnum):
 
 
 class MeasurementLabelAdminUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     pref_label: Annotated[str | None, Field(title="Pref Label")] = None
     alt_label: Annotated[str | None, Field(title="Alt Label")] = None
     definition: Annotated[str | None, Field(title="Definition")] = None
@@ -1403,6 +1447,20 @@ class NestedScientificArtifactRead(BaseModel):
     type: EntityType
 
 
+class NestedSimulatableExtracellularRecordingArrayRead(BaseModel):
+    authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
+    authorized_public: Annotated[bool, Field(title="Authorized Public")]
+    lifecycle_status: EntityLifecycleStatus
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    id: Annotated[UUID, Field(title="Id")]
+    type: EntityType
+    name: Annotated[str, Field(title="Name")]
+    description: Annotated[str, Field(title="Description")]
+    electrode_type: ElectrodeType
+    circuit_id: Annotated[UUID, Field(title="Circuit Id")]
+
+
 class NestedSimulationRead(BaseModel):
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool, Field(title="Authorized Public")]
@@ -1469,6 +1527,9 @@ class NestedSynaptome(BaseModel):
 
 
 class OrganizationAdminUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     pref_label: Annotated[str | None, Field(title="Pref Label")] = None
     alternative_name: Annotated[str | None, Field(title="Alternative Name")] = None
     legacy_id: Annotated[str | None, Field(title="Legacy Id")] = None
@@ -1533,6 +1594,9 @@ class PaginationResponse(BaseModel):
 
 
 class PersonAdminUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     given_name: Annotated[str | None, Field(title="Given Name")] = None
     family_name: Annotated[str | None, Field(title="Family Name")] = None
     pref_label: Annotated[str | None, Field(title="Pref Label")] = None
@@ -1578,6 +1642,9 @@ class PointLocationBase(BaseModel):
 
 
 class PublicationAdminUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     DOI: Annotated[str | None, Field(title="Doi")] = None
     title: Annotated[str | None, Field(title="Title")] = None
     authors: Annotated[list[Author] | None, Field(title="Authors")] = None
@@ -1651,6 +1718,9 @@ class RepairPipelineType(StrEnum):
 
 
 class RoleAdminUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     name: Annotated[str | None, Field(title="Name")] = None
     role_id: Annotated[str | None, Field(title="Role Id")] = None
 
@@ -1723,6 +1793,9 @@ class SimulatableExtracellularRecordingArrayCreate(BaseModel):
 
 
 class SimulatableExtracellularRecordingArrayUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
@@ -1740,6 +1813,9 @@ class SimulationCampaignCreate(BaseModel):
 
 
 class SimulationCampaignUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
@@ -1756,6 +1832,9 @@ class SimulationCreate(BaseModel):
     entity_id: Annotated[UUID, Field(title="Entity Id")]
     scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
     number_neurons: Annotated[int, Field(title="Number Neurons")]
+    recording_arrays: Annotated[
+        list[NestedEntityCreate] | None, Field(title="Recording Arrays", validate_default=True)
+    ] = []
 
 
 class SimulationExecutionCreate(BaseModel):
@@ -1837,6 +1916,9 @@ class SimulationResultCreate(BaseModel):
 
 
 class SimulationResultUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
@@ -1844,6 +1926,9 @@ class SimulationResultUserUpdate(BaseModel):
 
 
 class SimulationUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
@@ -1851,6 +1936,9 @@ class SimulationUserUpdate(BaseModel):
     entity_id: Annotated[UUID | None, Field(title="Entity Id")] = None
     scan_parameters: Annotated[dict[str, Any] | None, Field(title="Scan Parameters")] = None
     number_neurons: Annotated[int | None, Field(title="Number Neurons")] = None
+    recording_arrays: Annotated[
+        list[NestedEntityCreate] | None, Field(title="Recording Arrays")
+    ] = None
 
 
 class SingleNeuronSimulationCreate(BaseModel):
@@ -1866,6 +1954,9 @@ class SingleNeuronSimulationCreate(BaseModel):
 
 
 class SingleNeuronSimulationUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
     name: Annotated[str | None, Field(title="Name")] = None
@@ -1899,6 +1990,9 @@ class SingleNeuronSynaptomeSimulationCreate(BaseModel):
 
 
 class SingleNeuronSynaptomeSimulationUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
     name: Annotated[str | None, Field(title="Name")] = None
@@ -1910,6 +2004,9 @@ class SingleNeuronSynaptomeSimulationUserUpdate(BaseModel):
 
 
 class SingleNeuronSynaptomeUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
@@ -1930,6 +2027,9 @@ class SkeletonizationCampaignCreate(BaseModel):
 
 
 class SkeletonizationCampaignUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
@@ -1980,6 +2080,9 @@ class SkeletonizationConfigGenerationUserUpdate(BaseModel):
 
 
 class SkeletonizationConfigUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
@@ -2036,6 +2139,9 @@ class SlicingDirectionType(StrEnum):
 
 
 class SpeciesAdminUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     name: Annotated[str | None, Field(title="Name")] = None
     taxonomy_id: Annotated[str | None, Field(title="Taxonomy Id")] = None
 
@@ -2072,6 +2178,9 @@ class StorageType(StrEnum):
 
 
 class StrainAdminUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     name: Annotated[str | None, Field(title="Name")] = None
     taxonomy_id: Annotated[str | None, Field(title="Taxonomy Id")] = None
     species_id: Annotated[UUID | None, Field(title="Species Id")] = None
@@ -2125,6 +2234,9 @@ class SubjectCreate(BaseModel):
 
 
 class SubjectUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     sex: Sex | None = None
@@ -2142,6 +2254,7 @@ class TargetSimulator(StrEnum):
     Brian2 = "Brian2"
     CORENEURON = "CORENEURON"
     LearningEngine = "LearningEngine"
+    NEST = "NEST"
     NEURON = "NEURON"
 
 
@@ -2186,6 +2299,8 @@ class TaskActivityType(StrEnum):
     circuit_synaptic_physiology_assignment__execution = (
         "circuit_synaptic_physiology_assignment__execution"
     )
+    circuit_simplification__config_generation = "circuit_simplification__config_generation"
+    circuit_simplification__execution = "circuit_simplification__execution"
 
 
 class TaskActivityUserUpdate(BaseModel):
@@ -2237,9 +2352,14 @@ class TaskConfigType(StrEnum):
     circuit_synaptic_physiology_assignment__config = (
         "circuit_synaptic_physiology_assignment__config"
     )
+    circuit_simplification__campaign = "circuit_simplification__campaign"
+    circuit_simplification__config = "circuit_simplification__config"
 
 
 class TaskConfigUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     task_config_type: TaskConfigType | None = None
@@ -2271,6 +2391,9 @@ class TaskResultType(StrEnum):
 
 
 class TaskResultUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
@@ -2338,6 +2461,9 @@ class ValidationResultCreate(BaseModel):
 
 
 class ValidationResultUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     passed: Annotated[bool | None, Field(title="Passed")] = None
@@ -2376,6 +2502,9 @@ class AnalysisNotebookEnvironmentCreate(BaseModel):
 
 
 class AnalysisNotebookEnvironmentUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     runtime_info: RuntimeInfo | None = None
 
@@ -2420,6 +2549,9 @@ class AnalysisNotebookResultCreate(BaseModel):
 
 
 class AnalysisNotebookResultUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
@@ -2443,6 +2575,9 @@ class AnalysisNotebookTemplateSpecifications(BaseModel):
 
 
 class AnalysisNotebookTemplateUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
@@ -2515,6 +2650,9 @@ class BrainAtlasRegionCreate(BaseModel):
 
 
 class BrainAtlasRegionUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     volume: Annotated[float | None, Field(title="Volume")] = None
     is_leaf_region: Annotated[bool | None, Field(title="Is Leaf Region")] = None
@@ -2523,6 +2661,9 @@ class BrainAtlasRegionUpdate(BaseModel):
 
 
 class BrainAtlasUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     species_id: Annotated[UUID | None, Field(title="Species Id")] = None
     strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
     name: Annotated[str | None, Field(title="Name")] = None
@@ -2583,6 +2724,9 @@ class CellCompositionCreate(BaseModel):
 
 
 class CellCompositionUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     species_id: Annotated[UUID | None, Field(title="Species Id")] = None
     strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
@@ -2635,6 +2779,9 @@ class CellMorphologyCreate(BaseModel):
 
 
 class CellMorphologyUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
     brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
     subject_id: Annotated[UUID | None, Field(title="Subject Id")] = None
@@ -2707,6 +2854,9 @@ class CircuitCreate(BaseModel):
 
 
 class CircuitUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
     brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
     subject_id: Annotated[UUID | None, Field(title="Subject Id")] = None
@@ -2855,6 +3005,9 @@ class EMCellMeshCreate(BaseModel):
 
 
 class EMCellMeshUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
     brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
     subject_id: Annotated[UUID | None, Field(title="Subject Id")] = None
@@ -2881,6 +3034,9 @@ class EMCellMeshUserUpdate(BaseModel):
 
 
 class EMDenseReconstructionDatasetAdminUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = None
     brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
@@ -3005,6 +3161,9 @@ class EModelCreate(BaseModel):
 
 
 class EModelUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
     species_id: Annotated[UUID | None, Field(title="Species Id")] = None
     strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
@@ -3110,6 +3269,9 @@ class ElectricalCellRecordingCreate(BaseModel):
 
 
 class ElectricalCellRecordingUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     license_id: Annotated[UUID | None, Field(title="License Id")] = None
     brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
     subject_id: Annotated[UUID | None, Field(title="Subject Id")] = None
@@ -3143,6 +3305,9 @@ class ElectricalRecordingStimulusCreate(BaseModel):
 
 
 class ElectricalRecordingStimulusUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
@@ -3185,6 +3350,9 @@ class IonChannelModelingCampaignCreate(BaseModel):
 
 
 class IonChannelModelingCampaignUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
@@ -3434,6 +3602,9 @@ class MEModelCreate(BaseModel):
 
 
 class MEModelUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     species_id: Annotated[UUID | None, Field(title="Species Id")] = None
     strain_id: Annotated[UUID | None, Field(title="Strain Id")] = None
@@ -3700,6 +3871,9 @@ class SimulationRead(BaseModel):
     entity_id: Annotated[UUID, Field(title="Entity Id")]
     scan_parameters: Annotated[dict[str, Any], Field(title="Scan Parameters")]
     number_neurons: Annotated[int, Field(title="Number Neurons")]
+    recording_arrays: Annotated[
+        list[NestedSimulatableExtracellularRecordingArrayRead], Field(title="Recording Arrays")
+    ]
 
 
 class SimulationResultRead(BaseModel):
@@ -4123,7 +4297,7 @@ class AnalysisNotebookTemplateRead(BaseModel):
 
 class AssetAndPresignedURLS(BaseModel):
     asset: AssetRead
-    files: Annotated[dict[str, AnyUrl], Field(title="Files")]
+    files: Annotated[dict[str, FilesAdditionalProperty], Field(title="Files")]
 
 
 class BrainAtlasRead(BaseModel):
@@ -4669,6 +4843,9 @@ class ExperimentalBoutonDensityRead(BaseModel):
 
 
 class ExperimentalBoutonDensityUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     subject_id: Annotated[UUID | None, Field(title="Subject Id")] = None
     brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
@@ -4722,6 +4899,9 @@ class ExperimentalNeuronDensityRead(BaseModel):
 
 
 class ExperimentalNeuronDensityUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     subject_id: Annotated[UUID | None, Field(title="Subject Id")] = None
     brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
@@ -4781,6 +4961,9 @@ class ExperimentalSynapsesPerConnectionRead(BaseModel):
 
 
 class ExperimentalSynapsesPerConnectionUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     lifecycle_status: EntityLifecycleStatus | None = None
     subject_id: Annotated[UUID | None, Field(title="Subject Id")] = None
     brain_region_id: Annotated[UUID | None, Field(title="Brain Region Id")] = None
@@ -4961,6 +5144,9 @@ class IonChannelModelRead(BaseModel):
 
 
 class IonChannelModelUserUpdate(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     name: Annotated[str | None, Field(title="Name")] = None
     description: Annotated[str | None, Field(title="Description")] = None
     nmodl_suffix: Annotated[str | None, Field(title="Nmodl Suffix")] = None
