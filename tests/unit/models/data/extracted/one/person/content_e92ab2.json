@@ -5,7 +5,7 @@
     "given_name": null,
     "id": "00000000-0000-4000-8000-000001234678",
     "orcid": null,
-    "pref_label": "Admin User",
+    "pref_label": "Regular User With Project Id",
     "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person",
     "update_date": "2025-01-01T00:00:00Z"
@@ -14,8 +14,8 @@
   "family_name": "courcol",
   "given_name": "jd",
   "id": "00000000-0000-4000-8000-000001234678",
-  "orcid": "https://orcid.org/0000-0002-1825-0097",
-  "pref_label": "person-0097",
+  "orcid": "https://orcid.org/0000-0003-1234-5674",
+  "pref_label": "person-5674",
   "sub_id": null,
   "type": "person",
   "update_date": "2025-01-01T00:00:00Z",
@@ -25,7 +25,7 @@
     "given_name": null,
     "id": "00000000-0000-4000-8000-000001234678",
     "orcid": null,
-    "pref_label": "Admin User",
+    "pref_label": "Regular User With Project Id",
     "sub_id": "00000000-0000-4000-8000-000001234678",
     "type": "person",
     "update_date": "2025-01-01T00:00:00Z"

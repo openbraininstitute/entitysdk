@@ -64,31 +64,31 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 6,
+          "id": 123,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 7,
+          "id": 124,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 2.45
         },
         {
-          "id": 8,
+          "id": 125,
           "name": "mean",
           "unit": "1/\u03bcm",
           "value": 30.0
         },
         {
-          "id": 9,
+          "id": 126,
           "name": "standard_error",
           "unit": "1/\u03bcm",
           "value": 3.0
         },
         {
-          "id": 10,
+          "id": 127,
           "name": "sample_size",
           "unit": "dimensionless",
           "value": 300.0

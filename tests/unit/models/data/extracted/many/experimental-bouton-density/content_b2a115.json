@@ -66,31 +66,31 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 21,
+          "id": 78,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 22,
+          "id": 79,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 2.45
         },
         {
-          "id": 23,
+          "id": 80,
           "name": "mean",
           "unit": "1/\u03bcm",
           "value": 40.0
         },
         {
-          "id": 24,
+          "id": 81,
           "name": "standard_error",
           "unit": "1/\u03bcm",
           "value": 4.0
         },
         {
-          "id": 25,
+          "id": 82,
           "name": "sample_size",
           "unit": "dimensionless",
           "value": 400.0
@@ -213,31 +213,31 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 11,
+          "id": 68,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 12,
+          "id": 69,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 2.45
         },
         {
-          "id": 13,
+          "id": 70,
           "name": "mean",
           "unit": "1/\u03bcm",
           "value": 20.0
         },
         {
-          "id": 14,
+          "id": 71,
           "name": "standard_error",
           "unit": "1/\u03bcm",
           "value": 2.0
         },
         {
-          "id": 15,
+          "id": 72,
           "name": "sample_size",
           "unit": "dimensionless",
           "value": 200.0
@@ -360,31 +360,31 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 1,
+          "id": 58,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 2,
+          "id": 59,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 2.45
         },
         {
-          "id": 3,
+          "id": 60,
           "name": "mean",
           "unit": "1/\u03bcm",
           "value": 10.0
         },
         {
-          "id": 4,
+          "id": 61,
           "name": "standard_error",
           "unit": "1/\u03bcm",
           "value": 1.0
         },
         {
-          "id": 5,
+          "id": 62,
           "name": "sample_size",
           "unit": "dimensionless",
           "value": 100.0

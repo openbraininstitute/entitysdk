@@ -1,6 +1,6 @@
 {
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": true,
+  "authorized_public": false,
   "contributions": [],
   "corrected_for_shrinkage": null,
   "created_by": {
@@ -15,13 +15,13 @@
     "update_date": "2025-01-01T00:00:00Z"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "Description Test",
+  "description": "description-0",
   "generated_from_derivations": null,
   "generation_type": "digital_reconstruction",
   "id": "00000000-0000-4000-8000-000001234678",
   "lifecycle_status": "draft",
   "magnification": null,
-  "name": "Digital Reconstruction Protocol Test",
+  "name": "name-0",
   "protocol_design": "cell_patch",
   "protocol_document": "https://example.com/",
   "slicing_direction": "horizontal",

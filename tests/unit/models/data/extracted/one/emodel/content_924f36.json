@@ -1,7 +1,7 @@
 {
   "assets": [],
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": false,
+  "authorized_public": true,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
@@ -26,7 +26,7 @@
     "update_date": "2025-01-01T00:00:00Z"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "8_description",
+  "description": "morph description",
   "etypes": [],
   "exemplar_morphology": {
     "cell_morphology_protocol": {
@@ -55,12 +55,12 @@
   "generated_from_derivations": null,
   "id": "00000000-0000-4000-8000-000001234678",
   "ion_channel_models": [],
-  "iteration": "test iteration",
+  "iteration": "0",
   "lifecycle_status": "active",
   "mtypes": [],
-  "name": "8",
-  "score": 80.0,
-  "seed": -1,
+  "name": "public emodel",
+  "score": 0.0,
+  "seed": 0,
   "species": {
     "creation_date": "2025-01-01T00:00:00Z",
     "id": "00000000-0000-4000-8000-000001234678",

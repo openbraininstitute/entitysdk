@@ -1,19 +1,19 @@
 {
   "data": [
     {
-      "alt_label": "alt_label_5",
+      "alt_label": "alt_label_a",
       "creation_date": "2025-01-01T00:00:00Z",
-      "definition": "definition_5",
+      "definition": "definition_a",
       "id": "00000000-0000-4000-8000-000001234678",
-      "pref_label": "pref_label_5",
+      "pref_label": "label_a",
       "update_date": "2025-01-01T00:00:00Z"
     },
     {
-      "alt_label": "alt_label_6",
+      "alt_label": "alt_label_ab",
       "creation_date": "2025-01-01T00:00:00Z",
-      "definition": "definition_6",
+      "definition": "definition_ab",
       "id": "00000000-0000-4000-8000-000001234678",
-      "pref_label": "pref_label_6",
+      "pref_label": "label_ab",
       "update_date": "2025-01-01T00:00:00Z"
     }
   ],

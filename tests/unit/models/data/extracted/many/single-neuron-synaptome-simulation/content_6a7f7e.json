@@ -28,26 +28,26 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "my-synaptome-simulation-description",
+      "description": "my-description",
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "injection_location": [
         "soma[0]"
       ],
       "lifecycle_status": "active",
-      "name": "sim-6",
+      "name": "Private u1/1",
       "recording_location": [
         "soma[0]_0.5"
       ],
       "seed": 1,
       "synaptome": {
         "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-        "authorized_public": false,
+        "authorized_public": true,
         "creation_date": "2025-01-01T00:00:00Z",
         "description": "my-synaptome-description",
         "id": "00000000-0000-4000-8000-000001234678",
         "lifecycle_status": "active",
-        "name": "syn-1",
+        "name": "my-synaptome",
         "seed": 1,
         "type": "single_neuron_synaptome",
         "update_date": "2025-01-01T00:00:00Z"
@@ -95,26 +95,26 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "my-synaptome-simulation-description",
+      "description": "my-description",
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "injection_location": [
         "soma[0]"
       ],
       "lifecycle_status": "active",
-      "name": "sim-5",
+      "name": "Private u1/0",
       "recording_location": [
         "soma[0]_0.5"
       ],
       "seed": 1,
       "synaptome": {
         "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-        "authorized_public": false,
+        "authorized_public": true,
         "creation_date": "2025-01-01T00:00:00Z",
         "description": "my-synaptome-description",
         "id": "00000000-0000-4000-8000-000001234678",
         "lifecycle_status": "active",
-        "name": "syn-2",
+        "name": "my-synaptome",
         "seed": 1,
         "type": "single_neuron_synaptome",
         "update_date": "2025-01-01T00:00:00Z"
@@ -137,7 +137,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -162,26 +162,26 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "my-synaptome-simulation-description",
+      "description": "my-description",
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "injection_location": [
         "soma[0]"
       ],
       "lifecycle_status": "active",
-      "name": "sim-4",
+      "name": "Public u1/0",
       "recording_location": [
         "soma[0]_0.5"
       ],
       "seed": 1,
       "synaptome": {
         "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-        "authorized_public": false,
+        "authorized_public": true,
         "creation_date": "2025-01-01T00:00:00Z",
         "description": "my-synaptome-description",
         "id": "00000000-0000-4000-8000-000001234678",
         "lifecycle_status": "active",
-        "name": "syn-1",
+        "name": "my-synaptome",
         "seed": 1,
         "type": "single_neuron_synaptome",
         "update_date": "2025-01-01T00:00:00Z"
@@ -205,7 +205,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 3,
-    "total_items": 7
+    "page_size": 30,
+    "total_items": 3
   }
 }

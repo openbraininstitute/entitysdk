@@ -1,7 +1,7 @@
 {
   "assets": [],
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": false,
+  "authorized_public": true,
   "contributions": [],
   "created_by": {
     "creation_date": "2025-01-01T00:00:00Z",
@@ -15,7 +15,7 @@
     "update_date": "2025-01-01T00:00:00Z"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "task-config-description",
+  "description": "campaign-description",
   "generated_from_derivations": null,
   "id": "00000000-0000-4000-8000-000001234678",
   "inputs": [],
@@ -23,9 +23,9 @@
   "meta": {
     "foo": "bar"
   },
-  "name": "task-config",
+  "name": "campaign",
   "task_config_generator_id": null,
-  "task_config_type": "skeletonization__config",
+  "task_config_type": "skeletonization__campaign",
   "type": "task_config",
   "update_date": "2025-01-01T00:00:00Z",
   "updated_by": {

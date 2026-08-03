@@ -52,7 +52,7 @@
         "z": 30.0
       },
       "mtypes": [],
-      "name": "Test Morphology Name",
+      "name": "TestMorphologyName2",
       "notice_text": null,
       "published_in": null,
       "repair_pipeline_state": null,
@@ -62,26 +62,26 @@
         "age_period": "postnatal",
         "age_value": 1209600.0,
         "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-        "authorized_public": true,
+        "authorized_public": false,
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "my-description",
+        "description": "my-description-2",
         "id": "00000000-0000-4000-8000-000001234678",
         "lifecycle_status": "active",
-        "name": "my-subject",
-        "sex": "female",
+        "name": "subject-2",
+        "sex": "male",
         "species": {
           "creation_date": "2025-01-01T00:00:00Z",
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "Test Species",
-          "taxonomy_id": "12345",
+          "name": "TestSpecies1",
+          "taxonomy_id": "1",
           "update_date": "2025-01-01T00:00:00Z"
         },
         "strain": {
           "creation_date": "2025-01-01T00:00:00Z",
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "Test Strain",
+          "name": "Strain1",
           "species_id": "00000000-0000-4000-8000-000001234678",
-          "taxonomy_id": "Taxonomy ID",
+          "taxonomy_id": "strain1",
           "update_date": "2025-01-01T00:00:00Z"
         },
         "type": "subject",
@@ -107,7 +107,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 30,
-    "total_items": 1
+    "page_size": 1,
+    "total_items": 3
   }
 }

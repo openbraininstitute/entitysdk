@@ -1,6 +1,6 @@
 {
   "assets": [],
-  "assignment_id": "assignment-101",
+  "assignment_id": "physiology_basics",
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "contributions": [],
@@ -20,7 +20,7 @@
   "generated_from_derivations": null,
   "id": "00000000-0000-4000-8000-000001234678",
   "lifecycle_status": "active",
-  "name": "a1",
+  "name": "b",
   "scale": "cellular",
   "specifications": {
     "docker": {
