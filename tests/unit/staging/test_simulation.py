@@ -281,28 +281,6 @@ def test_stage_recording_arrays(client, tmp_path, httpx_mock, api_url):
     assert res["SomaVoltRec"] == reports["SomaVoltRec"]
 
 
-def test_stage_recording_arrays__empty_arrays_with_config_entries(client, tmp_path):
-    reports = {"lfp": {"type": "lfp", "electrodes_file": f"electrodes_files/{uuid.uuid4()}.h5"}}
-    with pytest.raises(StagingError, match="recording_arrays is empty"):
-        test_module._stage_recording_arrays(
-            client,
-            reports=reports,
-            recording_arrays=[],
-            output_dir=tmp_path,
-        )
-
-
-def test_stage_recording_arrays__arrays_without_config_entries(client, tmp_path):
-    array = _recording_array(uuid.uuid4(), uuid.uuid4())
-    with pytest.raises(StagingError, match="no electrodes_file entries"):
-        test_module._stage_recording_arrays(
-            client,
-            reports={"SomaVoltRec": {"type": "compartment"}},
-            recording_arrays=[array],
-            output_dir=tmp_path,
-        )
-
-
 def test_stage_recording_arrays__missing_config_id(client, tmp_path):
     array = _recording_array(uuid.uuid4(), uuid.uuid4())
     missing_id = uuid.uuid4()
@@ -312,5 +290,20 @@ def test_stage_recording_arrays__missing_config_id(client, tmp_path):
             client,
             reports=reports,
             recording_arrays=[array],
+            output_dir=tmp_path,
+        )
+
+
+def test_stage_recording_arrays__extra_array_not_in_config(client, tmp_path):
+    array_id = uuid.uuid4()
+    array = _recording_array(array_id, uuid.uuid4())
+    # reports reference array_id (so missing check passes), but recording_arrays has an extra one
+    extra_array = _recording_array(uuid.uuid4(), uuid.uuid4())
+    reports = {"lfp": {"type": "lfp", "electrodes_file": f"electrodes_files/{array_id}.h5"}}
+    with pytest.raises(StagingError, match="not referenced by any electrodes_file"):
+        test_module._stage_recording_arrays(
+            client,
+            reports=reports,
+            recording_arrays=[array, extra_array],
             output_dir=tmp_path,
         )

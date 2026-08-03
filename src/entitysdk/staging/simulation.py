@@ -159,7 +159,7 @@ def _stage_single_cell_node_sets_file(
     return output_path
 
 
-def _map_electrode_id_to_report_name(reports: dict) -> dict[UUID, Path]:
+def _map_electrode_id_to_report_name(reports: dict) -> dict[UUID, str]:
     id_to_report = {}
     for name, values in reports.items():
         if values["type"] == "lfp" and (electrodes_file := values.get("electrodes_file")):
@@ -181,17 +181,6 @@ def _stage_recording_arrays(
     if not (id_to_report_name or array_ids):
         return reports
 
-    if not array_ids:
-        raise StagingError(
-            "Simulation config has electrodes_file entries in reports, "
-            "but recording_arrays is empty"
-        )
-
-    if not id_to_report_name:
-        raise StagingError(
-            "Simulation has recording_arrays, but no electrodes_file entries in reports"
-        )
-
     missing = set(id_to_report_name) - array_ids
     if missing:
         raise StagingError(
@@ -199,6 +188,15 @@ def _stage_recording_arrays(
             f"Config ids: {sorted(id_to_report_name)}\n"
             f"recording_arrays ids: {sorted(array_ids)}\n"
             f"Missing: {sorted(missing)}"
+        )
+
+    extra = array_ids - set(id_to_report_name)
+    if extra:
+        raise StagingError(
+            f"recording_arrays ids are not referenced by any electrodes_file in reports.\n"
+            f"Config ids: {sorted(id_to_report_name)}\n"
+            f"recording_arrays ids: {sorted(array_ids)}\n"
+            f"Extra: {sorted(extra)}"
         )
 
     electrodes_dir = create_dir(output_dir / DEFAULT_ELECTRODES_DIR)
