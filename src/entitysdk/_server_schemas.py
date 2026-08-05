@@ -2301,6 +2301,8 @@ class TaskActivityType(StrEnum):
     )
     circuit_simplification__config_generation = "circuit_simplification__config_generation"
     circuit_simplification__execution = "circuit_simplification__execution"
+    circuit_single_build__config_generation = "circuit_single_build__config_generation"
+    circuit_single_build__execution = "circuit_single_build__execution"
 
 
 class TaskActivityUserUpdate(BaseModel):
@@ -2354,6 +2356,8 @@ class TaskConfigType(StrEnum):
     )
     circuit_simplification__campaign = "circuit_simplification__campaign"
     circuit_simplification__config = "circuit_simplification__config"
+    circuit_single_build__campaign = "circuit_single_build__campaign"
+    circuit_single_build__config = "circuit_single_build__config"
 
 
 class TaskConfigUserUpdate(BaseModel):

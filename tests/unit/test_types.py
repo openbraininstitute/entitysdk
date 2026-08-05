@@ -8,7 +8,13 @@ from entitysdk.models.types import (
     ensure_id_is_none,
     ensure_id_is_set,
 )
-from entitysdk.types import AssetLabel, ContentType, StorageType
+from entitysdk.types import (
+    AssetLabel,
+    ContentType,
+    StorageType,
+    TaskActivityType,
+    TaskConfigType,
+)
 from tests.unit.util import MOCK_UUID
 
 
@@ -65,3 +71,14 @@ def test_ensure_id_is_set_rejects_asset_without_id():
 
 def test_asset_label_includes_compartment_sets():
     assert AssetLabel.compartment_sets.value == "compartment_sets"
+
+
+def test_task_types_include_circuit_single_build():
+    assert TaskConfigType.circuit_single_build__campaign.value == ("circuit_single_build__campaign")
+    assert TaskConfigType.circuit_single_build__config.value == "circuit_single_build__config"
+    assert TaskActivityType.circuit_single_build__config_generation.value == (
+        "circuit_single_build__config_generation"
+    )
+    assert TaskActivityType.circuit_single_build__execution.value == (
+        "circuit_single_build__execution"
+    )
