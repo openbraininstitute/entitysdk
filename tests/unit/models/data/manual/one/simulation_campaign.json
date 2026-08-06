@@ -6,31 +6,21 @@
   "name": "my-campaign",
   "description": "my-campaign-description",
   "type": "simulation_campaign",
-  "scan_parameters": {"foo": "bar"},
+  "scan_parameters": {
+    "foo": "bar"
+  },
   "entity_id": "33b5e17b-159f-4990-b087-fd0289db4026",
   "created_by": {
     "id": "e8997b32-0183-42c8-b11f-1a61da933a89",
-    "update_date": null,
-    "creation_date": null,
-    "type": "person",
     "pref_label": "Admin User",
-    "given_name": null,
-    "family_name": null,
-    "created_by": null,
-    "updated_by": null,
-    "sub_id": "00000000-0000-0000-0000-000000000001"
+    "creation_date": "2025-01-01T00:00:00",
+    "update_date": "2025-01-01T00:00:00"
   },
   "updated_by": {
     "id": "e8997b32-0183-42c8-b11f-1a61da933a89",
-    "update_date": null,
-    "creation_date": null,
-    "type": "person",
     "pref_label": "Admin User",
-    "given_name": null,
-    "family_name": null,
-    "created_by": null,
-    "updated_by": null,
-    "sub_id": "00000000-0000-0000-0000-000000000001"
+    "creation_date": "2025-01-01T00:00:00",
+    "update_date": "2025-01-01T00:00:00"
   },
   "authorized_public": false,
   "authorized_project_id": "0dbced5f-cc3d-488a-8c7f-cfb8ea039dc6",

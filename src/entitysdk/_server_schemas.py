@@ -1386,7 +1386,6 @@ class NestedPersonRead(BaseModel):
     family_name: Annotated[str | None, Field(title="Family Name")] = None
     pref_label: Annotated[str, Field(title="Pref Label")]
     type: AgentType
-    sub_id: Annotated[UUID | None, Field(title="Sub Id")]
     orcid: Annotated[str | None, Field(title="Orcid")]
 
 
@@ -1395,6 +1394,13 @@ class NestedPlaceholderCellMorphologyProtocolRead(BaseModel):
     description: Annotated[str, Field(title="Description")]
     type: EntityType | None = "cell_morphology_protocol"
     generation_type: Annotated[Literal["placeholder"], Field(title="Generation Type")]
+    id: Annotated[UUID, Field(title="Id")]
+
+
+class NestedPlatformUserRead(BaseModel):
+    creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
+    update_date: Annotated[AwareDatetime, Field(title="Update Date")]
+    pref_label: Annotated[str, Field(title="Pref Label")]
     id: Annotated[UUID, Field(title="Id")]
 
 
@@ -1547,8 +1553,8 @@ class OrganizationRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     pref_label: Annotated[str, Field(title="Pref Label")]
     alternative_name: Annotated[str, Field(title="Alternative Name")]
     type: AgentType
@@ -1616,13 +1622,12 @@ class PersonRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     given_name: Annotated[str | None, Field(title="Given Name")] = None
     family_name: Annotated[str | None, Field(title="Family Name")] = None
     pref_label: Annotated[str, Field(title="Pref Label")]
     type: AgentType
-    sub_id: Annotated[UUID | None, Field(title="Sub Id")]
     orcid: Annotated[str | None, Field(title="Orcid")]
 
 
@@ -1664,8 +1669,8 @@ class PublicationRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     DOI: Annotated[str, Field(title="Doi")]
     title: Annotated[str | None, Field(title="Title")] = None
     authors: Annotated[list[Author] | None, Field(title="Authors")] = None
@@ -1754,8 +1759,8 @@ class ScientificArtifactExternalUrlLinkRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     external_url: NestedExternalUrlRead
     scientific_artifact: NestedScientificArtifactRead
 
@@ -1770,8 +1775,8 @@ class ScientificArtifactPublicationLinkRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     publication_type: PublicationType
     publication: NestedPublicationRead
     scientific_artifact: NestedScientificArtifactRead
@@ -1854,8 +1859,8 @@ class SimulationExecutionRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: ActivityType | None = None
@@ -1888,8 +1893,8 @@ class SimulationGenerationRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: ActivityType | None = None
@@ -2060,8 +2065,8 @@ class SkeletonizationConfigGenerationRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: ActivityType | None = None
@@ -2110,8 +2115,8 @@ class SkeletonizationExecutionRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: ActivityType | None = None
@@ -2155,8 +2160,8 @@ class SpeciesRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     name: Annotated[str, Field(title="Name")]
     taxonomy_id: Annotated[str, Field(title="Taxonomy Id")]
 
@@ -2196,8 +2201,8 @@ class StrainRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     name: Annotated[str, Field(title="Name")]
     taxonomy_id: Annotated[str, Field(title="Taxonomy Id")]
     species_id: Annotated[UUID, Field(title="Species Id")]
@@ -2444,8 +2449,8 @@ class ValidationRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: ActivityType | None = None
@@ -2680,8 +2685,8 @@ class BrainRegionHierarchyRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     species: NestedSpeciesRead
     strain: NestedStrainRead | None = None
     name: Annotated[str, Field(title="Name")]
@@ -2705,8 +2710,8 @@ class CalibrationRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: ActivityType | None = None
@@ -2905,8 +2910,8 @@ class ConsortiumRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     pref_label: Annotated[str, Field(title="Pref Label")]
     alternative_name: Annotated[str, Field(title="Alternative Name")]
     type: AgentType
@@ -2916,8 +2921,8 @@ class ContributionRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     agent: AgentRead
     role: RoleRead
     entity: NestedEntityRead
@@ -2934,8 +2939,8 @@ class DerivationRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     used: NestedEntityRead
     generated: NestedEntityRead
     derivation_type: DerivationType
@@ -3189,8 +3194,8 @@ class ETypeClassificationRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     entity_id: Annotated[UUID, Field(title="Entity Id")]
     etype_class_id: Annotated[UUID, Field(title="Etype Class Id")]
 
@@ -3327,8 +3332,8 @@ class ExternalUrlRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     source: ExternalSource
@@ -3370,8 +3375,8 @@ class IonChannelModelingConfigGenerationRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: ActivityType | None = None
@@ -3388,8 +3393,8 @@ class IonChannelModelingExecutionRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: ActivityType | None = None
@@ -3404,8 +3409,8 @@ class IonChannelRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     label: Annotated[str, Field(title="Label")]
@@ -3417,8 +3422,8 @@ class LicenseRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     label: Annotated[str, Field(title="Label")]
@@ -3626,8 +3631,8 @@ class MTypeClassificationRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     entity_id: Annotated[UUID, Field(title="Entity Id")]
     mtype_class_id: Annotated[UUID, Field(title="Mtype Class Id")]
 
@@ -3654,8 +3659,8 @@ class MeasurementLabelRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     pref_label: Annotated[str, Field(title="Pref Label")]
     alt_label: Annotated[str | None, Field(title="Alt Label")] = None
     definition: Annotated[str, Field(title="Definition")]
@@ -3798,8 +3803,8 @@ class PlaceholderCellMorphologyProtocolRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
 
 
 class SimulatableExtracellularRecordingArrayRead(BaseModel):
@@ -3817,8 +3822,8 @@ class SimulatableExtracellularRecordingArrayRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -3841,8 +3846,8 @@ class SimulationCampaignRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -3866,8 +3871,8 @@ class SimulationRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -3895,8 +3900,8 @@ class SimulationResultRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -3918,8 +3923,8 @@ class SingleNeuronSimulationRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     brain_region: NestedBrainRegionRead
     name: Annotated[str, Field(title="Name")]
@@ -3946,8 +3951,8 @@ class SingleNeuronSynaptomeRead(BaseModel):
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     brain_region: NestedBrainRegionRead
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -3970,8 +3975,8 @@ class SingleNeuronSynaptomeSimulationRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     brain_region: NestedBrainRegionRead
     name: Annotated[str, Field(title="Name")]
@@ -3997,8 +4002,8 @@ class SkeletonizationCampaignRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -4024,8 +4029,8 @@ class SkeletonizationConfigRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -4062,8 +4067,8 @@ class SubjectRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     species: NestedSpeciesRead
     strain: NestedStrainRead | None = None
@@ -4088,8 +4093,8 @@ class TaskActivityRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: ActivityType | None = None
@@ -4136,8 +4141,8 @@ class TaskConfigRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     inputs: Annotated[
         list[NestedEntityRead] | None,
@@ -4169,8 +4174,8 @@ class TaskResultRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -4193,8 +4198,8 @@ class ValidationResultRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     passed: Annotated[bool, Field(title="Passed")]
@@ -4216,8 +4221,8 @@ class AnalysisNotebookEnvironmentRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     runtime_info: RuntimeInfo | None
 
@@ -4228,8 +4233,8 @@ class AnalysisNotebookExecutionRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     authorized_project_id: Annotated[UUID, Field(title="Authorized Project Id")]
     authorized_public: Annotated[bool | None, Field(title="Authorized Public")] = False
     type: ActivityType | None = None
@@ -4257,8 +4262,8 @@ class AnalysisNotebookResultRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -4289,8 +4294,8 @@ class AnalysisNotebookTemplateRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -4323,8 +4328,8 @@ class BrainAtlasRead(BaseModel):
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     hierarchy_id: Annotated[UUID, Field(title="Hierarchy Id")]
 
@@ -4344,8 +4349,8 @@ class BrainAtlasRegionRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     volume: Annotated[float | None, Field(title="Volume")]
     is_leaf_region: Annotated[bool, Field(title="Is Leaf Region")]
@@ -4368,8 +4373,8 @@ class CellCompositionRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     species: NestedSpeciesRead
     strain: NestedStrainRead | None = None
@@ -4441,8 +4446,8 @@ class CircuitRead(BaseModel):
         ),
     ] = None
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -4485,8 +4490,8 @@ class ComputationallySynthesizedCellMorphologyProtocolRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
 
 
 class DigitalReconstructionCellMorphologyProtocolRead(BaseModel):
@@ -4515,8 +4520,8 @@ class DigitalReconstructionCellMorphologyProtocolRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
 
 
 class EMCellMeshRead(BaseModel):
@@ -4565,8 +4570,8 @@ class EMCellMeshRead(BaseModel):
         ),
     ] = None
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -4628,8 +4633,8 @@ class EMDenseReconstructionDatasetRead(BaseModel):
         ),
     ] = None
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -4706,8 +4711,8 @@ class ElectricalCellRecordingRead(BaseModel):
         ),
     ] = None
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -4774,8 +4779,8 @@ class ElectricalRecordingStimulusRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -4802,8 +4807,8 @@ class EntityRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
 
 
@@ -4837,8 +4842,8 @@ class ExperimentalBoutonDensityRead(BaseModel):
     subject: NestedSubjectRead
     license: NestedLicenseRead | None
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -4892,8 +4897,8 @@ class ExperimentalNeuronDensityRead(BaseModel):
     subject: NestedSubjectRead
     license: NestedLicenseRead | None
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -4952,8 +4957,8 @@ class ExperimentalSynapsesPerConnectionRead(BaseModel):
     subject: NestedSubjectRead
     license: NestedLicenseRead | None
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -5078,8 +5083,8 @@ class IonChannelModelExpanded(BaseModel):
         ),
     ] = None
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -5239,8 +5244,8 @@ class IonChannelModelingCampaignRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -5268,8 +5273,8 @@ class IonChannelModelingConfigRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -5325,8 +5330,8 @@ class IonChannelRecordingRead(BaseModel):
         ),
     ] = None
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -5606,8 +5611,8 @@ class MEModelCalibrationResultRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     holding_current: Annotated[float, Field(title="Holding Current")]
     threshold_current: Annotated[float, Field(title="Threshold Current")]
@@ -5659,8 +5664,8 @@ class ModifiedReconstructionCellMorphologyProtocolRead(BaseModel):
     creation_date: Annotated[AwareDatetime, Field(title="Creation Date")]
     update_date: Annotated[AwareDatetime, Field(title="Update Date")]
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
 
 
 class NestedCellMorphologyProtocolRead(
@@ -5726,8 +5731,8 @@ class CellMorphologyAnnotationExpandedRead(BaseModel):
         ),
     ] = None
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -5803,8 +5808,8 @@ class CellMorphologyRead(BaseModel):
         ),
     ] = None
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -5862,8 +5867,8 @@ class EMCellMeshAnnotationExpandedRead(BaseModel):
         ),
     ] = None
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -5943,8 +5948,8 @@ class EModelRead(BaseModel):
     strain: NestedStrainRead | None = None
     brain_region: NestedBrainRegionRead
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -5974,8 +5979,8 @@ class EModelReadExpanded(BaseModel):
     strain: NestedStrainRead | None = None
     brain_region: NestedBrainRegionRead
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
@@ -6011,8 +6016,8 @@ class MEModelRead(BaseModel):
     strain: NestedStrainRead | None = None
     brain_region: NestedBrainRegionRead
     id: Annotated[UUID, Field(title="Id")]
-    created_by: NestedPersonRead
-    updated_by: NestedPersonRead
+    created_by: NestedPlatformUserRead
+    updated_by: NestedPlatformUserRead
     type: EntityType
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]

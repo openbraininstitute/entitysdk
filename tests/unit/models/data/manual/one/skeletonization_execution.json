@@ -5,19 +5,15 @@
   "update_date": "2025-11-06T15:51:34.858089Z",
   "created_by": {
     "id": "e37a8de0-4cfe-4347-abb0-1328eec2fef8",
-    "given_name": null,
-    "family_name": null,
     "pref_label": "Regular User With Project Id",
-    "type": "person",
-    "sub_id": "00000000-0000-0000-0000-000000000001"
+    "creation_date": "2025-01-01T00:00:00",
+    "update_date": "2025-01-01T00:00:00"
   },
   "updated_by": {
     "id": "e37a8de0-4cfe-4347-abb0-1328eec2fef8",
-    "given_name": null,
-    "family_name": null,
     "pref_label": "Regular User With Project Id",
-    "type": "person",
-    "sub_id": "00000000-0000-0000-0000-000000000001"
+    "creation_date": "2025-01-01T00:00:00",
+    "update_date": "2025-01-01T00:00:00"
   },
   "id": "22cebe80-f2d8-4aaf-9db8-a9ba284cb2da",
   "type": "skeletonization_execution",

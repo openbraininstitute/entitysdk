@@ -14,6 +14,27 @@ class Struct(BaseModel):
     """Struct is a model with a frozen structure with no id."""
 
 
+class PlatformUser(BaseModel):
+    """A registered user of the platform."""
+
+    id: Annotated[
+        ID,
+        Field(description="Keycloak subject ID of the platform user."),
+    ]
+    creation_date: Annotated[
+        datetime,
+        Field(description="When the platform user was created."),
+    ]
+    update_date: Annotated[
+        datetime,
+        Field(description="When the platform user was last updated."),
+    ]
+    pref_label: Annotated[
+        str,
+        Field(description="Human-readable display name of the platform user."),
+    ]
+
+
 class Identifiable(BaseModel):
     """Identifiable is a model with an id."""
 
@@ -41,17 +62,17 @@ class Identifiable(BaseModel):
         ),
     ] = None  # type: ignore[assignment]
     created_by: Annotated[
-        "Person",
+        PlatformUser,
         RuntimeNullableField,
         Field(
-            description="The agent that created this entity.",
+            description="The platform user who created this resource.",
         ),
     ] = None  # type: ignore[assignment]
     updated_by: Annotated[
-        "Person",
+        PlatformUser,
         RuntimeNullableField,
         Field(
-            description="The agent that updated this entity.",
+            description="The platform user who last updated this resource.",
         ),
     ] = None  # type: ignore[assignment]
 
@@ -96,7 +117,6 @@ class Person(Agent):
             description="The family name of the person.",
         ),
     ] = None
-    sub_id: Annotated[ID | None, Field(description="External subject id on Keycloak")] = None
 
     orcid: Annotated[str | None, Field(description="Open Researcher and Contributor ID")] = None
 
