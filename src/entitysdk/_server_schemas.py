@@ -145,6 +145,7 @@ class AssetLabel(StrEnum):
     replay_spikes = "replay_spikes"
     voltage_report = "voltage_report"
     spike_report = "spike_report"
+    lfp_report = "lfp_report"
     neuron_mechanisms = "neuron_mechanisms"
     brain_atlas_annotation = "brain_atlas_annotation"
     brain_atlas_region_mesh = "brain_atlas_region_mesh"
