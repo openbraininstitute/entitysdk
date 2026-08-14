@@ -17,7 +17,39 @@
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "simulation-campaign-8e5a0223",
+      "name": "simulation-campaign-d3dfe907",
+      "scan_parameters": {
+        "foo1": "bar2"
+      },
+      "simulations": [],
+      "type": "simulation_campaign",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "Regular User With Different Project Id",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "used_by_derivations": null
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "contributions": [],
+      "created_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "Regular User With Different Project Id",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "simulation-campaign-description",
+      "entity_id": "00000000-0000-4000-8000-000001234678",
+      "generated_from_derivations": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "lifecycle_status": "active",
+      "name": "simulation-campaign-a3e3f74a",
       "scan_parameters": {
         "foo1": "bar2"
       },
@@ -49,39 +81,7 @@
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "simulation-campaign-7897c79d",
-      "scan_parameters": {
-        "foo1": "bar2"
-      },
-      "simulations": [],
-      "type": "simulation_campaign",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "creation_date": "2025-01-01T00:00:00Z",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "used_by_derivations": null
-    },
-    {
-      "assets": [],
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
-      "contributions": [],
-      "created_by": {
-        "creation_date": "2025-01-01T00:00:00Z",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "description": "simulation-campaign-description",
-      "entity_id": "00000000-0000-4000-8000-000001234678",
-      "generated_from_derivations": null,
-      "id": "00000000-0000-4000-8000-000001234678",
-      "lifecycle_status": "active",
-      "name": "simulation-campaign-2b6a58e1",
+      "name": "simulation-campaign-dd8e842a",
       "scan_parameters": {
         "foo1": "bar2"
       },

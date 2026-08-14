@@ -37,13 +37,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 324,
+          "id": 749,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 325,
+          "id": 750,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45

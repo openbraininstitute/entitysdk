@@ -26,11 +26,11 @@
           "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
           "creation_date": "2025-01-01T00:00:00Z",
-          "description": "config-3",
+          "description": "config-4",
           "em_cell_mesh_id": "00000000-0000-4000-8000-000001234678",
           "id": "00000000-0000-4000-8000-000001234678",
           "lifecycle_status": "active",
-          "name": "config-3",
+          "name": "config-4",
           "scan_parameters": {
             "foo": "bar"
           },
@@ -42,11 +42,11 @@
           "authorized_project_id": "00000000-0000-4000-8000-000001234678",
           "authorized_public": false,
           "creation_date": "2025-01-01T00:00:00Z",
-          "description": "config-4",
+          "description": "config-3",
           "em_cell_mesh_id": "00000000-0000-4000-8000-000001234678",
           "id": "00000000-0000-4000-8000-000001234678",
           "lifecycle_status": "active",
-          "name": "config-4",
+          "name": "config-3",
           "scan_parameters": {
             "foo": "bar"
           },

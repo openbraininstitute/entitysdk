@@ -1387,6 +1387,7 @@ class NestedPersonRead(BaseModel):
     family_name: Annotated[str | None, Field(title="Family Name")] = None
     pref_label: Annotated[str, Field(title="Pref Label")]
     type: AgentType
+    sub_id: Annotated[UUID | None, Field(title="Sub Id")]
     orcid: Annotated[str | None, Field(title="Orcid")]
 
 
@@ -1629,6 +1630,7 @@ class PersonRead(BaseModel):
     family_name: Annotated[str | None, Field(title="Family Name")] = None
     pref_label: Annotated[str, Field(title="Pref Label")]
     type: AgentType
+    sub_id: Annotated[UUID | None, Field(title="Sub Id")]
     orcid: Annotated[str | None, Field(title="Orcid")]
 
 

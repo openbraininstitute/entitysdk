@@ -4,18 +4,18 @@
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Admin User",
+        "pref_label": "jd courcol",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Test Species 0",
-      "taxonomy_id": "12345_0",
+      "name": "s-0",
+      "taxonomy_id": "NCBITaxon:0000",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Admin User",
+        "pref_label": "jd courcol",
         "update_date": "2025-01-01T00:00:00Z"
       }
     },
@@ -23,18 +23,18 @@
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Admin User",
+        "pref_label": "jd courcol",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Test Species 1",
-      "taxonomy_id": "12345_1",
+      "name": "s-1",
+      "taxonomy_id": "NCBITaxon:1000",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Admin User",
+        "pref_label": "jd courcol",
         "update_date": "2025-01-01T00:00:00Z"
       }
     },
@@ -42,18 +42,18 @@
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Admin User",
+        "pref_label": "jd courcol",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Test Species 2",
-      "taxonomy_id": "12345_2",
+      "name": "s-2",
+      "taxonomy_id": "NCBITaxon:2000",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Admin User",
+        "pref_label": "jd courcol",
         "update_date": "2025-01-01T00:00:00Z"
       }
     }

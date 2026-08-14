@@ -117,6 +117,7 @@ class Person(Agent):
             description="The family name of the person.",
         ),
     ] = None
+    sub_id: Annotated[ID | None, Field(description="External subject id on Keycloak")] = None
 
     orcid: Annotated[str | None, Field(description="Open Researcher and Contributor ID")] = None
 

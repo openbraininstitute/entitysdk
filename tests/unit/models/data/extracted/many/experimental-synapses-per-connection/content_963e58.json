@@ -37,19 +37,19 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 277,
+          "id": 702,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 278,
+          "id": 703,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
         }
       ],
-      "name": "my-name-35ab1288",
+      "name": "my-name-02a04e9e",
       "post_mtype": {
         "alt_label": "mtype-alt-label",
         "creation_date": "2025-01-01T00:00:00Z",
@@ -167,19 +167,19 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 273,
+          "id": 698,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 274,
+          "id": 699,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
         }
       ],
-      "name": "my-name-a4d50eb6",
+      "name": "my-name-544d002f",
       "post_mtype": {
         "alt_label": "mtype-alt-label",
         "creation_date": "2025-01-01T00:00:00Z",
