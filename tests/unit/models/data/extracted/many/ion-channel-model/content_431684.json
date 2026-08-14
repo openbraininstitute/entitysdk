@@ -35,7 +35,7 @@
       "license": null,
       "lifecycle_status": "active",
       "max_permeability_name": null,
-      "name": "test_icm-523f760c",
+      "name": "test_icm-db3788e5",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
@@ -123,7 +123,7 @@
       "license": null,
       "lifecycle_status": "active",
       "max_permeability_name": null,
-      "name": "test_icm-b65248e6",
+      "name": "test_icm-66d81297",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
@@ -211,7 +211,7 @@
       "license": null,
       "lifecycle_status": "active",
       "max_permeability_name": null,
-      "name": "test_icm-fa321f64",
+      "name": "test_icm-45d86f46",
       "neuron_block": {
         "global": [],
         "nonspecific": [],

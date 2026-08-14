@@ -36,20 +36,20 @@
   "lifecycle_status": "active",
   "measurements": [
     {
-      "id": 180,
+      "id": 605,
       "name": "minimum",
       "unit": "\u03bcm",
       "value": 1.23
     },
     {
-      "id": 181,
+      "id": 606,
       "name": "maximum",
       "unit": "\u03bcm",
       "value": 1.45
     }
   ],
   "mtypes": [],
-  "name": "my-name-79b46371",
+  "name": "my-name-215fa2f5",
   "subject": {
     "age_max": null,
     "age_min": null,

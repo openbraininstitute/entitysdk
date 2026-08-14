@@ -69,13 +69,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 243,
+          "id": 668,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 244,
+          "id": 669,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 2.45
@@ -196,13 +196,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 239,
+          "id": 664,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 240,
+          "id": 665,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 2.45
@@ -323,13 +323,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 235,
+          "id": 660,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 236,
+          "id": 661,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 2.45

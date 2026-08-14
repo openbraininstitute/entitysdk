@@ -21,7 +21,7 @@
     "update_date": "2025-01-01T00:00:00Z"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "6_description",
+  "description": "0_description",
   "etypes": [],
   "exemplar_morphology": {
     "cell_morphology_protocol": {
@@ -53,8 +53,8 @@
   "iteration": "test iteration",
   "lifecycle_status": "active",
   "mtypes": [],
-  "name": "6",
-  "score": 60.0,
+  "name": "0",
+  "score": 0.0,
   "seed": -1,
   "species": {
     "creation_date": "2025-01-01T00:00:00Z",

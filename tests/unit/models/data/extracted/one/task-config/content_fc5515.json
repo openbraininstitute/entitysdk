@@ -10,7 +10,7 @@
     "update_date": "2025-01-01T00:00:00Z"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "task-config-description",
+  "description": "description-2",
   "generated_from_derivations": null,
   "id": "00000000-0000-4000-8000-000001234678",
   "inputs": [],
@@ -18,7 +18,7 @@
   "meta": {
     "foo": "bar"
   },
-  "name": "config-0",
+  "name": "name-2",
   "task_config_generator_id": "00000000-0000-4000-8000-000001234678",
   "task_config_type": "skeletonization__config",
   "type": "task_config",
