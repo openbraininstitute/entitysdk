@@ -84,8 +84,8 @@ def test_stage_sonata_from_memodel_preserves_missing_classifications(
         )
 
     assert result == config_path
-    assert mock_gen.call_args.kwargs["mtype"] is None
-    assert mock_gen.call_args.kwargs["etype"] is None
+    assert mock_gen.call_args.kwargs["mtype"] == "GEN_mtype"
+    assert mock_gen.call_args.kwargs["etype"] == "GEN_etype"
 
 
 def test_stage_sonata_from_memodel_no_calibration(tmp_path, fake_memodel_no_calib, fake_client):

@@ -71,8 +71,8 @@ def stage_sonata_from_memodel(
     with tempfile.TemporaryDirectory() as tmp_dir:
         downloaded_me_model = download_memodel(client, memodel=memodel, output_dir=tmp_dir)
 
-        mtype = memodel.mtypes[0].pref_label if memodel.mtypes else None
-        etype = memodel.emodel.etypes[0].pref_label if memodel.emodel.etypes else None
+        mtype = memodel.mtypes[0].pref_label if memodel.mtypes else "GEN_mtype"
+        etype = memodel.emodel.etypes[0].pref_label if memodel.emodel.etypes else "GEN_etype"
 
         if memodel.calibration_result is None:
             raise StagingError(f"MEModel {memodel.id} has no calibration result.")
