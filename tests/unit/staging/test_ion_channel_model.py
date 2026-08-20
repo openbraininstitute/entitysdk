@@ -217,5 +217,5 @@ def test_stage_sonata_from_config(client, tmp_path, httpx_mock, api_url, request
     assert (tmp_path / "node_sets.json").exists()
     with h5py.File(tmp_path / "network" / "nodes.h5") as h5:
         group = h5["nodes/All/0"]
-        assert "mtype" not in group
-        assert "etype" not in group
+        assert group["mtype"][0].decode() == "GEN_mtype"
+        assert group["etype"][0].decode() == "GEN_etype"
