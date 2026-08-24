@@ -125,6 +125,7 @@ def test_load_manifest(tmp_path, common_settings, runtime_context):
 def test_init_client_local(common_settings):
     client = test_module.init_client(common_settings)
     assert client is not None
+    assert client._local_store is None
 
 
 def test_init_client_non_local(monkeypatch, common_settings):
@@ -132,6 +133,15 @@ def test_init_client_non_local(monkeypatch, common_settings):
     monkeypatch.setattr(test_module, "get_token", lambda **kw: "fake-token")
     client = test_module.init_client(common_settings)
     assert client is not None
+    assert client._local_store is None
+
+
+def test_init_client_with_local_store_prefix(tmp_path, common_settings):
+    common_settings.local_store_prefix = tmp_path
+    client = test_module.init_client(common_settings)
+    assert client is not None
+    assert client._local_store is not None
+    assert client._local_store.prefix == tmp_path
 
 
 def test_script_dir(monkeypatch):

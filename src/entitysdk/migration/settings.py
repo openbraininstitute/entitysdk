@@ -3,7 +3,7 @@
 from pathlib import Path
 from typing import Annotated, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, DirectoryPath, Field
 from pydantic_settings import CliPositionalArg
 
 from entitysdk.common import ProjectContext
@@ -49,6 +49,9 @@ class CommonSettings(BaseModel):
     )
     project_context: Annotated[
         ProjectContext | None, Field(description="Default project context")
+    ] = None
+    local_store_prefix: Annotated[
+        DirectoryPath | None, Field(description="Optional prefix to the local asset store")
     ] = None
 
 

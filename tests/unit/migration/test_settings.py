@@ -24,6 +24,7 @@ def test_common_settings_defaults():
     assert s.dry_run is True
     assert s.environment == DeploymentEnvironment.local
     assert s.project_context is None
+    assert s.local_store_prefix is None
     assert isinstance(s.log, test_module.LogSettings)
     assert isinstance(s.dir, test_module.DirSettings)
 
@@ -37,3 +38,8 @@ def test_revert_settings_has_input_manifest():
     s = test_module.RevertSettings(input_manifest=Path("/path/to/manifest.json"))
     assert s.input_manifest == Path("/path/to/manifest.json")
     assert isinstance(s, test_module.CommonSettings)
+
+
+def test_common_settings_local_store_prefix(tmp_path):
+    s = test_module.CommonSettings(local_store_prefix=tmp_path)
+    assert s.local_store_prefix == tmp_path
