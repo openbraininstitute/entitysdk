@@ -25,6 +25,7 @@ from entitysdk.migration.tracking import ExecutionSummary
 from entitysdk.schemas.version import APIVersion
 from entitysdk.token_manager import TokenFromFunction, TokenManager
 from entitysdk.types import DeploymentEnvironment, Token
+from entitysdk.utils.store import LocalAssetStore
 
 # filename for logs and manifest, without extension
 FILENAME = datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
@@ -147,10 +148,14 @@ def init_client(settings: CommonSettings) -> Client:
                 environment=AuthEnvironment(settings.environment),
             ),
         )
+    local_store = (
+        LocalAssetStore(prefix=settings.local_store_prefix) if settings.local_store_prefix else None
+    )
     return Client(
         environment=settings.environment,
         project_context=settings.project_context,
         token_manager=token_manager,
+        local_store=local_store,
     )
 
 
