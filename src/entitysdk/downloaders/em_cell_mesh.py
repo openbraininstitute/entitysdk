@@ -5,7 +5,7 @@ from pathlib import Path
 
 from entitysdk.client import Client
 from entitysdk.models.em_cell_mesh import EMCellMesh
-from entitysdk.types import ContentType
+from entitysdk.types import AssetLabel, ContentType
 from entitysdk.utils.filesystem import create_dir
 
 logger = logging.getLogger(__name__)
@@ -31,7 +31,10 @@ def download_mesh_file(
     output_dir = create_dir(output_dir)
     asset = client.fetch_assets(
         em_cell_mesh,
-        selection={"content_type": content_type},
+        selection={
+            "content_type": content_type,
+            "label": AssetLabel.em_cell_mesh,
+        },
         output_path=output_dir,
     ).one()
 
