@@ -20,13 +20,16 @@ def download_simulation_config_content(client: Client, *, model: Simulation) -> 
 
     asset = client.select_assets(
         model,
-        selection={"label": "sonata_simulation_config"},
+        selection={
+            "label": AssetLabel.sonata_simulation_config,
+            "content_type": ContentType.application_json,
+        },
     ).one()
 
-    json_content: bytes = client.download_content(
+    json_content: bytes = client.fetch_content(
         entity_id=model.id,
         entity_type=Simulation,
-        asset_id=asset.id,
+        asset_or_id=asset.id,
     )
 
     return json.loads(json_content)
@@ -38,7 +41,10 @@ def download_node_sets_file(client: Client, *, model: Simulation, output_path: P
 
     asset = client.select_assets(
         model,
-        selection={"label": "custom_node_sets"},
+        selection={
+            "label": AssetLabel.custom_node_sets,
+            "content_type": ContentType.application_json,
+        },
     ).all()
 
     if len(asset) == 0:
@@ -46,7 +52,7 @@ def download_node_sets_file(client: Client, *, model: Simulation, output_path: P
     if len(asset) > 1:
         raise EntitySDKError(f"Too many node_sets_file for Simulation {model.id}")
 
-    path = client.download_file(
+    path = client.fetch_file(
         entity_id=model.id,
         entity_type=Simulation,
         asset_id=asset[0],
@@ -81,10 +87,13 @@ def download_spike_replay_files(
     ensure_has_id(model)
     ensure_has_assets(model)
 
-    assets = client.select_assets(model, selection={"label": "replay_spikes"}).all()
+    assets = client.select_assets(
+        model,
+        selection={"label": AssetLabel.replay_spikes},
+    ).all()
 
     spike_files: list[Path] = [
-        client.download_file(
+        client.fetch_file(
             entity_id=model.id,
             entity_type=Simulation,
             asset_id=asset,

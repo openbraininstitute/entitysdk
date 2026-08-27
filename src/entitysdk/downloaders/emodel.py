@@ -4,7 +4,7 @@ from pathlib import Path
 
 from entitysdk.client import Client
 from entitysdk.models.emodel import EModel
-from entitysdk.types import ContentType
+from entitysdk.types import AssetLabel, ContentType
 from entitysdk.utils.filesystem import create_dir
 
 
@@ -21,9 +21,12 @@ def download_hoc(
         output_dir (str or Path): directory to save the hoc file
     """
     output_dir = create_dir(output_dir)
-    asset = client.download_assets(
+    asset = client.fetch_assets(
         emodel,
-        selection={"content_type": ContentType.application_hoc},
+        selection={
+            "content_type": ContentType.application_hoc,
+            "label": AssetLabel.neuron_hoc,
+        },
         output_path=output_dir,
     ).one()
 

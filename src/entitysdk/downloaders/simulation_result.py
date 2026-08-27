@@ -6,6 +6,7 @@ from pathlib import Path
 from entitysdk.client import Client
 from entitysdk.dependencies.entity import ensure_has_assets, ensure_has_id
 from entitysdk.models import SimulationResult
+from entitysdk.types import AssetLabel
 
 L = logging.getLogger(__name__)
 
@@ -19,10 +20,10 @@ def download_spike_report_file(
 
     asset = client.select_assets(
         model,
-        selection={"label": "spike_report"},
+        selection={"label": AssetLabel.spike_report},
     ).one()
 
-    path = client.download_file(
+    path = client.fetch_file(
         entity_id=model.id,
         entity_type=SimulationResult,
         asset_id=asset,
@@ -41,11 +42,11 @@ def download_voltage_report_files(
 
     assets = client.select_assets(
         model,
-        selection={"label": "voltage_report"},
+        selection={"label": AssetLabel.voltage_report},
     ).all()
 
     files: list[Path] = [
-        client.download_file(
+        client.fetch_file(
             entity_id=model.id,
             entity_type=SimulationResult,
             asset_id=asset,

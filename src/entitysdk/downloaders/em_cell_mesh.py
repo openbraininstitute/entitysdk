@@ -29,7 +29,7 @@ def download_mesh_file(
         Path: Path to the downloaded file
     """
     output_dir = create_dir(output_dir)
-    asset = client.download_assets(
+    asset = client.fetch_assets(
         em_cell_mesh,
         selection={"content_type": content_type},
         output_path=output_dir,

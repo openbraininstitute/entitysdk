@@ -21,7 +21,7 @@ def download_ion_channel_mechanism(
         output_dir (str or Pathlib.Path): directory to save the mechanism file
     """
     output_dir = create_dir(output_dir)
-    asset = client.download_assets(
+    asset = client.fetch_assets(
         ion_channel_model,
         selection={"content_type": ContentType.application_mod},
         output_path=output_dir,
