@@ -33,7 +33,7 @@ def download_mesh_file(
         em_cell_mesh,
         selection={
             "content_type": content_type,
-            "label": AssetLabel.em_cell_mesh,
+            "label": AssetLabel.cell_surface_mesh,
         },
         output_path=output_dir,
     ).one()
