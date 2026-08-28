@@ -2,7 +2,7 @@ import uuid
 
 from entitysdk.downloaders.em_cell_mesh import download_mesh_file
 from entitysdk.models.em_cell_mesh import EMCellMesh
-from entitysdk.types import ContentType
+from entitysdk.types import AssetLabel, ContentType
 
 
 def _mock_asset_response(asset_id):
@@ -11,12 +11,12 @@ def _mock_asset_response(asset_id):
         "path": "mesh.obj",
         "full_path": "mesh.obj",
         "is_directory": False,
-        "content_type": "application/obj",
+        "content_type": ContentType.application_obj,
         "size": 1000,
         "status": "created",
         "meta": {},
         "sha256_digest": "sha256_digest",
-        "label": "cell_surface_mesh",
+        "label": AssetLabel.cell_surface_mesh,
         "storage_type": "aws_s3_internal",
     }
 
