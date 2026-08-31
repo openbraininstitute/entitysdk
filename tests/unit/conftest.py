@@ -1,13 +1,28 @@
 import uuid
+from collections.abc import Generator
 from typing import NamedTuple
 
 import pytest
+import respx
 
 from entitysdk.client import Client
 from entitysdk.common import ProjectContext
 from entitysdk.config import settings
 from entitysdk.token_manager import TokenFromValue
+from tests.unit.httpx_mock import HTTPXMock
 from tests.unit.util import PROJECT_ID, VIRTUAL_LAB_ID
+
+
+@pytest.fixture
+def httpx2_mock() -> Generator[respx.Router, None, None]:
+    # pytest-httpx allowed registering mocks that are not always consumed; respx does not.
+    with respx.mock(using="httpcore2", assert_all_called=False) as router:
+        yield router
+
+
+@pytest.fixture
+def httpx_mock(httpx2_mock: respx.Router) -> HTTPXMock:
+    return HTTPXMock(httpx2_mock)
 
 
 class Clients(NamedTuple):
