@@ -53,8 +53,6 @@ addopts = [
     "--import-mode=importlib",
     "--durations=10",
     "--durations-min=1.0",
-    "-p",
-    "pytest_httpx2._plugin",
 ]
 
 [tool.ruff]
