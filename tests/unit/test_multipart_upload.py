@@ -2,7 +2,6 @@ from pathlib import Path
 from unittest.mock import Mock, call, patch
 from uuid import uuid4
 
-import httpx
 import pytest
 
 from entitysdk import ProjectContext, models
@@ -16,6 +15,7 @@ from entitysdk.schemas.asset import (
     PartUpload,
 )
 from entitysdk.types import AssetLabel, ContentType
+from entitysdk.utils.http import HTTPClient
 
 ENTITY_ID = uuid4()
 ASSET_ID = uuid4()
@@ -169,7 +169,7 @@ def test_multipart_upload_asset_file(
             project_context=project_context,
             token_manager=token_manager,
             transfer_config=transfer_config_sequential,
-            http_client=httpx.Client(),
+            http_client=HTTPClient(),
             admin=False,
         )
 
@@ -184,7 +184,7 @@ def test_multipart_upload_asset_file(
     ):
         mock_initiate.return_value = (asset_id, [])
 
-        http_client = httpx.Client()
+        http_client = HTTPClient()
 
         test_module.multipart_upload_asset_file(
             api_url=API_URL,
@@ -262,7 +262,7 @@ def test_initiate_upload(
         project_context=project_context,
         preferred_part_count=10,
         token_manager=token_from_value_manager,
-        http_client=httpx.Client(),
+        http_client=HTTPClient(),
         admin=False,
     )
 
@@ -304,7 +304,7 @@ def test_upload_part(httpx_mock, asset_file):
         method="PUT",
         url="http://my-url",
     )
-    client = httpx.Client()
+    client = HTTPClient()
     test_module._upload_part(
         file_path=asset_file,
         offset=0,
@@ -325,7 +325,7 @@ def test_complete_upload(httpx_mock, project_context, asset_payload, token_from_
         json=asset_payload,
     )
 
-    http_client = httpx.Client()
+    http_client = HTTPClient()
 
     res = test_module._complete_upload(
         api_url=API_URL,
@@ -341,7 +341,7 @@ def test_complete_upload(httpx_mock, project_context, asset_payload, token_from_
 
 
 def test_upload_parts_sequential_calls_upload_part_in_order(parts):
-    http_client = httpx.Client()
+    http_client = HTTPClient()
     with patch("entitysdk.multipart_upload._upload_part_with_retry") as mock_upload_part:
         test_module._upload_parts_sequential(
             parts=parts,
@@ -355,7 +355,7 @@ def test_upload_parts_sequential_calls_upload_part_in_order(parts):
 
 
 def test_upload_parts_threaded_executes_all_parts(parts, httpx_mock):
-    http_client = httpx.Client()
+    http_client = HTTPClient()
     with patch("entitysdk.multipart_upload._upload_part_with_retry") as mock_upload_part:
         test_module._upload_parts_threaded(
             parts=parts,
@@ -371,7 +371,7 @@ def test_upload_parts_threaded_executes_all_parts(parts, httpx_mock):
 
 @patch("entitysdk.multipart_upload._upload_part")
 def test_upload_part_with_retry(asset_file, parts):
-    http_client = httpx.Client()
+    http_client = HTTPClient()
     test_module._upload_part_with_retry(part=parts[0], http_client=http_client)
 
 
@@ -444,7 +444,7 @@ def test_initiate_directory_upload_file_count_mismatch(httpx_mock, project_conte
             entity_type=ENTITY_TYPE,
             project_context=project_context,
             token_manager=token_manager,
-            http_client=httpx.Client(),
+            http_client=HTTPClient(),
             upload_request=upload_request,
             paths=paths,
             admin=False,
