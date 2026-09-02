@@ -300,3 +300,34 @@ def test_extract_hoc_template_name_raises_when_missing(tmp_path):
     hoc_file.write_text("// just a comment\nsome hoc code\n")
     with pytest.raises(StagingError, match="Could not find 'begintemplate'"):
         memodel_mod._extract_hoc_template_name(hoc_file)
+
+
+@pytest.mark.parametrize("suffix", ["asc", "swc"])
+def test_create_nodes_file_stores_morphology_stem(tmp_path, suffix):
+    morph_file = tmp_path / f"cell.{suffix}"
+    morph_file.write_text("morph content")
+    output_file = tmp_path / "network" / "nodes.h5"
+
+    memodel_mod.create_nodes_file(
+        hoc_file=str(tmp_path / "cell.hoc"),
+        morph_file=str(morph_file),
+        output_file=output_file,
+        mtype=None,
+        etype=None,
+        threshold_current=0.2,
+        holding_current=-0.1,
+        template_name="MyCell",
+    )
+
+    with h5py.File(output_file) as h5:
+        assert h5["nodes/All/0/morphology"][0].decode() == "cell"
+
+
+def test_create_circuit_config_uses_morphology_directory_for_asc(tmp_path):
+    memodel_mod.create_circuit_config(output_path=tmp_path)
+
+    with open(tmp_path / "circuit_config.json") as f:
+        population = json.load(f)["networks"]["nodes"][0]["populations"]["All"]
+
+    assert population["morphologies_dir"] == "$BASE_DIR/morphologies"
+    assert population["alternate_morphologies"]["neurolucida-asc"] == "$BASE_DIR/morphologies"

@@ -205,9 +205,9 @@ def create_nodes_file(
         )
         group_0.create_dataset("model_type", (1,), dtype="int32")[0] = 0
         group_0.create_dataset("morph_class", (1,), dtype="int32")[0] = 0
-        group_0.create_dataset("morphology", (1,), dtype=h5py.string_dtype())[0] = (
-            f"morphologies/{Path(morph_file).stem}"
-        )
+        group_0.create_dataset("morphology", (1,), dtype=h5py.string_dtype())[0] = Path(
+            morph_file
+        ).stem
         if mtype is not None:
             group_0.create_dataset("mtype", (1,), dtype=h5py.string_dtype())[0] = mtype
         if etype is not None:
@@ -264,7 +264,7 @@ def create_circuit_config(
                             "type": "biophysical",
                             "morphologies_dir": "$BASE_DIR/morphologies",
                             "biophysical_neuron_models_dir": "$BASE_DIR/hocs",
-                            "alternate_morphologies": {"neurolucida-asc": "$BASE_DIR/"},
+                            "alternate_morphologies": {"neurolucida-asc": "$BASE_DIR/morphologies"},
                         }
                     },
                 }
