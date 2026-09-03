@@ -129,7 +129,7 @@ def test_stage_simulation_result__memodel(
 
     # circuit should also have been staged in /circuit directory because not explicitly passed
     expected_circuit_config_path = tmp_path / "circuit" / "circuit_config.json"
-    expected_circuit_nodes_path = tmp_path / "circuit" / "network" / "nodes.h5"
+    expected_circuit_nodes_path = tmp_path / "circuit" / "All" / "nodes.h5"
 
     assert expected_circuit_config_path.exists()
     assert expected_circuit_nodes_path.exists()
