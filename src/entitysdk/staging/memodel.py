@@ -114,11 +114,11 @@ def _generate_sonata_files_from_memodel(
         threshold_current (float): Threshold current.
         holding_current (float): Holding current.
     """
+    nodes_file = Path(DEFAULT_NODE_POPULATION_NAME) / "nodes.h5"
     subdirs = {
         "hocs": output_path / "hocs",
         "mechanisms": output_path / "mechanisms",
         "morphologies": output_path / "morphologies",
-        "network": output_path / "network",
     }
     for path in subdirs.values():
         create_dir(path)
@@ -149,7 +149,7 @@ def _generate_sonata_files_from_memodel(
     create_nodes_file(
         hoc_file=str(hoc_dst),
         morph_file=str(morph_dst),
-        output_file=Path(str(subdirs["network"])) / "nodes.h5",
+        output_file=output_path / nodes_file,
         mtype=mtype,
         etype=etype,
         threshold_current=threshold_current,
@@ -258,7 +258,7 @@ def create_circuit_config(
         "networks": {
             "nodes": [
                 {
-                    "nodes_file": "$BASE_DIR/network/nodes.h5",
+                    "nodes_file": f"$BASE_DIR/{node_population_name}/nodes.h5",
                     "populations": {
                         node_population_name: {
                             "type": "biophysical",
