@@ -310,17 +310,18 @@ def stage_sonata_from_config(
         etype="GEN_etype",
     )
 
+    output_file = output_dir / DEFAULT_CIRCUIT_CONFIG_FILENAME
     create_circuit_config(
-        output_path=output_dir,
+        output_file=output_file,
         nodes_file=nodes_file,
         node_sets_file=node_sets_file,
+        morphologies_dir=subdirs["morphologies"],
+        hocs_dir=subdirs["hocs"],
     )
     create_node_sets_file(output_file=node_sets_file)
 
     L.debug(f"SONATA single cell circuit created at {output_dir}")
 
-    config_path = output_dir / DEFAULT_CIRCUIT_CONFIG_FILENAME
+    L.info("Circuit for ion channel model simulation staged at %s", output_file)
 
-    L.info("Circuit for ion channel model simulation staged at %s", config_path)
-
-    return config_path
+    return output_file

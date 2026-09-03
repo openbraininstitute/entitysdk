@@ -159,10 +159,13 @@ def _generate_sonata_files_from_memodel(
         template_name=template_name,
     )
 
+    output_file = output_path / DEFAULT_CIRCUIT_CONFIG_FILENAME
     create_circuit_config(
-        output_path=output_path,
+        output_file=output_file,
         nodes_file=nodes_file,
         node_sets_file=node_sets_file,
+        morphologies_dir=subdirs["morphologies"],
+        hocs_dir=subdirs["hocs"],
     )
     create_node_sets_file(output_file=node_sets_file)
 
@@ -249,25 +252,30 @@ def create_nodes_file(
 
 
 def create_circuit_config(
-    output_path: Path,
+    output_file: Path,
     *,
     nodes_file: Path,
     node_sets_file: Path,
+    morphologies_dir: Path,
+    hocs_dir: Path,
     node_population_name: str = DEFAULT_NODE_POPULATION_NAME,
 ):
     """Create a SONATA circuit_config.json for a single cell.
 
     Args:
-        output_path: Directory where circuit_config.json will be written.
+        output_file: Circuit config file to write.
         nodes_file: Path to the SONATA nodes.h5 file.
         node_sets_file: Path to the SONATA node_sets.json file.
+        morphologies_dir: Directory containing morphology files.
+        hocs_dir: Directory containing HOC files.
         node_population_name: Name of the node population.
     """
-    base_dir = Path(output_path).resolve()
+    output_file = Path(output_file)
+    base_dir = output_file.parent.resolve()
     nodes_path = Path(nodes_file).resolve().relative_to(base_dir).as_posix()
     node_sets_path = Path(node_sets_file).resolve().relative_to(base_dir).as_posix()
-    morphologies_path = (base_dir / "morphologies").relative_to(base_dir).as_posix()
-    hocs_path = (base_dir / "hocs").relative_to(base_dir).as_posix()
+    morphologies_path = Path(morphologies_dir).resolve().relative_to(base_dir).as_posix()
+    hocs_path = Path(hocs_dir).resolve().relative_to(base_dir).as_posix()
     config = {
         "manifest": {"$BASE_DIR": "."},
         "node_sets_file": f"$BASE_DIR/{node_sets_path}",
@@ -290,9 +298,8 @@ def create_circuit_config(
             "edges": [],
         },
     }
-    config_path = Path(output_path) / DEFAULT_CIRCUIT_CONFIG_FILENAME
-    write_json(data=config, path=config_path, indent=2)
-    L.debug(f"Successfully created circuit_config.json at {config_path}")
+    write_json(data=config, path=output_file, indent=2)
+    L.debug(f"Successfully created circuit_config.json at {output_file}")
 
 
 def create_node_sets_file(

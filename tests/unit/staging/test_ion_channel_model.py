@@ -219,6 +219,10 @@ def test_stage_sonata_from_config(client, tmp_path, httpx_mock, api_url, request
     config = json.loads(config_path.read_text())
     assert config["node_sets_file"] == "$BASE_DIR/node_sets.json"
     assert config["networks"]["nodes"][0]["nodes_file"] == "$BASE_DIR/network/nodes.h5"
+    population = config["networks"]["nodes"][0]["populations"]["All"]
+    assert population["morphologies_dir"] == "$BASE_DIR/morphologies"
+    assert population["biophysical_neuron_models_dir"] == "$BASE_DIR/hocs"
+    assert population["alternate_morphologies"]["neurolucida-asc"] == "$BASE_DIR/morphologies"
     with h5py.File(tmp_path / "network" / "nodes.h5") as h5:
         group = h5["nodes/All/0"]
         assert group["mtype"][0].decode() == "GEN_mtype"

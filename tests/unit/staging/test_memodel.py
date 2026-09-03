@@ -140,6 +140,11 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
     with open(output_path / "circuit_config.json") as config_file:
         config = json.load(config_file)
     assert config["networks"]["nodes"][0]["nodes_file"] == "$BASE_DIR/All/nodes.h5"
+    population = config["networks"]["nodes"][0]["populations"]["All"]
+    assert population["morphologies_dir"] == "$BASE_DIR/morphologies"
+    assert population["biophysical_neuron_models_dir"] == "$BASE_DIR/hocs"
+    assert population["alternate_morphologies"]["neurolucida-asc"] == "$BASE_DIR/morphologies"
+    assert config["node_sets_file"] == "$BASE_DIR/node_sets.json"
 
     # Validate content inside nodes.h5
     with h5py.File(nodes_file, "r") as f:
@@ -196,12 +201,17 @@ def test_create_json_configs(tmp_path):
 
     assert nodes_file.exists()
 
+    output_file = tmp_path / "circuit_config.json"
+    morphologies_dir = tmp_path / "morphologies"
+    hocs_dir = tmp_path / "hocs"
     memodel_mod.create_circuit_config(
-        output_path=tmp_path,
+        output_file=output_file,
         nodes_file=nodes_file,
         node_sets_file=node_sets_file,
+        morphologies_dir=morphologies_dir,
+        hocs_dir=hocs_dir,
     )
-    with open(tmp_path / "circuit_config.json") as f:
+    with open(output_file) as f:
         config = json.load(f)
         assert "networks" in config
         assert config["node_sets_file"] == "$BASE_DIR/node_sets.json"
@@ -336,16 +346,26 @@ def test_create_nodes_file_stores_morphology_stem(tmp_path, suffix):
 
 
 def test_create_circuit_config_uses_morphology_directory_for_asc(tmp_path):
-    nodes_file = tmp_path / "All" / "nodes.h5"
-    node_sets_file = tmp_path / "node_sets.json"
+    output_dir = tmp_path / "circuit"
+    output_dir.mkdir()
+    output_file = output_dir / "circuit_config.json"
+    nodes_file = output_dir / "All" / "nodes.h5"
+    node_sets_file = output_dir / "node_sets.json"
+    morphologies_dir = output_dir / "custom_morphologies"
+    hocs_dir = output_dir / "custom_hocs"
     memodel_mod.create_circuit_config(
-        output_path=tmp_path,
+        output_file=output_file,
         nodes_file=nodes_file,
         node_sets_file=node_sets_file,
+        morphologies_dir=morphologies_dir,
+        hocs_dir=hocs_dir,
     )
 
-    with open(tmp_path / "circuit_config.json") as f:
+    with open(output_file) as f:
         population = json.load(f)["networks"]["nodes"][0]["populations"]["All"]
 
-    assert population["morphologies_dir"] == "$BASE_DIR/morphologies"
-    assert population["alternate_morphologies"]["neurolucida-asc"] == "$BASE_DIR/morphologies"
+    assert population["morphologies_dir"] == "$BASE_DIR/custom_morphologies"
+    assert population["biophysical_neuron_models_dir"] == "$BASE_DIR/custom_hocs"
+    assert population["alternate_morphologies"]["neurolucida-asc"] == (
+        "$BASE_DIR/custom_morphologies"
+    )
