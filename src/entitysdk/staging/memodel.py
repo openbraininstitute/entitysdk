@@ -164,8 +164,8 @@ def _generate_sonata_files_from_memodel(
 
 
 def create_nodes_file(
-    hoc_file: str,
-    morph_file: str,
+    hoc_file: str | Path,
+    morph_file: str | Path,
     output_file: Path,
     threshold_current: float,
     holding_current: float,
@@ -177,8 +177,8 @@ def create_nodes_file(
     """Create a SONATA nodes.h5 file for a single cell population.
 
     Args:
-        hoc_file (str): Path to the hoc file.
-        morph_file (str): Path to the morphology file.
+        hoc_file (str | Path): Path to the hoc file.
+        morph_file (str | Path): Path to the morphology file.
         output_file (Path): Output file path for nodes.h5.
         threshold_current (float): Threshold current value.
         holding_current (float): Holding current value.

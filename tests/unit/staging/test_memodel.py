@@ -183,8 +183,8 @@ def test_create_json_configs(tmp_path):
     population_dir = tmp_path / "All"
 
     memodel_mod.create_nodes_file(
-        hoc_file=str(hoc_file),
-        morph_file=str(morph_file),
+        hoc_file=hoc_file,
+        morph_file=morph_file,
         output_file=population_dir / "nodes.h5",
         mtype="L5_TTPC1",
         etype="cADpyr",
