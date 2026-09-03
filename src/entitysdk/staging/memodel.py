@@ -114,7 +114,9 @@ def _generate_sonata_files_from_memodel(
         threshold_current (float): Threshold current.
         holding_current (float): Holding current.
     """
-    nodes_file = Path(DEFAULT_NODE_POPULATION_NAME) / "nodes.h5"
+    output_path = Path(output_path)
+    nodes_file = output_path / DEFAULT_NODE_POPULATION_NAME / "nodes.h5"
+    node_sets_file = output_path / "node_sets.json"
     subdirs = {
         "hocs": output_path / "hocs",
         "mechanisms": output_path / "mechanisms",
@@ -147,9 +149,9 @@ def _generate_sonata_files_from_memodel(
             shutil.copy(src_path, target)
 
     create_nodes_file(
-        hoc_file=str(hoc_dst),
-        morph_file=str(morph_dst),
-        output_file=output_path / nodes_file,
+        hoc_file=hoc_dst,
+        morph_file=morph_dst,
+        output_file=nodes_file,
         mtype=mtype,
         etype=etype,
         threshold_current=threshold_current,
@@ -157,8 +159,12 @@ def _generate_sonata_files_from_memodel(
         template_name=template_name,
     )
 
-    create_circuit_config(output_path=output_path)
-    create_node_sets_file(output_file=output_path / "node_sets.json")
+    create_circuit_config(
+        output_path=output_path,
+        nodes_file=nodes_file,
+        node_sets_file=node_sets_file,
+    )
+    create_node_sets_file(output_file=node_sets_file)
 
     L.debug(f"SONATA single cell circuit created at {output_path}")
 
@@ -244,27 +250,39 @@ def create_nodes_file(
 
 def create_circuit_config(
     output_path: Path,
+    *,
+    nodes_file: Path,
+    node_sets_file: Path,
     node_population_name: str = DEFAULT_NODE_POPULATION_NAME,
 ):
     """Create a SONATA circuit_config.json for a single cell.
 
     Args:
         output_path: Directory where circuit_config.json will be written.
+        nodes_file: Path to the SONATA nodes.h5 file.
+        node_sets_file: Path to the SONATA node_sets.json file.
         node_population_name: Name of the node population.
     """
+    base_dir = Path(output_path).resolve()
+    nodes_path = Path(nodes_file).resolve().relative_to(base_dir).as_posix()
+    node_sets_path = Path(node_sets_file).resolve().relative_to(base_dir).as_posix()
+    morphologies_path = (base_dir / "morphologies").relative_to(base_dir).as_posix()
+    hocs_path = (base_dir / "hocs").relative_to(base_dir).as_posix()
     config = {
         "manifest": {"$BASE_DIR": "."},
-        "node_sets_file": "$BASE_DIR/node_sets.json",
+        "node_sets_file": f"$BASE_DIR/{node_sets_path}",
         "networks": {
             "nodes": [
                 {
-                    "nodes_file": f"$BASE_DIR/{node_population_name}/nodes.h5",
+                    "nodes_file": f"$BASE_DIR/{nodes_path}",
                     "populations": {
                         node_population_name: {
                             "type": "biophysical",
-                            "morphologies_dir": "$BASE_DIR/morphologies",
-                            "biophysical_neuron_models_dir": "$BASE_DIR/hocs",
-                            "alternate_morphologies": {"neurolucida-asc": "$BASE_DIR/morphologies"},
+                            "morphologies_dir": f"$BASE_DIR/{morphologies_path}",
+                            "biophysical_neuron_models_dir": f"$BASE_DIR/{hocs_path}",
+                            "alternate_morphologies": {
+                                "neurolucida-asc": f"$BASE_DIR/{morphologies_path}"
+                            },
                         }
                     },
                 }
@@ -272,7 +290,7 @@ def create_circuit_config(
             "edges": [],
         },
     }
-    config_path = output_path / DEFAULT_CIRCUIT_CONFIG_FILENAME
+    config_path = Path(output_path) / DEFAULT_CIRCUIT_CONFIG_FILENAME
     write_json(data=config, path=config_path, indent=2)
     L.debug(f"Successfully created circuit_config.json at {config_path}")
 

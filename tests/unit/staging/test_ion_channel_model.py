@@ -1,3 +1,4 @@
+import json
 import uuid
 
 import h5py
@@ -215,6 +216,9 @@ def test_stage_sonata_from_config(client, tmp_path, httpx_mock, api_url, request
     assert (tmp_path / "network" / "nodes.h5").exists()
     assert (tmp_path / "circuit_config.json").exists()
     assert (tmp_path / "node_sets.json").exists()
+    config = json.loads(config_path.read_text())
+    assert config["node_sets_file"] == "$BASE_DIR/node_sets.json"
+    assert config["networks"]["nodes"][0]["nodes_file"] == "$BASE_DIR/network/nodes.h5"
     with h5py.File(tmp_path / "network" / "nodes.h5") as h5:
         group = h5["nodes/All/0"]
         assert group["mtype"][0].decode() == "GEN_mtype"

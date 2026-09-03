@@ -87,7 +87,7 @@ proc init(/* args: morphology_dir, morphology_name */) {{
 
 /*!
  * Assign section indices to the section voltage value.  This will be useful later for serializing
- * the sections into an array.  Note, that once the simulation begins, 
+ * the sections into an array.  Note, that once the simulation begins,
  * the voltage values will revert to actual data again.
  *
  * @param $o1 Import3d_GUI object
@@ -297,10 +297,12 @@ def stage_sonata_from_config(
         subdirs["hocs"],
     )
 
+    nodes_file = output_dir / "network" / "nodes.h5"
+    node_sets_file = output_dir / "node_sets.json"
     create_nodes_file(
-        hoc_file=str(hoc_dst),
-        morph_file=str(morph_dst),
-        output_file=Path(str(subdirs["network"])) / "nodes.h5",
+        hoc_file=hoc_dst,
+        morph_file=morph_dst,
+        output_file=nodes_file,
         threshold_current=threshold_current,
         holding_current=holding_current,
         template_name="cell",
@@ -308,8 +310,12 @@ def stage_sonata_from_config(
         etype="GEN_etype",
     )
 
-    create_circuit_config(output_path=output_dir)
-    create_node_sets_file(output_file=output_dir / "node_sets.json")
+    create_circuit_config(
+        output_path=output_dir,
+        nodes_file=nodes_file,
+        node_sets_file=node_sets_file,
+    )
+    create_node_sets_file(output_file=node_sets_file)
 
     L.debug(f"SONATA single cell circuit created at {output_dir}")
 

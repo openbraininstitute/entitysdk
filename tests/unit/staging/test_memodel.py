@@ -180,12 +180,13 @@ def test_create_json_configs(tmp_path):
     morph_file = tmp_path / "cell.asc"
     hoc_file.write_text("begintemplate MyCell\nendtemplate MyCell\n")
     morph_file.write_text("morph content")
-    population_dir = tmp_path / "All"
+    nodes_file = tmp_path / "All" / "nodes.h5"
+    node_sets_file = tmp_path / "node_sets.json"
 
     memodel_mod.create_nodes_file(
         hoc_file=hoc_file,
         morph_file=morph_file,
-        output_file=population_dir / "nodes.h5",
+        output_file=nodes_file,
         mtype="L5_TTPC1",
         etype="cADpyr",
         threshold_current=0.2,
@@ -193,16 +194,21 @@ def test_create_json_configs(tmp_path):
         template_name="MyCell",
     )
 
-    assert (population_dir / "nodes.h5").exists()
+    assert nodes_file.exists()
 
-    memodel_mod.create_circuit_config(output_path=tmp_path)
+    memodel_mod.create_circuit_config(
+        output_path=tmp_path,
+        nodes_file=nodes_file,
+        node_sets_file=node_sets_file,
+    )
     with open(tmp_path / "circuit_config.json") as f:
         config = json.load(f)
         assert "networks" in config
+        assert config["node_sets_file"] == "$BASE_DIR/node_sets.json"
         assert config["networks"]["nodes"][0]["nodes_file"] == "$BASE_DIR/All/nodes.h5"
 
-    memodel_mod.create_node_sets_file(output_file=tmp_path / "node_sets.json")
-    with open(tmp_path / "node_sets.json") as f:
+    memodel_mod.create_node_sets_file(output_file=node_sets_file)
+    with open(node_sets_file) as f:
         node_sets = json.load(f)
         assert node_sets["All"]["node_id"] == [0]
 
@@ -330,7 +336,13 @@ def test_create_nodes_file_stores_morphology_stem(tmp_path, suffix):
 
 
 def test_create_circuit_config_uses_morphology_directory_for_asc(tmp_path):
-    memodel_mod.create_circuit_config(output_path=tmp_path)
+    nodes_file = tmp_path / "All" / "nodes.h5"
+    node_sets_file = tmp_path / "node_sets.json"
+    memodel_mod.create_circuit_config(
+        output_path=tmp_path,
+        nodes_file=nodes_file,
+        node_sets_file=node_sets_file,
+    )
 
     with open(tmp_path / "circuit_config.json") as f:
         population = json.load(f)["networks"]["nodes"][0]["populations"]["All"]
