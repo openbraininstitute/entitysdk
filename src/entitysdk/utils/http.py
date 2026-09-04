@@ -4,13 +4,24 @@ import sys
 from collections.abc import Iterator
 from json import dumps
 
-import httpx
+import httpx2
 
 from entitysdk.common import ProjectContext
 from entitysdk.config import settings
 from entitysdk.exception import EntitySDKError
 from entitysdk.models.response import ListResponse
 from entitysdk.token_manager import TokenManager
+
+# httpx2 is imported only in this module. Other code should use these aliases so we can
+# swap or upgrade the HTTP client library in one place without touching the rest of the codebase.
+HTTPClient = httpx2.Client
+HTTPTimeout = httpx2.Timeout
+ConnectError = httpx2.ConnectError
+ReadTimeout = httpx2.ReadTimeout
+RemoteProtocolError = httpx2.RemoteProtocolError
+RequestError = httpx2.RequestError
+HTTPStatusError = httpx2.HTTPStatusError
+WriteTimeout = httpx2.WriteTimeout
 
 
 def make_db_api_request(
@@ -23,8 +34,8 @@ def make_db_api_request(
     files: dict | None = None,
     project_context: ProjectContext | None = None,
     token_manager: TokenManager,
-    http_client: httpx.Client,
-) -> httpx.Response:
+    http_client: HTTPClient,
+) -> httpx2.Response:
     """Make a request to entitycore api."""
     token = token_manager.get_token()
     headers = {"Authorization": f"Bearer {token}"}
@@ -47,19 +58,19 @@ def make_db_api_request(
             data=data,
             params=parameters,
             follow_redirects=True,
-            timeout=httpx.Timeout(
+            timeout=HTTPTimeout(
                 connect=settings.connect_timeout,
                 read=settings.read_timeout,
                 write=settings.write_timeout,
                 pool=settings.pool_timeout,
             ),
         )
-    except httpx.RequestError as e:
+    except RequestError as e:
         raise EntitySDKError(f"Request error: {e}") from e
 
     try:
         response.raise_for_status()
-    except httpx.HTTPStatusError as e:
+    except HTTPStatusError as e:
         message = (
             f"HTTP error {response.status_code} for {method} {url}\n"
             f"data       : {data}\n"
@@ -78,7 +89,7 @@ def stream_paginated_request(
     json: dict | None = None,
     parameters: dict | None = None,
     project_context: ProjectContext | None = None,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     page_size: int | None = None,
     limit: int | None = None,
     token_manager: TokenManager,
@@ -146,7 +157,7 @@ def stream_response(
     method: str,
     headers: dict[str, str] | None = None,
     parameters: dict | None = None,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
 ) -> Iterator[bytes]:
     """Stream an HTTP response body.
 
@@ -167,7 +178,7 @@ def stream_response(
             headers=headers,
             params=parameters,
             follow_redirects=True,
-            timeout=httpx.Timeout(
+            timeout=HTTPTimeout(
                 connect=settings.connect_timeout,
                 read=settings.read_timeout,
                 write=settings.write_timeout,
@@ -176,7 +187,7 @@ def stream_response(
         ) as response:
             response.raise_for_status()
             yield from response.iter_bytes(chunk_size=settings.download_stream_data_buffer_size)
-    except httpx.RequestError as e:
+    except RequestError as e:
         raise EntitySDKError(f"Request error: {e}") from e
-    except httpx.HTTPStatusError as e:
+    except HTTPStatusError as e:
         raise EntitySDKError(f"HTTP error {e.response.status_code} for {method} {url}") from e

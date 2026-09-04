@@ -5,8 +5,6 @@ from collections.abc import Iterator
 from pathlib import Path
 from typing import TypeVar
 
-import httpx
-
 from entitysdk import serdes
 from entitysdk.common import ProjectContext
 from entitysdk.exception import EntitySDKError
@@ -52,7 +50,12 @@ from entitysdk.utils.filesystem import (
     get_filesize,
     validate_filename_extension_consistency,
 )
-from entitysdk.utils.http import make_db_api_request, stream_paginated_request, stream_response
+from entitysdk.utils.http import (
+    HTTPClient,
+    make_db_api_request,
+    stream_paginated_request,
+    stream_response,
+)
 from entitysdk.utils.io import calculate_sha256_digest
 from entitysdk.utils.store import LocalAssetStore
 
@@ -65,7 +68,7 @@ def get_api_version(
     *,
     api_url: str,
     token_manager: TokenManager,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
 ) -> APIVersion:
     """Return the entitycore version."""
     url = get_version_endpoint(api_url=api_url)
@@ -86,7 +89,7 @@ def search_entities(
     limit: int | None,
     project_context: ProjectContext | None = None,
     token_manager: TokenManager,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     admin: bool,
 ) -> IteratorResult[TIdentifiable]:
     """Search for entities.
@@ -131,7 +134,7 @@ def get_entity(
     project_context: ProjectContext | None = None,
     token_manager: TokenManager,
     options: dict | None = None,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     admin: bool,
 ) -> TIdentifiable:
     """Instantiate entity with model ``entity_type`` from resource id."""
@@ -161,7 +164,7 @@ def get_entity_derivations(
     project_context: ProjectContext | None,
     derivation_type: DerivationType,
     token_manager: TokenManager,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     admin: bool,
 ) -> IteratorResult[Entity]:
     """Get derivations for entity."""
@@ -195,7 +198,7 @@ def get_entity_asset(
     entity_type: type[Entity],
     project_context: ProjectContext | None,
     token_manager: TokenManager,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     admin: bool = False,
 ) -> Asset:
     """Get an entity's asset metadata."""
@@ -223,7 +226,7 @@ def get_entity_assets(
     entity_type: type[Entity],
     project_context: ProjectContext | None,
     token_manager: TokenManager,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     admin: bool = False,
 ):
     """Get all assets of an entity."""
@@ -252,7 +255,7 @@ def register_entity(
     entity: TIdentifiable,
     project_context: ProjectContext | None,
     token_manager: TokenManager,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
 ) -> TIdentifiable:
     """Register entity."""
     url = get_entities_endpoint(api_url=api_url, entity_type=type(entity))
@@ -278,7 +281,7 @@ def update_entity(
     attrs_or_entity: dict | Identifiable,
     project_context: ProjectContext | None,
     token_manager: TokenManager,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     admin: bool,
 ) -> TIdentifiable:
     """Update entity."""
@@ -314,7 +317,7 @@ def delete_entity(
     entity_id: ID,
     entity_type: type[Identifiable],
     token_manager: TokenManager,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     admin: bool,
 ) -> None:
     """Delete entity."""
@@ -341,7 +344,7 @@ def upload_asset_file(
     asset_metadata: LocalAssetMetadata,
     project_context: ProjectContext | None,
     token_manager: TokenManager,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     transfer_config: MultipartUploadTransferConfig | None = None,
     admin: bool,
 ) -> Asset:
@@ -385,7 +388,7 @@ def upload_asset_content(
     asset_metadata: LocalAssetMetadata,
     project_context: ProjectContext | None,
     token_manager: TokenManager,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     admin: bool,
 ) -> Asset:
     """Upload asset to an existing entity's endpoint from a file-like object."""
@@ -426,7 +429,7 @@ def upload_asset_directory(
     label: AssetLabel,
     project_context: ProjectContext | None,
     token_manager: TokenManager,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     transfer_config: MultipartDirectoryUploadTransferConfig | None = None,
     admin: bool,
 ) -> Asset:
@@ -474,7 +477,7 @@ def list_directory(
     asset_id: ID,
     token_manager: TokenManager,
     project_context: ProjectContext | None = None,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     admin: bool,
 ) -> DetailedFileList:
     """List all files within an asset directory."""
@@ -508,7 +511,7 @@ def fetch_asset_file(
     asset_path: Path | None = None,
     project_context: ProjectContext | None = None,
     token_manager: TokenManager,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     local_store: LocalAssetStore | None = None,
     strategy: FetchFileStrategy,
     admin: bool,
@@ -604,7 +607,7 @@ def download_asset_file(
     target_path: Path,
     token_manager: TokenManager,
     project_context: ProjectContext | None = None,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     asset_path: Path | None = None,
     admin: bool,
 ) -> Path:
@@ -665,7 +668,7 @@ def fetch_asset_content(
     asset_path: Path | None = None,
     project_context: ProjectContext | None = None,
     token_manager: TokenManager,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     local_store: LocalAssetStore | None = None,
     strategy: FetchContentStrategy,
     admin: bool,
@@ -756,7 +759,7 @@ def delete_asset(
     entity_type: type[Entity],
     project_context: ProjectContext | None,
     token_manager: TokenManager,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     admin: bool,
 ) -> Asset:
     """Delete asset."""
@@ -785,7 +788,7 @@ def register_asset(
     asset_metadata: ExistingAssetMetadata,
     project_context: ProjectContext | None,
     token_manager: TokenManager,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     admin: bool,
 ) -> Asset:
     """Register a file or directory already existing."""

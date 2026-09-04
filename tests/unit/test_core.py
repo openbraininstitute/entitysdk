@@ -2,7 +2,6 @@ from pathlib import Path
 from unittest.mock import Mock, patch
 from uuid import uuid4
 
-import httpx
 import pytest
 
 from entitysdk import core as test_module
@@ -16,6 +15,7 @@ from entitysdk.types import (
     FetchFileStrategy,
     StorageType,
 )
+from entitysdk.utils.http import HTTPClient
 
 
 @pytest.fixture
@@ -44,7 +44,7 @@ def test_get_api_version(httpx_mock, token_from_value_manager):
         json={"app_name": "entitycore", "app_version": "2.0.0", "commit_sha": "def456"},
     )
 
-    with httpx.Client() as client:
+    with HTTPClient() as client:
         result = test_module.get_api_version(
             api_url=api_url,
             token_manager=token_from_value_manager,
@@ -73,7 +73,7 @@ def test_upload_asset_file(asset_file, token_manager):
             token_manager=token_manager,
             asset_path=asset_file,
             asset_metadata=None,
-            http_client=httpx.Client(),
+            http_client=HTTPClient(),
             admin=False,
         )
         patched_content.assert_called_once()
@@ -91,7 +91,7 @@ def test_upload_asset_file(asset_file, token_manager):
             asset_path=asset_file,
             asset_metadata=None,
             transfer_config=transfer_config,
-            http_client=httpx.Client(),
+            http_client=HTTPClient(),
             admin=False,
         )
         patched_content.assert_called_once()
@@ -109,7 +109,7 @@ def test_upload_asset_file(asset_file, token_manager):
             asset_path=asset_file,
             asset_metadata=None,
             transfer_config=transfer_config,
-            http_client=httpx.Client(),
+            http_client=HTTPClient(),
             admin=False,
         )
         patched_file.assert_called_once()
@@ -144,7 +144,7 @@ def test_fetch_asset_content_copy_or_download_reads_from_store_when_asset_is_pro
         token_manager=token_from_value_manager,
         local_store=store,
         strategy=FetchContentStrategy.local_or_download,
-        http_client=httpx.Client(),
+        http_client=HTTPClient(),
         admin=False,
     )
 
@@ -186,7 +186,7 @@ def test_fetch_asset_file_download_streams_to_disk(tmp_path, token_from_value_ma
             output_path=tmp_path,
             token_manager=token_from_value_manager,
             strategy=FetchFileStrategy.download_only,
-            http_client=httpx.Client(),
+            http_client=HTTPClient(),
             admin=False,
         )
 
@@ -229,7 +229,7 @@ def test_fetch_asset_file_download_stream_sets_context_headers(tmp_path, token_f
             token_manager=token_from_value_manager,
             project_context=ctx,
             strategy=FetchFileStrategy.download_only,
-            http_client=httpx.Client(),
+            http_client=HTTPClient(),
             admin=False,
         )
 
@@ -263,7 +263,7 @@ def test_fetch_asset_file_download_request_error_raises(tmp_path, token_from_val
                 output_path=tmp_path,
                 token_manager=token_from_value_manager,
                 strategy=FetchFileStrategy.download_only,
-                http_client=httpx.Client(),
+                http_client=HTTPClient(),
                 admin=False,
             )
 
@@ -293,7 +293,7 @@ def test_fetch_asset_file_download_http_status_error_raises(tmp_path, token_from
                 output_path=tmp_path,
                 token_manager=token_from_value_manager,
                 strategy=FetchFileStrategy.download_only,
-                http_client=httpx.Client(),
+                http_client=HTTPClient(),
                 admin=False,
             )
 
@@ -322,7 +322,7 @@ def test_fetch_asset_file_unsupported_strategy_raises(tmp_path, token_from_value
             output_path=tmp_path / "out.txt",
             token_manager=token_from_value_manager,
             strategy="unsupported-strategy",
-            http_client=httpx.Client(),
+            http_client=HTTPClient(),
             admin=False,
         )
 
@@ -350,7 +350,7 @@ def test_fetch_asset_content_unsupported_strategy_raises(token_from_value_manage
             asset_or_id=asset,
             token_manager=token_from_value_manager,
             strategy="unsupported-strategy",
-            http_client=httpx.Client(),
+            http_client=HTTPClient(),
             admin=False,
         )
 
@@ -369,7 +369,7 @@ def test_download_asset_file_without_project_context(
         content=b"payload",
     )
 
-    with httpx.Client() as client:
+    with HTTPClient() as client:
         res = test_module.download_asset_file(
             api_url=api_url,
             entity_id=entity_id,
@@ -404,7 +404,7 @@ def test_download_asset_file_project_context_without_virtual_lab_id(
         content=b"z",
     )
 
-    with httpx.Client() as client:
+    with HTTPClient() as client:
         res = test_module.download_asset_file(
             api_url=api_url,
             entity_id=entity_id,
@@ -432,7 +432,7 @@ def test_download_asset_file_with_asset_path_query(tmp_path, httpx_mock, token_f
         content=b"inner",
     )
 
-    with httpx.Client() as client:
+    with HTTPClient() as client:
         res = test_module.download_asset_file(
             api_url=api_url,
             entity_id=entity_id,
@@ -458,7 +458,7 @@ def test_download_asset_file_skips_empty_chunks(tmp_path, token_from_value_manag
         yield b"ab"
 
     with patch("entitysdk.core.stream_response", side_effect=_fake_stream):
-        with httpx.Client() as client:
+        with HTTPClient() as client:
             res = test_module.download_asset_file(
                 api_url="http://mock-host:8000",
                 entity_id=uuid4(),

@@ -4,7 +4,6 @@ import uuid
 from pathlib import Path
 from unittest.mock import patch
 
-import httpx
 import pytest
 from pydantic import ValidationError
 
@@ -26,6 +25,7 @@ from entitysdk.types import (
     FetchFileStrategy,
     StorageType,
 )
+from entitysdk.utils.http import ReadTimeout
 from tests.unit.util import PROJECT_ID, VIRTUAL_LAB_ID
 
 
@@ -1020,17 +1020,17 @@ def test_upload_directory_by_paths(
 
     # have read error / exception
     httpx_mock.add_exception(
-        httpx.ReadTimeout("Unable to read within timeout"),
+        ReadTimeout("Unable to read within timeout"),
         method="PUT",
         url="http://upload_url0_0",
     )
     httpx_mock.add_exception(
-        httpx.ReadTimeout("Unable to read within timeout"),
+        ReadTimeout("Unable to read within timeout"),
         method="PUT",
         url="http://upload_url0_0",
     )
     httpx_mock.add_exception(
-        httpx.ReadTimeout("Unable to read within timeout"),
+        ReadTimeout("Unable to read within timeout"),
         method="PUT",
         url="http://upload_url0_0",
     )

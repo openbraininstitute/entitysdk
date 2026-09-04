@@ -5,8 +5,6 @@ import math
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-import httpx
-
 from entitysdk import serdes
 from entitysdk.common import ProjectContext
 from entitysdk.exception import EntitySDKError
@@ -29,7 +27,17 @@ from entitysdk.token_manager import TokenManager
 from entitysdk.types import ID
 from entitysdk.utils.execution import execute_with_retry
 from entitysdk.utils.filesystem import get_filesize
-from entitysdk.utils.http import make_db_api_request
+from entitysdk.utils.http import (
+    ConnectError,
+    HTTPClient,
+    HTTPStatusError,
+    HTTPTimeout,
+    ReadTimeout,
+    RemoteProtocolError,
+    RequestError,
+    WriteTimeout,
+    make_db_api_request,
+)
 from entitysdk.utils.io import calculate_sha256_digest, iter_bytes_chunk
 
 L = logging.getLogger(__name__)
@@ -37,13 +45,13 @@ L = logging.getLogger(__name__)
 
 MAX_RETRIES = 3
 BACKOFF_BASE = 0.25
-TIMEOUT = httpx.Timeout(connect=5.0, read=120.0, write=120.0, pool=10.0)
+TIMEOUT = HTTPTimeout(connect=5.0, read=120.0, write=120.0, pool=10.0)
 DEFAULT_THREAD_COUNT = 10
 RETRIABLE_EXCEPTIONS = (
-    httpx.ConnectError,  # network down, DNS failure, etc.
-    httpx.ReadTimeout,  # server took too long to respond
-    httpx.WriteTimeout,  # slow upload
-    httpx.RemoteProtocolError,  # low-level network glitch
+    ConnectError,  # network down, DNS failure, etc.
+    ReadTimeout,  # server took too long to respond
+    WriteTimeout,  # slow upload
+    RemoteProtocolError,  # low-level network glitch
 )
 STREAM_DATA_BUFFER_SIZE = 256 * 1024
 
@@ -101,7 +109,7 @@ def multipart_upload_asset_file(
     asset_metadata: LocalAssetMetadata,
     project_context: ProjectContext | None,
     token_manager: TokenManager,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     transfer_config: MultipartUploadTransferConfig,
     admin: bool,
 ) -> Asset:
@@ -165,7 +173,7 @@ def _initiate_upload(
     project_context: ProjectContext | None,
     preferred_part_count: int,
     token_manager: TokenManager,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     admin: bool,
 ) -> tuple[ID, list[PartUpload]]:
     """Initiate a multipart upload with the backend and prepare part metadata.
@@ -226,7 +234,7 @@ def _initiate_upload(
 
 def _upload_parts(
     parts: list[PartUpload],
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     transfer_config: MultipartUploadTransferConfig | MultipartDirectoryUploadTransferConfig,
 ) -> None:
     """Upload file parts either sequentially or concurrently.
@@ -252,7 +260,7 @@ def _upload_parts(
 def _upload_parts_sequential(
     *,
     parts: list[PartUpload],
-    http_client: httpx.Client,
+    http_client: HTTPClient,
 ) -> None:
     """Upload multiple file parts sequentially.
 
@@ -261,7 +269,7 @@ def _upload_parts_sequential(
 
     Args:
         parts: A list of PartUpload objects describing the parts to upload.
-        http_client: An initialized httpx.Client used to perform HTTP requests.
+        http_client: An initialized HTTPClient used to perform HTTP requests.
 
     Raises:
         Exception: Propagates any exception raised by `_upload_part`.
@@ -273,7 +281,7 @@ def _upload_parts_sequential(
 def _upload_parts_threaded(
     *,
     parts: list[PartUpload],
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     max_concurrency: int,
 ) -> None:
     """Upload multiple file parts concurrently using a thread pool.
@@ -284,7 +292,7 @@ def _upload_parts_threaded(
 
     Args:
         parts: A list of PartUpload objects describing the parts to upload.
-        http_client: An initialized httpx.Client used to perform HTTP requests.
+        http_client: An initialized HTTPClient used to perform HTTP requests.
         max_concurrency: Maximum number of concurrent upload threads.
 
     Raises:
@@ -298,7 +306,7 @@ def _upload_parts_threaded(
         list(pool.map(_task, parts))
 
 
-def _upload_part_with_retry(part: PartUpload, http_client: httpx.Client) -> None:
+def _upload_part_with_retry(part: PartUpload, http_client: HTTPClient) -> None:
     """Upload a single file part to its presigned URL.
 
     Reads the corresponding byte range from the file and sends it using
@@ -318,13 +326,13 @@ def _upload_part_with_retry(part: PartUpload, http_client: httpx.Client) -> None
             backoff_base=BACKOFF_BASE,
             retry_on=RETRIABLE_EXCEPTIONS,
         )
-    except httpx.RequestError as e:
+    except RequestError as e:
         msg = (
             f"Failed to upload part {part.part_number} of file {part.file_path}\n"
             f"Request exception: {e!r}"
         )
         raise EntitySDKError(msg) from e
-    except httpx.HTTPStatusError as e:
+    except HTTPStatusError as e:
         message = (
             f"Failed to upload part {part.part_number} of file {part.file_path}\n"
             f"HTTP error {e.response.status_code} for {e.request.method} {e.request.url}\n"
@@ -336,13 +344,13 @@ def _upload_part_with_retry(part: PartUpload, http_client: httpx.Client) -> None
 
 
 def _upload_part(
-    file_path: Path, offset: int, size: int, url: str, http_client: httpx.Client
+    file_path: Path, offset: int, size: int, url: str, http_client: HTTPClient
 ) -> None:
     """Upload a single part to the presigned URL.
 
     Raises:
-        httpx.HTTPStatusError: If the PUT request fails.
-        httpx.RequestError: For network-related errors.
+        HTTPStatusError: If the PUT request fails.
+        RequestError: For network-related errors.
     """
     data_iterator = iter_bytes_chunk(
         path=file_path,
@@ -364,7 +372,7 @@ def _complete_upload(
     asset_id: ID,
     project_context: ProjectContext | None,
     token_manager: TokenManager,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     admin: bool,
 ) -> Asset:
     """Finalize a multipart upload with the backend and return the created asset.
@@ -403,7 +411,7 @@ def multipart_upload_asset_directory(
     entity_type: type[Entity],
     project_context: ProjectContext | None,
     token_manager: TokenManager,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     transfer_config: MultipartDirectoryUploadTransferConfig,
     upload_request: MultipartDirectoryUploadRequest,
     paths: dict[Path, Path],
@@ -468,7 +476,7 @@ def _initiate_directory_upload(
     entity_type: type[Entity],
     project_context: ProjectContext | None,
     token_manager: TokenManager,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     upload_request: MultipartDirectoryUploadRequest,
     paths: dict[Path, Path],
     admin: bool,
@@ -527,7 +535,7 @@ def _complete_upload_directory(
     asset_id: ID,
     project_context: ProjectContext | None,
     token_manager: TokenManager,
-    http_client: httpx.Client,
+    http_client: HTTPClient,
     admin: bool,
 ) -> Asset:
     """Finalize a multipart directory upload with the backend and return the created asset.
