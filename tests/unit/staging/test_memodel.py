@@ -128,15 +128,26 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
         holding_current=-0.1,
     )
 
+    nodes_file = output_path / "All" / "nodes.h5"
     assert (output_path / "hocs" / "TestCell.hoc").exists()
     assert (output_path / "morphologies" / "cell.asc").exists()
     assert (output_path / "mechanisms" / "mech.mod").exists()
-    assert (output_path / "network" / "nodes.h5").exists()
+    assert nodes_file.exists()
+    assert not (output_path / "network").exists()
     assert (output_path / "circuit_config.json").exists()
     assert (output_path / "node_sets.json").exists()
 
+    with open(output_path / "circuit_config.json") as config_file:
+        config = json.load(config_file)
+    assert config["networks"]["nodes"][0]["nodes_file"] == "$BASE_DIR/All/nodes.h5"
+    population = config["networks"]["nodes"][0]["populations"]["All"]
+    assert population["morphologies_dir"] == "$BASE_DIR/morphologies"
+    assert population["biophysical_neuron_models_dir"] == "$BASE_DIR/hocs"
+    assert population["alternate_morphologies"]["neurolucida-asc"] == "$BASE_DIR/morphologies"
+    assert config["node_sets_file"] == "$BASE_DIR/node_sets.json"
+
     # Validate content inside nodes.h5
-    with h5py.File(output_path / "network" / "nodes.h5", "r") as f:
+    with h5py.File(nodes_file, "r") as f:
         group = f["nodes"]["All"]["0"]
         assert group["model_template"][0].decode() == "hoc:TestCell"
         assert group["mtype"][0].decode() == "L5_TTPC1"
@@ -150,7 +161,7 @@ def test_create_nodes_file_omits_missing_classifications(tmp_path):
     morph_file = tmp_path / "cell.asc"
     hoc_file.write_text("begintemplate MyCell\nendtemplate MyCell\n")
     morph_file.write_text("morph content")
-    output_file = tmp_path / "network" / "nodes.h5"
+    output_file = tmp_path / "All" / "nodes.h5"
 
     memodel_mod.create_nodes_file(
         hoc_file=str(hoc_file),
@@ -174,12 +185,13 @@ def test_create_json_configs(tmp_path):
     morph_file = tmp_path / "cell.asc"
     hoc_file.write_text("begintemplate MyCell\nendtemplate MyCell\n")
     morph_file.write_text("morph content")
-    network_dir = tmp_path / "network"
+    nodes_file = tmp_path / "All" / "nodes.h5"
+    node_sets_file = tmp_path / "node_sets.json"
 
     memodel_mod.create_nodes_file(
-        hoc_file=str(hoc_file),
-        morph_file=str(morph_file),
-        output_file=network_dir / "nodes.h5",
+        hoc_file=hoc_file,
+        morph_file=morph_file,
+        output_file=nodes_file,
         mtype="L5_TTPC1",
         etype="cADpyr",
         threshold_current=0.2,
@@ -187,16 +199,26 @@ def test_create_json_configs(tmp_path):
         template_name="MyCell",
     )
 
-    assert (network_dir / "nodes.h5").exists()
+    assert nodes_file.exists()
 
-    memodel_mod.create_circuit_config(output_path=tmp_path)
-    with open(tmp_path / "circuit_config.json") as f:
+    output_file = tmp_path / "circuit_config.json"
+    morphologies_dir = tmp_path / "morphologies"
+    hocs_dir = tmp_path / "hocs"
+    memodel_mod.create_circuit_config(
+        output_file=output_file,
+        nodes_file=nodes_file,
+        node_sets_file=node_sets_file,
+        morphologies_dir=morphologies_dir,
+        hocs_dir=hocs_dir,
+    )
+    with open(output_file) as f:
         config = json.load(f)
         assert "networks" in config
-        assert config["networks"]["nodes"][0]["nodes_file"] == "$BASE_DIR/network/nodes.h5"
+        assert config["node_sets_file"] == "$BASE_DIR/node_sets.json"
+        assert config["networks"]["nodes"][0]["nodes_file"] == "$BASE_DIR/All/nodes.h5"
 
-    memodel_mod.create_node_sets_file(output_file=tmp_path / "node_sets.json")
-    with open(tmp_path / "node_sets.json") as f:
+    memodel_mod.create_node_sets_file(output_file=node_sets_file)
+    with open(node_sets_file) as f:
         node_sets = json.load(f)
         assert node_sets["All"]["node_id"] == [0]
 
@@ -300,3 +322,50 @@ def test_extract_hoc_template_name_raises_when_missing(tmp_path):
     hoc_file.write_text("// just a comment\nsome hoc code\n")
     with pytest.raises(StagingError, match="Could not find 'begintemplate'"):
         memodel_mod._extract_hoc_template_name(hoc_file)
+
+
+@pytest.mark.parametrize("suffix", ["asc", "swc"])
+def test_create_nodes_file_stores_morphology_stem(tmp_path, suffix):
+    morph_file = tmp_path / f"cell.{suffix}"
+    morph_file.write_text("morph content")
+    output_file = tmp_path / "All" / "nodes.h5"
+
+    memodel_mod.create_nodes_file(
+        hoc_file=str(tmp_path / "cell.hoc"),
+        morph_file=str(morph_file),
+        output_file=output_file,
+        mtype=None,
+        etype=None,
+        threshold_current=0.2,
+        holding_current=-0.1,
+        template_name="MyCell",
+    )
+
+    with h5py.File(output_file) as h5:
+        assert h5["nodes/All/0/morphology"][0].decode() == "cell"
+
+
+def test_create_circuit_config_uses_morphology_directory_for_asc(tmp_path):
+    output_dir = tmp_path / "circuit"
+    output_dir.mkdir()
+    output_file = output_dir / "circuit_config.json"
+    nodes_file = output_dir / "All" / "nodes.h5"
+    node_sets_file = output_dir / "node_sets.json"
+    morphologies_dir = output_dir / "custom_morphologies"
+    hocs_dir = output_dir / "custom_hocs"
+    memodel_mod.create_circuit_config(
+        output_file=output_file,
+        nodes_file=nodes_file,
+        node_sets_file=node_sets_file,
+        morphologies_dir=morphologies_dir,
+        hocs_dir=hocs_dir,
+    )
+
+    with open(output_file) as f:
+        population = json.load(f)["networks"]["nodes"][0]["populations"]["All"]
+
+    assert population["morphologies_dir"] == "$BASE_DIR/custom_morphologies"
+    assert population["biophysical_neuron_models_dir"] == "$BASE_DIR/custom_hocs"
+    assert population["alternate_morphologies"]["neurolucida-asc"] == (
+        "$BASE_DIR/custom_morphologies"
+    )
