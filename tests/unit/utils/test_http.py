@@ -1,10 +1,10 @@
-import httpx
 import pytest
 
 from entitysdk.common import ProjectContext
 from entitysdk.exception import EntitySDKError
 from entitysdk.types import ID
 from entitysdk.utils import http as test_module
+from entitysdk.utils.http import ConnectError, HTTPClient, RequestError
 
 
 def test_stream_response_streams_bytes(httpx_mock):
@@ -15,7 +15,7 @@ def test_stream_response_streams_bytes(httpx_mock):
         content=b"abcd",
     )
 
-    with httpx.Client() as http_client:
+    with HTTPClient() as http_client:
         chunks = list(
             test_module.stream_response(
                 url="http://example.com/file",
@@ -30,9 +30,9 @@ def test_stream_response_streams_bytes(httpx_mock):
 
 
 def test_stream_response_request_error_raises(httpx_mock):
-    httpx_mock.add_exception(httpx.ConnectError("boom"))
+    httpx_mock.add_exception(ConnectError("boom"))
 
-    with httpx.Client() as http_client:
+    with HTTPClient() as http_client:
         with pytest.raises(EntitySDKError, match="Request error: boom"):
             list(
                 test_module.stream_response(
@@ -48,7 +48,7 @@ def test_stream_response_http_status_error_raises(httpx_mock):
         method="GET", url="http://example.com/file", status_code=404, text="nope"
     )
 
-    with httpx.Client() as http_client:
+    with HTTPClient() as http_client:
         with pytest.raises(EntitySDKError, match="HTTP error 404 for GET http://example.com/file"):
             list(
                 test_module.stream_response(
@@ -70,7 +70,7 @@ def test_make_db_api_request(
         match_json={"name": "John Doe"},
     )
 
-    with httpx.Client() as http_client:
+    with HTTPClient() as http_client:
         res = test_module.make_db_api_request(
             url=url,
             method="POST",
@@ -94,7 +94,7 @@ def test_make_db_api_request__no_context(
         match_json={"name": "John Doe"},
     )
 
-    with httpx.Client() as http_client:
+    with HTTPClient() as http_client:
         res = test_module.make_db_api_request(
             url=url,
             method="POST",
@@ -124,7 +124,7 @@ def test_make_db_api_request__context_without_virtual_lab_id(
         match_json={"name": "John Doe"},
     )
 
-    with httpx.Client() as http_client:
+    with HTTPClient() as http_client:
         res = test_module.make_db_api_request(
             url=url,
             method="POST",
@@ -141,9 +141,9 @@ def test_make_db_api_request_with_none_http_client__raises_request(
     httpx_mock, api_url, project_context, token_from_value_manager
 ):
     url = f"{api_url}/api/v1/entity/person"
-    httpx_mock.add_exception(httpx.RequestError(message="Test"))
+    httpx_mock.add_exception(RequestError(message="Test"))
 
-    with httpx.Client() as http_client:
+    with HTTPClient() as http_client:
         with pytest.raises(EntitySDKError, match="Request error: Test"):
             test_module.make_db_api_request(
                 url=url,
@@ -162,7 +162,7 @@ def test_make_db_api_request_with_none_http_client__raises(
     url = f"{api_url}/api/v1/entity/person"
     httpx_mock.add_response(status_code=404)
 
-    with httpx.Client() as http_client:
+    with HTTPClient() as http_client:
         with pytest.raises(EntitySDKError, match=f"HTTP error 404 for POST {url}"):
             test_module.make_db_api_request(
                 url=url,
@@ -193,7 +193,7 @@ def test_make_db_api_request_with_none_http_client__client_none(
         parameters={"foo": "bar"},
         project_context=project_context,
         token_manager=token_from_value_manager,
-        http_client=httpx.Client(),
+        http_client=HTTPClient(),
     )
 
     assert res.status_code == 200
@@ -210,7 +210,7 @@ def test_stream_paginated_request_validate_limit(
         limit=limit,
         project_context=project_context,
         token_manager=token_from_value_manager,
-        http_client=httpx.Client(),
+        http_client=HTTPClient(),
     )
     with pytest.raises(EntitySDKError, match="limit must be either None or strictly positive."):
         next(it)
@@ -227,7 +227,7 @@ def test_stream_paginated_request_validate_page_size(
         page_size=page_size,
         project_context=project_context,
         token_manager=token_from_value_manager,
-        http_client=httpx.Client(),
+        http_client=HTTPClient(),
     )
     with pytest.raises(EntitySDKError, match="page_size must be either None or strictly positive."):
         next(it)
@@ -254,7 +254,7 @@ def test_stream_paginated_request_one_item(
         project_context=project_context,
         token_manager=token_from_value_manager,
         page_size=2,
-        http_client=httpx.Client(),
+        http_client=HTTPClient(),
     )
     assert [item["id"] for item in it] == [1]
 
@@ -290,7 +290,7 @@ def test_stream_paginated_request_two_pages(
         project_context=project_context,
         token_manager=token_from_value_manager,
         page_size=2,
-        http_client=httpx.Client(),
+        http_client=HTTPClient(),
     )
     assert [item["id"] for item in it] == [1, 2, 3, 4]
 
@@ -326,7 +326,7 @@ def test_stream_paginated_request_two_pages_and_lower_limit(
         project_context=project_context,
         token_manager=token_from_value_manager,
         page_size=2,
-        http_client=httpx.Client(),
+        http_client=HTTPClient(),
     )
     assert [item["id"] for item in it] == [1, 2, 3]
 
@@ -362,7 +362,7 @@ def test_stream_paginated_request_two_pages_and_higher_limit(
         project_context=project_context,
         token_manager=token_from_value_manager,
         page_size=2,
-        http_client=httpx.Client(),
+        http_client=HTTPClient(),
     )
     assert [item["id"] for item in it] == [1, 2, 3, 4]
 
@@ -398,7 +398,7 @@ def test_stream_paginated_request_one_page_and_some(
         project_context=project_context,
         token_manager=token_from_value_manager,
         page_size=2,
-        http_client=httpx.Client(),
+        http_client=HTTPClient(),
     )
     assert [item["id"] for item in it] == [1, 2, 3]
 
@@ -428,7 +428,7 @@ def test_stream_paginated_request_one_page_exactly(
         method="GET",
         project_context=project_context,
         token_manager=token_from_value_manager,
-        http_client=httpx.Client(),
+        http_client=HTTPClient(),
     )
     assert [item["id"] for item in it] == [1, 2]
 
@@ -458,7 +458,7 @@ def test_stream_paginated_request_no_items(
         method="GET",
         project_context=project_context,
         token_manager=token_from_value_manager,
-        http_client=httpx.Client(),
+        http_client=HTTPClient(),
     )
     assert [item["id"] for item in it] == []
 
@@ -488,7 +488,7 @@ def test_stream_paginated_request_with_unexpected_page(
         method="GET",
         project_context=project_context,
         token_manager=token_from_value_manager,
-        http_client=httpx.Client(),
+        http_client=HTTPClient(),
     )
     with pytest.raises(
         EntitySDKError, match="Unexpected response: payload.pagination.page=2 but it should be 1"
@@ -522,7 +522,7 @@ def test_stream_paginated_request_with_unexpected_page_size(
         project_context=project_context,
         token_manager=token_from_value_manager,
         page_size=123,
-        http_client=httpx.Client(),
+        http_client=HTTPClient(),
     )
     with pytest.raises(
         EntitySDKError,

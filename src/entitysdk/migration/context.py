@@ -241,7 +241,7 @@ def _setup_logging(settings: CommonSettings, base: Path) -> None:
             logging.FileHandler(log_file),
         ],
     )
-    for noisy_logger in ("urllib3", "httpx", "httpcore"):
+    for noisy_logger in ("urllib3", "httpx2", "httpcore2"):
         logging.getLogger(noisy_logger).setLevel(logging.WARNING)
     L.info(f"Log file: {log_file}")
 

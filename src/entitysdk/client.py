@@ -5,7 +5,6 @@ import os
 from pathlib import Path
 from typing import Annotated, Any
 
-import httpx
 from pydantic import AfterValidator, validate_call
 
 from entitysdk import core
@@ -49,6 +48,7 @@ from entitysdk.types import (
     Token,
 )
 from entitysdk.utils.asset import filter_assets
+from entitysdk.utils.http import HTTPClient
 from entitysdk.utils.store import LocalAssetStore
 from entitysdk.utils.url import (
     build_api_url,
@@ -63,7 +63,7 @@ class Client:
         *,
         api_url: str | None = None,
         project_context: ProjectContext | None = None,
-        http_client: httpx.Client | None = None,
+        http_client: HTTPClient | None = None,
         token_manager: TokenManager | Token,
         environment: DeploymentEnvironment | str | None = None,
         local_store: LocalAssetStore | None = None,
@@ -92,7 +92,7 @@ class Client:
             environment=environment,
         )
         self.project_context = project_context
-        self._http_client = http_client or httpx.Client()
+        self._http_client = http_client or HTTPClient()
         self._token_manager = (
             TokenFromValue(token_manager) if isinstance(token_manager, Token) else token_manager
         )
@@ -104,7 +104,7 @@ class Client:
         vlab_url: str,
         *,
         api_url: str | None = None,
-        http_client: httpx.Client | None = None,
+        http_client: HTTPClient | None = None,
         token_manager: TokenManager | Token,
         local_store: LocalAssetStore | None = None,
     ) -> Self:
