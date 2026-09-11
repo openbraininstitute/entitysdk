@@ -389,12 +389,17 @@ def test_create_nodes_file_stores_morphology_stem(tmp_path, suffix):
         ("swc", True, None),
         ("asc", False, {"neurolucida-asc": "$BASE_DIR/morphologies"}),
         ("h5", False, {"h5v1": "$BASE_DIR/morphologies"}),
+        ("obj", False, None),
     ],
 )
 def test_create_circuit_config_declares_only_the_staged_morphology_format(
     tmp_path, morphology_format, expected_morphologies_dir, expected_alternate
 ):
-    """A staged 'asc'-only (or 'h5'-only) morphology must not claim '.swc' exists."""
+    """A staged 'asc'-only (or 'h5'-only) morphology must not claim '.swc' exists.
+
+    An unrecognized format ('obj') is not fatal here: the config is written without any
+    morphology reference for that population, since neither caller can currently produce it.
+    """
     output_dir = tmp_path / "circuit"
     output_dir.mkdir()
     output_file = output_dir / "circuit_config.json"
