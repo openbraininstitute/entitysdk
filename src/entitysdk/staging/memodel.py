@@ -166,7 +166,7 @@ def _generate_sonata_files_from_memodel(
         node_sets_file=node_sets_file,
         morphologies_dir=subdirs["morphologies"],
         hocs_dir=subdirs["hocs"],
-        morphology_format=downloaded_memodel.morphology_path.suffix.lstrip("."),
+        morphology_format=downloaded_memodel.morphology_path.suffix.removeprefix("."),
     )
     create_node_sets_file(output_file=node_sets_file)
 
@@ -288,16 +288,16 @@ def create_circuit_config(  # ruff: ignore[too-many-arguments]
     morphologies_path = Path(morphologies_dir).resolve().relative_to(base_dir).as_posix()
     hocs_path = Path(hocs_dir).resolve().relative_to(base_dir).as_posix()
 
-    node_population: dict = {
-        "type": "biophysical",
-        "biophysical_neuron_models_dir": f"$BASE_DIR/{hocs_path}",
-    }
+    morphology_config: dict[str, str | dict[str, str]]
     if morphology_format == "swc":
-        node_population["morphologies_dir"] = f"$BASE_DIR/{morphologies_path}"
+        morphology_config = {"morphologies_dir": f"$BASE_DIR/{morphologies_path}"}
     elif morphology_format in _ALTERNATE_MORPHOLOGY_FORMAT_KEYS:
-        node_population["alternate_morphologies"] = {
-            _ALTERNATE_MORPHOLOGY_FORMAT_KEYS[morphology_format]: f"$BASE_DIR/{morphologies_path}"
+        alternate_key = _ALTERNATE_MORPHOLOGY_FORMAT_KEYS[morphology_format]
+        morphology_config = {
+            "alternate_morphologies": {alternate_key: f"$BASE_DIR/{morphologies_path}"}
         }
+    else:
+        morphology_config = {}
 
     config = {
         "manifest": {"$BASE_DIR": "."},
@@ -306,7 +306,13 @@ def create_circuit_config(  # ruff: ignore[too-many-arguments]
             "nodes": [
                 {
                     "nodes_file": f"$BASE_DIR/{nodes_path}",
-                    "populations": {node_population_name: node_population},
+                    "populations": {
+                        node_population_name: {
+                            "type": "biophysical",
+                            "biophysical_neuron_models_dir": f"$BASE_DIR/{hocs_path}",
+                            **morphology_config,
+                        }
+                    },
                 }
             ],
             "edges": [],

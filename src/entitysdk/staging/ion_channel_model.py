@@ -317,7 +317,7 @@ def stage_sonata_from_config(
         node_sets_file=node_sets_file,
         morphologies_dir=subdirs["morphologies"],
         hocs_dir=subdirs["hocs"],
-        morphology_format=morph_dst.suffix.lstrip("."),
+        morphology_format=morph_dst.suffix.removeprefix("."),
     )
     create_node_sets_file(output_file=node_sets_file)
 
