@@ -166,6 +166,7 @@ def _generate_sonata_files_from_memodel(
         node_sets_file=node_sets_file,
         morphologies_dir=subdirs["morphologies"],
         hocs_dir=subdirs["hocs"],
+        morphology_format=downloaded_memodel.morphology_path.suffix.lstrip("."),
     )
     create_node_sets_file(output_file=node_sets_file)
 
@@ -251,7 +252,14 @@ def create_nodes_file(
     L.debug(f"Successfully created file at {output_file}")
 
 
-def create_circuit_config(
+# 'swc' has no entry here; it's declared via `morphologies_dir`, not `alternate_morphologies`.
+_ALTERNATE_MORPHOLOGY_FORMAT_KEYS = {
+    "asc": "neurolucida-asc",
+    "h5": "h5v1",
+}
+
+
+def create_circuit_config(  # ruff: ignore[too-many-arguments]
     output_file: Path,
     *,
     nodes_file: Path,
@@ -259,6 +267,7 @@ def create_circuit_config(
     morphologies_dir: Path,
     hocs_dir: Path,
     node_population_name: str = DEFAULT_NODE_POPULATION_NAME,
+    morphology_format: str,
 ):
     """Create a SONATA circuit_config.json for a single cell.
 
@@ -269,6 +278,8 @@ def create_circuit_config(
         morphologies_dir: Directory containing morphology files.
         hocs_dir: Directory containing HOC files.
         node_population_name: Name of the node population.
+        morphology_format: File extension of the morphology actually staged in
+            ``morphologies_dir`` (e.g. ``"asc"``), declared via the matching config key.
     """
     output_file = Path(output_file)
     base_dir = output_file.parent.resolve()
@@ -276,6 +287,18 @@ def create_circuit_config(
     node_sets_path = Path(node_sets_file).resolve().relative_to(base_dir).as_posix()
     morphologies_path = Path(morphologies_dir).resolve().relative_to(base_dir).as_posix()
     hocs_path = Path(hocs_dir).resolve().relative_to(base_dir).as_posix()
+
+    node_population: dict = {
+        "type": "biophysical",
+        "biophysical_neuron_models_dir": f"$BASE_DIR/{hocs_path}",
+    }
+    if morphology_format == "swc":
+        node_population["morphologies_dir"] = f"$BASE_DIR/{morphologies_path}"
+    elif morphology_format in _ALTERNATE_MORPHOLOGY_FORMAT_KEYS:
+        node_population["alternate_morphologies"] = {
+            _ALTERNATE_MORPHOLOGY_FORMAT_KEYS[morphology_format]: f"$BASE_DIR/{morphologies_path}"
+        }
+
     config = {
         "manifest": {"$BASE_DIR": "."},
         "node_sets_file": f"$BASE_DIR/{node_sets_path}",
@@ -283,16 +306,7 @@ def create_circuit_config(
             "nodes": [
                 {
                     "nodes_file": f"$BASE_DIR/{nodes_path}",
-                    "populations": {
-                        node_population_name: {
-                            "type": "biophysical",
-                            "morphologies_dir": f"$BASE_DIR/{morphologies_path}",
-                            "biophysical_neuron_models_dir": f"$BASE_DIR/{hocs_path}",
-                            "alternate_morphologies": {
-                                "neurolucida-asc": f"$BASE_DIR/{morphologies_path}"
-                            },
-                        }
-                    },
+                    "populations": {node_population_name: node_population},
                 }
             ],
             "edges": [],
