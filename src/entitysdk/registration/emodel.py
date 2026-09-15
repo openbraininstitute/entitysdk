@@ -50,7 +50,7 @@ def register_emodel(
     emodel_summary_file: Path,
     electrical_cell_recording_ids: list[ID],
     validation_result_figure_files: list[Path],
-    validateion_result_status: bool,
+    validation_result_status: bool,
 ):
     """Register EModel."""
     emodel = client.register_entity(
@@ -110,6 +110,6 @@ def register_emodel(
             authorized_public=emodel.authorized_public,
             figure_file=figure_file,
             validated_entity_id=emodel.id,
-            passed=False,
+            passed=validation_result_status,
         )
     return emodel
