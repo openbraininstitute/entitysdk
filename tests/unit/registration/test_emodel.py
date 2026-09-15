@@ -46,7 +46,7 @@ def _emodel_registration_kwargs(
         "emodel_summary_file": tmp_path / "summary.json",
         "electrical_cell_recording_ids": trace_ids or [uuid.uuid4()],
         "validation_result_figure_files": figure_files or [tmp_path / "figure.png"],
-        "validateion_result_status": False,
+        "validation_result_status": False,
     }
 
 
