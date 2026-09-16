@@ -1,8 +1,10 @@
+import re
 import uuid
-from collections.abc import Generator
+from collections.abc import Callable, Generator
 from typing import Any, NamedTuple
 from urllib.parse import parse_qsl, urlparse
 
+import httpx
 import pytest
 import respx
 from respx.mocks import HTTPCoreMocker
@@ -57,6 +59,13 @@ class HTTPXMock:
     def add_exception(self, exception: BaseException, **matchers: Any) -> None:
         self._route(**matchers).mock(side_effect=exception)
 
+    def add_callback(
+        self,
+        callback: Callable[[httpx.Request], httpx.Response],
+        **matchers: Any,
+    ) -> None:
+        self._route(**matchers).mock(side_effect=callback)
+
     def _route(self, **matchers: Any) -> respx.models.Route:
         method = matchers.pop("method", None)
         url = matchers.pop("url", None)
@@ -75,10 +84,13 @@ class HTTPXMock:
         if method is not None:
             route_kwargs["method"] = method
         if url is not None:
-            parsed = urlparse(str(url))
-            route_kwargs["url"] = f"{parsed.scheme}://{parsed.netloc}{parsed.path}"
-            if parsed.query:
-                match_params = match_params or dict(parse_qsl(parsed.query))
+            if isinstance(url, re.Pattern):
+                route_kwargs["url"] = url
+            else:
+                parsed = urlparse(str(url))
+                route_kwargs["url"] = f"{parsed.scheme}://{parsed.netloc}{parsed.path}"
+                if parsed.query:
+                    match_params = match_params or dict(parse_qsl(parsed.query))
         if match_params is not None:
             route_kwargs["params"] = match_params
         if match_headers is not None:
