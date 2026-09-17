@@ -1,6 +1,6 @@
 """Staging constants."""
 
-from enum import StrEnum
+from entitysdk.compat import StrEnum
 
 DEFAULT_NODE_POPULATION_NAME = "All"
 DEFAULT_NODE_SET_NAME = "All"
