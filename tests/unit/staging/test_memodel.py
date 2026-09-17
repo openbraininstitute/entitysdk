@@ -245,9 +245,8 @@ def test_create_json_configs(tmp_path):
         output_file=output_file,
         nodes_file=nodes_file,
         node_sets_file=node_sets_file,
-        morphologies_dir=morphologies_dir,
+        morphology_dirs={memodel_mod.MorphologyFormat.asc: morphologies_dir},
         hocs_dir=hocs_dir,
-        morphology_format="asc",
     )
     with open(output_file) as f:
         config = json.load(f)
@@ -386,20 +385,15 @@ def test_create_nodes_file_stores_morphology_stem(tmp_path, suffix):
 @pytest.mark.parametrize(
     ("morphology_format", "expected_morphologies_dir", "expected_alternate"),
     [
-        ("swc", True, None),
-        ("asc", False, {"neurolucida-asc": "$BASE_DIR/morphologies"}),
-        ("h5", False, {"h5v1": "$BASE_DIR/morphologies"}),
-        ("obj", False, None),
+        (memodel_mod.MorphologyFormat.swc, True, None),
+        (memodel_mod.MorphologyFormat.asc, False, {"neurolucida-asc": "$BASE_DIR/morphologies"}),
+        (memodel_mod.MorphologyFormat.h5, False, {"h5v1": "$BASE_DIR/morphologies"}),
     ],
 )
 def test_create_circuit_config_declares_only_the_staged_morphology_format(
     tmp_path, morphology_format, expected_morphologies_dir, expected_alternate
 ):
-    """A staged 'asc'-only (or 'h5'-only) morphology must not claim '.swc' exists.
-
-    An unrecognized format ('obj') is not fatal here: the config is written without any
-    morphology reference for that population, since neither caller can currently produce it.
-    """
+    """A staged 'asc'-only (or 'h5'-only) morphology must not claim '.swc' exists."""
     output_dir = tmp_path / "circuit"
     output_dir.mkdir()
     output_file = output_dir / "circuit_config.json"
@@ -412,9 +406,8 @@ def test_create_circuit_config_declares_only_the_staged_morphology_format(
         output_file=output_file,
         nodes_file=nodes_file,
         node_sets_file=node_sets_file,
-        morphologies_dir=morphologies_dir,
+        morphology_dirs={morphology_format: morphologies_dir},
         hocs_dir=hocs_dir,
-        morphology_format=morphology_format,
     )
 
     with open(output_file) as f:
@@ -429,3 +422,45 @@ def test_create_circuit_config_declares_only_the_staged_morphology_format(
         assert population["alternate_morphologies"] == expected_alternate
     else:
         assert "alternate_morphologies" not in population
+
+
+def test_create_circuit_config_rejects_unrecognized_format(tmp_path):
+    """An unsupported extension raises via `MorphologyFormat`'s enum validation, not silently."""
+    output_dir = tmp_path / "circuit"
+    output_dir.mkdir()
+
+    with pytest.raises(ValueError, match="obj"):
+        memodel_mod.MorphologyFormat("obj")
+
+
+def test_create_circuit_config_accepts_multiple_formats(tmp_path):
+    """A caller may stage more than one format; each lands under its matching config key."""
+    output_dir = tmp_path / "circuit"
+    output_dir.mkdir()
+    output_file = output_dir / "circuit_config.json"
+    nodes_file = output_dir / "All" / "nodes.h5"
+    node_sets_file = output_dir / "node_sets.json"
+    morphologies_dir = output_dir / "morphologies"
+    alternate_dir = output_dir / "alternate_morphologies"
+    hocs_dir = output_dir / "hocs"
+
+    memodel_mod.create_circuit_config(
+        output_file=output_file,
+        nodes_file=nodes_file,
+        node_sets_file=node_sets_file,
+        morphology_dirs={
+            memodel_mod.MorphologyFormat.asc: alternate_dir,
+            memodel_mod.MorphologyFormat.h5: alternate_dir,
+            memodel_mod.MorphologyFormat.swc: morphologies_dir,
+        },
+        hocs_dir=hocs_dir,
+    )
+
+    with open(output_file) as f:
+        population = json.load(f)["networks"]["nodes"][0]["populations"]["All"]
+
+    assert population["morphologies_dir"] == "$BASE_DIR/morphologies"
+    assert population["alternate_morphologies"] == {
+        "neurolucida-asc": "$BASE_DIR/alternate_morphologies",
+        "h5v1": "$BASE_DIR/alternate_morphologies",
+    }

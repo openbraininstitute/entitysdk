@@ -6,6 +6,7 @@ from pathlib import Path
 from entitysdk import Client
 from entitysdk.downloaders.ion_channel_model import download_ion_channel_mechanism
 from entitysdk.models.ion_channel_model import IonChannelModel
+from entitysdk.staging.constants import MorphologyFormat
 from entitysdk.staging.memodel import (
     create_circuit_config,
     create_node_sets_file,
@@ -310,14 +311,14 @@ def stage_sonata_from_config(
         etype="GEN_etype",
     )
 
+    morphology_format = MorphologyFormat(morph_dst.suffix.removeprefix("."))
     output_file = output_dir / DEFAULT_CIRCUIT_CONFIG_FILENAME
     create_circuit_config(
         output_file=output_file,
         nodes_file=nodes_file,
         node_sets_file=node_sets_file,
-        morphologies_dir=subdirs["morphologies"],
+        morphology_dirs={morphology_format: subdirs["morphologies"]},
         hocs_dir=subdirs["hocs"],
-        morphology_format=morph_dst.suffix.removeprefix("."),
     )
     create_node_sets_file(output_file=node_sets_file)
 
