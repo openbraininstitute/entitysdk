@@ -299,6 +299,9 @@ def create_circuit_config(
             case MorphologyFormat.asc | MorphologyFormat.h5:
                 alternate_key = _ALTERNATE_MORPHOLOGY_FORMAT_KEYS[morphology_format]
                 alternate_morphologies[alternate_key] = f"$BASE_DIR/{morphologies_path}"
+            case _:  # pragma: no cover
+                msg = f"Unsupported morphology format: {morphology_format}"
+                raise StagingError(msg)
     if alternate_morphologies:
         morphology_config["alternate_morphologies"] = alternate_morphologies
 
