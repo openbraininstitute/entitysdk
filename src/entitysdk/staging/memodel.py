@@ -15,6 +15,7 @@ from entitysdk.models.memodel import MEModel
 from entitysdk.staging.constants import (
     DEFAULT_NODE_POPULATION_NAME,
     DEFAULT_NODE_SET_NAME,
+    MorphologyFormat,
 )
 from entitysdk.utils.filesystem import create_dir
 from entitysdk.utils.io import write_json
@@ -159,12 +160,15 @@ def _generate_sonata_files_from_memodel(
         template_name=template_name,
     )
 
+    morphology_format = MorphologyFormat(
+        downloaded_memodel.morphology_path.suffix.removeprefix(".")
+    )
     output_file = output_path / DEFAULT_CIRCUIT_CONFIG_FILENAME
     create_circuit_config(
         output_file=output_file,
         nodes_file=nodes_file,
         node_sets_file=node_sets_file,
-        morphologies_dir=subdirs["morphologies"],
+        morphology_dirs={morphology_format: subdirs["morphologies"]},
         hocs_dir=subdirs["hocs"],
     )
     create_node_sets_file(output_file=node_sets_file)
@@ -251,12 +255,19 @@ def create_nodes_file(
     L.debug(f"Successfully created file at {output_file}")
 
 
+# 'swc' has no entry here; it's declared via `morphologies_dir`, not `alternate_morphologies`.
+_ALTERNATE_MORPHOLOGY_FORMAT_KEYS = {
+    MorphologyFormat.asc: "neurolucida-asc",
+    MorphologyFormat.h5: "h5v1",
+}
+
+
 def create_circuit_config(
     output_file: Path,
     *,
     nodes_file: Path,
     node_sets_file: Path,
-    morphologies_dir: Path,
+    morphology_dirs: dict[MorphologyFormat, Path],
     hocs_dir: Path,
     node_population_name: str = DEFAULT_NODE_POPULATION_NAME,
 ):
@@ -266,7 +277,9 @@ def create_circuit_config(
         output_file: Circuit config file to write.
         nodes_file: Path to the SONATA nodes.h5 file.
         node_sets_file: Path to the SONATA node_sets.json file.
-        morphologies_dir: Directory containing morphology files.
+        morphology_dirs: Directory containing morphology files actually staged, keyed by their
+            format. Each entry is declared under the matching config key, e.g. ``swc`` under
+            ``morphologies_dir`` and ``asc``/``h5`` under ``alternate_morphologies``.
         hocs_dir: Directory containing HOC files.
         node_population_name: Name of the node population.
     """
@@ -274,8 +287,24 @@ def create_circuit_config(
     base_dir = output_file.parent.resolve()
     nodes_path = Path(nodes_file).resolve().relative_to(base_dir).as_posix()
     node_sets_path = Path(node_sets_file).resolve().relative_to(base_dir).as_posix()
-    morphologies_path = Path(morphologies_dir).resolve().relative_to(base_dir).as_posix()
     hocs_path = Path(hocs_dir).resolve().relative_to(base_dir).as_posix()
+
+    morphology_config: dict[str, str | dict[str, str]] = {}
+    alternate_morphologies: dict[str, str] = {}
+    for morphology_format, morphology_dir in morphology_dirs.items():
+        morphologies_path = Path(morphology_dir).resolve().relative_to(base_dir).as_posix()
+        match morphology_format:
+            case MorphologyFormat.swc:
+                morphology_config["morphologies_dir"] = f"$BASE_DIR/{morphologies_path}"
+            case MorphologyFormat.asc | MorphologyFormat.h5:
+                alternate_key = _ALTERNATE_MORPHOLOGY_FORMAT_KEYS[morphology_format]
+                alternate_morphologies[alternate_key] = f"$BASE_DIR/{morphologies_path}"
+            case _:  # pragma: no cover
+                msg = f"Unsupported morphology format: {morphology_format}"
+                raise StagingError(msg)
+    if alternate_morphologies:
+        morphology_config["alternate_morphologies"] = alternate_morphologies
+
     config = {
         "manifest": {"$BASE_DIR": "."},
         "node_sets_file": f"$BASE_DIR/{node_sets_path}",
@@ -286,11 +315,8 @@ def create_circuit_config(
                     "populations": {
                         node_population_name: {
                             "type": "biophysical",
-                            "morphologies_dir": f"$BASE_DIR/{morphologies_path}",
                             "biophysical_neuron_models_dir": f"$BASE_DIR/{hocs_path}",
-                            "alternate_morphologies": {
-                                "neurolucida-asc": f"$BASE_DIR/{morphologies_path}"
-                            },
+                            **morphology_config,
                         }
                     },
                 }

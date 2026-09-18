@@ -141,7 +141,7 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
         config = json.load(config_file)
     assert config["networks"]["nodes"][0]["nodes_file"] == "$BASE_DIR/All/nodes.h5"
     population = config["networks"]["nodes"][0]["populations"]["All"]
-    assert population["morphologies_dir"] == "$BASE_DIR/morphologies"
+    assert "morphologies_dir" not in population
     assert population["biophysical_neuron_models_dir"] == "$BASE_DIR/hocs"
     assert population["alternate_morphologies"]["neurolucida-asc"] == "$BASE_DIR/morphologies"
     assert config["node_sets_file"] == "$BASE_DIR/node_sets.json"
@@ -154,6 +154,43 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
         assert group["etype"][0].decode() == "cADpyr"
         assert group["dynamics_params"]["holding_current"][0] == pytest.approx(-0.1)
         assert group["dynamics_params"]["threshold_current"][0] == pytest.approx(0.2)
+
+
+def test_generate_sonata_files_from_memodel_swc_only_uses_morphologies_dir(tmp_path):
+    """When only '.swc' was downloaded, the config must not claim an 'asc' alternate exists."""
+    memodel_path = tmp_path / "memodel"
+    hoc_path = memodel_path / "hoc" / "cell.hoc"
+    morph_path = memodel_path / "morphology" / "cell.swc"
+    mech_dir = memodel_path / "mechanisms"
+
+    hoc_path.parent.mkdir(parents=True)
+    morph_path.parent.mkdir()
+    mech_dir.mkdir()
+    hoc_path.write_text("begintemplate TestCell\nendtemplate TestCell\n")
+    morph_path.write_text("morph content")
+
+    output_path = tmp_path / "sonata"
+    downloaded_me_model = DownloadedMEModel(
+        hoc_path=hoc_path,
+        mechanisms_dir=mech_dir,
+        mechanism_files=[],
+        morphology_path=morph_path,
+    )
+
+    memodel_mod._generate_sonata_files_from_memodel(
+        downloaded_memodel=downloaded_me_model,
+        output_path=output_path,
+        mtype="L5_TTPC1",
+        etype="cADpyr",
+        threshold_current=0.2,
+        holding_current=-0.1,
+    )
+
+    with open(output_path / "circuit_config.json") as config_file:
+        config = json.load(config_file)
+    population = config["networks"]["nodes"][0]["populations"]["All"]
+    assert population["morphologies_dir"] == "$BASE_DIR/morphologies"
+    assert "alternate_morphologies" not in population
 
 
 def test_create_nodes_file_omits_missing_classifications(tmp_path):
@@ -208,7 +245,7 @@ def test_create_json_configs(tmp_path):
         output_file=output_file,
         nodes_file=nodes_file,
         node_sets_file=node_sets_file,
-        morphologies_dir=morphologies_dir,
+        morphology_dirs={memodel_mod.MorphologyFormat.asc: morphologies_dir},
         hocs_dir=hocs_dir,
     )
     with open(output_file) as f:
@@ -345,27 +382,85 @@ def test_create_nodes_file_stores_morphology_stem(tmp_path, suffix):
         assert h5["nodes/All/0/morphology"][0].decode() == "cell"
 
 
-def test_create_circuit_config_uses_morphology_directory_for_asc(tmp_path):
+@pytest.mark.parametrize(
+    ("morphology_format", "expected_morphologies_dir", "expected_alternate"),
+    [
+        (memodel_mod.MorphologyFormat.swc, True, None),
+        (memodel_mod.MorphologyFormat.asc, False, {"neurolucida-asc": "$BASE_DIR/morphologies"}),
+        (memodel_mod.MorphologyFormat.h5, False, {"h5v1": "$BASE_DIR/morphologies"}),
+    ],
+)
+def test_create_circuit_config_declares_only_the_staged_morphology_format(
+    tmp_path, morphology_format, expected_morphologies_dir, expected_alternate
+):
+    """A staged 'asc'-only (or 'h5'-only) morphology must not claim '.swc' exists."""
     output_dir = tmp_path / "circuit"
     output_dir.mkdir()
     output_file = output_dir / "circuit_config.json"
     nodes_file = output_dir / "All" / "nodes.h5"
     node_sets_file = output_dir / "node_sets.json"
-    morphologies_dir = output_dir / "custom_morphologies"
-    hocs_dir = output_dir / "custom_hocs"
+    morphologies_dir = output_dir / "morphologies"
+    hocs_dir = output_dir / "hocs"
+
     memodel_mod.create_circuit_config(
         output_file=output_file,
         nodes_file=nodes_file,
         node_sets_file=node_sets_file,
-        morphologies_dir=morphologies_dir,
+        morphology_dirs={morphology_format: morphologies_dir},
         hocs_dir=hocs_dir,
     )
 
     with open(output_file) as f:
         population = json.load(f)["networks"]["nodes"][0]["populations"]["All"]
 
-    assert population["morphologies_dir"] == "$BASE_DIR/custom_morphologies"
-    assert population["biophysical_neuron_models_dir"] == "$BASE_DIR/custom_hocs"
-    assert population["alternate_morphologies"]["neurolucida-asc"] == (
-        "$BASE_DIR/custom_morphologies"
+    if expected_morphologies_dir:
+        assert population["morphologies_dir"] == "$BASE_DIR/morphologies"
+    else:
+        assert "morphologies_dir" not in population
+
+    if expected_alternate:
+        assert population["alternate_morphologies"] == expected_alternate
+    else:
+        assert "alternate_morphologies" not in population
+
+
+def test_create_circuit_config_rejects_unrecognized_format(tmp_path):
+    """An unsupported extension raises via `MorphologyFormat`'s enum validation, not silently."""
+    output_dir = tmp_path / "circuit"
+    output_dir.mkdir()
+
+    with pytest.raises(ValueError, match="obj"):
+        memodel_mod.MorphologyFormat("obj")
+
+
+def test_create_circuit_config_accepts_multiple_formats(tmp_path):
+    """A caller may stage more than one format; each lands under its matching config key."""
+    output_dir = tmp_path / "circuit"
+    output_dir.mkdir()
+    output_file = output_dir / "circuit_config.json"
+    nodes_file = output_dir / "All" / "nodes.h5"
+    node_sets_file = output_dir / "node_sets.json"
+    morphologies_dir = output_dir / "morphologies"
+    alternate_dir = output_dir / "alternate_morphologies"
+    hocs_dir = output_dir / "hocs"
+
+    memodel_mod.create_circuit_config(
+        output_file=output_file,
+        nodes_file=nodes_file,
+        node_sets_file=node_sets_file,
+        morphology_dirs={
+            memodel_mod.MorphologyFormat.asc: alternate_dir,
+            memodel_mod.MorphologyFormat.h5: alternate_dir,
+            memodel_mod.MorphologyFormat.swc: morphologies_dir,
+        },
+        hocs_dir=hocs_dir,
     )
+
+    with open(output_file) as f:
+        population = json.load(f)["networks"]["nodes"][0]["populations"]["All"]
+
+    assert population["morphologies_dir"] == "$BASE_DIR/morphologies"
+    assert population["alternate_morphologies"] == {
+        "neurolucida-asc": "$BASE_DIR/alternate_morphologies",
+        "h5v1": "$BASE_DIR/alternate_morphologies",
+    }
