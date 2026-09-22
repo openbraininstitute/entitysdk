@@ -216,7 +216,8 @@ def test_download_memodel(
         max_concurrent=max_concurrent,
     )
     assert downloaded_memodel.hoc_path.is_file()
-    assert downloaded_memodel.morphology_path.is_file()
+    assert downloaded_memodel.morphology_paths
+    assert all(p.is_file() for p in downloaded_memodel.morphology_paths)
     assert downloaded_memodel.mechanisms_dir.is_dir()
     assert len(os.listdir(downloaded_memodel.mechanisms_dir)) == 1
 
@@ -255,7 +256,9 @@ def test_download_memodel_hoc_missing(tmp_path, max_concurrent, monkeypatch):
 
 
 @pytest.mark.parametrize("max_concurrent", [1, 4])
-def test_download_memodel_morphology_asc_fallback_to_swc(tmp_path, max_concurrent, monkeypatch):
+def test_download_memodel_stages_every_available_format(tmp_path, max_concurrent, monkeypatch):
+    """All available morphology formats are staged; a missing one is skipped, not fatal."""
+
     class DummyMEModel:
         emodel = type("EModel", (), {"id": "dummy_id"})()
         morphology = "dummy_morphology"
@@ -266,13 +269,12 @@ def test_download_memodel_morphology_asc_fallback_to_swc(tmp_path, max_concurren
         return hoc_file
 
     def dummy_download_morphology(client, morphology, path, fmt):
-        if fmt == "asc":
-            raise IteratorResultError("asc not available")
-        elif fmt == "swc":
-            swc_file = path / "dummy.swc"
-            swc_file.parent.mkdir(parents=True, exist_ok=True)
-            swc_file.write_text("swc")
-            return swc_file
+        if fmt == "h5":
+            raise IteratorResultError("h5 not available")
+        morph_file = path / f"dummy.{fmt}"
+        morph_file.parent.mkdir(parents=True, exist_ok=True)
+        morph_file.write_text(fmt)
+        return morph_file
 
     import entitysdk.downloaders.memodel as memodel_mod
 
@@ -281,4 +283,29 @@ def test_download_memodel_morphology_asc_fallback_to_swc(tmp_path, max_concurren
     result = download_memodel(
         DummyClient(), DummyMEModel(), tmp_path, max_concurrent=max_concurrent
     )
-    assert result.morphology_path.name == "dummy.swc"
+    assert {p.name for p in result.morphology_paths} == {"dummy.swc", "dummy.asc"}
+
+
+@pytest.mark.parametrize("max_concurrent", [1, 4])
+def test_download_memodel_raises_when_no_morphology_format_available(
+    tmp_path, max_concurrent, monkeypatch
+):
+    class DummyMEModel:
+        id = "dummy_id"
+        emodel = type("EModel", (), {"id": "dummy_id"})()
+        morphology = "dummy_morphology"
+
+    def dummy_download_hoc(client, emodel, path):
+        hoc_file = tmp_path / "dummy.hoc"
+        hoc_file.write_text("hoc")
+        return hoc_file
+
+    def dummy_download_morphology(client, morphology, path, fmt):
+        raise IteratorResultError(f"{fmt} not available")
+
+    import entitysdk.downloaders.memodel as memodel_mod
+
+    monkeypatch.setattr(memodel_mod, "download_hoc", dummy_download_hoc)
+    monkeypatch.setattr(memodel_mod, "download_morphology", dummy_download_morphology)
+    with pytest.raises(StagingError, match="No morphology file found"):
+        download_memodel(DummyClient(), DummyMEModel(), tmp_path, max_concurrent=max_concurrent)
