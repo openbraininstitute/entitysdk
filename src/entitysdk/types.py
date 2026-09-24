@@ -83,3 +83,11 @@ class FetchContentStrategy(StrEnum):
     local_only = "local_only"
     local_or_download = "local_or_download"
     download_only = "download_only"
+
+
+class MorphologyFormat(StrEnum):
+    """A morphology file extension that SONATA can declare in a circuit config."""
+
+    swc = "swc"
+    asc = "asc"
+    h5 = "h5"

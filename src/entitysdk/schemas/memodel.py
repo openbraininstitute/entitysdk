@@ -11,4 +11,4 @@ class DownloadedMEModel(Schema):
     hoc_path: Path
     mechanisms_dir: Path
     mechanism_files: list[str]
-    morphology_path: Path
+    morphology_paths: list[Path]

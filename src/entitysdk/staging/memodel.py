@@ -15,8 +15,8 @@ from entitysdk.models.memodel import MEModel
 from entitysdk.staging.constants import (
     DEFAULT_NODE_POPULATION_NAME,
     DEFAULT_NODE_SET_NAME,
-    MorphologyFormat,
 )
+from entitysdk.types import MorphologyFormat
 from entitysdk.utils.filesystem import create_dir
 from entitysdk.utils.io import write_json
 
@@ -136,11 +136,17 @@ def _generate_sonata_files_from_memodel(
     hoc_dst = subdirs["hocs"] / f"{template_name}.hoc"
     shutil.copy(hoc_file, hoc_dst)
 
-    # Copy morphology file
-    if not downloaded_memodel.morphology_path.exists():
-        raise FileNotFoundError(f"No morphology file found {downloaded_memodel.morphology_path}")
-    morph_dst = subdirs["morphologies"] / downloaded_memodel.morphology_path.name
-    shutil.copy(downloaded_memodel.morphology_path, morph_dst)
+    # Copy every staged morphology format. All formats share the same stem, so the node
+    # property (which stores the stem, not an extension) is the same whichever we point at.
+    if not downloaded_memodel.morphology_paths:
+        raise FileNotFoundError("No morphology file found")
+    morph_dsts = []
+    for morph_src in downloaded_memodel.morphology_paths:
+        if not morph_src.exists():
+            raise FileNotFoundError(f"No morphology file found {morph_src}")
+        morph_dst = subdirs["morphologies"] / morph_src.name
+        shutil.copy(morph_src, morph_dst)
+        morph_dsts.append(morph_dst)
 
     # Copy mechanisms
     for file in downloaded_memodel.mechanism_files:
@@ -151,7 +157,7 @@ def _generate_sonata_files_from_memodel(
 
     create_nodes_file(
         hoc_file=hoc_dst,
-        morph_file=morph_dst,
+        morph_file=morph_dsts[0],
         output_file=nodes_file,
         mtype=mtype,
         etype=etype,
@@ -160,15 +166,16 @@ def _generate_sonata_files_from_memodel(
         template_name=template_name,
     )
 
-    morphology_format = MorphologyFormat(
-        downloaded_memodel.morphology_path.suffix.removeprefix(".")
-    )
+    morphology_dirs = {
+        MorphologyFormat(morph_dst.suffix.removeprefix(".")): subdirs["morphologies"]
+        for morph_dst in morph_dsts
+    }
     output_file = output_path / DEFAULT_CIRCUIT_CONFIG_FILENAME
     create_circuit_config(
         output_file=output_file,
         nodes_file=nodes_file,
         node_sets_file=node_sets_file,
-        morphology_dirs={morphology_format: subdirs["morphologies"]},
+        morphology_dirs=morphology_dirs,
         hocs_dir=subdirs["hocs"],
     )
     create_node_sets_file(output_file=node_sets_file)

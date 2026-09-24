@@ -6,12 +6,12 @@ from pathlib import Path
 from entitysdk import Client
 from entitysdk.downloaders.ion_channel_model import download_ion_channel_mechanism
 from entitysdk.models.ion_channel_model import IonChannelModel
-from entitysdk.staging.constants import MorphologyFormat
 from entitysdk.staging.memodel import (
     create_circuit_config,
     create_node_sets_file,
     create_nodes_file,
 )
+from entitysdk.types import MorphologyFormat
 from entitysdk.utils.filesystem import create_dir
 
 L = logging.getLogger(__name__)

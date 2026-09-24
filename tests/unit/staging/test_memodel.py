@@ -116,7 +116,7 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
         hoc_path=hoc_path,
         mechanisms_dir=mech_dir,
         mechanism_files=["mech.mod"],
-        morphology_path=morph_path,
+        morphology_paths=[morph_path],
     )
 
     memodel_mod._generate_sonata_files_from_memodel(
@@ -174,7 +174,7 @@ def test_generate_sonata_files_from_memodel_swc_only_uses_morphologies_dir(tmp_p
         hoc_path=hoc_path,
         mechanisms_dir=mech_dir,
         mechanism_files=[],
-        morphology_path=morph_path,
+        morphology_paths=[morph_path],
     )
 
     memodel_mod._generate_sonata_files_from_memodel(
@@ -191,6 +191,53 @@ def test_generate_sonata_files_from_memodel_swc_only_uses_morphologies_dir(tmp_p
     population = config["networks"]["nodes"][0]["populations"]["All"]
     assert population["morphologies_dir"] == "$BASE_DIR/morphologies"
     assert "alternate_morphologies" not in population
+
+
+def test_generate_sonata_files_from_memodel_declares_every_staged_format(tmp_path):
+    """When all three formats are staged, each is declared under its matching config key."""
+    memodel_path = tmp_path / "memodel"
+    hoc_path = memodel_path / "hoc" / "cell.hoc"
+    mech_dir = memodel_path / "mechanisms"
+    morph_dir = memodel_path / "morphology"
+
+    hoc_path.parent.mkdir(parents=True)
+    morph_dir.mkdir()
+    mech_dir.mkdir()
+    hoc_path.write_text("begintemplate TestCell\nendtemplate TestCell\n")
+    morph_paths = []
+    for ext in ("swc", "asc", "h5"):
+        p = morph_dir / f"cell.{ext}"
+        p.write_text("morph content")
+        morph_paths.append(p)
+
+    output_path = tmp_path / "sonata"
+    downloaded_me_model = DownloadedMEModel(
+        hoc_path=hoc_path,
+        mechanisms_dir=mech_dir,
+        mechanism_files=[],
+        morphology_paths=morph_paths,
+    )
+
+    memodel_mod._generate_sonata_files_from_memodel(
+        downloaded_memodel=downloaded_me_model,
+        output_path=output_path,
+        mtype="L5_TTPC1",
+        etype="cADpyr",
+        threshold_current=0.2,
+        holding_current=-0.1,
+    )
+
+    for ext in ("swc", "asc", "h5"):
+        assert (output_path / "morphologies" / f"cell.{ext}").exists()
+
+    with open(output_path / "circuit_config.json") as config_file:
+        config = json.load(config_file)
+    population = config["networks"]["nodes"][0]["populations"]["All"]
+    assert population["morphologies_dir"] == "$BASE_DIR/morphologies"
+    assert population["alternate_morphologies"] == {
+        "neurolucida-asc": "$BASE_DIR/morphologies",
+        "h5v1": "$BASE_DIR/morphologies",
+    }
 
 
 def test_create_nodes_file_omits_missing_classifications(tmp_path):
@@ -274,7 +321,7 @@ def test_missing_hoc_file_raise(tmp_path):
         hoc_path=hoc_path,
         mechanisms_dir=memodel_path / "mechanisms",
         mechanism_files=["mech.mod"],
-        morphology_path=memodel_path / "morphology" / "cell.asc",
+        morphology_paths=[memodel_path / "morphology" / "cell.asc"],
     )
     with pytest.raises(FileNotFoundError, match=f"No HOC file found {hoc_path}"):
         memodel_mod._generate_sonata_files_from_memodel(
@@ -299,7 +346,29 @@ def test_missing_morphology_file_raises(tmp_path):
         hoc_path=memodel_path / "hoc" / "cell.hoc",
         mechanisms_dir=memodel_path / "mechanisms",
         mechanism_files=["mech.mod"],
-        morphology_path=memodel_path / "morphology" / "missing.asc",
+        morphology_paths=[memodel_path / "morphology" / "missing.asc"],
+    )
+    with pytest.raises(FileNotFoundError, match="No morphology file found"):
+        memodel_mod._generate_sonata_files_from_memodel(
+            downloaded_memodel=downloaded_me_model,
+            output_path=tmp_path,
+            mtype="Test",
+            etype="TestEType",
+            threshold_current=0.2,
+            holding_current=-0.1,
+        )
+
+
+def test_no_morphology_paths_raises(tmp_path):
+    memodel_path = tmp_path / "memodel"
+    (memodel_path / "hoc").mkdir(parents=True)
+    (memodel_path / "hoc" / "cell.hoc").write_text("begintemplate TestCell\nendtemplate TestCell\n")
+
+    downloaded_me_model = DownloadedMEModel(
+        hoc_path=memodel_path / "hoc" / "cell.hoc",
+        mechanisms_dir=memodel_path / "mechanisms",
+        mechanism_files=[],
+        morphology_paths=[],
     )
     with pytest.raises(FileNotFoundError, match="No morphology file found"):
         memodel_mod._generate_sonata_files_from_memodel(
@@ -325,7 +394,7 @@ def test_mechanism_file_not_exists(tmp_path):
         hoc_path=memodel_path / "hoc" / "cell.hoc",
         mechanisms_dir=memodel_path / "mechanisms",
         mechanism_files=["missing.mod"],
-        morphology_path=memodel_path / "morphology" / "cell.asc",
+        morphology_paths=[memodel_path / "morphology" / "cell.asc"],
     )
     # Should not raise, just skip missing file
     memodel_mod._generate_sonata_files_from_memodel(
