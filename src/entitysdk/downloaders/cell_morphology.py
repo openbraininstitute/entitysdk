@@ -10,7 +10,7 @@ from entitysdk.utils.filesystem import create_dir
 
 logger = logging.getLogger(__name__)
 
-_MORPHOLOGY_CONTENT_TYPES = {
+MORPHOLOGY_CONTENT_TYPES = {
     "asc": ContentType.application_asc,
     "swc": ContentType.application_swc,
     "h5": ContentType.application_x_hdf5,
@@ -36,7 +36,7 @@ def download_morphology(
 
     asset = client.fetch_assets(
         morphology,
-        selection={"content_type": _MORPHOLOGY_CONTENT_TYPES[file_type]},
+        selection={"content_type": MORPHOLOGY_CONTENT_TYPES[file_type]},
         output_path=output_dir,
     ).one()
 

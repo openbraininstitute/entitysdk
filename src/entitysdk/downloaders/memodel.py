@@ -5,14 +5,13 @@ import logging
 from pathlib import Path
 
 from entitysdk.client import Client
-from entitysdk.downloaders.cell_morphology import download_morphology
+from entitysdk.downloaders.cell_morphology import MORPHOLOGY_CONTENT_TYPES, download_morphology
 from entitysdk.downloaders.emodel import download_hoc
 from entitysdk.downloaders.ion_channel_model import download_ion_channel_mechanism
-from entitysdk.exception import IteratorResultError, StagingError
+from entitysdk.exception import StagingError
 from entitysdk.models.emodel import EModel
 from entitysdk.models.memodel import MEModel
 from entitysdk.schemas.memodel import DownloadedMEModel
-from entitysdk.types import MorphologyFormat
 from entitysdk.utils.filesystem import create_dir
 
 logger = logging.getLogger(__name__)
@@ -41,23 +40,21 @@ def download_memodel(
     mechanisms_dir = create_dir(output_dir / "mechanisms")
     ion_channels = list(emodel.ion_channel_models or [])
 
-    # Platform-registered morphologies carry all three formats; stage whichever are available so
-    # every downstream consumer (viewer wants swc, simulators may want asc/h5) finds its format.
+    # Stage every morphology format the entity carries, so each downstream consumer (the viewer
+    # wants swc, simulators may want asc/h5) finds its format.
     def _download_morphs() -> list[Path]:
-        paths = []
-        for morphology_format in MorphologyFormat:
-            try:
-                paths.append(
-                    download_morphology(
-                        client, memodel.morphology, morphology_dir, morphology_format
-                    )
-                )
-            except IteratorResultError as e:
-                logger.debug("Skipping morphology format %r: %s", morphology_format, e)
-                continue
-        if not paths:
+        present = {asset.content_type for asset in memodel.morphology.assets}
+        formats = [
+            file_type
+            for file_type, content_type in MORPHOLOGY_CONTENT_TYPES.items()
+            if content_type in present
+        ]
+        if not formats:
             raise StagingError(f"No morphology file found for MEModel {memodel.id}")
-        return paths
+        return [
+            download_morphology(client, memodel.morphology, morphology_dir, file_type)
+            for file_type in formats
+        ]
 
     if max_concurrent == 1:
         hoc_path = download_hoc(client, emodel, hoc_dir)
