@@ -44,10 +44,6 @@ def register_validation_result_figure(
             authorized_public=authorized_public,
         )
     )
-    # Keep the file extension on renamed uploads: entitycore validates that the
-    # asset path suffix matches the declared content type and rejects a bare
-    # detected name with 422. Unrecognised/thumbnail figures keep their real
-    # filename via upload_file's file_name fallback.
     asset = client.upload_file(
         entity_id=validation_result.id,
         entity_type=ValidationResult,
