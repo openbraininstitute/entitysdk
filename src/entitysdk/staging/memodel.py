@@ -144,7 +144,11 @@ def _generate_sonata_files_from_memodel(
     for morph_src in downloaded_memodel.morphology_paths:
         if not morph_src.exists():
             raise FileNotFoundError(f"No morphology file found {morph_src}")
-        morph_dst = subdirs["morphologies"] / morph_src.name
+        # Extract format from the directory structure (parent dir name)
+        fmt = morph_src.parent.name
+        format_dir = subdirs["morphologies"] / fmt
+        create_dir(format_dir)
+        morph_dst = format_dir / morph_src.name
         shutil.copy(morph_src, morph_dst)
         morph_dsts.append(morph_dst)
 
@@ -167,7 +171,7 @@ def _generate_sonata_files_from_memodel(
     )
 
     morphology_dirs = {
-        MorphologyFormat(morph_dst.suffix.removeprefix(".")): subdirs["morphologies"]
+        MorphologyFormat(morph_dst.suffix.removeprefix(".")): morph_dst.parent
         for morph_dst in morph_dsts
     }
     output_file = output_path / DEFAULT_CIRCUIT_CONFIG_FILENAME

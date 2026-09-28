@@ -41,7 +41,7 @@ def download_memodel(
     ion_channels = list(emodel.ion_channel_models or [])
 
     # Stage every morphology format the entity carries, so each downstream consumer (the viewer
-    # wants swc, simulators may want asc/h5) finds its format.
+    # wants swc, simulators may want asc/h5) finds its format in a separate directory.
     def _download_morphs() -> list[Path]:
         present = {asset.content_type for asset in memodel.morphology.assets}
         formats = [
@@ -52,7 +52,7 @@ def download_memodel(
         if not formats:
             raise StagingError(f"No morphology file found for MEModel {memodel.id}")
         return [
-            download_morphology(client, memodel.morphology, morphology_dir, file_type)
+            download_morphology(client, memodel.morphology, morphology_dir / file_type, file_type)
             for file_type in formats
         ]
 

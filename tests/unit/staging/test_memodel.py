@@ -99,11 +99,11 @@ def test_stage_sonata_from_memodel_no_calibration(tmp_path, fake_memodel_no_cali
 def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
     memodel_path = tmp_path / "memodel"
     hoc_path = memodel_path / "hoc" / "cell.hoc"
-    morph_path = memodel_path / "morphology" / "cell.asc"
+    morph_path = memodel_path / "morphology" / "asc" / "cell.asc"
     mech_dir = memodel_path / "mechanisms"
 
     hoc_path.parent.mkdir(parents=True)
-    morph_path.parent.mkdir()
+    morph_path.parent.mkdir(parents=True)
     mech_dir.mkdir()
 
     (hoc_path).write_text("begintemplate TestCell\nendtemplate TestCell\n")
@@ -130,7 +130,7 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
 
     nodes_file = output_path / "All" / "nodes.h5"
     assert (output_path / "hocs" / "TestCell.hoc").exists()
-    assert (output_path / "morphologies" / "cell.asc").exists()
+    assert (output_path / "morphologies" / "asc" / "cell.asc").exists()
     assert (output_path / "mechanisms" / "mech.mod").exists()
     assert nodes_file.exists()
     assert not (output_path / "network").exists()
@@ -143,7 +143,7 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
     population = config["networks"]["nodes"][0]["populations"]["All"]
     assert "morphologies_dir" not in population
     assert population["biophysical_neuron_models_dir"] == "$BASE_DIR/hocs"
-    assert population["alternate_morphologies"]["neurolucida-asc"] == "$BASE_DIR/morphologies"
+    assert population["alternate_morphologies"]["neurolucida-asc"] == "$BASE_DIR/morphologies/asc"
     assert config["node_sets_file"] == "$BASE_DIR/node_sets.json"
 
     # Validate content inside nodes.h5
@@ -160,11 +160,11 @@ def test_generate_sonata_files_from_memodel_swc_only_uses_morphologies_dir(tmp_p
     """When only '.swc' was downloaded, the config must not claim an 'asc' alternate exists."""
     memodel_path = tmp_path / "memodel"
     hoc_path = memodel_path / "hoc" / "cell.hoc"
-    morph_path = memodel_path / "morphology" / "cell.swc"
+    morph_path = memodel_path / "morphology" / "swc" / "cell.swc"
     mech_dir = memodel_path / "mechanisms"
 
     hoc_path.parent.mkdir(parents=True)
-    morph_path.parent.mkdir()
+    morph_path.parent.mkdir(parents=True)
     mech_dir.mkdir()
     hoc_path.write_text("begintemplate TestCell\nendtemplate TestCell\n")
     morph_path.write_text("morph content")
@@ -189,7 +189,7 @@ def test_generate_sonata_files_from_memodel_swc_only_uses_morphologies_dir(tmp_p
     with open(output_path / "circuit_config.json") as config_file:
         config = json.load(config_file)
     population = config["networks"]["nodes"][0]["populations"]["All"]
-    assert population["morphologies_dir"] == "$BASE_DIR/morphologies"
+    assert population["morphologies_dir"] == "$BASE_DIR/morphologies/swc"
     assert "alternate_morphologies" not in population
 
 
@@ -206,7 +206,8 @@ def test_generate_sonata_files_from_memodel_declares_every_staged_format(tmp_pat
     hoc_path.write_text("begintemplate TestCell\nendtemplate TestCell\n")
     morph_paths = []
     for ext in ("swc", "asc", "h5"):
-        p = morph_dir / f"cell.{ext}"
+        p = morph_dir / ext / f"cell.{ext}"
+        p.parent.mkdir()
         p.write_text("morph content")
         morph_paths.append(p)
 
@@ -228,15 +229,15 @@ def test_generate_sonata_files_from_memodel_declares_every_staged_format(tmp_pat
     )
 
     for ext in ("swc", "asc", "h5"):
-        assert (output_path / "morphologies" / f"cell.{ext}").exists()
+        assert (output_path / "morphologies" / ext / f"cell.{ext}").exists()
 
     with open(output_path / "circuit_config.json") as config_file:
         config = json.load(config_file)
     population = config["networks"]["nodes"][0]["populations"]["All"]
-    assert population["morphologies_dir"] == "$BASE_DIR/morphologies"
+    assert population["morphologies_dir"] == "$BASE_DIR/morphologies/swc"
     assert population["alternate_morphologies"] == {
-        "neurolucida-asc": "$BASE_DIR/morphologies",
-        "h5v1": "$BASE_DIR/morphologies",
+        "neurolucida-asc": "$BASE_DIR/morphologies/asc",
+        "h5v1": "$BASE_DIR/morphologies/h5",
     }
 
 
