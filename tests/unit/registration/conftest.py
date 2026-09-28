@@ -17,6 +17,7 @@ EXTRACTED_DATA_DIR = Path(__file__).resolve().parents[1] / "models" / "data" / "
 REGISTER_ENTITY_ROUTES = (
     "emodel",
     "memodel",
+    "memodel-calibration-result",
     "etype-classification",
     "mtype-classification",
     "derivation",
@@ -29,6 +30,8 @@ REGISTER_ENTITY_BODY_FIELDS = (
     "etype_class_id",
     "mtype_class_id",
     "validated_entity_id",
+    "calibrated_entity_id",
+    "rin",
     "name",
     "description",
     "passed",
@@ -48,6 +51,7 @@ ROUTE_TO_FIXTURE.update(
     {
         "emodel": "emodel",
         "memodel": "memodel",
+        "memodel-calibration-result": "memodel-calibration-result",
         "etype-classification": "etype-classification",
         "mtype-classification": "mtype-classification",
         "derivation": "derivation",
@@ -135,6 +139,34 @@ def upload_file_responder(httpx_mock, api_url) -> Callable[[], None]:
             callback,
             method="POST",
             url=re.compile(re.escape(base) + r"/[\w-]+/[^/]+/assets$"),
+            is_reusable=True,
+        )
+
+    return _install
+
+
+@pytest.fixture
+def search_responder(httpx_mock) -> Callable[[str, list], None]:
+    """Mock the ``GET /<route>`` search endpoint used by dedupe checks."""
+
+    def _install(route: str, data: list) -> None:
+        def callback(request: httpx.Request) -> httpx.Response:
+            return httpx.Response(
+                200,
+                json={
+                    "data": data,
+                    "pagination": {
+                        "page": 1,
+                        "page_size": 10,
+                        "total_items": len(data),
+                    },
+                },
+            )
+
+        httpx_mock.add_callback(
+            callback,
+            method="GET",
+            url=re.compile(rf".*/{re.escape(route)}"),
             is_reusable=True,
         )
 
