@@ -1,5 +1,7 @@
 """Tests for MEModel registration."""
 
+import uuid
+
 from entitysdk.models import (
     BrainRegion,
     CellMorphology,
@@ -7,10 +9,14 @@ from entitysdk.models import (
     ETypeClass,
     License,
     MEModel,
+    MEModelCalibrationResult,
     MTypeClass,
     Species,
 )
-from entitysdk.registration.memodel import register_memodel
+from entitysdk.registration.memodel import (
+    register_memodel,
+    register_memodel_calibration_result,
+)
 from entitysdk.types import EntityLifecycleStatus, ValidationStatus
 
 from .conftest import load_extracted_json
@@ -81,3 +87,51 @@ def test_register_memodel_skips_empty_classification_lists(client, register_enti
     )
 
     assert registered.id is not None
+
+
+def test_register_memodel_calibration_result_registers(
+    client,
+    httpx_mock,
+    register_entity_responder,
+    search_responder,
+):
+    search_responder("memodel-calibration-result", [])
+    register_entity_responder(("memodel-calibration-result",))
+
+    memodel_id = uuid.uuid4()
+    registered = register_memodel_calibration_result(
+        client=client,
+        calibrated_entity_id=memodel_id,
+        holding_current=-0.016,
+        threshold_current=0.1,
+        rin=100.0,
+        authorized_public=True,
+    )
+
+    assert isinstance(registered, MEModelCalibrationResult)
+    assert registered.holding_current == -0.016
+    assert registered.threshold_current == 0.1
+    assert registered.rin == 100.0
+    assert registered.calibrated_entity_id == memodel_id
+
+
+def test_register_memodel_calibration_result_skips_existing(
+    client,
+    httpx_mock,
+    search_responder,
+):
+    search_responder(
+        "memodel-calibration-result",
+        [load_extracted_json("memodel-calibration-result")],
+    )
+
+    result = register_memodel_calibration_result(
+        client=client,
+        calibrated_entity_id=uuid.uuid4(),
+        holding_current=-0.016,
+        threshold_current=0.1,
+        rin=None,
+        authorized_public=False,
+    )
+
+    assert result is None
