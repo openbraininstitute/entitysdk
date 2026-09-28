@@ -38,7 +38,6 @@ def register_validation_result_figure(
     detected = _detect_validation_name(figure_file.stem)
     validation_result = client.register_entity(
         ValidationResult(
-            # thumbnail generation looks up ValidationResult(name="thumbnail").
             name="thumbnail" if detected == "thumbnail" else figure_file.stem,
             passed=passed,
             validated_entity_id=validated_entity_id,
