@@ -7,6 +7,7 @@ from entitysdk.client import Client
 from entitysdk.models.cell_morphology import CellMorphology
 from entitysdk.types import ContentType
 from entitysdk.utils.filesystem import create_dir
+from entitysdk._server_schemas import AssetLabel
 
 logger = logging.getLogger(__name__)
 
@@ -22,21 +23,25 @@ def download_morphology(
     morphology: CellMorphology,
     output_dir: str | Path,
     file_type: str,
+    asset_label: AssetLabel = AssetLabel.morphology,
 ) -> Path:
-    """Download morphology file.
+    """Download a morphology file.
 
     Args:
-        client (Client): EntitySDK client
-        morphology (CellMorphology): Morphology entitysdk object
-        output_dir (str or Path): directory to save the morphology file
-        file_type (str or None): type of the morphology file ('asc', 'swc' or 'h5').
-            Will take the first one if None.
+        client: EntitySDK client.
+        morphology: Morphology entity.
+        output_dir: Directory where the morphology file is saved.
+        file_type: Morphology file type ('asc', 'swc', or 'h5').
+        asset_label: Label identifying the morphology asset.
     """
     output_dir = create_dir(output_dir)
 
     asset = client.fetch_assets(
         morphology,
-        selection={"content_type": MORPHOLOGY_CONTENT_TYPES[file_type]},
+        selection={
+            "content_type": MORPHOLOGY_CONTENT_TYPES[file_type],
+            "label": asset_label,
+        },
         output_path=output_dir,
     ).one()
 
