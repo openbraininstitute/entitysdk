@@ -67,6 +67,25 @@ def test_stage_sonata_from_memodel_success(tmp_path, fake_memodel, fake_client):
         assert mock_gen.call_args.kwargs["etype"] == "cADpyr"
 
 
+@pytest.mark.parametrize("max_concurrent", [1, 4])
+def test_stage_sonata_from_memodel_forwards_max_concurrent(
+    tmp_path, fake_memodel, fake_client, max_concurrent
+):
+    config_path = tmp_path / "circuit_config.json"
+    config_path.write_text("{}")
+
+    with (
+        mock.patch.object(memodel_mod, "download_memodel") as mock_dl,
+        mock.patch.object(memodel_mod, "_generate_sonata_files_from_memodel"),
+    ):
+        memodel_mod.stage_sonata_from_memodel(
+            fake_client, fake_memodel, output_dir=tmp_path, max_concurrent=max_concurrent
+        )
+
+    mock_dl.assert_called_once()
+    assert mock_dl.call_args.kwargs["max_concurrent"] == max_concurrent
+
+
 def test_stage_sonata_from_memodel_preserves_missing_classifications(
     tmp_path, fake_memodel, fake_client
 ):
