@@ -174,6 +174,7 @@ class AssetLabel(StrEnum):
     efeature_extraction_figures = "efeature_extraction_figures"
     efeature_extraction_cells = "efeature_extraction_cells"
     efeature_extraction_protocols = "efeature_extraction_protocols"
+    current_report = "current_report"
 
 
 class Sha256Digest(RootModel[str]):
@@ -684,7 +685,7 @@ class ExternalUrlCreate(BaseModel):
 
 
 class Facet(BaseModel):
-    id: Annotated[UUID | int, Field(title="Id")]
+    id: Annotated[UUID, Field(title="Id")]
     label: Annotated[str, Field(title="Label")]
     count: Annotated[int, Field(title="Count")]
     type: Annotated[str | None, Field(title="Type")]
@@ -1532,6 +1533,14 @@ class NestedSynaptome(BaseModel):
     name: Annotated[str, Field(title="Name")]
     description: Annotated[str, Field(title="Description")]
     seed: Annotated[int, Field(title="Seed")]
+
+
+class NotebookCloneRequest(BaseModel):
+    target_project_ids: Annotated[list[UUID], Field(title="Target Project Ids")]
+
+
+class NotebookDeleteClonesRequest(BaseModel):
+    target_project_ids: Annotated[list[UUID], Field(title="Target Project Ids")]
 
 
 class OrganizationAdminUpdate(BaseModel):
@@ -5686,6 +5695,14 @@ class NestedCellMorphologyProtocolRead(
         | NestedPlaceholderCellMorphologyProtocolRead,
         Field(discriminator="generation_type"),
     ]
+
+
+class NotebookCloneResponse(BaseModel):
+    created: Annotated[list[AnalysisNotebookTemplateRead], Field(title="Created")]
+
+
+class NotebookDeleteClonesResponse(BaseModel):
+    deleted: Annotated[list[AnalysisNotebookTemplateRead], Field(title="Deleted")]
 
 
 class CellMorphologyAnnotationExpandedRead(BaseModel):
