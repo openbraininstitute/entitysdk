@@ -3,11 +3,11 @@
 import logging
 from pathlib import Path
 
+from entitysdk._server_schemas import AssetLabel
 from entitysdk.client import Client
 from entitysdk.models.cell_morphology import CellMorphology
 from entitysdk.types import ContentType
 from entitysdk.utils.filesystem import create_dir
-from entitysdk._server_schemas import AssetLabel
 
 logger = logging.getLogger(__name__)
 

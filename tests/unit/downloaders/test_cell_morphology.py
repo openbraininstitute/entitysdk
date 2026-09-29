@@ -2,11 +2,12 @@ import uuid
 
 import pytest
 
+from entitysdk._server_schemas import AssetLabel
 from entitysdk.downloaders.cell_morphology import download_morphology
 from entitysdk.exception import IteratorResultError
 from entitysdk.models.cell_morphology import CellMorphology
 from entitysdk.models.cell_morphology_protocol import CellMorphologyProtocol
-from entitysdk.types import AssetLabel, CellMorphologyGenerationType
+from entitysdk.types import CellMorphologyGenerationType
 
 
 def _mock_asset_response(
