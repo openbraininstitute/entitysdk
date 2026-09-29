@@ -61,6 +61,7 @@ def stage_sonata_from_memodel(
     client: Client,
     memodel: MEModel,
     output_dir: Path = Path("."),
+    max_concurrent: int = 1,
 ) -> Path:
     """Stages a SONATA single-cell circuit from an MEModel entity.
 
@@ -70,7 +71,9 @@ def stage_sonata_from_memodel(
         Path to generated circuit_config.json (inside SONATA folder).
     """
     with tempfile.TemporaryDirectory() as tmp_dir:
-        downloaded_me_model = download_memodel(client, memodel=memodel, output_dir=tmp_dir)
+        downloaded_me_model = download_memodel(
+            client, memodel=memodel, output_dir=tmp_dir, max_concurrent=max_concurrent
+        )
 
         mtype = memodel.mtypes[0].pref_label if memodel.mtypes else "GEN_mtype"
         etype = memodel.emodel.etypes[0].pref_label if memodel.emodel.etypes else "GEN_etype"
