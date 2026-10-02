@@ -159,12 +159,16 @@ def _stage_single_cell_node_sets_file(
     return output_path
 
 
-def _map_electrode_id_to_report_name(reports: dict) -> dict[UUID, str]:
-    id_to_report = {}
+def _map_electrode_id_to_report_names(reports: dict) -> dict[UUID, list[str]]:
+    """Map each recording array id named by an lfp report's electrodes_file to those reports.
+
+    Several reports can record with the same array, so an id maps to every report naming it.
+    """
+    id_to_reports: dict[UUID, list[str]] = {}
     for name, values in reports.items():
         if values["type"] == "lfp" and (electrodes_file := values.get("electrodes_file")):
-            id_to_report[UUID(Path(electrodes_file).stem)] = name
-    return id_to_report
+            id_to_reports.setdefault(UUID(Path(electrodes_file).stem), []).append(name)
+    return id_to_reports
 
 
 def _stage_recording_arrays(
@@ -175,26 +179,26 @@ def _stage_recording_arrays(
     output_dir: Path,
 ) -> dict:
     """Download recording arrays and rewrite electrodes_file paths in reports."""
-    id_to_report_name = _map_electrode_id_to_report_name(reports)
+    id_to_report_names = _map_electrode_id_to_report_names(reports)
     array_ids = {array.id for array in recording_arrays}
 
-    if not (id_to_report_name or array_ids):
+    if not (id_to_report_names or array_ids):
         return reports
 
-    missing = set(id_to_report_name) - array_ids
+    missing = set(id_to_report_names) - array_ids
     if missing:
         raise StagingError(
             f"electrodes_file ids in config are not present in recording_arrays.\n"
-            f"Config ids: {sorted(id_to_report_name)}\n"
+            f"Config ids: {sorted(id_to_report_names)}\n"
             f"recording_arrays ids: {sorted(array_ids)}\n"
             f"Missing: {sorted(missing)}"
         )
 
-    extra = array_ids - set(id_to_report_name)
+    extra = array_ids - set(id_to_report_names)
     if extra:
         raise StagingError(
             f"recording_arrays ids are not referenced by any electrodes_file in reports.\n"
-            f"Config ids: {sorted(id_to_report_name)}\n"
+            f"Config ids: {sorted(id_to_report_names)}\n"
             f"recording_arrays ids: {sorted(array_ids)}\n"
             f"Extra: {sorted(extra)}"
         )
@@ -210,8 +214,9 @@ def _stage_recording_arrays(
     }
 
     transformed = deepcopy(reports)
-    for array_id, report_name in id_to_report_name.items():
-        transformed[report_name]["electrodes_file"] = str(staged_electrode_files[array_id])
+    for array_id, report_names in id_to_report_names.items():
+        for report_name in report_names:
+            transformed[report_name]["electrodes_file"] = str(staged_electrode_files[array_id])
 
     return transformed
 
