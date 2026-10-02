@@ -193,6 +193,25 @@ def test__transform_simulation_config():
 
 
 def _recording_array(array_id, asset_id):
+    """A recording array carrying the assets entitycore allows it.
+
+    asset_id is the weight matrix, the only one staging should download; the electrode locations
+    and the image get ids of their own, which the tests register no responses for.
+    """
+
+    def asset(id_, label, content_type, path):
+        return Asset(
+            id=id_,
+            content_type=content_type,
+            label=label,
+            path=path,
+            full_path=f"/{path}",
+            size=0,
+            is_directory=False,
+            storage_type=StorageType.aws_s3_internal,
+            status="created",
+        )
+
     return SimulatableExtracellularRecordingArray(
         id=array_id,
         name="array",
@@ -200,19 +219,15 @@ def _recording_array(array_id, asset_id):
         electrode_type="custom",
         circuit_id=uuid.uuid4(),
         assets=[
-            Asset(
-                id=asset_id,
-                content_type="application/x-hdf5",
-                label="electrode_locations",
-                path="electrodes.h5",
-                full_path="/electrodes.h5",
-                size=0,
-                is_directory=False,
-                storage_type=StorageType.aws_s3_internal,
-                status="created",
-            )
+            asset(uuid.uuid4(), "electrode_locations", "application/json", "locations.json"),
+            asset(asset_id, "electrode_array_weight_matrix", "application/x-hdf5", "weights.h5"),
+            asset(uuid.uuid4(), "electrode_array_image", "image/png", "array.png"),
         ],
     )
+
+
+def _weight_matrix(array):
+    return next(a for a in array.assets if a.label == "electrode_array_weight_matrix")
 
 
 def test_stage_recording_arrays(client, tmp_path, httpx_mock, api_url):
@@ -235,12 +250,12 @@ def test_stage_recording_arrays(client, tmp_path, httpx_mock, api_url):
     httpx_mock.add_response(
         method="GET",
         url=f"{api_url}/simulatable-extracellular-recording-array/{id1}/assets/{asset1}",
-        json=arrays[0].assets[0].model_dump(mode="json"),
+        json=_weight_matrix(arrays[0]).model_dump(mode="json"),
     )
     httpx_mock.add_response(
         method="GET",
         url=f"{api_url}/simulatable-extracellular-recording-array/{id2}/assets/{asset2}",
-        json=arrays[1].assets[0].model_dump(mode="json"),
+        json=_weight_matrix(arrays[1]).model_dump(mode="json"),
     )
     httpx_mock.add_response(
         method="GET",
@@ -279,6 +294,40 @@ def test_stage_recording_arrays(client, tmp_path, httpx_mock, api_url):
     assert res["lfp_report_A"]["electrodes_file"] == str(path1)
     assert res["lfp_report_B"]["electrodes_file"] == str(path2)
     assert res["SomaVoltRec"] == reports["SomaVoltRec"]
+
+
+def test_stage_recording_arrays__array_shared_by_two_reports(client, tmp_path, httpx_mock, api_url):
+    array_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+    array = _recording_array(array_id, asset_id)
+    array_url = f"{api_url}/simulatable-extracellular-recording-array/{array_id}"
+
+    httpx_mock.add_response(method="GET", url=array_url, json=array.model_dump(mode="json"))
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{array_url}/assets/{asset_id}",
+        json=_weight_matrix(array).model_dump(mode="json"),
+    )
+    httpx_mock.add_response(
+        method="GET", url=f"{array_url}/assets/{asset_id}/download", content=b"weights"
+    )
+
+    reports = {
+        "lfp_shallow": {"type": "lfp", "electrodes_file": f"{array_id}.h5"},
+        "lfp_deep": {"type": "lfp", "electrodes_file": f"{array_id}.h5"},
+    }
+
+    res = test_module._stage_recording_arrays(
+        client,
+        reports=reports,
+        recording_arrays=[array],
+        output_dir=tmp_path,
+    )
+
+    staged = tmp_path / "electrodes_files" / f"{array_id}.h5"
+    assert staged.read_bytes() == b"weights"
+    assert res["lfp_shallow"]["electrodes_file"] == str(staged)
+    assert res["lfp_deep"]["electrodes_file"] == str(staged)
 
 
 def test_stage_recording_arrays__missing_config_id(client, tmp_path):

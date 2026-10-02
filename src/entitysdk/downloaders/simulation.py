@@ -113,11 +113,15 @@ def download_recording_array_file(
     recording_array_id: ID,
     output_path: Path,
 ) -> Path:
-    """Download a recording array electrodes file to output_path."""
+    """Download a recording array electrodes file to output_path.
+
+    The electrodes file of a SONATA lfp report is the array's weight matrix. The array's
+    electrode_locations asset is a JSON summary of where the electrodes are, not this file.
+    """
     downloaded = client.fetch_assets(
         (recording_array_id, SimulatableExtracellularRecordingArray),
         selection={
-            "label": AssetLabel.electrode_locations,
+            "label": AssetLabel.electrode_array_weight_matrix,
             "content_type": ContentType.application_x_hdf5,
         },
         output_path=output_path,
