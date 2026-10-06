@@ -11,6 +11,7 @@ class ActivityStatus(StrEnum):
     error = "error"
     cancelled = "cancelled"
 
+
 class ActivityType(StrEnum):
     simulation_execution = "simulation_execution"
     simulation_generation = "simulation_generation"
@@ -23,21 +24,25 @@ class ActivityType(StrEnum):
     skeletonization_config_generation = "skeletonization_config_generation"
     task_activity = "task_activity"
 
+
 class AgePeriod(StrEnum):
     prenatal = "prenatal"
     postnatal = "postnatal"
     unknown = "unknown"
+
 
 class AgentType(StrEnum):
     person = "person"
     organization = "organization"
     consortium = "consortium"
 
+
 class AnalysisScale(StrEnum):
     subcellular = "subcellular"
     cellular = "cellular"
     circuit = "circuit"
     system = "system"
+
 
 class ApiErrorCode(StrEnum):
     GENERIC_ERROR = "GENERIC_ERROR"
@@ -63,6 +68,7 @@ class ApiErrorCode(StrEnum):
     S3_CANNOT_CREATE_PRESIGNED_URL = "S3_CANNOT_CREATE_PRESIGNED_URL"
     OPENAI_API_KEY_MISSING = "OPENAI_API_KEY_MISSING"
     OPENAI_API_ERROR = "OPENAI_API_ERROR"
+
 
 class AssetLabel(StrEnum):
     directory_child = "directory_child"
@@ -127,9 +133,11 @@ class AssetLabel(StrEnum):
     efeature_extraction_protocols = "efeature_extraction_protocols"
     current_report = "current_report"
 
+
 class AssetStatus(StrEnum):
     created = "created"
     uploading = "uploading"
+
 
 class CellMorphologyGenerationType(StrEnum):
     digital_reconstruction = "digital_reconstruction"
@@ -137,15 +145,18 @@ class CellMorphologyGenerationType(StrEnum):
     computationally_synthesized = "computationally_synthesized"
     placeholder = "placeholder"
 
+
 class CellMorphologyProtocolDesign(StrEnum):
     electron_microscopy = "electron_microscopy"
     cell_patch = "cell_patch"
     fluorophore = "fluorophore"
     topological_synthesis = "topological_synthesis"
 
+
 class CircuitBuildCategory(StrEnum):
     computational_model = "computational_model"
     em_reconstruction = "em_reconstruction"
+
 
 class CircuitScale(StrEnum):
     single = "single"
@@ -155,6 +166,7 @@ class CircuitScale(StrEnum):
     region = "region"
     system = "system"
     whole_brain = "whole_brain"
+
 
 class ContentType(StrEnum):
     application_json = "application/json"
@@ -179,6 +191,7 @@ class ContentType(StrEnum):
     application_zip = "application/zip"
     application_octet_stream = "application/octet-stream"
 
+
 class DerivationType(StrEnum):
     circuit_customization = "circuit_customization"
     circuit_extraction = "circuit_extraction"
@@ -190,18 +203,22 @@ class DerivationType(StrEnum):
     circuit_simplification = "circuit_simplification"
     unspecified = "unspecified"
 
+
 class EMCellMeshGenerationMethod(StrEnum):
     marching_cubes = "marching_cubes"
+
 
 class EMCellMeshType(StrEnum):
     static = "static"
     dynamic = "dynamic"
+
 
 class ElectricalRecordingOrigin(StrEnum):
     in_vivo = "in_vivo"
     in_vitro = "in_vitro"
     in_silico = "in_silico"
     unknown = "unknown"
+
 
 class ElectricalRecordingStimulusShape(StrEnum):
     cheops = "cheops"
@@ -215,6 +232,7 @@ class ElectricalRecordingStimulusShape(StrEnum):
     two_steps = "two_steps"
     unknown = "unknown"
 
+
 class ElectricalRecordingStimulusType(StrEnum):
     voltage_clamp = "voltage_clamp"
     current_clamp = "current_clamp"
@@ -223,11 +241,13 @@ class ElectricalRecordingStimulusType(StrEnum):
     other = "other"
     unknown = "unknown"
 
+
 class ElectricalRecordingType(StrEnum):
     intracellular = "intracellular"
     extracellular = "extracellular"
     both = "both"
     unknown = "unknown"
+
 
 class ElectrodeType(StrEnum):
     neuropixels_v1 = "neuropixels_v1"
@@ -235,14 +255,17 @@ class ElectrodeType(StrEnum):
     neuropixels_ultra = "neuropixels_ultra"
     custom = "custom"
 
+
 class EntityExpand(StrEnum):
     generated_from_derivations = "generated_from_derivations"
     used_by_derivations = "used_by_derivations"
+
 
 class EntityLifecycleStatus(StrEnum):
     draft = "draft"
     active = "active"
     disqualified = "disqualified"
+
 
 class EntityRoute(StrEnum):
     brain_atlas = "brain-atlas"
@@ -282,6 +305,7 @@ class EntityRoute(StrEnum):
     skeletonization_config = "skeletonization-config"
     skeletonization_campaign = "skeletonization-campaign"
     task_config = "task-config"
+
 
 class EntityType(StrEnum):
     analysis_software_source_code = "analysis_software_source_code"
@@ -326,6 +350,7 @@ class EntityType(StrEnum):
     skeletonization_campaign = "skeletonization_campaign"
     task_config = "task_config"
 
+
 class EntityTypeWithBrainRegion(StrEnum):
     brain_atlas_region = "brain_atlas_region"
     cell_composition = "cell_composition"
@@ -348,29 +373,35 @@ class EntityTypeWithBrainRegion(StrEnum):
     single_neuron_synaptome = "single_neuron_synaptome"
     single_neuron_synaptome_simulation = "single_neuron_synaptome_simulation"
 
+
 class ExecutorType(StrEnum):
     single_node_job = "single_node_job"
     distributed_job = "distributed_job"
     jupyter_notebook = "jupyter_notebook"
+
 
 class Expandable(StrEnum):
     measurement_annotation = "measurement_annotation"
     generated_from_derivations = "generated_from_derivations"
     used_by_derivations = "used_by_derivations"
 
+
 class ExpandableAttribute(StrEnum):
     measurement_annotation = "measurement_annotation"
     generated_from_derivations = "generated_from_derivations"
     used_by_derivations = "used_by_derivations"
+
 
 class ExternalSource(StrEnum):
     channelpedia = "channelpedia"
     modeldb = "modeldb"
     icgenealogy = "icgenealogy"
 
+
 class MeasurableEntity(StrEnum):
     cell_morphology = "cell_morphology"
     em_cell_mesh = "em_cell_mesh"
+
 
 class MeasurementStatistic(StrEnum):
     mean = "mean"
@@ -386,6 +417,7 @@ class MeasurementStatistic(StrEnum):
     maximum = "maximum"
     sum = "sum"
 
+
 class MeasurementUnit(StrEnum):
     dimensionless = "dimensionless"
     field_1_μm = "1/μm"
@@ -396,16 +428,19 @@ class MeasurementUnit(StrEnum):
     μm__1 = "μm³"
     radian = "radian"
 
+
 class ModifiedMorphologyMethodType(StrEnum):
     cloned = "cloned"
     mix_and_match = "mix_and_match"
     mousified = "mousified"
     ratified = "ratified"
 
+
 class PublicationType(StrEnum):
     entity_source = "entity_source"
     component_source = "component_source"
     application = "application"
+
 
 class RepairPipelineType(StrEnum):
     raw = "raw"
@@ -413,16 +448,19 @@ class RepairPipelineType(StrEnum):
     unraveled = "unraveled"
     repaired = "repaired"
 
+
 class Sex(StrEnum):
     male = "male"
     female = "female"
     unknown = "unknown"
+
 
 class SlicingDirectionType(StrEnum):
     coronal = "coronal"
     sagittal = "sagittal"
     horizontal = "horizontal"
     custom = "custom"
+
 
 class StainingType(StrEnum):
     golgi = "golgi"
@@ -434,9 +472,11 @@ class StainingType(StrEnum):
     immunohistochemistry = "immunohistochemistry"
     other = "other"
 
+
 class StorageType(StrEnum):
     aws_s3_internal = "aws_s3_internal"
     aws_s3_open = "aws_s3_open"
+
 
 class StructuralDomain(StrEnum):
     apical_dendrite = "apical_dendrite"
@@ -446,12 +486,14 @@ class StructuralDomain(StrEnum):
     neuron_morphology = "neuron_morphology"
     not_applicable = "not_applicable"
 
+
 class TargetSimulator(StrEnum):
     Brian2 = "Brian2"
     CORENEURON = "CORENEURON"
     LearningEngine = "LearningEngine"
     NEST = "NEST"
     NEURON = "NEURON"
+
 
 class TaskActivityType(StrEnum):
     circuit_simulation__config_generation = "circuit_simulation__config_generation"
@@ -499,6 +541,7 @@ class TaskActivityType(StrEnum):
     circuit_single_build__config_generation = "circuit_single_build__config_generation"
     circuit_single_build__execution = "circuit_single_build__execution"
 
+
 class TaskConfigType(StrEnum):
     circuit_simulation__campaign = "circuit_simulation__campaign"
     circuit_simulation__config = "circuit_simulation__config"
@@ -543,6 +586,7 @@ class TaskConfigType(StrEnum):
     circuit_single_build__campaign = "circuit_single_build__campaign"
     circuit_single_build__config = "circuit_single_build__config"
 
+
 class TaskResultType(StrEnum):
     circuit_simulation__result = "circuit_simulation__result"
     circuit_extraction__circuit = "circuit_extraction__circuit"
@@ -563,12 +607,14 @@ class TaskResultType(StrEnum):
         "circuit_synaptic_physiology_assignment__result"
     )
 
+
 class ValidationStatus(StrEnum):
     created = "created"
     initialized = "initialized"
     running = "running"
     done = "done"
     error = "error"
+
 
 class WithinBrainRegionDirection(StrEnum):
     ascendants = "ascendants"
