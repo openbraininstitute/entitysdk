@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """Keep only StrEnum / Enum classes from datamodel-codegen server schema output."""
 
-from __future__ import annotations
-
 import argparse
 import ast
 import sys
