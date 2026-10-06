@@ -100,8 +100,9 @@ tox
 
 ### Auto-generate server schemas
 
-Server schemas at src/entitysdk/_server_schemas.py, which are currently used for importing enum
-types, can be updated with the following tox command:
+Server schemas at src/entitysdk/_server_schemas.py contain OpenAPI enum types (non-enum models
+are generated temporarily and stripped by `scripts/filter_server_schema_enums.py`). Update them
+with:
 
 ```bash
 tox -e generate-server-schemas
