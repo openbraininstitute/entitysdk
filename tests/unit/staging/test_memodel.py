@@ -143,6 +143,7 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
         output_path=output_path,
         mtype="L5_TTPC1",
         etype="cADpyr",
+        synapse_class="EXC",
         threshold_current=0.2,
         holding_current=-0.1,
     )
@@ -171,6 +172,7 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
         assert group["model_template"][0].decode() == "hoc:TestCell"
         assert group["mtype"][0].decode() == "L5_TTPC1"
         assert group["etype"][0].decode() == "cADpyr"
+        assert group["synapse_class"][0].decode() == "EXC"
         assert group["dynamics_params"]["holding_current"][0] == pytest.approx(-0.1)
         assert group["dynamics_params"]["threshold_current"][0] == pytest.approx(0.2)
 
@@ -201,6 +203,7 @@ def test_generate_sonata_files_from_memodel_swc_only_uses_morphologies_dir(tmp_p
         output_path=output_path,
         mtype="L5_TTPC1",
         etype="cADpyr",
+        synapse_class=None,
         threshold_current=0.2,
         holding_current=-0.1,
     )
@@ -243,6 +246,7 @@ def test_generate_sonata_files_from_memodel_declares_every_staged_format(tmp_pat
         output_path=output_path,
         mtype="L5_TTPC1",
         etype="cADpyr",
+        synapse_class=None,
         threshold_current=0.2,
         holding_current=-0.1,
     )
@@ -260,7 +264,7 @@ def test_generate_sonata_files_from_memodel_declares_every_staged_format(tmp_pat
     }
 
 
-def test_create_nodes_file_omits_missing_classifications(tmp_path):
+def test_create_nodes_file_stores_na_for_missing_classifications(tmp_path):
     hoc_file = tmp_path / "cell.hoc"
     morph_file = tmp_path / "cell.asc"
     hoc_file.write_text("begintemplate MyCell\nendtemplate MyCell\n")
@@ -273,15 +277,20 @@ def test_create_nodes_file_omits_missing_classifications(tmp_path):
         output_file=output_file,
         mtype=None,
         etype=None,
+        synapse_class=None,
         threshold_current=0.2,
         holding_current=-0.1,
         template_name="MyCell",
     )
 
+    # mtype, etype and synapse_class are required SONATA properties: when not available
+    # they must still be present, stored as the UNKNOWN_PROPERTY_VALUE sentinel.
+    sentinel = memodel_mod.UNKNOWN_PROPERTY_VALUE
     with h5py.File(output_file) as h5:
         group = h5["nodes/All/0"]
-        assert "mtype" not in group
-        assert "etype" not in group
+        assert group["mtype"][0].decode() == sentinel
+        assert group["etype"][0].decode() == sentinel
+        assert group["synapse_class"][0].decode() == sentinel
 
 
 def test_create_json_configs(tmp_path):
@@ -347,8 +356,9 @@ def test_missing_hoc_file_raise(tmp_path):
         memodel_mod._generate_sonata_files_from_memodel(
             downloaded_memodel=downloaded_me_model,
             output_path=tmp_path,
-            mtype="Test",
+            mtype="TestMType",
             etype="TestEType",
+            synapse_class="TestSynClass",
             threshold_current=0.2,
             holding_current=-0.1,
         )
@@ -372,8 +382,9 @@ def test_missing_morphology_file_raises(tmp_path):
         memodel_mod._generate_sonata_files_from_memodel(
             downloaded_memodel=downloaded_me_model,
             output_path=tmp_path,
-            mtype="Test",
+            mtype="TestMType",
             etype="TestEType",
+            synapse_class="TestSynClass",
             threshold_current=0.2,
             holding_current=-0.1,
         )
@@ -394,8 +405,9 @@ def test_no_morphology_paths_raises(tmp_path):
         memodel_mod._generate_sonata_files_from_memodel(
             downloaded_memodel=downloaded_me_model,
             output_path=tmp_path,
-            mtype="Test",
+            mtype="TestMType",
             etype="TestEType",
+            synapse_class="TestSynClass",
             threshold_current=0.2,
             holding_current=-0.1,
         )
@@ -420,8 +432,9 @@ def test_mechanism_file_not_exists(tmp_path):
     memodel_mod._generate_sonata_files_from_memodel(
         downloaded_memodel=downloaded_me_model,
         output_path=tmp_path,
-        mtype="Test",
+        mtype="TestMType",
         etype="TestEType",
+        synapse_class="TestSynClass",
         threshold_current=0.2,
         holding_current=-0.1,
     )
