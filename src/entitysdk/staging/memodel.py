@@ -24,6 +24,10 @@ L = logging.getLogger(__name__)
 
 DEFAULT_CIRCUIT_CONFIG_FILENAME = "circuit_config.json"
 
+# Sentinel value for required SONATA node properties (mtype, etype, synapse_class) whose
+# actual value is not known for a staged ME-model.
+UNKNOWN_PROPERTY_VALUE = "N/A"
+
 
 def _extract_hoc_template_name(hoc_file: Path) -> str:
     """Extract the template name from a HOC file by parsing the 'begintemplate' statement.
@@ -89,6 +93,7 @@ def stage_sonata_from_memodel(
             output_path=output_dir,
             mtype=mtype,
             etype=etype,
+            synapse_class=None,
             threshold_current=threshold_current,
             holding_current=holding_current,
         )
@@ -105,6 +110,7 @@ def _generate_sonata_files_from_memodel(
     output_path: Path,
     mtype: str | None,
     etype: str | None,
+    synapse_class: str | None,
     threshold_current: float,
     holding_current: float,
 ):
@@ -113,8 +119,9 @@ def _generate_sonata_files_from_memodel(
     Args:
         downloaded_memodel (DownloadedMEModel): The downloaded MEModel object.
         output_path (str or Path): Path to the output 'sonata' folder.
-        mtype (str | None): Cell mtype, if available.
-        etype (str | None): Cell etype, if available.
+        mtype (str | None): Cell mtype. Stored as "N/A" if not available.
+        etype (str | None): Cell etype. Stored as "N/A" if not available.
+        synapse_class (str | None): Cell synapse class. Stored as "N/A" if not available.
         threshold_current (float): Threshold current.
         holding_current (float): Holding current.
     """
@@ -168,6 +175,7 @@ def _generate_sonata_files_from_memodel(
         output_file=nodes_file,
         mtype=mtype,
         etype=etype,
+        synapse_class=synapse_class,
         threshold_current=threshold_current,
         holding_current=holding_current,
         template_name=template_name,
@@ -200,6 +208,7 @@ def create_nodes_file(
     *,
     mtype: str | None = None,
     etype: str | None = None,
+    synapse_class: str | None = None,
 ):
     """Create a SONATA nodes.h5 file for a single cell population.
 
@@ -210,8 +219,9 @@ def create_nodes_file(
         threshold_current (float): Threshold current value.
         holding_current (float): Holding current value.
         template_name (str): HOC template name (from begintemplate statement).
-        mtype (str | None): Cell mtype, if available.
-        etype (str | None): Cell etype, if available.
+        mtype (str | None): Cell mtype. Stored as "N/A" if not available.
+        etype (str | None): Cell etype. Stored as "N/A" if not available.
+        synapse_class (str | None): Cell synapse class. Stored as "N/A" if not available.
     """
     output_file = Path(output_file)  # ensure Path type
     output_file.parent.mkdir(parents=True, exist_ok=True)
@@ -235,10 +245,18 @@ def create_nodes_file(
         group_0.create_dataset("morphology", (1,), dtype=h5py.string_dtype())[0] = Path(
             morph_file
         ).stem
-        if mtype is not None:
-            group_0.create_dataset("mtype", (1,), dtype=h5py.string_dtype())[0] = mtype
-        if etype is not None:
-            group_0.create_dataset("etype", (1,), dtype=h5py.string_dtype())[0] = etype
+        # mtype, etype and synapse_class are all required SONATA properties. When a value is
+        # not known (None), still create the dataset with UNKNOWN_PROPERTY_VALUE as a sentinel
+        # so that SONATA validation passes.
+        group_0.create_dataset("mtype", (1,), dtype=h5py.string_dtype())[0] = (
+            mtype if mtype is not None else UNKNOWN_PROPERTY_VALUE
+        )
+        group_0.create_dataset("etype", (1,), dtype=h5py.string_dtype())[0] = (
+            etype if etype is not None else UNKNOWN_PROPERTY_VALUE
+        )
+        group_0.create_dataset("synapse_class", (1,), dtype=h5py.string_dtype())[0] = (
+            synapse_class if synapse_class is not None else UNKNOWN_PROPERTY_VALUE
+        )
 
         # Coordinates and rotation
         for name in [
