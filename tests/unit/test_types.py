@@ -82,3 +82,12 @@ def test_task_types_include_circuit_single_build():
     assert TaskActivityType.circuit_single_build__execution.value == (
         "circuit_single_build__execution"
     )
+
+
+def test_task_types_include_memodel_build():
+    assert TaskConfigType.memodel_build__campaign.value == "memodel_build__campaign"
+    assert TaskConfigType.memodel_build__config.value == "memodel_build__config"
+    assert TaskActivityType.memodel_build__config_generation.value == (
+        "memodel_build__config_generation"
+    )
+    assert TaskActivityType.memodel_build__execution.value == "memodel_build__execution"
