@@ -137,7 +137,7 @@ class IonChannelModel(ScientificArtifact):
         ),
     ]
     temperature_celsius: Annotated[
-        int | None,
+        float | None,
         Field(description="The temperature at which the mechanism has been built to work on."),
     ]
     is_stochastic: Annotated[
