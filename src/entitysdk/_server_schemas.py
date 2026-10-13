@@ -540,6 +540,8 @@ class TaskActivityType(StrEnum):
     circuit_simplification__execution = "circuit_simplification__execution"
     circuit_single_build__config_generation = "circuit_single_build__config_generation"
     circuit_single_build__execution = "circuit_single_build__execution"
+    memodel_build__config_generation = "memodel_build__config_generation"
+    memodel_build__execution = "memodel_build__execution"
 
 
 class TaskConfigType(StrEnum):
@@ -585,6 +587,8 @@ class TaskConfigType(StrEnum):
     circuit_simplification__config = "circuit_simplification__config"
     circuit_single_build__campaign = "circuit_single_build__campaign"
     circuit_single_build__config = "circuit_single_build__config"
+    memodel_build__campaign = "memodel_build__campaign"
+    memodel_build__config = "memodel_build__config"
 
 
 class TaskResultType(StrEnum):
