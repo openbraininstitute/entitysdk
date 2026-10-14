@@ -1,5 +1,6 @@
 """Core SDK operations."""
 
+import json
 import logging
 from collections.abc import Iterator
 from pathlib import Path
@@ -78,7 +79,7 @@ def get_api_version(
         token_manager=token_manager,
         http_client=http_client,
     )
-    return APIVersion.model_validate(response.json())
+    return APIVersion.model_validate_json(response.content)
 
 
 def search_entities(
@@ -153,7 +154,7 @@ def get_entity(
         token_manager=token_manager,
         http_client=http_client,
     )
-    return serdes.deserialize_model(response.json(), entity_type)
+    return serdes.deserialize_model_json(response.content, entity_type)
 
 
 def get_entity_derivations(
@@ -186,7 +187,8 @@ def get_entity_derivations(
         parameters=params,
     )
     return IteratorResult(
-        serdes.deserialize_model(json_data, Entity) for json_data in response.json()["data"]
+        serdes.deserialize_model(json_data, Entity)
+        for json_data in json.loads(response.content)["data"]
     )
 
 
@@ -216,7 +218,7 @@ def get_entity_asset(
         token_manager=token_manager,
         http_client=http_client,
     )
-    return serdes.deserialize_model(response.json(), Asset)
+    return serdes.deserialize_model_json(response.content, Asset)
 
 
 def get_entity_assets(
@@ -245,7 +247,8 @@ def get_entity_assets(
         http_client=http_client,
     )
     return IteratorResult(
-        serdes.deserialize_model(json_data, Asset) for json_data in response.json()["data"]
+        serdes.deserialize_model(json_data, Asset)
+        for json_data in json.loads(response.content)["data"]
     )
 
 
@@ -270,7 +273,7 @@ def register_entity(
         token_manager=token_manager,
         http_client=http_client,
     )
-    return serdes.deserialize_model(response.json(), type(entity))
+    return serdes.deserialize_model_json(response.content, type(entity))
 
 
 def update_entity(
@@ -306,9 +309,7 @@ def update_entity(
         http_client=http_client,
     )
 
-    json_data = response.json()
-
-    return serdes.deserialize_model(json_data, entity_type)
+    return serdes.deserialize_model_json(response.content, entity_type)
 
 
 def delete_entity(
@@ -415,7 +416,7 @@ def upload_asset_content(
         token_manager=token_manager,
         http_client=http_client,
     )
-    return serdes.deserialize_model(response.json(), Asset)
+    return serdes.deserialize_model_json(response.content, Asset)
 
 
 def upload_asset_directory(
@@ -498,7 +499,7 @@ def list_directory(
         token_manager=token_manager,
         http_client=http_client,
     )
-    return serdes.deserialize_model(response.json(), DetailedFileList)
+    return serdes.deserialize_model_json(response.content, DetailedFileList)
 
 
 def fetch_asset_file(
@@ -777,7 +778,7 @@ def delete_asset(
         token_manager=token_manager,
         http_client=http_client,
     )
-    return serdes.deserialize_model(response.json(), Asset)
+    return serdes.deserialize_model_json(response.content, Asset)
 
 
 def register_asset(
@@ -810,4 +811,4 @@ def register_asset(
         token_manager=token_manager,
         http_client=http_client,
     )
-    return serdes.deserialize_model(response.json(), Asset)
+    return serdes.deserialize_model_json(response.content, Asset)

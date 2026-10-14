@@ -199,7 +199,7 @@ def _initiate_upload(
         admin=admin,
     )
     filesize = get_filesize(asset_path)
-    data = make_db_api_request(
+    response = make_db_api_request(
         url=url,
         method="POST",
         json={
@@ -213,9 +213,9 @@ def _initiate_upload(
         project_context=project_context,
         token_manager=token_manager,
         http_client=http_client,
-    ).json()
+    )
 
-    asset = AssetWithUploadMeta.model_validate(data)
+    asset = AssetWithUploadMeta.model_validate_json(response.content)
     part_size = asset.upload_meta.part_size
 
     parts = [
@@ -394,14 +394,14 @@ def _complete_upload(
         asset_id=asset_id,
         admin=admin,
     )
-    data = make_db_api_request(
+    response = make_db_api_request(
         url=url,
         method="POST",
         token_manager=token_manager,
         http_client=http_client,
         project_context=project_context,
-    ).json()
-    return serdes.deserialize_model(data, Asset)
+    )
+    return serdes.deserialize_model_json(response.content, Asset)
 
 
 def multipart_upload_asset_directory(
@@ -491,16 +491,16 @@ def _initiate_directory_upload(
         entity_type=entity_type,
         admin=admin,
     )
-    data = make_db_api_request(
+    response = make_db_api_request(
         url=url,
         method="POST",
         json=upload_request.model_dump(mode="json"),
         project_context=project_context,
         token_manager=token_manager,
         http_client=http_client,
-    ).json()
+    )
 
-    upload_response = MultipartDirectoryUploadResponse.model_validate(data)
+    upload_response = MultipartDirectoryUploadResponse.model_validate_json(response.content)
     if len(upload_response.files) != len(paths):
         msg = (
             f"Backend returned {len(upload_response.files)} files, but {len(paths)} were expected."
@@ -549,11 +549,11 @@ def _complete_upload_directory(
         asset_id=asset_id,
         admin=admin,
     )
-    data = make_db_api_request(
+    response = make_db_api_request(
         url=url,
         method="POST",
         token_manager=token_manager,
         http_client=http_client,
         project_context=project_context,
-    ).json()
-    return serdes.deserialize_model(data, Asset)
+    )
+    return serdes.deserialize_model_json(response.content, Asset)
