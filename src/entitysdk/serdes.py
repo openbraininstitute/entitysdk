@@ -29,6 +29,11 @@ def deserialize_model(json_data: dict, entity_type: type[TBaseModel]) -> TBaseMo
     return entity_type.model_validate(json_data, extra=settings.deserialize_model_extra)
 
 
+def deserialize_model_json(json: str | bytes, entity_type: type[TBaseModel]) -> TBaseModel:
+    """Deserialize a JSON document into an entity."""
+    return entity_type.model_validate_json(json, extra=settings.deserialize_model_extra)
+
+
 def serialize_model(model: BaseModel) -> dict:
     """Serialize entity into json."""
     if isinstance(model, Activity):
