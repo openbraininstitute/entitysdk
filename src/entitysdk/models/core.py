@@ -122,9 +122,6 @@ class Person(Agent):
     orcid: Annotated[str | None, Field(description="Open Researcher and Contributor ID")] = None
 
 
-Identifiable.model_rebuild()
-
-
 class Organization(Agent):
     """Organization model."""
 
