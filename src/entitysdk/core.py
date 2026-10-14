@@ -1,6 +1,5 @@
 """Core SDK operations."""
 
-import json
 import logging
 from collections.abc import Iterator
 from pathlib import Path
@@ -187,8 +186,7 @@ def get_entity_derivations(
         parameters=params,
     )
     return IteratorResult(
-        serdes.deserialize_model(json_data, Entity)
-        for json_data in json.loads(response.content)["data"]
+        serdes.deserialize_model(json_data, Entity) for json_data in response.json()["data"]
     )
 
 
@@ -247,8 +245,7 @@ def get_entity_assets(
         http_client=http_client,
     )
     return IteratorResult(
-        serdes.deserialize_model(json_data, Asset)
-        for json_data in json.loads(response.content)["data"]
+        serdes.deserialize_model(json_data, Asset) for json_data in response.json()["data"]
     )
 
 
