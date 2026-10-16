@@ -264,6 +264,98 @@ def test_generate_sonata_files_from_memodel_declares_every_staged_format(tmp_pat
     }
 
 
+@pytest.mark.parametrize(
+    ("file_type", "config_key"),
+    [
+        ("swc", "morphologies_dir"),
+        ("asc", "neurolucida-asc"),
+        ("h5", "h5v1"),
+    ],
+)
+def test_generate_sonata_files_from_memodel_uppercase_extension(tmp_path, file_type, config_key):
+    """A morphology asset stored with an uppercase extension (e.g. 'cell.ASC') must stage
+    under its format's config key and be copied as '<stem>.<fmt>' for SONATA readers."""
+    memodel_path = tmp_path / "memodel"
+    hoc_path = memodel_path / "hoc" / "cell.hoc"
+    morph_path = memodel_path / "morphology" / file_type / f"cell.{file_type.upper()}"
+    mech_dir = memodel_path / "mechanisms"
+
+    hoc_path.parent.mkdir(parents=True)
+    morph_path.parent.mkdir(parents=True)
+    mech_dir.mkdir()
+    hoc_path.write_text("begintemplate TestCell\nendtemplate TestCell\n")
+    morph_path.write_text("morph content")
+
+    output_path = tmp_path / "sonata"
+    downloaded_me_model = DownloadedMEModel(
+        hoc_path=hoc_path,
+        mechanisms_dir=mech_dir,
+        mechanism_files=[],
+        morphology_paths=[morph_path],
+    )
+
+    memodel_mod._generate_sonata_files_from_memodel(
+        downloaded_memodel=downloaded_me_model,
+        output_path=output_path,
+        mtype="L5_TTPC1",
+        etype="cADpyr",
+        synapse_class=None,
+        threshold_current=0.2,
+        holding_current=-0.1,
+    )
+
+    assert (output_path / "morphologies" / file_type / f"cell.{file_type}").exists()
+    with open(output_path / "circuit_config.json") as config_file:
+        population = json.load(config_file)["networks"]["nodes"][0]["populations"]["All"]
+    if config_key == "morphologies_dir":
+        assert population["morphologies_dir"] == f"$BASE_DIR/morphologies/{file_type}"
+    else:
+        assert (
+            population["alternate_morphologies"][config_key]
+            == f"$BASE_DIR/morphologies/{file_type}"
+        )
+    with h5py.File(output_path / "All" / "nodes.h5", "r") as f:
+        assert f["nodes/All/0/morphology"][0].decode() == "cell"
+
+
+def test_generate_sonata_files_from_memodel_flat_layout_uses_extension(tmp_path):
+    """When the downloaded morphology is not under a per-format directory, the format falls
+    back to the lowercased file extension."""
+    memodel_path = tmp_path / "memodel"
+    hoc_path = memodel_path / "hoc" / "cell.hoc"
+    morph_path = memodel_path / "morphology" / "cell.ASC"
+    mech_dir = memodel_path / "mechanisms"
+
+    hoc_path.parent.mkdir(parents=True)
+    morph_path.parent.mkdir(parents=True)
+    mech_dir.mkdir()
+    hoc_path.write_text("begintemplate TestCell\nendtemplate TestCell\n")
+    morph_path.write_text("morph content")
+
+    output_path = tmp_path / "sonata"
+    downloaded_me_model = DownloadedMEModel(
+        hoc_path=hoc_path,
+        mechanisms_dir=mech_dir,
+        mechanism_files=[],
+        morphology_paths=[morph_path],
+    )
+
+    memodel_mod._generate_sonata_files_from_memodel(
+        downloaded_memodel=downloaded_me_model,
+        output_path=output_path,
+        mtype="L5_TTPC1",
+        etype="cADpyr",
+        synapse_class=None,
+        threshold_current=0.2,
+        holding_current=-0.1,
+    )
+
+    assert (output_path / "morphologies" / "asc" / "cell.asc").exists()
+    with open(output_path / "circuit_config.json") as config_file:
+        population = json.load(config_file)["networks"]["nodes"][0]["populations"]["All"]
+    assert population["alternate_morphologies"]["neurolucida-asc"] == "$BASE_DIR/morphologies/asc"
+
+
 def test_create_nodes_file_stores_na_for_missing_classifications(tmp_path):
     hoc_file = tmp_path / "cell.hoc"
     morph_file = tmp_path / "cell.asc"

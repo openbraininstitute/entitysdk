@@ -151,16 +151,24 @@ def _generate_sonata_files_from_memodel(
     if not downloaded_memodel.morphology_paths:
         raise FileNotFoundError("No morphology file found")
     morph_dsts = []
+    morphology_dirs: dict[MorphologyFormat, Path] = {}
     for morph_src in downloaded_memodel.morphology_paths:
         if not morph_src.exists():
             raise FileNotFoundError(f"No morphology file found {morph_src}")
-        # Extract format from the directory structure (parent dir name)
-        fmt = morph_src.parent.name
+        # The downloader writes each file under a per-format directory, so the parent dir
+        # name identifies the format; fall back to the file extension otherwise. Either way
+        # the stored asset's filename may differ in case from the format (e.g. '.ASC').
+        try:
+            fmt = MorphologyFormat(morph_src.parent.name)
+        except ValueError:
+            fmt = MorphologyFormat(morph_src.suffix.removeprefix(".").lower())
         format_dir = subdirs["morphologies"] / fmt
         create_dir(format_dir)
-        morph_dst = format_dir / morph_src.name
+        # Normalize the extension to the format so readers resolving '<stem>.<fmt>' find it.
+        morph_dst = format_dir / f"{morph_src.stem}.{fmt}"
         shutil.copy(morph_src, morph_dst)
         morph_dsts.append(morph_dst)
+        morphology_dirs[fmt] = format_dir
 
     # Copy mechanisms
     for file in downloaded_memodel.mechanism_files:
@@ -181,10 +189,6 @@ def _generate_sonata_files_from_memodel(
         template_name=template_name,
     )
 
-    morphology_dirs = {
-        MorphologyFormat(morph_dst.suffix.removeprefix(".")): morph_dst.parent
-        for morph_dst in morph_dsts
-    }
     output_file = output_path / DEFAULT_CIRCUIT_CONFIG_FILENAME
     create_circuit_config(
         output_file=output_file,
