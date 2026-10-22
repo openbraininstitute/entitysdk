@@ -114,6 +114,7 @@ class AssetLabel(StrEnum):
     node_stats = "node_stats"
     network_stats_a = "network_stats_a"
     network_stats_b = "network_stats_b"
+    circuit_morphology_pack = "circuit_morphology_pack"
     cell_surface_mesh = "cell_surface_mesh"
     jupyter_notebook = "jupyter_notebook"
     requirements = "requirements"
