@@ -190,7 +190,6 @@ class ContentType(StrEnum):
     image_webp = "image/webp"
     application_x_ipynb_json = "application/x-ipynb+json"
     application_zip = "application/zip"
-    application_vnd_obi_morphology_pack = "application/vnd.obi.morphology-pack"
     application_octet_stream = "application/octet-stream"
 
 
