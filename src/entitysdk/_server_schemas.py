@@ -260,6 +260,28 @@ class ElectrodeType(StrEnum):
 class EntityExpand(StrEnum):
     generated_from_derivations = "generated_from_derivations"
     used_by_derivations = "used_by_derivations"
+    generated_from_derivations_circuit_customization = (
+        "generated_from_derivations:circuit_customization"
+    )
+    generated_from_derivations_circuit_extraction = "generated_from_derivations:circuit_extraction"
+    generated_from_derivations_circuit_rewiring = "generated_from_derivations:circuit_rewiring"
+    generated_from_derivations_emodel_circuit = "generated_from_derivations:emodel_circuit"
+    generated_from_derivations_em_dense_reconstruction_dataset_cell_morphology = (
+        "generated_from_derivations:em_dense_reconstruction_dataset_cell_morphology"
+    )
+    generated_from_derivations_circuit_simplification = (
+        "generated_from_derivations:circuit_simplification"
+    )
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations_circuit_customization = "used_by_derivations:circuit_customization"
+    used_by_derivations_circuit_extraction = "used_by_derivations:circuit_extraction"
+    used_by_derivations_circuit_rewiring = "used_by_derivations:circuit_rewiring"
+    used_by_derivations_emodel_circuit = "used_by_derivations:emodel_circuit"
+    used_by_derivations_em_dense_reconstruction_dataset_cell_morphology = (
+        "used_by_derivations:em_dense_reconstruction_dataset_cell_morphology"
+    )
+    used_by_derivations_circuit_simplification = "used_by_derivations:circuit_simplification"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
 
 
 class EntityLifecycleStatus(StrEnum):
@@ -381,18 +403,6 @@ class ExecutorType(StrEnum):
     jupyter_notebook = "jupyter_notebook"
 
 
-class Expandable(StrEnum):
-    measurement_annotation = "measurement_annotation"
-    generated_from_derivations = "generated_from_derivations"
-    used_by_derivations = "used_by_derivations"
-
-
-class ExpandableAttribute(StrEnum):
-    measurement_annotation = "measurement_annotation"
-    generated_from_derivations = "generated_from_derivations"
-    used_by_derivations = "used_by_derivations"
-
-
 class ExternalSource(StrEnum):
     channelpedia = "channelpedia"
     modeldb = "modeldb"
@@ -402,6 +412,34 @@ class ExternalSource(StrEnum):
 class MeasurableEntity(StrEnum):
     cell_morphology = "cell_morphology"
     em_cell_mesh = "em_cell_mesh"
+
+
+class MeasurableEntityExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    used_by_derivations = "used_by_derivations"
+    generated_from_derivations_circuit_customization = (
+        "generated_from_derivations:circuit_customization"
+    )
+    generated_from_derivations_circuit_extraction = "generated_from_derivations:circuit_extraction"
+    generated_from_derivations_circuit_rewiring = "generated_from_derivations:circuit_rewiring"
+    generated_from_derivations_emodel_circuit = "generated_from_derivations:emodel_circuit"
+    generated_from_derivations_em_dense_reconstruction_dataset_cell_morphology = (
+        "generated_from_derivations:em_dense_reconstruction_dataset_cell_morphology"
+    )
+    generated_from_derivations_circuit_simplification = (
+        "generated_from_derivations:circuit_simplification"
+    )
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations_circuit_customization = "used_by_derivations:circuit_customization"
+    used_by_derivations_circuit_extraction = "used_by_derivations:circuit_extraction"
+    used_by_derivations_circuit_rewiring = "used_by_derivations:circuit_rewiring"
+    used_by_derivations_emodel_circuit = "used_by_derivations:emodel_circuit"
+    used_by_derivations_em_dense_reconstruction_dataset_cell_morphology = (
+        "used_by_derivations:em_dense_reconstruction_dataset_cell_morphology"
+    )
+    used_by_derivations_circuit_simplification = "used_by_derivations:circuit_simplification"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+    measurement_annotation = "measurement_annotation"
 
 
 class MeasurementStatistic(StrEnum):
