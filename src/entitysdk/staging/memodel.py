@@ -117,6 +117,7 @@ def stage_sonata_from_memodel(
             mtype=mtype,
             etype=etype,
             synapse_class=None,
+            morph_class=None,
             threshold_current=threshold_current,
             holding_current=holding_current,
         )
@@ -134,6 +135,7 @@ def _generate_sonata_files_from_memodel(
     mtype: str | None,
     etype: str | None,
     synapse_class: str | None,
+    morph_class: str | None,
     threshold_current: float,
     holding_current: float,
 ):
@@ -145,6 +147,7 @@ def _generate_sonata_files_from_memodel(
         mtype (str | None): Cell mtype. Stored as "N/A" if not available.
         etype (str | None): Cell etype. Stored as "N/A" if not available.
         synapse_class (str | None): Cell synapse class. Stored as "N/A" if not available.
+        morph_class (str | None): Cell morph class. Stored as "N/A" if not available.
         threshold_current (float): Threshold current.
         holding_current (float): Holding current.
     """
@@ -206,6 +209,7 @@ def _generate_sonata_files_from_memodel(
         mtype=mtype,
         etype=etype,
         synapse_class=synapse_class,
+        morph_class=morph_class,
         threshold_current=threshold_current,
         holding_current=holding_current,
         template_name=template_name,
@@ -235,6 +239,7 @@ def create_nodes_file(
     mtype: str | None = None,
     etype: str | None = None,
     synapse_class: str | None = None,
+    morph_class: str | None = None,
 ):
     """Create a SONATA nodes.h5 file for a single cell population.
 
@@ -248,6 +253,7 @@ def create_nodes_file(
         mtype (str | None): Cell mtype. Stored as "N/A" if not available.
         etype (str | None): Cell etype. Stored as "N/A" if not available.
         synapse_class (str | None): Cell synapse class. Stored as "N/A" if not available.
+        morph_class (str | None): Cell morph class. Stored as "N/A" if not available.
     """
     output_file = Path(output_file)  # ensure Path type
     output_file.parent.mkdir(parents=True, exist_ok=True)
@@ -266,14 +272,13 @@ def create_nodes_file(
         group_0.create_dataset("model_template", (1,), dtype=h5py.string_dtype())[0] = (
             f"hoc:{template_name}"
         )
-        group_0.create_dataset("model_type", (1,), dtype="int32")[0] = 0
-        group_0.create_dataset("morph_class", (1,), dtype="int32")[0] = 0
+        group_0.create_dataset("model_type", (1,), dtype=h5py.string_dtype())[0] = "biophysical"
         group_0.create_dataset("morphology", (1,), dtype=h5py.string_dtype())[0] = Path(
             morph_file
         ).stem
-        # mtype, etype and synapse_class are all required SONATA properties. When a value is
-        # not known (None), still create the dataset with UNKNOWN_PROPERTY_VALUE as a sentinel
-        # so that SONATA validation passes.
+        # mtype, etype, synapse_class and morph_class are all required SONATA properties. When a
+        # value is not known (None), still create the dataset with UNKNOWN_PROPERTY_VALUE as a
+        # sentinel so that SONATA validation passes.
         group_0.create_dataset("mtype", (1,), dtype=h5py.string_dtype())[0] = (
             mtype if mtype is not None else UNKNOWN_PROPERTY_VALUE
         )
@@ -282,6 +287,9 @@ def create_nodes_file(
         )
         group_0.create_dataset("synapse_class", (1,), dtype=h5py.string_dtype())[0] = (
             synapse_class if synapse_class is not None else UNKNOWN_PROPERTY_VALUE
+        )
+        group_0.create_dataset("morph_class", (1,), dtype=h5py.string_dtype())[0] = (
+            morph_class if morph_class is not None else UNKNOWN_PROPERTY_VALUE
         )
 
         # Coordinates and rotation

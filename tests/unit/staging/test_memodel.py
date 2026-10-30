@@ -144,6 +144,7 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
         mtype="L5_TTPC1",
         etype="cADpyr",
         synapse_class="EXC",
+        morph_class="PYR",
         threshold_current=0.2,
         holding_current=-0.1,
     )
@@ -170,9 +171,11 @@ def test_generate_sonata_files_from_memodel_creates_structure(tmp_path):
     with h5py.File(nodes_file, "r") as f:
         group = f["nodes"]["All"]["0"]
         assert group["model_template"][0].decode() == "hoc:TestCell"
+        assert group["model_type"][0].decode() == "biophysical"
         assert group["mtype"][0].decode() == "L5_TTPC1"
         assert group["etype"][0].decode() == "cADpyr"
         assert group["synapse_class"][0].decode() == "EXC"
+        assert group["morph_class"][0].decode() == "PYR"
         assert group["dynamics_params"]["holding_current"][0] == pytest.approx(-0.1)
         assert group["dynamics_params"]["threshold_current"][0] == pytest.approx(0.2)
 
@@ -204,6 +207,7 @@ def test_generate_sonata_files_from_memodel_swc_only_uses_morphologies_dir(tmp_p
         mtype="L5_TTPC1",
         etype="cADpyr",
         synapse_class=None,
+        morph_class=None,
         threshold_current=0.2,
         holding_current=-0.1,
     )
@@ -247,6 +251,7 @@ def test_generate_sonata_files_from_memodel_declares_every_staged_format(tmp_pat
         mtype="L5_TTPC1",
         etype="cADpyr",
         synapse_class=None,
+        morph_class=None,
         threshold_current=0.2,
         holding_current=-0.1,
     )
@@ -300,6 +305,7 @@ def test_generate_sonata_files_from_memodel_uppercase_extension(tmp_path, file_t
         mtype="L5_TTPC1",
         etype="cADpyr",
         synapse_class=None,
+        morph_class=None,
         threshold_current=0.2,
         holding_current=-0.1,
     )
@@ -346,6 +352,7 @@ def test_generate_sonata_files_from_memodel_flat_layout_uses_extension(tmp_path)
         mtype="L5_TTPC1",
         etype="cADpyr",
         synapse_class=None,
+        morph_class=None,
         threshold_current=0.2,
         holding_current=-0.1,
     )
@@ -382,6 +389,7 @@ def _stage_morphologies(tmp_path, relative_morph_paths):
         mtype="L5_TTPC1",
         etype="cADpyr",
         synapse_class=None,
+        morph_class=None,
         threshold_current=0.2,
         holding_current=-0.1,
     )
@@ -440,19 +448,21 @@ def test_create_nodes_file_stores_na_for_missing_classifications(tmp_path):
         mtype=None,
         etype=None,
         synapse_class=None,
+        morph_class=None,
         threshold_current=0.2,
         holding_current=-0.1,
         template_name="MyCell",
     )
 
-    # mtype, etype and synapse_class are required SONATA properties: when not available
-    # they must still be present, stored as the UNKNOWN_PROPERTY_VALUE sentinel.
+    # mtype, etype, synapse_class and morph_class are required SONATA properties: when not
+    # available they must still be present, stored as the UNKNOWN_PROPERTY_VALUE sentinel.
     sentinel = memodel_mod.UNKNOWN_PROPERTY_VALUE
     with h5py.File(output_file) as h5:
         group = h5["nodes/All/0"]
         assert group["mtype"][0].decode() == sentinel
         assert group["etype"][0].decode() == sentinel
         assert group["synapse_class"][0].decode() == sentinel
+        assert group["morph_class"][0].decode() == sentinel
 
 
 def test_create_json_configs(tmp_path):
@@ -521,6 +531,7 @@ def test_missing_hoc_file_raise(tmp_path):
             mtype="TestMType",
             etype="TestEType",
             synapse_class="TestSynClass",
+            morph_class="TestMorphClass",
             threshold_current=0.2,
             holding_current=-0.1,
         )
@@ -547,6 +558,7 @@ def test_missing_morphology_file_raises(tmp_path):
             mtype="TestMType",
             etype="TestEType",
             synapse_class="TestSynClass",
+            morph_class="TestMorphClass",
             threshold_current=0.2,
             holding_current=-0.1,
         )
@@ -570,6 +582,7 @@ def test_no_morphology_paths_raises(tmp_path):
             mtype="TestMType",
             etype="TestEType",
             synapse_class="TestSynClass",
+            morph_class="TestMorphClass",
             threshold_current=0.2,
             holding_current=-0.1,
         )
@@ -597,6 +610,7 @@ def test_mechanism_file_not_exists(tmp_path):
         mtype="TestMType",
         etype="TestEType",
         synapse_class="TestSynClass",
+        morph_class="TestMorphClass",
         threshold_current=0.2,
         holding_current=-0.1,
     )
