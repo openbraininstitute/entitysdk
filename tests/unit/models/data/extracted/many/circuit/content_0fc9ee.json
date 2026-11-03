@@ -110,7 +110,7 @@
         "parent_structure_id": null,
         "update_date": "2025-01-01T00:00:00Z"
       },
-      "build_category": "computational_model",
+      "build_category": "em_reconstruction",
       "contact_email": null,
       "contributions": [],
       "created_by": {
@@ -120,13 +120,13 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "circuit-description-2",
+      "description": "circuit-description-3",
       "experiment_date": null,
       "generated_from_derivations": null,
-      "has_electrical_cell_models": true,
-      "has_morphologies": true,
-      "has_point_neurons": true,
-      "has_spines": true,
+      "has_electrical_cell_models": false,
+      "has_morphologies": false,
+      "has_point_neurons": false,
+      "has_spines": false,
       "id": "00000000-0000-4000-8000-000001234678",
       "license": {
         "creation_date": "2025-01-01T00:00:00Z",
@@ -137,14 +137,14 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "lifecycle_status": "active",
-      "name": "circuit-2",
+      "name": "circuit-3",
       "notice_text": null,
-      "number_connections": 201,
-      "number_neurons": 21,
-      "number_synapses": 2001,
-      "published_in": "journal-2",
+      "number_connections": 301,
+      "number_neurons": 31,
+      "number_synapses": 3001,
+      "published_in": "journal-3",
       "root_circuit_id": "00000000-0000-4000-8000-000001234678",
-      "scale": "whole_brain",
+      "scale": "single",
       "subject": {
         "age_max": null,
         "age_min": null,
@@ -177,7 +177,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "target_simulator": "LearningEngine",
+      "target_simulator": "Brian2",
       "type": "circuit",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {

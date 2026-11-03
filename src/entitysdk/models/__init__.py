@@ -52,6 +52,7 @@ from entitysdk.models.memodel import MEModel
 from entitysdk.models.memodelcalibrationresult import MEModelCalibrationResult
 from entitysdk.models.mtype import MTypeClass
 from entitysdk.models.publication import Publication
+from entitysdk.models.research_log import ResearchLog
 from entitysdk.models.scientific_artifact_external_url_link import ScientificArtifactExternalUrlLink
 from entitysdk.models.scientific_artifact_publication_link import ScientificArtifactPublicationLink
 from entitysdk.models.simulatable_extracellular_recording_array import (
@@ -129,6 +130,7 @@ __all__ = [
     "Organization",
     "Person",
     "Publication",
+    "ResearchLog",
     "Role",
     "ScientificArtifactExternalUrlLink",
     "ScientificArtifactPublicationLink",

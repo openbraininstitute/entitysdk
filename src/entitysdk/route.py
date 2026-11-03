@@ -51,6 +51,7 @@ _ROUTES = {
     "Organization": "organization",
     "Person": "person",
     "Publication": "publication",
+    "ResearchLog": "research-log",
     "ScientificArtifactExternalUrlLink": "scientific-artifact-external-url-link",
     "ScientificArtifactPublicationLink": "scientific-artifact-publication-link",
     "SimulatableExtracellularRecordingArray": "simulatable-extracellular-recording-array",

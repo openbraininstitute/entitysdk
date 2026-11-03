@@ -17,7 +17,7 @@
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "analysis-notebook-template-d5744160",
+      "name": "analysis-notebook-template-7fe60484",
       "scale": "cellular",
       "specifications": {
         "docker": {
@@ -74,7 +74,7 @@
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "analysis-notebook-template-58f143c2",
+      "name": "analysis-notebook-template-b67d5967",
       "scale": "cellular",
       "specifications": {
         "docker": {
@@ -131,7 +131,7 @@
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "analysis-notebook-template-2893da18",
+      "name": "analysis-notebook-template-9445edfe",
       "scale": "cellular",
       "specifications": {
         "docker": {

@@ -5,13 +5,13 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym-2",
-        "annotation_value": 2,
+        "acronym": "acronym-0",
+        "annotation_value": 0,
         "color_hex_triplet": "FF0000",
         "creation_date": "2025-01-01T00:00:00Z",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region-2",
+        "name": "region-0",
         "parent_structure_id": null,
         "update_date": "2025-01-01T00:00:00Z"
       },
@@ -61,47 +61,47 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 553,
+          "id": 118,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 554,
+          "id": 119,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 2.45
         },
         {
-          "id": 555,
+          "id": 120,
           "name": "mean",
           "unit": "1/\u03bcm",
-          "value": 20.0
+          "value": 10.0
         },
         {
-          "id": 556,
+          "id": 121,
           "name": "standard_error",
           "unit": "1/\u03bcm",
-          "value": 2.0
+          "value": 1.0
         },
         {
-          "id": 557,
+          "id": 122,
           "name": "sample_size",
           "unit": "dimensionless",
-          "value": 200.0
+          "value": 100.0
         }
       ],
       "mtypes": [
         {
-          "alt_label": "m2",
+          "alt_label": "m0",
           "creation_date": "2025-01-01T00:00:00Z",
           "definition": "d",
           "id": "00000000-0000-4000-8000-000001234678",
-          "pref_label": "m2",
+          "pref_label": "m0",
           "update_date": "2025-01-01T00:00:00Z"
         }
       ],
-      "name": "d-1",
+      "name": "d-0",
       "subject": {
         "age_max": null,
         "age_min": null,
@@ -113,13 +113,13 @@
         "description": "my-description",
         "id": "00000000-0000-4000-8000-000001234678",
         "lifecycle_status": "active",
-        "name": "subject-2",
+        "name": "subject-0",
         "sex": "female",
         "species": {
           "creation_date": "2025-01-01T00:00:00Z",
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "species-2",
-          "taxonomy_id": "taxonomy-2",
+          "name": "species-0",
+          "taxonomy_id": "taxonomy-0",
           "update_date": "2025-01-01T00:00:00Z"
         },
         "strain": null,
@@ -196,31 +196,31 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 548,
+          "id": 123,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 549,
+          "id": 124,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 2.45
         },
         {
-          "id": 550,
+          "id": 125,
           "name": "mean",
           "unit": "1/\u03bcm",
           "value": 30.0
         },
         {
-          "id": 551,
+          "id": 126,
           "name": "standard_error",
           "unit": "1/\u03bcm",
           "value": 3.0
         },
         {
-          "id": 552,
+          "id": 127,
           "name": "sample_size",
           "unit": "dimensionless",
           "value": 300.0
@@ -277,13 +277,13 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym-4",
-        "annotation_value": 4,
+        "acronym": "acronym-2",
+        "annotation_value": 2,
         "color_hex_triplet": "FF0000",
         "creation_date": "2025-01-01T00:00:00Z",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region-4",
+        "name": "region-2",
         "parent_structure_id": null,
         "update_date": "2025-01-01T00:00:00Z"
       },
@@ -333,47 +333,47 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 563,
+          "id": 128,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 564,
+          "id": 129,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 2.45
         },
         {
-          "id": 565,
+          "id": 130,
           "name": "mean",
           "unit": "1/\u03bcm",
-          "value": 40.0
+          "value": 20.0
         },
         {
-          "id": 566,
+          "id": 131,
           "name": "standard_error",
           "unit": "1/\u03bcm",
-          "value": 4.0
+          "value": 2.0
         },
         {
-          "id": 567,
+          "id": 132,
           "name": "sample_size",
           "unit": "dimensionless",
-          "value": 400.0
+          "value": 200.0
         }
       ],
       "mtypes": [
         {
-          "alt_label": "m4",
+          "alt_label": "m2",
           "creation_date": "2025-01-01T00:00:00Z",
           "definition": "d",
           "id": "00000000-0000-4000-8000-000001234678",
-          "pref_label": "m4",
+          "pref_label": "m2",
           "update_date": "2025-01-01T00:00:00Z"
         }
       ],
-      "name": "d-2",
+      "name": "d-1",
       "subject": {
         "age_max": null,
         "age_min": null,
@@ -385,13 +385,13 @@
         "description": "my-description",
         "id": "00000000-0000-4000-8000-000001234678",
         "lifecycle_status": "active",
-        "name": "subject-4",
+        "name": "subject-2",
         "sex": "female",
         "species": {
           "creation_date": "2025-01-01T00:00:00Z",
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "species-1",
-          "taxonomy_id": "taxonomy-1",
+          "name": "species-2",
+          "taxonomy_id": "taxonomy-2",
           "update_date": "2025-01-01T00:00:00Z"
         },
         "strain": null,
@@ -414,13 +414,13 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "acronym-5",
-        "annotation_value": 5,
+        "acronym": "acronym-3",
+        "annotation_value": 3,
         "color_hex_triplet": "FF0000",
         "creation_date": "2025-01-01T00:00:00Z",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "region-5",
+        "name": "region-3",
         "parent_structure_id": null,
         "update_date": "2025-01-01T00:00:00Z"
       },
@@ -468,47 +468,47 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 568,
+          "id": 133,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 569,
+          "id": 134,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 2.45
         },
         {
-          "id": 570,
+          "id": 135,
           "name": "mean",
           "unit": "1/\u03bcm",
-          "value": 60.0
+          "value": 50.0
         },
         {
-          "id": 571,
+          "id": 136,
           "name": "standard_error",
           "unit": "1/\u03bcm",
-          "value": 6.0
+          "value": 5.0
         },
         {
-          "id": 572,
+          "id": 137,
           "name": "sample_size",
           "unit": "dimensionless",
-          "value": 600.0
+          "value": 500.0
         }
       ],
       "mtypes": [
         {
-          "alt_label": "m5",
+          "alt_label": "m3",
           "creation_date": "2025-01-01T00:00:00Z",
           "definition": "d",
           "id": "00000000-0000-4000-8000-000001234678",
-          "pref_label": "m5",
+          "pref_label": "m3",
           "update_date": "2025-01-01T00:00:00Z"
         }
       ],
-      "name": "d-2",
+      "name": "d-1",
       "subject": {
         "age_max": null,
         "age_min": null,
@@ -520,13 +520,13 @@
         "description": "my-description",
         "id": "00000000-0000-4000-8000-000001234678",
         "lifecycle_status": "active",
-        "name": "subject-5",
+        "name": "subject-3",
         "sex": "female",
         "species": {
           "creation_date": "2025-01-01T00:00:00Z",
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "species-2",
-          "taxonomy_id": "taxonomy-2",
+          "name": "species-0",
+          "taxonomy_id": "taxonomy-0",
           "update_date": "2025-01-01T00:00:00Z"
         },
         "strain": null,

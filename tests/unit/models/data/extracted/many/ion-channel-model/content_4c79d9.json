@@ -77,7 +77,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "temperature_celsius": 0,
+      "temperature_celsius": 0.0,
       "type": "ion_channel_model",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -165,7 +165,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "temperature_celsius": 0,
+      "temperature_celsius": 0.0,
       "type": "ion_channel_model",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -253,7 +253,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "temperature_celsius": 0,
+      "temperature_celsius": 0.0,
       "type": "ion_channel_model",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -341,7 +341,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "temperature_celsius": 0,
+      "temperature_celsius": 0.0,
       "type": "ion_channel_model",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -429,7 +429,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "temperature_celsius": 0,
+      "temperature_celsius": 0.0,
       "type": "ion_channel_model",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -517,7 +517,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "temperature_celsius": 0,
+      "temperature_celsius": 0.0,
       "type": "ion_channel_model",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -605,7 +605,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "temperature_celsius": 0,
+      "temperature_celsius": 0.0,
       "type": "ion_channel_model",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -693,7 +693,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "temperature_celsius": 0,
+      "temperature_celsius": 0.0,
       "type": "ion_channel_model",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -781,7 +781,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "temperature_celsius": 0,
+      "temperature_celsius": 0.0,
       "type": "ion_channel_model",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -869,7 +869,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "temperature_celsius": 0,
+      "temperature_celsius": 0.0,
       "type": "ion_channel_model",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -957,7 +957,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "temperature_celsius": 0,
+      "temperature_celsius": 0.0,
       "type": "ion_channel_model",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -1045,7 +1045,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "temperature_celsius": 0,
+      "temperature_celsius": 0.0,
       "type": "ion_channel_model",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -1133,7 +1133,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "temperature_celsius": 0,
+      "temperature_celsius": 0.0,
       "type": "ion_channel_model",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -1221,7 +1221,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "temperature_celsius": 0,
+      "temperature_celsius": 0.0,
       "type": "ion_channel_model",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -1309,7 +1309,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "temperature_celsius": 0,
+      "temperature_celsius": 0.0,
       "type": "ion_channel_model",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -1397,7 +1397,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "temperature_celsius": 0,
+      "temperature_celsius": 0.0,
       "type": "ion_channel_model",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -1485,7 +1485,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "temperature_celsius": 0,
+      "temperature_celsius": 0.0,
       "type": "ion_channel_model",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {

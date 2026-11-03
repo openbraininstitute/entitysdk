@@ -6,20 +6,20 @@
       "age_period": "postnatal",
       "age_value": 1209600.0,
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "contributions": [],
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
+        "pref_label": "Regular User With Different Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "description-2",
+      "description": "my-description",
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "name-2",
+      "name": "my-subject-652d854a",
       "sex": "female",
       "species": {
         "creation_date": "2025-01-01T00:00:00Z",
@@ -41,7 +41,7 @@
       "updated_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
+        "pref_label": "Regular User With Different Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "used_by_derivations": null,
@@ -53,7 +53,7 @@
       "age_period": "postnatal",
       "age_value": 1209600.0,
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "contributions": [],
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
@@ -62,11 +62,11 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "description-1",
+      "description": "my-description",
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "name-1",
+      "name": "my-subject-76bd812d",
       "sex": "female",
       "species": {
         "creation_date": "2025-01-01T00:00:00Z",
@@ -98,7 +98,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 2,
-    "total_items": 3
+    "page_size": 30,
+    "total_items": 2
   }
 }

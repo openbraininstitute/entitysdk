@@ -200,10 +200,11 @@ def test_update_one(client, httpx_mock, model, json_data, model_info):
 
 
 def test_read_many(client, httpx_mock, many_info, many_json_data):
-    # overwrite page and total_items so that only a single request is made
+    # overwrite page and total_items so that only a single request is made,
+    # also when the extracted payload is a page other than the first one
     pagination = many_json_data["pagination"]
     pagination["page"] = 1
-    pagination["total_items"] = min(pagination["total_items"], pagination["page_size"])
+    pagination["total_items"] = len(many_json_data["data"])
     httpx_mock.add_response(method="GET", json=many_json_data)
 
     entity_list = list(client.search_entity(entity_type=many_info.cls))

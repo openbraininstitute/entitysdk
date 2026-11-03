@@ -71,13 +71,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 670,
+          "id": 245,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 671,
+          "id": 246,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 2.45
@@ -198,13 +198,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 676,
+          "id": 251,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 677,
+          "id": 252,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 2.45
@@ -327,13 +327,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 674,
+          "id": 249,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 675,
+          "id": 250,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 2.45
@@ -454,13 +454,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 672,
+          "id": 247,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 673,
+          "id": 248,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 2.45
@@ -581,13 +581,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 680,
+          "id": 255,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 681,
+          "id": 256,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 2.45
@@ -710,13 +710,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 678,
+          "id": 253,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 679,
+          "id": 254,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 2.45
