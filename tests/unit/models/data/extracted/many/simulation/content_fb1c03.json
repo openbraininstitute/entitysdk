@@ -17,42 +17,7 @@
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "simulation-c847207e",
-      "number_neurons": 10,
-      "recording_arrays": [],
-      "scan_parameters": {
-        "foo1": "bar1",
-        "foo2": "bar2"
-      },
-      "simulation_campaign_id": "00000000-0000-4000-8000-000001234678",
-      "type": "simulation",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "creation_date": "2025-01-01T00:00:00Z",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "used_by_derivations": null
-    },
-    {
-      "assets": [],
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
-      "contributions": [],
-      "created_by": {
-        "creation_date": "2025-01-01T00:00:00Z",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "description": "simulation-description",
-      "entity_id": "00000000-0000-4000-8000-000001234678",
-      "generated_from_derivations": null,
-      "id": "00000000-0000-4000-8000-000001234678",
-      "lifecycle_status": "active",
-      "name": "simulation-d04a07c1",
+      "name": "simulation-45560515",
       "number_neurons": 10,
       "recording_arrays": [],
       "scan_parameters": {
@@ -87,7 +52,42 @@
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "simulation-25e797a2",
+      "name": "simulation-5de8ccc1",
+      "number_neurons": 10,
+      "recording_arrays": [],
+      "scan_parameters": {
+        "foo1": "bar1",
+        "foo2": "bar2"
+      },
+      "simulation_campaign_id": "00000000-0000-4000-8000-000001234678",
+      "type": "simulation",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "used_by_derivations": null
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "contributions": [],
+      "created_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "simulation-description",
+      "entity_id": "00000000-0000-4000-8000-000001234678",
+      "generated_from_derivations": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "lifecycle_status": "active",
+      "name": "simulation-a1ac12a6",
       "number_neurons": 10,
       "recording_arrays": [],
       "scan_parameters": {

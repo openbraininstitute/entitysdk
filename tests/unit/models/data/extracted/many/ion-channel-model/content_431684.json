@@ -35,7 +35,7 @@
       "license": null,
       "lifecycle_status": "active",
       "max_permeability_name": null,
-      "name": "test_icm-db3788e5",
+      "name": "test_icm-f4f7467d",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
@@ -77,7 +77,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "temperature_celsius": 0,
+      "temperature_celsius": 0.0,
       "type": "ion_channel_model",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -123,7 +123,7 @@
       "license": null,
       "lifecycle_status": "active",
       "max_permeability_name": null,
-      "name": "test_icm-66d81297",
+      "name": "test_icm-0dd9d9da",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
@@ -165,7 +165,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "temperature_celsius": 0,
+      "temperature_celsius": 0.0,
       "type": "ion_channel_model",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
@@ -211,7 +211,7 @@
       "license": null,
       "lifecycle_status": "active",
       "max_permeability_name": null,
-      "name": "test_icm-45d86f46",
+      "name": "test_icm-f12e9647",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
@@ -253,7 +253,7 @@
         "update_date": "2025-01-01T00:00:00Z",
         "weight": 1.5
       },
-      "temperature_celsius": 0,
+      "temperature_celsius": 0.0,
       "type": "ion_channel_model",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {

@@ -20,7 +20,40 @@
       "meta": {
         "foo": "bar"
       },
-      "name": "task-config-f69875c2",
+      "name": "task-config-7d2dfeb1",
+      "task_config_generator_id": null,
+      "task_config_type": "skeletonization__config",
+      "type": "task_config",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "Regular User With Different Project Id",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "used_by_derivations": null
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": false,
+      "contributions": [],
+      "created_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "Regular User With Different Project Id",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "task-config-description",
+      "generated_from_derivations": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "inputs": [],
+      "lifecycle_status": "active",
+      "meta": {
+        "foo": "bar"
+      },
+      "name": "task-config-55361148",
       "task_config_generator_id": null,
       "task_config_type": "skeletonization__config",
       "type": "task_config",
@@ -53,40 +86,7 @@
       "meta": {
         "foo": "bar"
       },
-      "name": "task-config-393f1cc9",
-      "task_config_generator_id": null,
-      "task_config_type": "skeletonization__config",
-      "type": "task_config",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "creation_date": "2025-01-01T00:00:00Z",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Project Id",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "used_by_derivations": null
-    },
-    {
-      "assets": [],
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
-      "contributions": [],
-      "created_by": {
-        "creation_date": "2025-01-01T00:00:00Z",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Project Id",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "description": "task-config-description",
-      "generated_from_derivations": null,
-      "id": "00000000-0000-4000-8000-000001234678",
-      "inputs": [],
-      "lifecycle_status": "active",
-      "meta": {
-        "foo": "bar"
-      },
-      "name": "task-config-9324c16f",
+      "name": "task-config-a745ab72",
       "task_config_generator_id": null,
       "task_config_type": "skeletonization__config",
       "type": "task_config",

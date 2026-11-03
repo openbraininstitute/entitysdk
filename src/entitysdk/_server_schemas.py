@@ -133,6 +133,9 @@ class AssetLabel(StrEnum):
     efeature_extraction_cells = "efeature_extraction_cells"
     efeature_extraction_protocols = "efeature_extraction_protocols"
     current_report = "current_report"
+    research_log_document = "research_log_document"
+    research_log_files = "research_log_files"
+    recording_summary = "recording_summary"
 
 
 class AssetStatus(StrEnum):
@@ -190,6 +193,7 @@ class ContentType(StrEnum):
     image_webp = "image/webp"
     application_x_ipynb_json = "application/x-ipynb+json"
     application_zip = "application/zip"
+    text_markdown = "text/markdown"
     application_octet_stream = "application/octet-stream"
 
 
@@ -202,6 +206,8 @@ class DerivationType(StrEnum):
         "em_dense_reconstruction_dataset_cell_morphology"
     )
     circuit_simplification = "circuit_simplification"
+    research_log_input = "research_log_input"
+    research_log_output = "research_log_output"
     unspecified = "unspecified"
 
 
@@ -272,6 +278,10 @@ class EntityExpand(StrEnum):
     generated_from_derivations_circuit_simplification = (
         "generated_from_derivations:circuit_simplification"
     )
+    generated_from_derivations_research_log_input = "generated_from_derivations:research_log_input"
+    generated_from_derivations_research_log_output = (
+        "generated_from_derivations:research_log_output"
+    )
     generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
     used_by_derivations_circuit_customization = "used_by_derivations:circuit_customization"
     used_by_derivations_circuit_extraction = "used_by_derivations:circuit_extraction"
@@ -281,6 +291,8 @@ class EntityExpand(StrEnum):
         "used_by_derivations:em_dense_reconstruction_dataset_cell_morphology"
     )
     used_by_derivations_circuit_simplification = "used_by_derivations:circuit_simplification"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
     used_by_derivations_unspecified = "used_by_derivations:unspecified"
 
 
@@ -328,6 +340,7 @@ class EntityRoute(StrEnum):
     skeletonization_config = "skeletonization-config"
     skeletonization_campaign = "skeletonization-campaign"
     task_config = "task-config"
+    research_log = "research-log"
 
 
 class EntityType(StrEnum):
@@ -372,6 +385,7 @@ class EntityType(StrEnum):
     skeletonization_config = "skeletonization_config"
     skeletonization_campaign = "skeletonization_campaign"
     task_config = "task_config"
+    research_log = "research_log"
 
 
 class EntityTypeWithBrainRegion(StrEnum):
@@ -429,6 +443,10 @@ class MeasurableEntityExpand(StrEnum):
     generated_from_derivations_circuit_simplification = (
         "generated_from_derivations:circuit_simplification"
     )
+    generated_from_derivations_research_log_input = "generated_from_derivations:research_log_input"
+    generated_from_derivations_research_log_output = (
+        "generated_from_derivations:research_log_output"
+    )
     generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
     used_by_derivations_circuit_customization = "used_by_derivations:circuit_customization"
     used_by_derivations_circuit_extraction = "used_by_derivations:circuit_extraction"
@@ -438,6 +456,8 @@ class MeasurableEntityExpand(StrEnum):
         "used_by_derivations:em_dense_reconstruction_dataset_cell_morphology"
     )
     used_by_derivations_circuit_simplification = "used_by_derivations:circuit_simplification"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
     used_by_derivations_unspecified = "used_by_derivations:unspecified"
     measurement_annotation = "measurement_annotation"
 

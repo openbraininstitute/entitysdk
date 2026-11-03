@@ -37,13 +37,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 817,
+          "id": 392,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 818,
+          "id": 393,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
@@ -167,13 +167,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 815,
+          "id": 390,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 816,
+          "id": 391,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
@@ -297,13 +297,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 813,
+          "id": 388,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 814,
+          "id": 389,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
@@ -427,13 +427,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 811,
+          "id": 386,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 812,
+          "id": 387,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
@@ -557,13 +557,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 809,
+          "id": 384,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 810,
+          "id": 385,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
@@ -687,13 +687,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 807,
+          "id": 382,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 808,
+          "id": 383,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
@@ -817,13 +817,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 805,
+          "id": 380,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 806,
+          "id": 381,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
@@ -947,13 +947,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 803,
+          "id": 378,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 804,
+          "id": 379,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
@@ -1077,13 +1077,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 801,
+          "id": 376,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 802,
+          "id": 377,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
@@ -1207,13 +1207,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 799,
+          "id": 374,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 800,
+          "id": 375,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
@@ -1337,13 +1337,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 797,
+          "id": 372,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 798,
+          "id": 373,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
@@ -1467,13 +1467,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 795,
+          "id": 370,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 796,
+          "id": 371,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
@@ -1597,13 +1597,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 793,
+          "id": 368,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 794,
+          "id": 369,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
@@ -1727,13 +1727,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 791,
+          "id": 366,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 792,
+          "id": 367,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
@@ -1857,13 +1857,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 789,
+          "id": 364,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 790,
+          "id": 365,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
@@ -1987,13 +1987,13 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 787,
+          "id": 362,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 788,
+          "id": 363,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
