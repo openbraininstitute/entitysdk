@@ -11,6 +11,7 @@ from entitysdk.config import settings
 from entitysdk.exception import EntitySDKError
 from entitysdk.models.response import ListResponse
 from entitysdk.token_manager import TokenManager
+from entitysdk.utils.execution import execute_with_retry
 
 # httpx2 is imported only in this module. Other code should use these aliases so we can
 # swap or upgrade the HTTP client library in one place without touching the rest of the codebase.
@@ -26,6 +27,12 @@ RemoteProtocolError = httpx2.RemoteProtocolError
 RequestError = httpx2.RequestError
 HTTPStatusError = httpx2.HTTPStatusError
 WriteTimeout = httpx2.WriteTimeout
+
+# Errors raised before the request is sent to the server. Retrying them is safe for any HTTP
+# method, including non-idempotent POSTs, because the server never saw the request.
+CONNECTION_PHASE_EXCEPTIONS = (ConnectError, ConnectTimeout, PoolTimeout)
+CONNECTION_MAX_ATTEMPTS = 3
+CONNECTION_BACKOFF_BASE = 1.0
 
 
 def make_db_api_request(
@@ -53,21 +60,26 @@ def make_db_api_request(
             headers["virtual-lab-id"] = str(vlab_id)
 
     try:
-        response = http_client.request(
-            method=method,
-            url=url,
-            headers=headers,
-            json=json,
-            files=files,
-            data=data,
-            params=parameters,
-            follow_redirects=True,
-            timeout=HTTPTimeout(
-                connect=settings.connect_timeout,
-                read=settings.read_timeout,
-                write=settings.write_timeout,
-                pool=settings.pool_timeout,
+        response = execute_with_retry(
+            lambda: http_client.request(
+                method=method,
+                url=url,
+                headers=headers,
+                json=json,
+                files=files,
+                data=data,
+                params=parameters,
+                follow_redirects=True,
+                timeout=HTTPTimeout(
+                    connect=settings.connect_timeout,
+                    read=settings.read_timeout,
+                    write=settings.write_timeout,
+                    pool=settings.pool_timeout,
+                ),
             ),
+            max_attempts=CONNECTION_MAX_ATTEMPTS,
+            backoff_base=CONNECTION_BACKOFF_BASE,
+            retry_on=CONNECTION_PHASE_EXCEPTIONS,
         )
     except RequestError as e:
         raise EntitySDKError(f"Request error: {e}") from e

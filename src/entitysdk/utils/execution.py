@@ -10,7 +10,7 @@ T = TypeVar("T")  # Generic return type
 def execute_with_retry(
     fn: Callable[[], T],
     *,
-    max_retries: int = 3,
+    max_attempts: int = 3,
     backoff_base: float = 0.5,
     retry_on: tuple[type[BaseException], ...] = (Exception,),
 ) -> T:
@@ -18,7 +18,7 @@ def execute_with_retry(
 
     Args:
         fn: Callable with no arguments returning any type T.
-        max_retries: Maximum number of attempts (>=0).
+        max_attempts: Total number of attempts, including the first one (>=1).
         backoff_base: Base delay in seconds for exponential backoff.
         retry_on: Types of exceptions to retry.
 
@@ -28,17 +28,18 @@ def execute_with_retry(
     Raises:
         The last exception if all retries fail.
     """
-    if max_retries < 0:
-        raise ValueError("max_retries must be >= 0")
+    if max_attempts < 1:
+        raise ValueError("max_attempts must be >= 1")
     last_exception: BaseException | None = None
 
-    for attempt in range(1, max_retries + 1):
+    for attempt in range(1, max_attempts + 1):
         try:
             return fn()
         except retry_on as exc:
             last_exception = exc
-            delay = backoff_base * (2 ** (attempt - 1))
-            time.sleep(delay)
+            if attempt < max_attempts:
+                delay = backoff_base * (2 ** (attempt - 1))
+                time.sleep(delay)
 
     assert last_exception is not None
     raise last_exception
