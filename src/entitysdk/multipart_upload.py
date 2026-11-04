@@ -29,12 +29,16 @@ from entitysdk.utils.execution import execute_with_retry
 from entitysdk.utils.filesystem import get_filesize
 from entitysdk.utils.http import (
     ConnectError,
+    ConnectTimeout,
     HTTPClient,
     HTTPStatusError,
     HTTPTimeout,
+    PoolTimeout,
+    ReadError,
     ReadTimeout,
     RemoteProtocolError,
     RequestError,
+    WriteError,
     WriteTimeout,
     make_db_api_request,
 )
@@ -43,14 +47,18 @@ from entitysdk.utils.io import calculate_sha256_digest, iter_bytes_chunk
 L = logging.getLogger(__name__)
 
 
-MAX_RETRIES = 3
-BACKOFF_BASE = 0.25
-TIMEOUT = HTTPTimeout(connect=5.0, read=120.0, write=120.0, pool=10.0)
+MAX_RETRIES = 6
+BACKOFF_BASE = 1.0
+TIMEOUT = HTTPTimeout(connect=15.0, read=120.0, write=120.0, pool=10.0)
 DEFAULT_THREAD_COUNT = 10
 RETRIABLE_EXCEPTIONS = (
     ConnectError,  # network down, DNS failure, etc.
+    ConnectTimeout,  # connection/TLS handshake timed out (not a ConnectError subclass)
+    PoolTimeout,  # no free connection in the pool in time
     ReadTimeout,  # server took too long to respond
     WriteTimeout,  # slow upload
+    ReadError,  # connection reset while reading
+    WriteError,  # connection reset while writing
     RemoteProtocolError,  # low-level network glitch
 )
 STREAM_DATA_BUFFER_SIZE = 256 * 1024

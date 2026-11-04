@@ -17,6 +17,10 @@ from entitysdk.token_manager import TokenManager
 HTTPClient = httpx2.Client
 HTTPTimeout = httpx2.Timeout
 ConnectError = httpx2.ConnectError
+ConnectTimeout = httpx2.ConnectTimeout
+PoolTimeout = httpx2.PoolTimeout
+ReadError = httpx2.ReadError
+WriteError = httpx2.WriteError
 ReadTimeout = httpx2.ReadTimeout
 RemoteProtocolError = httpx2.RemoteProtocolError
 RequestError = httpx2.RequestError
