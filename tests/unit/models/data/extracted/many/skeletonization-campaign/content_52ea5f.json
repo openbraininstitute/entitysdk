@@ -8,16 +8,16 @@
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Project Id",
+        "pref_label": "Regular User With Different Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "description-2",
+      "description": "my-skeletonization-campaign",
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "input_meshes": [],
       "lifecycle_status": "active",
-      "name": "name-2",
+      "name": "Private u2/0",
       "scan_parameters": {
         "foo": "bar"
       },
@@ -27,7 +27,7 @@
       "updated_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Project Id",
+        "pref_label": "Regular User With Different Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "used_by_derivations": null
@@ -35,21 +35,21 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "contributions": [],
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Project Id",
+        "pref_label": "Regular User With Different Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "description-1",
+      "description": "my-skeletonization-campaign",
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "input_meshes": [],
       "lifecycle_status": "active",
-      "name": "name-1",
+      "name": "Public u2/0",
       "scan_parameters": {
         "foo": "bar"
       },
@@ -59,7 +59,7 @@
       "updated_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Project Id",
+        "pref_label": "Regular User With Different Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "used_by_derivations": null
@@ -68,7 +68,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 2,
-    "total_items": 3
+    "page_size": 30,
+    "total_items": 2
   }
 }

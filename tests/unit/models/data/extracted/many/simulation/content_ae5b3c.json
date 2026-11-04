@@ -17,7 +17,7 @@
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "simulation-45560515",
+      "name": "Public u2/0",
       "number_neurons": 10,
       "recording_arrays": [],
       "scan_parameters": {
@@ -52,7 +52,7 @@
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "simulation-5de8ccc1",
+      "name": "Public u1/0",
       "number_neurons": 10,
       "recording_arrays": [],
       "scan_parameters": {

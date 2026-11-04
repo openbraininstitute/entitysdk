@@ -3,39 +3,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
-      "contributions": [],
-      "created_by": {
-        "creation_date": "2025-01-01T00:00:00Z",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "description": "my-skeletonization-campaign",
-      "generated_from_derivations": null,
-      "id": "00000000-0000-4000-8000-000001234678",
-      "input_meshes": [],
-      "lifecycle_status": "active",
-      "name": "skeletonization-campaign-f70c6874",
-      "scan_parameters": {
-        "foo": "bar"
-      },
-      "skeletonization_configs": [],
-      "type": "skeletonization_campaign",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "creation_date": "2025-01-01T00:00:00Z",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "used_by_derivations": null
-    },
-    {
-      "assets": [],
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "contributions": [],
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
@@ -49,7 +17,7 @@
       "id": "00000000-0000-4000-8000-000001234678",
       "input_meshes": [],
       "lifecycle_status": "active",
-      "name": "skeletonization-campaign-8d5ae007",
+      "name": "Private u1/1",
       "scan_parameters": {
         "foo": "bar"
       },
@@ -81,7 +49,39 @@
       "id": "00000000-0000-4000-8000-000001234678",
       "input_meshes": [],
       "lifecycle_status": "active",
-      "name": "skeletonization-campaign-5d972b17",
+      "name": "Private u1/0",
+      "scan_parameters": {
+        "foo": "bar"
+      },
+      "skeletonization_configs": [],
+      "type": "skeletonization_campaign",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "Regular User With Project Id",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "used_by_derivations": null
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": true,
+      "contributions": [],
+      "created_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "Regular User With Project Id",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "my-skeletonization-campaign",
+      "generated_from_derivations": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "input_meshes": [],
+      "lifecycle_status": "active",
+      "name": "Public u1/0",
       "scan_parameters": {
         "foo": "bar"
       },

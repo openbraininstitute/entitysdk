@@ -47,7 +47,7 @@
         "z": 30.0
       },
       "mtypes": [],
-      "name": "TestMorphologyName1",
+      "name": "TestMorphologyName2",
       "notice_text": null,
       "published_in": null,
       "repair_pipeline_state": null,
@@ -59,24 +59,24 @@
         "authorized_project_id": "00000000-0000-4000-8000-000001234678",
         "authorized_public": false,
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "my-description-1",
+        "description": "my-description-2",
         "id": "00000000-0000-4000-8000-000001234678",
         "lifecycle_status": "active",
-        "name": "subject-1",
+        "name": "subject-2",
         "sex": "male",
         "species": {
           "creation_date": "2025-01-01T00:00:00Z",
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "TestSpecies0",
-          "taxonomy_id": "0",
+          "name": "TestSpecies1",
+          "taxonomy_id": "1",
           "update_date": "2025-01-01T00:00:00Z"
         },
         "strain": {
           "creation_date": "2025-01-01T00:00:00Z",
           "id": "00000000-0000-4000-8000-000001234678",
-          "name": "Strain0",
+          "name": "Strain1",
           "species_id": "00000000-0000-4000-8000-000001234678",
-          "taxonomy_id": "strain0",
+          "taxonomy_id": "strain1",
           "update_date": "2025-01-01T00:00:00Z"
         },
         "type": "subject",
@@ -96,7 +96,7 @@
   ],
   "facets": null,
   "pagination": {
-    "page": 2,
+    "page": 1,
     "page_size": 1,
     "total_items": 3
   }

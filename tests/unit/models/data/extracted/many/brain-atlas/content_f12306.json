@@ -3,12 +3,12 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "contributions": [],
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
+        "pref_label": "Regular User With Different Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
@@ -17,7 +17,7 @@
       "hierarchy_id": "00000000-0000-4000-8000-000001234678",
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "Private u1/0",
+      "name": "test brain atlas-423ceb14",
       "species": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
@@ -31,7 +31,7 @@
       "updated_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
+        "pref_label": "Regular User With Different Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "used_by_derivations": null
@@ -44,7 +44,7 @@
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
+        "pref_label": "Regular User With Different Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
@@ -53,7 +53,7 @@
       "hierarchy_id": "00000000-0000-4000-8000-000001234678",
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "Private u1/1",
+      "name": "test brain atlas-66a65053",
       "species": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
@@ -67,7 +67,7 @@
       "updated_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
+        "pref_label": "Regular User With Different Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "used_by_derivations": null
@@ -89,7 +89,7 @@
       "hierarchy_id": "00000000-0000-4000-8000-000001234678",
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "Public u1/0",
+      "name": "test brain atlas-7cefcc81",
       "species": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",

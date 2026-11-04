@@ -3,7 +3,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -24,8 +24,8 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "dense_reconstruction_cell_id": 9223372036854775807,
-      "description": "mesh-description",
+      "dense_reconstruction_cell_id": 2,
+      "description": "desc-2",
       "em_dense_reconstruction_dataset": {
         "id": "00000000-0000-4000-8000-000001234678",
         "type": "em_dense_reconstruction_dataset"
@@ -35,15 +35,15 @@
       "generation_method": "marching_cubes",
       "generation_parameters": null,
       "id": "00000000-0000-4000-8000-000001234678",
-      "level_of_detail": 10,
+      "level_of_detail": 2,
       "license": null,
       "lifecycle_status": "active",
       "mesh_type": "static",
       "mtypes": [],
-      "name": "Public u1/0",
+      "name": "mesh-2",
       "notice_text": null,
       "published_in": null,
-      "release_version": 1,
+      "release_version": 2,
       "subject": {
         "age_max": null,
         "age_min": null,

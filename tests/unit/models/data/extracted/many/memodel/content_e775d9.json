@@ -18,14 +18,12 @@
       "contributions": [
         {
           "agent": {
+            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
-            "family_name": "family name 1",
-            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "orcid": null,
-            "pref_label": "test_person_1",
-            "sub_id": null,
-            "type": "person",
+            "pref_label": "test_organization_1",
+            "ror_id": null,
+            "type": "organization",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -41,12 +39,14 @@
         },
         {
           "agent": {
-            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
+            "family_name": "family name 1",
+            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "pref_label": "test_organization_1",
-            "ror_id": null,
-            "type": "organization",
+            "orcid": null,
+            "pref_label": "test_person_1",
+            "sub_id": null,
+            "type": "person",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -280,14 +280,12 @@
       "contributions": [
         {
           "agent": {
+            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
-            "family_name": "family name 1",
-            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "orcid": null,
-            "pref_label": "test_person_1",
-            "sub_id": null,
-            "type": "person",
+            "pref_label": "test_organization_1",
+            "ror_id": null,
+            "type": "organization",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -303,12 +301,14 @@
         },
         {
           "agent": {
-            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
+            "family_name": "family name 1",
+            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "pref_label": "test_organization_1",
-            "ror_id": null,
-            "type": "organization",
+            "orcid": null,
+            "pref_label": "test_person_1",
+            "sub_id": null,
+            "type": "person",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -542,14 +542,12 @@
       "contributions": [
         {
           "agent": {
+            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
-            "family_name": "family name 1",
-            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "orcid": null,
-            "pref_label": "test_person_1",
-            "sub_id": null,
-            "type": "person",
+            "pref_label": "test_organization_1",
+            "ror_id": null,
+            "type": "organization",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -565,12 +563,14 @@
         },
         {
           "agent": {
-            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
+            "family_name": "family name 1",
+            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "pref_label": "test_organization_1",
-            "ror_id": null,
-            "type": "organization",
+            "orcid": null,
+            "pref_label": "test_person_1",
+            "sub_id": null,
+            "type": "person",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -804,14 +804,12 @@
       "contributions": [
         {
           "agent": {
+            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
-            "family_name": "family name 1",
-            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "orcid": null,
-            "pref_label": "test_person_1",
-            "sub_id": null,
-            "type": "person",
+            "pref_label": "test_organization_1",
+            "ror_id": null,
+            "type": "organization",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -827,12 +825,14 @@
         },
         {
           "agent": {
-            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
+            "family_name": "family name 1",
+            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "pref_label": "test_organization_1",
-            "ror_id": null,
-            "type": "organization",
+            "orcid": null,
+            "pref_label": "test_person_1",
+            "sub_id": null,
+            "type": "person",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -1066,14 +1066,12 @@
       "contributions": [
         {
           "agent": {
+            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
-            "family_name": "family name 1",
-            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "orcid": null,
-            "pref_label": "test_person_1",
-            "sub_id": null,
-            "type": "person",
+            "pref_label": "test_organization_1",
+            "ror_id": null,
+            "type": "organization",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -1089,12 +1087,14 @@
         },
         {
           "agent": {
-            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
+            "family_name": "family name 1",
+            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "pref_label": "test_organization_1",
-            "ror_id": null,
-            "type": "organization",
+            "orcid": null,
+            "pref_label": "test_person_1",
+            "sub_id": null,
+            "type": "person",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -1328,14 +1328,12 @@
       "contributions": [
         {
           "agent": {
+            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
-            "family_name": "family name 1",
-            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "orcid": null,
-            "pref_label": "test_person_1",
-            "sub_id": null,
-            "type": "person",
+            "pref_label": "test_organization_1",
+            "ror_id": null,
+            "type": "organization",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -1351,12 +1349,14 @@
         },
         {
           "agent": {
-            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
+            "family_name": "family name 1",
+            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "pref_label": "test_organization_1",
-            "ror_id": null,
-            "type": "organization",
+            "orcid": null,
+            "pref_label": "test_person_1",
+            "sub_id": null,
+            "type": "person",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -1590,14 +1590,12 @@
       "contributions": [
         {
           "agent": {
+            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
-            "family_name": "family name 1",
-            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "orcid": null,
-            "pref_label": "test_person_1",
-            "sub_id": null,
-            "type": "person",
+            "pref_label": "test_organization_1",
+            "ror_id": null,
+            "type": "organization",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -1613,12 +1611,14 @@
         },
         {
           "agent": {
-            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
+            "family_name": "family name 1",
+            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "pref_label": "test_organization_1",
-            "ror_id": null,
-            "type": "organization",
+            "orcid": null,
+            "pref_label": "test_person_1",
+            "sub_id": null,
+            "type": "person",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -1852,14 +1852,12 @@
       "contributions": [
         {
           "agent": {
+            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
-            "family_name": "family name 1",
-            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "orcid": null,
-            "pref_label": "test_person_1",
-            "sub_id": null,
-            "type": "person",
+            "pref_label": "test_organization_1",
+            "ror_id": null,
+            "type": "organization",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -1875,12 +1873,14 @@
         },
         {
           "agent": {
-            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
+            "family_name": "family name 1",
+            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "pref_label": "test_organization_1",
-            "ror_id": null,
-            "type": "organization",
+            "orcid": null,
+            "pref_label": "test_person_1",
+            "sub_id": null,
+            "type": "person",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -2114,14 +2114,12 @@
       "contributions": [
         {
           "agent": {
+            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
-            "family_name": "family name 1",
-            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "orcid": null,
-            "pref_label": "test_person_1",
-            "sub_id": null,
-            "type": "person",
+            "pref_label": "test_organization_1",
+            "ror_id": null,
+            "type": "organization",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -2137,12 +2135,14 @@
         },
         {
           "agent": {
-            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
+            "family_name": "family name 1",
+            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "pref_label": "test_organization_1",
-            "ror_id": null,
-            "type": "organization",
+            "orcid": null,
+            "pref_label": "test_person_1",
+            "sub_id": null,
+            "type": "person",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -2376,14 +2376,12 @@
       "contributions": [
         {
           "agent": {
+            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
-            "family_name": "family name 1",
-            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "orcid": null,
-            "pref_label": "test_person_1",
-            "sub_id": null,
-            "type": "person",
+            "pref_label": "test_organization_1",
+            "ror_id": null,
+            "type": "organization",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -2399,12 +2397,14 @@
         },
         {
           "agent": {
-            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
+            "family_name": "family name 1",
+            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "pref_label": "test_organization_1",
-            "ror_id": null,
-            "type": "organization",
+            "orcid": null,
+            "pref_label": "test_person_1",
+            "sub_id": null,
+            "type": "person",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -2638,14 +2638,12 @@
       "contributions": [
         {
           "agent": {
+            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
-            "family_name": "family name 1",
-            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "orcid": null,
-            "pref_label": "test_person_1",
-            "sub_id": null,
-            "type": "person",
+            "pref_label": "test_organization_1",
+            "ror_id": null,
+            "type": "organization",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -2661,12 +2659,14 @@
         },
         {
           "agent": {
-            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
+            "family_name": "family name 1",
+            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "pref_label": "test_organization_1",
-            "ror_id": null,
-            "type": "organization",
+            "orcid": null,
+            "pref_label": "test_person_1",
+            "sub_id": null,
+            "type": "person",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -2900,14 +2900,12 @@
       "contributions": [
         {
           "agent": {
+            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
-            "family_name": "family name 1",
-            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "orcid": null,
-            "pref_label": "test_person_1",
-            "sub_id": null,
-            "type": "person",
+            "pref_label": "test_organization_1",
+            "ror_id": null,
+            "type": "organization",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -2923,12 +2921,14 @@
         },
         {
           "agent": {
-            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
+            "family_name": "family name 1",
+            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "pref_label": "test_organization_1",
-            "ror_id": null,
-            "type": "organization",
+            "orcid": null,
+            "pref_label": "test_person_1",
+            "sub_id": null,
+            "type": "person",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -3162,14 +3162,12 @@
       "contributions": [
         {
           "agent": {
+            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
-            "family_name": "family name 1",
-            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "orcid": null,
-            "pref_label": "test_person_1",
-            "sub_id": null,
-            "type": "person",
+            "pref_label": "test_organization_1",
+            "ror_id": null,
+            "type": "organization",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -3185,12 +3183,14 @@
         },
         {
           "agent": {
-            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
+            "family_name": "family name 1",
+            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "pref_label": "test_organization_1",
-            "ror_id": null,
-            "type": "organization",
+            "orcid": null,
+            "pref_label": "test_person_1",
+            "sub_id": null,
+            "type": "person",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -3424,14 +3424,12 @@
       "contributions": [
         {
           "agent": {
+            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
-            "family_name": "family name 1",
-            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "orcid": null,
-            "pref_label": "test_person_1",
-            "sub_id": null,
-            "type": "person",
+            "pref_label": "test_organization_1",
+            "ror_id": null,
+            "type": "organization",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -3447,12 +3445,14 @@
         },
         {
           "agent": {
-            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
+            "family_name": "family name 1",
+            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "pref_label": "test_organization_1",
-            "ror_id": null,
-            "type": "organization",
+            "orcid": null,
+            "pref_label": "test_person_1",
+            "sub_id": null,
+            "type": "person",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -3686,14 +3686,12 @@
       "contributions": [
         {
           "agent": {
+            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
-            "family_name": "family name 1",
-            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "orcid": null,
-            "pref_label": "test_person_1",
-            "sub_id": null,
-            "type": "person",
+            "pref_label": "test_organization_1",
+            "ror_id": null,
+            "type": "organization",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -3709,12 +3707,14 @@
         },
         {
           "agent": {
-            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
+            "family_name": "family name 1",
+            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "pref_label": "test_organization_1",
-            "ror_id": null,
-            "type": "organization",
+            "orcid": null,
+            "pref_label": "test_person_1",
+            "sub_id": null,
+            "type": "person",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -3948,14 +3948,12 @@
       "contributions": [
         {
           "agent": {
+            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
-            "family_name": "family name 1",
-            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "orcid": null,
-            "pref_label": "test_person_1",
-            "sub_id": null,
-            "type": "person",
+            "pref_label": "test_organization_1",
+            "ror_id": null,
+            "type": "organization",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -3971,12 +3969,14 @@
         },
         {
           "agent": {
-            "alternative_name": "alt name 1",
             "creation_date": "2025-01-01T00:00:00Z",
+            "family_name": "family name 1",
+            "given_name": "given name 1",
             "id": "00000000-0000-4000-8000-000001234678",
-            "pref_label": "test_organization_1",
-            "ror_id": null,
-            "type": "organization",
+            "orcid": null,
+            "pref_label": "test_person_1",
+            "sub_id": null,
+            "type": "person",
             "update_date": "2025-01-01T00:00:00Z"
           },
           "creation_date": "2025-01-01T00:00:00Z",
@@ -4193,97 +4193,7 @@
       "validation_status": "created"
     }
   ],
-  "facets": {
-    "brain_region": [
-      {
-        "count": 8,
-        "id": "00000000-0000-4000-8000-000001234678",
-        "label": "region0",
-        "type": "brain_region"
-      },
-      {
-        "count": 8,
-        "id": "00000000-0000-4000-8000-000001234678",
-        "label": "region1",
-        "type": "brain_region"
-      }
-    ],
-    "contribution": [
-      {
-        "count": 16,
-        "id": "00000000-0000-4000-8000-000001234678",
-        "label": "test_organization_1",
-        "type": "organization"
-      },
-      {
-        "count": 16,
-        "id": "00000000-0000-4000-8000-000001234678",
-        "label": "test_person_1",
-        "type": "person"
-      }
-    ],
-    "created_by": [
-      {
-        "count": 16,
-        "id": "00000000-0000-4000-8000-000001234678",
-        "label": "jd courcol",
-        "type": "created_by"
-      }
-    ],
-    "emodel": [
-      {
-        "count": 8,
-        "id": "00000000-0000-4000-8000-000001234678",
-        "label": "0",
-        "type": "emodel"
-      },
-      {
-        "count": 8,
-        "id": "00000000-0000-4000-8000-000001234678",
-        "label": "1",
-        "type": "emodel"
-      }
-    ],
-    "etype": [],
-    "morphology": [
-      {
-        "count": 8,
-        "id": "00000000-0000-4000-8000-000001234678",
-        "label": "test morphology 0",
-        "type": "morphology"
-      },
-      {
-        "count": 8,
-        "id": "00000000-0000-4000-8000-000001234678",
-        "label": "test morphology 1",
-        "type": "morphology"
-      }
-    ],
-    "mtype": [],
-    "species": [
-      {
-        "count": 8,
-        "id": "00000000-0000-4000-8000-000001234678",
-        "label": "TestSpecies0",
-        "type": "species"
-      },
-      {
-        "count": 8,
-        "id": "00000000-0000-4000-8000-000001234678",
-        "label": "TestSpecies1",
-        "type": "species"
-      }
-    ],
-    "strain": [],
-    "updated_by": [
-      {
-        "count": 16,
-        "id": "00000000-0000-4000-8000-000001234678",
-        "label": "jd courcol",
-        "type": "updated_by"
-      }
-    ]
-  },
+  "facets": null,
   "pagination": {
     "page": 1,
     "page_size": 30,

@@ -35,7 +35,7 @@
   "lifecycle_status": "active",
   "measurements": [
     {
-      "id": 20,
+      "id": 19,
       "name": "mean",
       "unit": "\u03bcm",
       "value": 1.34
@@ -80,7 +80,7 @@
   "updated_by": {
     "creation_date": "2025-01-01T00:00:00Z",
     "id": "00000000-0000-4000-8000-000001234678",
-    "pref_label": "jd courcol",
+    "pref_label": "Admin User",
     "update_date": "2025-01-01T00:00:00Z"
   },
   "used_by_derivations": null

@@ -17,7 +17,7 @@
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "skeletonization-config",
+      "name": "config-0",
       "scan_parameters": {
         "foo": "bar"
       },

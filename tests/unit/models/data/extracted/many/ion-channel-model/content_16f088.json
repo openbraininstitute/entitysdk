@@ -25,7 +25,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Test ICM Description",
+      "description": "Test description",
       "experiment_date": null,
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
@@ -35,14 +35,14 @@
       "license": null,
       "lifecycle_status": "active",
       "max_permeability_name": null,
-      "name": "28",
+      "name": "Private u1/1",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "28",
+      "nmodl_suffix": "test",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -113,7 +113,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Test ICM Description",
+      "description": "Test description",
       "experiment_date": null,
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
@@ -123,14 +123,14 @@
       "license": null,
       "lifecycle_status": "active",
       "max_permeability_name": null,
-      "name": "27",
+      "name": "Private u1/0",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "27",
+      "nmodl_suffix": "test",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -179,7 +179,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -197,11 +197,11 @@
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
+        "pref_label": "Regular User With Different Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Test ICM Description",
+      "description": "Test description",
       "experiment_date": null,
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
@@ -211,14 +211,14 @@
       "license": null,
       "lifecycle_status": "active",
       "max_permeability_name": null,
-      "name": "26",
+      "name": "Public u2/0",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "26",
+      "nmodl_suffix": "test",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -259,7 +259,7 @@
       "updated_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
+        "pref_label": "Regular User With Different Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "used_by_derivations": null
@@ -267,7 +267,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -289,7 +289,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Test ICM Description",
+      "description": "Test description",
       "experiment_date": null,
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
@@ -299,14 +299,14 @@
       "license": null,
       "lifecycle_status": "active",
       "max_permeability_name": null,
-      "name": "25",
+      "name": "Public u1/0",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "25",
+      "nmodl_suffix": "test",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -356,7 +356,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 4,
-    "total_items": 29
+    "page_size": 30,
+    "total_items": 4
   }
 }

@@ -6,7 +6,7 @@
       "age_period": "postnatal",
       "age_value": 1209600.0,
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "contributions": [],
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
@@ -19,7 +19,7 @@
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "my-subject-652d854a",
+      "name": "Private u2/0",
       "sex": "female",
       "species": {
         "creation_date": "2025-01-01T00:00:00Z",
@@ -58,7 +58,7 @@
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
+        "pref_label": "Regular User With Different Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
@@ -66,7 +66,7 @@
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "my-subject-76bd812d",
+      "name": "Public u2/0",
       "sex": "female",
       "species": {
         "creation_date": "2025-01-01T00:00:00Z",
@@ -88,7 +88,7 @@
       "updated_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
+        "pref_label": "Regular User With Different Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "used_by_derivations": null,

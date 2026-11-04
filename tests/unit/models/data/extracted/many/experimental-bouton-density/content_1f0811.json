@@ -3,7 +3,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -19,7 +19,7 @@
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
+        "pref_label": "jd courcol",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
@@ -37,20 +37,20 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 9,
+          "id": 50,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 10,
+          "id": 51,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
         }
       ],
       "mtypes": [],
-      "name": "my-name-e3523b04",
+      "name": "Private u1/1",
       "subject": {
         "age_max": null,
         "age_min": null,
@@ -88,7 +88,7 @@
       "updated_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
+        "pref_label": "jd courcol",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "used_by_derivations": null
@@ -112,7 +112,7 @@
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
+        "pref_label": "jd courcol",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
@@ -130,20 +130,20 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 7,
+          "id": 48,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 8,
+          "id": 49,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
         }
       ],
       "mtypes": [],
-      "name": "my-name-911abfd3",
+      "name": "Private u1/0",
       "subject": {
         "age_max": null,
         "age_min": null,
@@ -181,7 +181,7 @@
       "updated_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
+        "pref_label": "jd courcol",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "used_by_derivations": null
@@ -223,20 +223,20 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 5,
+          "id": 42,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 6,
+          "id": 43,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
         }
       ],
       "mtypes": [],
-      "name": "my-name-5cc760a9",
+      "name": "Public u1/0",
       "subject": {
         "age_max": null,
         "age_min": null,
