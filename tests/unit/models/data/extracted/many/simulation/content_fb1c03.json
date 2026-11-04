@@ -17,7 +17,7 @@
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "simulation-45560515",
+      "name": "simulation-6200bcb0",
       "number_neurons": 10,
       "recording_arrays": [],
       "scan_parameters": {
@@ -52,7 +52,7 @@
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "simulation-5de8ccc1",
+      "name": "simulation-34180069",
       "number_neurons": 10,
       "recording_arrays": [],
       "scan_parameters": {
@@ -87,7 +87,7 @@
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "simulation-a1ac12a6",
+      "name": "simulation-b8a8f03b",
       "number_neurons": 10,
       "recording_arrays": [],
       "scan_parameters": {

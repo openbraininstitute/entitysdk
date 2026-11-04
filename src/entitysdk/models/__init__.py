@@ -36,6 +36,7 @@ from entitysdk.models.emodel import EModel
 from entitysdk.models.entity import Entity
 from entitysdk.models.etype import ETypeClass
 from entitysdk.models.external_url import ExternalUrl
+from entitysdk.models.extracellular_recording import ExtracellularRecording
 from entitysdk.models.ion_channel import IonChannel
 from entitysdk.models.ion_channel_model import IonChannelModel, NeuronBlock, UseIon
 from entitysdk.models.ion_channel_modeling_campaign import IonChannelModelingCampaign
@@ -112,6 +113,7 @@ __all__ = [
     "ExperimentalNeuronDensity",
     "ExperimentalSynapsesPerConnection",
     "ExternalUrl",
+    "ExtracellularRecording",
     "IonChannel",
     "IonChannelModel",
     "IonChannelModelingCampaign",

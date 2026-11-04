@@ -4,7 +4,7 @@
       "assets": [],
       "atlas_id": "00000000-0000-4000-8000-000001234678",
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -22,7 +22,7 @@
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
+        "pref_label": "Regular User With Different Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
@@ -43,7 +43,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "lifecycle_status": "draft",
-      "name": "Private u1/1",
+      "name": "root-circuit-1cdbbcab",
       "notice_text": null,
       "number_connections": 100000000,
       "number_neurons": 10000000,
@@ -89,7 +89,7 @@
       "updated_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
+        "pref_label": "Regular User With Different Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "used_by_derivations": null
@@ -116,7 +116,7 @@
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
+        "pref_label": "Regular User With Different Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
@@ -137,7 +137,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "lifecycle_status": "draft",
-      "name": "Private u1/0",
+      "name": "root-circuit-ec4fa8b8",
       "notice_text": null,
       "number_connections": 100000000,
       "number_neurons": 10000000,
@@ -183,7 +183,7 @@
       "updated_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
+        "pref_label": "Regular User With Different Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "used_by_derivations": null
@@ -231,7 +231,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "lifecycle_status": "draft",
-      "name": "Public u1/0",
+      "name": "root-circuit-345fe6b8",
       "notice_text": null,
       "number_connections": 100000000,
       "number_neurons": 10000000,

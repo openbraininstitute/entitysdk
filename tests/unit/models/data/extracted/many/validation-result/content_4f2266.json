@@ -3,34 +3,6 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
-      "contributions": [],
-      "created_by": {
-        "creation_date": "2025-01-01T00:00:00Z",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "generated_from_derivations": null,
-      "id": "00000000-0000-4000-8000-000001234678",
-      "lifecycle_status": "active",
-      "name": "test_validation_result-24b5ef70",
-      "passed": true,
-      "type": "validation_result",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "creation_date": "2025-01-01T00:00:00Z",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "used_by_derivations": null,
-      "validated_entity_id": "00000000-0000-4000-8000-000001234678"
-    },
-    {
-      "assets": [],
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "contributions": [],
       "created_by": {
@@ -43,7 +15,7 @@
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "test_validation_result-92bc245d",
+      "name": "test_validation_result-55645af4",
       "passed": true,
       "type": "validation_result",
       "update_date": "2025-01-01T00:00:00Z",
@@ -64,6 +36,34 @@
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "Regular User With Different Project Id",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "generated_from_derivations": null,
+      "id": "00000000-0000-4000-8000-000001234678",
+      "lifecycle_status": "active",
+      "name": "test_validation_result-9c6e9118",
+      "passed": true,
+      "type": "validation_result",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "Regular User With Different Project Id",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "used_by_derivations": null,
+      "validated_entity_id": "00000000-0000-4000-8000-000001234678"
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": true,
+      "contributions": [],
+      "created_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
         "update_date": "2025-01-01T00:00:00Z"
       },
@@ -71,7 +71,7 @@
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "test_validation_result-c2e5791e",
+      "name": "test_validation_result-c9dc9341",
       "passed": true,
       "type": "validation_result",
       "update_date": "2025-01-01T00:00:00Z",

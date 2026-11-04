@@ -3,7 +3,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": false,
+      "authorized_public": true,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -21,11 +21,11 @@
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
+        "pref_label": "Regular User With Different Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Test ICM Description",
+      "description": "Test description",
       "experiment_date": null,
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
@@ -35,14 +35,14 @@
       "license": null,
       "lifecycle_status": "active",
       "max_permeability_name": null,
-      "name": "7",
+      "name": "Public u2/0",
       "neuron_block": {
         "global": [],
         "nonspecific": [],
         "range": [],
         "useion": []
       },
-      "nmodl_suffix": "7",
+      "nmodl_suffix": "test",
       "notice_text": null,
       "published_in": null,
       "subject": {
@@ -83,7 +83,7 @@
       "updated_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
+        "pref_label": "Regular User With Different Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "used_by_derivations": null
@@ -91,8 +91,8 @@
   ],
   "facets": null,
   "pagination": {
-    "page": 22,
-    "page_size": 1,
-    "total_items": 29
+    "page": 1,
+    "page_size": 30,
+    "total_items": 1
   }
 }

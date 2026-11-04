@@ -4,7 +4,7 @@
   "age_period": "postnatal",
   "age_value": 1209600.0,
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": false,
+  "authorized_public": true,
   "contributions": [],
   "created_by": {
     "creation_date": "2025-01-01T00:00:00Z",
@@ -13,11 +13,11 @@
     "update_date": "2025-01-01T00:00:00Z"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "my-description",
+  "description": "description",
   "generated_from_derivations": null,
   "id": "00000000-0000-4000-8000-000001234678",
   "lifecycle_status": "active",
-  "name": "Private u1/1",
+  "name": "name",
   "sex": "female",
   "species": {
     "creation_date": "2025-01-01T00:00:00Z",
@@ -39,7 +39,7 @@
   "updated_by": {
     "creation_date": "2025-01-01T00:00:00Z",
     "id": "00000000-0000-4000-8000-000001234678",
-    "pref_label": "jd courcol",
+    "pref_label": "Admin User",
     "update_date": "2025-01-01T00:00:00Z"
   },
   "used_by_derivations": null,

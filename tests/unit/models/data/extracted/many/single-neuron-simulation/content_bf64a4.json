@@ -23,7 +23,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "original-description",
+      "description": "my-description",
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "injection_location": [
@@ -32,19 +32,19 @@
       "lifecycle_status": "active",
       "me_model": {
         "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-        "authorized_public": true,
+        "authorized_public": false,
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "description",
+        "description": "my-description-1",
         "etypes": [],
         "id": "00000000-0000-4000-8000-000001234678",
         "lifecycle_status": "active",
         "mtypes": [],
-        "name": "name",
+        "name": "me-model-1",
         "type": "memodel",
         "update_date": "2025-01-01T00:00:00Z",
         "validation_status": "created"
       },
-      "name": "Private u1/1",
+      "name": "sim-6",
       "recording_location": [
         "soma[0]_0.5"
       ],
@@ -82,7 +82,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "original-description",
+      "description": "my-description",
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "injection_location": [
@@ -91,19 +91,19 @@
       "lifecycle_status": "active",
       "me_model": {
         "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-        "authorized_public": true,
+        "authorized_public": false,
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "description",
+        "description": "my-description",
         "etypes": [],
         "id": "00000000-0000-4000-8000-000001234678",
         "lifecycle_status": "active",
         "mtypes": [],
-        "name": "name",
+        "name": "my-me-model",
         "type": "memodel",
         "update_date": "2025-01-01T00:00:00Z",
         "validation_status": "created"
       },
-      "name": "Private u1/0",
+      "name": "sim-5",
       "recording_location": [
         "soma[0]_0.5"
       ],
@@ -121,7 +121,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -141,7 +141,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "original-description",
+      "description": "my-description",
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "injection_location": [
@@ -150,19 +150,19 @@
       "lifecycle_status": "active",
       "me_model": {
         "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-        "authorized_public": true,
+        "authorized_public": false,
         "creation_date": "2025-01-01T00:00:00Z",
-        "description": "description",
+        "description": "my-description-1",
         "etypes": [],
         "id": "00000000-0000-4000-8000-000001234678",
         "lifecycle_status": "active",
         "mtypes": [],
-        "name": "name",
+        "name": "me-model-1",
         "type": "memodel",
         "update_date": "2025-01-01T00:00:00Z",
         "validation_status": "created"
       },
-      "name": "Public u1/0",
+      "name": "sim-4",
       "recording_location": [
         "soma[0]_0.5"
       ],
@@ -181,7 +181,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 30,
-    "total_items": 3
+    "page_size": 3,
+    "total_items": 7
   }
 }

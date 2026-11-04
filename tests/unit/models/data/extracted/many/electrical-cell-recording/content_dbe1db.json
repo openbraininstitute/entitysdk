@@ -3,7 +3,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -21,7 +21,7 @@
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
+        "pref_label": "jd courcol",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
@@ -41,7 +41,7 @@
       },
       "lifecycle_status": "active",
       "ljp": 11.5,
-      "name": "my-name-2769a085",
+      "name": "Private u1/1",
       "notice_text": null,
       "published_in": null,
       "recording_location": [
@@ -88,7 +88,7 @@
       "updated_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
+        "pref_label": "jd courcol",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "used_by_derivations": null
@@ -96,7 +96,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -134,7 +134,7 @@
       },
       "lifecycle_status": "active",
       "ljp": 11.5,
-      "name": "my-name-1e43f620",
+      "name": "Private u1/0",
       "notice_text": null,
       "published_in": null,
       "recording_location": [

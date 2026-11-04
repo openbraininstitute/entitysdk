@@ -3,7 +3,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -19,11 +19,11 @@
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
+        "pref_label": "jd courcol",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "my-description",
+      "description": "d1",
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "license": {
@@ -37,54 +37,54 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 277,
+          "id": 396,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 278,
+          "id": 397,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
         }
       ],
-      "name": "my-name-17425a81",
+      "name": "s1",
       "post_mtype": {
-        "alt_label": "mtype-alt-label",
+        "alt_label": "post-m3",
         "creation_date": "2025-01-01T00:00:00Z",
-        "definition": "mtype-definition",
+        "definition": "",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "mtype-pref-label",
+        "pref_label": "post-m3",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "post_region": {
-        "acronym": "acronym64",
-        "annotation_value": 64,
+        "acronym": "acronym2",
+        "annotation_value": 2,
         "color_hex_triplet": "FF0000",
         "creation_date": "2025-01-01T00:00:00Z",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "RedRegion",
+        "name": "post-r2",
         "parent_structure_id": null,
         "update_date": "2025-01-01T00:00:00Z"
       },
       "pre_mtype": {
-        "alt_label": "mtype-alt-label",
+        "alt_label": "pre-m0",
         "creation_date": "2025-01-01T00:00:00Z",
-        "definition": "mtype-definition",
+        "definition": "",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "mtype-pref-label",
+        "pref_label": "pre-m0",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "pre_region": {
-        "acronym": "acronym64",
-        "annotation_value": 64,
+        "acronym": "acronym0",
+        "annotation_value": 0,
         "color_hex_triplet": "FF0000",
         "creation_date": "2025-01-01T00:00:00Z",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "RedRegion",
+        "name": "pre-r0",
         "parent_structure_id": null,
         "update_date": "2025-01-01T00:00:00Z"
       },
@@ -125,7 +125,7 @@
       "updated_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
+        "pref_label": "jd courcol",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "used_by_derivations": null
@@ -133,7 +133,7 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "brain_region": {
         "acronym": "acronym64",
         "annotation_value": 64,
@@ -153,7 +153,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "my-description",
+      "description": "d0",
       "generated_from_derivations": null,
       "id": "00000000-0000-4000-8000-000001234678",
       "license": {
@@ -167,54 +167,54 @@
       "lifecycle_status": "active",
       "measurements": [
         {
-          "id": 273,
+          "id": 394,
           "name": "minimum",
           "unit": "\u03bcm",
           "value": 1.23
         },
         {
-          "id": 274,
+          "id": 395,
           "name": "maximum",
           "unit": "\u03bcm",
           "value": 1.45
         }
       ],
-      "name": "my-name-7532402d",
+      "name": "s0",
       "post_mtype": {
-        "alt_label": "mtype-alt-label",
+        "alt_label": "post-m2",
         "creation_date": "2025-01-01T00:00:00Z",
-        "definition": "mtype-definition",
+        "definition": "",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "mtype-pref-label",
+        "pref_label": "post-m2",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "post_region": {
-        "acronym": "acronym64",
-        "annotation_value": 64,
+        "acronym": "acronym2",
+        "annotation_value": 2,
         "color_hex_triplet": "FF0000",
         "creation_date": "2025-01-01T00:00:00Z",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "RedRegion",
+        "name": "post-r2",
         "parent_structure_id": null,
         "update_date": "2025-01-01T00:00:00Z"
       },
       "pre_mtype": {
-        "alt_label": "mtype-alt-label",
+        "alt_label": "pre-m0",
         "creation_date": "2025-01-01T00:00:00Z",
-        "definition": "mtype-definition",
+        "definition": "",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "mtype-pref-label",
+        "pref_label": "pre-m0",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "pre_region": {
-        "acronym": "acronym64",
-        "annotation_value": 64,
+        "acronym": "acronym0",
+        "annotation_value": 0,
         "color_hex_triplet": "FF0000",
         "creation_date": "2025-01-01T00:00:00Z",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "RedRegion",
+        "name": "pre-r0",
         "parent_structure_id": null,
         "update_date": "2025-01-01T00:00:00Z"
       },

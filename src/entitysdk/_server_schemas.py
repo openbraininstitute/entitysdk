@@ -341,6 +341,7 @@ class EntityRoute(StrEnum):
     skeletonization_campaign = "skeletonization-campaign"
     task_config = "task-config"
     research_log = "research-log"
+    extracellular_recording = "extracellular-recording"
 
 
 class EntityType(StrEnum):
@@ -386,6 +387,7 @@ class EntityType(StrEnum):
     skeletonization_campaign = "skeletonization_campaign"
     task_config = "task_config"
     research_log = "research_log"
+    extracellular_recording = "extracellular_recording"
 
 
 class EntityTypeWithBrainRegion(StrEnum):
@@ -401,6 +403,7 @@ class EntityTypeWithBrainRegion(StrEnum):
     experimental_bouton_density = "experimental_bouton_density"
     experimental_neuron_density = "experimental_neuron_density"
     experimental_synapses_per_connection = "experimental_synapses_per_connection"
+    extracellular_recording = "extracellular_recording"
     ion_channel_model = "ion_channel_model"
     ion_channel_recording = "ion_channel_recording"
     me_type_density = "me_type_density"
