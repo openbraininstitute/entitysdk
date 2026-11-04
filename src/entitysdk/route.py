@@ -34,6 +34,7 @@ _ROUTES = {
     "ExperimentalNeuronDensity": "experimental-neuron-density",
     "ExperimentalSynapsesPerConnection": "experimental-synapses-per-connection",
     "ExternalUrl": "external-url",
+    "ExtracellularRecording": "extracellular-recording",
     "IonChannel": "ion-channel",
     "IonChannelModel": "ion-channel-model",
     "IonChannelModelingCampaign": "ion-channel-modeling-campaign",
