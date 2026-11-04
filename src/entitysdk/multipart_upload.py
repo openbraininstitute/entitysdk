@@ -47,7 +47,7 @@ from entitysdk.utils.io import calculate_sha256_digest, iter_bytes_chunk
 L = logging.getLogger(__name__)
 
 
-MAX_RETRIES = 6
+MAX_ATTEMPTS = 6
 BACKOFF_BASE = 1.0
 TIMEOUT = HTTPTimeout(connect=15.0, read=120.0, write=120.0, pool=10.0)
 DEFAULT_THREAD_COUNT = 10
@@ -330,7 +330,7 @@ def _upload_part_with_retry(part: PartUpload, http_client: HTTPClient) -> None:
                 url=part.url,
                 http_client=http_client,
             ),
-            max_retries=MAX_RETRIES,
+            max_attempts=MAX_ATTEMPTS,
             backoff_base=BACKOFF_BASE,
             retry_on=RETRIABLE_EXCEPTIONS,
         )

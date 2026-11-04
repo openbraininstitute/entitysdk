@@ -1,3 +1,4 @@
+import httpx
 import pytest
 
 from entitysdk.common import ProjectContext
@@ -529,3 +530,81 @@ def test_stream_paginated_request_with_unexpected_page_size(
         match="Unexpected response: payload.pagination.page_size=2 but it should be 123",
     ):
         next(it)
+
+
+def test_make_db_api_request__retries_connection_phase_errors(
+    httpx_mock, api_url, token_from_value_manager, monkeypatch
+):
+    monkeypatch.setattr("entitysdk.utils.execution.time.sleep", lambda _: None)
+    url = f"{api_url}/api/v1/entity/person"
+    calls = []
+
+    def callback(request):
+        calls.append(request)
+        if len(calls) < 3:
+            raise test_module.ConnectTimeout("tls handshake timed out")
+        return httpx.Response(200)
+
+    httpx_mock.add_callback(callback, method="POST", url=url)
+
+    with HTTPClient() as http_client:
+        res = test_module.make_db_api_request(
+            url=url,
+            method="POST",
+            json={"name": "John Doe"},
+            token_manager=token_from_value_manager,
+            http_client=http_client,
+        )
+
+    assert res.status_code == 200
+    assert len(calls) == 3
+
+
+def test_make_db_api_request__raises_after_max_connection_retries(
+    httpx_mock, api_url, token_from_value_manager, monkeypatch
+):
+    monkeypatch.setattr("entitysdk.utils.execution.time.sleep", lambda _: None)
+    url = f"{api_url}/api/v1/entity/person"
+    calls = []
+
+    def callback(request):
+        calls.append(request)
+        raise test_module.ConnectTimeout("tls handshake timed out")
+
+    httpx_mock.add_callback(callback, method="POST", url=url)
+
+    with HTTPClient() as http_client:
+        with pytest.raises(EntitySDKError, match="tls handshake timed out"):
+            test_module.make_db_api_request(
+                url=url,
+                method="POST",
+                token_manager=token_from_value_manager,
+                http_client=http_client,
+            )
+
+    assert len(calls) == test_module.CONNECTION_MAX_ATTEMPTS
+
+
+def test_make_db_api_request__does_not_retry_after_request_sent(
+    httpx_mock, api_url, token_from_value_manager, monkeypatch
+):
+    monkeypatch.setattr("entitysdk.utils.execution.time.sleep", lambda _: None)
+    url = f"{api_url}/api/v1/entity/person"
+    calls = []
+
+    def callback(request):
+        calls.append(request)
+        raise test_module.ReadTimeout("no response")
+
+    httpx_mock.add_callback(callback, method="POST", url=url)
+
+    with HTTPClient() as http_client:
+        with pytest.raises(EntitySDKError, match="no response"):
+            test_module.make_db_api_request(
+                url=url,
+                method="POST",
+                token_manager=token_from_value_manager,
+                http_client=http_client,
+            )
+
+    assert len(calls) == 1

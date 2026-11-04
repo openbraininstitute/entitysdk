@@ -217,7 +217,7 @@ def test_execute_with_retry_retries_on_exception():
     # Patch time.sleep to avoid slowing down the test
     with patch("entitysdk.utils.execution.time.sleep", return_value=None) as mock_sleep:
         result = test_module.execute_with_retry(
-            mock_fn, max_retries=3, backoff_base=0.1, retry_on=test_module.RETRIABLE_EXCEPTIONS
+            mock_fn, max_attempts=3, backoff_base=0.1, retry_on=test_module.RETRIABLE_EXCEPTIONS
         )
 
     # The function should eventually return "success"
@@ -230,14 +230,14 @@ def test_execute_with_retry_retries_on_exception():
     assert mock_sleep.call_count == 2
 
 
-def test_execute_with_retry_raises_after_max_retries():
+def test_execute_with_retry_raises_after_max_attempts():
     # Function that always fails
     mock_fn = Mock(side_effect=test_module.RETRIABLE_EXCEPTIONS[0]("always fail"))
 
     with patch("entitysdk.utils.execution.time.sleep", return_value=None):
         with pytest.raises(test_module.RETRIABLE_EXCEPTIONS[0], match="always fail"):
             test_module.execute_with_retry(
-                mock_fn, max_retries=3, backoff_base=0.1, retry_on=test_module.RETRIABLE_EXCEPTIONS
+                mock_fn, max_attempts=3, backoff_base=0.1, retry_on=test_module.RETRIABLE_EXCEPTIONS
             )
 
     # It should try 3 times

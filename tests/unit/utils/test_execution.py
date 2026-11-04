@@ -18,7 +18,7 @@ def test_execute_retries_then_succeeds():
     fn = Mock(side_effect=[ValueError("fail"), ValueError("fail"), "success"])
 
     with patch("entitysdk.utils.execution.time.sleep") as sleep_mock:
-        result = test_module.execute_with_retry(fn, max_retries=3, backoff_base=1)
+        result = test_module.execute_with_retry(fn, max_attempts=3, backoff_base=1)
 
     assert result == "success"
     assert fn.call_count == 3
@@ -34,24 +34,38 @@ def test_execute_all_retries_fail():
 
     with patch("entitysdk.utils.execution.time.sleep") as sleep_mock:
         with pytest.raises(RuntimeError, match="boom"):
-            test_module.execute_with_retry(fn, max_retries=3, backoff_base=0.1)
+            test_module.execute_with_retry(fn, max_attempts=3, backoff_base=0.1)
 
     assert fn.call_count == 3
-    assert sleep_mock.call_count == 3  # sleeps even on last failure
+    assert sleep_mock.call_count == 2  # no sleep after the final failed attempt
 
 
-def test_invalid_max_retries():
+def test_invalid_max_attempts():
     fn = Mock()
 
-    with pytest.raises(ValueError, match="max_retries must be >= 0"):
-        test_module.execute_with_retry(fn, max_retries=-1)
+    for value in (-1, 0):
+        with pytest.raises(ValueError, match="max_attempts must be >= 1"):
+            test_module.execute_with_retry(fn, max_attempts=value)
+
+    fn.assert_not_called()
+
+
+def test_single_attempt_does_not_retry_or_sleep():
+    fn = Mock(side_effect=RuntimeError("boom"))
+
+    with patch("entitysdk.utils.execution.time.sleep") as sleep_mock:
+        with pytest.raises(RuntimeError, match="boom"):
+            test_module.execute_with_retry(fn, max_attempts=1)
+
+    assert fn.call_count == 1
+    sleep_mock.assert_not_called()
 
 
 def test_backoff_values_exact():
     fn = Mock(side_effect=[Exception("x"), Exception("y"), "done"])
 
     with patch("entitysdk.utils.execution.time.sleep") as sleep_mock:
-        test_module.execute_with_retry(fn, max_retries=3, backoff_base=0.5)
+        test_module.execute_with_retry(fn, max_attempts=3, backoff_base=0.5)
 
     expected_calls = [(0.5,), (1.0,)]
     actual_calls = sleep_mock.call_args_list[:2]

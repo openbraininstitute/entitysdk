@@ -42,7 +42,7 @@ class Settings(BaseSettings):
         Field(
             description="Maximum time to wait until a connection is established, in seconds.",
         ),
-    ] = 5
+    ] = 15
     read_timeout: Annotated[
         float,
         Field(
