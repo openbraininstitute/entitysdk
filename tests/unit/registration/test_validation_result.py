@@ -1,6 +1,7 @@
 """Tests for ValidationResult registration."""
 
 import uuid
+from types import SimpleNamespace
 from unittest.mock import MagicMock
 
 import pytest
@@ -12,7 +13,7 @@ from entitysdk.registration.validation_result import (
     register_validation_result,
     register_validation_result_figure,
 )
-from entitysdk.types import ContentType
+from entitysdk.types import AssetLabel, ContentType
 
 from .conftest import load_extracted_json
 
@@ -351,3 +352,115 @@ def test_register_memodel_validation_results_skips_existing(
     )
 
     assert results == []
+
+
+def _overwrite_client(matches, assets):
+    """A client whose search finds ``matches`` and whose result has ``assets``."""
+    client = MagicMock()
+    client.search_entity.return_value.all.return_value = matches
+    client.update_entity.side_effect = lambda *, entity_id, entity_type, attrs_or_entity: matches[
+        0
+    ].model_copy(update=attrs_or_entity)
+    client.get_entity_assets.return_value.all.return_value = assets
+    return client
+
+
+def _existing_result(name="Simulatable Neuron Spiking Validation"):
+    return ValidationResult(
+        id=uuid.uuid4(), name=name, passed=False, validated_entity_id=uuid.uuid4()
+    )
+
+
+def test_register_validation_result_overwrite_updates_in_place(tmp_path):
+    existing = _existing_result()
+    figure_asset = SimpleNamespace(id=uuid.uuid4(), label=AssetLabel.validation_result_figure)
+    details_asset = SimpleNamespace(id=uuid.uuid4(), label=AssetLabel.validation_result_details)
+    other_asset = SimpleNamespace(id=uuid.uuid4(), label=AssetLabel.morphology)
+    client = _overwrite_client([existing], [figure_asset, details_asset, other_asset])
+    figure_file = tmp_path / "spiking_validation.pdf"
+    figure_file.write_bytes(b"figure-content")
+
+    result = register_validation_result(
+        client=client,
+        name=existing.name,
+        passed=True,
+        validated_entity_id=existing.validated_entity_id,
+        authorized_public=False,
+        figure_files=[figure_file],
+        details_text="Validation passed.",
+        overwrite=True,
+    )
+
+    assert result is not None
+    assert result.id == existing.id
+    assert result.passed is True
+    client.register_entity.assert_not_called()
+    client.update_entity.assert_called_once_with(
+        entity_id=existing.id, entity_type=ValidationResult, attrs_or_entity={"passed": True}
+    )
+    deleted = [c.kwargs["asset_id"] for c in client.delete_asset.call_args_list]
+    assert deleted == [figure_asset.id, details_asset.id]
+    uploaded = [c.kwargs["asset_label"] for c in client.upload_file.call_args_list]
+    assert uploaded == [
+        AssetLabel.validation_result_figure,
+        AssetLabel.validation_result_details,
+    ]
+    assert all(c.kwargs["entity_id"] == existing.id for c in client.upload_file.call_args_list)
+
+
+def test_register_validation_result_overwrite_registers_when_missing():
+    client = _overwrite_client([], [])
+    client.register_entity.side_effect = lambda entity: entity.model_copy(
+        update={"id": uuid.uuid4()}
+    )
+
+    result = register_validation_result(
+        client=client,
+        name="n",
+        passed=True,
+        validated_entity_id=uuid.uuid4(),
+        authorized_public=False,
+        overwrite=True,
+    )
+
+    assert result is not None
+    client.register_entity.assert_called_once()
+    client.update_entity.assert_not_called()
+
+
+def test_register_validation_result_overwrite_rejects_ambiguous_match():
+    client = _overwrite_client([_existing_result(), _existing_result()], [])
+
+    with pytest.raises(ValueError, match="cannot choose the one to overwrite"):
+        register_validation_result(
+            client=client,
+            name="Simulatable Neuron Spiking Validation",
+            passed=True,
+            validated_entity_id=uuid.uuid4(),
+            authorized_public=False,
+            overwrite=True,
+        )
+    client.update_entity.assert_not_called()
+
+
+def test_register_memodel_validation_results_overwrite_returns_updated():
+    existing = _existing_result()
+    client = _overwrite_client([existing], [])
+
+    results = register_memodel_validation_results(
+        client=client,
+        memodel_id=existing.validated_entity_id,
+        validation_dict={
+            "spiking_test": {
+                "name": existing.name,
+                "passed": True,
+                "validation_details": "",
+                "figures": [],
+            }
+        },
+        authorized_public=False,
+        overwrite=True,
+    )
+
+    assert [r.id for r in results] == [existing.id]
+    assert results[0].passed is True

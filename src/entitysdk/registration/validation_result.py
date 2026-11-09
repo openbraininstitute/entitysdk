@@ -23,6 +23,10 @@ SUFFIX_TO_NAME = {
     "traces": "traces",
     "thumbnail": "thumbnail",
 }
+# Assets of a ValidationResult that an overwrite replaces.
+REPLACEABLE_ASSET_LABELS = frozenset(
+    {AssetLabel.validation_result_figure, AssetLabel.validation_result_details}
+)
 
 
 def register_validation_result_figure(
@@ -93,6 +97,34 @@ def _detect_validation_name(filename_stem: str) -> str | None:
     return None
 
 
+def _update_validation_result(
+    client: Client, existing: ValidationResult, passed: bool
+) -> ValidationResult:
+    """Set ``passed`` on an existing result and delete its figure and details assets.
+
+    The caller uploads the new assets. Other assets of the result are kept.
+    """
+    validation_result = client.update_entity(
+        entity_id=existing.id,
+        entity_type=ValidationResult,
+        attrs_or_entity={"passed": passed},
+    )
+    for asset in client.get_entity_assets(existing.id, entity_type=ValidationResult).all():
+        if asset.label in REPLACEABLE_ASSET_LABELS:
+            client.delete_asset(
+                entity_id=existing.id,
+                entity_type=ValidationResult,
+                asset_id=asset.id,
+            )
+    L.info(
+        "Updated ValidationResult(id=%s, name=%r, passed=%s)",
+        validation_result.id,
+        validation_result.name,
+        validation_result.passed,
+    )
+    return validation_result
+
+
 def register_validation_result(
     *,
     client: Client,
@@ -102,11 +134,15 @@ def register_validation_result(
     authorized_public: bool,
     figure_files: list[Path] | None = None,
     details_text: str | None = None,
+    overwrite: bool = False,
 ) -> ValidationResult | None:
     """Register a ValidationResult with optional figure and details assets.
 
-    Skips registration when a ValidationResult with the same ``name`` already
-    exists for ``validated_entity_id``.
+    When a ValidationResult with the same ``name`` already exists for
+    ``validated_entity_id``, registration is skipped by default. With
+    ``overwrite=True`` the existing result is updated in place instead: it keeps its
+    ID, gets the new ``passed`` value, and its figure and details assets are replaced
+    by the new ones.
 
     Figures are uploaded under their real filenames: downstream UIs derive
     captions and documentation from the asset path (e.g.
@@ -126,15 +162,23 @@ def register_validation_result(
             downstream UIs can match it to the result (e.g.
             "Simulatable Neuron Input Resistance Validation" ->
             ``SimulatableNeuronInputResistanceValidation_validation_details.txt``).
+        overwrite: Update an existing result with the same ``name`` instead of
+            skipping it. Updating a result owned by another user fails with the
+            client's HTTP error (403).
 
     Returns:
-        The registered ValidationResult, or ``None`` if it already existed.
+        The registered or updated ValidationResult, or ``None`` if it already
+        existed and ``overwrite`` is False.
+
+    Raises:
+        ValueError: If ``overwrite`` is True and several results with ``name``
+            exist for ``validated_entity_id``: the one to update is ambiguous.
     """
-    existing = client.search_entity(
+    matches = client.search_entity(
         entity_type=ValidationResult,
         query={"name": name, "validated_entity_id": validated_entity_id},
-    ).first()
-    if existing is not None:
+    ).all()
+    if matches and not overwrite:
         L.info(
             "ValidationResult %r already exists for %s; skipping.",
             name,
@@ -142,20 +186,29 @@ def register_validation_result(
         )
         return None
 
-    validation_result = client.register_entity(
-        ValidationResult(
-            name=name,
-            passed=passed,
-            validated_entity_id=validated_entity_id,
-            authorized_public=authorized_public,
+    if matches:
+        if len(matches) > 1:
+            msg = (
+                f"{len(matches)} ValidationResults named {name!r} exist for "
+                f"{validated_entity_id}; cannot choose the one to overwrite."
+            )
+            raise ValueError(msg)
+        validation_result = _update_validation_result(client, matches[0], passed)
+    else:
+        validation_result = client.register_entity(
+            ValidationResult(
+                name=name,
+                passed=passed,
+                validated_entity_id=validated_entity_id,
+                authorized_public=authorized_public,
+            )
         )
-    )
-    L.info(
-        "Registered ValidationResult(id=%s, name=%r, passed=%s)",
-        validation_result.id,
-        validation_result.name,
-        validation_result.passed,
-    )
+        L.info(
+            "Registered ValidationResult(id=%s, name=%r, passed=%s)",
+            validation_result.id,
+            validation_result.name,
+            validation_result.passed,
+        )
 
     for figure_file in figure_files or []:
         content_type = FIGURE_EXT_TO_CONTENT_TYPE.get(figure_file.suffix)
@@ -195,6 +248,7 @@ def register_memodel_validation_results(
     memodel_id: ID,
     validation_dict: dict,
     authorized_public: bool,
+    overwrite: bool = False,
 ) -> list[ValidationResult]:
     """Register per-test ValidationResults from a bluecellulab validation run.
 
@@ -202,16 +256,19 @@ def register_memodel_validation_results(
     a mapping of test keys to dicts with keys ``name``, ``passed``,
     ``validation_details`` (text), and ``figures`` (list of figure paths).
     Entries without ``name``/``passed`` (e.g. ``memodel_properties``) are
-    skipped, as are results already registered for ``memodel_id``.
+    skipped, as are results already registered for ``memodel_id`` unless
+    ``overwrite`` is True.
 
     Args:
         client: Entitysdk client.
         memodel_id: ID of the validated MEModel.
         validation_dict: ``run_validations`` result dict.
         authorized_public: Whether the registered entities are public.
+        overwrite: Update existing results with the same name instead of skipping
+            them (see :func:`register_validation_result`).
 
     Returns:
-        The newly registered ValidationResult entities.
+        The registered or updated ValidationResult entities.
     """
     registered: list[ValidationResult] = []
     for value in validation_dict.values():
@@ -225,6 +282,7 @@ def register_memodel_validation_results(
             authorized_public=authorized_public,
             figure_files=[Path(f) for f in value.get("figures", [])],
             details_text=value.get("validation_details") or None,
+            overwrite=overwrite,
         )
         if result is not None:
             registered.append(result)
