@@ -911,7 +911,11 @@ def test_upload_directory_by_paths(
     api_url,
     project_context,
     request_headers,
+    monkeypatch,
 ):
+    # avoid real exponential backoff sleeps (~31s) when retrying failed part uploads
+    monkeypatch.setattr("entitysdk.multipart_upload.BACKOFF_BASE", 0)
+
     def _mock_file_asset_payload(relative_path, urls):
         return {
             "id": str(uuid.uuid4()),
