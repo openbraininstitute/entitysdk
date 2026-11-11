@@ -12,6 +12,7 @@ from entitysdk.registration.validation_result import (
     register_memodel_validation_results,
     register_validation_result,
     register_validation_result_figure,
+    update_validation_result,
 )
 from entitysdk.types import AssetLabel, ContentType
 
@@ -354,113 +355,128 @@ def test_register_memodel_validation_results_skips_existing(
     assert results == []
 
 
-def _overwrite_client(matches, assets):
-    """A client whose search finds ``matches`` and whose result has ``assets``."""
+def _asset(path, label):
+    return SimpleNamespace(id=uuid.uuid4(), path=path, label=label)
+
+
+def _update_client(assets=()):
+    """A client whose updated result is named "Spiking Validation" and has ``assets``."""
     client = MagicMock()
-    client.search_entity.return_value.all.return_value = matches
-    client.update_entity.side_effect = lambda *, entity_id, entity_type, attrs_or_entity: matches[
-        0
-    ].model_copy(update=attrs_or_entity)
-    client.get_entity_assets.return_value.all.return_value = assets
+    client.update_entity.side_effect = lambda *, entity_id, entity_type, attrs_or_entity: (
+        ValidationResult(
+            id=entity_id,
+            name="Spiking Validation",
+            validated_entity_id=uuid.uuid4(),
+            **attrs_or_entity,
+        )
+    )
+    client.get_entity_assets.return_value.all.return_value = list(assets)
     return client
 
 
-def _existing_result(name="Simulatable Neuron Spiking Validation"):
-    return ValidationResult(
-        id=uuid.uuid4(), name=name, passed=False, validated_entity_id=uuid.uuid4()
-    )
+def test_update_validation_result_verdict_only_keeps_assets():
+    client = _update_client()
+    result_id = uuid.uuid4()
 
+    result = update_validation_result(client=client, validation_result_id=result_id, passed=True)
 
-def test_register_validation_result_overwrite_updates_in_place(tmp_path):
-    existing = _existing_result()
-    figure_asset = SimpleNamespace(id=uuid.uuid4(), label=AssetLabel.validation_result_figure)
-    details_asset = SimpleNamespace(id=uuid.uuid4(), label=AssetLabel.validation_result_details)
-    other_asset = SimpleNamespace(id=uuid.uuid4(), label=AssetLabel.morphology)
-    client = _overwrite_client([existing], [figure_asset, details_asset, other_asset])
-    figure_file = tmp_path / "spiking_validation.pdf"
-    figure_file.write_bytes(b"figure-content")
-
-    result = register_validation_result(
-        client=client,
-        name=existing.name,
-        passed=True,
-        validated_entity_id=existing.validated_entity_id,
-        authorized_public=False,
-        figure_files=[figure_file],
-        details_text="Validation passed.",
-        overwrite=True,
-    )
-
-    assert result is not None
-    assert result.id == existing.id
+    assert result.id == result_id
     assert result.passed is True
-    client.register_entity.assert_not_called()
     client.update_entity.assert_called_once_with(
-        entity_id=existing.id, entity_type=ValidationResult, attrs_or_entity={"passed": True}
+        entity_id=result_id, entity_type=ValidationResult, attrs_or_entity={"passed": True}
     )
-    deleted = [c.kwargs["asset_id"] for c in client.delete_asset.call_args_list]
-    assert deleted == [figure_asset.id, details_asset.id]
-    uploaded = [c.kwargs["asset_label"] for c in client.upload_file.call_args_list]
-    assert uploaded == [
-        AssetLabel.validation_result_figure,
-        AssetLabel.validation_result_details,
-    ]
-    assert all(c.kwargs["entity_id"] == existing.id for c in client.upload_file.call_args_list)
+    client.get_entity_assets.assert_not_called()
+    client.upload_file.assert_not_called()
+    client.delete_asset.assert_not_called()
 
 
-def test_register_validation_result_overwrite_registers_when_missing():
-    client = _overwrite_client([], [])
-    client.register_entity.side_effect = lambda entity: entity.model_copy(
-        update={"id": uuid.uuid4()}
+def test_update_validation_result_replaces_figures(tmp_path):
+    same = _asset("traces.pdf", AssetLabel.validation_result_figure)
+    stale = _asset("old.pdf", AssetLabel.validation_result_figure)
+    details = _asset(
+        "SpikingValidation_validation_details.txt", AssetLabel.validation_result_details
     )
+    client = _update_client([same, stale, details])
+    traces = tmp_path / "traces.pdf"
+    thumbnail = tmp_path / "thumbnail.png"
+    traces.write_bytes(b"pdf")
+    thumbnail.write_bytes(b"png")
 
-    result = register_validation_result(
+    update_validation_result(
         client=client,
-        name="n",
+        validation_result_id=uuid.uuid4(),
+        passed=False,
+        figure_files=[traces, thumbnail],
+    )
+
+    # the verdict is updated before any asset is touched
+    assert client.method_calls[0][0] == "update_entity"
+    replaced = client.update_asset_file.call_args.kwargs
+    assert replaced["asset_id"] == same.id
+    assert replaced["file_path"] == traces
+    uploaded = client.upload_file.call_args.kwargs
+    assert uploaded["file_path"] == thumbnail
+    assert uploaded["file_content_type"] == ContentType.image_png
+    assert uploaded["asset_label"] == AssetLabel.validation_result_figure
+    # only the stale figure is deleted, after the replacements; the details are kept
+    assert [c.kwargs["asset_id"] for c in client.delete_asset.call_args_list] == [stale.id]
+    names = [name for name, *_ in client.method_calls]
+    assert names.index("delete_asset") > names.index("upload_file")
+
+
+@pytest.mark.parametrize("existing", [True, False])
+def test_update_validation_result_replaces_details(existing):
+    old = _asset("SpikingValidation_validation_details.txt", AssetLabel.validation_result_details)
+    figure = _asset("traces.pdf", AssetLabel.validation_result_figure)
+    client = _update_client([old, figure] if existing else [figure])
+
+    update_validation_result(
+        client=client,
+        validation_result_id=uuid.uuid4(),
         passed=True,
-        validated_entity_id=uuid.uuid4(),
-        authorized_public=False,
-        overwrite=True,
+        details_text="Validation passed.",
     )
 
-    assert result is not None
-    client.register_entity.assert_called_once()
-    client.update_entity.assert_not_called()
+    if existing:
+        call = client.update_asset_file.call_args.kwargs
+        assert call["asset_id"] == old.id
+        client.upload_file.assert_not_called()
+    else:
+        call = client.upload_file.call_args.kwargs
+        assert call["asset_label"] == AssetLabel.validation_result_details
+        client.update_asset_file.assert_not_called()
+    assert call["file_path"].name == "SpikingValidation_validation_details.txt"
+    assert call["file_content_type"] == ContentType.text_plain
+    client.delete_asset.assert_not_called()
 
 
-def test_register_validation_result_overwrite_rejects_ambiguous_match():
-    client = _overwrite_client([_existing_result(), _existing_result()], [])
+@pytest.mark.parametrize(
+    ("figure_names", "details_text", "match"),
+    [
+        (["missing.pdf"], None, "not found"),
+        (["figure.svg"], None, "Unsupported"),
+        (["traces.pdf", "sub/traces.pdf"], None, "Several validation figures"),
+        (None, "  ", "details_text is empty"),
+    ],
+)
+def test_update_validation_result_rejects_bad_inputs_before_changing(
+    tmp_path, figure_names, details_text, match
+):
+    figure_files = None
+    if figure_names is not None:
+        figure_files = [tmp_path / name for name in figure_names]
+        for path in figure_files:
+            if path.name != "missing.pdf":
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(b"x")
+    client = _update_client()
 
-    with pytest.raises(ValueError, match="cannot choose the one to overwrite"):
-        register_validation_result(
+    with pytest.raises(ValueError, match=match):
+        update_validation_result(
             client=client,
-            name="Simulatable Neuron Spiking Validation",
+            validation_result_id=uuid.uuid4(),
             passed=True,
-            validated_entity_id=uuid.uuid4(),
-            authorized_public=False,
-            overwrite=True,
+            figure_files=figure_files,
+            details_text=details_text,
         )
-    client.update_entity.assert_not_called()
-
-
-def test_register_memodel_validation_results_overwrite_returns_updated():
-    existing = _existing_result()
-    client = _overwrite_client([existing], [])
-
-    results = register_memodel_validation_results(
-        client=client,
-        memodel_id=existing.validated_entity_id,
-        validation_dict={
-            "spiking_test": {
-                "name": existing.name,
-                "passed": True,
-                "validation_details": "",
-                "figures": [],
-            }
-        },
-        authorized_public=False,
-        overwrite=True,
-    )
-
-    assert [r.id for r in results] == [existing.id]
-    assert results[0].passed is True
+    assert client.method_calls == []
