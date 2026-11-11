@@ -189,6 +189,133 @@ def register_validation_result(
     return validation_result
 
 
+def _checked_figures(figure_files: list[Path]) -> dict[str, tuple[Path, ContentType]]:
+    """Map each figure's file name to its path and content type, rejecting bad inputs."""
+    figures: dict[str, tuple[Path, ContentType]] = {}
+    for figure_file in figure_files:
+        content_type = FIGURE_EXT_TO_CONTENT_TYPE.get(figure_file.suffix)
+        if content_type is None:
+            raise ValueError(f"Unsupported validation figure format: {figure_file}")
+        if not figure_file.is_file():
+            raise ValueError(f"Validation figure not found: {figure_file}")
+        if figure_file.name in figures:
+            raise ValueError(f"Several validation figures are named {figure_file.name!r}.")
+        figures[figure_file.name] = (figure_file, content_type)
+    return figures
+
+
+def _replace_assets(
+    client: Client,
+    validation_result_id: ID,
+    label: AssetLabel,
+    files: dict[str, tuple[Path, ContentType]],
+) -> None:
+    """Make ``files`` the ``label`` assets of a ValidationResult, keyed by file name.
+
+    An asset whose path is one of the new file names is replaced by that file, new
+    names are uploaded, and the remaining assets with ``label`` are deleted last.
+    entitycore allows one asset per path, so a same-named asset is deleted just
+    before its replacement is uploaded (``Client.update_asset_file``).
+    """
+    existing = [
+        asset
+        for asset in client.get_entity_assets(
+            validation_result_id, entity_type=ValidationResult
+        ).all()
+        if asset.label == label
+    ]
+    by_path = {asset.path: asset for asset in existing}
+    for file_name, (file_path, content_type) in files.items():
+        if file_name in by_path:
+            client.update_asset_file(
+                entity_id=validation_result_id,
+                entity_type=ValidationResult,
+                asset_id=by_path[file_name].id,
+                file_path=file_path,
+                file_content_type=content_type,
+            )
+        else:
+            client.upload_file(
+                entity_id=validation_result_id,
+                entity_type=ValidationResult,
+                file_path=file_path,
+                file_content_type=content_type,
+                asset_label=label,
+            )
+    for asset in existing:
+        if asset.path not in files:
+            client.delete_asset(
+                entity_id=validation_result_id,
+                entity_type=ValidationResult,
+                asset_id=asset.id,
+            )
+
+
+def update_validation_result(
+    *,
+    client: Client,
+    validation_result_id: ID,
+    passed: bool,
+    figure_files: list[Path] | None = None,
+    details_text: str | None = None,
+) -> ValidationResult:
+    """Update the verdict of an existing ValidationResult and, optionally, its assets.
+
+    Unlike :func:`register_validation_result`, nothing is looked up: the caller
+    chooses the result to update. All inputs are checked before anything changes,
+    and only the assets passed in are replaced.
+
+    Args:
+        client: Entitysdk client.
+        validation_result_id: ID of the ValidationResult to update.
+        passed: The new verdict.
+        figure_files: ``.pdf``/``.png`` files that replace the result's
+            ``validation_result_figure`` assets; figures not among them are
+            deleted. ``None`` keeps the existing figures.
+        details_text: Text that replaces the result's ``validation_result_details``
+            asset (same file name as :func:`register_validation_result` uses).
+            ``None`` keeps the existing details.
+
+    Returns:
+        The updated ValidationResult.
+
+    Raises:
+        ValueError: If a figure file is missing, unsupported or named like another,
+            or ``details_text`` is empty. Nothing is changed then.
+    """
+    figures = None if figure_files is None else _checked_figures(figure_files)
+    if details_text is not None and not details_text.strip():
+        raise ValueError("details_text is empty; pass None to keep the existing details.")
+
+    # The verdict first: on a result owned by another user this fails (403) before any
+    # asset is touched.
+    validation_result = client.update_entity(
+        entity_id=validation_result_id,
+        entity_type=ValidationResult,
+        attrs_or_entity={"passed": passed},
+    )
+    if figures is not None:
+        _replace_assets(client, validation_result_id, AssetLabel.validation_result_figure, figures)
+    if details_text is not None:
+        details_name = f"{validation_result.name.replace(' ', '')}_validation_details.txt"
+        with tempfile.TemporaryDirectory() as tmpdir:
+            details_path = Path(tmpdir) / details_name
+            details_path.write_text(details_text, encoding="utf-8")
+            _replace_assets(
+                client,
+                validation_result_id,
+                AssetLabel.validation_result_details,
+                {details_name: (details_path, ContentType.text_plain)},
+            )
+    L.info(
+        "Updated ValidationResult(id=%s, name=%r, passed=%s)",
+        validation_result.id,
+        validation_result.name,
+        validation_result.passed,
+    )
+    return validation_result
+
+
 def register_memodel_validation_results(
     *,
     client: Client,
