@@ -37,6 +37,33 @@ class AgentType(StrEnum):
     consortium = "consortium"
 
 
+class AnalysisNotebookEnvironmentReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class AnalysisNotebookResultReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class AnalysisNotebookTemplateReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
 class AnalysisScale(StrEnum):
     subcellular = "subcellular"
     cellular = "cellular"
@@ -68,6 +95,7 @@ class ApiErrorCode(StrEnum):
     S3_CANNOT_CREATE_PRESIGNED_URL = "S3_CANNOT_CREATE_PRESIGNED_URL"
     OPENAI_API_KEY_MISSING = "OPENAI_API_KEY_MISSING"
     OPENAI_API_ERROR = "OPENAI_API_ERROR"
+    QUERY_TIMEOUT = "QUERY_TIMEOUT"
 
 
 class AssetLabel(StrEnum):
@@ -143,6 +171,33 @@ class AssetStatus(StrEnum):
     uploading = "uploading"
 
 
+class BrainAtlasReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class BrainAtlasRegionReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class CellCompositionReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
 class CellMorphologyGenerationType(StrEnum):
     digital_reconstruction = "digital_reconstruction"
     modified_reconstruction = "modified_reconstruction"
@@ -157,9 +212,53 @@ class CellMorphologyProtocolDesign(StrEnum):
     topological_synthesis = "topological_synthesis"
 
 
+class CellMorphologyProtocolReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class CellMorphologyReadExpand(StrEnum):
+    measurement_annotation = "measurement_annotation"
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_em_dense_reconstruction_dataset_cell_morphology = (
+        "generated_from_derivations:em_dense_reconstruction_dataset_cell_morphology"
+    )
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
 class CircuitBuildCategory(StrEnum):
     computational_model = "computational_model"
     em_reconstruction = "em_reconstruction"
+
+
+class CircuitReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_circuit_customization = (
+        "generated_from_derivations:circuit_customization"
+    )
+    generated_from_derivations_circuit_extraction = "generated_from_derivations:circuit_extraction"
+    generated_from_derivations_circuit_rewiring = "generated_from_derivations:circuit_rewiring"
+    generated_from_derivations_emodel_circuit = "generated_from_derivations:emodel_circuit"
+    generated_from_derivations_circuit_simplification = (
+        "generated_from_derivations:circuit_simplification"
+    )
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_circuit_customization = "used_by_derivations:circuit_customization"
+    used_by_derivations_circuit_extraction = "used_by_derivations:circuit_extraction"
+    used_by_derivations_circuit_rewiring = "used_by_derivations:circuit_rewiring"
+    used_by_derivations_circuit_simplification = "used_by_derivations:circuit_simplification"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
 
 
 class CircuitScale(StrEnum):
@@ -215,9 +314,50 @@ class EMCellMeshGenerationMethod(StrEnum):
     marching_cubes = "marching_cubes"
 
 
+class EMCellMeshReadExpand(StrEnum):
+    measurement_annotation = "measurement_annotation"
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
 class EMCellMeshType(StrEnum):
     static = "static"
     dynamic = "dynamic"
+
+
+class EMDenseReconstructionDatasetReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_em_dense_reconstruction_dataset_cell_morphology = (
+        "used_by_derivations:em_dense_reconstruction_dataset_cell_morphology"
+    )
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class EModelReadExpandedExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_emodel_circuit = "used_by_derivations:emodel_circuit"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class ElectricalCellRecordingReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
 
 
 class ElectricalRecordingOrigin(StrEnum):
@@ -225,6 +365,15 @@ class ElectricalRecordingOrigin(StrEnum):
     in_vitro = "in_vitro"
     in_silico = "in_silico"
     unknown = "unknown"
+
+
+class ElectricalRecordingStimulusReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
 
 
 class ElectricalRecordingStimulusShape(StrEnum):
@@ -261,39 +410,6 @@ class ElectrodeType(StrEnum):
     neuropixels_v2 = "neuropixels_v2"
     neuropixels_ultra = "neuropixels_ultra"
     custom = "custom"
-
-
-class EntityExpand(StrEnum):
-    generated_from_derivations = "generated_from_derivations"
-    used_by_derivations = "used_by_derivations"
-    generated_from_derivations_circuit_customization = (
-        "generated_from_derivations:circuit_customization"
-    )
-    generated_from_derivations_circuit_extraction = "generated_from_derivations:circuit_extraction"
-    generated_from_derivations_circuit_rewiring = "generated_from_derivations:circuit_rewiring"
-    generated_from_derivations_emodel_circuit = "generated_from_derivations:emodel_circuit"
-    generated_from_derivations_em_dense_reconstruction_dataset_cell_morphology = (
-        "generated_from_derivations:em_dense_reconstruction_dataset_cell_morphology"
-    )
-    generated_from_derivations_circuit_simplification = (
-        "generated_from_derivations:circuit_simplification"
-    )
-    generated_from_derivations_research_log_input = "generated_from_derivations:research_log_input"
-    generated_from_derivations_research_log_output = (
-        "generated_from_derivations:research_log_output"
-    )
-    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
-    used_by_derivations_circuit_customization = "used_by_derivations:circuit_customization"
-    used_by_derivations_circuit_extraction = "used_by_derivations:circuit_extraction"
-    used_by_derivations_circuit_rewiring = "used_by_derivations:circuit_rewiring"
-    used_by_derivations_emodel_circuit = "used_by_derivations:emodel_circuit"
-    used_by_derivations_em_dense_reconstruction_dataset_cell_morphology = (
-        "used_by_derivations:em_dense_reconstruction_dataset_cell_morphology"
-    )
-    used_by_derivations_circuit_simplification = "used_by_derivations:circuit_simplification"
-    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
-    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
-    used_by_derivations_unspecified = "used_by_derivations:unspecified"
 
 
 class EntityLifecycleStatus(StrEnum):
@@ -420,49 +536,130 @@ class ExecutorType(StrEnum):
     jupyter_notebook = "jupyter_notebook"
 
 
+class ExperimentalBoutonDensityReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class ExperimentalNeuronDensityReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class ExperimentalSynapsesPerConnectionReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
 class ExternalSource(StrEnum):
     channelpedia = "channelpedia"
     modeldb = "modeldb"
     icgenealogy = "icgenealogy"
 
 
-class MeasurableEntity(StrEnum):
-    cell_morphology = "cell_morphology"
-    em_cell_mesh = "em_cell_mesh"
-
-
-class MeasurableEntityExpand(StrEnum):
+class ExtracellularRecordingReadExpand(StrEnum):
     generated_from_derivations = "generated_from_derivations"
-    used_by_derivations = "used_by_derivations"
-    generated_from_derivations_circuit_customization = (
-        "generated_from_derivations:circuit_customization"
-    )
-    generated_from_derivations_circuit_extraction = "generated_from_derivations:circuit_extraction"
-    generated_from_derivations_circuit_rewiring = "generated_from_derivations:circuit_rewiring"
-    generated_from_derivations_emodel_circuit = "generated_from_derivations:emodel_circuit"
-    generated_from_derivations_em_dense_reconstruction_dataset_cell_morphology = (
-        "generated_from_derivations:em_dense_reconstruction_dataset_cell_morphology"
-    )
-    generated_from_derivations_circuit_simplification = (
-        "generated_from_derivations:circuit_simplification"
-    )
-    generated_from_derivations_research_log_input = "generated_from_derivations:research_log_input"
-    generated_from_derivations_research_log_output = (
-        "generated_from_derivations:research_log_output"
-    )
     generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
-    used_by_derivations_circuit_customization = "used_by_derivations:circuit_customization"
-    used_by_derivations_circuit_extraction = "used_by_derivations:circuit_extraction"
-    used_by_derivations_circuit_rewiring = "used_by_derivations:circuit_rewiring"
-    used_by_derivations_emodel_circuit = "used_by_derivations:emodel_circuit"
-    used_by_derivations_em_dense_reconstruction_dataset_cell_morphology = (
-        "used_by_derivations:em_dense_reconstruction_dataset_cell_morphology"
-    )
-    used_by_derivations_circuit_simplification = "used_by_derivations:circuit_simplification"
+    used_by_derivations = "used_by_derivations"
     used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
     used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
     used_by_derivations_unspecified = "used_by_derivations:unspecified"
-    measurement_annotation = "measurement_annotation"
+
+
+class IonChannelModelExpandedExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class IonChannelModelingCampaignReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class IonChannelModelingConfigReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class IonChannelRecordingReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class MEModelCalibrationResultReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class MEModelReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+    morphology_measurement_annotation = "morphology.measurement_annotation"
+    morphology_generated_from_derivations = "morphology.generated_from_derivations"
+    morphology_generated_from_derivations_em_dense_reconstruction_dataset_cell_morphology = (
+        "morphology.generated_from_derivations:em_dense_reconstruction_dataset_cell_morphology"
+    )
+    morphology_generated_from_derivations_unspecified = (
+        "morphology.generated_from_derivations:unspecified"
+    )
+    morphology_used_by_derivations = "morphology.used_by_derivations"
+    morphology_used_by_derivations_research_log_input = (
+        "morphology.used_by_derivations:research_log_input"
+    )
+    morphology_used_by_derivations_research_log_output = (
+        "morphology.used_by_derivations:research_log_output"
+    )
+    morphology_used_by_derivations_unspecified = "morphology.used_by_derivations:unspecified"
+    emodel_generated_from_derivations = "emodel.generated_from_derivations"
+    emodel_generated_from_derivations_unspecified = "emodel.generated_from_derivations:unspecified"
+    emodel_used_by_derivations = "emodel.used_by_derivations"
+    emodel_used_by_derivations_emodel_circuit = "emodel.used_by_derivations:emodel_circuit"
+    emodel_used_by_derivations_research_log_input = "emodel.used_by_derivations:research_log_input"
+    emodel_used_by_derivations_research_log_output = (
+        "emodel.used_by_derivations:research_log_output"
+    )
+    emodel_used_by_derivations_unspecified = "emodel.used_by_derivations:unspecified"
+
+
+class MeasurableEntity(StrEnum):
+    cell_morphology = "cell_morphology"
+    em_cell_mesh = "em_cell_mesh"
 
 
 class MeasurementStatistic(StrEnum):
@@ -511,10 +708,104 @@ class RepairPipelineType(StrEnum):
     repaired = "repaired"
 
 
+class ResearchLogReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_research_log_input = "generated_from_derivations:research_log_input"
+    generated_from_derivations_research_log_output = (
+        "generated_from_derivations:research_log_output"
+    )
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
 class Sex(StrEnum):
     male = "male"
     female = "female"
     unknown = "unknown"
+
+
+class SimulatableExtracellularRecordingArrayReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class SimulationCampaignReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class SimulationReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class SimulationResultReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class SingleNeuronSimulationReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class SingleNeuronSynaptomeReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class SingleNeuronSynaptomeSimulationReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class SkeletonizationCampaignReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class SkeletonizationConfigReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
 
 
 class SlicingDirectionType(StrEnum):
@@ -547,6 +838,15 @@ class StructuralDomain(StrEnum):
     soma = "soma"
     neuron_morphology = "neuron_morphology"
     not_applicable = "not_applicable"
+
+
+class SubjectReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
 
 
 class TargetSimulator(StrEnum):
@@ -606,6 +906,15 @@ class TaskActivityType(StrEnum):
     memodel_build__execution = "memodel_build__execution"
 
 
+class TaskConfigReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
 class TaskConfigType(StrEnum):
     circuit_simulation__campaign = "circuit_simulation__campaign"
     circuit_simulation__config = "circuit_simulation__config"
@@ -653,6 +962,15 @@ class TaskConfigType(StrEnum):
     memodel_build__config = "memodel_build__config"
 
 
+class TaskResultReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
 class TaskResultType(StrEnum):
     circuit_simulation__result = "circuit_simulation__result"
     circuit_extraction__circuit = "circuit_extraction__circuit"
@@ -672,6 +990,15 @@ class TaskResultType(StrEnum):
     circuit_synaptic_physiology_assignment__result = (
         "circuit_synaptic_physiology_assignment__result"
     )
+
+
+class ValidationResultReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
 
 
 class ValidationStatus(StrEnum):
