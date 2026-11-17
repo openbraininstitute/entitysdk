@@ -1,8 +1,9 @@
 """Pydantic helpers for static/runtime field typing."""
 
-from typing import Any
+from types import NoneType, UnionType
+from typing import Annotated, Any, Union, get_args, get_origin
 
-from pydantic import GetCoreSchemaHandler, GetPydanticSchema
+from pydantic import MISSING, BaseModel, GetCoreSchemaHandler, GetPydanticSchema, ValidationError
 from pydantic_core import core_schema
 
 
@@ -19,4 +20,51 @@ def _nullable_schema(source_type: Any, handler: GetCoreSchemaHandler) -> core_sc
 # Annotate as ``T`` (not ``T | MISSING`` — pyright does not erase MISSING from
 # unions). Default to ``MISSING`` with ``# type: ignore[assignment]``.
 # ``RuntimeNullableField`` accepts wire ``null``. Example: Identifiable.id.
+#
+# On deserialize (see ``reject_missing_non_nullable_fields``), a non-nullable
+# field left as ``MISSING`` because the key was omitted is a validation error.
+# ``RuntimeNullableField`` stays wire-optional (omit → MISSING, null → None).
+# Local construction may still leave non-nullable fields as ``MISSING``.
 RuntimeNullableField = GetPydanticSchema(_nullable_schema)
+
+
+def _annotation_allows_none(annotation: Any) -> bool:
+    origin = get_origin(annotation)
+    if origin is Annotated:
+        return _annotation_allows_none(get_args(annotation)[0])
+    if origin is Union or origin is UnionType:
+        return any(arg is NoneType or arg is type(None) for arg in get_args(annotation))
+    return annotation is NoneType or annotation is type(None)
+
+
+def _field_allows_missing(field: Any) -> bool:
+    if _annotation_allows_none(field.annotation):
+        return True
+    return any(meta is RuntimeNullableField for meta in field.metadata)
+
+
+def reject_missing_non_nullable_fields(model: BaseModel) -> None:
+    """Raise if top-level non-nullable fields are still ``MISSING`` after deserialize.
+
+    Nested expansions are often partial; only the root resource is checked.
+    ``T | None`` and ``RuntimeNullableField`` may remain ``MISSING`` when omitted.
+    """
+    missing_fields = [
+        name
+        for name, field in type(model).model_fields.items()
+        if getattr(model, name) is MISSING and not _field_allows_missing(field)
+    ]
+    if not missing_fields:
+        return
+
+    raise ValidationError.from_exception_data(
+        title=type(model).__name__,
+        line_errors=[
+            {
+                "type": "missing",
+                "loc": (name,),
+                "input": MISSING,
+            }
+            for name in missing_fields
+        ],
+    )

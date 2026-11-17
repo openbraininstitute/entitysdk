@@ -1,8 +1,24 @@
 {
-    "authorized_public": false,
-	"id" : "6fa52c8b-e9df-4f10-bdee-07c9af59a5ba",
-	"passed" : true,
-	"name" : "Simulatable Neuron Spiking Validation",
-	"validated_entity_id" : "54004e96-cef0-4f1c-8c89-d9cdf7b94e43",
-    "assets": []
+  "authorized_public": false,
+  "id": "6fa52c8b-e9df-4f10-bdee-07c9af59a5ba",
+  "passed": true,
+  "name": "Simulatable Neuron Spiking Validation",
+  "validated_entity_id": "54004e96-cef0-4f1c-8c89-d9cdf7b94e43",
+  "assets": [],
+  "creation_date": "2025-01-01T00:00:00Z",
+  "update_date": "2025-01-01T00:00:00Z",
+  "created_by": {
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "test-user",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "update_date": "2025-01-01T00:00:00Z"
+  },
+  "updated_by": {
+    "id": "00000000-0000-4000-8000-000001234678",
+    "pref_label": "test-user",
+    "creation_date": "2025-01-01T00:00:00Z",
+    "update_date": "2025-01-01T00:00:00Z"
+  },
+  "type": "validation_result",
+  "authorized_project_id": "00000000-0000-4000-8000-000001234678"
 }

@@ -4,6 +4,7 @@ from typing import Annotated
 
 from pydantic import Field
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.entity import Entity
 from entitysdk.models.scientific_artifact import ScientificArtifact
 from entitysdk.types import (
@@ -15,7 +16,7 @@ from entitysdk.types import (
 )
 
 
-class ElectricalRecordingStimulus(Entity):
+class ElectricalRecordingStimulus(NameDescriptionMixin, Entity):
     """Electrical cell recording stimulus model."""
 
     dt: float | None = None
@@ -26,7 +27,7 @@ class ElectricalRecordingStimulus(Entity):
     recording_id: ID | None = None
 
 
-class ElectricalRecording(ScientificArtifact):
+class ElectricalRecording(NameDescriptionMixin, ScientificArtifact):
     """Electrical recording base."""
 
     ljp: Annotated[

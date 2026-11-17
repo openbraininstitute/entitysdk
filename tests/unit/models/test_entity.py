@@ -22,7 +22,6 @@ def test_entity_subclasses_are_fully_defined_after_import():
 def test_entity_accepts_derivation_lists():
     derivation_id = uuid.uuid4()
     entity = Entity(
-        name="entity-with-derivations",
         generated_from_derivations=[
             Derivation(id=derivation_id, label="generated"),
         ],
@@ -35,7 +34,7 @@ def test_entity_accepts_derivation_lists():
 
 
 def test_entity_accepts_contributions():
-    entity = Entity(name="entity-with-contributions", contributions=[])
+    entity = Entity(contributions=[])
 
     assert entity.contributions == []
 
@@ -43,7 +42,6 @@ def test_entity_accepts_contributions():
 def test_entity_model_validate_accepts_derivation_payload():
     entity = Entity.model_validate(
         {
-            "name": "entity",
             "generated_from_derivations": [{"id": str(uuid.uuid4()), "label": "derivation"}],
             "contributions": [],
         }
@@ -56,7 +54,6 @@ def test_entity_model_validate_accepts_derivation_payload():
 def test_entity_model_validate_accepts_contribution_payload():
     entity = Entity.model_validate(
         {
-            "name": "entity",
             "contributions": [
                 {
                     "agent": {

@@ -7,6 +7,7 @@ from pydantic import TypeAdapter
 from entitysdk.config import settings
 from entitysdk.models.activity import Activity
 from entitysdk.models.base import BaseModel
+from entitysdk.utils.pydantic import reject_missing_non_nullable_fields
 
 SERIALIZATION_EXCLUDE_KEYS = {
     "assets",
@@ -28,13 +29,20 @@ def deserialize_model(json_data: dict, entity_type: type[TBaseModel]) -> TBaseMo
 
     The presence of extra fields can be tolerated only during the deserialization
     and not in the model itself, accordingly to settings.deserialize_model_extra.
+
+    Non-nullable fields left as ``MISSING`` (key omitted) raise ``ValidationError``.
+    Local model construction may still use ``MISSING`` to omit fields on serialize.
     """
-    return entity_type.model_validate(json_data, extra=settings.deserialize_model_extra)
+    model = entity_type.model_validate(json_data, extra=settings.deserialize_model_extra)
+    reject_missing_non_nullable_fields(model)
+    return model
 
 
 def deserialize_model_json(json: str | bytes, entity_type: type[TBaseModel]) -> TBaseModel:
     """Deserialize a JSON document into an entity."""
-    return entity_type.model_validate_json(json, extra=settings.deserialize_model_extra)
+    model = entity_type.model_validate_json(json, extra=settings.deserialize_model_extra)
+    reject_missing_non_nullable_fields(model)
+    return model
 
 
 def serialize_model(model: BaseModel) -> dict:

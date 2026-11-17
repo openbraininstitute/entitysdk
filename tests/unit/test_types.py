@@ -33,13 +33,13 @@ def _asset(*, asset_id: uuid.UUID | None = MOCK_UUID) -> Asset:
 
 
 def test_ensure_id_is_none_accepts_entity_without_id():
-    entity = Entity(name="entity")
+    entity = Entity()
     assert entity.id is MISSING
     assert ensure_id_is_none(entity) is entity
 
 
 def test_ensure_id_is_none_rejects_entity_with_id():
-    entity = Entity(id=MOCK_UUID, name="entity")
+    entity = Entity(id=MOCK_UUID)
     with pytest.raises(ValueError, match="Resource id must be None"):
         ensure_id_is_none(entity)
 
@@ -50,16 +50,16 @@ def test_ensure_id_is_none_accepts_asset_without_id():
 
 
 def test_ensure_id_is_set_accepts_entity_with_id():
-    entity = Entity(id=MOCK_UUID, name="entity")
+    entity = Entity(id=MOCK_UUID)
     assert ensure_id_is_set(entity) is entity
 
 
 def test_ensure_id_is_set_rejects_entity_without_id():
-    entity = Entity(name="entity")
+    entity = Entity()
     with pytest.raises(ValueError, match="Resource must have an id"):
         ensure_id_is_set(entity)
 
-    entity = Entity(name="entity", id=None)
+    entity = Entity(id=None)
     with pytest.raises(ValueError, match="Resource must have an id"):
         ensure_id_is_set(entity)
 

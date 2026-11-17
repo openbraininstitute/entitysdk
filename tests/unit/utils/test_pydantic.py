@@ -56,3 +56,30 @@ def test_runtime_nullable_missing_accepts_json_null():
 
     assert model.value is None
     assert model.model_dump() == {"value": None}
+
+
+class _NonNullableMissingModel(BaseModel):
+    required_value: Annotated[int, Field(description="required int")] = MISSING  # type: ignore[assignment]
+    optional_value: Annotated[int | None, Field(description="optional int")] = MISSING  # type: ignore[assignment]
+
+
+def test_reject_missing_non_nullable_fields():
+    from entitysdk.utils.pydantic import reject_missing_non_nullable_fields
+
+    model = _NonNullableMissingModel.model_validate({})
+    assert model.required_value is MISSING
+    assert model.optional_value is MISSING
+
+    with pytest.raises(ValidationError) as exc_info:
+        reject_missing_non_nullable_fields(model)
+
+    assert "required_value" in str(exc_info.value)
+    assert "optional_value" not in str(exc_info.value)
+
+
+def test_reject_missing_non_nullable_fields_passes_when_set():
+    from entitysdk.utils.pydantic import reject_missing_non_nullable_fields
+
+    model = _NonNullableMissingModel.model_validate({"required_value": 1})
+    reject_missing_non_nullable_fields(model)
+    assert model.optional_value is MISSING

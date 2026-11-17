@@ -4,6 +4,7 @@ from typing import Annotated
 
 from pydantic import Field
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.cell_morphology import CellMorphology
 from entitysdk.models.contribution import Contribution
@@ -15,7 +16,7 @@ from entitysdk.models.mtype import MTypeClass
 from entitysdk.models.taxonomy import Species, Strain
 
 
-class EModel(Entity):
+class EModel(NameDescriptionMixin, Entity):
     """Electrical cell model."""
 
     species: Annotated[

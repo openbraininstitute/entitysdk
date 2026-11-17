@@ -4,6 +4,7 @@ from typing import Annotated
 
 from pydantic import MISSING, Field
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.base import BaseModel
 from entitysdk.models.contribution import Contribution
 from entitysdk.models.scientific_artifact import ScientificArtifact
@@ -82,17 +83,9 @@ class NeuronBlock(BaseModel):
     ] = None
 
 
-class IonChannelModel(ScientificArtifact):
+class IonChannelModel(NameDescriptionMixin, ScientificArtifact):
     """Ion channel mechanism model."""
 
-    name: Annotated[  # pyright: ignore[reportGeneralTypeIssues, reportIncompatibleVariableOverride]
-        str,
-        Field(
-            description="The name of the ion channel model "
-            "(e.g., the SUFFIX or POINT_PROCESS name).",
-            examples=["Ca_HVA"],
-        ),
-    ]
     conductance_name: Annotated[
         str | None,
         Field(
@@ -110,13 +103,6 @@ class IonChannelModel(ScientificArtifact):
         Field(
             description="The SUFFIX of the ion channel model as defined in the NMODL file ",
             examples=["Ca_HVA"],
-        ),
-    ]
-    description: Annotated[  # pyright: ignore[reportGeneralTypeIssues, reportIncompatibleVariableOverride]
-        str,
-        Field(
-            description="A description of the ion channel mechanism.",
-            examples=["High-voltage activated calcium channel"],
         ),
     ]
     contributions: Annotated[

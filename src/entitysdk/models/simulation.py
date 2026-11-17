@@ -1,5 +1,6 @@
 """Simulation model."""
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.entity import Entity
 from entitysdk.models.simulatable_extracellular_recording_array import (
     SimulatableExtracellularRecordingArray,
@@ -7,7 +8,7 @@ from entitysdk.models.simulatable_extracellular_recording_array import (
 from entitysdk.types import ID
 
 
-class Simulation(Entity):
+class Simulation(NameDescriptionMixin, Entity):
     """Simulation model."""
 
     simulation_campaign_id: ID

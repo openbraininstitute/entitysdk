@@ -4,6 +4,7 @@ from typing import Annotated, Any, ClassVar, Literal
 
 from pydantic import ConfigDict, Field, HttpUrl, TypeAdapter
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.entity import Entity
 from entitysdk.types import (
     CellMorphologyGenerationType,
@@ -15,7 +16,7 @@ from entitysdk.types import (
 )
 
 
-class CellMorphologyProtocolBase(Entity):
+class CellMorphologyProtocolBase(NameDescriptionMixin, Entity):
     """Cell Morphology Protocol Base, used by all the protocols."""
 
     # forbid extra parameters to prevent providing attributes of other classes by mistake

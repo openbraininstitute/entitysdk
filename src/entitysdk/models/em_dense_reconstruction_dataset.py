@@ -4,11 +4,12 @@ from typing import Annotated
 
 from pydantic import Field, HttpUrl
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.scientific_artifact import ScientificArtifact
 from entitysdk.types import SlicingDirectionType
 
 
-class EMDenseReconstructionDataset(ScientificArtifact):
+class EMDenseReconstructionDataset(NameDescriptionMixin, ScientificArtifact):
     """EM Dense Reconstruction Dataset model."""
 
     protocol_document: Annotated[

@@ -64,7 +64,6 @@
   "mesh_type": "static",
   "em_dense_reconstruction_dataset": {
     "id": "123e4567-e89b-12d3-a456-426614174006",
-    "name": "Test Dataset",
     "type": "em_dense_reconstruction_dataset",
     "assets": [],
     "authorized_public": false

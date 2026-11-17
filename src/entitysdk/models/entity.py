@@ -10,27 +10,12 @@ from pydantic import MISSING, Field
 from entitysdk.mixin import HasAssets
 from entitysdk.models.core import Identifiable
 from entitysdk.types import ID, EntityLifecycleStatus, EntityType
+from entitysdk.utils.pydantic import RuntimeNullableField
 
 
 class Entity(Identifiable, HasAssets):
     """Entity is a model with id and authorization."""
 
-    # Name/description are non-nullable on entitycore when present (NameDescriptionMixin).
-    # Omit with MISSING for entity types that lack them or when unset on create.
-    name: Annotated[
-        str,
-        Field(
-            examples=["Entity 1"],
-            description="The name of the entity.",
-        ),
-    ] = MISSING  # type: ignore[assignment]
-    description: Annotated[
-        str,
-        Field(
-            examples=["This is entity 1"],
-            description="The description of the entity.",
-        ),
-    ] = MISSING  # type: ignore[assignment]
     # Server-assigned from the entity route / SQLAlchemy polymorphic identity.
     # Not on EntityCreate; clients must not send it (excluded in serdes).
     type: Annotated[
@@ -47,9 +32,11 @@ class Entity(Identifiable, HasAssets):
             description="Whether the resource is authorized to be public.",
         ),
     ] = False
-    # Server-assigned from project context headers; not on EntityCreate (excluded in serdes).
+    # Present on EntityRead / NestedEntityRead; omitted on NestedEntityBareRead (derivations).
+    # RuntimeNullable: omit → MISSING, null → None; excluded from serialize.
     authorized_project_id: Annotated[
         ID,
+        RuntimeNullableField,
         Field(
             examples=[UUID("12345678-1234-1234-1234-123456789012")],
             description="The project ID owning the resource (server-assigned).",

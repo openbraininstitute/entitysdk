@@ -2,11 +2,12 @@
 
 from typing import Any
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.entity import Entity
 from entitysdk.types import TaskResultType
 
 
-class TaskResult(Entity):
+class TaskResult(NameDescriptionMixin, Entity):
     """Generic task config model."""
 
     task_result_type: TaskResultType

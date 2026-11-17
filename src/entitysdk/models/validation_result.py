@@ -2,7 +2,7 @@
 
 from typing import Annotated
 
-from pydantic import Field
+from pydantic import MISSING, Field
 
 from entitysdk.models.entity import Entity
 from entitysdk.types import ID
@@ -11,6 +11,7 @@ from entitysdk.types import ID
 class ValidationResult(Entity):
     """Validation result."""
 
+    # entitycore ValidationResult has name but not NameDescriptionMixin / description.
     passed: Annotated[
         bool,
         Field(
@@ -18,13 +19,13 @@ class ValidationResult(Entity):
             examples=[True],
         ),
     ]
-    name: Annotated[  # pyright: ignore[reportGeneralTypeIssues, reportIncompatibleVariableOverride]
+    name: Annotated[
         str,
         Field(
             description="Name of the validation.",
             examples=["Neuron spiking validation"],
         ),
-    ]
+    ] = MISSING  # type: ignore[assignment]
     validated_entity_id: Annotated[
         ID,
         Field(

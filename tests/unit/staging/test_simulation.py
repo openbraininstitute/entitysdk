@@ -216,6 +216,8 @@ def _recording_array(array_id, asset_id):
         id=array_id,
         name="array",
         description="array",
+        type="simulatable_extracellular_recording_array",
+        authorized_project_id=uuid.UUID("12341234-1234-1234-1234-123412341234"),
         electrode_type="custom",
         circuit_id=uuid.uuid4(),
         assets=[
