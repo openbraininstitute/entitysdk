@@ -87,10 +87,10 @@ def _serialize_activity(model: Activity) -> dict:
         exclude_none=False,
     )
 
-    if used := data.pop("used"):
+    if used := data.pop("used", None):
         data["used_ids"] = [u["id"] for u in used]
 
-    if generated := data.pop("generated"):
+    if generated := data.pop("generated", None):
         data["generated_ids"] = [g["id"] for g in generated]
 
     data = _convert_identifiables_to_ids(data)

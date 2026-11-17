@@ -1,6 +1,7 @@
 import uuid
 
 import pytest
+from pydantic import MISSING
 
 from entitysdk.models.asset import Asset
 from entitysdk.models.entity import Entity
@@ -33,6 +34,7 @@ def _asset(*, asset_id: uuid.UUID | None = MOCK_UUID) -> Asset:
 
 def test_ensure_id_is_none_accepts_entity_without_id():
     entity = Entity(name="entity")
+    assert entity.id is MISSING
     assert ensure_id_is_none(entity) is entity
 
 
@@ -54,6 +56,10 @@ def test_ensure_id_is_set_accepts_entity_with_id():
 
 def test_ensure_id_is_set_rejects_entity_without_id():
     entity = Entity(name="entity")
+    with pytest.raises(ValueError, match="Resource must have an id"):
+        ensure_id_is_set(entity)
+
+    entity = Entity(name="entity", id=None)
     with pytest.raises(ValueError, match="Resource must have an id"):
         ensure_id_is_set(entity)
 

@@ -3,7 +3,7 @@
 from datetime import datetime
 
 import pytest
-from pydantic import ValidationError
+from pydantic import MISSING, ValidationError
 
 from entitysdk.models.core import PlatformUser
 from entitysdk.models.entity import Entity
@@ -37,13 +37,13 @@ def test_identifiable_accepts_json_null(field_name):
     assert getattr(entity, field_name) is None
 
 
-def test_identifiable_defaults_metadata_fields_to_none():
+def test_identifiable_defaults_metadata_fields_to_missing():
     entity = Entity(name="entity")
-    assert entity.id is None
-    assert entity.creation_date is None
-    assert entity.update_date is None
-    assert entity.created_by is None
-    assert entity.updated_by is None
+    assert entity.id is MISSING
+    assert entity.creation_date is MISSING
+    assert entity.update_date is MISSING
+    assert entity.created_by is MISSING
+    assert entity.updated_by is MISSING
 
 
 def test_identifiable_accepts_populated_metadata_fields():

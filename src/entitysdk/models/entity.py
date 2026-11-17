@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Annotated
 from uuid import UUID
 
-from pydantic import Field
+from pydantic import MISSING, Field
 
 from entitysdk.mixin import HasAssets
 from entitysdk.models.core import Identifiable
@@ -16,26 +16,26 @@ class Entity(Identifiable, HasAssets):
     """Entity is a model with id and authorization."""
 
     name: Annotated[
-        str | None,
+        str | None | MISSING,
         Field(
             examples=["Entity 1"],
             description="The name of the entity.",
         ),
-    ] = None
+    ] = MISSING
     description: Annotated[
-        str | None,
+        str | None | MISSING,
         Field(
             examples=["This is entity 1"],
             description="The description of the entity.",
         ),
-    ] = None
+    ] = MISSING
     type: Annotated[
-        EntityType | None,
+        EntityType | None | MISSING,
         Field(
             examples=["license"],
             description="The type of this Entity.",
         ),
-    ] = None
+    ] = MISSING
     authorized_public: Annotated[
         bool,
         Field(
@@ -44,25 +44,26 @@ class Entity(Identifiable, HasAssets):
         ),
     ] = False
     authorized_project_id: Annotated[
-        ID | None,
+        ID | None | MISSING,
         Field(
             examples=[UUID("12345678-1234-1234-1234-123456789012")],
             description="The project ID owning the resource.",
         ),
-    ] = None
+    ] = MISSING
     contributions: Annotated[
-        list[Contribution] | None, Field(description="The constributions for this entity.")
-    ] = None
+        list[Contribution] | None | MISSING,
+        Field(description="The constributions for this entity."),
+    ] = MISSING
     legacy_id: Annotated[
-        list[str] | None,
+        list[str] | None | MISSING,
         Field(description="Legacy NEXUS ids."),
-    ] = None
+    ] = MISSING
     lifecycle_status: Annotated[
         EntityLifecycleStatus, Field(description="The lifecycle status of this entity.")
     ] = EntityLifecycleStatus.active
 
-    generated_from_derivations: list[Derivation] | None = None
-    used_by_derivations: list[Derivation] | None = None
+    generated_from_derivations: list[Derivation] | None | MISSING = MISSING
+    used_by_derivations: list[Derivation] | None | MISSING = MISSING
 
 
 from entitysdk.models.contribution import Contribution  # noqa: E402

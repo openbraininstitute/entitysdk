@@ -2,7 +2,7 @@
 
 from typing import Annotated
 
-from pydantic import Field
+from pydantic import MISSING, Field
 
 from entitysdk.models.base import BaseModel
 from entitysdk.models.contribution import Contribution
@@ -94,17 +94,17 @@ class IonChannelModel(ScientificArtifact):
         ),
     ]
     conductance_name: Annotated[
-        str | None,
+        str | None | MISSING,
         Field(
             description="Name of conductance if present.",
         ),
-    ] = None
+    ] = MISSING
     max_permeability_name: Annotated[
-        str | None,
+        str | None | MISSING,
         Field(
             description="Name of maximum permeability if present.",
         ),
-    ] = None
+    ] = MISSING
     nmodl_suffix: Annotated[
         str,
         Field(
@@ -120,9 +120,9 @@ class IonChannelModel(ScientificArtifact):
         ),
     ]
     contributions: Annotated[
-        list[Contribution] | None,
+        list[Contribution] | None | MISSING,
         Field(description="List of contributions related to this mechanism."),
-    ] = None
+    ] = MISSING
     is_ljp_corrected: Annotated[
         bool,
         Field(
@@ -150,4 +150,4 @@ class IonChannelModel(ScientificArtifact):
         NeuronBlock,
         Field(description="Variables declared in the NEURON block of the mod file."),
     ]
-    legacy_id: list[str] | None = None
+    legacy_id: list[str] | None | MISSING = MISSING

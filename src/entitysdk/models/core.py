@@ -3,7 +3,7 @@
 from datetime import datetime
 from typing import Annotated, Literal
 
-from pydantic import Field
+from pydantic import MISSING, Field
 
 from entitysdk.models.base import BaseModel
 from entitysdk.types import ID, AgentType
@@ -39,42 +39,42 @@ class Identifiable(BaseModel):
     """Identifiable is a model with an id."""
 
     id: Annotated[
-        ID,
+        ID | MISSING,
         RuntimeNullableField,
         Field(
             description="The primary key identifier of the resource.",
         ),
-    ] = None  # type: ignore[assignment]
+    ] = MISSING  # type: ignore[assignment]
     creation_date: Annotated[
-        datetime,
+        datetime | MISSING,
         RuntimeNullableField,
         Field(
             examples=[datetime(2025, 1, 1)],
             description="The date and time the resource was created.",
         ),
-    ] = None  # type: ignore[assignment]
+    ] = MISSING  # type: ignore[assignment]
     update_date: Annotated[
-        datetime,
+        datetime | MISSING,
         RuntimeNullableField,
         Field(
             examples=[datetime(2025, 1, 1)],
             description="The date and time the resource was last updated.",
         ),
-    ] = None  # type: ignore[assignment]
+    ] = MISSING  # type: ignore[assignment]
     created_by: Annotated[
-        PlatformUser,
+        PlatformUser | MISSING,
         RuntimeNullableField,
         Field(
             description="The platform user who created this resource.",
         ),
-    ] = None  # type: ignore[assignment]
+    ] = MISSING  # type: ignore[assignment]
     updated_by: Annotated[
-        PlatformUser,
+        PlatformUser | MISSING,
         RuntimeNullableField,
         Field(
             description="The platform user who last updated this resource.",
         ),
-    ] = None  # type: ignore[assignment]
+    ] = MISSING  # type: ignore[assignment]
 
 
 class Agent(Identifiable):
@@ -104,22 +104,26 @@ class Person(Agent):
         ),
     ] = AgentType.person
     given_name: Annotated[
-        str | None,
+        str | None | MISSING,
         Field(
             examples=["John", "Jane"],
             description="The given name of the person.",
         ),
-    ] = None
+    ] = MISSING
     family_name: Annotated[
-        str | None,
+        str | None | MISSING,
         Field(
             examples=["Doe", "Smith"],
             description="The family name of the person.",
         ),
-    ] = None
-    sub_id: Annotated[ID | None, Field(description="External subject id on Keycloak")] = None
+    ] = MISSING
+    sub_id: Annotated[
+        ID | None | MISSING, Field(description="External subject id on Keycloak")
+    ] = MISSING
 
-    orcid: Annotated[str | None, Field(description="Open Researcher and Contributor ID")] = None
+    orcid: Annotated[
+        str | None | MISSING, Field(description="Open Researcher and Contributor ID")
+    ] = MISSING
 
 
 class Organization(Agent):
@@ -132,14 +136,16 @@ class Organization(Agent):
         ),
     ] = AgentType.organization
     alternative_name: Annotated[
-        str | None,
+        str | None | MISSING,
         Field(
             examples=["Open Brain Institute"],
             description="The alternative name of the organization.",
         ),
-    ] = None
+    ] = MISSING
 
-    ror_id: Annotated[str | None, Field(description="Research Organization Registry Id")] = None
+    ror_id: Annotated[
+        str | None | MISSING, Field(description="Research Organization Registry Id")
+    ] = MISSING
 
 
 class Consortium(Agent):
@@ -152,12 +158,12 @@ class Consortium(Agent):
         ),
     ] = AgentType.consortium
     alternative_name: Annotated[
-        str | None,
+        str | None | MISSING,
         Field(
             examples=["Open Brain Institute"],
             description="The alternative name of the consortium.",
         ),
-    ] = None
+    ] = MISSING
 
 
 AgentUnion = Annotated[Person | Organization | Consortium, Field(discriminator="type")]

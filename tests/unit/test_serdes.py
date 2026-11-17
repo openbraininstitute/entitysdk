@@ -2,11 +2,13 @@ import uuid
 from datetime import datetime, timezone
 
 import pytest
+from pydantic import MISSING
 
 from entitysdk import serdes as test_module
 from entitysdk.models.activity import Activity
 from entitysdk.models.core import Identifiable, Struct
 from entitysdk.models.entity import Entity
+from entitysdk.models.validation_result import ValidationResult
 
 from .util import MOCK_UUID
 
@@ -37,7 +39,7 @@ class E3(Identifiable):
         ),
         (
             E2(id=MOCK_UUID, a="foo", b=1),
-            {"a": "foo", "b": 1, "created_by": None, "updated_by": None},
+            {"a": "foo", "b": 1},
         ),
         (
             E3(
@@ -48,8 +50,6 @@ class E3(Identifiable):
             {
                 "a": {"a": "foo", "b": 1},
                 "b_id": str(MOCK_UUID),
-                "created_by": None,
-                "updated_by": None,
             },
         ),
     ],
@@ -57,6 +57,37 @@ class E3(Identifiable):
 def test_serialize_model(entity, expected):
     result = test_module.serialize_model(entity)
     assert result == expected
+
+
+def test_serialize_model_omits_missing_optional_fields():
+    entity = Entity(name="entity")
+    data = test_module.serialize_model(entity)
+
+    assert data == {
+        "name": "entity",
+        "authorized_public": False,
+        "lifecycle_status": "active",
+    }
+    assert entity.description is MISSING
+
+
+def test_serialize_model_includes_explicit_none():
+    entity = Entity(name="entity", description=None)
+    data = test_module.serialize_model(entity)
+
+    assert data["description"] is None
+
+
+def test_serialize_validation_result_omits_unset_description():
+    result = ValidationResult(
+        name="scores",
+        passed=True,
+        validated_entity_id=MOCK_UUID,
+    )
+    data = test_module.serialize_model(result)
+
+    assert "description" not in data
+    assert data["name"] == "scores"
 
 
 def test_deserialization():

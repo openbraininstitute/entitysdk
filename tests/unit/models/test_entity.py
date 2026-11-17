@@ -12,6 +12,9 @@ def test_entity_is_fully_defined_after_import():
 
 
 def test_entity_subclasses_are_fully_defined_after_import():
+    # defer_build leaves subclasses incomplete until rebuild/first use
+    Subject.model_rebuild()
+    CellMorphology.model_rebuild()
     assert Subject.__pydantic_complete__
     assert CellMorphology.__pydantic_complete__
 
