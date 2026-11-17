@@ -11,13 +11,17 @@ def _nullable_schema(source_type: Any, handler: GetCoreSchemaHandler) -> core_sc
     return core_schema.nullable_schema(handler(source_type))
 
 
-# Entity models share one class across staging, registration, and fetch. Metadata
-# fields are often unset (``MISSING``, omitted, or JSON ``null``), but after
-# ``get_entity`` callers want checkers to treat them as ``T``, not ``T | None``.
+# Shared create/read models need three states for server-owned fields:
+# - ``MISSING``: unset on create → omitted from serialize
+# - ``None``: JSON null on deserialize (nested/incomplete payloads)
+# - ``T``: real value after fetch
 #
-# ``Annotated[T | MISSING, RuntimeNullableField]`` bridges that gap:
-# pyright keeps ``T`` (``MISSING`` is special-cased), while
-# ``RuntimeNullableField`` wraps the schema with ``nullable_schema`` so Pydantic
-# accepts ``None``. Default to ``MISSING`` (omitted on serialize) with
-# ``# type: ignore[assignment]``. Example: ``entitysdk.models.core.Identifiable``.
+# ``Annotated[T | MISSING, RuntimeNullableField] = MISSING`` encodes that:
+# pyright treats the field as ``T`` (``MISSING`` is special-cased),
+# ``RuntimeNullableField`` accepts ``None`` at runtime, and the default
+# ``MISSING`` is omitted on serialize. Use ``# type: ignore[assignment]`` on
+# the default. Example: ``entitysdk.models.core.Identifiable``.
+#
+# Prefer this over ``T | None | MISSING`` when ``None`` is not a valid domain
+# value (DB/read non-null) but may still appear on the wire.
 RuntimeNullableField = GetPydanticSchema(_nullable_schema)

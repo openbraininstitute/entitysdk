@@ -10,6 +10,7 @@ from pydantic import MISSING, Field
 from entitysdk.mixin import HasAssets
 from entitysdk.models.core import Identifiable
 from entitysdk.types import ID, EntityLifecycleStatus, EntityType
+from entitysdk.utils.pydantic import RuntimeNullableField
 
 
 class Entity(Identifiable, HasAssets):
@@ -31,15 +32,15 @@ class Entity(Identifiable, HasAssets):
             description="The description of the entity.",
         ),
     ] = MISSING
-    # Server-assigned on create; required non-null on top-level read. Nested payloads
-    # in fixtures/responses may still send null, so None is accepted on deserialize.
+    # DB non-null; server-assigned on create. None only from incomplete nested payloads.
     type: Annotated[
-        EntityType | None | MISSING,
+        EntityType | MISSING,
+        RuntimeNullableField,
         Field(
             examples=["license"],
             description="The type of this Entity.",
         ),
-    ] = MISSING
+    ] = MISSING  # type: ignore[assignment]
     authorized_public: Annotated[
         bool,
         Field(
@@ -47,15 +48,15 @@ class Entity(Identifiable, HasAssets):
             description="Whether the resource is authorized to be public.",
         ),
     ] = False
-    # Required non-null in DB/top-level read; set from project context on create.
-    # Nested payloads may still send null.
+    # DB non-null; set from project context on create. None only from nested payloads.
     authorized_project_id: Annotated[
-        ID | None | MISSING,
+        ID | MISSING,
+        RuntimeNullableField,
         Field(
             examples=[UUID("12345678-1234-1234-1234-123456789012")],
             description="The project ID owning the resource.",
         ),
-    ] = MISSING
+    ] = MISSING  # type: ignore[assignment]
     contributions: Annotated[
         list[Contribution] | None | MISSING,
         Field(description="The constributions for this entity."),
