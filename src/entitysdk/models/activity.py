@@ -14,11 +14,13 @@ from entitysdk.utils.pydantic import RuntimeNullableField
 class Activity(Identifiable):
     """Activity model."""
 
-    # DB non-null; server-assigned on create. None only from incomplete wire data.
+    # Server-assigned from the activity route / SQLAlchemy polymorphic identity.
+    # Not on ActivityCreate; clients must not send it (excluded in serdes).
+    # Present only after deserialize. None only from incomplete wire data.
     type: Annotated[
         ActivityType | MISSING,
         RuntimeNullableField,
-        Field(description="The type of the activity."),
+        Field(description="The type of the activity (server-assigned)."),
     ] = MISSING  # type: ignore[assignment]
 
     authorized_public: Annotated[

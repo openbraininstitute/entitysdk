@@ -103,6 +103,22 @@ def test_deserialization():
     pass
 
 
+def test_serialize_excludes_server_assigned_type():
+    activity = Activity.model_validate(
+        {
+            "status": "done",
+            "type": "validation",
+            "start_time": datetime.now(UTC).isoformat(),
+        }
+    )
+    assert activity.type == "validation"
+    assert "type" not in test_module.serialize_model(activity)
+
+    entity = Entity.model_validate({"name": "entity", "type": "subject"})
+    assert entity.type == "subject"
+    assert "type" not in test_module.serialize_model(entity)
+
+
 def test_serialize_activity():
     e1 = Entity(
         id=uuid.uuid4(),
