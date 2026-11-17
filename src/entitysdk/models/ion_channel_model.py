@@ -2,8 +2,9 @@
 
 from typing import Annotated
 
-from pydantic import Field
+from pydantic import MISSING, Field
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.base import BaseModel
 from entitysdk.models.contribution import Contribution
 from entitysdk.models.scientific_artifact import ScientificArtifact
@@ -82,29 +83,21 @@ class NeuronBlock(BaseModel):
     ] = None
 
 
-class IonChannelModel(ScientificArtifact):
+class IonChannelModel(NameDescriptionMixin, ScientificArtifact):
     """Ion channel mechanism model."""
 
-    name: Annotated[  # pyright: ignore[reportGeneralTypeIssues, reportIncompatibleVariableOverride]
-        str,
-        Field(
-            description="The name of the ion channel model "
-            "(e.g., the SUFFIX or POINT_PROCESS name).",
-            examples=["Ca_HVA"],
-        ),
-    ]
     conductance_name: Annotated[
         str | None,
         Field(
             description="Name of conductance if present.",
         ),
-    ] = None
+    ] = MISSING  # type: ignore[assignment]
     max_permeability_name: Annotated[
         str | None,
         Field(
             description="Name of maximum permeability if present.",
         ),
-    ] = None
+    ] = MISSING  # type: ignore[assignment]
     nmodl_suffix: Annotated[
         str,
         Field(
@@ -112,17 +105,10 @@ class IonChannelModel(ScientificArtifact):
             examples=["Ca_HVA"],
         ),
     ]
-    description: Annotated[  # pyright: ignore[reportGeneralTypeIssues, reportIncompatibleVariableOverride]
-        str,
-        Field(
-            description="A description of the ion channel mechanism.",
-            examples=["High-voltage activated calcium channel"],
-        ),
-    ]
     contributions: Annotated[
         list[Contribution] | None,
         Field(description="List of contributions related to this mechanism."),
-    ] = None
+    ] = MISSING  # type: ignore[assignment]
     is_ljp_corrected: Annotated[
         bool,
         Field(
@@ -150,4 +136,4 @@ class IonChannelModel(ScientificArtifact):
         NeuronBlock,
         Field(description="Variables declared in the NEURON block of the mod file."),
     ]
-    legacy_id: list[str] | None = None
+    legacy_id: list[str] | None = MISSING  # type: ignore[assignment]

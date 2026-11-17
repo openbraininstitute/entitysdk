@@ -1,6 +1,7 @@
 from unittest.mock import Mock
 
 import pytest
+from pydantic import MISSING
 
 from entitysdk.dependencies import entity as test_module
 from entitysdk.exception import DependencyError
@@ -8,6 +9,10 @@ from entitysdk.exception import DependencyError
 
 def test_ensure_has_no_id():
     mock = Mock(id=None)
+    with pytest.raises(DependencyError, match="Model has no id"):
+        test_module.ensure_has_id(mock)
+
+    mock = Mock(id=MISSING)
     with pytest.raises(DependencyError, match="Model has no id"):
         test_module.ensure_has_id(mock)
 

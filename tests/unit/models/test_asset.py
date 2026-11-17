@@ -17,8 +17,6 @@ def test_asset():
         meta={},
     )
     assert res.model_dump() == {
-        "update_date": None,
-        "creation_date": None,
         "id": MOCK_UUID,
         "path": "path/to/asset",
         "full_path": "full/path/to/asset",
@@ -30,8 +28,6 @@ def test_asset():
         "meta": {},
         "label": AssetLabel.sonata_circuit,
         "storage_type": StorageType.aws_s3_internal,
-        "created_by": None,
-        "updated_by": None,
     }
 
 

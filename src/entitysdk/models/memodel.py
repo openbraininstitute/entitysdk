@@ -2,9 +2,9 @@
 
 from typing import Annotated
 
-from pydantic import Field
+from pydantic import MISSING, Field
 
-from entitysdk.models.base import BaseModel
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.cell_morphology import CellMorphology
 from entitysdk.models.contribution import Contribution
@@ -18,23 +18,9 @@ from entitysdk.models.taxonomy import Species, Strain
 from entitysdk.types import ValidationStatus
 
 
-class MEModelBase(BaseModel):
+class MEModelBase(NameDescriptionMixin):
     """Base for simulatable neuron model."""
 
-    name: Annotated[
-        str | None,
-        Field(
-            examples=["Entity 1"],
-            description="The name of the entity.",
-        ),
-    ] = None
-    description: Annotated[
-        str | None,
-        Field(
-            examples=["This is entity 1"],
-            description="The description of the entity.",
-        ),
-    ] = None
     validation_status: Annotated[
         ValidationStatus,
         Field(
@@ -51,13 +37,13 @@ class NestedMEModel(MEModelBase, Entity):
         Field(
             description="The etype classes of the memodel.",
         ),
-    ] = None
+    ] = MISSING  # type: ignore[assignment]
     mtypes: Annotated[
         list[MTypeClass] | None,
         Field(
             description="The mtype classes of the memodel.",
         ),
-    ] = None
+    ] = MISSING  # type: ignore[assignment]
 
 
 class MEModel(MEModelBase, Entity):
@@ -70,7 +56,7 @@ class MEModel(MEModelBase, Entity):
     strain: Annotated[
         Strain | None,
         Field(description="The specific strain of the species, if applicable."),
-    ] = None
+    ] = MISSING  # type: ignore[assignment]
     brain_region: Annotated[
         BrainRegion,
         Field(description="The brain region where the memodel is used or applies."),
@@ -78,32 +64,32 @@ class MEModel(MEModelBase, Entity):
     license: Annotated[
         License | None,
         Field(description="License under which the memodel is distributed."),
-    ] = None
+    ] = MISSING  # type: ignore[assignment]
     contributions: Annotated[
         list[Contribution] | None,
         Field(description="List of contributions related to this memodel."),
-    ] = None
+    ] = MISSING  # type: ignore[assignment]
     iteration: Annotated[
         str | None,
         Field(
             description="The iteration of the memodel used during optimisation.",
             examples=["1372346"],
         ),
-    ] = None
+    ] = MISSING  # type: ignore[assignment]
     holding_current: Annotated[
         float | None,
         Field(
             description="The holding current of the memodel.",
             examples=[0.0],
         ),
-    ] = None
+    ] = MISSING  # type: ignore[assignment]
     threshold_current: Annotated[
         float | None,
         Field(
             description="The threshold current of the memodel.",
             examples=[0.1],
         ),
-    ] = None
+    ] = MISSING  # type: ignore[assignment]
     morphology: Annotated[
         CellMorphology,
         Field(
@@ -121,17 +107,17 @@ class MEModel(MEModelBase, Entity):
         Field(
             description="The etype classes of the memodel.",
         ),
-    ] = None
+    ] = MISSING  # type: ignore[assignment]
     mtypes: Annotated[
         list[MTypeClass] | None,
         Field(
             description="The mtype classes of the memodel.",
         ),
-    ] = None
+    ] = MISSING  # type: ignore[assignment]
     calibration_result: Annotated[
         MEModelCalibrationResult | None,
         Field(
             description="The calibration result of the memodel.",
         ),
-    ] = None
-    legacy_id: list[str] | None = None
+    ] = MISSING  # type: ignore[assignment]
+    legacy_id: list[str] | None = MISSING  # type: ignore[assignment]

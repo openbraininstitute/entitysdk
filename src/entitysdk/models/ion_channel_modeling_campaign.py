@@ -1,11 +1,12 @@
 """Ion channel modeling campaign model."""
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.entity import Entity
 from entitysdk.models.ion_channel_modeling_config import IonChannelModelingConfig
 from entitysdk.models.ion_channel_recording import IonChannelRecording
 
 
-class IonChannelModelingCampaign(Entity):
+class IonChannelModelingCampaign(NameDescriptionMixin, Entity):
     """IonChannelModelingCampaign model."""
 
     scan_parameters: dict

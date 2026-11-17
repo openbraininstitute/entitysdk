@@ -113,6 +113,8 @@ def _get_update_data(model_class: type[BaseModel]):
         return {"title": "New custom title"}
     if "pref_label" in model_class.model_fields:  # mtype_class, etype_class
         return {"pref_label": "New custom pref_label"}
+    if "authorized_public" in model_class.model_fields:
+        return {"authorized_public": True}
     msg = f"Unsupported class for testing update: {model_class.__name__}"
     raise RuntimeError(msg)
 

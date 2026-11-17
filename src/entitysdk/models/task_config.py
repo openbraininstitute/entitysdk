@@ -4,11 +4,12 @@ from typing import Annotated, Any
 
 from pydantic import Field
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.entity import Entity
 from entitysdk.types import ID, TaskConfigType
 
 
-class TaskConfig(Entity):
+class TaskConfig(NameDescriptionMixin, Entity):
     """Generic task config model."""
 
     task_config_type: TaskConfigType

@@ -4,12 +4,13 @@ from typing import Annotated
 
 from pydantic import Field
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.entity import Entity
 from entitysdk.models.synaptome import NestedSynaptome
 
 
-class SingleNeuronSynaptomeSimulation(Entity):
+class SingleNeuronSynaptomeSimulation(NameDescriptionMixin, Entity):
     """Single neuron synaptome simulation."""
 
     seed: Annotated[

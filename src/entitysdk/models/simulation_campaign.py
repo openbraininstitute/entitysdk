@@ -1,11 +1,12 @@
 """Simulation campaign model."""
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.entity import Entity
 from entitysdk.models.simulation import Simulation
 from entitysdk.types import ID
 
 
-class SimulationCampaign(Entity):
+class SimulationCampaign(NameDescriptionMixin, Entity):
     """SimulationCampaign model."""
 
     scan_parameters: dict

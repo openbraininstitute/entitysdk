@@ -1,9 +1,9 @@
-"""Tests for Identifiable runtime-nullable metadata fields."""
+"""Tests for Identifiable id / metadata fields."""
 
 from datetime import datetime
 
 import pytest
-from pydantic import ValidationError
+from pydantic import MISSING, ValidationError
 
 from entitysdk.models.core import PlatformUser
 from entitysdk.models.entity import Entity
@@ -11,39 +11,46 @@ from entitysdk.models.entity import Entity
 from ..util import MOCK_UUID
 
 
+def test_id_rejects_explicit_none():
+    with pytest.raises(ValidationError):
+        Entity(id=None)
+
+
+def test_id_rejects_json_null():
+    with pytest.raises(ValidationError):
+        Entity.model_validate_json('{"id": null}')
+
+
 @pytest.mark.parametrize(
     ("field_name", "payload", "expected"),
     [
-        ("id", None, None),
         ("creation_date", None, None),
         ("update_date", None, None),
         ("created_by", None, None),
         ("updated_by", None, None),
     ],
 )
-def test_identifiable_accepts_explicit_none(field_name, payload, expected):
-    entity = Entity(name="entity", **{field_name: payload})
+def test_identifiable_metadata_accepts_explicit_none(field_name, payload, expected):
+    entity = Entity(**{field_name: payload})
     assert getattr(entity, field_name) is expected
 
 
 @pytest.mark.parametrize(
     "field_name",
-    ["id", "creation_date", "update_date", "created_by", "updated_by"],
+    ["creation_date", "update_date", "created_by", "updated_by"],
 )
-def test_identifiable_accepts_json_null(field_name):
-    entity = Entity.model_validate_json(
-        f'{{"name": "entity", "{field_name}": null}}',
-    )
+def test_identifiable_metadata_accepts_json_null(field_name):
+    entity = Entity.model_validate_json(f'{{"{field_name}": null}}')
     assert getattr(entity, field_name) is None
 
 
-def test_identifiable_defaults_metadata_fields_to_none():
-    entity = Entity(name="entity")
-    assert entity.id is None
-    assert entity.creation_date is None
-    assert entity.update_date is None
-    assert entity.created_by is None
-    assert entity.updated_by is None
+def test_identifiable_defaults_metadata_fields_to_missing():
+    entity = Entity()
+    assert entity.id is MISSING
+    assert entity.creation_date is MISSING
+    assert entity.update_date is MISSING
+    assert entity.created_by is MISSING
+    assert entity.updated_by is MISSING
 
 
 def test_identifiable_accepts_populated_metadata_fields():
@@ -57,7 +64,6 @@ def test_identifiable_accepts_populated_metadata_fields():
     )
     entity = Entity(
         id=MOCK_UUID,
-        name="entity",
         creation_date=created,
         update_date=updated,
         created_by=platform_user,
@@ -73,7 +79,6 @@ def test_identifiable_accepts_populated_metadata_fields():
 def test_identifiable_accepts_nested_platform_user_from_json():
     entity = Entity.model_validate(
         {
-            "name": "entity",
             "created_by": {
                 "id": str(MOCK_UUID),
                 "pref_label": "Jane Doe",
@@ -88,10 +93,10 @@ def test_identifiable_accepts_nested_platform_user_from_json():
 
 def test_identifiable_rejects_invalid_metadata_values():
     with pytest.raises(ValidationError):
-        Entity(name="entity", id="not-a-uuid")
+        Entity(id="not-a-uuid")
 
     with pytest.raises(ValidationError):
-        Entity(name="entity", creation_date="not-a-datetime")
+        Entity(creation_date="not-a-datetime")
 
     with pytest.raises(ValidationError):
-        Entity(name="entity", created_by="not-a-person")
+        Entity(created_by="not-a-person")

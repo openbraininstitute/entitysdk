@@ -2,32 +2,18 @@
 
 from typing import Annotated
 
-from pydantic import Field
+from pydantic import MISSING, Field
 
-from entitysdk.models.base import BaseModel
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.contribution import Contribution
 from entitysdk.models.entity import Entity
 from entitysdk.models.memodel import NestedMEModel
 
 
-class SingleNeuronSynaptomeBase(BaseModel):
+class SingleNeuronSynaptomeBase(NameDescriptionMixin):
     """Base for single neuron synaptome."""
 
-    name: Annotated[
-        str | None,
-        Field(
-            examples=["Entity 1"],
-            description="The name of the entity.",
-        ),
-    ] = None
-    description: Annotated[
-        str | None,
-        Field(
-            examples=["This is entity 1"],
-            description="The description of the entity.",
-        ),
-    ] = None
     seed: Annotated[
         int,
         Field(
@@ -53,7 +39,7 @@ class SingleNeuronSynaptome(SingleNeuronSynaptomeBase, Entity):
     contributions: Annotated[
         list[Contribution] | None,
         Field(description="List of contributions related to this memodel."),
-    ] = None
+    ] = MISSING  # type: ignore[assignment]
     me_model: Annotated[
         NestedMEModel,
         Field(

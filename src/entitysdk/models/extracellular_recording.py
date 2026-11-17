@@ -4,10 +4,11 @@ from typing import Annotated
 
 from pydantic import Field
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.scientific_artifact import ScientificArtifact
 
 
-class ExtracellularRecording(ScientificArtifact):
+class ExtracellularRecording(NameDescriptionMixin, ScientificArtifact):
     """Extracellular probe recording, e.g. Neuropixels, with its traces in an NWB asset."""
 
     sampling_frequency: Annotated[

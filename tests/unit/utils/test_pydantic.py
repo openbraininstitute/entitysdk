@@ -3,7 +3,7 @@
 from typing import Annotated
 
 import pytest
-from pydantic import Field, ValidationError
+from pydantic import MISSING, Field, ValidationError
 
 from entitysdk.models.base import BaseModel
 from entitysdk.utils.pydantic import RuntimeNullableField
@@ -11,6 +11,14 @@ from entitysdk.utils.pydantic import RuntimeNullableField
 
 class _RuntimeNullableModel(BaseModel):
     value: Annotated[int, RuntimeNullableField, Field(description="nullable int")] = None  # type: ignore[assignment]
+
+
+class _RuntimeNullableMissingModel(BaseModel):
+    value: Annotated[
+        int,
+        RuntimeNullableField,
+        Field(description="server-owned int"),
+    ] = MISSING  # type: ignore[assignment]
 
 
 def test_runtime_nullable_field_accepts_none():
@@ -34,3 +42,44 @@ def test_runtime_nullable_field_accepts_value():
 def test_runtime_nullable_field_rejects_invalid_value():
     with pytest.raises(ValidationError):
         _RuntimeNullableModel(value="not-an-int")
+
+
+def test_runtime_nullable_missing_defaults_to_missing_and_omits_on_dump():
+    model = _RuntimeNullableMissingModel()
+
+    assert model.value is MISSING
+    assert model.model_dump() == {}
+
+
+def test_runtime_nullable_missing_accepts_json_null():
+    model = _RuntimeNullableMissingModel.model_validate_json('{"value": null}')
+
+    assert model.value is None
+    assert model.model_dump() == {"value": None}
+
+
+class _NonNullableMissingModel(BaseModel):
+    required_value: Annotated[int, Field(description="required int")] = MISSING  # type: ignore[assignment]
+    optional_value: Annotated[int | None, Field(description="optional int")] = MISSING  # type: ignore[assignment]
+
+
+def test_reject_missing_non_nullable_fields():
+    from entitysdk.utils.pydantic import reject_missing_non_nullable_fields
+
+    model = _NonNullableMissingModel.model_validate({})
+    assert model.required_value is MISSING
+    assert model.optional_value is MISSING
+
+    with pytest.raises(ValidationError) as exc_info:
+        reject_missing_non_nullable_fields(model)
+
+    assert "required_value" in str(exc_info.value)
+    assert "optional_value" not in str(exc_info.value)
+
+
+def test_reject_missing_non_nullable_fields_passes_when_set():
+    from entitysdk.utils.pydantic import reject_missing_non_nullable_fields
+
+    model = _NonNullableMissingModel.model_validate({"required_value": 1})
+    reject_missing_non_nullable_fields(model)
+    assert model.optional_value is MISSING

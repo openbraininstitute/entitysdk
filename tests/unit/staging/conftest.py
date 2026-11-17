@@ -22,6 +22,7 @@ from entitysdk.models import (
 from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.cell_morphology_protocol import CellMorphologyProtocol
 from entitysdk.types import CellMorphologyGenerationType
+from tests.unit.util import PROJECT_ID
 
 DATA_DIR = Path(__file__).parent / "data"
 
@@ -41,6 +42,10 @@ def species():
 @pytest.fixture
 def subject(species):
     return Subject(
+        name="subject",
+        description="",
+        type="subject",
+        authorized_project_id=PROJECT_ID,
         sex=types.Sex.male,
         species=species,
     )
@@ -75,6 +80,10 @@ def etype():
 def circuit(subject, brain_region):
     return Circuit(
         id=uuid.uuid4(),
+        name="my-circuit",
+        description="my-circuit-description",
+        type="circuit",
+        authorized_project_id=PROJECT_ID,
         subject=subject,
         number_neurons=5,
         number_synapses=10,
@@ -163,6 +172,8 @@ def simulation(circuit):
         id=uuid.uuid4(),
         name="my-simulation",
         description="my-description",
+        type="simulation",
+        authorized_project_id=PROJECT_ID,
         entity_id=circuit.id,
         simulation_campaign_id=uuid.uuid4(),
         scan_parameters={},
@@ -289,6 +300,8 @@ def simulation_result(simulation):
         id=uuid.uuid4(),
         name="my-sim-result",
         description="my-sim-result-description",
+        type="simulation_result",
+        authorized_project_id=PROJECT_ID,
         simulation_id=simulation.id,
         assets=[
             Asset(
@@ -362,6 +375,8 @@ def cell_morphology(brain_region, subject, mtype, cell_morphology_protocol):
         id=uuid.uuid4(),
         name="cell-morphology",
         description="cell-morphology-description",
+        type="cell_morphology",
+        authorized_project_id=PROJECT_ID,
         cell_morphology_protocol=cell_morphology_protocol,
         brain_region=brain_region,
         subject=subject,
@@ -459,6 +474,8 @@ def emodel(brain_region, etype, species):
         id=uuid.uuid4(),
         name="emodel",
         description="emodel-description",
+        type="emodel",
+        authorized_project_id=PROJECT_ID,
         species=species,
         brain_region=brain_region,
         iteration="1",
@@ -548,6 +565,8 @@ def memodel(brain_region, mtype, species, cell_morphology, emodel):
         id=memodel_id,
         name="my-memodel",
         description="my-memodel-description",
+        type="memodel",
+        authorized_project_id=PROJECT_ID,
         validation_status="done",
         species=species,
         morphology=cell_morphology,

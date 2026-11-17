@@ -2,7 +2,7 @@
 
 from typing import Annotated, TypeVar
 
-from pydantic import AfterValidator
+from pydantic import MISSING, AfterValidator
 
 from entitysdk.models.asset import Asset
 from entitysdk.models.core import Identifiable
@@ -14,9 +14,14 @@ TEntity = TypeVar("TEntity", bound=Entity)
 TAsset = TypeVar("TAsset", bound=Asset)
 
 
+def _id_is_unset(value: TIdentifiable) -> bool:
+    resource_id = getattr(value, "id", None)
+    return resource_id is None or resource_id is MISSING
+
+
 def ensure_id_is_none(value: TIdentifiable) -> TIdentifiable:
-    """Check that id is None."""
-    if getattr(value, "id", None) is not None:
+    """Check that id is unset (``None`` or ``MISSING``)."""
+    if not _id_is_unset(value):
         msg = "Resource id must be None."
         raise ValueError(msg)
     return value
@@ -24,7 +29,7 @@ def ensure_id_is_none(value: TIdentifiable) -> TIdentifiable:
 
 def ensure_id_is_set(value: TIdentifiable) -> TIdentifiable:
     """Check that id is set."""
-    if getattr(value, "id", None) is None:
+    if _id_is_unset(value):
         msg = "Resource must have an id."
         raise ValueError(msg)
     return value

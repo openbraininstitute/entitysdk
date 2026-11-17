@@ -3,7 +3,7 @@
 from datetime import datetime
 from typing import Annotated, Literal
 
-from pydantic import Field
+from pydantic import MISSING, Field
 
 from entitysdk.models.base import BaseModel
 from entitysdk.types import ID, AgentType
@@ -38,13 +38,16 @@ class PlatformUser(BaseModel):
 class Identifiable(BaseModel):
     """Identifiable is a model with an id."""
 
+    # Annotate as T for checkers (not T | MISSING — pyright does not erase it).
+    # id: entitycore always sends a concrete UUID on read; MISSING only for create.
     id: Annotated[
         ID,
-        RuntimeNullableField,
         Field(
             description="The primary key identifier of the resource.",
         ),
-    ] = None  # type: ignore[assignment]
+    ] = MISSING  # type: ignore[assignment]
+    # Timestamps/users: present on IdentifiableRead, omitted on AssetRead and some
+    # nested stubs — RuntimeNullable keeps annotation as T while allowing omit/null.
     creation_date: Annotated[
         datetime,
         RuntimeNullableField,
@@ -52,7 +55,7 @@ class Identifiable(BaseModel):
             examples=[datetime(2025, 1, 1)],
             description="The date and time the resource was created.",
         ),
-    ] = None  # type: ignore[assignment]
+    ] = MISSING  # type: ignore[assignment]
     update_date: Annotated[
         datetime,
         RuntimeNullableField,
@@ -60,21 +63,21 @@ class Identifiable(BaseModel):
             examples=[datetime(2025, 1, 1)],
             description="The date and time the resource was last updated.",
         ),
-    ] = None  # type: ignore[assignment]
+    ] = MISSING  # type: ignore[assignment]
     created_by: Annotated[
         PlatformUser,
         RuntimeNullableField,
         Field(
             description="The platform user who created this resource.",
         ),
-    ] = None  # type: ignore[assignment]
+    ] = MISSING  # type: ignore[assignment]
     updated_by: Annotated[
         PlatformUser,
         RuntimeNullableField,
         Field(
             description="The platform user who last updated this resource.",
         ),
-    ] = None  # type: ignore[assignment]
+    ] = MISSING  # type: ignore[assignment]
 
 
 class Agent(Identifiable):
@@ -109,17 +112,17 @@ class Person(Agent):
             examples=["John", "Jane"],
             description="The given name of the person.",
         ),
-    ] = None
+    ] = MISSING  # type: ignore[assignment]
     family_name: Annotated[
         str | None,
         Field(
             examples=["Doe", "Smith"],
             description="The family name of the person.",
         ),
-    ] = None
-    sub_id: Annotated[ID | None, Field(description="External subject id on Keycloak")] = None
+    ] = MISSING  # type: ignore[assignment]
+    sub_id: Annotated[ID | None, Field(description="External subject id on Keycloak")] = MISSING  # type: ignore[assignment]
 
-    orcid: Annotated[str | None, Field(description="Open Researcher and Contributor ID")] = None
+    orcid: Annotated[str | None, Field(description="Open Researcher and Contributor ID")] = MISSING  # type: ignore[assignment]
 
 
 class Organization(Agent):
@@ -132,14 +135,13 @@ class Organization(Agent):
         ),
     ] = AgentType.organization
     alternative_name: Annotated[
-        str | None,
+        str,
         Field(
             examples=["Open Brain Institute"],
             description="The alternative name of the organization.",
         ),
-    ] = None
-
-    ror_id: Annotated[str | None, Field(description="Research Organization Registry Id")] = None
+    ]
+    ror_id: Annotated[str | None, Field(description="Research Organization Registry Id")] = MISSING  # type: ignore[assignment]
 
 
 class Consortium(Agent):
@@ -152,12 +154,12 @@ class Consortium(Agent):
         ),
     ] = AgentType.consortium
     alternative_name: Annotated[
-        str | None,
+        str,
         Field(
             examples=["Open Brain Institute"],
             description="The alternative name of the consortium.",
         ),
-    ] = None
+    ]
 
 
 AgentUnion = Annotated[Person | Organization | Consortium, Field(discriminator="type")]
