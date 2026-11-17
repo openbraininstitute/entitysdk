@@ -117,9 +117,9 @@ class Person(Agent):
             description="The family name of the person.",
         ),
     ] = MISSING
-    sub_id: Annotated[
-        ID | None | MISSING, Field(description="External subject id on Keycloak")
-    ] = MISSING
+    sub_id: Annotated[ID | None | MISSING, Field(description="External subject id on Keycloak")] = (
+        MISSING
+    )
 
     orcid: Annotated[
         str | None | MISSING, Field(description="Open Researcher and Contributor ID")
