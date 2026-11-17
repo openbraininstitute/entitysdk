@@ -10,7 +10,6 @@ from pydantic import MISSING, Field
 from entitysdk.mixin import HasAssets
 from entitysdk.models.core import Identifiable
 from entitysdk.types import ID, EntityLifecycleStatus, EntityType
-from entitysdk.utils.pydantic import RuntimeNullableField
 
 
 class Entity(Identifiable, HasAssets):
@@ -48,15 +47,14 @@ class Entity(Identifiable, HasAssets):
             description="Whether the resource is authorized to be public.",
         ),
     ] = False
-    # DB non-null; set from project context on create. None only from nested payloads.
+    # Server-assigned from project context headers; not on EntityCreate (excluded in serdes).
     authorized_project_id: Annotated[
         ID | MISSING,
-        RuntimeNullableField,
         Field(
             examples=[UUID("12345678-1234-1234-1234-123456789012")],
-            description="The project ID owning the resource.",
+            description="The project ID owning the resource (server-assigned).",
         ),
-    ] = MISSING  # type: ignore[assignment]
+    ] = MISSING
     contributions: Annotated[
         list[Contribution] | None | MISSING,
         Field(description="The constributions for this entity."),

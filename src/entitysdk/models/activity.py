@@ -8,7 +8,6 @@ from pydantic import MISSING, Field
 from entitysdk.models.core import Identifiable
 from entitysdk.models.entity import Entity
 from entitysdk.types import ID, ActivityStatus, ActivityType
-from entitysdk.utils.pydantic import RuntimeNullableField
 
 
 class Activity(Identifiable):
@@ -27,14 +26,11 @@ class Activity(Identifiable):
             description="Whether the resource is authorized to be public.",
         ),
     ] = False
-    # DB non-null; set from project context on create.
+    # Server-assigned from project context headers; not on ActivityCreate (excluded in serdes).
     authorized_project_id: Annotated[
         ID | MISSING,
-        RuntimeNullableField,
-        Field(
-            description="The project ID owning the resource.",
-        ),
-    ] = MISSING  # type: ignore[assignment]
+        Field(description="The project ID owning the resource (server-assigned)."),
+    ] = MISSING
 
     status: Annotated[
         ActivityStatus,

@@ -15,8 +15,9 @@ SERIALIZATION_EXCLUDE_KEYS = {
     "update_date",
     "generated_from_derivations",
     "generated_by_derivations",
-    # Server-assigned via route/polymorphic identity; not on Create schemas.
+    # Server-assigned (route polymorphic identity / project context); not on Create schemas.
     "type",
+    "authorized_project_id",
 }
 
 TBaseModel = TypeVar("TBaseModel", bound=BaseModel)

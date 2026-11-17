@@ -2,7 +2,7 @@
 
 from typing import Annotated
 
-from pydantic import Field
+from pydantic import MISSING, Field
 
 from entitysdk.models.core import Identifiable
 from entitysdk.types import ID
@@ -18,12 +18,11 @@ class Classification(Identifiable):
             description="Whether the resource is authorized to be public.",
         ),
     ] = False
+    # Server-assigned from project context headers (excluded in serdes).
     authorized_project_id: Annotated[
-        ID | None,
-        Field(
-            description="The project ID owning the resource.",
-        ),
-    ] = None
+        ID | MISSING,
+        Field(description="The project ID owning the resource (server-assigned)."),
+    ] = MISSING
 
 
 class MTypeClassification(Classification):

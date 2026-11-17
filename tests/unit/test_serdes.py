@@ -103,20 +103,29 @@ def test_deserialization():
     pass
 
 
-def test_serialize_excludes_server_assigned_type():
+def test_serialize_excludes_server_assigned_fields():
     activity = Activity.model_validate(
         {
             "status": "done",
             "type": "validation",
+            "authorized_project_id": str(MOCK_UUID),
             "start_time": datetime.now(UTC).isoformat(),
         }
     )
     assert activity.type == "validation"
-    assert "type" not in test_module.serialize_model(activity)
+    assert activity.authorized_project_id == MOCK_UUID
+    data = test_module.serialize_model(activity)
+    assert "type" not in data
+    assert "authorized_project_id" not in data
 
-    entity = Entity.model_validate({"name": "entity", "type": "subject"})
+    entity = Entity.model_validate(
+        {"name": "entity", "type": "subject", "authorized_project_id": str(MOCK_UUID)}
+    )
     assert entity.type == "subject"
-    assert "type" not in test_module.serialize_model(entity)
+    assert entity.authorized_project_id == MOCK_UUID
+    data = test_module.serialize_model(entity)
+    assert "type" not in data
+    assert "authorized_project_id" not in data
 
 
 def test_serialize_activity():

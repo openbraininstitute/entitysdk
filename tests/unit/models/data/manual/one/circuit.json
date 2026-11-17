@@ -37,7 +37,7 @@
     "created_by": null,
     "updated_by": null,
     "authorized_public": false,
-    "authorized_project_id": null,
+    "authorized_project_id": "00000000-0000-4000-8000-000001234678",
     "contributions": null,
     "legacy_id": null,
     "sex": "male",
