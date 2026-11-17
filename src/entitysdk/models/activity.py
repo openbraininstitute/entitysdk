@@ -16,12 +16,10 @@ class Activity(Identifiable):
 
     # Server-assigned from the activity route / SQLAlchemy polymorphic identity.
     # Not on ActivityCreate; clients must not send it (excluded in serdes).
-    # Present only after deserialize. None only from incomplete wire data.
     type: Annotated[
         ActivityType | MISSING,
-        RuntimeNullableField,
         Field(description="The type of the activity (server-assigned)."),
-    ] = MISSING  # type: ignore[assignment]
+    ] = MISSING
 
     authorized_public: Annotated[
         bool,

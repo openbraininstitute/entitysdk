@@ -34,15 +34,13 @@ class Entity(Identifiable, HasAssets):
     ] = MISSING
     # Server-assigned from the entity route / SQLAlchemy polymorphic identity.
     # Not on EntityCreate; clients must not send it (excluded in serdes).
-    # Present only after deserialize. None only from incomplete nested payloads.
     type: Annotated[
         EntityType | MISSING,
-        RuntimeNullableField,
         Field(
             examples=["license"],
             description="The type of this Entity (server-assigned).",
         ),
-    ] = MISSING  # type: ignore[assignment]
+    ] = MISSING
     authorized_public: Annotated[
         bool,
         Field(

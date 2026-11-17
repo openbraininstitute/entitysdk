@@ -33,7 +33,7 @@
     "creation_date": null,
     "name": "my-subject",
     "description": "my-subject-description",
-    "type": null,
+    "type": "subject",
     "created_by": null,
     "updated_by": null,
     "authorized_public": false,
