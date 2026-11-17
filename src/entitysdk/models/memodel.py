@@ -22,14 +22,14 @@ class MEModelBase(BaseModel):
     """Base for simulatable neuron model."""
 
     name: Annotated[
-        str | None | MISSING,
+        str | MISSING,
         Field(
             examples=["Entity 1"],
             description="The name of the entity.",
         ),
     ] = MISSING
     description: Annotated[
-        str | None | MISSING,
+        str | MISSING,
         Field(
             examples=["This is entity 1"],
             description="The description of the entity.",

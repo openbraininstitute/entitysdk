@@ -15,20 +15,24 @@ from entitysdk.types import ID, EntityLifecycleStatus, EntityType
 class Entity(Identifiable, HasAssets):
     """Entity is a model with id and authorization."""
 
+    # Name/description are non-nullable on entitycore when present (NameDescriptionMixin).
+    # Omit with MISSING for entity types that lack them or when unset on create.
     name: Annotated[
-        str | None | MISSING,
+        str | MISSING,
         Field(
             examples=["Entity 1"],
             description="The name of the entity.",
         ),
     ] = MISSING
     description: Annotated[
-        str | None | MISSING,
+        str | MISSING,
         Field(
             examples=["This is entity 1"],
             description="The description of the entity.",
         ),
     ] = MISSING
+    # Server-assigned on create; required non-null on top-level read. Nested payloads
+    # in fixtures/responses may still send null, so None is accepted on deserialize.
     type: Annotated[
         EntityType | None | MISSING,
         Field(
@@ -43,6 +47,8 @@ class Entity(Identifiable, HasAssets):
             description="Whether the resource is authorized to be public.",
         ),
     ] = False
+    # Required non-null in DB/top-level read; set from project context on create.
+    # Nested payloads may still send null.
     authorized_project_id: Annotated[
         ID | None | MISSING,
         Field(
@@ -62,6 +68,8 @@ class Entity(Identifiable, HasAssets):
         EntityLifecycleStatus, Field(description="The lifecycle status of this entity.")
     ] = EntityLifecycleStatus.active
 
+    # entitycore expandable fields use MISSING when not expanded; older responses
+    # still send null, so accept None on deserialize while defaulting to MISSING.
     generated_from_derivations: list[Derivation] | None | MISSING = MISSING
     used_by_derivations: list[Derivation] | None | MISSING = MISSING
 

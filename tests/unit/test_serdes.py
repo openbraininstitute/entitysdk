@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime, timezone
 
 import pytest
-from pydantic import MISSING
+from pydantic import MISSING, ValidationError
 
 from entitysdk import serdes as test_module
 from entitysdk.models.activity import Activity
@@ -71,11 +71,20 @@ def test_serialize_model_omits_missing_optional_fields():
     assert entity.description is MISSING
 
 
-def test_serialize_model_includes_explicit_none():
-    entity = Entity(name="entity", description=None)
+def test_serialize_model_includes_explicit_none_for_nullable_fields():
+    # legacy_id is nullable in entitycore; name/description are not.
+    entity = Entity(name="entity", legacy_id=None)
     data = test_module.serialize_model(entity)
 
-    assert data["description"] is None
+    assert data["legacy_id"] is None
+    assert "description" not in data
+
+
+def test_entity_rejects_null_name_and_description():
+    with pytest.raises(ValidationError):
+        Entity(name=None)
+    with pytest.raises(ValidationError):
+        Entity(name="entity", description=None)
 
 
 def test_serialize_validation_result_omits_unset_description():

@@ -136,13 +136,12 @@ class Organization(Agent):
         ),
     ] = AgentType.organization
     alternative_name: Annotated[
-        str | None | MISSING,
+        str,
         Field(
             examples=["Open Brain Institute"],
             description="The alternative name of the organization.",
         ),
-    ] = MISSING
-
+    ]
     ror_id: Annotated[
         str | None | MISSING, Field(description="Research Organization Registry Id")
     ] = MISSING
@@ -158,12 +157,12 @@ class Consortium(Agent):
         ),
     ] = AgentType.consortium
     alternative_name: Annotated[
-        str | None | MISSING,
+        str,
         Field(
             examples=["Open Brain Institute"],
             description="The alternative name of the consortium.",
         ),
-    ] = MISSING
+    ]
 
 
 AgentUnion = Annotated[Person | Organization | Consortium, Field(discriminator="type")]

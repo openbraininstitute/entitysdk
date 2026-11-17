@@ -26,11 +26,12 @@ def test_entity_accepts_derivation_lists():
         generated_from_derivations=[
             Derivation(id=derivation_id, label="generated"),
         ],
-        used_by_derivations=None,
+        used_by_derivations=[],
     )
 
     assert entity.generated_from_derivations is not None
     assert entity.generated_from_derivations[0].id == derivation_id
+    assert entity.used_by_derivations == []
 
 
 def test_entity_accepts_contributions():

@@ -44,6 +44,7 @@ def test_agent_discriminated_union():
             "agent": {
                 "type": "organization",
                 "pref_label": "foo",
+                "alternative_name": "bar",
             },
         }
     )
