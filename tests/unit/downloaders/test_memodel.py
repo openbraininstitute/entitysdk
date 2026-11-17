@@ -149,9 +149,7 @@ def test_download_memodel(
                     "nmodl_suffix": "Ca_HVA",
                     "description": "foo description",
                     "type": "ion_channel_model",
-                    "authorized_project_id": str(
-                        uuid.UUID("12341234-1234-1234-1234-123412341234")
-                    ),
+                    "authorized_project_id": str(uuid.UUID("12341234-1234-1234-1234-123412341234")),
                     "subject": {
                         "sex": "male",
                         "species": {"name": "foo", "taxonomy_id": "bar"},

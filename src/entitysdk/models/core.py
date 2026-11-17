@@ -38,15 +38,16 @@ class PlatformUser(BaseModel):
 class Identifiable(BaseModel):
     """Identifiable is a model with an id."""
 
-    # Annotate as T for checkers; default MISSING omits on serialize; RuntimeNullable
-    # accepts JSON null. Do not put MISSING in the annotation (pyright does not erase it).
+    # Annotate as T for checkers (not T | MISSING — pyright does not erase it).
+    # id: entitycore always sends a concrete UUID on read; MISSING only for create.
     id: Annotated[
         ID,
-        RuntimeNullableField,
         Field(
             description="The primary key identifier of the resource.",
         ),
     ] = MISSING  # type: ignore[assignment]
+    # Timestamps/users: present on IdentifiableRead, omitted on AssetRead and some
+    # nested stubs — RuntimeNullable keeps annotation as T while allowing omit/null.
     creation_date: Annotated[
         datetime,
         RuntimeNullableField,

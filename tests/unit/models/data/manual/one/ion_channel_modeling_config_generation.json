@@ -1,7 +1,5 @@
 {
   "id": "97efd591-ee95-426d-b110-c32620dc19c2",
-  "creation_date": null,
-  "update_date": null,
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
   "authorized_public": false,
   "start_time": "2025-06-11T09:33:51.707275Z",
@@ -16,8 +14,6 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "contributions": null,
-      "created_by": null,
-      "updated_by": null,
       "legacy_id": null
     }
   ],
@@ -25,11 +21,7 @@
     {
       "assets": [],
       "id": "32073304-a8cc-4461-9ef7-9d526527214b",
-      "update_date": null,
-      "creation_date": null,
       "type": "ion_channel_modeling_config",
-      "created_by": null,
-      "updated_by": null,
       "authorized_public": false,
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "contributions": null,
@@ -38,18 +30,12 @@
     {
       "assets": [],
       "id": "e2549cb6-c065-4827-ba09-005117a0a1a7",
-      "update_date": null,
-      "creation_date": null,
       "type": "ion_channel_modeling_config",
-      "created_by": null,
-      "updated_by": null,
       "authorized_public": false,
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "contributions": null,
       "legacy_id": null
     }
   ],
-  "type": "ion_channel_modeling_config_generation",
-  "created_by": null,
-  "updated_by": null
+  "type": "ion_channel_modeling_config_generation"
 }

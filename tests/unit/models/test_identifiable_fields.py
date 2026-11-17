@@ -1,4 +1,4 @@
-"""Tests for Identifiable runtime-nullable metadata fields."""
+"""Tests for Identifiable id / metadata fields."""
 
 from datetime import datetime
 
@@ -11,29 +11,36 @@ from entitysdk.models.entity import Entity
 from ..util import MOCK_UUID
 
 
+def test_id_rejects_explicit_none():
+    with pytest.raises(ValidationError):
+        Entity(id=None)
+
+
+def test_id_rejects_json_null():
+    with pytest.raises(ValidationError):
+        Entity.model_validate_json('{"id": null}')
+
+
 @pytest.mark.parametrize(
     ("field_name", "payload", "expected"),
     [
-        ("id", None, None),
         ("creation_date", None, None),
         ("update_date", None, None),
         ("created_by", None, None),
         ("updated_by", None, None),
     ],
 )
-def test_identifiable_accepts_explicit_none(field_name, payload, expected):
+def test_identifiable_metadata_accepts_explicit_none(field_name, payload, expected):
     entity = Entity(**{field_name: payload})
     assert getattr(entity, field_name) is expected
 
 
 @pytest.mark.parametrize(
     "field_name",
-    ["id", "creation_date", "update_date", "created_by", "updated_by"],
+    ["creation_date", "update_date", "created_by", "updated_by"],
 )
-def test_identifiable_accepts_json_null(field_name):
-    entity = Entity.model_validate_json(
-        f'{{"{field_name}": null}}',
-    )
+def test_identifiable_metadata_accepts_json_null(field_name):
+    entity = Entity.model_validate_json(f'{{"{field_name}": null}}')
     assert getattr(entity, field_name) is None
 
 
