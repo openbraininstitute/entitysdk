@@ -13,10 +13,10 @@ from entitysdk.models.subject import Subject
 class ScientificArtifact(Entity):
     """Scientific artifact base model."""
 
-    experiment_date: datetime | None | MISSING = MISSING
-    contact_email: str | None | MISSING = MISSING
-    subject: Subject | None | MISSING = MISSING
-    brain_region: BrainRegion | None | MISSING = MISSING
-    license: License | None | MISSING = MISSING
-    published_in: str | None | MISSING = MISSING
-    notice_text: str | None | MISSING = MISSING
+    experiment_date: datetime | None = MISSING  # type: ignore[assignment]
+    contact_email: str | None = MISSING  # type: ignore[assignment]
+    subject: Subject | None = MISSING  # type: ignore[assignment]
+    brain_region: BrainRegion | None = MISSING  # type: ignore[assignment]
+    license: License | None = MISSING  # type: ignore[assignment]
+    published_in: str | None = MISSING  # type: ignore[assignment]
+    notice_text: str | None = MISSING  # type: ignore[assignment]

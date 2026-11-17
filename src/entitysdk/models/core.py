@@ -38,15 +38,17 @@ class PlatformUser(BaseModel):
 class Identifiable(BaseModel):
     """Identifiable is a model with an id."""
 
+    # Annotate as T for checkers; default MISSING omits on serialize; RuntimeNullable
+    # accepts JSON null. Do not put MISSING in the annotation (pyright does not erase it).
     id: Annotated[
-        ID | MISSING,
+        ID,
         RuntimeNullableField,
         Field(
             description="The primary key identifier of the resource.",
         ),
     ] = MISSING  # type: ignore[assignment]
     creation_date: Annotated[
-        datetime | MISSING,
+        datetime,
         RuntimeNullableField,
         Field(
             examples=[datetime(2025, 1, 1)],
@@ -54,7 +56,7 @@ class Identifiable(BaseModel):
         ),
     ] = MISSING  # type: ignore[assignment]
     update_date: Annotated[
-        datetime | MISSING,
+        datetime,
         RuntimeNullableField,
         Field(
             examples=[datetime(2025, 1, 1)],
@@ -62,14 +64,14 @@ class Identifiable(BaseModel):
         ),
     ] = MISSING  # type: ignore[assignment]
     created_by: Annotated[
-        PlatformUser | MISSING,
+        PlatformUser,
         RuntimeNullableField,
         Field(
             description="The platform user who created this resource.",
         ),
     ] = MISSING  # type: ignore[assignment]
     updated_by: Annotated[
-        PlatformUser | MISSING,
+        PlatformUser,
         RuntimeNullableField,
         Field(
             description="The platform user who last updated this resource.",
@@ -104,26 +106,22 @@ class Person(Agent):
         ),
     ] = AgentType.person
     given_name: Annotated[
-        str | None | MISSING,
+        str | None,
         Field(
             examples=["John", "Jane"],
             description="The given name of the person.",
         ),
-    ] = MISSING
+    ] = MISSING  # type: ignore[assignment]
     family_name: Annotated[
-        str | None | MISSING,
+        str | None,
         Field(
             examples=["Doe", "Smith"],
             description="The family name of the person.",
         ),
-    ] = MISSING
-    sub_id: Annotated[ID | None | MISSING, Field(description="External subject id on Keycloak")] = (
-        MISSING
-    )
+    ] = MISSING  # type: ignore[assignment]
+    sub_id: Annotated[ID | None, Field(description="External subject id on Keycloak")] = MISSING  # type: ignore[assignment]
 
-    orcid: Annotated[
-        str | None | MISSING, Field(description="Open Researcher and Contributor ID")
-    ] = MISSING
+    orcid: Annotated[str | None, Field(description="Open Researcher and Contributor ID")] = MISSING  # type: ignore[assignment]
 
 
 class Organization(Agent):
@@ -142,9 +140,7 @@ class Organization(Agent):
             description="The alternative name of the organization.",
         ),
     ]
-    ror_id: Annotated[
-        str | None | MISSING, Field(description="Research Organization Registry Id")
-    ] = MISSING
+    ror_id: Annotated[str | None, Field(description="Research Organization Registry Id")] = MISSING  # type: ignore[assignment]
 
 
 class Consortium(Agent):

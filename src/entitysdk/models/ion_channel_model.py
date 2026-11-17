@@ -94,17 +94,17 @@ class IonChannelModel(ScientificArtifact):
         ),
     ]
     conductance_name: Annotated[
-        str | None | MISSING,
+        str | None,
         Field(
             description="Name of conductance if present.",
         ),
-    ] = MISSING
+    ] = MISSING  # type: ignore[assignment]
     max_permeability_name: Annotated[
-        str | None | MISSING,
+        str | None,
         Field(
             description="Name of maximum permeability if present.",
         ),
-    ] = MISSING
+    ] = MISSING  # type: ignore[assignment]
     nmodl_suffix: Annotated[
         str,
         Field(
@@ -120,9 +120,9 @@ class IonChannelModel(ScientificArtifact):
         ),
     ]
     contributions: Annotated[
-        list[Contribution] | None | MISSING,
+        list[Contribution] | None,
         Field(description="List of contributions related to this mechanism."),
-    ] = MISSING
+    ] = MISSING  # type: ignore[assignment]
     is_ljp_corrected: Annotated[
         bool,
         Field(
@@ -150,4 +150,4 @@ class IonChannelModel(ScientificArtifact):
         NeuronBlock,
         Field(description="Variables declared in the NEURON block of the mod file."),
     ]
-    legacy_id: list[str] | None | MISSING = MISSING
+    legacy_id: list[str] | None = MISSING  # type: ignore[assignment]

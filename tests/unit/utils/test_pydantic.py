@@ -15,7 +15,7 @@ class _RuntimeNullableModel(BaseModel):
 
 class _RuntimeNullableMissingModel(BaseModel):
     value: Annotated[
-        int | MISSING,
+        int,
         RuntimeNullableField,
         Field(description="server-owned int"),
     ] = MISSING  # type: ignore[assignment]

@@ -13,15 +13,10 @@ def _nullable_schema(source_type: Any, handler: GetCoreSchemaHandler) -> core_sc
 
 # Shared create/read models need three states for server-owned fields:
 # - ``MISSING``: unset on create → omitted from serialize
-# - ``None``: JSON null on deserialize (nested/incomplete payloads)
+# - ``None``: JSON null on deserialize (via this helper)
 # - ``T``: real value after fetch
 #
-# ``Annotated[T | MISSING, RuntimeNullableField] = MISSING`` encodes that:
-# pyright treats the field as ``T`` (``MISSING`` is special-cased),
-# ``RuntimeNullableField`` accepts ``None`` at runtime, and the default
-# ``MISSING`` is omitted on serialize. Use ``# type: ignore[assignment]`` on
-# the default. Example: ``entitysdk.models.core.Identifiable``.
-#
-# Prefer this over ``T | None | MISSING`` when ``None`` is not a valid domain
-# value (DB/read non-null) but may still appear on the wire.
+# Annotate as ``T`` (not ``T | MISSING`` — pyright does not erase MISSING from
+# unions). Default to ``MISSING`` with ``# type: ignore[assignment]``.
+# ``RuntimeNullableField`` accepts wire ``null``. Example: Identifiable.id.
 RuntimeNullableField = GetPydanticSchema(_nullable_schema)

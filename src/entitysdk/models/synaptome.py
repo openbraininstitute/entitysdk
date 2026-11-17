@@ -15,19 +15,19 @@ class SingleNeuronSynaptomeBase(BaseModel):
     """Base for single neuron synaptome."""
 
     name: Annotated[
-        str | MISSING,
+        str,
         Field(
             examples=["Entity 1"],
             description="The name of the entity.",
         ),
-    ] = MISSING
+    ] = MISSING  # type: ignore[assignment]
     description: Annotated[
-        str | MISSING,
+        str,
         Field(
             examples=["This is entity 1"],
             description="The description of the entity.",
         ),
-    ] = MISSING
+    ] = MISSING  # type: ignore[assignment]
     seed: Annotated[
         int,
         Field(
@@ -51,9 +51,9 @@ class SingleNeuronSynaptome(SingleNeuronSynaptomeBase, Entity):
         Field(description="The brain region where the memodel is used or applies."),
     ]
     contributions: Annotated[
-        list[Contribution] | None | MISSING,
+        list[Contribution] | None,
         Field(description="List of contributions related to this memodel."),
-    ] = MISSING
+    ] = MISSING  # type: ignore[assignment]
     me_model: Annotated[
         NestedMEModel,
         Field(

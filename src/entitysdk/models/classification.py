@@ -20,9 +20,9 @@ class Classification(Identifiable):
     ] = False
     # Server-assigned from project context headers (excluded in serdes).
     authorized_project_id: Annotated[
-        ID | MISSING,
+        ID,
         Field(description="The project ID owning the resource (server-assigned)."),
-    ] = MISSING
+    ] = MISSING  # type: ignore[assignment]
 
 
 class MTypeClassification(Classification):

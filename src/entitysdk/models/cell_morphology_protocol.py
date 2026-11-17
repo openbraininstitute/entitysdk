@@ -21,7 +21,9 @@ class CellMorphologyProtocolBase(Entity):
     # forbid extra parameters to prevent providing attributes of other classes by mistake
     model_config = ConfigDict(extra="forbid")
 
-    type: EntityType | None = EntityType.cell_morphology_protocol
+    type: EntityType | None = (  # pyright: ignore[reportIncompatibleVariableOverride]
+        EntityType.cell_morphology_protocol
+    )
 
 
 class CellMorphologyProtocolExtendedBase(CellMorphologyProtocolBase):

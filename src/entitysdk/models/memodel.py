@@ -22,19 +22,19 @@ class MEModelBase(BaseModel):
     """Base for simulatable neuron model."""
 
     name: Annotated[
-        str | MISSING,
+        str,
         Field(
             examples=["Entity 1"],
             description="The name of the entity.",
         ),
-    ] = MISSING
+    ] = MISSING  # type: ignore[assignment]
     description: Annotated[
-        str | MISSING,
+        str,
         Field(
             examples=["This is entity 1"],
             description="The description of the entity.",
         ),
-    ] = MISSING
+    ] = MISSING  # type: ignore[assignment]
     validation_status: Annotated[
         ValidationStatus,
         Field(
@@ -47,17 +47,17 @@ class NestedMEModel(MEModelBase, Entity):
     """Nested simulatable neuron model."""
 
     etypes: Annotated[
-        list[ETypeClass] | None | MISSING,
+        list[ETypeClass] | None,
         Field(
             description="The etype classes of the memodel.",
         ),
-    ] = MISSING
+    ] = MISSING  # type: ignore[assignment]
     mtypes: Annotated[
-        list[MTypeClass] | None | MISSING,
+        list[MTypeClass] | None,
         Field(
             description="The mtype classes of the memodel.",
         ),
-    ] = MISSING
+    ] = MISSING  # type: ignore[assignment]
 
 
 class MEModel(MEModelBase, Entity):
@@ -68,42 +68,42 @@ class MEModel(MEModelBase, Entity):
         Field(description="The species for which the memodel applies."),
     ]
     strain: Annotated[
-        Strain | None | MISSING,
+        Strain | None,
         Field(description="The specific strain of the species, if applicable."),
-    ] = MISSING
+    ] = MISSING  # type: ignore[assignment]
     brain_region: Annotated[
         BrainRegion,
         Field(description="The brain region where the memodel is used or applies."),
     ]
     license: Annotated[
-        License | None | MISSING,
+        License | None,
         Field(description="License under which the memodel is distributed."),
-    ] = MISSING
+    ] = MISSING  # type: ignore[assignment]
     contributions: Annotated[
-        list[Contribution] | None | MISSING,
+        list[Contribution] | None,
         Field(description="List of contributions related to this memodel."),
-    ] = MISSING
+    ] = MISSING  # type: ignore[assignment]
     iteration: Annotated[
-        str | None | MISSING,
+        str | None,
         Field(
             description="The iteration of the memodel used during optimisation.",
             examples=["1372346"],
         ),
-    ] = MISSING
+    ] = MISSING  # type: ignore[assignment]
     holding_current: Annotated[
-        float | None | MISSING,
+        float | None,
         Field(
             description="The holding current of the memodel.",
             examples=[0.0],
         ),
-    ] = MISSING
+    ] = MISSING  # type: ignore[assignment]
     threshold_current: Annotated[
-        float | None | MISSING,
+        float | None,
         Field(
             description="The threshold current of the memodel.",
             examples=[0.1],
         ),
-    ] = MISSING
+    ] = MISSING  # type: ignore[assignment]
     morphology: Annotated[
         CellMorphology,
         Field(
@@ -117,21 +117,21 @@ class MEModel(MEModelBase, Entity):
         ),
     ]
     etypes: Annotated[
-        list[ETypeClass] | None | MISSING,
+        list[ETypeClass] | None,
         Field(
             description="The etype classes of the memodel.",
         ),
-    ] = MISSING
+    ] = MISSING  # type: ignore[assignment]
     mtypes: Annotated[
-        list[MTypeClass] | None | MISSING,
+        list[MTypeClass] | None,
         Field(
             description="The mtype classes of the memodel.",
         ),
-    ] = MISSING
+    ] = MISSING  # type: ignore[assignment]
     calibration_result: Annotated[
-        MEModelCalibrationResult | None | MISSING,
+        MEModelCalibrationResult | None,
         Field(
             description="The calibration result of the memodel.",
         ),
-    ] = MISSING
-    legacy_id: list[str] | None | MISSING = MISSING
+    ] = MISSING  # type: ignore[assignment]
+    legacy_id: list[str] | None = MISSING  # type: ignore[assignment]
