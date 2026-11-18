@@ -11,6 +11,8 @@ from entitysdk.types import ID
 class ValidationResult(Entity):
     """Validation result."""
 
+    # entitycore ValidationResult has name but not NameDescriptionMixin / description.
+
     passed: Annotated[
         bool,
         Field(
@@ -18,7 +20,7 @@ class ValidationResult(Entity):
             examples=[True],
         ),
     ]
-    name: Annotated[  # pyright: ignore[reportGeneralTypeIssues, reportIncompatibleVariableOverride]
+    name: Annotated[
         str,
         Field(
             description="Name of the validation.",

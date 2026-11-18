@@ -4,6 +4,7 @@ from typing import Annotated
 
 from pydantic import Field
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.base import BaseModel
 from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.contribution import Contribution
@@ -24,7 +25,7 @@ class MeasurementRecord(BaseModel):
     value: float
 
 
-class ExperimentalDensityBase(Entity):
+class ExperimentalDensityBase(NameDescriptionMixin, Entity):
     """Experimental Density Base model."""
 
     subject: Annotated[Subject, Field(description="The subject associated with the density.")]

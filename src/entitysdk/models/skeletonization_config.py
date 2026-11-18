@@ -1,10 +1,11 @@
 """Skeletonization config model."""
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.entity import Entity
 from entitysdk.types import ID
 
 
-class SkeletonizationConfig(Entity):
+class SkeletonizationConfig(NameDescriptionMixin, Entity):
     """SkeletonizationConfig model."""
 
     skeletonization_campaign_id: ID

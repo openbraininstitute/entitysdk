@@ -12,6 +12,9 @@ def test_entity_is_fully_defined_after_import():
 
 
 def test_entity_subclasses_are_fully_defined_after_import():
+    # defer_build leaves subclasses incomplete until rebuild/first use
+    Subject.model_rebuild()
+    CellMorphology.model_rebuild()
     assert Subject.__pydantic_complete__
     assert CellMorphology.__pydantic_complete__
 
@@ -19,19 +22,19 @@ def test_entity_subclasses_are_fully_defined_after_import():
 def test_entity_accepts_derivation_lists():
     derivation_id = uuid.uuid4()
     entity = Entity(
-        name="entity-with-derivations",
         generated_from_derivations=[
             Derivation(id=derivation_id, label="generated"),
         ],
-        used_by_derivations=None,
+        used_by_derivations=[],
     )
 
     assert entity.generated_from_derivations is not None
     assert entity.generated_from_derivations[0].id == derivation_id
+    assert entity.used_by_derivations == []
 
 
 def test_entity_accepts_contributions():
-    entity = Entity(name="entity-with-contributions", contributions=[])
+    entity = Entity(contributions=[])
 
     assert entity.contributions == []
 
@@ -39,7 +42,6 @@ def test_entity_accepts_contributions():
 def test_entity_model_validate_accepts_derivation_payload():
     entity = Entity.model_validate(
         {
-            "name": "entity",
             "generated_from_derivations": [{"id": str(uuid.uuid4()), "label": "derivation"}],
             "contributions": [],
         }
@@ -52,7 +54,6 @@ def test_entity_model_validate_accepts_derivation_payload():
 def test_entity_model_validate_accepts_contribution_payload():
     entity = Entity.model_validate(
         {
-            "name": "entity",
             "contributions": [
                 {
                     "agent": {

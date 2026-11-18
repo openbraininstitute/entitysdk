@@ -48,6 +48,7 @@ def test_download_mesh_file(
     em_cell_mesh = EMCellMesh(
         id=mesh_id,
         name="Test Mesh",
+        description="",
         release_version=1,
         dense_reconstruction_cell_id=12345,
         generation_method="marching_cubes",

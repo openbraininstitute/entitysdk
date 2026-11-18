@@ -29,15 +29,11 @@
   "subject": {
     "assets": [],
     "id": "5a567dde-8ce5-40d2-8619-d6f40c76aef6",
-    "update_date": null,
-    "creation_date": null,
     "name": "my-subject",
     "description": "my-subject-description",
-    "type": null,
-    "created_by": null,
-    "updated_by": null,
+    "type": "subject",
     "authorized_public": false,
-    "authorized_project_id": null,
+    "authorized_project_id": "00000000-0000-4000-8000-000001234678",
     "contributions": null,
     "legacy_id": null,
     "sex": "male",
@@ -48,12 +44,8 @@
     "age_period": null,
     "species": {
       "id": "fbb190bf-593a-4a89-bd81-fcb6e4c5c133",
-      "update_date": null,
-      "creation_date": null,
       "name": "Mus musculus",
-      "taxonomy_id": "NCBITaxon:10090",
-      "created_by": null,
-      "updated_by": null
+      "taxonomy_id": "NCBITaxon:10090"
     },
     "strain": null
   },
@@ -66,9 +58,7 @@
     "acronym": "CB",
     "parent_structure_id": "7f22cd12-07b6-408e-aac1-ca75afb918c8",
     "hierarchy_id": "f728b4fa-4248-4e3a-8a5d-2f346baa9455",
-    "color_hex_triplet": "F0F080",
-    "created_by": null,
-    "updated_by": null
+    "color_hex_triplet": "F0F080"
   },
   "license": null,
   "has_morphologies": false,

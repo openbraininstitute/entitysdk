@@ -1,11 +1,12 @@
 """Skeletonization campaign model."""
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.em_cell_mesh import EMCellMesh
 from entitysdk.models.entity import Entity
 from entitysdk.models.skeletonization_config import SkeletonizationConfig
 
 
-class SkeletonizationCampaign(Entity):
+class SkeletonizationCampaign(NameDescriptionMixin, Entity):
     """SkeletonizationCampaign model."""
 
     scan_parameters: dict

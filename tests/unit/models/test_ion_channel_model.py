@@ -10,6 +10,8 @@ def test_temperature_keeps_its_fraction():
         nmodl_suffix="Kv3_1",
         description="foo description",
         subject=models.Subject(
+            name="subject",
+            description="",
             sex=types.Sex.male,
             species={"name": "foo", "taxonomy_id": "bar"},
         ),
