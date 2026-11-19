@@ -4,27 +4,19 @@ from typing import Annotated
 
 from pydantic import Field
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.entity import Entity
 from entitysdk.types import ID
 
 
-class ValidationResult(Entity):
+class ValidationResult(NameDescriptionMixin, Entity):
     """Validation result."""
-
-    # entitycore ValidationResult has name but not NameDescriptionMixin / description.
 
     passed: Annotated[
         bool,
         Field(
             description="True if the validation passed, False otherwise.",
             examples=[True],
-        ),
-    ]
-    name: Annotated[
-        str,
-        Field(
-            description="Name of the validation.",
-            examples=["Neuron spiking validation"],
         ),
     ]
     validated_entity_id: Annotated[
