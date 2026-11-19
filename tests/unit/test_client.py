@@ -149,9 +149,7 @@ def test_client_update(mocked_route, client, httpx_mock):
     assert res.name == new_name
 
 
-def _mock_entity_response(entity_id, assets=None, named=True):
-    # Entity has no name/description; named= is kept for call-site compatibility.
-    del named
+def _mock_entity_response(entity_id, assets=None):
     data = {
         "id": str(entity_id),
         "type": "cell_morphology",

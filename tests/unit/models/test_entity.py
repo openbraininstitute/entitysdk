@@ -11,12 +11,30 @@ def test_entity_is_fully_defined_after_import():
     assert Entity.__pydantic_complete__
 
 
-def test_entity_subclasses_are_fully_defined_after_import():
-    # defer_build leaves subclasses incomplete until rebuild/first use
-    Subject.model_rebuild()
-    CellMorphology.model_rebuild()
-    assert Subject.__pydantic_complete__
-    assert CellMorphology.__pydantic_complete__
+def test_entity_subclasses_model_validate_without_explicit_rebuild():
+    """defer_build may leave subclasses incomplete until first use; validation still works."""
+    subject = Subject.model_validate(
+        {
+            "name": "subject",
+            "description": "",
+            "sex": "male",
+            "species": {"name": "Mus musculus", "taxonomy_id": "NCBITaxon:10090"},
+        }
+    )
+    morphology = CellMorphology.model_validate(
+        {
+            "name": "morph",
+            "description": "",
+            "cell_morphology_protocol": {
+                "name": "protocol",
+                "description": "",
+                "generation_type": "placeholder",
+            },
+        }
+    )
+
+    assert subject.name == "subject"
+    assert morphology.name == "morph"
 
 
 def test_entity_accepts_derivation_lists():
