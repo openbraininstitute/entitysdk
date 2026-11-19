@@ -8,12 +8,9 @@ and expect ``206``; that detail stays here, not in the public type name.
 import io
 import logging
 from bisect import bisect_right
-from typing import TYPE_CHECKING, override
 
+from entitysdk.compat import Buffer, override
 from entitysdk.utils.http import HTTPClient
-
-if TYPE_CHECKING:
-    from collections.abc import Buffer
 
 L = logging.getLogger(__name__)
 
@@ -77,14 +74,17 @@ class HttpFile(io.RawIOBase):
 
     @override
     def readable(self) -> bool:
+        """Return True; the file supports reads."""
         return True
 
     @override
     def seekable(self) -> bool:
+        """Return True; the file supports seeks."""
         return True
 
     @override
     def close(self) -> None:
+        """Drop cached blocks and mark the file closed."""
         self._starts.clear()
         self._blocks.clear()
         super().close()
@@ -97,11 +97,13 @@ class HttpFile(io.RawIOBase):
 
     @override
     def tell(self) -> int:
+        """Return the current byte position."""
         self._check_open()
         return self._position
 
     @override
     def seek(self, offset: int, whence: int = io.SEEK_SET, /) -> int:
+        """Move the file position; no network request."""
         self._check_open()
         try:
             base = {io.SEEK_SET: 0, io.SEEK_CUR: self._position, io.SEEK_END: self.size}[whence]
@@ -116,7 +118,7 @@ class HttpFile(io.RawIOBase):
         return self._position
 
     @override
-    def readinto(self, buffer: "Buffer", /) -> int:
+    def readinto(self, buffer: Buffer, /) -> int:
         """Fill ``buffer`` from the current position; at most one request.
 
         Never a short read: h5py calls ``readinto`` once and ignores the count returned,

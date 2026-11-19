@@ -1647,4 +1647,3 @@ def test_client_open_remote_file(client, httpx_mock, api_url, request_headers):
         assert remote._block_size == 4
         assert remote.read() == blob
         assert "storage.example" not in repr(remote)
-
