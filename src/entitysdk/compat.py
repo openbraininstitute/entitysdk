@@ -11,6 +11,7 @@ else:
 
 
 if sys.version_info < (3, 12):  # pragma: no cover
-    from typing_extensions import TypedDict
+    from typing_extensions import Buffer, TypedDict, override
 else:
-    from typing import TypedDict  # noqa: F401
+    from collections.abc import Buffer  # noqa: F401
+    from typing import TypedDict, override  # noqa: F401

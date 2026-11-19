@@ -11,6 +11,7 @@ from entitysdk import core
 from entitysdk.common import ProjectContext, parse_vlab_url
 from entitysdk.compat import Self
 from entitysdk.exception import EntitySDKError
+from entitysdk.http_file import DEFAULT_BLOCK_SIZE, HttpFile
 from entitysdk.models.asset import (
     Asset,
     DetailedFileList,
@@ -49,7 +50,6 @@ from entitysdk.types import (
 )
 from entitysdk.utils.asset import filter_assets
 from entitysdk.utils.http import HTTPClient
-from entitysdk.http_file import DEFAULT_BLOCK_SIZE, HttpFile
 from entitysdk.utils.store import LocalAssetStore
 from entitysdk.utils.url import (
     build_api_url,
