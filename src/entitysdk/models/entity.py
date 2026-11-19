@@ -15,20 +15,6 @@ from entitysdk.types import ID, EntityLifecycleStatus, EntityType
 class Entity(Identifiable, HasAssets):
     """Entity is a model with id and authorization."""
 
-    name: Annotated[
-        str | None,
-        Field(
-            examples=["Entity 1"],
-            description="The name of the entity.",
-        ),
-    ] = None
-    description: Annotated[
-        str | None,
-        Field(
-            examples=["This is entity 1"],
-            description="The description of the entity.",
-        ),
-    ] = None
     type: Annotated[
         EntityType | None,
         Field(

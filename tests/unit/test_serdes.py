@@ -64,16 +64,8 @@ def test_deserialization():
 
 
 def test_serialize_activity():
-    e1 = Entity(
-        id=uuid.uuid4(),
-        name="foo",
-        description="foo",
-    )
-    e2 = Entity(
-        id=uuid.uuid4(),
-        name="bar",
-        description="bar",
-    )
+    e1 = Entity(id=uuid.uuid4())
+    e2 = Entity(id=uuid.uuid4())
     activity = Activity(
         start_time=datetime.now(UTC),
         end_time=datetime.now(UTC),

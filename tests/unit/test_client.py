@@ -26,7 +26,7 @@ from entitysdk.types import (
     StorageType,
 )
 from entitysdk.utils.http import ReadTimeout
-from tests.unit.util import PROJECT_ID, VIRTUAL_LAB_ID
+from tests.unit.util import MOCK_UUID, PROJECT_ID, VIRTUAL_LAB_ID
 
 
 def test_client_api_url():
@@ -96,8 +96,8 @@ def test_client_search(client, httpx_mock):
         method="GET",
         json={
             "data": [
-                {"id": str(id1), "name": "foo", "description": "bar", "type": "circuit"},
-                {"id": str(id2), "name": "foo", "description": "bar", "type": "circuit"},
+                {"id": str(id1), "type": "circuit"},
+                {"id": str(id2), "type": "circuit"},
             ],
             "pagination": {"page": 1, "page_size": 10, "total_items": 2},
         },
@@ -149,15 +149,12 @@ def test_client_update(mocked_route, client, httpx_mock):
     assert res.name == new_name
 
 
-def _mock_entity_response(entity_id, assets=None, named=True):
+def _mock_entity_response(entity_id, assets=None):
     data = {
         "id": str(entity_id),
+        "type": "cell_morphology",
+        "authorized_project_id": str(MOCK_UUID),
     }
-    if named:
-        data = data | {
-            "name": "my-entity",
-            "description": "my-entity",
-        }
     if assets:
         data["assets"] = assets
 
@@ -574,8 +571,6 @@ def test_client_admin_get(
         match_headers=request_headers_no_context,
         json={
             "id": str(entity_id),
-            "name": "foo",
-            "description": "bar",
             "type": "circuit",
             "assets": [
                 _mock_asset_response(asset_id=asset_id1),
@@ -864,8 +859,6 @@ def test_client_download_assets__entity(
 
     entity = Entity(
         id=entity_id,
-        name="foo",
-        description="bar",
         assets=[
             Asset(
                 id=asset_id,

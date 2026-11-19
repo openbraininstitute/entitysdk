@@ -4,6 +4,7 @@ from typing import Annotated
 
 from pydantic import Field
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.base import BaseModel
 from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.contribution import Contribution
@@ -11,23 +12,9 @@ from entitysdk.models.entity import Entity
 from entitysdk.models.memodel import NestedMEModel
 
 
-class SingleNeuronSynaptomeBase(BaseModel):
+class SingleNeuronSynaptomeBase(NameDescriptionMixin, BaseModel):
     """Base for single neuron synaptome."""
 
-    name: Annotated[
-        str | None,
-        Field(
-            examples=["Entity 1"],
-            description="The name of the entity.",
-        ),
-    ] = None
-    description: Annotated[
-        str | None,
-        Field(
-            examples=["This is entity 1"],
-            description="The description of the entity.",
-        ),
-    ] = None
     seed: Annotated[
         int,
         Field(

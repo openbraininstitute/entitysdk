@@ -52,6 +52,8 @@ def test_download_ion_channel_model(
         nmodl_suffix="Ca_HVA",
         description="foo description",
         subject=models.Subject(
+            name="subject",
+            description="",
             sex=types.Sex.male,
             species={"name": "foo", "taxonomy_id": "bar"},
         ),

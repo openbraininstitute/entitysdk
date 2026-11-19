@@ -41,7 +41,11 @@ def create_http_ic_mock(ic_id, name, httpx_mock, api_url, request_headers, with_
         name=name,
         nmodl_suffix=name,
         description=f"{name} description",
+        type="ion_channel_model",
+        authorized_project_id=uuid.UUID("12341234-1234-1234-1234-123412341234"),
         subject=models.Subject(
+            name="subject",
+            description="",
             sex=types.Sex.male,
             species={"name": "foo", "taxonomy_id": "bar"},
         ),

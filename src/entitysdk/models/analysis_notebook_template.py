@@ -4,6 +4,7 @@ from typing import Annotated
 
 from pydantic import Field
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.base import BaseModel
 from entitysdk.models.entity import Entity
 from entitysdk.types import AnalysisScale, EntityType
@@ -54,7 +55,7 @@ class AnalysisNotebookTemplateSpecifications(BaseModel):
     inputs: Annotated[list[AnalysisNotebookTemplateInputType] | None, Field(title="Inputs")] = []
 
 
-class AnalysisNotebookTemplate(Entity):
+class AnalysisNotebookTemplate(NameDescriptionMixin, Entity):
     """Analysis notebook template model."""
 
     specifications: AnalysisNotebookTemplateSpecifications | None = None

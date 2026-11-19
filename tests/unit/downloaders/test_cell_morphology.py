@@ -61,8 +61,11 @@ def test_download_morphology(
     morphology = CellMorphology(
         id=morph_id,
         name="foo",
+        description="",
         cell_morphology_protocol=CellMorphologyProtocol(
-            generation_type=CellMorphologyGenerationType.placeholder
+            name="protocol",
+            description="",
+            generation_type=CellMorphologyGenerationType.placeholder,
         ),
         assets=[asset],
     )
@@ -130,8 +133,11 @@ def test_download_morphology_selects_asset_by_label(
     morphology = CellMorphology(
         id=morph_id,
         name="foo",
+        description="",
         cell_morphology_protocol=CellMorphologyProtocol(
-            generation_type=CellMorphologyGenerationType.placeholder
+            name="protocol",
+            description="",
+            generation_type=CellMorphologyGenerationType.placeholder,
         ),
         assets=[morphology_asset, spiny_asset],
     )

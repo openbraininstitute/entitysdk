@@ -4,6 +4,7 @@ from typing import Annotated
 
 from pydantic import Field
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.base import BaseModel
 from entitysdk.models.brain_region import BrainRegion
 from entitysdk.models.cell_morphology import CellMorphology
@@ -18,23 +19,9 @@ from entitysdk.models.taxonomy import Species, Strain
 from entitysdk.types import ValidationStatus
 
 
-class MEModelBase(BaseModel):
+class MEModelBase(NameDescriptionMixin, BaseModel):
     """Base for simulatable neuron model."""
 
-    name: Annotated[
-        str | None,
-        Field(
-            examples=["Entity 1"],
-            description="The name of the entity.",
-        ),
-    ] = None
-    description: Annotated[
-        str | None,
-        Field(
-            examples=["This is entity 1"],
-            description="The description of the entity.",
-        ),
-    ] = None
     validation_status: Annotated[
         ValidationStatus,
         Field(

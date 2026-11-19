@@ -28,6 +28,8 @@ def _mock_asset_response(asset_id, content_type, label):
 def _mock_simulation(simulation_id, assets):
     return Simulation(
         id=simulation_id,
+        name="simulation",
+        description="",
         simulation_campaign_id=uuid.uuid4(),
         entity_id=uuid.uuid4(),
         scan_parameters={},
