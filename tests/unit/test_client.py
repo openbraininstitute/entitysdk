@@ -1554,3 +1554,97 @@ def test_client_admin_upload_directory(
         _, kwargs = mock_upload.call_args
         assert kwargs["admin"] is True
         assert kwargs["project_context"] is None
+
+
+def test_client_get_download_url(client, httpx_mock, api_url, request_headers):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+    storage_url = "https://storage.example/file.h5?X-Amz-Signature=secret"
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download?asset_path=pop%2Fedges.h5",
+        match_headers=request_headers,
+        status_code=307,
+        headers={"location": storage_url},
+    )
+
+    url = client.get_download_url(
+        entity_id=entity_id,
+        entity_type=Entity,
+        asset_id=asset_id,
+        asset_path="pop/edges.h5",
+    )
+    assert url == storage_url
+
+
+def test_client_get_download_url_without_asset_path(client, httpx_mock, api_url, request_headers):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+    storage_url = "https://storage.example/single.bin"
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download",
+        match_headers=request_headers,
+        status_code=307,
+        headers={"location": storage_url},
+    )
+
+    url = client.get_download_url(
+        entity_id=entity_id,
+        entity_type=Entity,
+        asset_id=asset_id,
+    )
+    assert url == storage_url
+
+
+def test_client_get_download_url_requires_redirect(client, httpx_mock, api_url, request_headers):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download",
+        match_headers=request_headers,
+        status_code=200,
+        content=b"not a redirect",
+    )
+
+    with pytest.raises(EntitySDKError, match="Expected a redirect"):
+        client.get_download_url(
+            entity_id=entity_id,
+            entity_type=Entity,
+            asset_id=asset_id,
+        )
+
+
+def test_client_open_remote_file(client, httpx_mock, api_url, request_headers):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+    blob = b"abcdefghij"
+    storage_url = "https://storage.example/file.bin"
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download",
+        match_headers=request_headers,
+        status_code=307,
+        headers={"location": storage_url},
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=storage_url,
+        status_code=206,
+        content=blob,
+        match_headers={"Range": "bytes=0-9"},
+    )
+
+    remote = client.open_remote_file(
+        entity_id=entity_id,
+        entity_type=Entity,
+        asset_id=asset_id,
+        size=len(blob),
+        block_size=4,
+    )
+    with remote:
+        assert remote._block_size == 4
+        assert remote.read() == blob
+        assert "storage.example" not in repr(remote)
+

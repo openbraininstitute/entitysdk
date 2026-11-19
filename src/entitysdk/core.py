@@ -7,6 +7,7 @@ from typing import TypeVar
 
 from entitysdk import serdes
 from entitysdk.common import ProjectContext
+from entitysdk.config import settings
 from entitysdk.exception import EntitySDKError
 from entitysdk.models.asset import (
     Asset,
@@ -52,6 +53,8 @@ from entitysdk.utils.filesystem import (
 )
 from entitysdk.utils.http import (
     HTTPClient,
+    HTTPTimeout,
+    RequestError,
     make_db_api_request,
     stream_paginated_request,
     stream_response,
@@ -596,6 +599,106 @@ def fetch_asset_file(
             raise EntitySDKError(f"{strategy} strategy failed: Unsupported strategy")
 
 
+def _asset_download_request(
+    *,
+    api_url: str,
+    entity_id: ID,
+    entity_type: type[Entity],
+    asset_id: ID,
+    token_manager: TokenManager,
+    project_context: ProjectContext | None,
+    asset_path: Path | None,
+    admin: bool,
+) -> tuple[str, dict[str, str], dict[str, str]]:
+    """Build the download URL, auth headers, and query params for an asset file.
+
+    Returns:
+        ``(download_url, headers, parameters)`` for entitycore's ``/download`` endpoint.
+    """
+    asset_endpoint = get_assets_endpoint(
+        api_url=api_url,
+        entity_type=entity_type,
+        entity_id=entity_id,
+        asset_id=asset_id,
+        admin=admin,
+    )
+    headers = {"Authorization": f"Bearer {token_manager.get_token()}"}
+    if project_context:
+        headers["project-id"] = str(project_context.project_id)
+        if vlab_id := project_context.virtual_lab_id:
+            headers["virtual-lab-id"] = str(vlab_id)
+    parameters = {"asset_path": str(asset_path)} if asset_path else {}
+    return f"{asset_endpoint}/download", headers, parameters
+
+
+def get_asset_download_url(
+    *,
+    api_url: str,
+    entity_id: ID,
+    entity_type: type[Entity],
+    asset_id: ID,
+    token_manager: TokenManager,
+    project_context: ProjectContext | None = None,
+    http_client: HTTPClient,
+    asset_path: Path | None = None,
+    admin: bool,
+) -> str:
+    """Return the presigned storage URL for an asset file.
+
+    Asks entitycore's ``/download`` without following the redirect. The URL is signed and
+    short-lived: use it at once, never store or log it.
+
+    Args:
+        api_url: the api url to entitycore service.
+        entity_id: Resource id.
+        entity_type: Resource type.
+        asset_id: Asset id.
+        token_manager: Authorization access token manager.
+        project_context: Optional project context for ``project-id`` / ``virtual-lab-id`` headers.
+        http_client: HTTP client used for the request.
+        asset_path: For directory assets, path within the directory to the file.
+        admin: Whether to use admin endpoints.
+
+    Returns:
+        The ``Location`` header of the redirect to storage.
+
+    Raises:
+        EntitySDKError: No redirect, or the request failed (network error, timeout).
+    """
+    url, headers, parameters = _asset_download_request(
+        api_url=api_url,
+        entity_id=entity_id,
+        entity_type=entity_type,
+        asset_id=asset_id,
+        token_manager=token_manager,
+        project_context=project_context,
+        asset_path=asset_path,
+        admin=admin,
+    )
+    try:
+        response = http_client.get(
+            url,
+            params=parameters,
+            headers=headers,
+            follow_redirects=False,
+            timeout=HTTPTimeout(
+                connect=settings.connect_timeout,
+                read=settings.read_timeout,
+                write=settings.write_timeout,
+                pool=settings.pool_timeout,
+            ),
+        )
+    except RequestError as err:
+        raise EntitySDKError(f"Request error: {err}") from err
+    location = response.headers.get("location")
+    if not response.is_redirect or location is None:
+        path = asset_path if asset_path is not None else asset_id
+        raise EntitySDKError(
+            f"Expected a redirect to storage for {path}, got {response.status_code}"
+        )
+    return location
+
+
 def download_asset_file(
     *,
     api_url: str,
@@ -629,24 +732,19 @@ def download_asset_file(
     Returns:
         ``target_path`` after the download completes.
     """
-    asset_endpoint = get_assets_endpoint(
+    url, headers, parameters = _asset_download_request(
         api_url=api_url,
-        entity_type=entity_type,
         entity_id=entity_id,
+        entity_type=entity_type,
         asset_id=asset_id,
+        token_manager=token_manager,
+        project_context=project_context,
+        asset_path=asset_path,
         admin=admin,
     )
-    token = token_manager.get_token()
-    headers = {"Authorization": f"Bearer {token}"}
-    if project_context:
-        headers["project-id"] = str(project_context.project_id)
-        if vlab_id := project_context.virtual_lab_id:
-            headers["virtual-lab-id"] = str(vlab_id)
-
-    parameters = {"asset_path": str(asset_path)} if asset_path else {}
     with target_path.open("wb") as f:
         for chunk in stream_response(
-            url=f"{asset_endpoint}/download",
+            url=url,
             method="GET",
             headers=headers,
             parameters=parameters,
