@@ -3,8 +3,6 @@
 Requires the ``staging`` extra (``h5py``).
 """
 
-from __future__ import annotations
-
 from typing import TYPE_CHECKING
 
 import h5py
@@ -14,7 +12,7 @@ if TYPE_CHECKING:
     from entitysdk.http_file import HttpFile
 
 
-def read_contiguous_dataset(dataset: h5py.Dataset, remote: HttpFile) -> np.ndarray:
+def read_contiguous_dataset(dataset: h5py.Dataset, remote: "HttpFile") -> np.ndarray:
     """Read a whole dataset of a file opened on ``remote``, fetching its bytes outside h5py.
 
     A contiguous, uncompressed dataset is one run of bytes: its offset and size give one

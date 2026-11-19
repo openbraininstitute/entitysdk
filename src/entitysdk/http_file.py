@@ -5,8 +5,6 @@ no ``HEAD`` is sent (S3 refuses ``HEAD`` on a presigned ``GET`` URL). Reads use 
 and expect ``206``; that detail stays here, not in the public type name.
 """
 
-from __future__ import annotations
-
 import io
 import logging
 from bisect import bisect_right
@@ -118,7 +116,7 @@ class HttpFile(io.RawIOBase):
         return self._position
 
     @override
-    def readinto(self, buffer: Buffer, /) -> int:
+    def readinto(self, buffer: "Buffer", /) -> int:
         """Fill ``buffer`` from the current position; at most one request.
 
         Never a short read: h5py calls ``readinto`` once and ignores the count returned,
