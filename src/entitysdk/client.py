@@ -916,10 +916,7 @@ class Client:
     ) -> HttpFile:
         """Open an asset file as a seekable remote file that fetches bytes on demand.
 
-        Resolves size with ``HEAD`` on entitycore ``/download`` (storage ``head_object``
-        URL), then opens a GET-signed URL for range reads. Needs an entitycore release
-        that includes openbraininstitute/entitycore#774. For directory assets,
-        ``asset_path`` is the relative path from ``list_directory``.
+        For directory assets, ``asset_path`` is the relative path from ``list_directory``.
 
         Args:
             entity_id: Id of the entity.

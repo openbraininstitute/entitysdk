@@ -3,7 +3,7 @@
 import logging
 from collections.abc import Iterator
 from pathlib import Path
-from typing import TypeVar
+from typing import Literal, TypeVar
 
 from entitysdk import serdes
 from entitysdk.common import ProjectContext
@@ -643,13 +643,9 @@ def _asset_storage_redirect_url(
     http_client: HTTPClient,
     asset_path: Path | None,
     admin: bool,
-    method: str,
+    method: Literal["GET", "HEAD"],
 ) -> str:
-    """Ask entitycore ``/download`` without following the redirect; return ``Location``.
-
-    ``GET`` redirects to a ``get_object`` URL; ``HEAD`` to a ``head_object`` URL. Storage
-    rejects ``HEAD`` on a GET-signed URL, so the method must match the intended use.
-    """
+    """Ask entitycore ``/download`` without following the redirect; return ``Location``."""
     url, headers, parameters = _asset_download_request(
         api_url=api_url,
         entity_id=entity_id,
@@ -678,9 +674,9 @@ def _asset_storage_redirect_url(
         raise EntitySDKError(f"Request error: {err}") from err
     location = response.headers.get("location")
     if not response.is_redirect or location is None:
-        path = asset_path if asset_path is not None else asset_id
+        target = f"asset_path={asset_path}" if asset_path is not None else f"asset_id={asset_id}"
         raise EntitySDKError(
-            f"Expected a redirect to storage for {path}, got {response.status_code}"
+            f"Expected a redirect to storage for {target}, got {response.status_code}"
         )
     return location
 
@@ -747,9 +743,6 @@ def get_asset_size(
 ) -> int:
     """Return the asset file size in bytes via ``HEAD`` on entitycore ``/download``.
 
-    Requires entitycore to redirect ``HEAD`` to a ``head_object`` URL (entitycore#774).
-    A release that includes that change must be deployed.
-
     Args:
         api_url: the api url to entitycore service.
         entity_id: Resource id.
@@ -794,8 +787,8 @@ def get_asset_size(
         raise EntitySDKError(f"Request error: {err}") from err
     content_length = response.headers.get("content-length")
     if content_length is None:
-        path = asset_path if asset_path is not None else asset_id
-        raise EntitySDKError(f"Expected Content-Length from storage HEAD for {path}")
+        target = f"asset_path={asset_path}" if asset_path is not None else f"asset_id={asset_id}"
+        raise EntitySDKError(f"Expected Content-Length from storage HEAD for {target}")
     return int(content_length)
 
 
