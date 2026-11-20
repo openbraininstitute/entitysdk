@@ -25,7 +25,7 @@ from entitysdk.types import (
     FetchFileStrategy,
     StorageType,
 )
-from entitysdk.utils.http import ReadTimeout
+from entitysdk.utils.http import ReadTimeout, RequestError
 from tests.unit.util import MOCK_UUID, PROJECT_ID, VIRTUAL_LAB_ID
 
 
@@ -1547,3 +1547,170 @@ def test_client_admin_upload_directory(
         _, kwargs = mock_upload.call_args
         assert kwargs["admin"] is True
         assert kwargs["project_context"] is None
+
+
+def test_client_get_download_url(client, httpx_mock, api_url, request_headers):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+    storage_url = "https://storage.example/file.bin?X-Amz-Signature=secret"
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download?asset_path=dir%2Ffile.bin",
+        match_headers=request_headers,
+        status_code=307,
+        headers={"location": storage_url},
+    )
+
+    url = client.get_download_url(
+        entity_id=entity_id,
+        entity_type=Entity,
+        asset_id=asset_id,
+        asset_path="dir/file.bin",
+    )
+    assert url == storage_url
+
+
+def test_client_get_download_url_without_asset_path(client, httpx_mock, api_url, request_headers):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+    storage_url = "https://storage.example/single.bin"
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download",
+        match_headers=request_headers,
+        status_code=307,
+        headers={"location": storage_url},
+    )
+
+    url = client.get_download_url(
+        entity_id=entity_id,
+        entity_type=Entity,
+        asset_id=asset_id,
+    )
+    assert url == storage_url
+
+
+def test_client_get_download_url_requires_redirect(client, httpx_mock, api_url, request_headers):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+    httpx_mock.add_response(
+        method="GET",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download",
+        match_headers=request_headers,
+        status_code=200,
+        content=b"not a redirect",
+    )
+
+    with pytest.raises(EntitySDKError, match="Expected a redirect"):
+        client.get_download_url(
+            entity_id=entity_id,
+            entity_type=Entity,
+            asset_id=asset_id,
+        )
+
+
+def test_client_get_download_url_request_error(client, httpx_mock, api_url, request_headers):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+    httpx_mock.add_exception(RequestError("connection failed"))
+
+    with pytest.raises(EntitySDKError, match="Request error: connection failed"):
+        client.get_download_url(
+            entity_id=entity_id,
+            entity_type=Entity,
+            asset_id=asset_id,
+        )
+
+
+def test_client_open_remote_file(client, httpx_mock, api_url, request_headers):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+    blob = b"abcdefghij"
+    get_url = "https://storage.example/file.bin?X-Amz-Signature=get"
+    head_url = "https://storage.example/file.bin?X-Amz-Signature=head"
+    download = f"{api_url}/entity/{entity_id}/assets/{asset_id}/download"
+    httpx_mock.add_response(
+        method="HEAD",
+        url=download,
+        match_headers=request_headers,
+        status_code=307,
+        headers={"location": head_url},
+    )
+    httpx_mock.add_response(
+        method="HEAD",
+        url=head_url,
+        status_code=200,
+        headers={"content-length": str(len(blob))},
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=download,
+        match_headers=request_headers,
+        status_code=307,
+        headers={"location": get_url},
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=get_url,
+        status_code=206,
+        content=blob,
+        match_headers={"Range": "bytes=0-9"},
+    )
+
+    remote = client.open_remote_file(
+        entity_id=entity_id,
+        entity_type=Entity,
+        asset_id=asset_id,
+        block_size=4,
+    )
+    with remote:
+        assert remote.size == len(blob)
+        assert remote._block_size == 4
+        assert remote.read() == blob
+        assert "storage.example" not in repr(remote)
+
+
+def test_client_open_remote_file_requires_content_length(
+    client, httpx_mock, api_url, request_headers
+):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+    head_url = "https://storage.example/file.bin?X-Amz-Signature=head"
+    httpx_mock.add_response(
+        method="HEAD",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download",
+        match_headers=request_headers,
+        status_code=307,
+        headers={"location": head_url},
+    )
+    httpx_mock.add_response(method="HEAD", url=head_url, status_code=200)
+
+    with pytest.raises(EntitySDKError, match="Expected Content-Length"):
+        client.open_remote_file(
+            entity_id=entity_id,
+            entity_type=Entity,
+            asset_id=asset_id,
+        )
+
+
+def test_client_open_remote_file_storage_head_request_error(
+    client, httpx_mock, api_url, request_headers
+):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+    head_url = "https://storage.example/file.bin?X-Amz-Signature=head"
+    httpx_mock.add_response(
+        method="HEAD",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download",
+        match_headers=request_headers,
+        status_code=307,
+        headers={"location": head_url},
+    )
+    httpx_mock.add_exception(RequestError("storage unreachable"), url=head_url, method="HEAD")
+
+    with pytest.raises(EntitySDKError, match="Request error: storage unreachable"):
+        client.open_remote_file(
+            entity_id=entity_id,
+            entity_type=Entity,
+            asset_id=asset_id,
+        )

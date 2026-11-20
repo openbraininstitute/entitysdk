@@ -11,6 +11,7 @@ from entitysdk import core
 from entitysdk.common import ProjectContext, parse_vlab_url
 from entitysdk.compat import Self
 from entitysdk.exception import EntitySDKError
+from entitysdk.http_file import DEFAULT_BLOCK_SIZE, HttpFile
 from entitysdk.models.asset import (
     Asset,
     DetailedFileList,
@@ -855,6 +856,96 @@ class Client:
             strategy=FetchFileStrategy.download_only,
             admin=admin,
         )
+
+    @validate_call
+    def get_download_url(
+        self,
+        *,
+        entity_id: ID,
+        entity_type: type[Entity],
+        asset_id: ID,
+        asset_path: StrOrPath | None = None,
+        project_context: ProjectContext | None = None,
+        admin: bool = False,
+    ) -> str:
+        """Return the presigned storage URL for an asset file.
+
+        Does not download the file. The URL is signed and short-lived: use it at once,
+        never store or log it.
+
+        Args:
+            entity_id: Id of the entity.
+            entity_type: Type of the entity.
+            asset_id: Id of the asset.
+            asset_path: For directory assets, path within the directory to the file.
+            project_context: Optional project context.
+            admin: Whether to use admin endpoints.
+
+        Returns:
+            The redirect ``Location`` pointing at storage.
+        """
+        return core.get_asset_download_url(
+            api_url=self.api_url,
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=asset_id,
+            asset_path=Path(asset_path) if asset_path else None,
+            project_context=self._optional_user_context(project_context, admin),
+            http_client=self._http_client,
+            token_manager=self._token_manager,
+            admin=admin,
+        )
+
+    @validate_call
+    def open_remote_file(
+        self,
+        *,
+        entity_id: ID,
+        entity_type: type[Entity],
+        asset_id: ID,
+        asset_path: StrOrPath | None = None,
+        block_size: int = DEFAULT_BLOCK_SIZE,
+        project_context: ProjectContext | None = None,
+        admin: bool = False,
+    ) -> HttpFile:
+        """Open an asset file as a seekable remote file that fetches bytes on demand.
+
+        For directory assets, ``asset_path`` is the relative path from ``list_directory``.
+
+        Args:
+            entity_id: Id of the entity.
+            entity_type: Type of the entity.
+            asset_id: Id of the asset.
+            asset_path: For directory assets, path within the directory to the file.
+            block_size: Bytes fetched per range request for small reads. Larger reads
+                are fetched exactly and not cached.
+            project_context: Optional project context.
+            admin: Whether to use admin endpoints.
+
+        Returns:
+            An ``HttpFile``. Nothing is fetched before the first read; close it after use.
+        """
+        context = self._optional_user_context(project_context, admin)
+        size = core.get_asset_size(
+            api_url=self.api_url,
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=asset_id,
+            asset_path=Path(asset_path) if asset_path else None,
+            project_context=context,
+            http_client=self._http_client,
+            token_manager=self._token_manager,
+            admin=admin,
+        )
+        url = self.get_download_url(
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=asset_id,
+            asset_path=asset_path,
+            project_context=project_context,
+            admin=admin,
+        )
+        return HttpFile(url, self._http_client, size, block_size=block_size)
 
     @staticmethod
     @validate_call
