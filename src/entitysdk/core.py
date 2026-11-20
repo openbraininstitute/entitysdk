@@ -631,6 +631,59 @@ def _asset_download_request(
     return f"{asset_endpoint}/download", headers, parameters
 
 
+def _asset_storage_redirect_url(
+    *,
+    api_url: str,
+    entity_id: ID,
+    entity_type: type[Entity],
+    asset_id: ID,
+    token_manager: TokenManager,
+    project_context: ProjectContext | None,
+    http_client: HTTPClient,
+    asset_path: Path | None,
+    admin: bool,
+    method: str,
+) -> str:
+    """Ask entitycore ``/download`` without following the redirect; return ``Location``.
+
+    ``GET`` redirects to a ``get_object`` URL; ``HEAD`` to a ``head_object`` URL. Storage
+    rejects ``HEAD`` on a GET-signed URL, so the method must match the intended use.
+    """
+    url, headers, parameters = _asset_download_request(
+        api_url=api_url,
+        entity_id=entity_id,
+        entity_type=entity_type,
+        asset_id=asset_id,
+        token_manager=token_manager,
+        project_context=project_context,
+        asset_path=asset_path,
+        admin=admin,
+    )
+    try:
+        response = http_client.request(
+            method,
+            url,
+            params=parameters,
+            headers=headers,
+            follow_redirects=False,
+            timeout=HTTPTimeout(
+                connect=settings.connect_timeout,
+                read=settings.read_timeout,
+                write=settings.write_timeout,
+                pool=settings.pool_timeout,
+            ),
+        )
+    except RequestError as err:
+        raise EntitySDKError(f"Request error: {err}") from err
+    location = response.headers.get("location")
+    if not response.is_redirect or location is None:
+        path = asset_path if asset_path is not None else asset_id
+        raise EntitySDKError(
+            f"Expected a redirect to storage for {path}, got {response.status_code}"
+        )
+    return location
+
+
 def get_asset_download_url(
     *,
     api_url: str,
@@ -665,22 +718,70 @@ def get_asset_download_url(
     Raises:
         EntitySDKError: No redirect, or the request failed (network error, timeout).
     """
-    url, headers, parameters = _asset_download_request(
+    return _asset_storage_redirect_url(
         api_url=api_url,
         entity_id=entity_id,
         entity_type=entity_type,
         asset_id=asset_id,
         token_manager=token_manager,
         project_context=project_context,
+        http_client=http_client,
         asset_path=asset_path,
         admin=admin,
+        method="GET",
+    )
+
+
+def get_asset_size(
+    *,
+    api_url: str,
+    entity_id: ID,
+    entity_type: type[Entity],
+    asset_id: ID,
+    token_manager: TokenManager,
+    project_context: ProjectContext | None = None,
+    http_client: HTTPClient,
+    asset_path: Path | None = None,
+    admin: bool,
+) -> int:
+    """Return the asset file size in bytes via ``HEAD`` on entitycore ``/download``.
+
+    Requires entitycore to redirect ``HEAD`` to a ``head_object`` URL (entitycore#774).
+    A release that includes that change must be deployed.
+
+    Args:
+        api_url: the api url to entitycore service.
+        entity_id: Resource id.
+        entity_type: Resource type.
+        asset_id: Asset id.
+        token_manager: Authorization access token manager.
+        project_context: Optional project context for ``project-id`` / ``virtual-lab-id`` headers.
+        http_client: HTTP client used for the request.
+        asset_path: For directory assets, path within the directory to the file.
+        admin: Whether to use admin endpoints.
+
+    Returns:
+        File size from the storage ``Content-Length`` header.
+
+    Raises:
+        EntitySDKError: No redirect, missing ``Content-Length``, or the request failed.
+    """
+    head_url = _asset_storage_redirect_url(
+        api_url=api_url,
+        entity_id=entity_id,
+        entity_type=entity_type,
+        asset_id=asset_id,
+        token_manager=token_manager,
+        project_context=project_context,
+        http_client=http_client,
+        asset_path=asset_path,
+        admin=admin,
+        method="HEAD",
     )
     try:
-        response = http_client.get(
-            url,
-            params=parameters,
-            headers=headers,
-            follow_redirects=False,
+        response = http_client.head(
+            head_url,
+            follow_redirects=True,
             timeout=HTTPTimeout(
                 connect=settings.connect_timeout,
                 read=settings.read_timeout,
@@ -690,13 +791,11 @@ def get_asset_download_url(
         )
     except RequestError as err:
         raise EntitySDKError(f"Request error: {err}") from err
-    location = response.headers.get("location")
-    if not response.is_redirect or location is None:
+    content_length = response.headers.get("content-length")
+    if content_length is None:
         path = asset_path if asset_path is not None else asset_id
-        raise EntitySDKError(
-            f"Expected a redirect to storage for {path}, got {response.status_code}"
-        )
-    return location
+        raise EntitySDKError(f"Expected Content-Length from storage HEAD for {path}")
+    return int(content_length)
 
 
 def download_asset_file(
