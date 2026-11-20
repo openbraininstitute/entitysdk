@@ -27,7 +27,7 @@ from entitysdk.types import (
     FetchFileStrategy,
     StorageType,
 )
-from entitysdk.utils.http import ReadTimeout
+from entitysdk.utils.http import ReadTimeout, RequestError
 from tests.unit.util import MOCK_UUID, PROJECT_ID, VIRTUAL_LAB_ID
 
 
@@ -1642,6 +1642,19 @@ def test_client_get_download_url_requires_redirect(client, httpx_mock, api_url, 
     )
 
     with pytest.raises(EntitySDKError, match="Expected a redirect"):
+        client.get_download_url(
+            entity_id=entity_id,
+            entity_type=Entity,
+            asset_id=asset_id,
+        )
+
+
+def test_client_get_download_url_request_error(client, httpx_mock, api_url, request_headers):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+    httpx_mock.add_exception(RequestError("connection failed"))
+
+    with pytest.raises(EntitySDKError, match="Request error: connection failed"):
         client.get_download_url(
             entity_id=entity_id,
             entity_type=Entity,
