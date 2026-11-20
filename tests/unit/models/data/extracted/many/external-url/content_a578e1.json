@@ -4,23 +4,23 @@
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Admin User",
+        "pref_label": "jd courcol",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Contains description of potassium channels...",
+      "description": "description-1",
       "id": "00000000-0000-4000-8000-000001234678",
-      "name": "Potassium channel page on Channelpedia",
-      "source": "channelpedia",
-      "source_name": "Channelpedia",
+      "name": "name-1",
+      "source": "icgenealogy",
+      "source_name": "ICGenealogy",
       "update_date": "2025-01-01T00:00:00Z",
       "updated_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Admin User",
+        "pref_label": "jd courcol",
         "update_date": "2025-01-01T00:00:00Z"
       },
-      "url": "https://channelpedia.epfl.ch/wikipages/188"
+      "url": "https://icg.neurotheory.ox.ac.uk//wiki/page-1"
     }
   ],
   "facets": null,

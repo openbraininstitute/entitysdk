@@ -164,6 +164,8 @@ class AssetLabel(StrEnum):
     research_log_document = "research_log_document"
     research_log_files = "research_log_files"
     recording_summary = "recording_summary"
+    generic_dataset_files = "generic_dataset_files"
+    generic_dataset_readme = "generic_dataset_readme"
 
 
 class AssetStatus(StrEnum):
@@ -458,6 +460,7 @@ class EntityRoute(StrEnum):
     task_config = "task-config"
     research_log = "research-log"
     extracellular_recording = "extracellular-recording"
+    generic_dataset = "generic-dataset"
 
 
 class EntityType(StrEnum):
@@ -504,6 +507,7 @@ class EntityType(StrEnum):
     task_config = "task_config"
     research_log = "research_log"
     extracellular_recording = "extracellular_recording"
+    generic_dataset = "generic_dataset"
 
 
 class EntityTypeWithBrainRegion(StrEnum):
@@ -570,6 +574,15 @@ class ExternalSource(StrEnum):
 
 
 class ExtracellularRecordingReadExpand(StrEnum):
+    generated_from_derivations = "generated_from_derivations"
+    generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
+    used_by_derivations = "used_by_derivations"
+    used_by_derivations_research_log_input = "used_by_derivations:research_log_input"
+    used_by_derivations_research_log_output = "used_by_derivations:research_log_output"
+    used_by_derivations_unspecified = "used_by_derivations:unspecified"
+
+
+class GenericDatasetReadExpand(StrEnum):
     generated_from_derivations = "generated_from_derivations"
     generated_from_derivations_unspecified = "generated_from_derivations:unspecified"
     used_by_derivations = "used_by_derivations"

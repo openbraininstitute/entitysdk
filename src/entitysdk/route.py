@@ -35,6 +35,7 @@ _ROUTES = {
     "ExperimentalSynapsesPerConnection": "experimental-synapses-per-connection",
     "ExternalUrl": "external-url",
     "ExtracellularRecording": "extracellular-recording",
+    "GenericDataset": "generic-dataset",
     "IonChannel": "ion-channel",
     "IonChannelModel": "ion-channel-model",
     "IonChannelModelingCampaign": "ion-channel-modeling-campaign",

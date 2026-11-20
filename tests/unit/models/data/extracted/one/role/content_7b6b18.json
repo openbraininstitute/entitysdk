@@ -1,19 +1,7 @@
 {
   "creation_date": "2025-01-01T00:00:00Z",
   "id": "00000000-0000-4000-8000-000001234678",
-  "name": "role",
-  "role_id": "role_id",
-  "update_date": "2025-01-01T00:00:00Z",
-  "created_by": {
-    "id": "00000000-0000-4000-8000-000001234678",
-    "pref_label": "test-user",
-    "creation_date": "2025-01-01T00:00:00Z",
-    "update_date": "2025-01-01T00:00:00Z"
-  },
-  "updated_by": {
-    "id": "00000000-0000-4000-8000-000001234678",
-    "pref_label": "test-user",
-    "creation_date": "2025-01-01T00:00:00Z",
-    "update_date": "2025-01-01T00:00:00Z"
-  }
+  "name": "important role",
+  "role_id": "important role id",
+  "update_date": "2025-01-01T00:00:00Z"
 }
