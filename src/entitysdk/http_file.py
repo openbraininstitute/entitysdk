@@ -1,8 +1,7 @@
 """Read parts of a remote file with HTTP byte-range requests, not the whole file.
 
-``HttpFile`` makes a URL look like a seekable file. The caller supplies the file size so
-no ``HEAD`` is sent (S3 refuses ``HEAD`` on a presigned ``GET`` URL). Reads use ``Range``
-and expect ``206``; that detail stays here, not in the public type name.
+``HttpFile`` makes a URL look like a seekable file. The caller supplies the file size
+(storage refuses ``HEAD`` on a GET-signed URL). Reads use ``Range`` and expect ``206``.
 """
 
 import io
