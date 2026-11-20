@@ -903,7 +903,6 @@ class Client:
         entity_id: ID,
         entity_type: type[Entity],
         asset_id: ID,
-        size: int | None = None,
         asset_path: StrOrPath | None = None,
         block_size: int = DEFAULT_BLOCK_SIZE,
         project_context: ProjectContext | None = None,
@@ -911,18 +910,15 @@ class Client:
     ) -> HttpFile:
         """Open an asset file as a seekable remote file that fetches bytes on demand.
 
-        Uses ``get_download_url`` and the client's HTTP client. For directory assets,
+        Resolves size with ``HEAD`` on entitycore ``/download`` (storage ``head_object``
+        URL), then opens a GET-signed URL for range reads. Needs an entitycore release
+        that includes openbraininstitute/entitycore#774. For directory assets,
         ``asset_path`` is the relative path from ``list_directory``.
-
-        When ``size`` is omitted, the size is resolved with ``HEAD`` on entitycore's
-        ``/download`` (redirects to a storage ``head_object`` URL). That needs an
-        entitycore release that includes openbraininstitute/entitycore#774.
 
         Args:
             entity_id: Id of the entity.
             entity_type: Type of the entity.
             asset_id: Id of the asset.
-            size: File size in bytes. If omitted, resolved via ``HEAD`` as above.
             asset_path: For directory assets, path within the directory to the file.
             block_size: Bytes fetched per range request for small reads. Larger reads
                 are fetched exactly and not cached.
@@ -933,20 +929,16 @@ class Client:
             An ``HttpFile``. Nothing is fetched before the first read; close it after use.
         """
         context = self._optional_user_context(project_context, admin)
-        resolved_size = (
-            size
-            if size is not None
-            else core.get_asset_size(
-                api_url=self.api_url,
-                entity_id=entity_id,
-                entity_type=entity_type,
-                asset_id=asset_id,
-                asset_path=Path(asset_path) if asset_path else None,
-                project_context=context,
-                http_client=self._http_client,
-                token_manager=self._token_manager,
-                admin=admin,
-            )
+        size = core.get_asset_size(
+            api_url=self.api_url,
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=asset_id,
+            asset_path=Path(asset_path) if asset_path else None,
+            project_context=context,
+            http_client=self._http_client,
+            token_manager=self._token_manager,
+            admin=admin,
         )
         url = self.get_download_url(
             entity_id=entity_id,
@@ -956,7 +948,7 @@ class Client:
             project_context=project_context,
             admin=admin,
         )
-        return HttpFile(url, self._http_client, resolved_size, block_size=block_size)
+        return HttpFile(url, self._http_client, size, block_size=block_size)
 
     @staticmethod
     @validate_call
