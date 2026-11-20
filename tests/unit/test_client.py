@@ -1559,10 +1559,10 @@ def test_client_admin_upload_directory(
 def test_client_get_download_url(client, httpx_mock, api_url, request_headers):
     entity_id = uuid.uuid4()
     asset_id = uuid.uuid4()
-    storage_url = "https://storage.example/file.h5?X-Amz-Signature=secret"
+    storage_url = "https://storage.example/file.bin?X-Amz-Signature=secret"
     httpx_mock.add_response(
         method="GET",
-        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download?asset_path=pop%2Fedges.h5",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download?asset_path=dir%2Ffile.bin",
         match_headers=request_headers,
         status_code=307,
         headers={"location": storage_url},
@@ -1572,7 +1572,7 @@ def test_client_get_download_url(client, httpx_mock, api_url, request_headers):
         entity_id=entity_id,
         entity_type=Entity,
         asset_id=asset_id,
-        asset_path="pop/edges.h5",
+        asset_path="dir/file.bin",
     )
     assert url == storage_url
 

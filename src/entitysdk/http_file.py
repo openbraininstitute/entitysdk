@@ -121,8 +121,8 @@ class HttpFile(io.RawIOBase):
     def readinto(self, buffer: Buffer, /) -> int:
         """Fill ``buffer`` from the current position; at most one request.
 
-        Never a short read: h5py calls ``readinto`` once and ignores the count returned,
-        so a partial fill would hand HDF5 uninitialised memory.
+        Never a short read: callers that ignore the returned count would otherwise see
+        uninitialised bytes past a partial fill.
 
         Returns:
             The number of bytes copied; 0 at the end of the file.
@@ -142,7 +142,7 @@ class HttpFile(io.RawIOBase):
     def read_at(self, start: int, length: int) -> bytes:
         """Fetch bytes ``[start, start + length)`` in one request, bypassing the cache.
 
-        Does not touch the file position, so it is safe while h5py has the file open.
+        Does not change the file position.
 
         Raises:
             ValueError: The range ends past the end of the file.

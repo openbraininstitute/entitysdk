@@ -1,8 +1,6 @@
 import io
 
-import h5py
 import httpx2
-import numpy as np
 import pytest
 
 from entitysdk.http_file import HttpFile
@@ -41,7 +39,7 @@ class TestHttpFile:
         assert remote.seekable()
 
     def test_repr_omits_the_url(self):
-        remote = HttpFile("https://s3/f.h5?X-Amz-Signature=secret", _client(RangeServer(b"x")), 1)
+        remote = HttpFile("https://s3/f.bin?X-Amz-Signature=secret", _client(RangeServer(b"x")), 1)
         assert "secret" not in repr(remote)
         assert "HttpFile" in repr(remote)
 
@@ -54,7 +52,7 @@ class TestHttpFile:
 
     def test_an_error_status_is_an_oserror_without_the_signed_url(self):
         client = httpx2.Client(transport=httpx2.MockTransport(lambda _: httpx2.Response(403)))
-        remote = HttpFile("https://s3/f.h5?X-Amz-Signature=secret", client, 10)
+        remote = HttpFile("https://s3/f.bin?X-Amz-Signature=secret", client, 10)
         with pytest.raises(OSError, match="got 403") as excinfo:
             remote.read(1)
         assert "secret" not in str(excinfo.value)
@@ -114,32 +112,15 @@ class TestHttpFile:
         with pytest.raises(ValueError, match=match):
             remote.seek(offset, whence)
 
-    def test_h5py_reads_one_dataset_without_the_rest(self, tmp_path):
-        path = tmp_path / "nodes.h5"
-        with h5py.File(path, "w") as h5:
-            group = h5.create_group("nodes/pop/0")
-            group.create_dataset("model_template", data=np.array([0, 1, 0, 1], dtype="i8"))
-            group.create_dataset("big", data=np.arange(10_000, dtype="f8"))
-            lib = group.create_group("@library")
-            lib.create_dataset(
-                "model_template",
-                data=np.array([b"hoc:A", b"hoc:B"], dtype=object),
-                dtype=h5py.string_dtype(),
-            )
-        blob = path.read_bytes()
+    def test_a_middle_slice_does_not_fetch_the_whole_file(self):
+        blob = bytes(range(256)) * 64
         server = RangeServer(blob)
-        remote = HttpFile("http://s/f", _client(server), len(blob), block_size=4096)
-        with h5py.File(remote, "r") as h5:
-            group = h5["nodes/pop/0"]
-            library = group["@library/model_template"].asstr()[:]
-            indices = np.unique(group["model_template"][:])
-        with h5py.File(path, "r") as h5:
-            group = h5["nodes/pop/0"]
-            assert list(library) == list(group["@library/model_template"].asstr()[:])
-            assert list(indices) == list(np.unique(group["model_template"][:]))
+        remote = HttpFile("http://s/f", _client(server), len(blob), block_size=512)
+        remote.seek(4000)
+        assert remote.read(8) == blob[4000:4008]
         fetched = sum(len(block) for block in remote._blocks)
         assert fetched < len(blob)
-        assert remote.requests == len(server.requests)
+        assert server.requests == ["GET bytes=3584-4095"]
 
     def test_a_large_read_is_not_kept_in_memory(self):
         blob = bytes(range(256)) * 16
