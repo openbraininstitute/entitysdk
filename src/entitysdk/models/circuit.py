@@ -1,10 +1,11 @@
 """Circuit model."""
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.scientific_artifact import ScientificArtifact
 from entitysdk.types import ID, CircuitBuildCategory, CircuitScale, TargetSimulator
 
 
-class Circuit(ScientificArtifact):
+class Circuit(NameDescriptionMixin, ScientificArtifact):
     """Circuit model."""
 
     has_morphologies: bool = False

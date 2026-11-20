@@ -127,6 +127,9 @@ def test_download_memodel(
         json={
             "id": str(emodel_id),
             "name": "foo",
+            "description": "",
+            "type": "emodel",
+            "authorized_project_id": str(uuid.UUID("12341234-1234-1234-1234-123412341234")),
             "species": {"name": "foo", "taxonomy_id": "bar"},
             "brain_region": {
                 "name": "foo",
@@ -145,7 +148,11 @@ def test_download_memodel(
                     "name": "foo",
                     "nmodl_suffix": "Ca_HVA",
                     "description": "foo description",
+                    "type": "ion_channel_model",
+                    "authorized_project_id": str(uuid.UUID("12341234-1234-1234-1234-123412341234")),
                     "subject": {
+                        "name": "subject",
+                        "description": "",
                         "sex": "male",
                         "species": {"name": "foo", "taxonomy_id": "bar"},
                     },
@@ -168,11 +175,12 @@ def test_download_memodel(
     )
 
     cell_morphology_protocol = CellMorphologyProtocol(
-        generation_type=CellMorphologyGenerationType.placeholder
+        name="protocol", description="", generation_type=CellMorphologyGenerationType.placeholder
     )
     memodel = MEModel(
         id=memodel_id,
         name="foo",
+        description="",
         species={"name": "foo", "taxonomy_id": "bar"},
         brain_region={
             "name": "foo",
@@ -186,12 +194,14 @@ def test_download_memodel(
         morphology=CellMorphology(
             id=morph_id,
             name="foo",
+            description="",
             cell_morphology_protocol=cell_morphology_protocol,
             assets=[_mock_morph_asset_response(morph_asset_id)],
         ),
         emodel=EModel(
             id=emodel_id,
             name="foo",
+            description="",
             species={"name": "foo", "taxonomy_id": "bar"},
             brain_region={
                 "name": "foo",

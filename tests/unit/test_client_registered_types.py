@@ -30,7 +30,7 @@ def _asset(*, asset_id: uuid.UUID | None) -> Asset:
 
 def test_register_entity_rejects_registered_input(client):
     with pytest.raises(ValidationError):
-        client.register_entity(entity=Entity(id=uuid.uuid4(), name="entity"))
+        client.register_entity(entity=Entity(id=uuid.uuid4()))
 
 
 def test_register_entity_accepts_unregistered_input(client, httpx_mock, api_url, request_headers):
@@ -39,10 +39,14 @@ def test_register_entity_accepts_unregistered_input(client, httpx_mock, api_url,
         method="POST",
         url=f"{api_url}/entity",
         match_headers=request_headers,
-        json={"id": str(entity_id), "name": "entity"},
+        json={
+            "id": str(entity_id),
+            "type": "cell_morphology",
+            "authorized_project_id": str(uuid.UUID("12341234-1234-1234-1234-123412341234")),
+        },
     )
 
-    registered = client.register_entity(entity=Entity(name="entity"))
+    registered = client.register_entity(entity=Entity())
 
     assert registered.id == entity_id
 
@@ -59,7 +63,7 @@ def test_fetch_file_rejects_unregistered_asset(client, tmp_path):
 
 def test_select_assets_rejects_unregistered_entity():
     with pytest.raises(ValidationError):
-        Client.select_assets(Entity(name="entity"), {"label": "morphology"})
+        Client.select_assets(Entity(), {"label": "morphology"})
 
 
 def test_download_assets_rejects_non_entity_type(client, tmp_path):
@@ -78,7 +82,6 @@ def test_fetch_assets_accepts_registered_entity(
 
     entity = Entity(
         id=entity_id,
-        name="entity",
         assets=[
             Asset(
                 id=asset_id,

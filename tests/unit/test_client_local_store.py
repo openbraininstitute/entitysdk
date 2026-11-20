@@ -225,7 +225,7 @@ def public_asset_directory_file2_download_httpx_mock(
 @pytest.fixture(scope="module")
 def entity(entity_id, public_asset_file_metadata, public_asset_directory_metadata):
     cell_morphology_protocol = CellMorphologyProtocol(
-        generation_type=CellMorphologyGenerationType.placeholder
+        name="protocol", description="", generation_type=CellMorphologyGenerationType.placeholder
     )
     return CellMorphology(
         id=entity_id,

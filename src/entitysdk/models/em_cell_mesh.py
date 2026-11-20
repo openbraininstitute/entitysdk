@@ -4,6 +4,7 @@ from typing import Annotated
 
 from pydantic import Field
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.entity import Entity
 from entitysdk.models.measurement_annotation import MeasurementAnnotation
 from entitysdk.models.mtype import MTypeClass
@@ -11,7 +12,7 @@ from entitysdk.models.scientific_artifact import ScientificArtifact
 from entitysdk.types import EMCellMeshGenerationMethod, EMCellMeshType
 
 
-class EMCellMesh(ScientificArtifact):
+class EMCellMesh(NameDescriptionMixin, ScientificArtifact):
     """EM Cell Mesh model."""
 
     release_version: Annotated[

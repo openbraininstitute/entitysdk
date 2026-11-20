@@ -5,12 +5,13 @@ from typing import Annotated
 
 from pydantic import Field
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.entity import Entity
 from entitysdk.models.taxonomy import Species, Strain
 from entitysdk.types import AgePeriod, Sex
 
 
-class Subject(Entity):
+class Subject(NameDescriptionMixin, Entity):
     """Subject model."""
 
     sex: Annotated[

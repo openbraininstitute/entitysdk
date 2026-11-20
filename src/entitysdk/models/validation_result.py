@@ -4,11 +4,12 @@ from typing import Annotated
 
 from pydantic import Field
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.entity import Entity
 from entitysdk.types import ID
 
 
-class ValidationResult(Entity):
+class ValidationResult(NameDescriptionMixin, Entity):
     """Validation result."""
 
     passed: Annotated[
@@ -16,13 +17,6 @@ class ValidationResult(Entity):
         Field(
             description="True if the validation passed, False otherwise.",
             examples=[True],
-        ),
-    ]
-    name: Annotated[  # pyright: ignore[reportGeneralTypeIssues, reportIncompatibleVariableOverride]
-        str,
-        Field(
-            description="Name of the validation.",
-            examples=["Neuron spiking validation"],
         ),
     ]
     validated_entity_id: Annotated[

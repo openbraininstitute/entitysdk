@@ -1017,7 +1017,7 @@ class Client:
             raise EntitySDKError(f"Type {type(entity)} has no assets.")
 
         if not entity.assets:
-            raise EntitySDKError(f"Entity {entity.id} ({entity.name}) has no assets.")
+            raise EntitySDKError(f"Entity {entity.id} has no assets.")
 
         assets = filter_assets(entity.assets, selection) if selection else entity.assets
 

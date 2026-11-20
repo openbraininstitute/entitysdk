@@ -4,6 +4,7 @@ from typing import Annotated
 
 from pydantic import Field
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.brain_location import BrainLocation
 from entitysdk.models.cell_morphology_protocol import CellMorphologyProtocolUnion
 from entitysdk.models.measurement_annotation import MeasurementAnnotation
@@ -12,7 +13,7 @@ from entitysdk.models.scientific_artifact import ScientificArtifact
 from entitysdk.types import RepairPipelineType
 
 
-class CellMorphology(ScientificArtifact):
+class CellMorphology(NameDescriptionMixin, ScientificArtifact):
     """Cell Morphology model."""
 
     cell_morphology_protocol: Annotated[

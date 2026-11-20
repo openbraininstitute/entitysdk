@@ -4,21 +4,15 @@ from typing import Annotated
 
 from pydantic import Field
 
+from entitysdk.mixin import NameDescriptionMixin
 from entitysdk.models.entity import Entity
 from entitysdk.models.taxonomy import Species, Strain
 from entitysdk.types import ID
 
 
-class BrainAtlas(Entity):
+class BrainAtlas(NameDescriptionMixin, Entity):
     """BrainAtlas model."""
 
-    name: Annotated[  # pyright: ignore[reportGeneralTypeIssues, reportIncompatibleVariableOverride]
-        str,
-        Field(
-            examples=["Thalamus"],
-            description="The name of the brain region.",
-        ),
-    ]
     hierarchy_id: Annotated[
         ID, Field(examples=[], description="The brain hierarchy that includes this brain region.")
     ]

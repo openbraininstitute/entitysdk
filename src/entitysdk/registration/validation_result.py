@@ -39,6 +39,7 @@ def register_validation_result_figure(
     validation_result = client.register_entity(
         ValidationResult(
             name="thumbnail" if detected == "thumbnail" else figure_file.stem,
+            description="",
             passed=passed,
             validated_entity_id=validated_entity_id,
             authorized_public=authorized_public,
@@ -100,6 +101,7 @@ def register_validation_result(
     passed: bool,
     validated_entity_id: ID,
     authorized_public: bool,
+    description: str = "",
     figure_files: list[Path] | None = None,
     details_text: str | None = None,
 ) -> ValidationResult | None:
@@ -118,6 +120,7 @@ def register_validation_result(
         passed: Whether the validation passed.
         validated_entity_id: ID of the validated entity (e.g. a MEModel).
         authorized_public: Whether the entity is public.
+        description: Validation result description.
         figure_files: ``.pdf``/``.png`` figure files to upload as
             ``validation_result_figure`` assets. Missing files and unsupported
             suffixes are skipped with a warning.
@@ -145,6 +148,7 @@ def register_validation_result(
     validation_result = client.register_entity(
         ValidationResult(
             name=name,
+            description=description,
             passed=passed,
             validated_entity_id=validated_entity_id,
             authorized_public=authorized_public,

@@ -49,6 +49,7 @@ def test_download_hoc(
     emodel = EModel(
         id=emodel_id,
         name="foo",
+        description="",
         species={"name": "foo", "taxonomy_id": "bar"},
         brain_region={
             "name": "foo",
