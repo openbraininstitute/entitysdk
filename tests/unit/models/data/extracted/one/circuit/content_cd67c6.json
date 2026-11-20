@@ -2,7 +2,7 @@
   "assets": [],
   "atlas_id": "00000000-0000-4000-8000-000001234678",
   "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-  "authorized_public": false,
+  "authorized_public": true,
   "brain_region": {
     "acronym": "acronym64",
     "annotation_value": 64,
@@ -20,11 +20,11 @@
   "created_by": {
     "creation_date": "2025-01-01T00:00:00Z",
     "id": "00000000-0000-4000-8000-000001234678",
-    "pref_label": "Regular User With Different Project Id",
+    "pref_label": "jd courcol",
     "update_date": "2025-01-01T00:00:00Z"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "My Circuit",
+  "description": "description",
   "experiment_date": null,
   "has_electrical_cell_models": true,
   "has_morphologies": true,
@@ -39,8 +39,8 @@
     "name": "Test License",
     "update_date": "2025-01-01T00:00:00Z"
   },
-  "lifecycle_status": "active",
-  "name": "circuit-u3-delete",
+  "lifecycle_status": "draft",
+  "name": "name",
   "notice_text": null,
   "number_connections": 10,
   "number_neurons": 5,
@@ -86,7 +86,7 @@
   "updated_by": {
     "creation_date": "2025-01-01T00:00:00Z",
     "id": "00000000-0000-4000-8000-000001234678",
-    "pref_label": "Regular User With Different Project Id",
+    "pref_label": "Admin User",
     "update_date": "2025-01-01T00:00:00Z"
   }
 }

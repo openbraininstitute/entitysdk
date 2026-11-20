@@ -21,7 +21,7 @@
     "update_date": "2025-01-01T00:00:00Z"
   },
   "creation_date": "2025-01-01T00:00:00Z",
-  "description": "emodel-desc-6",
+  "description": "emodel-desc-7",
   "etypes": [],
   "exemplar_morphology": {
     "cell_morphology_protocol": {
@@ -43,7 +43,7 @@
       "y": 20.0,
       "z": 30.0
     },
-    "name": "test exemplar morphology 0",
+    "name": "test exemplar morphology 1",
     "repair_pipeline_state": null,
     "update_date": "2025-01-01T00:00:00Z"
   },
@@ -197,8 +197,8 @@
   "iteration": "test iteration",
   "lifecycle_status": "active",
   "mtypes": [],
-  "name": "e-6",
-  "score": 60.0,
+  "name": "e-7",
+  "score": 70.0,
   "seed": -1,
   "species": {
     "creation_date": "2025-01-01T00:00:00Z",

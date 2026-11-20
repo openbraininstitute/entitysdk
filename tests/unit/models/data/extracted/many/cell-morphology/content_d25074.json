@@ -5,13 +5,13 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "RegionA-1",
-        "annotation_value": 8,
+        "acronym": "RegionB-2",
+        "annotation_value": 20,
         "color_hex_triplet": "BFDAE3",
         "creation_date": "2025-01-01T00:00:00Z",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "RegionA-1",
+        "name": "RegionB-1",
         "parent_structure_id": "00000000-0000-4000-8000-000001234678",
         "update_date": "2025-01-01T00:00:00Z"
       },
@@ -31,7 +31,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Description RegionA-1-hier1",
+      "description": "Description RegionB-2-hier1",
       "experiment_date": null,
       "has_segmented_spines": false,
       "id": "00000000-0000-4000-8000-000001234678",
@@ -46,7 +46,7 @@
         "z": 30.0
       },
       "mtypes": [],
-      "name": "RegionA-1-hier1",
+      "name": "RegionB-2-hier1",
       "notice_text": null,
       "published_in": null,
       "repair_pipeline_state": null,
@@ -96,13 +96,13 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "RegionA",
-        "annotation_value": 7,
+        "acronym": "RegionB",
+        "annotation_value": 17,
         "color_hex_triplet": "BFDAE3",
         "creation_date": "2025-01-01T00:00:00Z",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "RegionA",
+        "name": "RegionB",
         "parent_structure_id": "00000000-0000-4000-8000-000001234678",
         "update_date": "2025-01-01T00:00:00Z"
       },
@@ -122,7 +122,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Description RegionA-hier1",
+      "description": "Description RegionB-hier1",
       "experiment_date": null,
       "has_segmented_spines": false,
       "id": "00000000-0000-4000-8000-000001234678",
@@ -137,7 +137,7 @@
         "z": 30.0
       },
       "mtypes": [],
-      "name": "RegionA-hier1",
+      "name": "RegionB-hier1",
       "notice_text": null,
       "published_in": null,
       "repair_pipeline_state": null,

@@ -5,13 +5,13 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "grey",
-        "annotation_value": 8,
+        "acronym": "RegionA-2-1",
+        "annotation_value": 99,
         "color_hex_triplet": "BFDAE3",
         "creation_date": "2025-01-01T00:00:00Z",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "Basic cell groups and regions",
+        "name": "RegionA-2-1",
         "parent_structure_id": "00000000-0000-4000-8000-000001234678",
         "update_date": "2025-01-01T00:00:00Z"
       },
@@ -31,7 +31,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Description grey-hier0",
+      "description": "Description RegionA-2-1-hier1",
       "experiment_date": null,
       "has_segmented_spines": false,
       "id": "00000000-0000-4000-8000-000001234678",
@@ -46,7 +46,7 @@
         "z": 30.0
       },
       "mtypes": [],
-      "name": "grey-hier0",
+      "name": "RegionA-2-1-hier1",
       "notice_text": null,
       "published_in": null,
       "repair_pipeline_state": null,
@@ -96,13 +96,13 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "red",
-        "annotation_value": 64,
+        "acronym": "RegionA-2",
+        "annotation_value": 98,
         "color_hex_triplet": "BFDAE3",
         "creation_date": "2025-01-01T00:00:00Z",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "RedRegion",
+        "name": "RegionA-2",
         "parent_structure_id": "00000000-0000-4000-8000-000001234678",
         "update_date": "2025-01-01T00:00:00Z"
       },
@@ -122,7 +122,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Description red-hier0",
+      "description": "Description RegionA-2-hier1",
       "experiment_date": null,
       "has_segmented_spines": false,
       "id": "00000000-0000-4000-8000-000001234678",
@@ -137,7 +137,7 @@
         "z": 30.0
       },
       "mtypes": [],
-      "name": "red-hier0",
+      "name": "RegionA-2-hier1",
       "notice_text": null,
       "published_in": null,
       "repair_pipeline_state": null,
@@ -187,13 +187,13 @@
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "brain_region": {
-        "acronym": "blue",
-        "annotation_value": 42,
+        "acronym": "RegionA",
+        "annotation_value": 7,
         "color_hex_triplet": "BFDAE3",
         "creation_date": "2025-01-01T00:00:00Z",
         "hierarchy_id": "00000000-0000-4000-8000-000001234678",
         "id": "00000000-0000-4000-8000-000001234678",
-        "name": "BlueRegion",
+        "name": "RegionA",
         "parent_structure_id": "00000000-0000-4000-8000-000001234678",
         "update_date": "2025-01-01T00:00:00Z"
       },
@@ -213,7 +213,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Description blue-hier0",
+      "description": "Description RegionA-hier1",
       "experiment_date": null,
       "has_segmented_spines": false,
       "id": "00000000-0000-4000-8000-000001234678",
@@ -228,7 +228,7 @@
         "z": 30.0
       },
       "mtypes": [],
-      "name": "blue-hier0",
+      "name": "RegionA-hier1",
       "notice_text": null,
       "published_in": null,
       "repair_pipeline_state": null,
@@ -304,7 +304,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Description root-hier0",
+      "description": "Description root-hier1",
       "experiment_date": null,
       "has_segmented_spines": false,
       "id": "00000000-0000-4000-8000-000001234678",
@@ -319,7 +319,7 @@
         "z": 30.0
       },
       "mtypes": [],
-      "name": "root-hier0",
+      "name": "root-hier1",
       "notice_text": null,
       "published_in": null,
       "repair_pipeline_state": null,

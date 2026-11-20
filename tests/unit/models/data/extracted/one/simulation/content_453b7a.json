@@ -22,11 +22,11 @@
       "authorized_public": false,
       "circuit_id": "00000000-0000-4000-8000-000001234678",
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "array-description-0",
+      "description": "array-description-1",
       "electrode_type": "custom",
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "array-0",
+      "name": "array-1",
       "type": "simulatable_extracellular_recording_array",
       "update_date": "2025-01-01T00:00:00Z"
     },
@@ -35,11 +35,11 @@
       "authorized_public": false,
       "circuit_id": "00000000-0000-4000-8000-000001234678",
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "array-description-1",
+      "description": "array-description-0",
       "electrode_type": "custom",
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "array-1",
+      "name": "array-0",
       "type": "simulatable_extracellular_recording_array",
       "update_date": "2025-01-01T00:00:00Z"
     }

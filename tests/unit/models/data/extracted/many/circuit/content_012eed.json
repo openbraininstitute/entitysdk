@@ -42,7 +42,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "lifecycle_status": "draft",
-      "name": "root-circuit-32b18cff",
+      "name": "root-circuit-9201c55f",
       "notice_text": null,
       "number_connections": 100000000,
       "number_neurons": 10000000,
@@ -134,7 +134,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "lifecycle_status": "draft",
-      "name": "root-circuit-630afe50",
+      "name": "root-circuit-2227d0d1",
       "notice_text": null,
       "number_connections": 100000000,
       "number_neurons": 10000000,
@@ -226,7 +226,7 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "lifecycle_status": "draft",
-      "name": "root-circuit-d3f7f7a8",
+      "name": "root-circuit-1a79110f",
       "notice_text": null,
       "number_connections": 100000000,
       "number_neurons": 10000000,

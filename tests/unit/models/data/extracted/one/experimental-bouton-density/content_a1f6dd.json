@@ -34,20 +34,20 @@
   "lifecycle_status": "active",
   "measurements": [
     {
-      "id": 1311,
+      "id": 1317,
       "name": "minimum",
       "unit": "\u03bcm",
       "value": 1.23
     },
     {
-      "id": 1312,
+      "id": 1318,
       "name": "maximum",
       "unit": "\u03bcm",
       "value": 1.45
     }
   ],
   "mtypes": [],
-  "name": "my-name",
+  "name": "Public u1/0",
   "subject": {
     "age_max": null,
     "age_min": null,

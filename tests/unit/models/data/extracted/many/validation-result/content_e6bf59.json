@@ -12,10 +12,10 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Step at 130% of rheobase.",
+      "description": "Hyperpolarizing pulse after a long hold.",
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "test_validation_result",
+      "name": "rebound",
       "passed": true,
       "type": "validation_result",
       "update_date": "2025-01-01T00:00:00Z",

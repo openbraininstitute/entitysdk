@@ -2,22 +2,22 @@
   "data": [
     {
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "contributions": [],
       "corrected_for_shrinkage": null,
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
+        "pref_label": "Regular User With Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Description Test",
+      "description": "description-2",
       "generation_type": "digital_reconstruction",
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "draft",
       "magnification": null,
-      "name": "Public u2/0",
+      "name": "name-2",
       "protocol_design": "cell_patch",
       "protocol_document": "https://example.com/",
       "slicing_direction": "horizontal",
@@ -29,13 +29,13 @@
       "updated_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
+        "pref_label": "Regular User With Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       }
     },
     {
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
+      "authorized_public": false,
       "contributions": [],
       "corrected_for_shrinkage": null,
       "created_by": {
@@ -45,12 +45,12 @@
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Description Test",
+      "description": "description-1",
       "generation_type": "digital_reconstruction",
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "draft",
       "magnification": null,
-      "name": "Public u1/0",
+      "name": "name-1",
       "protocol_design": "cell_patch",
       "protocol_document": "https://example.com/",
       "slicing_direction": "horizontal",
@@ -70,7 +70,7 @@
   "facets": null,
   "pagination": {
     "page": 1,
-    "page_size": 30,
-    "total_items": 2
+    "page_size": 2,
+    "total_items": 3
   }
 }

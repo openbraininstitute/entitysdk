@@ -3,38 +3,65 @@
     {
       "assets": [],
       "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": true,
+      "contributions": [],
+      "created_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Step at 130% of rheobase.",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "lifecycle_status": "active",
+      "name": "test_validation_result-458670ce",
+      "passed": true,
+      "type": "validation_result",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "jd courcol",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "validated_entity_id": "00000000-0000-4000-8000-000001234678"
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
+      "authorized_public": true,
+      "contributions": [],
+      "created_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "Regular User With Different Project Id",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "creation_date": "2025-01-01T00:00:00Z",
+      "description": "Step at 130% of rheobase.",
+      "id": "00000000-0000-4000-8000-000001234678",
+      "lifecycle_status": "active",
+      "name": "test_validation_result-82979664",
+      "passed": true,
+      "type": "validation_result",
+      "update_date": "2025-01-01T00:00:00Z",
+      "updated_by": {
+        "creation_date": "2025-01-01T00:00:00Z",
+        "id": "00000000-0000-4000-8000-000001234678",
+        "pref_label": "Regular User With Different Project Id",
+        "update_date": "2025-01-01T00:00:00Z"
+      },
+      "validated_entity_id": "00000000-0000-4000-8000-000001234678"
+    },
+    {
+      "assets": [],
+      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
       "authorized_public": false,
       "contributions": [],
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Step at 130% of rheobase.",
-      "id": "00000000-0000-4000-8000-000001234678",
-      "lifecycle_status": "active",
-      "name": "test_validation_result-009f5600",
-      "passed": true,
-      "type": "validation_result",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "creation_date": "2025-01-01T00:00:00Z",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "validated_entity_id": "00000000-0000-4000-8000-000001234678"
-    },
-    {
-      "assets": [],
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
-      "contributions": [],
-      "created_by": {
-        "creation_date": "2025-01-01T00:00:00Z",
-        "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
         "update_date": "2025-01-01T00:00:00Z"
       },
@@ -42,7 +69,7 @@
       "description": "Step at 130% of rheobase.",
       "id": "00000000-0000-4000-8000-000001234678",
       "lifecycle_status": "active",
-      "name": "test_validation_result-db5add92",
+      "name": "test_validation_result-b2aa9939",
       "passed": true,
       "type": "validation_result",
       "update_date": "2025-01-01T00:00:00Z",
@@ -50,33 +77,6 @@
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
         "pref_label": "jd courcol",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "validated_entity_id": "00000000-0000-4000-8000-000001234678"
-    },
-    {
-      "assets": [],
-      "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-      "authorized_public": true,
-      "contributions": [],
-      "created_by": {
-        "creation_date": "2025-01-01T00:00:00Z",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
-        "update_date": "2025-01-01T00:00:00Z"
-      },
-      "creation_date": "2025-01-01T00:00:00Z",
-      "description": "Step at 130% of rheobase.",
-      "id": "00000000-0000-4000-8000-000001234678",
-      "lifecycle_status": "active",
-      "name": "test_validation_result-e89a8a3b",
-      "passed": true,
-      "type": "validation_result",
-      "update_date": "2025-01-01T00:00:00Z",
-      "updated_by": {
-        "creation_date": "2025-01-01T00:00:00Z",
-        "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "Regular User With Different Project Id",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "validated_entity_id": "00000000-0000-4000-8000-000001234678"
