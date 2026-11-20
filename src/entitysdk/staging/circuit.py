@@ -12,9 +12,19 @@ L = logging.getLogger(__name__)
 
 
 def stage_circuit(
-    client: Client, *, model: Circuit, output_dir: Path, max_concurrent: int = 1
+    client: Client,
+    *,
+    model: Circuit,
+    output_dir: Path,
+    max_concurrent: int = 1,
+    strategy: FetchFileStrategy = FetchFileStrategy.link_or_download,
 ) -> Path:
-    """Stage a Circuit directory into output_dir."""
+    """Stage a Circuit directory into output_dir.
+
+    By default files are symlinked to the mounted asset store when it is available and downloaded
+    otherwise. Pass a copy or download ``strategy`` when the staged files will be modified, so that
+    the original circuit is not changed through the links.
+    """
     ensure_has_id(model)
     ensure_has_assets(model)
 
@@ -34,7 +44,7 @@ def stage_circuit(
         output_path=output_dir,
         ignore_directory_name=True,
         max_concurrent=max_concurrent,
-        strategy=FetchFileStrategy.link_or_download,
+        strategy=strategy,
     )
 
     L.debug("Downloaded circuit %s paths: %s", model.id, paths)
