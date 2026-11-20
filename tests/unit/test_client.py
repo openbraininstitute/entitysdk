@@ -1666,42 +1666,6 @@ def test_client_open_remote_file(client, httpx_mock, api_url, request_headers):
     entity_id = uuid.uuid4()
     asset_id = uuid.uuid4()
     blob = b"abcdefghij"
-    storage_url = "https://storage.example/file.bin"
-    httpx_mock.add_response(
-        method="GET",
-        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download",
-        match_headers=request_headers,
-        status_code=307,
-        headers={"location": storage_url},
-    )
-    httpx_mock.add_response(
-        method="GET",
-        url=storage_url,
-        status_code=206,
-        content=blob,
-        match_headers={"Range": "bytes=0-9"},
-    )
-
-    remote = client.open_remote_file(
-        entity_id=entity_id,
-        entity_type=Entity,
-        asset_id=asset_id,
-        size=len(blob),
-        block_size=4,
-    )
-    with remote:
-        assert remote.size == len(blob)
-        assert remote._block_size == 4
-        assert remote.read() == blob
-        assert "storage.example" not in repr(remote)
-
-
-def test_client_open_remote_file_resolves_size_via_head(
-    client, httpx_mock, api_url, request_headers
-):
-    entity_id = uuid.uuid4()
-    asset_id = uuid.uuid4()
-    blob = b"abcdefghij"
     get_url = "https://storage.example/file.bin?X-Amz-Signature=get"
     head_url = "https://storage.example/file.bin?X-Amz-Signature=head"
     download = f"{api_url}/entity/{entity_id}/assets/{asset_id}/download"
@@ -1741,10 +1705,12 @@ def test_client_open_remote_file_resolves_size_via_head(
     )
     with remote:
         assert remote.size == len(blob)
+        assert remote._block_size == 4
         assert remote.read() == blob
+        assert "storage.example" not in repr(remote)
 
 
-def test_client_open_remote_file_size_requires_content_length(
+def test_client_open_remote_file_requires_content_length(
     client, httpx_mock, api_url, request_headers
 ):
     entity_id = uuid.uuid4()
