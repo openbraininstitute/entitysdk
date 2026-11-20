@@ -1691,3 +1691,26 @@ def test_client_open_remote_file_requires_content_length(
             entity_type=Entity,
             asset_id=asset_id,
         )
+
+
+def test_client_open_remote_file_storage_head_request_error(
+    client, httpx_mock, api_url, request_headers
+):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+    head_url = "https://storage.example/file.bin?X-Amz-Signature=head"
+    httpx_mock.add_response(
+        method="HEAD",
+        url=f"{api_url}/entity/{entity_id}/assets/{asset_id}/download",
+        match_headers=request_headers,
+        status_code=307,
+        headers={"location": head_url},
+    )
+    httpx_mock.add_exception(RequestError("storage unreachable"), url=head_url, method="HEAD")
+
+    with pytest.raises(EntitySDKError, match="Request error: storage unreachable"):
+        client.open_remote_file(
+            entity_id=entity_id,
+            entity_type=Entity,
+            asset_id=asset_id,
+        )
