@@ -4,17 +4,17 @@
       "created_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
+        "pref_label": "alice",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "creation_date": "2025-01-01T00:00:00Z",
       "derivation_type": "circuit_extraction",
       "generated": {
         "authorized_project_id": "00000000-0000-4000-8000-000001234678",
-        "authorized_public": true,
+        "authorized_public": false,
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "lifecycle_status": "draft",
+        "lifecycle_status": "active",
         "type": "circuit",
         "update_date": "2025-01-01T00:00:00Z"
       },
@@ -24,7 +24,7 @@
       "updated_by": {
         "creation_date": "2025-01-01T00:00:00Z",
         "id": "00000000-0000-4000-8000-000001234678",
-        "pref_label": "jd courcol",
+        "pref_label": "alice",
         "update_date": "2025-01-01T00:00:00Z"
       },
       "used": {
