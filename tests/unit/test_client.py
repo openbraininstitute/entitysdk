@@ -1796,3 +1796,33 @@ def test_client_open_file__remote(client, httpx_mock, api_url, request_headers, 
         entity_id=entity_id, entity_type=Entity, asset_id=asset_id, strategy=strategy
     ) as f:
         assert f.read() == blob
+
+
+def test_client_open_remote_file__with_size_skips_head(
+    client, httpx_mock, api_url, request_headers
+):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+    blob = b"abcdefghij"
+    get_url = "https://storage.example/file.bin?X-Amz-Signature=get"
+    download = f"{api_url}/entity/{entity_id}/assets/{asset_id}/download"
+    httpx_mock.add_response(
+        method="GET",
+        url=download,
+        match_headers=request_headers,
+        status_code=307,
+        headers={"location": get_url},
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=get_url,
+        status_code=206,
+        content=blob,
+        match_headers={"Range": "bytes=0-9"},
+    )
+
+    with client.open_remote_file(
+        entity_id=entity_id, entity_type=Entity, asset_id=asset_id, size=len(blob)
+    ) as remote:
+        assert remote.size == len(blob)
+        assert remote.read() == blob
