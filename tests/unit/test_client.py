@@ -1,9 +1,11 @@
 import io
+import json
 import re
 import uuid
 from pathlib import Path
 from unittest.mock import patch
 
+import httpx
 import pytest
 from pydantic import ValidationError
 
@@ -1444,6 +1446,44 @@ def test_client_delete_entity(mock_route, clients, httpx_mock, api_url, request_
     )
 
     clients.wout_context.delete_entity(entity_id=entity_id, entity_type=Entity, admin=True)
+
+
+@pytest.mark.parametrize("client_fixture", ["client", "client_no_context"])
+def test_client_admin_register_entity(client_fixture, request, httpx_mock, api_url, auth_token):
+    client = request.getfixturevalue(client_fixture)
+    entity_id = uuid.uuid4()
+    project_id = uuid.uuid4()
+
+    sent: list[httpx.Request] = []
+
+    def callback(request: httpx.Request) -> httpx.Response:
+        sent.append(request)
+        return httpx.Response(
+            200, json={"id": str(entity_id), "authorized_project_id": str(project_id)}
+        )
+
+    httpx_mock.add_callback(callback, method="POST", url=f"{api_url}/admin/entity")
+
+    registered = client.register_entity(
+        entity=Entity(authorized_project_id=project_id),
+        admin=True,
+    )
+
+    assert registered.id == entity_id
+    assert registered.authorized_project_id == project_id
+
+    assert len(sent) == 1
+    headers = sent[0].headers
+    assert headers["Authorization"] == f"Bearer {auth_token}"
+    # the admin routes ignore the project headers, and the project is taken from the body
+    assert "project-id" not in headers
+    assert "virtual-lab-id" not in headers
+    assert json.loads(sent[0].content)["authorized_project_id"] == str(project_id)
+
+
+def test_client_register_entity_without_context__raises(client_no_context):
+    with pytest.raises(EntitySDKError, match="A project context is mandatory for this operation."):
+        client_no_context.register_entity(entity=Entity())
 
 
 @patch("entitysdk.route.get_route_name")
