@@ -7,7 +7,12 @@ from entitysdk import Client, ProjectContext
 from entitysdk.exception import EntitySDKError
 from entitysdk.models import Asset, CellMorphology, CellMorphologyProtocol
 from entitysdk.route import get_assets_endpoint
-from entitysdk.types import CellMorphologyGenerationType, FetchContentStrategy, FetchFileStrategy
+from entitysdk.types import (
+    CellMorphologyGenerationType,
+    FetchContentStrategy,
+    FetchFileStrategy,
+    OpenFileStrategy,
+)
 from entitysdk.utils.store import LocalAssetStore
 
 MOCK_DATE = "2025-11-07 13:59:27.938208+00:00"
@@ -1710,3 +1715,67 @@ def test_fetch_assets__wout_mount__link_or_download(
     assert not res.path.is_symlink()
     assert res.path.resolve().name == "my_cell.swc"
     assert res.path.read_bytes() == b"public"
+
+
+def test_open_file__with_mount__local_only__directory(
+    client_with_mount,
+    entity_id,
+    entity_type,
+    public_asset_directory_id,
+    public_asset_directory_httpx_mock,
+):
+    with client_with_mount.open_file(
+        entity_id=entity_id,
+        entity_type=entity_type,
+        asset_id=public_asset_directory_id,
+        asset_path="dir_cell.swc",
+        strategy=OpenFileStrategy.local_only,
+    ) as f:
+        assert f.read() == b"public_directory_file"
+        f.seek(7)
+        assert f.read(9) == b"directory"
+
+
+def test_open_file__with_mount__local_or_remote__directory(
+    client_with_mount,
+    entity_id,
+    entity_type,
+    public_asset_directory_id,
+    public_asset_directory_httpx_mock,
+):
+    """A local hit needs no storage requests."""
+    with client_with_mount.open_file(
+        entity_id=entity_id,
+        entity_type=entity_type,
+        asset_id=public_asset_directory_id,
+        asset_path="dir_cell.swc",
+    ) as f:
+        assert f.read() == b"public_directory_file"
+
+
+def test_open_file__wout_mount__local_only(
+    client_wout_mount, entity_id, entity_type, public_asset_file_id
+):
+    with pytest.raises(EntitySDKError, match="open strategy failed"):
+        client_wout_mount.open_file(
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=public_asset_file_id,
+            strategy=OpenFileStrategy.local_only,
+        )
+
+
+def test_open_file__with_mount__no_files__local_only(
+    client_with_mount__no_files,
+    entity_id,
+    entity_type,
+    public_asset_file_id,
+    public_asset_file_metadata_httpx_mock,
+):
+    with pytest.raises(EntitySDKError, match="open strategy failed"):
+        client_with_mount__no_files.open_file(
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=public_asset_file_id,
+            strategy=OpenFileStrategy.local_only,
+        )

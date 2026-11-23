@@ -1,6 +1,7 @@
 """Local asset store module."""
 
 import shutil
+from io import BufferedReader
 from pathlib import Path
 
 from pydantic import BaseModel, DirectoryPath
@@ -34,3 +35,7 @@ class LocalAssetStore(BaseModel):
     def read_bytes(self, path: Path) -> bytes:
         """Read file from local store."""
         return self._local_path(path).read_bytes()
+
+    def open_path(self, path: Path) -> BufferedReader:
+        """Open file from local store for binary reading."""
+        return self._local_path(path).open("rb")

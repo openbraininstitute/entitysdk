@@ -25,6 +25,7 @@ from entitysdk.types import (
     DeploymentEnvironment,
     DerivationType,
     FetchFileStrategy,
+    OpenFileStrategy,
     StorageType,
 )
 from entitysdk.utils.http import ReadTimeout, RequestError
@@ -1754,3 +1755,44 @@ def test_client_open_remote_file_storage_head_request_error(
             entity_type=Entity,
             asset_id=asset_id,
         )
+
+
+@pytest.mark.parametrize(
+    "strategy", [OpenFileStrategy.local_or_remote, OpenFileStrategy.remote_only]
+)
+def test_client_open_file__remote(client, httpx_mock, api_url, request_headers, strategy):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+    blob = b"abcdefghij"
+    get_url = "https://storage.example/file.bin?X-Amz-Signature=get"
+    head_url = "https://storage.example/file.bin?X-Amz-Signature=head"
+    download = f"{api_url}/entity/{entity_id}/assets/{asset_id}/download"
+    httpx_mock.add_response(
+        method="HEAD",
+        url=download,
+        match_headers=request_headers,
+        status_code=307,
+        headers={"location": head_url},
+    )
+    httpx_mock.add_response(
+        method="HEAD", url=head_url, status_code=200, headers={"content-length": str(len(blob))}
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=download,
+        match_headers=request_headers,
+        status_code=307,
+        headers={"location": get_url},
+    )
+    httpx_mock.add_response(
+        method="GET",
+        url=get_url,
+        status_code=206,
+        content=blob,
+        match_headers={"Range": "bytes=0-9"},
+    )
+
+    with client.open_file(
+        entity_id=entity_id, entity_type=Entity, asset_id=asset_id, strategy=strategy
+    ) as f:
+        assert f.read() == blob

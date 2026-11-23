@@ -2,6 +2,7 @@
 
 import logging
 from collections.abc import Iterator
+from io import BufferedReader
 from pathlib import Path
 from typing import Literal, TypeVar
 
@@ -848,6 +849,72 @@ def download_asset_file(
     return target_path
 
 
+def _local_store_path(
+    *,
+    api_url: str,
+    entity_id: ID,
+    entity_type: type[Entity],
+    asset_or_id: ID | Asset,
+    asset_path: Path | None,
+    project_context: ProjectContext | None,
+    token_manager: TokenManager,
+    http_client: HTTPClient,
+    local_store: LocalAssetStore | None,
+    admin: bool,
+) -> Path | None:
+    """Return the asset path within the local store if it exists there, else None."""
+    if local_store is None:
+        return None
+
+    if isinstance(asset_or_id, Asset):
+        asset = asset_or_id
+    else:
+        asset = get_entity_asset(
+            api_url=api_url,
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=asset_or_id,
+            project_context=project_context,
+            http_client=http_client,
+            token_manager=token_manager,
+            admin=admin,
+        )
+
+    source_path = resolve_asset_path(asset, directory_file=asset_path)
+    return source_path if local_store.path_exists(source_path) else None
+
+
+def open_asset_file(
+    *,
+    api_url: str,
+    entity_id: ID,
+    entity_type: type[Entity],
+    asset_id: ID,
+    asset_path: Path | None = None,
+    project_context: ProjectContext | None = None,
+    token_manager: TokenManager,
+    http_client: HTTPClient,
+    local_store: LocalAssetStore | None = None,
+    admin: bool,
+) -> BufferedReader | None:
+    """Open an asset file from the local store, or return None if it is not there."""
+    source_path = _local_store_path(
+        api_url=api_url,
+        entity_id=entity_id,
+        entity_type=entity_type,
+        asset_or_id=asset_id,
+        asset_path=asset_path,
+        project_context=project_context,
+        token_manager=token_manager,
+        http_client=http_client,
+        local_store=local_store,
+        admin=admin,
+    )
+    if source_path is None or local_store is None:
+        return None
+    return local_store.open_path(source_path)
+
+
 def fetch_asset_content(
     *,
     api_url: str,
@@ -883,30 +950,21 @@ def fetch_asset_content(
     asset_id = asset_or_id.id if isinstance(asset_or_id, Asset) else asset_or_id
 
     def try_read_from_store() -> bytes | None:
-
-        if local_store is None:
+        source_path = _local_store_path(
+            api_url=api_url,
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_or_id=asset_or_id,
+            asset_path=asset_path,
+            project_context=project_context,
+            token_manager=token_manager,
+            http_client=http_client,
+            local_store=local_store,
+            admin=admin,
+        )
+        if source_path is None or local_store is None:
             return None
-
-        if isinstance(asset_or_id, ID):
-            asset = get_entity_asset(
-                api_url=api_url,
-                entity_id=entity_id,
-                entity_type=entity_type,
-                asset_id=asset_id,
-                project_context=project_context,
-                http_client=http_client,
-                token_manager=token_manager,
-                admin=admin,
-            )
-        else:
-            asset = asset_or_id
-
-        source_path: Path = resolve_asset_path(asset, directory_file=asset_path)
-
-        if local_store.path_exists(source_path):
-            return local_store.read_bytes(source_path)
-
-        return None
+        return local_store.read_bytes(source_path)
 
     def download_content():
         asset_endpoint = get_assets_endpoint(
