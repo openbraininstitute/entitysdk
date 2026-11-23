@@ -264,22 +264,28 @@ class Client:
         entity: Annotated[TIdentifiable, AfterValidator(ensure_id_is_none)],
         *,
         project_context: ProjectContext | None = None,
+        admin: bool = False,
     ) -> TIdentifiable:
         """Register entity.
 
         Args:
             entity: Identifiable to register. Its ``id`` must be ``None``.
-            project_context: Optional project context.
+            project_context: Optional project context, required when ``admin`` is false.
+            admin: Whether to use the admin endpoint or not. It requires the service admin role,
+                and the project context is ignored. The entities and activities are created in
+                the project given by their ``authorized_project_id``, which must be set.
 
         Returns:
             Registered entity with an assigned id.
         """
+        context = None if admin else self._required_user_context(project_context)
         return core.register_entity(
             api_url=self.api_url,
             entity=entity,
-            project_context=self._required_user_context(project_context),
+            project_context=context,
             http_client=self._http_client,
             token_manager=self._token_manager,
+            admin=admin,
         )
 
     @validate_call

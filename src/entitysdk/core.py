@@ -256,9 +256,10 @@ def register_entity(
     project_context: ProjectContext | None,
     token_manager: TokenManager,
     http_client: HTTPClient,
+    admin: bool,
 ) -> TIdentifiable:
     """Register entity."""
-    url = get_entities_endpoint(api_url=api_url, entity_type=type(entity))
+    url = get_entities_endpoint(api_url=api_url, entity_type=type(entity), admin=admin)
 
     json_data = serdes.serialize_model(entity)
 
