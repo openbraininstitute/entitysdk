@@ -930,6 +930,8 @@ class Client:
             asset_path: For directory assets, path within the directory to the file.
             size: Size of the file in bytes, if known beforehand (e.g. from
                 ``list_directory``). If omitted, it is resolved with extra HEAD requests.
+                A size too small silently makes the file look shorter; one too large
+                fails reads near the end with "wrong file size?".
             block_size: Bytes per cached block; see ``HttpFile``.
             project_context: Optional project context.
             admin: Whether to use admin endpoints.

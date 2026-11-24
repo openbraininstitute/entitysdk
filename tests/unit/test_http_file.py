@@ -268,8 +268,8 @@ class TestHttpFileBlocks:
         assert server.bytes_sent == len(blob)
 
     def test_large_read_is_streamed_and_checked_for_length(self):
-        _, remote = _counting(bytes(100), block_size=10, max_blocks=1)
-        remote.size = 110
+        server = CountingRangeServer(bytes(100))
+        remote = HttpFile("http://s/f", _client(server), 110, block_size=10, max_blocks=1)
         with pytest.raises(OSError, match="wrong file size"):
             remote.read(110)
 
@@ -296,6 +296,11 @@ class TestHttpFileBlocks:
         assert unraisable == []
 
 
+class _Body(httpx2.SyncByteStream):
+    def __iter__(self):
+        yield b"x"
+
+
 class TestHttpFileUrlRefresh:
     def test_expired_url_is_refreshed_once(self):
         calls = []
@@ -319,11 +324,45 @@ class TestHttpFileUrlRefresh:
             remote.read(1)
         assert remote.requests == 2
 
+    def test_url_is_refreshed_after_the_403_response_is_closed(self):
+        responses = []
+
+        def handler(request):
+            # A streamed body: with content=, the response would be closed from the start.
+            response = httpx2.Response(403 if not responses else 206, stream=_Body())
+            responses.append(response)
+            return response
+
+        def get_url():
+            assert responses[0].is_closed
+            return "http://s/f?fresh"
+
+        client = httpx2.Client(transport=httpx2.MockTransport(handler))
+        remote = HttpFile("http://s/f", client, 1, get_url=get_url)
+        assert remote.read(1) == b"x"
+
+    def test_a_failing_get_url_is_an_oserror(self):
+        def get_url():
+            raise RuntimeError("entitycore is down")
+
+        _, remote = _counting(bytes(100), expire_after=0, get_url=get_url)
+        with pytest.raises(OSError, match="Could not refresh") as excinfo:
+            remote.read(1)
+        assert isinstance(excinfo.value.__cause__, RuntimeError)
+
     def test_without_get_url_a_403_is_an_error(self):
         _, remote = _counting(bytes(100), expire_after=0)
         with pytest.raises(OSError, match="got 403"):
             remote.read(1)
         assert remote.requests == 1
+
+
+class TestHttpFileAttributes:
+    @pytest.mark.parametrize("name", ["size", "requests"])
+    def test_size_and_requests_are_read_only(self, name):
+        _, remote = _counting(bytes(100))
+        with pytest.raises(AttributeError):
+            setattr(remote, name, 1)
 
 
 class TestReadAtArguments:

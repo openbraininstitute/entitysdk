@@ -14,7 +14,7 @@ from entitysdk.utils.http import HTTPClient, HTTPResponse
 
 L = logging.getLogger(__name__)
 
-DEFAULT_BLOCK_SIZE = 4 * 1024 * 1024
+DEFAULT_BLOCK_SIZE = 1024 * 1024
 DEFAULT_MAX_BLOCKS = 8
 HTTP_PARTIAL_CONTENT = 206
 HTTP_FORBIDDEN = 403
@@ -31,8 +31,8 @@ class HttpFile(io.RawIOBase):
 
     A read raises ``OSError`` when the server does not answer 206 or returns the wrong
     number of bytes (a wrong ``size``). A presigned URL expires: when ``get_url`` is given,
-    a 403 fetches a fresh URL and retries once. The signed URL is never included in
-    ``repr`` or error messages.
+    a 403 fetches a fresh URL and retries once; a failing ``get_url`` raises ``OSError``.
+    The signed URL is never included in ``repr`` or error messages.
 
     Not thread-safe: the position and the cache are unguarded. Requests go through the
     given HTTP client, so the file stops working once that client is closed.
@@ -46,11 +46,9 @@ class HttpFile(io.RawIOBase):
                 header = remote.read(8)
 
     Attributes:
-        size: File size in bytes, as given by the caller.
-        requests: Number of range requests sent so far.
+        size: File size in bytes, as given by the caller. Read-only.
+        requests: Number of range requests sent so far. Read-only.
     """
-
-    size: int
 
     def __init__(
         self,
@@ -83,12 +81,23 @@ class HttpFile(io.RawIOBase):
         self._position = 0
         # Block index -> bytes, least recently used first.
         self._blocks: OrderedDict[int, bytes] = OrderedDict()
-        self.requests = 0
-        self.size = size
+        self._requests = 0
+        self._size = size
 
     def __repr__(self) -> str:
         """Omit the URL: it may carry presigned credentials."""
-        return f"<HttpFile size={getattr(self, 'size', None)} closed={self.closed}>"
+        # getattr: repr may run on an instance whose __init__ failed.
+        return f"<HttpFile size={getattr(self, '_size', None)} closed={self.closed}>"
+
+    @property
+    def size(self) -> int:
+        """File size in bytes, as given by the caller."""
+        return self._size
+
+    @property
+    def requests(self) -> int:
+        """Number of range requests sent so far."""
+        return self._requests
 
     @override
     def readable(self) -> bool:
@@ -220,27 +229,30 @@ class HttpFile(io.RawIOBase):
         """Stream a ``206`` response for ``[start, end)``; refresh the URL once on 403.
 
         Raises:
-            OSError: Status other than 206. The signed URL is left out.
+            OSError: Status other than 206, or ``get_url`` failed. The signed URL is left out.
         """
         headers = {"Range": f"bytes={start}-{end - 1}"}
         get_url = self._get_url
         while True:
-            self.requests += 1
+            self._requests += 1
             # Streamed: a 200 (Range header dropped) is refused before its body is read.
             # No raise_for_status(): its message holds the signed URL.
             with self._http.stream(
                 "GET", self._url, headers=headers, follow_redirects=True
             ) as response:
                 status = response.status_code
-                if status == HTTP_FORBIDDEN and get_url is not None:
-                    L.debug("Range read refused with 403, refreshing the URL")
-                    self._url, get_url = get_url(), None
-                    continue
-                if status != HTTP_PARTIAL_CONTENT:
-                    msg = f"Expected 206 for a range request, got {status}"
-                    raise OSError(msg)
-                yield response
-                return
+                if status == HTTP_PARTIAL_CONTENT:
+                    yield response
+                    return
+            # Refreshed after the 403 response is closed, so its connection is free for
+            # the request get_url() makes, even with a one-connection pool.
+            if status == HTTP_FORBIDDEN and get_url is not None:
+                L.debug("Range read refused with 403, refreshing the URL")
+                self._url = _refresh_url(get_url)
+                get_url = None
+                continue
+            msg = f"Expected 206 for a range request, got {status}"
+            raise OSError(msg)
 
     def _fetch(self, start: int, end: int) -> bytes:
         """Fetch bytes ``[start, end)`` in one request.
@@ -270,6 +282,15 @@ class HttpFile(io.RawIOBase):
                 received += len(chunk)
         _check_length(expected, received)
         L.debug("Range read %s-%s (%d bytes)", start, start + expected - 1, expected)
+
+
+def _refresh_url(get_url: Callable[[], str]) -> str:
+    """Call ``get_url``; raise ``OSError`` on failure, as file readers like h5py expect."""
+    try:
+        return get_url()
+    except Exception as err:
+        msg = f"Could not refresh the expired URL ({type(err).__name__})"
+        raise OSError(msg) from err
 
 
 def _check_length(expected: int, received: int) -> None:
