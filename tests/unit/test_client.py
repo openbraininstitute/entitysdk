@@ -13,6 +13,7 @@ from entitysdk.client import Client
 from entitysdk.common import ProjectContext
 from entitysdk.config import settings
 from entitysdk.exception import EntitySDKError
+from entitysdk.http_file import HttpFile
 from entitysdk.models import Asset, Circuit, MTypeClass
 from entitysdk.models.asset import DetailedFile, DetailedFileList
 from entitysdk.models.core import Identifiable
@@ -1795,6 +1796,8 @@ def test_client_open_file__remote(client, httpx_mock, api_url, request_headers, 
     with client.open_file(
         entity_id=entity_id, entity_type=Entity, asset_id=asset_id, strategy=strategy
     ) as f:
+        assert type(f) is io.BufferedReader
+        assert isinstance(f.raw, HttpFile)
         assert f.read() == blob
 
 
@@ -1826,3 +1829,30 @@ def test_client_open_remote_file__with_size_skips_head(
     ) as remote:
         assert remote.size == len(blob)
         assert remote.read() == blob
+
+
+def test_client_open_remote_file__refreshes_an_expired_url(
+    client, httpx_mock, api_url, request_headers
+):
+    entity_id = uuid.uuid4()
+    asset_id = uuid.uuid4()
+    blob = b"abcdefghij"
+    old_url = "https://storage.example/file.bin?X-Amz-Signature=old"
+    new_url = "https://storage.example/file.bin?X-Amz-Signature=new"
+    download = f"{api_url}/entity/{entity_id}/assets/{asset_id}/download"
+    locations = iter([old_url, new_url])
+    httpx_mock.add_callback(
+        lambda _: httpx.Response(307, headers={"location": next(locations)}),
+        method="GET",
+        url=download,
+        match_headers=request_headers,
+        is_reusable=True,
+    )
+    httpx_mock.add_response(method="GET", url=old_url, status_code=403)
+    httpx_mock.add_response(method="GET", url=new_url, status_code=206, content=blob)
+
+    with client.open_remote_file(
+        entity_id=entity_id, entity_type=Entity, asset_id=asset_id, size=len(blob)
+    ) as remote:
+        assert remote.read(4) == blob[:4]
+        assert remote.requests == 2

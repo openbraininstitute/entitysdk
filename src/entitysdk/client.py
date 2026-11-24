@@ -2,6 +2,7 @@
 
 import concurrent.futures
 import os
+from functools import partial
 from io import BufferedReader
 from pathlib import Path
 from typing import Annotated, Any
@@ -929,13 +930,13 @@ class Client:
             asset_path: For directory assets, path within the directory to the file.
             size: Size of the file in bytes, if known beforehand (e.g. from
                 ``list_directory``). If omitted, it is resolved with extra HEAD requests.
-            block_size: Bytes fetched per range request for small reads. Larger reads
-                are fetched exactly and not cached.
+            block_size: Bytes per cached block; see ``HttpFile``.
             project_context: Optional project context.
             admin: Whether to use admin endpoints.
 
         Returns:
             An ``HttpFile``. Nothing is fetched before the first read; close it after use.
+            An expired download URL is refreshed once on 403.
         """
         if size is None:
             size = core.get_asset_size(
@@ -949,7 +950,8 @@ class Client:
                 token_manager=self._token_manager,
                 admin=admin,
             )
-        url = self.get_download_url(
+        get_url = partial(
+            self.get_download_url,
             entity_id=entity_id,
             entity_type=entity_type,
             asset_id=asset_id,
@@ -957,7 +959,7 @@ class Client:
             project_context=project_context,
             admin=admin,
         )
-        return HttpFile(url, self._http_client, size, block_size=block_size)
+        return HttpFile(get_url(), self._http_client, size, block_size=block_size, get_url=get_url)
 
     @validate_call
     def open_file(
@@ -972,7 +974,7 @@ class Client:
         block_size: int = DEFAULT_BLOCK_SIZE,
         project_context: ProjectContext | None = None,
         admin: bool = False,
-    ) -> BufferedReader | HttpFile:
+    ) -> BufferedReader:
         """Open an asset file as a seekable binary file, locally or remotely.
 
         Args:
@@ -987,12 +989,13 @@ class Client:
                   fetch bytes on demand with range requests.
                 - ``remote_only``: always fetch bytes on demand, as ``open_remote_file``.
             size: Size in bytes, used only for remote reads. See ``open_remote_file``.
-            block_size: Bytes fetched per range request for remote reads of small size.
+            block_size: Bytes per cached block for remote reads.
             project_context: Optional project context.
             admin: Whether to use admin endpoints.
 
         Returns:
-            A local file object or an ``HttpFile``. Close it after use.
+            A ``BufferedReader`` over the local file or over an ``HttpFile``, so both
+            behave alike. Close it after use.
         """
         if strategy != OpenFileStrategy.remote_only:
             local_file = core.open_asset_file(
@@ -1012,15 +1015,18 @@ class Client:
             if strategy == OpenFileStrategy.local_only:
                 raise EntitySDKError("open strategy failed: No asset path found in store.")
 
-        return self.open_remote_file(
-            entity_id=entity_id,
-            entity_type=entity_type,
-            asset_id=asset_id,
-            asset_path=asset_path,
-            size=size,
-            block_size=block_size,
-            project_context=project_context,
-            admin=admin,
+        # Default buffer size: a block-sized buffer would make every refill skip the cache.
+        return BufferedReader(
+            self.open_remote_file(
+                entity_id=entity_id,
+                entity_type=entity_type,
+                asset_id=asset_id,
+                asset_path=asset_path,
+                size=size,
+                block_size=block_size,
+                project_context=project_context,
+                admin=admin,
+            )
         )
 
     @staticmethod

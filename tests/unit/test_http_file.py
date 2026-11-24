@@ -1,4 +1,6 @@
+import gc
 import io
+import sys
 
 import httpx2
 import pytest
@@ -83,15 +85,19 @@ class TestHttpFile:
         remote = HttpFile("http://s/f", _client(server), len(blob), block_size=512)
         remote.seek(500)
         assert remote.read(100) == blob[500:600]
-        assert server.requests == ["GET bytes=0-599"]
+        assert server.requests == ["GET bytes=0-1023"]
+        remote.seek(510)
+        assert remote.read(10) == blob[510:520]
+        assert remote.requests == 1
 
-    def test_a_large_read_is_one_exact_request(self):
+    def test_a_read_spanning_several_blocks_is_one_aligned_request(self):
         blob = bytes(range(256)) * 16
         server = RangeServer(blob)
         remote = HttpFile("http://s/f", _client(server), len(blob), block_size=512)
         remote.seek(300)
         assert remote.read(2000) == blob[300:2300]
-        assert server.requests == ["GET bytes=300-2299"]
+        assert server.requests == ["GET bytes=0-2559"]
+        assert sorted(remote._blocks) == [0, 1, 2, 3, 4]
 
     def test_reads_stop_at_the_end_of_the_file(self):
         blob = b"abcdef"
@@ -118,17 +124,17 @@ class TestHttpFile:
         remote = HttpFile("http://s/f", _client(server), len(blob), block_size=512)
         remote.seek(4000)
         assert remote.read(8) == blob[4000:4008]
-        fetched = sum(len(block) for block in remote._blocks)
+        fetched = sum(len(block) for block in remote._blocks.values())
         assert fetched < len(blob)
         assert server.requests == ["GET bytes=3584-4095"]
 
-    def test_a_large_read_is_not_kept_in_memory(self):
+    def test_a_read_larger_than_the_cache_is_exact_and_not_kept(self):
         blob = bytes(range(256)) * 16
         server = RangeServer(blob)
-        remote = HttpFile("http://s/f", _client(server), len(blob), block_size=512)
+        remote = HttpFile("http://s/f", _client(server), len(blob), block_size=512, max_blocks=2)
         remote.seek(300)
         assert remote.read(2000) == blob[300:2300]
-        assert remote._blocks == []
+        assert not remote._blocks
         remote.seek(300)
         assert remote.read(4) == blob[300:304]
         assert server.requests == ["GET bytes=300-2299", "GET bytes=0-511"]
@@ -138,7 +144,7 @@ class TestHttpFile:
         assert remote.read(1) == b"x"
         remote.close()
         assert remote.closed
-        assert remote._blocks == []
+        assert not remote._blocks
         for operation in (lambda: remote.read(1), remote.tell, lambda: remote.seek(0)):
             with pytest.raises(ValueError, match="closed file"):
                 operation()
@@ -170,3 +176,165 @@ class TestHttpFile:
         assert remote.tell() == 4
         with pytest.raises(ValueError, match="past the file size"):
             remote.read_at(1020, 8)
+
+
+MiB = 1024 * 1024
+
+
+class CountingRangeServer:
+    """Serve one blob with Range GETs; record ranges and bytes sent.
+
+    After ``expire_after`` requests, URLs without ``fresh`` get 403, like an expired
+    presigned URL.
+    """
+
+    def __init__(self, blob: bytes, *, expire_after: int | None = None):
+        self.blob = blob
+        self.ranges: list[tuple[int, int]] = []
+        self.bytes_sent = 0
+        self.expire_after = expire_after
+
+    def __call__(self, request: httpx2.Request) -> httpx2.Response:
+        expired = self.expire_after is not None and len(self.ranges) >= self.expire_after
+        if expired and "fresh" not in str(request.url):
+            return httpx2.Response(403)
+        start, end = map(int, request.headers["range"].removeprefix("bytes=").split("-"))
+        self.ranges.append((start, end))
+        body = self.blob[start : end + 1]
+        self.bytes_sent += len(body)
+        return httpx2.Response(206, content=body)
+
+
+def _counting(blob: bytes, block_size: int = 4 * MiB, **kwargs):
+    server = CountingRangeServer(blob, expire_after=kwargs.pop("expire_after", None))
+    remote = HttpFile("http://s/f", _client(server), len(blob), block_size=block_size, **kwargs)
+    return server, remote
+
+
+def _cached_bytes(remote: HttpFile) -> int:
+    return sum(len(block) for block in remote._blocks.values())
+
+
+class TestHttpFileBlocks:
+    """Fixed blocks with a bounded LRU cache: each byte is downloaded about once."""
+
+    def test_sequential_3mib_reads_download_each_byte_once(self):
+        blob = bytes(64 * MiB)
+        server, remote = _counting(blob)
+        while remote.read(3 * MiB):
+            pass
+        assert server.bytes_sent == len(blob)
+        assert _cached_bytes(remote) <= 8 * 4 * MiB
+
+    def test_read_crossing_a_cached_block_fetches_only_the_missing_block(self):
+        server, remote = _counting(bytes(16 * MiB))
+        remote.read(1)
+        remote.seek(3 * MiB)
+        remote.read(2 * MiB)
+        assert server.ranges == [(0, 4 * MiB - 1), (4 * MiB, 8 * MiB - 1)]
+
+    def test_cache_is_bounded_during_sequential_small_reads(self):
+        blob = bytes(64 * MiB)
+        server, remote = _counting(blob)
+        while remote.read(64 * 1024):
+            pass
+        assert server.bytes_sent == len(blob)
+        assert _cached_bytes(remote) == 8 * 4 * MiB
+
+    def test_least_recently_used_block_is_dropped_first(self):
+        blob = bytes(range(256)) * 4
+        server, remote = _counting(blob, block_size=256, max_blocks=2)
+        for position in (0, 256, 0, 512):
+            remote.seek(position)
+            remote.read(1)
+        assert sorted(remote._blocks) == [0, 2]
+        assert len(server.ranges) == 3
+
+    def test_plain_read_is_one_request_and_not_cached(self):
+        blob = bytes(range(256)) * 4096
+        server, remote = _counting(blob, block_size=4096)
+        remote.seek(10)
+        assert remote.read() == blob[10:]
+        assert server.ranges == [(10, len(blob) - 1)]
+        assert not remote._blocks
+        assert remote.read() == b""
+
+    def test_buffered_reader_with_10mb_chunks_downloads_each_byte_about_once(self):
+        blob = bytes(64 * MiB)
+        server, remote = _counting(blob)
+        reader = io.BufferedReader(remote)
+        while reader.read(10_000_000):
+            pass
+        assert server.bytes_sent == len(blob)
+
+    def test_large_read_is_streamed_and_checked_for_length(self):
+        _, remote = _counting(bytes(100), block_size=10, max_blocks=1)
+        remote.size = 110
+        with pytest.raises(OSError, match="wrong file size"):
+            remote.read(110)
+
+    def test_large_read_that_returns_too_many_bytes_is_refused(self):
+        transport = httpx2.MockTransport(lambda _: httpx2.Response(206, content=b"x" * 50))
+        remote = HttpFile("http://s/f", httpx2.Client(transport=transport), 40, 10, 1)
+        with pytest.raises(OSError, match="Expected 40 bytes, got 50"):
+            remote.read(40)
+
+    @pytest.mark.parametrize(("block_size", "max_blocks"), [(0, 1), (1, 0)])
+    def test_invalid_cache_settings_are_rejected(self, block_size, max_blocks):
+        with pytest.raises(ValueError, match="must be positive"):
+            HttpFile("http://s/f", _client(RangeServer(b"x")), 1, block_size, max_blocks)
+
+    def test_failed_construction_does_not_raise_on_garbage_collection(self):
+        unraisable = []
+        hook, sys.unraisablehook = sys.unraisablehook, unraisable.append
+        try:
+            with pytest.raises(ValueError, match="must be positive"):
+                HttpFile("http://s/f", _client(RangeServer(b"x")), 1, block_size=0)
+            gc.collect()
+        finally:
+            sys.unraisablehook = hook
+        assert unraisable == []
+
+
+class TestHttpFileUrlRefresh:
+    def test_expired_url_is_refreshed_once(self):
+        calls = []
+
+        def get_url():
+            calls.append(1)
+            return "http://s/f?fresh"
+
+        server, remote = _counting(bytes(16 * MiB), expire_after=1, get_url=get_url)
+        remote.read(1)
+        remote.seek(8 * MiB)
+        assert remote.read(1) == b"\0"
+        remote.seek(12 * MiB)
+        assert remote.read(1) == b"\0"
+        assert calls == [1]
+        assert remote.requests == 4
+
+    def test_a_second_403_is_an_error(self):
+        _, remote = _counting(bytes(100), expire_after=0, get_url=lambda: "http://s/still-old")
+        with pytest.raises(OSError, match="got 403"):
+            remote.read(1)
+        assert remote.requests == 2
+
+    def test_without_get_url_a_403_is_an_error(self):
+        _, remote = _counting(bytes(100), expire_after=0)
+        with pytest.raises(OSError, match="got 403"):
+            remote.read(1)
+        assert remote.requests == 1
+
+
+class TestReadAtArguments:
+    @pytest.mark.parametrize(("start", "length"), [(-1, 4), (0, -1)])
+    def test_negative_arguments_are_rejected_without_a_request(self, start, length):
+        server, remote = _counting(bytes(100), block_size=16)
+        with pytest.raises(ValueError, match="negative"):
+            remote.read_at(start, length)
+        assert server.ranges == []
+
+    def test_zero_length_is_empty_without_a_request(self):
+        server, remote = _counting(bytes(100), block_size=16)
+        assert remote.read_at(50, 0) == b""
+        assert server.ranges == []

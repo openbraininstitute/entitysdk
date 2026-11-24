@@ -1,32 +1,41 @@
 """Read parts of a remote file with HTTP byte-range requests, not the whole file.
 
-``HttpFile`` makes a URL look like a seekable file. The caller supplies the file size
-(storage refuses ``HEAD`` on a GET-signed URL). Reads use ``Range`` and expect ``206``.
+``HttpFile`` makes a URL look like a seekable file. Reads use ``Range`` and expect ``206``.
 """
 
 import io
 import logging
-from bisect import bisect_right
+from collections import OrderedDict
+from collections.abc import Callable, Iterator
+from contextlib import contextmanager
 
 from entitysdk.compat import Buffer, override
-from entitysdk.utils.http import HTTPClient
+from entitysdk.utils.http import HTTPClient, HTTPResponse
 
 L = logging.getLogger(__name__)
 
-# Default fetch size for small reads. Larger reads are fetched exactly and not cached.
 DEFAULT_BLOCK_SIZE = 4 * 1024 * 1024
+DEFAULT_MAX_BLOCKS = 8
 HTTP_PARTIAL_CONTENT = 206
+HTTP_FORBIDDEN = 403
 
 
 class HttpFile(io.RawIOBase):
     """A read-only, seekable file whose bytes are fetched from a URL on demand.
 
-    Small reads are served from ``block_size`` blocks kept until ``close()``. A read
-    larger than a block is fetched exactly and not kept.
+    The file is split into fixed, aligned blocks of ``block_size`` bytes. A read uses the
+    blocks already cached and fetches the missing ones in one request. At most
+    ``max_blocks`` blocks are kept; the least recently used are dropped first. A read
+    spanning more than ``max_blocks`` blocks is fetched exactly and not cached, and
+    ``read()`` of the whole remainder is a single request.
 
     A read raises ``OSError`` when the server does not answer 206 or returns the wrong
-    number of bytes (a wrong ``size``); the caller decides whether to fall back. The
-    signed URL is never included in ``repr`` or error messages.
+    number of bytes (a wrong ``size``). A presigned URL expires: when ``get_url`` is given,
+    a 403 fetches a fresh URL and retries once. The signed URL is never included in
+    ``repr`` or error messages.
+
+    Not thread-safe: the position and the cache are unguarded. Requests go through the
+    given HTTP client, so the file stops working once that client is closed.
 
     Example:
         ::
@@ -41,12 +50,16 @@ class HttpFile(io.RawIOBase):
         requests: Number of range requests sent so far.
     """
 
+    size: int
+
     def __init__(
         self,
         url: str,
         http_client: HTTPClient,
         size: int,
         block_size: int = DEFAULT_BLOCK_SIZE,
+        max_blocks: int = DEFAULT_MAX_BLOCKS,
+        get_url: Callable[[], str] | None = None,
     ) -> None:
         """Store the URL and the size; nothing is fetched before the first read.
 
@@ -54,22 +67,28 @@ class HttpFile(io.RawIOBase):
             url: Address of a file served with byte-range support.
             http_client: Client used for every request (connection pool, timeouts).
             size: File size in bytes.
-            block_size: Smallest number of bytes fetched per request.
+            block_size: Bytes per cached block.
+            max_blocks: Maximum number of blocks kept in memory.
+            get_url: Returns a fresh URL; called once when a request gets 403.
         """
+        if block_size < 1 or max_blocks < 1:
+            msg = f"block_size ({block_size}) and max_blocks ({max_blocks}) must be positive"
+            raise ValueError(msg)
         super().__init__()
         self._url = url
+        self._get_url = get_url
         self._http = http_client
         self._block_size = block_size
+        self._max_blocks = max_blocks
         self._position = 0
-        # Kept blocks sorted by start, as parallel lists for bisect.
-        self._starts: list[int] = []
-        self._blocks: list[bytes] = []
+        # Block index -> bytes, least recently used first.
+        self._blocks: OrderedDict[int, bytes] = OrderedDict()
         self.requests = 0
         self.size = size
 
     def __repr__(self) -> str:
         """Omit the URL: it may carry presigned credentials."""
-        return f"<HttpFile size={self.size} closed={self.closed}>"
+        return f"<HttpFile size={getattr(self, 'size', None)} closed={self.closed}>"
 
     @override
     def readable(self) -> bool:
@@ -84,8 +103,8 @@ class HttpFile(io.RawIOBase):
     @override
     def close(self) -> None:
         """Drop cached blocks and mark the file closed."""
-        self._starts.clear()
-        self._blocks.clear()
+        # Assigned, not cleared: close() also runs from __del__ when __init__ failed.
+        self._blocks = OrderedDict()
         super().close()
 
     def _check_open(self) -> None:
@@ -132,11 +151,25 @@ class HttpFile(io.RawIOBase):
         length = min(len(view), self.size - start)
         if length <= 0:
             return 0
-        block_start, block = self._block_covering(start, length)
-        offset = start - block_start
-        view[:length] = block[offset : offset + length]
-        self._position += length
+        end = start + length
+        first, last = start // self._block_size, (end - 1) // self._block_size
+        if last - first + 1 > self._max_blocks:
+            self._fetch_into(start, view[:length])
+        else:
+            self._copy_from_blocks(start, end, first, last, view)
+        self._position = end
         return length
+
+    @override
+    def readall(self) -> bytes:
+        """Read from the position to the end of the file in one request, bypassing the cache."""
+        self._check_open()
+        start = self._position
+        if start >= self.size:
+            return b""
+        content = self._fetch(start, self.size)
+        self._position = self.size
+        return content
 
     def read_at(self, start: int, length: int) -> bytes:
         """Fetch bytes ``[start, start + length)`` in one request, bypassing the cache.
@@ -144,54 +177,102 @@ class HttpFile(io.RawIOBase):
         Does not change the file position.
 
         Raises:
-            ValueError: The range ends past the end of the file.
+            ValueError: Negative arguments, or the range ends past the end of the file.
         """
         self._check_open()
+        if start < 0 or length < 0:
+            msg = f"negative start ({start}) or length ({length})"
+            raise ValueError(msg)
         if start + length > self.size:
             msg = f"range {start}-{start + length - 1} ends past the file size {self.size}"
             raise ValueError(msg)
+        if length == 0:
+            return b""
         return self._fetch(start, start + length)
 
-    def _block_covering(self, start: int, length: int) -> tuple[int, bytes]:
-        """Return ``(block start, block bytes)`` for a block holding ``[start, start+length)``.
+    def _copy_from_blocks(
+        self, start: int, end: int, first: int, last: int, view: memoryview
+    ) -> None:
+        """Copy ``[start, end)`` into ``view`` from blocks ``first..last``, fetching missing."""
+        bs = self._block_size
+        missing = [index for index in range(first, last + 1) if index not in self._blocks]
+        if missing:
+            # One request from the first to the last missing block; cached ones in between
+            # are fetched again rather than splitting the read into several requests.
+            span_start = missing[0] * bs
+            data = self._fetch(span_start, min((missing[-1] + 1) * bs, self.size))
+            for index in range(missing[0], missing[-1] + 1):
+                offset = index * bs - span_start
+                self._blocks[index] = data[offset : offset + bs]
+        out = 0
+        for index in range(first, last + 1):
+            self._blocks.move_to_end(index)
+            block_start = index * bs
+            low = max(start, block_start) - block_start
+            high = min(end, block_start + bs) - block_start
+            view[out : out + high - low] = memoryview(self._blocks[index])[low:high]
+            out += high - low
+        while len(self._blocks) > self._max_blocks:
+            self._blocks.popitem(last=False)
 
-        Only the kept block starting closest before ``start`` is checked. A block-sized
-        fetch is kept; a larger exact fetch is not.
+    @contextmanager
+    def _range_response(self, start: int, end: int) -> Iterator[HTTPResponse]:
+        """Stream a ``206`` response for ``[start, end)``; refresh the URL once on 403.
+
+        Raises:
+            OSError: Status other than 206. The signed URL is left out.
         """
-        index = bisect_right(self._starts, start) - 1
-        if index >= 0:
-            block_start, block = self._starts[index], self._blocks[index]
-            if start + length <= block_start + len(block):
-                return block_start, block
-        if length >= self._block_size:
-            return start, self._fetch(start, min(start + length, self.size))
-        # Block-aligned, extended when the read crosses the block end.
-        fetch_start = start - start % self._block_size
-        fetch_end = min(max(fetch_start + self._block_size, start + length), self.size)
-        block = self._fetch(fetch_start, fetch_end)
-        position = bisect_right(self._starts, fetch_start)
-        self._starts.insert(position, fetch_start)
-        self._blocks.insert(position, block)
-        return fetch_start, block
+        headers = {"Range": f"bytes={start}-{end - 1}"}
+        get_url = self._get_url
+        while True:
+            self.requests += 1
+            # Streamed: a 200 (Range header dropped) is refused before its body is read.
+            # No raise_for_status(): its message holds the signed URL.
+            with self._http.stream(
+                "GET", self._url, headers=headers, follow_redirects=True
+            ) as response:
+                status = response.status_code
+                if status == HTTP_FORBIDDEN and get_url is not None:
+                    L.debug("Range read refused with 403, refreshing the URL")
+                    self._url, get_url = get_url(), None
+                    continue
+                if status != HTTP_PARTIAL_CONTENT:
+                    msg = f"Expected 206 for a range request, got {status}"
+                    raise OSError(msg)
+                yield response
+                return
 
     def _fetch(self, start: int, end: int) -> bytes:
         """Fetch bytes ``[start, end)`` in one request.
 
         Raises:
-            OSError: Status other than 206, or wrong length. The signed URL is left out.
+            OSError: Status other than 206, or wrong length.
         """
-        self.requests += 1
-        # Streamed: a 200 (Range header dropped) is refused before its whole body is read.
-        # No raise_for_status(): its message holds the signed URL.
-        with self._http.stream(
-            "GET", self._url, headers={"Range": f"bytes={start}-{end - 1}"}, follow_redirects=True
-        ) as response:
-            if response.status_code != HTTP_PARTIAL_CONTENT:
-                msg = f"Expected 206 for a range request, got {response.status_code}"
-                raise OSError(msg)
+        with self._range_response(start, end) as response:
             content = response.read()
-        if len(content) != end - start:
-            msg = f"Expected {end - start} bytes, got {len(content)}: wrong file size?"
-            raise OSError(msg)
+        _check_length(end - start, len(content))
         L.debug("Range read %s-%s (%d bytes)", start, end - 1, len(content))
         return content
+
+    def _fetch_into(self, start: int, view: memoryview) -> None:
+        """Fetch ``len(view)`` bytes from ``start`` straight into ``view``, without a copy.
+
+        Raises:
+            OSError: Status other than 206, or wrong length.
+        """
+        expected = len(view)
+        received = 0
+        with self._range_response(start, start + expected) as response:
+            for chunk in response.iter_bytes():
+                if received + len(chunk) > expected:
+                    _check_length(expected, received + len(chunk))
+                view[received : received + len(chunk)] = chunk
+                received += len(chunk)
+        _check_length(expected, received)
+        L.debug("Range read %s-%s (%d bytes)", start, start + expected - 1, expected)
+
+
+def _check_length(expected: int, received: int) -> None:
+    if received != expected:
+        msg = f"Expected {expected} bytes, got {received}: wrong file size?"
+        raise OSError(msg)

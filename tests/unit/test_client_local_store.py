@@ -1,3 +1,4 @@
+import io
 from pathlib import Path
 from uuid import UUID
 
@@ -1750,6 +1751,7 @@ def test_open_file__with_mount__local_or_remote__directory(
         asset_id=public_asset_directory_id,
         asset_path="dir_cell.swc",
     ) as f:
+        assert type(f) is io.BufferedReader
         assert f.read() == b"public_directory_file"
 
 
