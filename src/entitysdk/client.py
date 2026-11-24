@@ -2,6 +2,8 @@
 
 import concurrent.futures
 import os
+from functools import partial
+from io import BufferedReader
 from pathlib import Path
 from typing import Annotated, Any
 
@@ -11,6 +13,7 @@ from entitysdk import core
 from entitysdk.common import ProjectContext, parse_vlab_url
 from entitysdk.compat import Self
 from entitysdk.exception import EntitySDKError
+from entitysdk.http_file import DEFAULT_BLOCK_SIZE, HttpFile
 from entitysdk.models.asset import (
     Asset,
     DetailedFileList,
@@ -43,6 +46,7 @@ from entitysdk.types import (
     DerivationType,
     FetchContentStrategy,
     FetchFileStrategy,
+    OpenFileStrategy,
     StorageType,
     StrOrPath,
     Token,
@@ -860,6 +864,171 @@ class Client:
             asset_path=Path(asset_path) if asset_path else None,
             strategy=FetchFileStrategy.download_only,
             admin=admin,
+        )
+
+    @validate_call
+    def get_download_url(
+        self,
+        *,
+        entity_id: ID,
+        entity_type: type[Entity],
+        asset_id: ID,
+        asset_path: StrOrPath | None = None,
+        project_context: ProjectContext | None = None,
+        admin: bool = False,
+    ) -> str:
+        """Return the presigned storage URL for an asset file.
+
+        Does not download the file. The URL is signed and short-lived: use it at once,
+        never store or log it.
+
+        Args:
+            entity_id: Id of the entity.
+            entity_type: Type of the entity.
+            asset_id: Id of the asset.
+            asset_path: For directory assets, path within the directory to the file.
+            project_context: Optional project context.
+            admin: Whether to use admin endpoints.
+
+        Returns:
+            The redirect ``Location`` pointing at storage.
+        """
+        return core.get_asset_download_url(
+            api_url=self.api_url,
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=asset_id,
+            asset_path=Path(asset_path) if asset_path else None,
+            project_context=self._optional_user_context(project_context, admin),
+            http_client=self._http_client,
+            token_manager=self._token_manager,
+            admin=admin,
+        )
+
+    @validate_call
+    def open_remote_file(
+        self,
+        *,
+        entity_id: ID,
+        entity_type: type[Entity],
+        asset_id: ID,
+        asset_path: StrOrPath | None = None,
+        size: int | None = None,
+        block_size: int = DEFAULT_BLOCK_SIZE,
+        project_context: ProjectContext | None = None,
+        admin: bool = False,
+    ) -> HttpFile:
+        """Open an asset file as a seekable remote file that fetches bytes on demand.
+
+        For directory assets, ``asset_path`` is the relative path from ``list_directory``.
+        See ``open_file`` to use the local store when available.
+
+        Args:
+            entity_id: Id of the entity.
+            entity_type: Type of the entity.
+            asset_id: Id of the asset.
+            asset_path: For directory assets, path within the directory to the file.
+            size: Size of the file in bytes, if known beforehand (e.g. from
+                ``list_directory``). If omitted, it is resolved with extra HEAD requests.
+                A size too small silently makes the file look shorter; one too large
+                fails reads near the end with "wrong file size?".
+            block_size: Bytes per cached block; see ``HttpFile``.
+            project_context: Optional project context.
+            admin: Whether to use admin endpoints.
+
+        Returns:
+            An ``HttpFile``. Nothing is fetched before the first read; close it after use.
+            An expired download URL is refreshed once on 403.
+        """
+        if size is None:
+            size = core.get_asset_size(
+                api_url=self.api_url,
+                entity_id=entity_id,
+                entity_type=entity_type,
+                asset_id=asset_id,
+                asset_path=Path(asset_path) if asset_path else None,
+                project_context=self._optional_user_context(project_context, admin),
+                http_client=self._http_client,
+                token_manager=self._token_manager,
+                admin=admin,
+            )
+        get_url = partial(
+            self.get_download_url,
+            entity_id=entity_id,
+            entity_type=entity_type,
+            asset_id=asset_id,
+            asset_path=asset_path,
+            project_context=project_context,
+            admin=admin,
+        )
+        return HttpFile(get_url(), self._http_client, size, block_size=block_size, get_url=get_url)
+
+    @validate_call
+    def open_file(
+        self,
+        *,
+        entity_id: ID,
+        entity_type: type[Entity],
+        asset_id: ID,
+        asset_path: StrOrPath | None = None,
+        strategy: OpenFileStrategy = OpenFileStrategy.local_or_remote,
+        size: int | None = None,
+        block_size: int = DEFAULT_BLOCK_SIZE,
+        project_context: ProjectContext | None = None,
+        admin: bool = False,
+    ) -> BufferedReader:
+        """Open an asset file as a seekable binary file, locally or remotely.
+
+        Args:
+            entity_id: Id of the entity.
+            entity_type: Type of the entity.
+            asset_id: Id of the asset.
+            asset_path: For directory assets, path within the directory to the file.
+            strategy: How to open the file:
+
+                - ``local_only``: open from the local store, or raise.
+                - ``local_or_remote``: open from the local store if present, else
+                  fetch bytes on demand with range requests.
+                - ``remote_only``: always fetch bytes on demand, as ``open_remote_file``.
+            size: Size in bytes, used only for remote reads. See ``open_remote_file``.
+            block_size: Bytes per cached block for remote reads.
+            project_context: Optional project context.
+            admin: Whether to use admin endpoints.
+
+        Returns:
+            A ``BufferedReader`` over the local file or over an ``HttpFile``, so both
+            behave alike. Close it after use.
+        """
+        if strategy != OpenFileStrategy.remote_only:
+            local_file = core.open_asset_file(
+                api_url=self.api_url,
+                entity_id=entity_id,
+                entity_type=entity_type,
+                asset_id=asset_id,
+                asset_path=Path(asset_path) if asset_path else None,
+                project_context=self._optional_user_context(project_context, admin),
+                token_manager=self._token_manager,
+                http_client=self._http_client,
+                local_store=self._local_store,
+                admin=admin,
+            )
+            if local_file is not None:
+                return local_file
+            if strategy == OpenFileStrategy.local_only:
+                raise EntitySDKError("open strategy failed: No asset path found in store.")
+
+        # Default buffer size: a block-sized buffer would make every refill skip the cache.
+        return BufferedReader(
+            self.open_remote_file(
+                entity_id=entity_id,
+                entity_type=entity_type,
+                asset_id=asset_id,
+                asset_path=asset_path,
+                size=size,
+                block_size=block_size,
+                project_context=project_context,
+                admin=admin,
+            )
         )
 
     @staticmethod

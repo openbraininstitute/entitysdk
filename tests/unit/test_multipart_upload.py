@@ -150,7 +150,6 @@ def test_calculate_part_count_large_file():
 def test_multipart_upload_asset_file(
     asset_file, asset_metadata, project_context, token_manager, transfer_config_sequential
 ):
-
     asset_id = uuid4()
 
     with (
@@ -247,7 +246,6 @@ def test_execute_with_retry_raises_after_max_attempts():
 def test_initiate_upload(
     asset_file, asset_metadata, project_context, httpx_mock, asset_payload, token_from_value_manager
 ):
-
     httpx_mock.add_response(
         url=f"http://my-url/cell-morphology/{ENTITY_ID}/assets/multipart-upload/initiate",
         json=asset_payload,
@@ -285,7 +283,6 @@ def test_initiate_upload(
 
 
 def test_upload_parts():
-
     with (
         patch("entitysdk.multipart_upload._upload_parts_threaded", autospec=True) as p_thread,
         patch("entitysdk.multipart_upload._upload_parts_sequential", autospec=True) as p_seq,
@@ -315,7 +312,6 @@ def test_upload_part(httpx_mock, asset_file):
 
 
 def test_complete_upload(httpx_mock, project_context, asset_payload, token_from_value_manager):
-
     del asset_payload["upload_meta"]
 
     asset_payload |= {"status": "created"}

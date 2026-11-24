@@ -57,7 +57,6 @@ def test_get_api_version(httpx_mock, token_from_value_manager):
 
 
 def test_upload_asset_file(asset_file, token_manager):
-
     transfer_config = Mock()
     transfer_config.threshold = 100
 

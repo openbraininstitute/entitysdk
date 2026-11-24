@@ -17,6 +17,7 @@ from entitysdk.utils.execution import execute_with_retry
 # swap or upgrade the HTTP client library in one place without touching the rest of the codebase.
 HTTPClient = httpx2.Client
 HTTPTimeout = httpx2.Timeout
+HTTPResponse = httpx2.Response
 ConnectError = httpx2.ConnectError
 ConnectTimeout = httpx2.ConnectTimeout
 PoolTimeout = httpx2.PoolTimeout

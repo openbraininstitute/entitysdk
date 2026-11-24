@@ -85,6 +85,14 @@ class FetchContentStrategy(StrEnum):
     download_only = "download_only"
 
 
+class OpenFileStrategy(StrEnum):
+    """File opening strategy."""
+
+    local_only = "local_only"
+    local_or_remote = "local_or_remote"
+    remote_only = "remote_only"
+
+
 class MorphologyFormat(StrEnum):
     """A morphology file extension that SONATA can declare in a circuit config."""
 
