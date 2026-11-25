@@ -917,6 +917,7 @@ class TaskActivityType(StrEnum):
     circuit_single_build__execution = "circuit_single_build__execution"
     memodel_build__config_generation = "memodel_build__config_generation"
     memodel_build__execution = "memodel_build__execution"
+    em_cell_mesh_conversion__execution = "em_cell_mesh_conversion__execution"
 
 
 class TaskConfigReadExpand(StrEnum):
@@ -973,6 +974,7 @@ class TaskConfigType(StrEnum):
     circuit_single_build__config = "circuit_single_build__config"
     memodel_build__campaign = "memodel_build__campaign"
     memodel_build__config = "memodel_build__config"
+    em_cell_mesh_conversion__config = "em_cell_mesh_conversion__config"
 
 
 class TaskResultReadExpand(StrEnum):

@@ -91,3 +91,12 @@ def test_task_types_include_memodel_build():
         "memodel_build__config_generation"
     )
     assert TaskActivityType.memodel_build__execution.value == "memodel_build__execution"
+
+
+def test_task_types_include_em_cell_mesh_conversion():
+    assert TaskConfigType.em_cell_mesh_conversion__config.value == (
+        "em_cell_mesh_conversion__config"
+    )
+    assert TaskActivityType.em_cell_mesh_conversion__execution.value == (
+        "em_cell_mesh_conversion__execution"
+    )
